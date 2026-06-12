@@ -76,9 +76,24 @@ Any image that fails to load is hidden (no broken-image icon).
 ## Editing text
 
 No text is hardcoded in the HTML. Every page loads its strings from
-`lang/messages/en/<page>.json` (and `…/fr/…`) — edit those to change
-content. Keys map to element `id`s. (The French translations are a
-work in progress.)
+`lang/messages/en/<page>.json` — edit those to change content. Most keys
+map to an element `id`; a tracker's **per-item** text (names, "where to
+find it", "how to obtain it", rewards, descriptions …) lives in that same
+file under an `"items"` map:
+
+```
+"items": { "<section>": [ { "name": "…", "where": "…" }, … ] }
+```
+
+keyed by section (its store id; per-character sections use
+`<section>-<char>`) then item index, matching the order in the game's
+`js/*-tracker-data.js` module. The data module now holds only structure
+plus each item's `name`, kept as a stable id for trophy / auto-unlock
+matching (KH1 also keeps `num`). So to edit visible tracker text, edit the
+lang file; the engine falls back to the data module for any field not yet
+moved. Keep item order in sync between the two. (Birth by Sleep's item
+text still lives in its data module for now; the French files are a work
+in progress.)
 
 ## Trackers
 

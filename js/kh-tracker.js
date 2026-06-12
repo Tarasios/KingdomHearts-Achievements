@@ -52,6 +52,25 @@ function bar(x, y) {
   return `<span class="dashnum">${x} / ${y}</span><span class="dashbar${x >= y && y > 0 ? " full" : ""}"><i style="width:${pct}%"></i></span>`;
 }
 
+/* ---------- item display text from the lang file ----------
+   All user-facing item text (names, "where to find it", "how to obtain
+   it", …) lives in the page's lang JSON under an "items" map:
+       "items": { "<storeId>": [ { "name": "…", "where": "…" }, … ] }
+   keyed by section store id then item index (matching the data order).
+   The data module keeps only the structural bits + the item name as a
+   stable id (used for trophy/auto-unlock matching). cellText prefers the
+   lang text and falls back to the data value, so a game whose text has
+   not been moved out yet keeps working unchanged. */
+function langRow(storeId, i) {
+  const items = (typeof i18n !== "undefined" && i18n.messages && i18n.messages.items) || null;
+  const rows = items && items[storeId];
+  return (rows && rows[i]) || null;
+}
+function cellText(storeId, i, key, it) {
+  const row = langRow(storeId, i);
+  return (row && Object.prototype.hasOwnProperty.call(row, key)) ? row[key] : it[key];
+}
+
 /* Item-level character filter: items tagged c only count/show for that
    character. With no char filter (dashboard totals) everything counts. */
 function itemVisible(it, char) { return !it.c || !char || it.c === char; }
@@ -231,7 +250,8 @@ function checklist(box, sec, res, state) {
     const done = checks ? checks.every((c, idx) => store[checkKey(i, c.k, idx)])
                         : (!!store[i] || !!auto);
     if (state.hide && done) return;
-    const hay = (Object.values(it).join(" ")).toLowerCase();
+    const lrow = langRow(res.storeId, i);
+    const hay = (Object.values(it).join(" ") + (lrow ? " " + Object.values(lrow).join(" ") : "")).toLowerCase();
     if (q && !hay.includes(q)) return;
     if (it.g && it.g !== lastGroup) {
       lastGroup = it.g;
@@ -268,7 +288,7 @@ function checklist(box, sec, res, state) {
       tr.appendChild(td);
     }
     cols.forEach(c => {
-      const v = it[c.k] || "";
+      const v = cellText(res.storeId, i, c.k, it) || "";
       let html;
       if (c.rarity && v) html = `<span class="rarity ${esc(v.toLowerCase())}">${esc(v)}</span>`;
       else if (c.name) html = `<span class="itemname">${esc(v)}</span>${auto ? ` <span class="srcbadge" title="${fmt('gt-auto-tip', auto)}">${t('gt-auto-badge')}</span>` : ""}`;

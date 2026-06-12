@@ -1,106 +1,5632 @@
 {
-    "logo-name": "KH Completionist",
-    "lang-toggle-aria": "Switch language to French",
-    "nav-tools": "Tools",
-    "playing-as": "Playing as:",
-    "gt-filter": "filter…",
-    "gt-hide-done": "hide completed",
-    "gt-count": "%1 / %2 done",
-    "gt-overall": "Total: %1 / %2 (%3%)",
-    "gt-nothing": "Nothing matches the current filter.",
-    "gt-reset": "Reset all progress",
-    "gt-reset-confirm": "Reset ALL tracker progress for this game?",
-    "gt-toggle-all": "toggle all",
-    "gt-dash-title": "Progress overview",
-    "gt-dash-section": "Section",
-    "gt-dash-progress": "Progress",
-    "gt-th-progress": "Tracked progress",
-    "gt-th-clear": "Cleared",
-    "gt-th-srank": "S-Rank",
-    "gt-th-ex": "EX S-Rank",
-    "gt-auto-badge": "auto",
-    "gt-auto-tip": "Earned automatically from %1 (S-rank)",
-    "gt-section-for": "%1 — %2",
-    "page-title": "Kingdom Hearts II — Achievement Tracker",
-    "kh-title": "Kingdom Hearts II — Achievement Tracker",
-    "kh-subtitle": "Every trophy, journal entry, treasure, puzzle piece, synthesis item and gummi mission in one checklist, saved in your browser. Checklist data from xenodusk's completion guide.",
-    "tabbtn-trophies": "Trophies",
-    "tabbtn-journal": "Journal",
-    "tabbtn-treasures": "Treasures",
-    "tabbtn-puzzles": "Puzzles",
-    "tabbtn-challenges": "Challenges",
-    "tabbtn-minigames": "Minigames",
-    "tabbtn-synthesis": "Synthesis",
-    "tabbtn-gummi": "Gummi",
-    "tabbtn-misc": "Misc",
-    "sec-trophies": "Trophies / Achievements",
-    "sec-professor": "Journal Entries (Professor)",
-    "sec-enemies": "Heartless & Nobodies",
-    "sec-treasures": "Treasure Chests (Treasure Hunter)",
-    "sec-puzzles": "Puzzle Pieces (Puzzler)",
-    "sec-conqueror": "Missions (Conqueror)",
-    "sec-mushrooms": "Mushroom XIII (Mushroom Master)",
-    "sec-cups": "Underworld Cups",
-    "sec-minigames": "Minigames (Minigame Maniac)",
-    "sec-materials": "Synthesis Materials",
-    "sec-recipes": "Synthesis Recipes",
-    "sec-lists": "Synthesis Lists",
-    "sec-gummim": "Gummi Missions",
-    "sec-blueprints": "Gummi Ship Blueprints",
-    "sec-searcher": "Searcher Items",
-    "sec-limits": "Limits (Limit Master)",
-    "th-trophies-rarity": "Rarity",
-    "th-trophies-name": "Trophy",
-    "th-trophies-desc": "Description",
-    "th-professor-name": "Journal Entry",
-    "th-professor-how": "How to obtain it",
-    "th-enemies-name": "Enemy",
-    "th-enemies-where": "Where to find it",
-    "th-treasures-name": "Reward",
-    "th-treasures-area": "Area",
-    "th-treasures-where": "Where to find it",
-    "th-puzzles-name": "Puzzle",
-    "th-puzzles-area": "Area",
-    "th-puzzles-where": "Where to find it",
-    "th-conqueror-name": "Mission / Category",
-    "th-conqueror-area": "Area",
-    "th-conqueror-cond": "Condition",
-    "th-mushrooms-name": "Mushroom",
-    "th-mushrooms-world": "World",
-    "th-mushrooms-area": "Area",
-    "th-mushrooms-req": "Mission requirement",
-    "th-cups-name": "Tournament",
-    "th-cups-unlock": "Unlock requirements",
-    "th-cups-score": "Target Score",
-    "th-cups-reward": "Reward",
-    "th-minigames-name": "Minigame",
-    "th-minigames-area": "Area",
-    "th-minigames-score": "Score",
-    "th-materials-name": "Item",
-    "th-materials-source": "Source",
-    "th-materials-loc": "Location",
-    "th-recipes-name": "Recipe",
-    "th-recipes-mats": "Materials",
-    "th-recipes-how": "How to unlock it",
-    "th-lists-name": "Condition",
-    "th-lists-reward": "Reward",
-    "th-gummim-name": "Mission",
-    "th-gummim-ex": "EX Mission",
-    "th-gummim-reward": "Reward",
-    "th-blueprints-name": "Model",
-    "th-blueprints-how": "How to get it",
-    "th-searcher-name": "Item",
-    "th-searcher-how": "How to get it",
-    "th-limits-name": "Character",
-    "th-limits-limit": "Limit",
-    "th-limits-cond": "Required skill / Condition",
-    "kp-export": "Export progress",
-    "kp-import": "Import progress",
-    "kp-note": "Backs up / restores ALL Kingdom Hearts tracker progress on this site as a JSON file.",
-    "kp-import-confirm": "Importing will overwrite the saved progress of every KH tool on this site with the file's contents. Continue?",
-    "kp-import-error": "That file could not be read as a progress export.",
-    "nav-home": "Home",
-    "theme-to-day": "Day",
-    "theme-to-night": "Night",
-    "theme-toggle-aria": "Toggle bright theme"
+  "logo-name": "KH Completionist",
+  "lang-toggle-aria": "Switch language to French",
+  "nav-tools": "Tools",
+  "playing-as": "Playing as:",
+  "gt-filter": "filter…",
+  "gt-hide-done": "hide completed",
+  "gt-count": "%1 / %2 done",
+  "gt-overall": "Total: %1 / %2 (%3%)",
+  "gt-nothing": "Nothing matches the current filter.",
+  "gt-reset": "Reset all progress",
+  "gt-reset-confirm": "Reset ALL tracker progress for this game?",
+  "gt-toggle-all": "toggle all",
+  "gt-dash-title": "Progress overview",
+  "gt-dash-section": "Section",
+  "gt-dash-progress": "Progress",
+  "gt-th-progress": "Tracked progress",
+  "gt-th-clear": "Cleared",
+  "gt-th-srank": "S-Rank",
+  "gt-th-ex": "EX S-Rank",
+  "gt-auto-badge": "auto",
+  "gt-auto-tip": "Earned automatically from %1 (S-rank)",
+  "gt-section-for": "%1 — %2",
+  "page-title": "Kingdom Hearts II — Achievement Tracker",
+  "kh-title": "Kingdom Hearts II — Achievement Tracker",
+  "kh-subtitle": "Every trophy, journal entry, treasure, puzzle piece, synthesis item and gummi mission in one checklist, saved in your browser. Checklist data from xenodusk's completion guide.",
+  "tabbtn-trophies": "Trophies",
+  "tabbtn-journal": "Journal",
+  "tabbtn-treasures": "Treasures",
+  "tabbtn-puzzles": "Puzzles",
+  "tabbtn-challenges": "Challenges",
+  "tabbtn-minigames": "Minigames",
+  "tabbtn-synthesis": "Synthesis",
+  "tabbtn-gummi": "Gummi",
+  "tabbtn-misc": "Misc",
+  "sec-trophies": "Trophies / Achievements",
+  "sec-professor": "Journal Entries (Professor)",
+  "sec-enemies": "Heartless & Nobodies",
+  "sec-treasures": "Treasure Chests (Treasure Hunter)",
+  "sec-puzzles": "Puzzle Pieces (Puzzler)",
+  "sec-conqueror": "Missions (Conqueror)",
+  "sec-mushrooms": "Mushroom XIII (Mushroom Master)",
+  "sec-cups": "Underworld Cups",
+  "sec-minigames": "Minigames (Minigame Maniac)",
+  "sec-materials": "Synthesis Materials",
+  "sec-recipes": "Synthesis Recipes",
+  "sec-lists": "Synthesis Lists",
+  "sec-gummim": "Gummi Missions",
+  "sec-blueprints": "Gummi Ship Blueprints",
+  "sec-searcher": "Searcher Items",
+  "sec-limits": "Limits (Limit Master)",
+  "th-trophies-rarity": "Rarity",
+  "th-trophies-name": "Trophy",
+  "th-trophies-desc": "Description",
+  "th-professor-name": "Journal Entry",
+  "th-professor-how": "How to obtain it",
+  "th-enemies-name": "Enemy",
+  "th-enemies-where": "Where to find it",
+  "th-treasures-name": "Reward",
+  "th-treasures-area": "Area",
+  "th-treasures-where": "Where to find it",
+  "th-puzzles-name": "Puzzle",
+  "th-puzzles-area": "Area",
+  "th-puzzles-where": "Where to find it",
+  "th-conqueror-name": "Mission / Category",
+  "th-conqueror-area": "Area",
+  "th-conqueror-cond": "Condition",
+  "th-mushrooms-name": "Mushroom",
+  "th-mushrooms-world": "World",
+  "th-mushrooms-area": "Area",
+  "th-mushrooms-req": "Mission requirement",
+  "th-cups-name": "Tournament",
+  "th-cups-unlock": "Unlock requirements",
+  "th-cups-score": "Target Score",
+  "th-cups-reward": "Reward",
+  "th-minigames-name": "Minigame",
+  "th-minigames-area": "Area",
+  "th-minigames-score": "Score",
+  "th-materials-name": "Item",
+  "th-materials-source": "Source",
+  "th-materials-loc": "Location",
+  "th-recipes-name": "Recipe",
+  "th-recipes-mats": "Materials",
+  "th-recipes-how": "How to unlock it",
+  "th-lists-name": "Condition",
+  "th-lists-reward": "Reward",
+  "th-gummim-name": "Mission",
+  "th-gummim-ex": "EX Mission",
+  "th-gummim-reward": "Reward",
+  "th-blueprints-name": "Model",
+  "th-blueprints-how": "How to get it",
+  "th-searcher-name": "Item",
+  "th-searcher-how": "How to get it",
+  "th-limits-name": "Character",
+  "th-limits-limit": "Limit",
+  "th-limits-cond": "Required skill / Condition",
+  "kp-export": "Export progress",
+  "kp-import": "Import progress",
+  "kp-note": "Backs up / restores ALL Kingdom Hearts tracker progress on this site as a JSON file.",
+  "kp-import-confirm": "Importing will overwrite the saved progress of every KH tool on this site with the file's contents. Continue?",
+  "kp-import-error": "That file could not be read as a progress export.",
+  "nav-home": "Home",
+  "theme-to-day": "Day",
+  "theme-to-night": "Night",
+  "theme-toggle-aria": "Toggle bright theme",
+  "items": {
+    "trophies": [
+      {
+        "rarity": "Gold",
+        "name": "Critical Competitor",
+        "desc": "Clear game on Critical."
+      },
+      {
+        "rarity": "Silver",
+        "name": "Proud Player",
+        "desc": "Clear game on Proud."
+      },
+      {
+        "rarity": "Silver",
+        "name": "Ambitious Adventurer",
+        "desc": "Clear the game and watch the ending sequence."
+      },
+      {
+        "rarity": "Silver",
+        "name": "Level Master",
+        "desc": "Get Sora to Level 99."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "My Hero",
+        "desc": "Get rescued by the King."
+      },
+      {
+        "rarity": "Silver",
+        "name": "Lingering Will",
+        "desc": "Defeat the Lingering Will."
+      },
+      {
+        "rarity": "Silver",
+        "name": "One-Winged Angel",
+        "desc": "Defeat Sephiroth."
+      },
+      {
+        "rarity": "Gold",
+        "name": "To Rule Them All",
+        "desc": "Defeat all Organization XIII Replica Data."
+      },
+      {
+        "rarity": "Silver",
+        "name": "Mushroom Master",
+        "desc": "Satisfy every member of Mushroom XIII."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Rookie",
+        "desc": "Win the Pain and Panic Cup."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Novice Hero",
+        "desc": "Win the Cerberus Cup."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Artisan Hero",
+        "desc": "Win the Titan Cup."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "True Hero",
+        "desc": "Win the Goddess of Fate Cup."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Coliseum Competitor",
+        "desc": "Win the Pain and Panic Paradox Cup."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Coliseum Star",
+        "desc": "Win the Cerberus Paradox Cup."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Hero of the Coliseum",
+        "desc": "Win the Titan Paradox Cup."
+      },
+      {
+        "rarity": "Silver",
+        "name": "Coliseum Champion",
+        "desc": "Win the Hades Paradox Cup."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Summer's End",
+        "desc": "Complete Roxas's episode."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "A Timeless World",
+        "desc": "Complete the Timeless River episode."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Above Honor",
+        "desc": "Complete the Land of Dragons episodes."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "A Budding Romance",
+        "desc": "Complete the Beast's Castle episodes."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Hail the Hero",
+        "desc": "Complete the Olympus Coliseum episodes."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Lifting the Curse",
+        "desc": "Complete the Port Royal episodes."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "What Friends Are For",
+        "desc": "Complete the Agrabah episodes."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "The Gift of Love",
+        "desc": "Complete the Halloween Town episodes."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Return of the King",
+        "desc": "Complete the Pride Lands episodes."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Electric Spark",
+        "desc": "Complete the Space Paranoids episodes."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Always Together",
+        "desc": "Complete the 100 Acre Wood episode."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Kindred Spirits",
+        "desc": "Complete the Atlantica episodes."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "A Taste of the Past",
+        "desc": "Complete the Twilight Town episodes."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Reunion",
+        "desc": "Reunite with Riku and Kairi."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Searcher",
+        "desc": "Collect all Ansem Reports in Jiminy's Journal."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Professor",
+        "desc": "Collect all Character entries in Jiminy's Journal."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Heartless Highbrow",
+        "desc": "Collect all Heartless entries in Jiminy's Journal."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Nobody Know-It-All",
+        "desc": "Collect all Nobody entries in Jiminy's Journal."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Treasure Hunter",
+        "desc": "Collect all Treasures in Jiminy's Journal."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Puzzler",
+        "desc": "Complete all Puzzles in Jiminy's Journal."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Navigator",
+        "desc": "Collect all Maps in Jiminy's Journal."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Conqueror",
+        "desc": "Collect all Mission entries in Jiminy's Journal."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Minigame Maniac",
+        "desc": "Collect all Minigame entries in Jiminy's Journal."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Limit Master",
+        "desc": "Collect all Limit entries in Jiminy's Journal."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Craftsman",
+        "desc": "Collect all Synthesis Note entries in Jiminy's Journal."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Seeker",
+        "desc": "Collect all Character Link entries in Jiminy's Journal."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Pro Skater",
+        "desc": "Obtain 5,000 points with skateboard tricks."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Struggle Champion",
+        "desc": "Win by obtaining all of the opponent's orbs."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Corroded by Darkness",
+        "desc": "Activate Antiform 13 times."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Veteran Pilot",
+        "desc": "Obtain an S rank on a gummi ship mission."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Ace Pilot",
+        "desc": "Obtain an S rank on a gummi ship mission for all routes."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Top Gun",
+        "desc": "Obtain an S rank on a gummi ship EX mission for all routes."
+      },
+      {
+        "rarity": "Silver",
+        "name": "Gummi Ship Collector",
+        "desc": "Obtain all blueprints."
+      }
+    ],
+    "professor": [
+      {
+        "name": "Sora",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sora",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Donald Duck",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Goofy",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Kairi",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Kairi",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Ansem",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Riku",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Riku",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Selphie",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Stitch",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Peter Pan",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Chicken Little",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Pete",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Maleficent",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Jiminy Cricket",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Moogles",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "King Mickey",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "King Mickey",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Pluto",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Naminé",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "DiZ",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Ansem the Wise",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Xehanort",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Organization XIII",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Xemnas",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Organization XIII",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Xigbar",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Organization XIII",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Xaldin",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Vexen",
+        "how": "Defeat Vexen's Absent Silhoutte in Agrabah."
+      },
+      {
+        "name": "Lexaeus",
+        "how": "Defeat Lexaeus's Absent Silhoutte in Twitlight Town."
+      },
+      {
+        "name": "Zexion",
+        "how": "Defeat Zexion's Absent Silhoutte in Olympus Coliseum."
+      },
+      {
+        "name": "Organization XIII",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Saïx",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Axel",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Organization XIII",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Demyx",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Organization XIII",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Luxord",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Marluxia",
+        "how": "Defeat Marluxia's Absent Silhoutte in Beast's Castle."
+      },
+      {
+        "name": "Larxene",
+        "how": "Defeat Larxene's Absent Silhoutte in Port Royal."
+      },
+      {
+        "name": "Roxas",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Lingering Will",
+        "how": "Defeat Lingering Will in Disney Castle."
+      },
+      {
+        "name": "Sora",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sora",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Donald Duck",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Goofy",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Roxas",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Pence",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Hayner",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Olette",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Seifer",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Rai (Raijin)",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Fuu (Fujin)",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Setzer",
+        "how": "Defeat Setzer at Struggle in Twilight Town (to fight him, you must defeat Hayner 10 times)."
+      },
+      {
+        "name": "Vivi",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Yen Sid",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sora",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Donald Duck",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Goofy",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Leon",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Cid",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Cloud",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Aerith",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Tifa",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Yuffie",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Merlin",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Scrooge McDuck",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Huey",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Dewey",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Louie",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sephiroth",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Yuna",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Rikku",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Paine",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sora",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Donald Duck",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Goofy",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "The Beast",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "The Beast",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "The Beast",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Belle",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Belle",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Cogsworth",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Lumiere",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Mrs. Potts",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Chip",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "The Wardrobe",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Xaldin",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Xaldin",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sora",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Donald Duck",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Goofy",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Hercules",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Hercules",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Philoctetes",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Megara",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Pegasus",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Auron",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Pain",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Panic",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Hades",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Cerberus",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "The Hydra",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Demyx",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Pete",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sora",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Donald Duck",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Goofy",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Aladdin",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "The Magic Carpet",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Iago",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Abu",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Princess Jasmine",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Genie",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Jafar",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Jafar",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "The Peddler",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sora",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Donald Duck",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Goofy",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Ping",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Mulan",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Mushu",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Captain Li Shang",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Yao",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Chien-Po",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Ling",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "The Emperor",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Shan-Yu",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Xigbar",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sora",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Winnie the Pooh",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Tigger",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Piglet",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Rabbit",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Eeyore",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Owl",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Kanga",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Roo",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Gopher",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sora",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Donald Duck",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Goofy",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Simba",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Timon",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Pumbaa",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Nala",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Mufasa",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Rafiki",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Scar",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "The Ghost of Scar",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Shenzi",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Banzai",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Ed",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Pete",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sora",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Donald Duck",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Goofy",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Ariel",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Ariel",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "King Triton",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "King Triton",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sebastian",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Flounder",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Prince Eric",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Vanessa",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Ursula",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Jetsam",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Flotsam",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sora",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Donald Duck",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Goofy",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Queen Minnie",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Daisy Duck",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Chip",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Dale",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Brooms",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sora",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Donald Duck",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Goofy",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Pete (?)",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Pete",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Horace Horsecollar",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Clarabelle Cow",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Clara Cluck",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "King Mickey (?)",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "King Mickey",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Pete",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Maleficent",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sora",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sora",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Donald Duck",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Donald Duck",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Goofy",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Goofy",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Jack Skellington",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Jack Skellington",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sally",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Dr. Finkelstein",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Zero",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "The Mayor",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Lock",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Shock",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Barrel",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Santa Claus",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Bathtub",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Reindeer",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Oogie Boogie",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "The Experiment",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Maleficent",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sora",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Donald Duck",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Goofy",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Captain Jack Sparrow",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Will Turner",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Elizabeth Swann",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Captain Barbossa",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Undead Pirate A",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Undead Pirate B",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Undead Pirate C",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Pete",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Luxord",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sora",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Donald Duck",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Goofy",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Tron",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sark",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "MCP",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Hostile Program",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Sora",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Donald Duck",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Goofy",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Xemnas",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Xigbar",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Saix",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Luxord",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Roxas",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "King Mickey",
+        "how": "Obtained during the story."
+      },
+      {
+        "name": "Ansem the Wise",
+        "how": "Obtained during the story."
+      }
+    ],
+    "enemies": [
+      {
+        "name": "Shadow",
+        "where": "Twilight Town"
+      },
+      {
+        "name": "Soldier",
+        "where": "Twilight Town"
+      },
+      {
+        "name": "Large Body",
+        "where": "Beast's Castle"
+      },
+      {
+        "name": "Silver Rock",
+        "where": "Agrabah"
+      },
+      {
+        "name": "Emerald Blues",
+        "where": "Halloween Town"
+      },
+      {
+        "name": "Crimson Jazz",
+        "where": "Hollow Bastion"
+      },
+      {
+        "name": "Air Pirate",
+        "where": "Port Royal"
+      },
+      {
+        "name": "Trick Ghost",
+        "where": "Olympus Coliseum"
+      },
+      {
+        "name": "Rabid Dog",
+        "where": "Olympus Coliseum"
+      },
+      {
+        "name": "Hook Bat",
+        "where": "Beast's Castle"
+      },
+      {
+        "name": "Bookmaster",
+        "where": "Hollow Bastion"
+      },
+      {
+        "name": "Minute Bomb",
+        "where": "Disney Castle"
+      },
+      {
+        "name": "Hammer Frame",
+        "where": "Timeless River"
+      },
+      {
+        "name": "Bulky Vendor",
+        "where": "Various: See Below"
+      },
+      {
+        "name": "Fortuneteller",
+        "where": "Agrabah"
+      },
+      {
+        "name": "Cannon Gun",
+        "where": "Port Royal"
+      },
+      {
+        "name": "Rapid Thruster",
+        "where": "The Land of Dragons"
+      },
+      {
+        "name": "Driller Mole",
+        "where": "Halloween Town"
+      },
+      {
+        "name": "Lance Soldier",
+        "where": "Beast's Castle"
+      },
+      {
+        "name": "Morning Star",
+        "where": "Hollow Bastion"
+      },
+      {
+        "name": "Fiery Globe",
+        "where": "Agrabah"
+      },
+      {
+        "name": "Icy Cube",
+        "where": "Agrabah"
+      },
+      {
+        "name": "Fat Bandit",
+        "where": "Agrabah"
+      },
+      {
+        "name": "Luna Bandit",
+        "where": "Agrabah"
+      },
+      {
+        "name": "Gargoyle Knight",
+        "where": "Beast's Castle"
+      },
+      {
+        "name": "Gargoyle Warrior",
+        "where": "Beast's Castle"
+      },
+      {
+        "name": "Wight Knight",
+        "where": "Halloween Town"
+      },
+      {
+        "name": "Graveyard",
+        "where": "Halloween Town"
+      },
+      {
+        "name": "Toy Soldier",
+        "where": "Halloween Town"
+      },
+      {
+        "name": "Aeroplane",
+        "where": "Timeless River"
+      },
+      {
+        "name": "Hot Rod",
+        "where": "Timeless River"
+      },
+      {
+        "name": "Assault Rider",
+        "where": "The Land of Dragons"
+      },
+      {
+        "name": "Nightwalker",
+        "where": "The Land of Dragons"
+      },
+      {
+        "name": "Bolt Tower",
+        "where": "The Land of Dragons"
+      },
+      {
+        "name": "Magnum Loader",
+        "where": "Hollow Bastion"
+      },
+      {
+        "name": "Strafer",
+        "where": "Space Paranoids"
+      },
+      {
+        "name": "Devastator",
+        "where": "Space Paranoids"
+      },
+      {
+        "name": "Living Bone",
+        "where": "Pride Lands"
+      },
+      {
+        "name": "Shaman",
+        "where": "Pride Lands"
+      },
+      {
+        "name": "Aerial Knocker",
+        "where": "Pride Lands"
+      },
+      {
+        "name": "Tornado Step",
+        "where": "Olympus Coliseum"
+      },
+      {
+        "name": "Crescendo",
+        "where": "Olympus Coliseum"
+      },
+      {
+        "name": "Creeper Plant",
+        "where": "Olympus Coliseum"
+      },
+      {
+        "name": "Armored Knight",
+        "where": "Hollow Bastion"
+      },
+      {
+        "name": "Surveillance Robot",
+        "where": "Hollow Bastion"
+      },
+      {
+        "name": "Neoshadow",
+        "where": "The Land of Dragons"
+      },
+      {
+        "name": "Spring Metal",
+        "where": "Radiant Garden"
+      },
+      {
+        "name": "Aerial Viking",
+        "where": "Radiant Garden"
+      },
+      {
+        "name": "Magic Phantom",
+        "where": "Radiant Garden"
+      },
+      {
+        "name": "Beffudler",
+        "where": "Radiant Garden"
+      },
+      {
+        "name": "Runemaster",
+        "where": "Radiant Garden"
+      },
+      {
+        "name": "Iron Hammer",
+        "where": "Radiant Garden"
+      },
+      {
+        "name": "Mad Ride",
+        "where": "Radiant Garden"
+      },
+      {
+        "name": "Camo Cannon",
+        "where": "Radiant Garden"
+      },
+      {
+        "name": "Reckless",
+        "where": "Radiant Garden"
+      },
+      {
+        "name": "Lance Warrior",
+        "where": "Radiant Garden"
+      },
+      {
+        "name": "Necromancer",
+        "where": "Radiant Garden"
+      },
+      {
+        "name": "Aerial Champ",
+        "where": "Radiant Garden"
+      },
+      {
+        "name": "Volcanic Lord",
+        "where": "Agrabah"
+      },
+      {
+        "name": "Blizzard Lord",
+        "where": "Agrabah"
+      },
+      {
+        "name": "Thresholder",
+        "where": "Beast's Castle"
+      },
+      {
+        "name": "Possessor",
+        "where": "Beast's Castle"
+      },
+      {
+        "name": "Shadow Stalker",
+        "where": "Beast's Castle"
+      },
+      {
+        "name": "Dark Thorn",
+        "where": "Beast's Castle"
+      },
+      {
+        "name": "Illuminator",
+        "where": "Port Royal"
+      },
+      {
+        "name": "Grim Reaper",
+        "where": "Port Royal"
+      },
+      {
+        "name": "Groundshaker",
+        "where": "Pride Lands"
+      },
+      {
+        "name": "Prison Keeper",
+        "where": "Halloween Town"
+      },
+      {
+        "name": "Storm Rider",
+        "where": "The Land of Dragons"
+      },
+      {
+        "name": "No. 1",
+        "where": "The World That Never Was"
+      },
+      {
+        "name": "No. 2",
+        "where": "Halloween Town"
+      },
+      {
+        "name": "No. 3",
+        "where": "Beast's Castle"
+      },
+      {
+        "name": "No. 4",
+        "where": "The Land of Dragons"
+      },
+      {
+        "name": "No. 5",
+        "where": "Agrabah"
+      },
+      {
+        "name": "No. 6",
+        "where": "Olympus Coliseum"
+      },
+      {
+        "name": "No. 7",
+        "where": "Twilight Town"
+      },
+      {
+        "name": "No. 8",
+        "where": "Twilight Town"
+      },
+      {
+        "name": "No. 9",
+        "where": "Radiant Garden"
+      },
+      {
+        "name": "No. 10",
+        "where": "Port Royal"
+      },
+      {
+        "name": "No. 11",
+        "where": "Timeless River"
+      },
+      {
+        "name": "No. 12",
+        "where": "Twilight Town"
+      },
+      {
+        "name": "No. 13",
+        "where": "Radiant Garden"
+      },
+      {
+        "name": "Dusk",
+        "where": "Twilight Town"
+      },
+      {
+        "name": "Creeper",
+        "where": "Twilight Town"
+      },
+      {
+        "name": "Dragoon",
+        "where": "Beast's Castle"
+      },
+      {
+        "name": "Assassin",
+        "where": "Twilight Town"
+      },
+      {
+        "name": "Samurai",
+        "where": "Hollow Bastion"
+      },
+      {
+        "name": "Sniper",
+        "where": "The Land of Dragons"
+      },
+      {
+        "name": "Dancer",
+        "where": "Hollow Bastion"
+      },
+      {
+        "name": "Berserker",
+        "where": "Twilight Town"
+      },
+      {
+        "name": "Gambler",
+        "where": "Port Royal"
+      },
+      {
+        "name": "Sorcerer",
+        "where": "The World That Never Was"
+      },
+      {
+        "name": "Twilight Thorn",
+        "where": "Twilight Town"
+      }
+    ],
+    "treasures": [
+      {
+        "name": "Potion",
+        "area": "Old Mansion"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Old Mansion"
+      },
+      {
+        "name": "Potion",
+        "area": "The Woods"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "The Woods"
+      },
+      {
+        "name": "Hi-Potion",
+        "area": "The Woods"
+      },
+      {
+        "name": "Hi-Potion",
+        "area": "Tram Common"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Tram Common"
+      },
+      {
+        "name": "Tent",
+        "area": "Tram Common"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Tram Common"
+      },
+      {
+        "name": "Potion",
+        "area": "Tram Common"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Tram Common"
+      },
+      {
+        "name": "Potion",
+        "area": "Tram Common"
+      },
+      {
+        "name": "Tent",
+        "area": "Central Station"
+      },
+      {
+        "name": "Hi-Potion",
+        "area": "Central Station"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Central Station"
+      },
+      {
+        "name": "Potion",
+        "area": "Mysterious Tower"
+      },
+      {
+        "name": "Hi-Potion",
+        "area": "Mysterious Tower"
+      },
+      {
+        "name": "Ether",
+        "area": "Mysterious Tower"
+      },
+      {
+        "name": "Ether",
+        "area": "Entryway"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Entryway"
+      },
+      {
+        "name": "Tower Map",
+        "area": "Sorcerer's Loft"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Wardrobe"
+      },
+      {
+        "name": "Mythril Gem",
+        "area": "Underground Concourse"
+      },
+      {
+        "name": "Orichalcum",
+        "area": "Underground Concourse"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Underground Concourse"
+      },
+      {
+        "name": "Mythril Crystal",
+        "area": "Underground Concourse"
+      },
+      {
+        "name": "Orichalcum",
+        "area": "Tunnelway"
+      },
+      {
+        "name": "Mythril Crystal",
+        "area": "Tunnelway"
+      },
+      {
+        "name": "Orichalcum+",
+        "area": "Sunset Terrace"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Sunset Terrace"
+      },
+      {
+        "name": "Mythril Crystal",
+        "area": "Sunset Terrace"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Sunset Terrace"
+      },
+      {
+        "name": "Mythril Crystal",
+        "area": "Mansion: Foyer"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Mansion: Foyer"
+      },
+      {
+        "name": "Serenity Crystal",
+        "area": "Mansion: Foyer"
+      },
+      {
+        "name": "Mythril Crystal",
+        "area": "Mansion: Dining Room"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Mansion: Dining Room"
+      },
+      {
+        "name": "Orichalcum",
+        "area": "Mansion: Library"
+      },
+      {
+        "name": "Ultimate Recipe",
+        "area": "Mansion: Basement Corridor"
+      },
+      {
+        "name": "Drive Recovery",
+        "area": "Borough"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Borough"
+      },
+      {
+        "name": "Hi-Potion",
+        "area": "Borough"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Borough"
+      },
+      {
+        "name": "Dark Shard",
+        "area": "Borough"
+      },
+      {
+        "name": "Castle Perimeter Map",
+        "area": "Postern"
+      },
+      {
+        "name": "Mythril Gem",
+        "area": "Postern"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Postern"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Corridors"
+      },
+      {
+        "name": "Mythril Crystal",
+        "area": "Corridors"
+      },
+      {
+        "name": "Dark Crystal",
+        "area": "Corridors"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Corridors"
+      },
+      {
+        "name": "Skill Recipe",
+        "area": "Ansem's Study"
+      },
+      {
+        "name": "Ukulele Charm",
+        "area": "Ansem's Study"
+      },
+      {
+        "name": "Moon Recipe",
+        "area": "Restoration Site"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Restoration Site"
+      },
+      {
+        "name": "Torn Pages",
+        "area": "Crystal Fissure"
+      },
+      {
+        "name": "The Great Maw Map",
+        "area": "Crystal Fissure"
+      },
+      {
+        "name": "Energy Crystal",
+        "area": "Crystal Fissure"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Crystal Fissure"
+      },
+      {
+        "name": "Gull Wing",
+        "area": "Postern"
+      },
+      {
+        "name": "Cosmic Chain",
+        "area": "Heartless Manufactory"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Cavern of Remembrance: Depths"
+      },
+      {
+        "name": "Power Crystal",
+        "area": "Cavern of Remembrance: Depths"
+      },
+      {
+        "name": "Frost Crystal",
+        "area": "Cavern of Remembrance: Depths"
+      },
+      {
+        "name": "Manifest Illusion",
+        "area": "Cavern of Remembrance: Depths"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Cavern of Remembrance: Depths"
+      },
+      {
+        "name": "Remembrance Gem",
+        "area": "Cavern of Remembrance: Depths"
+      },
+      {
+        "name": "Serenity Gem",
+        "area": "Cavern of Remembrance: Mining Area"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Cavern of Remembrance: Mining Area"
+      },
+      {
+        "name": "Serenity Crystal",
+        "area": "Cavern of Remembrance: Mining Area"
+      },
+      {
+        "name": "Manifest Illusion",
+        "area": "Cavern of Remembrance: Mining Area"
+      },
+      {
+        "name": "Serenity Gem",
+        "area": "Cavern of Remembrance: Mineshaft"
+      },
+      {
+        "name": "Dark Remembrance Map",
+        "area": "Cavern of Remembrance: Mining Area"
+      },
+      {
+        "name": "Serenity Crystal",
+        "area": "Cavern of Remembrance: Engine Chamber"
+      },
+      {
+        "name": "Remembrance Crystal",
+        "area": "Cavern of Remembrance: Engine Chamber"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Cavern of Remembrance: Engine Chamber"
+      },
+      {
+        "name": "Manifest Illusion",
+        "area": "Cavern of Remembrance: Engine Chamber"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Cavern of Remembrance: Mineshaft"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Cavern of Remembrance: Mineshaft"
+      },
+      {
+        "name": "Depths of Remembrance Map",
+        "area": "Cavern of Remembrance: Mineshaft"
+      },
+      {
+        "name": "Power Boost",
+        "area": "Cavern of Remembrance: Mineshaft"
+      },
+      {
+        "name": "Magic Boost",
+        "area": "Cavern of Remembrance: Mineshaft"
+      },
+      {
+        "name": "Garden of Assemblage Map",
+        "area": "Garden of Assemblage"
+      },
+      {
+        "name": "Lost Illusion",
+        "area": "Garden of Assemblage"
+      },
+      {
+        "name": "Proof of Nonexistence",
+        "area": "Garden of Assemblage"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Courtyard"
+      },
+      {
+        "name": "Hi-Potion",
+        "area": "Courtyard"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Courtyard"
+      },
+      {
+        "name": "Castle Map",
+        "area": "Belle's Room"
+      },
+      {
+        "name": "Mega-Recipe",
+        "area": "Belle's Room"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "The East Wing"
+      },
+      {
+        "name": "Tent",
+        "area": "The East Wing"
+      },
+      {
+        "name": "Hi-Potion",
+        "area": "The West Hall"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "The West Hall"
+      },
+      {
+        "name": "Power Shard",
+        "area": "The West Hall"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "The West Hall"
+      },
+      {
+        "name": "AP Boost",
+        "area": "The West Hall"
+      },
+      {
+        "name": "Bright Stone",
+        "area": "The West Hall"
+      },
+      {
+        "name": "Basement Map",
+        "area": "Dungeon"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Dungeon"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Secret Passage"
+      },
+      {
+        "name": "Hi-Potion",
+        "area": "Secret Passage"
+      },
+      {
+        "name": "Lucid Shard",
+        "area": "Secret Passage"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "The West Wing"
+      },
+      {
+        "name": "Tent",
+        "area": "The West Wing"
+      },
+      {
+        "name": "Blazing Shard",
+        "area": "The Beast's Room"
+      },
+      {
+        "name": "Power Boost",
+        "area": "Underworld Entrance"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Cave of the Dead: Passage"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Cave of the Dead: Passage"
+      },
+      {
+        "name": "Ether",
+        "area": "Cave of the Dead: Passage"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Cave of the Dead: Passage"
+      },
+      {
+        "name": "Hi-Potion",
+        "area": "Cave of the Dead: Passage"
+      },
+      {
+        "name": "Underworld Map",
+        "area": "Cave of the Dead: Inner Chamber"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Cave of the Dead: Inner Chamber"
+      },
+      {
+        "name": "Lucid Shard",
+        "area": "Underworld Caverns: Entrance"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Underworld Caverns: Entrance"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Underworld Caverns: Entrance"
+      },
+      {
+        "name": "Bright Shard",
+        "area": "Underworld Caverns: The Lost Road"
+      },
+      {
+        "name": "Ether",
+        "area": "Underworld Caverns: The Lost Road"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Underworld Caverns: The Lost Road"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Underworld Caverns: The Lost Road"
+      },
+      {
+        "name": "Lucid Stone",
+        "area": "Underworld Caverns: Atrium"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Underworld Caverns: Atrium"
+      },
+      {
+        "name": "Caverns Map",
+        "area": "Underworld Caverns: The Lock"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Underworld Caverns: The Lock"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Underworld Caverns: The Lock"
+      },
+      {
+        "name": "Dark Shard",
+        "area": "Agrabah"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Agrabah"
+      },
+      {
+        "name": "Hi-Potion",
+        "area": "Agrabah"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Agrabah"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Agrabah"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Agrabah"
+      },
+      {
+        "name": "Serenity Shard",
+        "area": "Agrabah"
+      },
+      {
+        "name": "Mythril Gem",
+        "area": "Bazaar"
+      },
+      {
+        "name": "Power Shard",
+        "area": "Bazaar"
+      },
+      {
+        "name": "Hi-Potion",
+        "area": "Bazaar"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Bazaar"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Bazaar"
+      },
+      {
+        "name": "Skill Ring",
+        "area": "Palace Walls"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Palace Walls"
+      },
+      {
+        "name": "Power Stone",
+        "area": "The Cave of Wonders: Entrance"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "The Cave of Wonders: Entrance"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "The Cave of Wonders: Valley of Stone"
+      },
+      {
+        "name": "AP Boost",
+        "area": "The Cave of Wonders: Valley of Stone"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "The Cave of Wonders: Valley of Stone"
+      },
+      {
+        "name": "Hi-Potion",
+        "area": "The Cave of Wonders: Valley of Stone"
+      },
+      {
+        "name": "Cave of Wonders Map",
+        "area": "The Cave of Wonders: Chasm of Challenges"
+      },
+      {
+        "name": "AP Boost",
+        "area": "The Cave of Wonders: Chasm of Challenges"
+      },
+      {
+        "name": "AP Boost",
+        "area": "The Cave of Wonders: Treasure Room"
+      },
+      {
+        "name": "Serenity Gem",
+        "area": "The Cave of Wonders: Treasure Room"
+      },
+      {
+        "name": "Torn Pages",
+        "area": "Ruined Chamber"
+      },
+      {
+        "name": "Ruins Map",
+        "area": "Ruined Chamber"
+      },
+      {
+        "name": "Dark Shard",
+        "area": "Bamboo Grove"
+      },
+      {
+        "name": "Ether",
+        "area": "Bamboo Grove"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Bamboo Grove"
+      },
+      {
+        "name": "Hi-Potion",
+        "area": "Checkpoint"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Checkpoint"
+      },
+      {
+        "name": "Lightning Shard",
+        "area": "Mountain Trail"
+      },
+      {
+        "name": "Recovery Recipe",
+        "area": "Mountain Trail"
+      },
+      {
+        "name": "Ether",
+        "area": "Mountain Trail"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Mountain Trail"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Village Cave"
+      },
+      {
+        "name": "Dark Shard",
+        "area": "Village Cave"
+      },
+      {
+        "name": "Frost Shard",
+        "area": "Ridge"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Ridge"
+      },
+      {
+        "name": "Torn Pages",
+        "area": "Throne Room"
+      },
+      {
+        "name": "Palace Map",
+        "area": "Throne Room"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Throne Room"
+      },
+      {
+        "name": "Queen Recipe",
+        "area": "Throne Room"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Throne Room"
+      },
+      {
+        "name": "Ogre Shield",
+        "area": "Throne Room"
+      },
+      {
+        "name": "Mythril Crystal",
+        "area": "Throne Room"
+      },
+      {
+        "name": "Orichalcum",
+        "area": "Throne Room"
+      },
+      {
+        "name": "100 Acre Wood Map",
+        "area": "Pooh Bear's House"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Pooh Bear's House"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Pooh Bear's House"
+      },
+      {
+        "name": "Defense Boost",
+        "area": "Piglet's House"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Piglet's House"
+      },
+      {
+        "name": "Mythril Gem",
+        "area": "Piglet's House"
+      },
+      {
+        "name": "Draw Ring",
+        "area": "Rabbit's House"
+      },
+      {
+        "name": "Mythril Crystal",
+        "area": "Rabbit's House"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Rabbit's House"
+      },
+      {
+        "name": "Magic Boost",
+        "area": "Kanga's House"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Kanga's House"
+      },
+      {
+        "name": "Orichalcum",
+        "area": "Kanga's House"
+      },
+      {
+        "name": "Mythril Gem",
+        "area": "The Spooky Cave"
+      },
+      {
+        "name": "AP Boost",
+        "area": "The Spooky Cave"
+      },
+      {
+        "name": "Orichalcum",
+        "area": "The Spooky Cave"
+      },
+      {
+        "name": "Guard Recipe",
+        "area": "The Spooky Cave"
+      },
+      {
+        "name": "Mythril Crystal",
+        "area": "The Spooky Cave"
+      },
+      {
+        "name": "AP Boost",
+        "area": "The Spooky Cave"
+      },
+      {
+        "name": "Cosmic Ring",
+        "area": "Starry Hill"
+      },
+      {
+        "name": "Style Recipe",
+        "area": "Starry Hill"
+      },
+      {
+        "name": "Savannah Map",
+        "area": "Gorge"
+      },
+      {
+        "name": "Dark Gem",
+        "area": "Gorge"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Gorge"
+      },
+      {
+        "name": "Frost Gem",
+        "area": "Elephant Graveyard"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Elephant Graveyard"
+      },
+      {
+        "name": "Bright Stone",
+        "area": "Elephant Graveyard"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Elephant Graveyard"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Elephant Graveyard"
+      },
+      {
+        "name": "Pride Rock Map",
+        "area": "Pride Rock"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Pride Rock"
+      },
+      {
+        "name": "Serenity Crystal",
+        "area": "Pride Rock"
+      },
+      {
+        "name": "Energy Stone",
+        "area": "Wildebeest Valley"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Wildebeest Valley"
+      },
+      {
+        "name": "Mythril Gem",
+        "area": "Wildebeest Valley"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Wildebeest Valley"
+      },
+      {
+        "name": "Lucid Gem",
+        "area": "Wildebeest Valley"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Wastelands"
+      },
+      {
+        "name": "Serenity Gem",
+        "area": "Wastelands"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Wastelands"
+      },
+      {
+        "name": "Serenity Gem",
+        "area": "Jungle"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Jungle"
+      },
+      {
+        "name": "Serenity Crystal",
+        "area": "Jungle"
+      },
+      {
+        "name": "Oasis Map",
+        "area": "Oasis"
+      },
+      {
+        "name": "Torn Pages",
+        "area": "Oasis"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Oasis"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Courtyard"
+      },
+      {
+        "name": "Star Recipe",
+        "area": "Courtyard"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Courtyard"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Courtyard"
+      },
+      {
+        "name": "Blazing Stone",
+        "area": "Courtyard"
+      },
+      {
+        "name": "Blazing Shard",
+        "area": "Courtyard"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Courtyard"
+      },
+      {
+        "name": "Torn Pages",
+        "area": "Library"
+      },
+      {
+        "name": "Cornerstone Hill Map",
+        "area": "Cornerstone Hill"
+      },
+      {
+        "name": "Frost Shard",
+        "area": "Cornerstone Hill"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Pier"
+      },
+      {
+        "name": "Hi-Potion",
+        "area": "Pier"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Waterway"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Waterway"
+      },
+      {
+        "name": "Frost Stone",
+        "area": "Waterway"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Graveyard"
+      },
+      {
+        "name": "Serenity Gem",
+        "area": "Graveyard"
+      },
+      {
+        "name": "Halloween Town Map",
+        "area": "Dr. Finkelstein's Lab"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Halloween Town Square"
+      },
+      {
+        "name": "Energy Shard",
+        "area": "Halloween Town Square"
+      },
+      {
+        "name": "Lightning Shard",
+        "area": "The Hinterlands"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "The Hinterlands"
+      },
+      {
+        "name": "AP Boost",
+        "area": "The Hinterlands"
+      },
+      {
+        "name": "Mega-Potion",
+        "area": "Candy Cane Lane"
+      },
+      {
+        "name": "Mythril Gem",
+        "area": "Candy Cane Lane"
+      },
+      {
+        "name": "Lightning Stone",
+        "area": "Candy Cane Lane"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Candy Cane Lane"
+      },
+      {
+        "name": "Christmas Town Map",
+        "area": "Santa's House"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Santa's House"
+      },
+      {
+        "name": "Naval Map",
+        "area": "Rampart"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Rampart"
+      },
+      {
+        "name": "Dark Shard",
+        "area": "Rampart"
+      },
+      {
+        "name": "Dark Stone",
+        "area": "Town"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Town"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Town"
+      },
+      {
+        "name": "Mythril Gem",
+        "area": "Town"
+      },
+      {
+        "name": "Bright Shard",
+        "area": "Isla de Muerta: Cave Mouth"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Isla de Muerta: Cave Mouth"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Isla de Muerta: Powder Store"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Isla de Muerta: Powder Store"
+      },
+      {
+        "name": "Mythril Shard",
+        "area": "Isla de Muerta: Moonlight Nook"
+      },
+      {
+        "name": "Serenity Gem",
+        "area": "Isla de Muerta: Moonlight Nook"
+      },
+      {
+        "name": "Power Stone",
+        "area": "Isla de Muerta: Moonlight Nook"
+      },
+      {
+        "name": "Feather Charm",
+        "area": "Ship Graveyard: The Interceptor's Hold"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Ship Graveyard: Seadrift Keep"
+      },
+      {
+        "name": "Orichalcum",
+        "area": "Ship Graveyard: Seadrift Keep"
+      },
+      {
+        "name": "Meteor Staff",
+        "area": "Ship Graveyard: Seadrift Keep"
+      },
+      {
+        "name": "Serenity Gem",
+        "area": "Ship Graveyard: Seadrift Row"
+      },
+      {
+        "name": "King Recipe",
+        "area": "Ship Graveyard: Seadrift Row"
+      },
+      {
+        "name": "Mythril Crystal",
+        "area": "Ship Graveyard: Seadrift Row"
+      },
+      {
+        "name": "Pit Cell Area Map",
+        "area": "Pit Cell"
+      },
+      {
+        "name": "Mythril Crystal",
+        "area": "Pit Cell"
+      },
+      {
+        "name": "Dark Crystal",
+        "area": "Canyon"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Canyon"
+      },
+      {
+        "name": "Mythril Gem",
+        "area": "Canyon"
+      },
+      {
+        "name": "Frost Crystal",
+        "area": "Canyon"
+      },
+      {
+        "name": "Power Crystal",
+        "area": "I/O Tower: Hallway"
+      },
+      {
+        "name": "AP Boost",
+        "area": "I/O Tower: Hallway"
+      },
+      {
+        "name": "I/O Tower Map",
+        "area": "I/O Tower: Communications Room"
+      },
+      {
+        "name": "Gaia Belt",
+        "area": "I/O Tower: Communications Room"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Central Computer Mesa"
+      },
+      {
+        "name": "Orichalcum+",
+        "area": "Central Computer Mesa"
+      },
+      {
+        "name": "Cosmic Arts",
+        "area": "Central Computer Mesa"
+      },
+      {
+        "name": "Central Computer Core Map",
+        "area": "Central Computer Mesa"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Fragment Crossing"
+      },
+      {
+        "name": "Mythril Crystal",
+        "area": "Fragment Crossing"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Fragment Crossing"
+      },
+      {
+        "name": "Orichalcum",
+        "area": "Fragment Crossing"
+      },
+      {
+        "name": "Mythril Crystal",
+        "area": "Memory's Skyscraper"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Memory's Skyscraper"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Memory's Skyscraper"
+      },
+      {
+        "name": "Dark City Map",
+        "area": "The Brink of Despair"
+      },
+      {
+        "name": "Orichalcum+",
+        "area": "The Brink of Despair"
+      },
+      {
+        "name": "Mythril Gem",
+        "area": "Nothing's Call"
+      },
+      {
+        "name": "Orichalcum",
+        "area": "Nothing's Call"
+      },
+      {
+        "name": "Cosmic Belt",
+        "area": "Twilight's View"
+      },
+      {
+        "name": "Mythril Gem",
+        "area": "Naught's Skyway"
+      },
+      {
+        "name": "Orichalcum",
+        "area": "Naught's Skyway"
+      },
+      {
+        "name": "Mythril Crystal",
+        "area": "Naught's Skyway"
+      },
+      {
+        "name": "Mythril Stone",
+        "area": "Ruin and Creation's Passage"
+      },
+      {
+        "name": "AP Boost",
+        "area": "Ruin and Creation's Passage"
+      },
+      {
+        "name": "Mythril Crystal",
+        "area": "Ruin and Creation's Passage"
+      },
+      {
+        "name": "Orichalcum",
+        "area": "Ruin and Creation's Passage"
+      }
+    ],
+    "puzzles": [
+      {
+        "name": "Daylight",
+        "area": "Market Street: Station Heights"
+      },
+      {
+        "name": "Daylight",
+        "area": "Market Street: Tram Common"
+      },
+      {
+        "name": "Frontier",
+        "area": "Market Street: Tram Common"
+      },
+      {
+        "name": "Frontier",
+        "area": "Station Plaza"
+      },
+      {
+        "name": "Sunset",
+        "area": "Sunset Terrace"
+      },
+      {
+        "name": "Sunset",
+        "area": "Sunset Terrace"
+      },
+      {
+        "name": "Sunset",
+        "area": "Sunset Hill"
+      },
+      {
+        "name": "Sunset",
+        "area": "Sunset Hill"
+      },
+      {
+        "name": "Sunset",
+        "area": "The Old Mansion"
+      },
+      {
+        "name": "Daylight",
+        "area": "Mansion: Foyer"
+      },
+      {
+        "name": "Daylight",
+        "area": "Mansion: Foyer"
+      },
+      {
+        "name": "Sunset",
+        "area": "Mansion: The White Room"
+      },
+      {
+        "name": "Daylight",
+        "area": "Mansion: Computer Room (Data)"
+      },
+      {
+        "name": "Daylight",
+        "area": "Mansion: Pod Room"
+      },
+      {
+        "name": "Sunset",
+        "area": "The Tower"
+      },
+      {
+        "name": "Awakening",
+        "area": "Tower: Wardrobe"
+      },
+      {
+        "name": "Sunset",
+        "area": "Tower: Wardrobe"
+      },
+      {
+        "name": "Sunset",
+        "area": "Tunnelway"
+      },
+      {
+        "name": "Sunset",
+        "area": "Underground Concourse"
+      },
+      {
+        "name": "Sunset",
+        "area": "Underground Concourse"
+      },
+      {
+        "name": "Sunset",
+        "area": "Ansem's Study"
+      },
+      {
+        "name": "Daylight",
+        "area": "Postern"
+      },
+      {
+        "name": "Frontier",
+        "area": "Postern"
+      },
+      {
+        "name": "Duality",
+        "area": "Bailey"
+      },
+      {
+        "name": "Awakening",
+        "area": "Borough"
+      },
+      {
+        "name": "Sunset",
+        "area": "Borough"
+      },
+      {
+        "name": "Heart",
+        "area": "Marketplace"
+      },
+      {
+        "name": "Awakening",
+        "area": "Marketplace"
+      },
+      {
+        "name": "Sunset",
+        "area": "Corridors"
+      },
+      {
+        "name": "Daylight",
+        "area": "Heartless Manufactory"
+      },
+      {
+        "name": "Awakening",
+        "area": "Merlin's House"
+      },
+      {
+        "name": "Sunset",
+        "area": "Bailey"
+      },
+      {
+        "name": "Sunset",
+        "area": "Cavern of Remembrance: Depths"
+      },
+      {
+        "name": "Sunset",
+        "area": "Cavern of Remembrance: Depths"
+      },
+      {
+        "name": "Sunset",
+        "area": "Cavern of Remembrance: Mining Area"
+      },
+      {
+        "name": "Sunset",
+        "area": "Cavern of Remembrance: Mining Area"
+      },
+      {
+        "name": "Sunset",
+        "area": "Cavern of Remembrance: Mining Area"
+      },
+      {
+        "name": "Sunset",
+        "area": "Cavern of Remembrance: Mining Area"
+      },
+      {
+        "name": "Sunset",
+        "area": "Cavern of Remembrance: Mineshaft"
+      },
+      {
+        "name": "Sunset",
+        "area": "Cavern of Remembrance: Mineshaft"
+      },
+      {
+        "name": "Sunset",
+        "area": "Cavern of Remembrance: Mineshaft"
+      },
+      {
+        "name": "Sunset",
+        "area": "Cavern of Remembrance: Mineshaft"
+      },
+      {
+        "name": "Sunset",
+        "area": "Cavern of Remembrance: Mineshaft"
+      },
+      {
+        "name": "Sunset",
+        "area": "Entrance Hall"
+      },
+      {
+        "name": "Awakening",
+        "area": "The Beast's Room"
+      },
+      {
+        "name": "Daylight",
+        "area": "The West Hall"
+      },
+      {
+        "name": "Heart",
+        "area": "The West Wing"
+      },
+      {
+        "name": "Awakening",
+        "area": "Undercroft"
+      },
+      {
+        "name": "Awakening",
+        "area": "Undercroft"
+      },
+      {
+        "name": "Awakening",
+        "area": "Secret Passage"
+      },
+      {
+        "name": "Awakening",
+        "area": "Secret Passage"
+      },
+      {
+        "name": "Sunset",
+        "area": "Bridge"
+      },
+      {
+        "name": "Heart",
+        "area": "Cave of the Dead: Entrance"
+      },
+      {
+        "name": "Heart",
+        "area": "Underworld Caverns: Entrance"
+      },
+      {
+        "name": "Daylight",
+        "area": "Underworld Caverns: Entrance"
+      },
+      {
+        "name": "Duality",
+        "area": "The Lock"
+      },
+      {
+        "name": "Daylight",
+        "area": "Cave of the Dead: Passage"
+      },
+      {
+        "name": "Daylight",
+        "area": "Underworld Caverns: The Lost Road"
+      },
+      {
+        "name": "Daylight",
+        "area": "Underworld Caverns: The Lost Road"
+      },
+      {
+        "name": "Duality",
+        "area": "Underworld Caverns: The Lost Road"
+      },
+      {
+        "name": "Heart",
+        "area": "Underworld Caverns: Atrium"
+      },
+      {
+        "name": "Duality",
+        "area": "Agrabah"
+      },
+      {
+        "name": "Frontier",
+        "area": "Agrabah"
+      },
+      {
+        "name": "Frontier",
+        "area": "Bazaar"
+      },
+      {
+        "name": "Sunset",
+        "area": "Bazaar"
+      },
+      {
+        "name": "Daylight",
+        "area": "The Cave of Wonders: Entrance"
+      },
+      {
+        "name": "Daylight",
+        "area": "The Cave of Wonders: Treasure Room"
+      },
+      {
+        "name": "Sunset",
+        "area": "The Cave of Wonders: Treasure Room"
+      },
+      {
+        "name": "Frontier",
+        "area": "The Cave of Wonders: Valley of Stone"
+      },
+      {
+        "name": "Daylight",
+        "area": "The Cave of Wonders: Chasm of Challenges"
+      },
+      {
+        "name": "Daylight",
+        "area": "The Cave of Wonders: Chasm of Challenges"
+      },
+      {
+        "name": "Daylight",
+        "area": "The Cave of Wonders: Chasm of Challenges"
+      },
+      {
+        "name": "Daylight",
+        "area": "Sandswept Ruins"
+      },
+      {
+        "name": "Daylight",
+        "area": "Sandswept Ruins"
+      },
+      {
+        "name": "Sunset",
+        "area": "Sandswept Ruins"
+      },
+      {
+        "name": "Heart",
+        "area": "Encampment"
+      },
+      {
+        "name": "Sunset",
+        "area": "Encampment"
+      },
+      {
+        "name": "Frontier",
+        "area": "Mountain Trail"
+      },
+      {
+        "name": "Heart",
+        "area": "Village"
+      },
+      {
+        "name": "Awakening",
+        "area": "Village"
+      },
+      {
+        "name": "Daylight",
+        "area": "Village"
+      },
+      {
+        "name": "Awakening",
+        "area": "Ridge"
+      },
+      {
+        "name": "Awakening",
+        "area": "Ridge"
+      },
+      {
+        "name": "Daylight",
+        "area": "Throne Room"
+      },
+      {
+        "name": "Daylight",
+        "area": "Throne Room"
+      },
+      {
+        "name": "Daylight",
+        "area": "Starry Hill"
+      },
+      {
+        "name": "Daylight",
+        "area": "Pooh Bear's House"
+      },
+      {
+        "name": "Daylight",
+        "area": "Rabbit's House"
+      },
+      {
+        "name": "Daylight",
+        "area": "Piglet's House"
+      },
+      {
+        "name": "Daylight",
+        "area": "Kanga's House"
+      },
+      {
+        "name": "Daylight",
+        "area": "The Spooky Cave"
+      },
+      {
+        "name": "Sunset",
+        "area": "Pride Rock"
+      },
+      {
+        "name": "Daylight",
+        "area": "The King's Den"
+      },
+      {
+        "name": "Daylight",
+        "area": "Wildebeest Valley"
+      },
+      {
+        "name": "Daylight",
+        "area": "Wildebeest Valley"
+      },
+      {
+        "name": "Daylight",
+        "area": "Elephant Graveyard"
+      },
+      {
+        "name": "Daylight",
+        "area": "Elephant Graveyard"
+      },
+      {
+        "name": "Daylight",
+        "area": "Wastelands"
+      },
+      {
+        "name": "Daylight",
+        "area": "Wastelands"
+      },
+      {
+        "name": "Daylight",
+        "area": "Jungle"
+      },
+      {
+        "name": "Daylight",
+        "area": "Oasis"
+      },
+      {
+        "name": "Frontier",
+        "area": "Triton's Throne"
+      },
+      {
+        "name": "Frontier",
+        "area": "Triton's Throne"
+      },
+      {
+        "name": "Duality",
+        "area": "Undersea Courtyard"
+      },
+      {
+        "name": "Daylight",
+        "area": "Colonnade"
+      },
+      {
+        "name": "Heart",
+        "area": "Courtyard"
+      },
+      {
+        "name": "Heart",
+        "area": "Courtyard"
+      },
+      {
+        "name": "Duality",
+        "area": "Courtyard"
+      },
+      {
+        "name": "Duality",
+        "area": "Gummi Hangar"
+      },
+      {
+        "name": "Duality",
+        "area": "Pier"
+      },
+      {
+        "name": "Frontier",
+        "area": "Pier"
+      },
+      {
+        "name": "Heart",
+        "area": "Waterway"
+      },
+      {
+        "name": "Duality",
+        "area": "Halloween Town Square"
+      },
+      {
+        "name": "Sunset",
+        "area": "Curly Hill"
+      },
+      {
+        "name": "Duality",
+        "area": "The Hinterlands"
+      },
+      {
+        "name": "Daylight",
+        "area": "Yuletide Hill"
+      },
+      {
+        "name": "Daylight",
+        "area": "Santa's House"
+      },
+      {
+        "name": "Frontier",
+        "area": "Santa's House"
+      },
+      {
+        "name": "Daylight",
+        "area": "Toy Factory: Shipping and Receiving"
+      },
+      {
+        "name": "Sunset",
+        "area": "Toy Factory: Shipping and Receiving"
+      },
+      {
+        "name": "Heart",
+        "area": "Rampart"
+      },
+      {
+        "name": "Sunset",
+        "area": "Harbor"
+      },
+      {
+        "name": "Duality",
+        "area": "Town"
+      },
+      {
+        "name": "Frontier",
+        "area": "Town"
+      },
+      {
+        "name": "Daylight",
+        "area": "The Black Pearl"
+      },
+      {
+        "name": "Daylight",
+        "area": "The Black Pearl"
+      },
+      {
+        "name": "Daylight",
+        "area": "The Black Pearl: Captain's Stateroom"
+      },
+      {
+        "name": "Sunset",
+        "area": "Ship Graveyard: The Interceptor's Hold"
+      },
+      {
+        "name": "Heart",
+        "area": "Isla de Muerta: Powder Storage"
+      },
+      {
+        "name": "Duality",
+        "area": "Isla de Muerta: Powder Storage"
+      },
+      {
+        "name": "Sunset",
+        "area": "Ship Graveyard: Seadrift Keep"
+      },
+      {
+        "name": "Daylight",
+        "area": "Ship Graveyard: Seadrift Keep"
+      },
+      {
+        "name": "Sunset",
+        "area": "Ship Graveyard: Seadrift Row"
+      },
+      {
+        "name": "Sunset",
+        "area": "Canyon"
+      },
+      {
+        "name": "Daylight",
+        "area": "Canyon"
+      },
+      {
+        "name": "Sunset",
+        "area": "Solar Sailer Simulation"
+      },
+      {
+        "name": "Sunset",
+        "area": "Central Computer Core"
+      },
+      {
+        "name": "Sunset",
+        "area": "Memory's Skyscraper"
+      },
+      {
+        "name": "Sunset",
+        "area": "Crooked Ascension"
+      },
+      {
+        "name": "Sunset",
+        "area": "Twilight's View"
+      },
+      {
+        "name": "Daylight",
+        "area": "Naught's Skyway"
+      },
+      {
+        "name": "Sunset",
+        "area": "Proof of Existence"
+      },
+      {
+        "name": "Sunset",
+        "area": "Ruin and Creation's Passage"
+      },
+      {
+        "name": "Sunset",
+        "area": "Ruin and Creation's Passage"
+      }
+    ],
+    "conqueror": [
+      {
+        "name": "Event Quest",
+        "area": "Sandlot",
+        "cond": "Inspect the Absent Silhouette."
+      },
+      {
+        "name": "Mail Delivery",
+        "area": "Market Street: Station Heights",
+        "cond": "Try again."
+      },
+      {
+        "name": "Mail Delivery",
+        "area": "Market Street: Station Heights",
+        "cond": "Complete within 14 seconds."
+      },
+      {
+        "name": "Cargo Climb",
+        "area": "Market Street: Station Heights",
+        "cond": "Try again."
+      },
+      {
+        "name": "Cargo Climb",
+        "area": "Market Street: Station Heights",
+        "cond": "Complete within 15 seconds."
+      },
+      {
+        "name": "Grandstander",
+        "area": "Market Street: Station Heights",
+        "cond": "Try again."
+      },
+      {
+        "name": "Grandstander",
+        "area": "Market Street: Station Heights",
+        "cond": "Complete with 100 points or more."
+      },
+      {
+        "name": "Poster Duty",
+        "area": "Market Street: Tram Common",
+        "cond": "Try again."
+      },
+      {
+        "name": "Poster Duty",
+        "area": "Market Street: Tram Common",
+        "cond": "Complete within 30 seconds."
+      },
+      {
+        "name": "Bumble-Buster",
+        "area": "Market Street: Tram Common",
+        "cond": "Try again."
+      },
+      {
+        "name": "Bumble-Buster",
+        "area": "Market Street: Tram Common",
+        "cond": "Complete within 10 seconds."
+      },
+      {
+        "name": "Junk Sweep",
+        "area": "Market Street: Tram Common",
+        "cond": "Try again."
+      },
+      {
+        "name": "Junk Sweep",
+        "area": "Market Street: Tram Common",
+        "cond": "Complete with less than 6 points."
+      },
+      {
+        "name": "The Struggle: Hayner",
+        "area": "Sandlot",
+        "cond": "Give it a try."
+      },
+      {
+        "name": "The Struggle: Hayner",
+        "area": "Sandlot",
+        "cond": "Win by a margin of 100 or more points."
+      },
+      {
+        "name": "The Struggle: Setzer",
+        "area": "Sandlot",
+        "cond": "Give it a try."
+      },
+      {
+        "name": "The Struggle: Setzer",
+        "area": "Sandlot",
+        "cond": "Win with 150 or more points."
+      },
+      {
+        "name": "The Struggle: Seifer",
+        "area": "Sandlot",
+        "cond": "Give it a try."
+      },
+      {
+        "name": "The Struggle: Seifer",
+        "area": "Sandlot",
+        "cond": "Win with 200 points."
+      },
+      {
+        "name": "SB Street Rave",
+        "area": "Market Street: Station Heights",
+        "cond": "Give it a try."
+      },
+      {
+        "name": "SB Street Rave",
+        "area": "Market Street: Station Heights",
+        "cond": "Finish with 1,000 or more points."
+      },
+      {
+        "name": "Mushroom XIII: No. 7",
+        "area": "Tunnelway",
+        "cond": "Challenge to a duel."
+      },
+      {
+        "name": "Mushroom XIII: No. 7",
+        "area": "Tunnelway",
+        "cond": "Complete within 10 seconds."
+      },
+      {
+        "name": "Mushroom XIII: No. 8",
+        "area": "The Tower",
+        "cond": "Challenge to a duel."
+      },
+      {
+        "name": "Mushroom XIII: No. 8",
+        "area": "The Tower",
+        "cond": "Complete with a score of 85 or more."
+      },
+      {
+        "name": "Mushroom XIII: No. 12",
+        "area": "The Old Mansion",
+        "cond": "Challenge to a duel."
+      },
+      {
+        "name": "Mushroom XIII: No. 12",
+        "area": "The Old Mansion",
+        "cond": "Complete with a score of 40 or more."
+      },
+      {
+        "name": "Event Quest",
+        "area": "Postern",
+        "cond": "Meet the three girls again."
+      },
+      {
+        "name": "Event Quest",
+        "area": "Dark Depths",
+        "cond": "Meet Sephiroth again."
+      },
+      {
+        "name": "SB Freestyle",
+        "area": "Marketplace",
+        "cond": "Give it a try."
+      },
+      {
+        "name": "SB Freestyle",
+        "area": "Marketplace",
+        "cond": "Finish with 200 or more points."
+      },
+      {
+        "name": "Cavern of Remembrance",
+        "area": "Postern",
+        "cond": "Enter the Cavern of Remembrance."
+      },
+      {
+        "name": "Cavern of Remembrance",
+        "area": "Cavern of Remembrance",
+        "cond": "Investigate the depths of the Cavern."
+      },
+      {
+        "name": "Cavern of Remembrance",
+        "area": "Garden of Assemblage",
+        "cond": "Fight Xemnas again."
+      },
+      {
+        "name": "Cavern of Remembrance",
+        "area": "Garden of Assemblage",
+        "cond": "Fight Xigbar again."
+      },
+      {
+        "name": "Cavern of Remembrance",
+        "area": "Garden of Assemblage",
+        "cond": "Fight Xaldin again."
+      },
+      {
+        "name": "Cavern of Remembrance",
+        "area": "Garden of Assemblage",
+        "cond": "Fight Vexen again."
+      },
+      {
+        "name": "Cavern of Remembrance",
+        "area": "Garden of Assemblage",
+        "cond": "Fight Lexaeus again."
+      },
+      {
+        "name": "Cavern of Remembrance",
+        "area": "Garden of Assemblage",
+        "cond": "Fight Zexion again."
+      },
+      {
+        "name": "Cavern of Remembrance",
+        "area": "Garden of Assemblage",
+        "cond": "Fight Saïx again."
+      },
+      {
+        "name": "Cavern of Remembrance",
+        "area": "Garden of Assemblage",
+        "cond": "Fight Axel again."
+      },
+      {
+        "name": "Cavern of Remembrance",
+        "area": "Garden of Assemblage",
+        "cond": "Fight Demyx again."
+      },
+      {
+        "name": "Cavern of Remembrance",
+        "area": "Garden of Assemblage",
+        "cond": "Fight Luxord again."
+      },
+      {
+        "name": "Cavern of Remembrance",
+        "area": "Garden of Assemblage",
+        "cond": "Fight Marluxia again."
+      },
+      {
+        "name": "Cavern of Remembrance",
+        "area": "Garden of Assemblage",
+        "cond": "Fight Larxene again."
+      },
+      {
+        "name": "Cavern of Remembrance",
+        "area": "Garden of Assemblage",
+        "cond": "Fight Roxas again."
+      },
+      {
+        "name": "Mushroom XIII: No. 9",
+        "area": "Castle Gate",
+        "cond": "Challenge to a duel."
+      },
+      {
+        "name": "Mushroom XIII: No. 9",
+        "area": "Castle Gate",
+        "cond": "Complete with a score of 75 or more."
+      },
+      {
+        "name": "Mushroom XIII: No. 13",
+        "area": "The Great Maw",
+        "cond": "Challenge to a duel."
+      },
+      {
+        "name": "Event Quest",
+        "area": "Beast's Room",
+        "cond": "Inspect the Absent Silhouette."
+      },
+      {
+        "name": "Mushroom XIII: No. 3",
+        "area": "Bridge",
+        "cond": "Challenge to a duel."
+      },
+      {
+        "name": "Mushroom XIII: No. 3",
+        "area": "Bridge",
+        "cond": "Complete with a score of 450 or more."
+      },
+      {
+        "name": "Event Quest",
+        "area": "Cave of the Dead: Inner Chamber",
+        "cond": "Inspect the Absent Silhouette."
+      },
+      {
+        "name": "Phil's Training",
+        "area": "Olympus Coliseum",
+        "cond": "Try Practice Mode."
+      },
+      {
+        "name": "Phil's Training",
+        "area": "Olympus Coliseum",
+        "cond": "Try Maniac Mode."
+      },
+      {
+        "name": "Phil's Training",
+        "area": "Olympus Coliseum",
+        "cond": "Complete with a score of 1,000 or more."
+      },
+      {
+        "name": "The Underdrome: Pain and Panic",
+        "area": "Underworld Entrance",
+        "cond": "Give it a try."
+      },
+      {
+        "name": "The Underdrome: Pain and Panic",
+        "area": "Underworld Entrance",
+        "cond": "Win with a score of 2,000 or more."
+      },
+      {
+        "name": "The Underdrome: Cerberus",
+        "area": "Underworld Entrance",
+        "cond": "Give it a try."
+      },
+      {
+        "name": "The Underdrome: Cerberus",
+        "area": "Underworld Entrance",
+        "cond": "Win with a score of 1,000 or more."
+      },
+      {
+        "name": "The Underdrome: Titan",
+        "area": "Underworld Entrance",
+        "cond": "Give it a try."
+      },
+      {
+        "name": "The Underdrome: Titan",
+        "area": "Underworld Entrance",
+        "cond": "Win with a score of 5,000 or more."
+      },
+      {
+        "name": "The Underdrome: Goddess of Fate",
+        "area": "Underworld Entrance",
+        "cond": "Give it a try."
+      },
+      {
+        "name": "The Underdrome: Goddess of Fate",
+        "area": "Underworld Entrance",
+        "cond": "Win with a score of 3,000 or more."
+      },
+      {
+        "name": "The Paradox Battles: Pain and Panic",
+        "area": "Hades' Chamber",
+        "cond": "Give it a try."
+      },
+      {
+        "name": "The Paradox Battles: Pain and Panic",
+        "area": "Hades' Chamber",
+        "cond": "Win with a score of 2,500 or more."
+      },
+      {
+        "name": "The Paradox Battles: Cerberus",
+        "area": "Hades' Chamber",
+        "cond": "Give it a try."
+      },
+      {
+        "name": "The Paradox Battles: Cerberus",
+        "area": "Hades' Chamber",
+        "cond": "Win with a score of 1,300 or more."
+      },
+      {
+        "name": "The Paradox Battles: Titan",
+        "area": "Hades' Chamber",
+        "cond": "Give it a try."
+      },
+      {
+        "name": "The Paradox Battles: Titan",
+        "area": "Hades' Chamber",
+        "cond": "Win with a score of 10,000 or more."
+      },
+      {
+        "name": "The Paradox Battles: Hades",
+        "area": "Hades' Chamber",
+        "cond": "Give it a try."
+      },
+      {
+        "name": "The Paradox Battles: Hades",
+        "area": "Hades' Chamber",
+        "cond": "Win with a score of 15,000 or more."
+      },
+      {
+        "name": "Mushroom XIII: No. 6",
+        "area": "Underworld Caverns: Atrium",
+        "cond": "Challenge to a duel."
+      },
+      {
+        "name": "Mushroom XIII: No. 6",
+        "area": "Underworld Caverns: Atrium",
+        "cond": "Complete within 45 seconds."
+      },
+      {
+        "name": "Event Quest",
+        "area": "Cave of Wonders: Chasm of Challenges",
+        "cond": "Redo the Cave of Wonders: Chasm of Challenges."
+      },
+      {
+        "name": "Event Quest",
+        "area": "Peddler's Shop",
+        "cond": "Inspect the Absent Silhouette."
+      },
+      {
+        "name": "Magic Carpet",
+        "area": "Ruined Chamber",
+        "cond": "Try again."
+      },
+      {
+        "name": "Magic Carpet",
+        "area": "Ruined Chamber",
+        "cond": "Finish with a score of 65 or more."
+      },
+      {
+        "name": "SB Sand Glider",
+        "area": "Peddler's Shop",
+        "cond": "Give it a try."
+      },
+      {
+        "name": "SB Sand Glider",
+        "area": "Peddler's Shop",
+        "cond": "Finish with 10 or more points."
+      },
+      {
+        "name": "Mushroom XIII: No. 5",
+        "area": "Cave of Wonders: Treasure Room",
+        "cond": "Challenge to a duel."
+      },
+      {
+        "name": "Mushroom XIII: No. 5",
+        "area": "Cave of Wonders: Treasure Room",
+        "cond": "Complete within 10 seconds."
+      },
+      {
+        "name": "A Blustery Rescue",
+        "area": "Piglet's House",
+        "cond": "Try again."
+      },
+      {
+        "name": "A Blustery Rescue",
+        "area": "Piglet's House",
+        "cond": "Finish with a score of 18,000 or more."
+      },
+      {
+        "name": "Hunny Slider",
+        "area": "Rabbit's House",
+        "cond": "Try again."
+      },
+      {
+        "name": "Hunny Slider",
+        "area": "Rabbit's House",
+        "cond": "Finish with a score of 8,000 or more."
+      },
+      {
+        "name": "Balloon Bounce",
+        "area": "Kanga's House",
+        "cond": "Try again."
+      },
+      {
+        "name": "Balloon Bounce",
+        "area": "Kanga's House",
+        "cond": "Finish with a score of 2,000 or more."
+      },
+      {
+        "name": "The Expotition",
+        "area": "Spooky Cave",
+        "cond": "Try again."
+      },
+      {
+        "name": "The Expotition",
+        "area": "Spooky Cave",
+        "cond": "Finish within 90 seconds."
+      },
+      {
+        "name": "The Hunny Pot",
+        "area": "Starry Hill",
+        "cond": "Try again."
+      },
+      {
+        "name": "The Hunny Pot",
+        "area": "Starry Hill",
+        "cond": "Finish with a score of 8,000 or more."
+      },
+      {
+        "name": "A Musical Challenge",
+        "area": "Undersea Courtyard",
+        "cond": "Perform \"Swim This Way\" again."
+      },
+      {
+        "name": "A Musical Challenge",
+        "area": "Undersea Courtyard",
+        "cond": "Perform \"Part of Your World\" again."
+      },
+      {
+        "name": "A Musical Challenge",
+        "area": "Undersea Courtyard",
+        "cond": "Perform \"Under the Sea\" again."
+      },
+      {
+        "name": "A Musical Challenge",
+        "area": "Undersea Courtyard",
+        "cond": "Perform \"Ursula's Revenge\" again."
+      },
+      {
+        "name": "A Musical Challenge",
+        "area": "Undersea Courtyard",
+        "cond": "Perform \"A New Day is Dawning\" again."
+      },
+      {
+        "name": "Gift Wrapping",
+        "area": "Shipping and Receiving",
+        "cond": "Try again."
+      },
+      {
+        "name": "Gift Wrapping",
+        "area": "Shipping and Receiving",
+        "cond": "Finish with a score of 150 or more."
+      },
+      {
+        "name": "SB Workshop Rave",
+        "area": "Yuletide Hill",
+        "cond": "Give it a try."
+      },
+      {
+        "name": "SB Workshop Rave",
+        "area": "Yuletide Hill",
+        "cond": "Finish with 1,000 or more points."
+      },
+      {
+        "name": "Mushroom XIII: No. 2",
+        "area": "Christmas Tree Plaza",
+        "cond": "Challenge to a duel."
+      },
+      {
+        "name": "Mushroom XIII: No. 2",
+        "area": "Christmas Tree Plaza",
+        "cond": "Complete with a score of 80 or more."
+      },
+      {
+        "name": "Event Quest",
+        "area": "Isla de Muerta: Rock Face",
+        "cond": "Inspect the Absent Silhouette."
+      },
+      {
+        "name": "SB Time Attack",
+        "area": "Rampart",
+        "cond": "Give it a try."
+      },
+      {
+        "name": "SB Time Attack",
+        "area": "Rampart",
+        "cond": "Finish within 40 seconds."
+      },
+      {
+        "name": "Mushroom XIII: No. 10",
+        "area": "Isla de Muerta: Midnight Nook",
+        "cond": "Challenge to a duel."
+      },
+      {
+        "name": "Mushroom XIII: No. 10",
+        "area": "Isla de Muerta: Midnight Nook",
+        "cond": "Complete within 55 seconds."
+      },
+      {
+        "name": "Light Cycle",
+        "area": "Pit Cell",
+        "cond": "Try again."
+      },
+      {
+        "name": "Light Cycle",
+        "area": "Pit Cell",
+        "cond": "Finish with 30 or more points."
+      },
+      {
+        "name": "Mushroom XIII: No. 4",
+        "area": "Palace Gate",
+        "cond": "Challenge to a duel."
+      },
+      {
+        "name": "Mushroom XIII: No. 4",
+        "area": "Palace Gate",
+        "cond": "Complete with a score of 85 or more."
+      },
+      {
+        "name": "Event Quest",
+        "area": "Hall of the Cornerstone",
+        "cond": "Investigate the mysterious entranceway."
+      },
+      {
+        "name": "Mushroom XIII: No. 11",
+        "area": "Waterway",
+        "cond": "Challenge to a duel."
+      },
+      {
+        "name": "Mushroom XIII: No. 11",
+        "area": "Waterway",
+        "cond": "Complete within 19 seconds."
+      },
+      {
+        "name": "Event Quest",
+        "cond": "Complete all worlds and defeat Xemnas."
+      },
+      {
+        "name": "Mushroom XIII: No. 1",
+        "area": "Memory's Skyscraper",
+        "cond": "Challenge to a duel."
+      },
+      {
+        "name": "Mushroom XIII: No. 1",
+        "area": "Memory's Skyscraper",
+        "cond": "Complete with a score of 70 or more."
+      }
+    ],
+    "mushrooms": [
+      {
+        "name": "I",
+        "world": "The World That Never Was",
+        "area": "Memory's Skyscraper",
+        "req": "Complete with a score of 70 or more"
+      },
+      {
+        "name": "II",
+        "world": "Halloween Town",
+        "area": "Christmas Tree Plaza",
+        "req": "Complete with a score of 80 or more"
+      },
+      {
+        "name": "III",
+        "world": "Beast's Castle",
+        "area": "Bridge",
+        "req": "Complete with a score of 450 or more"
+      },
+      {
+        "name": "IV",
+        "world": "Land of the Dragons",
+        "area": "Palace Gate",
+        "req": "Complete with a score of 85 or more"
+      },
+      {
+        "name": "V",
+        "world": "Agrabah",
+        "area": "The Cave of Wonders: Treasure Room",
+        "req": "Complete within 10 seconds"
+      },
+      {
+        "name": "VI",
+        "world": "Olympus Coliseum",
+        "area": "Underworld Caverns: Atrium",
+        "req": "Complete within 45 seconds"
+      },
+      {
+        "name": "VII",
+        "world": "Twilight Town",
+        "area": "Tunnelway",
+        "req": "Complete within 10 seconds"
+      },
+      {
+        "name": "VIII",
+        "world": "Twilight Town",
+        "area": "Mysterious Tower",
+        "req": "Complete with a score of 85 or more"
+      },
+      {
+        "name": "IX",
+        "world": "Hollow Bastion",
+        "area": "Castle Gate",
+        "req": "Complete with a score of 75 or more"
+      },
+      {
+        "name": "X",
+        "world": "Port Royal",
+        "area": "Isla de Muerta: Moonlight Nook",
+        "req": "Complete within 55 seconds"
+      },
+      {
+        "name": "XI",
+        "world": "Timeless River",
+        "area": "Waterway",
+        "req": "Complete within 19 seconds"
+      },
+      {
+        "name": "XII",
+        "world": "Twilight Town",
+        "area": "The Old Mansion",
+        "req": "Complete with a score of 40 or more"
+      },
+      {
+        "name": "XIII",
+        "world": "Hollow Bastion",
+        "area": "Great Maw",
+        "req": "Find it after completing the other mushrooms"
+      }
+    ],
+    "cups": [
+      {
+        "name": "Pain and Panic",
+        "unlock": "Complete the story of Disney Castle",
+        "score": "2000",
+        "reward": "Protect Belt, Serenity Gem"
+      },
+      {
+        "name": "Cerberus",
+        "unlock": "Complete the first visit to Agrabah, Halloween Town, and the Pride Lands",
+        "score": "1000",
+        "reward": "Rising Dragon, Serenity Crystal"
+      },
+      {
+        "name": "Titan",
+        "unlock": "Complete the second visit to Olympus Coliseum",
+        "score": "5000",
+        "reward": "Genji Shield, Skillful Ring"
+      },
+      {
+        "name": "Goddess of Fate",
+        "unlock": "Complete the Pain and Panic, Cerberus, and Titan cups, and complete the story of The World That Never Was",
+        "score": "3000",
+        "reward": "Fatal Crest, Orichalcum+"
+      },
+      {
+        "name": "Paradox: Pain and Panic",
+        "unlock": "Complete the Pain and Panic, Cerberus, Titan, and Goddess of Fate cups",
+        "score": "2500"
+      },
+      {
+        "name": "Paradox: Cerberus",
+        "unlock": "Unlock the Paradox: Pain and Panic cup, and raise Valor, Wisdom, and Master Forms to level 5",
+        "score": "1300"
+      },
+      {
+        "name": "Paradox: Titan",
+        "unlock": "Unlock the Paradox: Cerberus cup, and raise Summons to level 5",
+        "score": "10000"
+      },
+      {
+        "name": "Paradox: Hades",
+        "unlock": "Complete the second visit to Space Paranoids, clear all previous cups, and raise all Drive Forms and Summons to level 7",
+        "score": "15000"
+      }
+    ],
+    "minigames": [
+      {
+        "name": "Mail Delivery",
+        "area": "Market Street: Station Heights"
+      },
+      {
+        "name": "Cargo Climb",
+        "area": "Market Street: Station Heights"
+      },
+      {
+        "name": "Grandstander",
+        "area": "Market Street: Station Heights"
+      },
+      {
+        "name": "Poster Duty",
+        "area": "Market Street: Tram Common"
+      },
+      {
+        "name": "Bumble-Buster",
+        "area": "Market Street: Tram Common"
+      },
+      {
+        "name": "Junk Sweep",
+        "area": "Market Street: Tram Common"
+      },
+      {
+        "name": "SB Street Rave",
+        "area": "Market Street: Station Heights"
+      },
+      {
+        "name": "Mushroom XIII: No. 7",
+        "area": "Tunnelway"
+      },
+      {
+        "name": "Mushroom XIII: No. 8",
+        "area": "The Tower"
+      },
+      {
+        "name": "Mushroom XIII: No. 12",
+        "area": "The Old Mansion"
+      },
+      {
+        "name": "SB Freestyle",
+        "area": "Marketplace"
+      },
+      {
+        "name": "Mushroom XIII: No. 9",
+        "area": "Castle Gate"
+      },
+      {
+        "name": "Phil's Training",
+        "area": "Olympus Coliseum"
+      },
+      {
+        "name": "The Underdrome: Pain and Panic",
+        "area": "Underworld Entrance"
+      },
+      {
+        "name": "The Underdrome: Cerberus",
+        "area": "Underworld Entrance"
+      },
+      {
+        "name": "The Underdrome: Titan",
+        "area": "Underworld Entrance"
+      },
+      {
+        "name": "The Underdrome: Goddess of Fate",
+        "area": "Underworld Entrance"
+      },
+      {
+        "name": "The Paradox Battles: Pain and Panic",
+        "area": "Hades' Chamber"
+      },
+      {
+        "name": "The Paradox Battles: Cerberus",
+        "area": "Hades' Chamber"
+      },
+      {
+        "name": "The Paradox Battles: Titan",
+        "area": "Hades' Chamber"
+      },
+      {
+        "name": "The Paradox Battles: Hades",
+        "area": "Hades' Chamber"
+      },
+      {
+        "name": "Mushroom XIII: No. 6",
+        "area": "Underworld Caverns: Atrium"
+      },
+      {
+        "name": "Magic Carpet",
+        "area": "Ruined Chamber"
+      },
+      {
+        "name": "SB Sand Glider",
+        "area": "Peddler's Shop"
+      },
+      {
+        "name": "Mushroom XIII: No. 5",
+        "area": "Cave of Wonders: Treasure Room"
+      },
+      {
+        "name": "A Blustery Rescue",
+        "area": "Piglet's House"
+      },
+      {
+        "name": "Hunny Slider",
+        "area": "Rabbit's House"
+      },
+      {
+        "name": "Balloon Bounce",
+        "area": "Kanga's House"
+      },
+      {
+        "name": "The Expotition",
+        "area": "Spooky Cave"
+      },
+      {
+        "name": "The Hunny Pot",
+        "area": "Starry Hill"
+      },
+      {
+        "name": "Gift Wrapping",
+        "area": "Shipping and Receiving"
+      },
+      {
+        "name": "SB Workshop Rave",
+        "area": "Yuletide Hill"
+      },
+      {
+        "name": "Mushroom XIII: No. 2",
+        "area": "Christmas Tree Plaza"
+      },
+      {
+        "name": "SB Time Attack",
+        "area": "Rampart"
+      },
+      {
+        "name": "Mushroom XIII: No. 10",
+        "area": "Isla de Muerta: Midnight Nook"
+      },
+      {
+        "name": "Light Cycle",
+        "area": "Pit Cell"
+      },
+      {
+        "name": "Mushroom XIII: No. 3",
+        "area": "Bridge"
+      },
+      {
+        "name": "Mushroom XIII: No. 4",
+        "area": "Palace Gate"
+      },
+      {
+        "name": "Mushroom XIII: No. 11",
+        "area": "Waterway"
+      },
+      {
+        "name": "Mushroom XIII: No. 1",
+        "area": "Memory's Skyscraper"
+      }
+    ],
+    "materials": [
+      {
+        "name": "Blazing Shard",
+        "source": "Hammer Frame",
+        "loc": "Beast's Castle"
+      },
+      {
+        "name": "Blazing Stone",
+        "source": "Tornado Step",
+        "loc": "Olympus Coliseum"
+      },
+      {
+        "name": "Blazing Gem",
+        "source": "Fiery Globe",
+        "loc": "Agrabah"
+      },
+      {
+        "name": "Blazing Crystal",
+        "source": "Crimson Jazz",
+        "loc": "Beast's Castle"
+      },
+      {
+        "name": "Frost Shard",
+        "source": "Lance Soldier",
+        "loc": "Beast's Castle"
+      },
+      {
+        "name": "Frost Stone",
+        "source": "Hot Rod",
+        "loc": "Timeless River"
+      },
+      {
+        "name": "Frost Gem",
+        "source": "Fortune Teller",
+        "loc": "Agrabah"
+      },
+      {
+        "name": "Frost Crystal",
+        "source": "Living Bone",
+        "loc": "Pride Lands"
+      },
+      {
+        "name": "Lightning Shard",
+        "source": "Bolt Tower",
+        "loc": "The Land of Dragons"
+      },
+      {
+        "name": "Lightning Stone",
+        "source": "Emerald Blues",
+        "loc": "The Land of Dragons"
+      },
+      {
+        "name": "Lightning Gem",
+        "source": "Surveillance Robot",
+        "loc": "Radiant Garden"
+      },
+      {
+        "name": "Lightning Crystal",
+        "source": "Devastator",
+        "loc": "Space Paranoids"
+      },
+      {
+        "name": "Lucid Shard",
+        "source": "Trick Ghost",
+        "loc": "Halloween Town"
+      },
+      {
+        "name": "Lucid Stone",
+        "source": "Graveyard",
+        "loc": "Halloween Town"
+      },
+      {
+        "name": "Lucid Gem",
+        "source": "Bookmaster",
+        "loc": "Radiant Garden"
+      },
+      {
+        "name": "Lucid Crystal",
+        "source": "Neoshadow",
+        "loc": "The Land of Dragons"
+      },
+      {
+        "name": "Power Shard",
+        "source": "Large Body",
+        "loc": "Beast's Castle"
+      },
+      {
+        "name": "Power Stone",
+        "source": "Luna Bandit",
+        "loc": "Agrabah"
+      },
+      {
+        "name": "Power Gem",
+        "source": "Shaman",
+        "loc": "Pride Lands"
+      },
+      {
+        "name": "Power Crystal",
+        "source": "Morning Star",
+        "loc": "Radiant Garden"
+      },
+      {
+        "name": "Dark Shard",
+        "source": "Soldier",
+        "loc": "Radiant Garden"
+      },
+      {
+        "name": "Dark Stone",
+        "source": "Assault Rider",
+        "loc": "The Land of Dragons"
+      },
+      {
+        "name": "Dark Gem",
+        "source": "Gargoyle Knight",
+        "loc": "Beast's Castle"
+      },
+      {
+        "name": "Dark Crystal",
+        "source": "Air Pirate",
+        "loc": "The Land of Dragons"
+      },
+      {
+        "name": "Dense Shard",
+        "source": "Creeper",
+        "loc": "The World That Never Was"
+      },
+      {
+        "name": "Dense Stone",
+        "source": "Sniper",
+        "loc": "The World That Never Was"
+      },
+      {
+        "name": "Dense Gem",
+        "source": "Samurai",
+        "loc": "The World That Never Was"
+      },
+      {
+        "name": "Dense Crystal",
+        "source": "Berserker",
+        "loc": "The World That Never Was"
+      },
+      {
+        "name": "Twilight Shard",
+        "source": "Gambler",
+        "loc": "Twilight Town"
+      },
+      {
+        "name": "Twilight Stone",
+        "source": "Dancer",
+        "loc": "Twilight Town"
+      },
+      {
+        "name": "Twilight Gem",
+        "source": "Assassin",
+        "loc": "Twilight Town"
+      },
+      {
+        "name": "Twilight Crystal",
+        "source": "Sorcerer",
+        "loc": "The World That Never Was"
+      },
+      {
+        "name": "Mythril Shard",
+        "loc": "Synthesis"
+      },
+      {
+        "name": "Mythril Stone",
+        "loc": "Synthesis"
+      },
+      {
+        "name": "Mythril Gem",
+        "loc": "Synthesis"
+      },
+      {
+        "name": "Mythril Crystal",
+        "loc": "Synthesis"
+      },
+      {
+        "name": "Remembrance Shard",
+        "source": "Iron Hammer",
+        "loc": "Cavern of Remembrance"
+      },
+      {
+        "name": "Remembrance Stone",
+        "source": "Lance Warrior",
+        "loc": "Cavern of Remembrance"
+      },
+      {
+        "name": "Remembrance Gem",
+        "source": "Mad Bumper",
+        "loc": "Cavern of Remembrance"
+      },
+      {
+        "name": "Remembrance Crystal",
+        "source": "Reckless",
+        "loc": "Cavern of Remembrance"
+      },
+      {
+        "name": "Tranquility Shard",
+        "source": "Mushroom XIII",
+        "loc": "Multiple worlds (see Heartless & Nobodies)"
+      },
+      {
+        "name": "Tranquility Stone",
+        "source": "Mushroom XIII",
+        "loc": "Multiple worlds (see Heartless & Nobodies)"
+      },
+      {
+        "name": "Tranquility Gem",
+        "source": "Mushroom XIII",
+        "loc": "Multiple worlds (see Heartless & Nobodies)"
+      },
+      {
+        "name": "Tranquillity Crystal",
+        "source": "Mushroom XIII",
+        "loc": "Multiple worlds (see Heartless & Nobodies)"
+      },
+      {
+        "name": "Bright Shard",
+        "source": "Hook Bat",
+        "loc": "The Land of Dragons"
+      },
+      {
+        "name": "Bright Stone",
+        "source": "Wight Knight",
+        "loc": "Halloween Town"
+      },
+      {
+        "name": "Bright Gem",
+        "source": "Aerial Knocker",
+        "loc": "Pride Lands"
+      },
+      {
+        "name": "Bright Crystal",
+        "source": "Crescendo",
+        "loc": "Olympus Coliseum"
+      },
+      {
+        "name": "Energy Shard",
+        "source": "Gargoyle Warrior",
+        "loc": "Beast's Castle"
+      },
+      {
+        "name": "Energy Stone",
+        "source": "Hammer Frame",
+        "loc": "Beast's Castle"
+      },
+      {
+        "name": "Energy Gem",
+        "source": "Fortune Teller",
+        "loc": "Agrabah"
+      },
+      {
+        "name": "Energy Crystal",
+        "source": "Book Master",
+        "loc": "Hollow Bastion"
+      },
+      {
+        "name": "Serenity Shard",
+        "source": "Bulky Vendor",
+        "loc": "See below"
+      },
+      {
+        "name": "Serenity Stone",
+        "source": "Bulky Vendor",
+        "loc": "See below"
+      },
+      {
+        "name": "Serenity Gem",
+        "source": "Bulky Vendor",
+        "loc": "See below"
+      },
+      {
+        "name": "Serenity Crystal",
+        "source": "Bulky Vendor",
+        "loc": "See below"
+      },
+      {
+        "name": "Manifest Illusion",
+        "source": "Lingering Will Treasure Chests Synthesis List (all Rank A) Complete the \"Frontier\" puzzle"
+      },
+      {
+        "name": "Lost Illusion",
+        "source": "Vexen, Lexaeus, Zexion, Marluxia, Larxene Treasure Chests Synthesis List (all Rank S)"
+      },
+      {
+        "name": "Orichalcum",
+        "source": "Bulky Vendor Treasure Chests"
+      },
+      {
+        "name": "Orichalcum+",
+        "source": "Treasure Chests"
+      }
+    ],
+    "recipes": [
+      {
+        "name": "Mega-Potion",
+        "mats": "Mythril Shard x2, Power Shard x1, Blazing Shard x1, Lucid Shard x1",
+        "how": "Obtain the Mega Recipe in a chest at Belle's Room (Beast's Castle)"
+      },
+      {
+        "name": "Mega-Ether",
+        "mats": "Mythril Shard x2, Power Shard x1, Blazing Shard x1, Lucid Shard x1, Serenity Stone x1",
+        "how": "Create a Mega-Potion"
+      },
+      {
+        "name": "Elixir",
+        "mats": "Mythril Stone x3, Power Stone x1, Dark Stone x1",
+        "how": "Obtain a Star Recipe in a chest in the Courtyard (Disney Castle)"
+      },
+      {
+        "name": "Megalixir",
+        "mats": "Mythril Stone x3, Power Stone x1, Dark Stone x1, Serenity Gem x1",
+        "how": "Create an Elixir"
+      },
+      {
+        "name": "Drive Recovery",
+        "mats": "Mythril Shard x3, Dark Shard x3, Frost Shard x1, Lightning Shard x1",
+        "how": "Obtain a Recovery Recipe in a chest at the Mountain Trail (Land of the Dragons)"
+      },
+      {
+        "name": "High Drive Recovery",
+        "mats": "Mythril Shard x3, Dark Shard x3, Frost Shard x1, Lightning Shard x1, Serenity Shard x1",
+        "how": "Create a Drive Recovery"
+      },
+      {
+        "name": "AP Boost",
+        "mats": "Mythril Gem x1, Power Crystal x3, Dark Crystal x3, Frost Crystal x3",
+        "how": "Obtain a Skill Recipe in a chest in Ansem's Study (Hollow Bastion)"
+      },
+      {
+        "name": "Magic Boost",
+        "mats": "Mythril Gem x1, Power Crystal x3, Dark Crystal x3, Frost Crystal x3, Serenity Crystal x1",
+        "how": "Create an AP Boost"
+      },
+      {
+        "name": "Defense Boost",
+        "mats": "Mythril Crystal x1, Blazing Crystal x3, Lightning Crystal x3, Lucid Crystal x3",
+        "how": "Obtain the Guard Recipe in a chest at The Spooky Cave (100 Acre Wood)"
+      },
+      {
+        "name": "Power Boost",
+        "mats": "Mythril Crystal x1, Blazing Crystal x3, Lightning Crystal x3, Lucid Crystal x3, Serenity Crystal x1",
+        "how": "Create a Defense Boost"
+      },
+      {
+        "name": "Mythril Shard",
+        "mats": "Dense Stone x1, Dense Shard x3, Twilight Stone x1, Twilight Shard x3",
+        "how": "Obtain tweny types of materials"
+      },
+      {
+        "name": "Mythril Stone",
+        "mats": "Dense Stone x1, Dense Shard x3, Twilight Stone x1, Twilight Shard x3, Serenity Shard x1",
+        "how": "Create a Mythril Shard"
+      },
+      {
+        "name": "Mythril Gem",
+        "mats": "Dense Crystal x1, Dense Gem x2, Twilight Crystal x1, Twilight Gem x2",
+        "how": "Raise Moguri rank to Level 8"
+      },
+      {
+        "name": "Mythril Crystal",
+        "mats": "Dense Crystal x1, Dense Gem x2, Twilight Crystal x1, Twilight Gem x2, Serenity Stone x1",
+        "how": "Create a Mythril Gem"
+      },
+      {
+        "name": "Serenity Crystal",
+        "mats": "Tranquility Crystal x1, Remembrance Crystal x1, Bright Crystal x5",
+        "how": "Raise Moguri rank to Level 8"
+      },
+      {
+        "name": "Manifest Illusion",
+        "mats": "Tranquility Crystal x1, Remembrance Crystal x1, Bright Crystal x5, Serenity Gem x1",
+        "how": "Create a Serenity Crystal"
+      },
+      {
+        "name": "Firaga Bangle",
+        "mats": "Mythril Shard x5, Blazing Stone x1, Blazing Shard x1",
+        "how": "Obtain five types of materials"
+      },
+      {
+        "name": "Firagun Bangle",
+        "mats": "Mythril Shard x5, Blazing Stone x1, Blazing Shard x1, Serenity Shard x1",
+        "how": "Create a Firaga Bangle"
+      },
+      {
+        "name": "Blizzaga Armlet",
+        "mats": "Mythril Shard x5, Frost Stone x1, Frost Shard x1",
+        "how": "Obtain five types of materials"
+      },
+      {
+        "name": "Blizzagun Armlet",
+        "mats": "Mythril Shard x5, Frost Stone x1, Frost Shard x1, Serenity Shard x1",
+        "how": "Create a Blizzaga Armlet"
+      },
+      {
+        "name": "Thundaga Trinket",
+        "mats": "Mythril Shard x5, Lightning Stone x1, Lightning Shard x1",
+        "how": "Obtain five types of materials"
+      },
+      {
+        "name": "Thundagun Trinket",
+        "mats": "Mythril Shard x5, Lightning Stone x1, Lightning Shard x1, Serenity Shard x1",
+        "how": "Create a Thundaga Trinket"
+      },
+      {
+        "name": "Midnight Anklet",
+        "mats": "Mythril Shard x5, Lucid Stone x1, Lucid Shard x1",
+        "how": "Obtain five types of materials"
+      },
+      {
+        "name": "Chaos Anklet",
+        "mats": "Mythril Shard x5, Lucid Stone x1, Lucid Shard x1, Serenity Shard x1",
+        "how": "Create a Midnight Anklet"
+      },
+      {
+        "name": "Acrisius",
+        "mats": "Mythril Stone x5, Blazing Stone x1, Frost Stone x1, Lightning Stone x1",
+        "how": "Obtain tweny types of materials"
+      },
+      {
+        "name": "Acrisius+",
+        "mats": "Mythril Stone x5, Blazing Stone x1, Frost Stone x1, Lightning Stone x1, Serenity Stone x1",
+        "how": "Create a Acrisius"
+      },
+      {
+        "name": "Power Band",
+        "mats": "Mythril Stone x5, Power Stone x1, Dark Stone x1, Lucid Stone x1",
+        "how": "Obtain tweny types of materials"
+      },
+      {
+        "name": "Buster Band",
+        "mats": "Mythril Stone x5, Power Stone x1, Dark Stone x1, Lucid Stone x1, Serenity Stone x1",
+        "how": "Create a Power Band"
+      },
+      {
+        "name": "Petite Ribbon",
+        "mats": "Mythril Crystal x3, Orichalcum x1, Dense Stone x1, Dense Shard x1",
+        "how": "Obtain a Style Recipe in a chest at the Starry Hill (100 Acre Wood)"
+      },
+      {
+        "name": "Ribbon",
+        "mats": "Mythril Crystal x3, Orichalcum x1, Dense Stone x1, Dense Shard x1, Serenity Gem x1",
+        "how": "Create a Petite Ribbon"
+      },
+      {
+        "name": "Shock Charm",
+        "mats": "Lost Illusion x1, Remembrance Gem x1, Remembrance Stone x3, Tranquility Gem x1, Tranquility Stone x3",
+        "how": "Obtain the Cloaked Thunder by defeating Larxene's Absent Silhouette"
+      },
+      {
+        "name": "Shock Charm+",
+        "mats": "Lost Illusion x1, Remembrance Gem x1, Remembrance Stone x3, Tranquility Gem x1, Tranquility Stone x3, Serenity Crystal x1",
+        "how": "Create a Shock Charm"
+      },
+      {
+        "name": "Garnet Ring",
+        "mats": "Mythril Stone x3, Power Stone x1, Power Shard x1, Dark Shard x1",
+        "how": "Obtain five types of materials"
+      },
+      {
+        "name": "Diamond Ring",
+        "mats": "Mythril Stone x3, Power Stone x1, Power Shard x1, Dark Shard x1, Serenity Shard x1",
+        "how": "Create a Garnet Ring"
+      },
+      {
+        "name": "Mythril Ring",
+        "mats": "Mythril Stone x3, Power Stone x1, Dark Stone x1, Dark Shard x1",
+        "how": "Obtain five types of materials"
+      },
+      {
+        "name": "Orichalcum Ring",
+        "mats": "Mythril Stone x3, Power Stone x1, Dark Stone x1, Dark Shard x1, Serenity Shard x1",
+        "how": "Create a Mythril Ring"
+      },
+      {
+        "name": "Soldier Earring",
+        "mats": "Mythril Gem x3, Dark Gem x1, Frost Gem x1, Lucid Gem x1",
+        "how": "Obtain tweny types of materials"
+      },
+      {
+        "name": "Fencer Earring",
+        "mats": "Mythril Gem x3, Dark Gem x1, Frost Gem x1, Lucid Gem x1, Serenity Stone x1",
+        "how": "Create a Soldier Earring"
+      },
+      {
+        "name": "Mage Earring",
+        "mats": "Mythril Gem x3, Power Gem x1, Blazing Gem x1, Lightning Gem x1",
+        "how": "Obtain tweny types of materials"
+      },
+      {
+        "name": "Slayer Earring",
+        "mats": "Mythril Gem x3, Power Gem x1, Blazing Gem x1, Lightning Gem x1, Serenity Stone x1",
+        "how": "Create a Mage Earring"
+      },
+      {
+        "name": "Expert's Ring",
+        "mats": "Mythril Crystal x3, Dark Crystal x1, Dark Gem x1, Dark Stone x1, Dark Shard x1",
+        "how": "Obtain tweny types of materials"
+      },
+      {
+        "name": "Master's Ring",
+        "mats": "Mythril Crystal x3, Dark Crystal x1, Dark Gem x1, Dark Stone x1, Dark Shard x1, Serenity Gem x1",
+        "how": "Create a Expert's Ring"
+      },
+      {
+        "name": "Moon Amulet",
+        "mats": "Orichalcum x3, Mythril Crystal x1, Twilight Stone x1, Twilight Shard x1",
+        "how": "Obtain the Moon Recipe in a chest at the Restoration Site (Hollow Bastion)"
+      },
+      {
+        "name": "Star Charm",
+        "mats": "Orichalcum x3, Mythril Crystal x1, Twilight Stone x1, Twilight Shard x1, Serenity Gem x1",
+        "how": "Create a Moon Amulet"
+      },
+      {
+        "name": "Draw Ring",
+        "mats": "Manifest Illusion x1, Remembrance Shard x3, Bright Gem x3, Bright Stone x5, Bright Shard x9",
+        "how": "Obtain Rare Document by completing the \"Duality\" Puzzle in Jiminy's Journal"
+      },
+      {
+        "name": "Lucky Ring",
+        "mats": "Manifest Illusion x1, Remembrance Shard x3, Bright Gem x3, Bright Stone x5, Bright Shard x9, Serenity Crystal x1",
+        "how": "Create a Draw Ring"
+      },
+      {
+        "name": "Shadow Archive",
+        "mats": "Lost Illusion x1, Manifest Illusion x1, Remembrance Crystal x1, Serenity Gem x3",
+        "how": "Obtain the Book of Shadows by defeating Zexion's Absent Silhouette"
+      },
+      {
+        "name": "Shadow Archive+",
+        "mats": "Lost Illusion x1, Manifest Illusion x1, Remembrance Crystal x1, Serenity Gem x3, Serenity Crystal x1",
+        "how": "Create a Shadow Archive"
+      },
+      {
+        "name": "Full Bloom",
+        "mats": "Lost Illusion x1, Manifest Illusion x1, Tranquility Crystal x1, Serenity Gem x3",
+        "how": "Obtain Eternal Blossom by defeating Marluxia's Absent Silhouette"
+      },
+      {
+        "name": "Full Bloom+",
+        "mats": "Lost Illusion x1, Manifest Illusion x1, Tranquility Crystal x1, Serenity Gem x3, Serenity Crystal x1",
+        "how": "Create a Full Bloom"
+      },
+      {
+        "name": "Centurion",
+        "mats": "Lost Illusion x1, Remembrance Crystal x1, Remembrance Gem x3, Remembrance Stone x5, Remembrance Shard x7",
+        "how": "Obtain Strength Beyond Strength by defeating Lexaeus's Absent Silhouette"
+      },
+      {
+        "name": "Centurion+",
+        "mats": "Lost Illusion x1, Remembrance Crystal x1, Remembrance Gem x3, Remembrance Stone x5, Remembrance Shard x7, Serenity Crystal x1",
+        "how": "Create a Centurion"
+      },
+      {
+        "name": "Save the Queen",
+        "mats": "Orichalcum x1, Dense Crystal x3, Dense Gem x5, Dense Stone x7, Dense Shard x9",
+        "how": "Obtain the Queen Recipe in a chest at the Throne Room (Land of the Dragons)"
+      },
+      {
+        "name": "Save the Queen+",
+        "mats": "Orichalcum x1, Dense Crystal x3, Dense Gem x5, Dense Stone x7, Dense Shard x9, Serenity Crystal x1",
+        "how": "Create a Save the Queen"
+      },
+      {
+        "name": "Frozen Pride",
+        "mats": "Lost Illusion x1, Tranquility Crystal x1, Tranquility Gem x3, Tranquility Stone x5, Tranquility Shard x7",
+        "how": "Obtain Road to Discovery by defeating Vexen's Absent Silhouette"
+      },
+      {
+        "name": "Frozen Pride+",
+        "mats": "Lost Illusion x1, Tranquility Crystal x1, Tranquility Gem x3, Tranquility Stone x5, Tranquility Shard x7, Serenity Crystal x1",
+        "how": "Create a Frozen Pride"
+      },
+      {
+        "name": "Save the King",
+        "mats": "Orichalcum x1, Twilight Crystal x3, Twilight Gem x5, Twilight Stone x7, Twilight Shard x9, Serenity Crystal x1",
+        "how": "Obtain the King Recipe in a chest at the Ship Graveyard: Seadrift Row (Port Royal)"
+      },
+      {
+        "name": "Save the King+",
+        "mats": "Orichalcum x1, Twilight Crystal x3, Twilight Gem x5, Twilight Stone x7, Twilight Shard x9",
+        "how": "Create a Save the King"
+      },
+      {
+        "name": "Ultima Weapon",
+        "mats": "Orichalcum+ x13, Orichalcum x1, Mythril Crystal x1, Dense Crystal x1, Twilight Crystal x1, Serenity Crystal x3, Energy Crystal x1",
+        "how": "Obtain an Ultimate Recipe in a chest at the Mansion: Basement Corridor (Twilight Town)"
+      }
+    ],
+    "lists": [
+      {
+        "name": "Get 1 type of Material.",
+        "reward": "Elixir"
+      },
+      {
+        "name": "Get 5 types of Materials.",
+        "reward": "Free Development 1"
+      },
+      {
+        "name": "Get 10 types of Materials.",
+        "reward": "AP Boost"
+      },
+      {
+        "name": "Get 15 types of Materials.",
+        "reward": "Megalixir"
+      },
+      {
+        "name": "Get 20 types of Materials.",
+        "reward": "Free Development 2"
+      },
+      {
+        "name": "Get 25 types of Materials.",
+        "reward": "AP Boost"
+      },
+      {
+        "name": "Get 30 types of Materials.",
+        "reward": "Defense Boost"
+      },
+      {
+        "name": "Get 35 types of Materials.",
+        "reward": "AP Boost"
+      },
+      {
+        "name": "Get 40 types of Materials.",
+        "reward": "Power Boost"
+      },
+      {
+        "name": "Get 45 types of Materials.",
+        "reward": "AP Boost"
+      },
+      {
+        "name": "Get 50 types of Materials.",
+        "reward": "Magic Boost"
+      },
+      {
+        "name": "Get 55 types of Materials.",
+        "reward": "Orichalcum"
+      },
+      {
+        "name": "Get all Materials.",
+        "reward": "Orichalcum+"
+      },
+      {
+        "name": "Obtain total amount of 50 or more.",
+        "reward": "Serenity Shard"
+      },
+      {
+        "name": "Obtain total amount of 100 or more.",
+        "reward": "Serenity Stone"
+      },
+      {
+        "name": "Obtain total amount of 250 or more.",
+        "reward": "Serenity Gem"
+      },
+      {
+        "name": "Obtain total amount of 500 or more.",
+        "reward": "Serenity Crystal"
+      },
+      {
+        "name": "Obtain total amount of 1,000 or more.",
+        "reward": "Orichalcum"
+      },
+      {
+        "name": "Obtain all dense Materials.",
+        "reward": "Serenity Gem"
+      },
+      {
+        "name": "Obtain all twilight Materials.",
+        "reward": "Serenity Crystal"
+      },
+      {
+        "name": "Obtain all mythril Materials.",
+        "reward": "AP Boost"
+      },
+      {
+        "name": "Obtain all remembrance Materials.",
+        "reward": "Serenity Crystal"
+      },
+      {
+        "name": "Obtain all tranquility Materials.",
+        "reward": "Serenity Crystal"
+      },
+      {
+        "name": "Obtain all bright Materials.",
+        "reward": "Defense Boost"
+      },
+      {
+        "name": "Obtain all energy Materials.",
+        "reward": "Power Boost"
+      },
+      {
+        "name": "Obtain all serenity Materials.",
+        "reward": "Magic Boost"
+      },
+      {
+        "name": "Obtain all rank C Materials.",
+        "reward": "Serenity Shard"
+      },
+      {
+        "name": "Obtain all rank B Materials.",
+        "reward": "Serenity Stone"
+      },
+      {
+        "name": "Obtain all rank A Materials.",
+        "reward": "Manifest Illusion"
+      },
+      {
+        "name": "Obtain all rank S Materials.",
+        "reward": "Lost Illusion"
+      },
+      {
+        "name": "Obtain 30 or more Blazing Shards.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 25 or more Blazing Stones.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 20 or more Blazing Gems.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 30 or more Frost Shards.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 25 or more Frost Stones.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 20 or more Frost Gems.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 30 or more Lightning Shards.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 25 or more Lightning Stones.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 20 or more Lightning Gems.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 30 or more Lucid Shards.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 25 or more Lucid Stones.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 20 or more Lucid Gems.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 30 or more Power Shards.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 25 or more Power Stones.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 20 or more Power Gems.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 30 or more Dark Shards.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 25 or more Dark Stones.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 20 or more Dark Gems.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 30 or more Dense Shards.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 25 or more Dense Stones.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 20 or more Dense Gems.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 30 or more Twilight Shards.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 25 or more Twilight Stones.",
+        "reward": "Sell at Shop"
+      },
+      {
+        "name": "Obtain 20 or more Twilight Gems.",
+        "reward": "Sell at Shop"
+      }
+    ],
+    "gummim": [
+      {
+        "name": "Asteroid Sweep 1",
+        "ex": "Fly a Gummi Ship with 50 or more speed!",
+        "reward": "EX: Caterpillar/G Rank S: Patterned Skins A Rank A: Neon Orb/G Rank B: Mini-Propeller/G Rank C: Fira/G Rank D: Thundara/G Rank E: Laser Upgrade"
+      },
+      {
+        "name": "Asteroid Sweep 2",
+        "ex": "Fly a Gummi Ship with 100 or more power!",
+        "reward": "EX: Shuriken/G Rank S: Highwind α Model Rank A: Propeller/G Rank B: Large Shield/G Rank C: Fira/G Rank D: Saw/G Rank E: Gravira/G"
+      },
+      {
+        "name": "Asteroid Sweep 3",
+        "ex": "Fly a Gummi Ship with 250 or more power!",
+        "reward": "EX: Figure/G Set Rank S: Flat Helm/G Rank A: Hurricane/G Rank B: Thruster/G Rank C: Radar/G Rank D: Gugnir/G Rank E: Masamune/G"
+      },
+      {
+        "name": "Stardust Sweep 1",
+        "ex": "Fly a Gummi Ship set with 12 or more Wing Gummies!",
+        "reward": "EX: Flag/G Rank S: Patterned Skins B Rank A: Rotor/G Rank B: Shield/G Rank C: Solid Helm/G Rank D: Blizzara/G Rank E: Cannon Upgrade"
+      },
+      {
+        "name": "Stardust Sweep 2",
+        "ex": "Fly a Gummi Ship with only Projectile Gummies as Weapon Gummies!",
+        "reward": "EX: Boomerang/G Rank S: PuPu Model Rank A: Thruster/G Rank B: Parabola/G Rank C: Blizzara/G Rank D: Radar/G Rank E: Orichalcum/G"
+      },
+      {
+        "name": "Stardust Sweep 3",
+        "ex": "Fly a Gummi Ship set with 20 or more Projectile Gummies!",
+        "reward": "EX: Strike/G Rank S: Bubble Helm/G Rank A: Sonic Turbo/G Rank B: Booster/G Rank C: Drill/G Rank D: Antenna/G Rank E: Comet/G"
+      },
+      {
+        "name": "Phantom Storm 1",
+        "ex": "Fly a Highwind model from the sample blueprints!",
+        "reward": "EX: Mast/G Rank S: Realistic Skins Rank A: Hurricane/G Rank B: Flat Helm/G Rank C: Cannon Upgrade Rank D: Gravira/G Rank E: Auto-Life"
+      },
+      {
+        "name": "Phantom Storm 2",
+        "ex": "Fly a Gummi Ship with 50 or less HP!",
+        "reward": "EX: Strike/G Rank S: Tonberry Model Rank A: Storm/G Rank B: Sonic Turbo/G Rank C: Radar/G Rank D: Gungnir/G Rank E: Thundara/G"
+      },
+      {
+        "name": "Phantom Storm 3",
+        "ex": "Fly a Gummi Ship and Teeny Ship with a combination of 20 or less HP!",
+        "reward": "EX: Caterpillar/G Rank S: Drill/G Rank A: Storm/G Rank B: Large Rotor/G Rank C: Bridge/G Rank D: Blizzara/G Rank E: Thundaga/G"
+      },
+      {
+        "name": "Splash Island 1",
+        "ex": "Fly a Gummi Ship set with the Formation Change Ability!",
+        "reward": "EX: Flag/G Rank S: Decal Skins Rank A: Neon Bar/G Rank B: Screw Propeller/G Rank C: Bridge/G Rank D: AP Limit Upgrade Rank E: Heal Upgrade"
+      },
+      {
+        "name": "Splash Island 2",
+        "ex": "Fly an Invincible model from the sample blueprints!",
+        "reward": "EX: Boomerang/G Rank S: Moogle Model Rank A: Storm/G Rank B: Round Light/G Rank C: Antenna/G Rank D: Laser Upgrade Rank E: Thundaga/G"
+      },
+      {
+        "name": "Splash Island 3",
+        "ex": "Fly a Gummi Ship with no Weapon Gummies!",
+        "reward": "EX: Mast/G Rank S: Solid Helm/G Rank A: Storm/G Rank B: Screw Propeller/G Rank C: Firaga/G Rank D: Blizzaga/G Rank E: Meteor/G"
+      },
+      {
+        "name": "Floating Island 1",
+        "ex": "Fly a special model Ship!",
+        "reward": "EX: Moon Ring/G Rank S: Variety Skins A Rank A: Propeller/G Rank B: Shell/G Rank C: Sphere Helm/G Rank D: Orichalcum/G Rank E: Active Formation"
+      },
+      {
+        "name": "Floating Island 2",
+        "ex": "Fly a Gummi Ship with 4 or more Lock-on Gummies!",
+        "reward": "EX: Caterpillar/G Rank S: Mandragora Model Rank A: Large Rotor/G Rank B: Cost Converter Rank C: Excalibur/G Rank D: Firaga/G Rank E: Graviga/G"
+      },
+      {
+        "name": "Floating Island 3",
+        "ex": "Fly without any Teeny Ships!",
+        "reward": "EX: Figure/G Rank S: Sphere Helm/G Rank A: Square Light/G Rank B: Mini-Propeller/G Rank C: Saw/G Rank D: Firaga/G Rank E: Ultima/G"
+      },
+      {
+        "name": "Ancient Highway 1",
+        "ex": "Fly a Gummi Ship set with 8 or more Wheel Gummies!",
+        "reward": "EX: Figure/G Rank S: Variety Skins B Rank A: Cyclone/G Rank B: Wheel/G Rank C: Slash Upgrade Rank D: Firaga/G Rank E: Auto-Regen"
+      },
+      {
+        "name": "Ancient Highway 2",
+        "ex": "Fly a Gummi Ship set with 8 or more Abilities!",
+        "reward": "EX: Caterpillar/G Rank S: Chocobo Model Rank A: Angel/G Rank B: Shell/G Rank C: AP Limit Upgrade Rank D: Fira/G Rank E: Ultima/G"
+      },
+      {
+        "name": "Ancient Highway 3",
+        "ex": "Fly a Gummi Ship and Teeny Ship with a combination of 80 or more speed!",
+        "reward": "EX: Boomerang/G Rank S: Saw/G Rank A: Neon Orb/G Rank B: Wheel/G Rank C: Sphere Helm/G Rank D: Gravira/G Rank E: Infinity/G"
+      },
+      {
+        "name": "Broken Highway 1",
+        "ex": "Fly a Gummi Ship set with 6 or more Shield Gummies!",
+        "reward": "EX: Caterpillar/G Rank S: Neon Skins A Rank A: Typhoon/G Rank B: Booster/G Rank C: Large Shield/G Rank D: Blizzaga/G Rank E: Medal Converter"
+      },
+      {
+        "name": "Broken Highway 2",
+        "ex": "Fly a Gummi Ship set with 2 or more Slash Gummies!",
+        "reward": "EX: Figure/G Rank S: Cactuar Model Rank A: Darkness/G Rank B: Wheel/G Rank C: Big Bridge/G Rank D: Blizzara/G Rank E: Masamune/G"
+      },
+      {
+        "name": "Broken Highway 3",
+        "ex": "Fly a Gummi Ship set with 4 or more Slash Gummies!",
+        "reward": "EX: Strike/G Rank S: Gungnir/G Rank A: Neon Bar/G Rank B: Wheel/G Rank C: Solid Helm/G Rank D: Thundara/G Rank E: Excalibur/G"
+      },
+      {
+        "name": "Sunlight Storm 1",
+        "ex": "Fly alongside a Teeny Ship set with 4 or more Impact Gummies!",
+        "reward": "EX: Figure/G Set Rank S: Neon Skins B Rank A: Sonic Turbo/G Rank B: Large Shell/G Rank C: Thundaga/G Rank D: AP Limit Upgrade Rank E: Draw"
+      },
+      {
+        "name": "Sunlight Storm 2",
+        "ex": "Fly a Falcon Model from the sample blueprints!",
+        "reward": "EX: Shuriken/G Rank S: Cait Sith Model Rank A: Neon Orb/G Rank B: Drill/G Rank C: Parabola/G Rank D: Slash Upgrade Rank E: Infinity/G"
+      },
+      {
+        "name": "Sunlight Storm 3",
+        "ex": "Fly a Gummi Ship with a cost of 400 or less!",
+        "reward": "EX: Strike/G Rank S: Bridge/G Rank A: Cyclone/G Rank B: Typhoon/G Rank C: Orichalcum/G Rank D: Comet/G Rank E: Graviga/G"
+      },
+      {
+        "name": "Assault of the Dreadnought 1",
+        "ex": "Fly a Gummi Ship set with 2 or more Ultima Gummies!",
+        "reward": "EX: Shuriken/G Rank S: Mushroom Model Rank A: Vortex/G Rank B: Big Bridge/G Rank C: Excalibur/G Rank D: Meteor/G Rank E: Cost Converter"
+      },
+      {
+        "name": "Assault of the Dreadnought 2",
+        "ex": "Fly a Gummi Ship with dimensions of 3 x 3 x 3 or smaller!",
+        "reward": "EX: Caterpillar/G Rank S: Fenrir Model Rank A: Square Light/G Rank B: Vortex/G Rank C: Large Shell/G Rank D: Auto-Regen Rank E: Drain/G"
+      },
+      {
+        "name": "Assault of the Dreadnought 3",
+        "ex": "Fly a Gummi Ship set with a Drain Gummi!",
+        "reward": "EX: Bomb/G Rank S: Big Bridge/G Rank A: Darkness/G Rank B: Angel/G Rank C: Meteor/G Rank D: Graviga/G Rank E: Firaga/G"
+      }
+    ],
+    "blueprints": [
+      {
+        "name": "Highwind",
+        "how": "Default"
+      },
+      {
+        "name": "Highwind Lv.1",
+        "how": "Obtain the following materials: Material/G x31, Blizzard/G x1, Thunder/G x2, Bubble Helm/G x1"
+      },
+      {
+        "name": "Highwind Lv.2",
+        "how": "Obtain the following materials: Material/G x44, Fire/G x1, Blizzard/G x1, Thunder/G x2, Vernier/G x2, Bubble Helm/G x1"
+      },
+      {
+        "name": "Highwind Lv.3",
+        "how": "Obtain the following materials: Material/G x49, Fire/G x1, Blizzard/G x1, Thunder/G x2, Vernier/G x2, Bubble Helm/G x1"
+      },
+      {
+        "name": "Highwind Lv.4",
+        "how": "Obtain the following materials: Material/G x52, Blizzard/G x1, Gravity/G x1, Thunder/G x2, Vernier/G x2, Bubble Helm/G x1"
+      },
+      {
+        "name": "Highwind Lv.5",
+        "how": "Obtain the following materials: Material/G x72, Fire/G x1, Blizzard/G x1, Gravity/G x1, Thunder/G x2, Vernier/G x2, Bubble Helm/G x1"
+      },
+      {
+        "name": "Highwind Lv.6",
+        "how": "Obtain the following materials: Material/G x112, Fire/G x1, Blizzard/G x1, Comet/G x1, Thunder/G x2, Vernier/G x4, Bubble Helm/G x1"
+      },
+      {
+        "name": "Highwind Lv.7",
+        "how": "Obtain the following materials: Material/G x82, Fire/G x1, Blizzard/G x1, Thunder/G x3, Vernier/G x4, Bubble Helm/G x1"
+      },
+      {
+        "name": "Highwind Lv.8",
+        "how": "Obtain the following materials: Material/G x122, Fire/G x1, Blizzard/G x1, Comet/G x1, Ultima/G x1, Vernier/G x2, Bubble Helm/G x1"
+      },
+      {
+        "name": "Highwind Peak",
+        "how": "Obtain the following materials: Material/G x138, Fire/G x1, Blizzard/G x1, Comet/G x1, Thunder/G x3, Vernier/G x4, Bubble Helm/G x1"
+      },
+      {
+        "name": "Invincible Lv.1",
+        "how": "Obtain the following materials: Material/G x31, Fire/G x1, Blizzard/G x1, Thunder/G x2, Vernier/G x2, Bubble Helm/G x1, Square Light/G x1"
+      },
+      {
+        "name": "Invincible Lv.2",
+        "how": "Obtain the following materials: Material/G x38, Fire/G x3, Thunder/G x1, Bubble Helm/G x1"
+      },
+      {
+        "name": "Invincible Lv.3",
+        "how": "Obtain the following materials: Material/G x44, Fire/G x1, Blizzard/G x1, Thunder/G x2, Vernier/G x2, Flat Helm/G x1, Square Light/G x2"
+      },
+      {
+        "name": "Invincible Lv.4",
+        "how": "Obtain the following materials: Material/G x60, Fire/G x1, Thunder/G x1, Sphere Helm/G x1"
+      },
+      {
+        "name": "Invincible Lv.5",
+        "how": "Obtain the following materials: Material/G x81, Fire/G x2, Blizzard/G x1, Thunder/G x1, Vernier/G x2, Booster/G x1, Bubble Helm/G x1"
+      },
+      {
+        "name": "Invincible Lv.6",
+        "how": "Obtain the following materials: Material/G x81, Fire/G x2, Blizzard/G x1, Thunder/G x1, Vernier/G x2, Booster/G x1, Bubble Helm/G x1"
+      },
+      {
+        "name": "Invincible Lv.7",
+        "how": "Obtain the following materials: Material/G x113, Fira/G x1, Blizzara/G x1, Thunder/G x1, Booster/G x1, Bubble Helm/G x1, Shield/G x1"
+      },
+      {
+        "name": "Invincible Lv.8",
+        "how": "Obtain the following materials: Material/G x50, Firaga/G x1, Blizzaga/G x1, Thunder/G x1, Booster/G x1, Sphere Helm/G x1, Round Light/G x2"
+      },
+      {
+        "name": "Invincible Peak",
+        "how": "Obtain the following materials: Material/G x169, Fire/G x1, Fira/G x1, Blizzara/G x1, Meteor/G x1, Booster/G x1, Bubble Helm/G x1, Shield/G x1"
+      },
+      {
+        "name": "Falcon Lv.1",
+        "how": "Obtain the following materials: Material/G x39, Fire/G x1, Blizzard/G x2, Gravity/G x1, Thunder/G x1, Vernier/G x2, Flat Helm/G x1"
+      },
+      {
+        "name": "Falcon Lv.2",
+        "how": "Obtain the following materials: Material/G x48, Fire/G x4, Blizzard/G x1, Thunder/G x2, Vernier/G x2, Flat Helm/G x1"
+      },
+      {
+        "name": "Falcon Lv.3",
+        "how": "Obtain the following materials: Material/G x52, Fira/G x1, Blizzara/G x1, Thunder/G x2, Vernier/G x2, Flat Helm/G x1"
+      },
+      {
+        "name": "Falcon Lv.4",
+        "how": "Obtain the following materials: Material/G x47, Fire/G x1, Fira/G x1, Blizzara/G x1, Thundara/G x1, Vernier/G x2, Flat Helm/G x1"
+      },
+      {
+        "name": "Falcon Lv.5",
+        "how": "Obtain the following materials: Material/G x68, Fire/G x4, Blizzard/G x2, Thunder/G x2, Vernier/G x2, Solid Helm/G x1"
+      },
+      {
+        "name": "Falcon Lv.6",
+        "how": "Obtain the following materials: Material/G x108, Fire/G x2, Blizzara/G x1, Comet/G x1, Thunder/G x2, Vernier/G x2, Solid Helm/G x1"
+      },
+      {
+        "name": "Falcon Lv.7",
+        "how": "Obtain the following materials: Material/G x77, Fira/G x1, Blizzard/G x1, Gravira/G x1, Thunder/G x2, Vernier/G x2, Solid Helm/G x1, Radar/G x1"
+      },
+      {
+        "name": "Falcon Lv.8",
+        "how": "Obtain the following materials: Material/G x28, Firaga/G x1, Blizzaga/G x1, Ultima/G x1, Vernier/G x2, Solid Helm/G x1"
+      },
+      {
+        "name": "Falcon Peak",
+        "how": "Obtain the following materials: Material/G x126, Blizzaga/G x1, Graviga/G x1, Meteor/G x1, Thunder/G x1, Vernier/G x2, Solid Helm/G x1"
+      },
+      {
+        "name": "Highwind α",
+        "how": "Achieve Rank S in Mission 2 of Asteroid Sweep"
+      },
+      {
+        "name": "PuPu",
+        "how": "Achieve Rank S in Mission 2 of Stardust Sweep"
+      },
+      {
+        "name": "Tonberry",
+        "how": "Achieve Rank S in Mission 2 of Phantom Storm"
+      },
+      {
+        "name": "Moogle",
+        "how": "Achieve Rank S in Mission 2 of Splash Island"
+      },
+      {
+        "name": "Mandragora",
+        "how": "Achieve Rank S in Mission 2 of Floating Island"
+      },
+      {
+        "name": "Chocobo",
+        "how": "Achieve Rank S in Mission 2 of Ancient Highway"
+      },
+      {
+        "name": "Cactuar",
+        "how": "Achieve Rank S in Mission 2 of Broken Highway"
+      },
+      {
+        "name": "Cait Sith",
+        "how": "Achieve Rank S in Mission 2 of Sunlight Storm"
+      },
+      {
+        "name": "Mushroom",
+        "how": "Achieve Rank S in Mission 1 of Assault of the Dreadnought"
+      },
+      {
+        "name": "Fenrir",
+        "how": "Achieve Rank S in Mission 2 of Assault of the Dreadnought"
+      },
+      {
+        "name": "Kingdom Model",
+        "how": "Received as treasure in Mission 2 of Asteroid Sweep"
+      },
+      {
+        "name": "Secret Model",
+        "how": "Achieve Rank S in Mission 3 of Assault of the Dreadnought"
+      }
+    ],
+    "searcher": [
+      {
+        "name": "Secret Ansem Report 1",
+        "how": "Obtained during the main story (in Hollow Bastion, 2nd visit)."
+      },
+      {
+        "name": "Secret Ansem Report 2",
+        "how": "Obtained during the main story (in Twilight Town, 1st visit)."
+      },
+      {
+        "name": "Secret Ansem Report 3",
+        "how": "Obtained during the main story (in The World That Never Was)."
+      },
+      {
+        "name": "Secret Ansem Report 4",
+        "how": "Obtained during the main story (in Beast Castle, 2nd visit)."
+      },
+      {
+        "name": "Secret Ansem Report 5",
+        "how": "Obtained during the main story (in Olympus Coliseum, 1st visit)."
+      },
+      {
+        "name": "Secret Ansem Report 6",
+        "how": "Obtained during the main story (in Port Royal, 2nd visit)."
+      },
+      {
+        "name": "Secret Ansem Report 7",
+        "how": "Obtained during the main story (in Hollow Bastion, 1st visit)."
+      },
+      {
+        "name": "Secret Ansem Report 8",
+        "how": "Obtained during the main story (in The World That Never Was)."
+      },
+      {
+        "name": "Secret Ansem Report 9",
+        "how": "Obtained during the main story (in The World That Never Was)."
+      },
+      {
+        "name": "Secret Ansem Report 10",
+        "how": "Obtained during the main story (in Twilight Town, 2nd visit)."
+      },
+      {
+        "name": "Secret Ansem Report 11",
+        "how": "Obtained during the main story (in The World That Never Was)."
+      },
+      {
+        "name": "Secret Ansem Report 12",
+        "how": "Obtained during the main story (in The World That Never Was)."
+      },
+      {
+        "name": "Secret Ansem Report 13",
+        "how": "Obtained during the main story (in The World That Never Was)."
+      }
+    ],
+    "limits": [
+      {
+        "name": "Donald",
+        "limit": "Fantasia",
+        "cond": "Fantasia"
+      },
+      {
+        "name": "Donald",
+        "limit": "Flare Force",
+        "cond": "Flare Force"
+      },
+      {
+        "name": "Goofy",
+        "limit": "Twister Fusion",
+        "cond": "Tornado Fusion"
+      },
+      {
+        "name": "Goofy",
+        "limit": "Teamwork",
+        "cond": "Teamwork"
+      },
+      {
+        "name": "Beast",
+        "limit": "Howling Moon",
+        "cond": "Howling Moon"
+      },
+      {
+        "name": "Auron",
+        "limit": "Overdrive",
+        "cond": "Overdrive"
+      },
+      {
+        "name": "Mulan",
+        "limit": "Dragonblaze",
+        "cond": "Dragonblaze"
+      },
+      {
+        "name": "Aladdin",
+        "limit": "Trick Fantasy",
+        "cond": "Trick Fantasy"
+      },
+      {
+        "name": "Jack",
+        "limit": "Applause, Applause",
+        "cond": "Applause, Applause"
+      },
+      {
+        "name": "Jack Sparrow",
+        "limit": "Treasure Isle",
+        "cond": "Bluff"
+      },
+      {
+        "name": "Simba",
+        "limit": "King's Pride",
+        "cond": "King's Pride"
+      },
+      {
+        "name": "Tron",
+        "limit": "Complete Compilement",
+        "cond": "Complete Compilement"
+      },
+      {
+        "name": "Riku",
+        "limit": "Eternal Session",
+        "cond": "Eternal Session"
+      },
+      {
+        "name": "Sora",
+        "limit": "Trinity Limit",
+        "cond": "Trinity Limit"
+      },
+      {
+        "name": "Peter Pan",
+        "limit": "Never Land",
+        "cond": "Summon Peter Pan"
+      },
+      {
+        "name": "Chicken Little",
+        "limit": "FPS Mode",
+        "cond": "Summon Chicken Little"
+      },
+      {
+        "name": "Stitch",
+        "limit": "Ohana",
+        "cond": "Summon Stitch"
+      },
+      {
+        "name": "\"Valor\" Genie",
+        "limit": "Sonic Rave",
+        "cond": "Summon Genie, shift to \"Valor\" Genie (select Drive? in the command menu), and use Sonic"
+      },
+      {
+        "name": "\"Wisdom\" Genie",
+        "limit": "Strike Raid",
+        "cond": "Summon Genie, change \"Wisdom\" Genie (select Drive? in the command menu), and use Strike"
+      },
+      {
+        "name": "\"Master\" Genie",
+        "limit": "Final Arcana",
+        "cond": "Summon Genie, change \"Master\" Genie (select Drive? in the command menu), and use Arcana"
+      },
+      {
+        "name": "\"Final\" Genie",
+        "limit": "Infinity",
+        "cond": "Summon Genie, change \"Final\" Genie (select Drive? in the command menu), and use Infinity"
+      }
+    ]
+  }
 }
