@@ -590,7 +590,7 @@
         "how": "Obtained during the story."
       },
       {
-        "name": "Dragon",
+        "name": "Dragon Maleficent",
         "how": "Obtained during the story."
       },
       {
@@ -603,7 +603,7 @@
       },
       {
         "name": "Dumbo",
-        "how": "Get the Watergleam Summon Gem from Monstro's Mouth."
+        "how": "Get the Watergleam Summon Gem from the Treasure chest in Monstro's Mouth."
       },
       {
         "name": "Bambi",
@@ -919,7 +919,7 @@
       },
       {
         "name": "Fat Bandit",
-        "how": "Defeat at least one of this Heartess. Location: Agrabah."
+        "how": "Defeat at least one of this Heartess. Location: Agrabah, Olympus Cups."
       },
       {
         "name": "Pot Spider",
@@ -943,11 +943,11 @@
       },
       {
         "name": "Sea Neon",
-        "how": "Defeat at least one of this Heartess. Location: Atlantica."
+        "how": "Defeat at least one of this Heartess. Location: Atlantica, World Terminus."
       },
       {
         "name": "Sheltering Zone",
-        "how": "Defeat at least one of this Heartess. Location: Atlantica."
+        "how": "Defeat at least one of this Heartess. Location: Atlantica, World Terminus."
       },
       {
         "name": "Screwdiver",
@@ -1375,7 +1375,7 @@
         "num": "13",
         "world": "Monstro",
         "area": "Mouth",
-        "where": "On a wooden platform near the front of the mouth after completing the world story.",
+        "where": "On a wooden platform near the front of the mouth after acquiring High Jump.",
         "reward": "50 Munny, Potion x2, Cottage"
       },
       {
@@ -2658,7 +2658,7 @@
       {
         "name": "Dalmatians (7-9)",
         "area": "Item Workshop",
-        "where": "On a table."
+        "where": "On a table upstairs."
       },
       {
         "name": "Mythril Shard",
