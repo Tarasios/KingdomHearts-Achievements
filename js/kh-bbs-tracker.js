@@ -105,6 +105,19 @@ function bar(x, y) {
 function stars(rank) { return `<span class="stars">${esc(rank)}</span>`; }
 function starCount(rank) { return (rank.match(/★/g) || []).length; }
 
+/* Item display text lives in the lang file under "items": { "<storeId>":
+   [ { … } ] } (shared sections keyed by name, per-character sections by
+   "<char>-<section>"). viewItems merges a section's raw BBS_DATA items
+   with that lang text (lang wins) so the column getters below read
+   editable text, while the progress/auto-unlock logic keeps using the raw
+   BBS_DATA (names, ranks, rewards, flavor locations stay there as ids).
+   Falls back to the raw items if no lang block exists. */
+function viewItems(storeId, list) {
+  const map = (typeof i18n !== "undefined" && i18n.messages && i18n.messages.items) || null;
+  const rows = map && map[storeId];
+  return rows ? list.map((it, i) => Object.assign({}, it, rows[i] || {})) : list;
+}
+
 /* ---------- progress math ---------- */
 function countMap(map, n) { let d = 0; for (let i = 0; i < n; i++) if (map[i]) d++; return d; }
 function sharedCount(key) { return [countMap(STORE.shared[key], BBS_DATA[key].length), BBS_DATA[key].length]; }
@@ -341,7 +354,7 @@ function renderTrophies(p) {
 
   const box = p.results;
   box.appendChild(el("div", "grp-title", t('bt-trophies-title')));
-  checklist(box, BBS_DATA.trophies, STORE.shared.trophies, [
+  checklist(box, viewItems("trophies", BBS_DATA.trophies), STORE.shared.trophies, [
     { th: t('bt-th-rarity'), get: it => it.rarity, cls: "raritycell" },
     { th: t('bt-th-trophy'), get: it => it.name, name: true },
     { th: t('bt-th-desc'), get: it => it.desc },
@@ -359,7 +372,7 @@ function renderTrophies(p) {
 
   box.appendChild(el("div", "sub-title", t('bt-ingame-title')));
   box.appendChild(el("p", "hint", t('bt-ingame-hint')));
-  checklist(box, BBS_DATA.ingame, STORE.shared.ingame, [
+  checklist(box, viewItems("ingame", BBS_DATA.ingame), STORE.shared.ingame, [
     { th: t('bt-th-trophy'), get: it => it.name, name: true },
     { th: t('bt-th-condition'), get: it => it.how },
     { th: t('bt-th-reward'), get: it => it.reward }
@@ -371,7 +384,7 @@ function renderTrophies(p) {
 
 function renderCommands(p) {
   const box = p.results;
-  const items = BBS_DATA.perChar[activeChar].commands;
+  const items = viewItems(activeChar + "-commands", BBS_DATA.perChar[activeChar].commands);
   const auto = commandAuto(activeChar);
   box.appendChild(el("div", "grp-title", fmt('bt-commands-for', CHAR_LABEL[activeChar])));
   checklist(box, items, STORE[activeChar].commands, [
@@ -393,7 +406,7 @@ function renderUnversed(p) {
   tbl.innerHTML = `<thead><tr><th>${fmt('bt-th-done', label)}</th><th>${fmt('bt-th-maxrank', label)}</th><th>${t('bt-th-unversed')}</th><th>${t('bt-th-world')}</th><th>${t('bt-th-area')}</th><th>${t('bt-th-requirement')}</th><th>${t('bt-th-reward')}</th></tr></thead>`;
   const tb = el("tbody");
   const q = p.state.q.toLowerCase();
-  BBS_DATA.missions.forEach((m, i) => {
+  viewItems("missions", BBS_DATA.missions).forEach((m, i) => {
     const kd = i + "-" + char, kr = i + "-" + char;
     const r = missionRewardFor(m, char);
     const done = !!STORE.missions.done[kd], rank = !!STORE.missions.rank[kr];
@@ -421,7 +434,7 @@ function renderUnversed(p) {
   box.appendChild(el("p", "legend", fmt('bt-legend-missions', sx, sy)));
 
   box.appendChild(el("div", "sub-title", fmt('bt-journal-for', label)));
-  checklist(box, BBS_DATA.perChar[char].unversed, STORE[char].unversed, [
+  checklist(box, viewItems(char + "-unversed", BBS_DATA.perChar[char].unversed), STORE[char].unversed, [
     { th: t('bt-th-enemy'), get: it => it.name, name: true },
     { th: t('bt-th-location'), get: it => it.loc || "" }
   ], p.state);
@@ -435,7 +448,7 @@ function perCharListRenderer(sec, titleKey, cols) {
   return function (p) {
     const box = p.results;
     box.appendChild(el("div", "grp-title", fmt(titleKey, CHAR_LABEL[activeChar])));
-    checklist(box, BBS_DATA.perChar[activeChar][sec], STORE[activeChar][sec], cols(), p.state);
+    checklist(box, viewItems(activeChar + "-" + sec, BBS_DATA.perChar[activeChar][sec]), STORE[activeChar][sec], cols(), p.state);
     const [x, y] = charCount(activeChar, sec);
     setCount(p, x, y);
   };
@@ -456,7 +469,7 @@ function renderTreasures(p) {
   const box = p.results;
   const label = CHAR_LABEL[activeChar];
   box.appendChild(el("div", "grp-title", fmt('bt-treasures-for', label)));
-  checklist(box, BBS_DATA.perChar[activeChar].treasures, STORE[activeChar].treasures, [
+  checklist(box, viewItems(activeChar + "-treasures", BBS_DATA.perChar[activeChar].treasures), STORE[activeChar].treasures, [
     { th: t('bt-th-reward'), get: it => it.name, name: true },
     { th: t('bt-th-area'), get: it => it.area || "" },
     { th: t('bt-th-where'), get: it => it.how || "" }
@@ -464,7 +477,7 @@ function renderTreasures(p) {
   box.appendChild(el("p", "legend", t('bt-legend-treasures')));
 
   box.appendChild(el("div", "sub-title", fmt('bt-stickers-for', label)));
-  checklist(box, BBS_DATA.stickers, STORE.shared.stickers, [
+  checklist(box, viewItems("stickers", BBS_DATA.stickers), STORE.shared.stickers, [
     { th: t('bt-th-sticker'), get: it => it.name, name: true },
     { th: t('bt-th-world'), get: it => it.world || "" },
     { th: t('bt-th-area'), get: it => it.area || "" },
@@ -477,7 +490,7 @@ function renderTreasures(p) {
 }
 
 function renderReports(p) {
-  checklist(p.results, BBS_DATA.reports, STORE.shared.reports, [
+  checklist(p.results, viewItems("reports", BBS_DATA.reports), STORE.shared.reports, [
     { th: t('bt-th-report'), get: it => it.name, name: true },
     { th: t('bt-th-obtain'), get: it => it.how || "" }
   ], p.state);
@@ -488,7 +501,7 @@ function renderReports(p) {
 function renderFinish(p) {
   const box = p.results;
   box.appendChild(el("div", "grp-title", fmt('bt-finish-for', CHAR_LABEL[activeChar])));
-  checklist(box, BBS_DATA.warrior, STORE.shared.warrior, [
+  checklist(box, viewItems("warrior", BBS_DATA.warrior), STORE.shared.warrior, [
     { th: t('bt-th-finish'), get: it => it.name, name: true },
     { th: t('bt-th-equipped'), get: it => it.equip || "" },
     { th: t('bt-th-unlock'), get: it => it.how || "" }
@@ -500,7 +513,7 @@ function renderFinish(p) {
 function renderIcecream(p) {
   const box = p.results;
   box.appendChild(el("div", "grp-title", fmt('bt-recipes-for', CHAR_LABEL[activeChar])));
-  checklist(box, BBS_DATA.patissier, STORE.shared.patissier, [
+  checklist(box, viewItems("patissier", BBS_DATA.patissier), STORE.shared.patissier, [
     { th: t('bt-th-icecream'), get: it => it.name, name: true },
     { th: t('bt-th-style'), get: it => it.style || "" },
     { th: t('bt-th-ingredients'), get: it => [it.i1, it.i2, it.i3, it.i4].filter(Boolean).join(", ") }
@@ -510,7 +523,7 @@ function renderIcecream(p) {
   // Ingredients the character can't obtain (no location) are hidden for them.
   const locKey = { terra: "locT", ventus: "locV", aqua: "locA" }[activeChar];
   const eligible = it => !!it[locKey];
-  checklist(box, BBS_DATA.flavors, STORE.shared.flavors, [
+  checklist(box, viewItems("flavors", BBS_DATA.flavors), STORE.shared.flavors, [
     { th: t('bt-th-ingredient'), get: it => it.name, name: true },
     { th: t('bt-th-icecream'), get: it => it.icecream || "" },
     { th: fmt('bt-th-location-for', CHAR_LABEL[activeChar]), get: it => it[locKey] || "" }
@@ -524,7 +537,7 @@ function renderIcecream(p) {
 
 function renderArena(p) {
   const box = p.results;
-  checklist(box, BBS_DATA.arena, STORE.shared.arena, [
+  checklist(box, viewItems("arena", BBS_DATA.arena), STORE.shared.arena, [
     { th: t('bt-th-stage'), get: it => it.name, name: true },
     { th: t('bt-th-rank'), get: it => it.rank },
     { th: t('bt-th-unlock'), get: it => it.how || "" },

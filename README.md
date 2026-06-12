@@ -89,11 +89,12 @@ keyed by section (its store id; per-character sections use
 `<section>-<char>`) then item index, matching the order in the game's
 `js/*-tracker-data.js` module. The data module now holds only structure
 plus each item's `name`, kept as a stable id for trophy / auto-unlock
-matching (KH1 also keeps `num`). So to edit visible tracker text, edit the
-lang file; the engine falls back to the data module for any field not yet
-moved. Keep item order in sync between the two. (Birth by Sleep's item
-text still lives in its data module for now; the French files are a work
-in progress.)
+matching (KH1 also keeps `num`; Birth by Sleep also keeps `g`, the arena
+`rank`, mission `reward` and the per-character flavor locations, which the
+engine uses as ids). So to edit visible tracker text, edit the lang file;
+the engine falls back to the data module for any field not yet moved. Keep
+item order in sync between the two. All seven games work this way now. (The
+French files are a work in progress.)
 
 ## Trackers
 
