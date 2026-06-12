@@ -1,11 +1,7 @@
 {
-    "logo-name": "Cassiel Williams",
+    "logo-name": "KH Completionist",
     "lang-toggle-aria": "Switch language to French",
-    "nav-projects": "Projects",
-    "nav-education": "Education",
-    "nav-experience": "Experience",
     "nav-tools": "Tools",
-    "nav-contact": "Contact Me",
     "playing-as": "Playing as:",
     "gt-filter": "filter…",
     "gt-hide-done": "hide completed",
@@ -111,5 +107,9 @@
     "kp-import-confirm": "Importing will overwrite the saved progress of every KH tool on this site with the file's contents. Continue?",
     "kp-import-error": "That file could not be read as a progress export.",
     "gt-auto-badge": "auto",
-    "gt-auto-tip": "Earned automatically from %1"
+    "gt-auto-tip": "Earned automatically from %1",
+    "nav-home": "Home",
+    "theme-to-day": "Day",
+    "theme-to-night": "Night",
+    "theme-toggle-aria": "Toggle bright theme"
 }

@@ -1,11 +1,7 @@
 {
-    "logo-name": "Cassiel Williams",
+    "logo-name": "KH Completionist",
     "lang-toggle-aria": "Switch language to French",
-    "nav-projects": "Projects",
-    "nav-education": "Education",
-    "nav-experience": "Experience",
     "nav-tools": "Tools",
-    "nav-contact": "Contact Me",
     "playing-as": "Playing as:",
     "gt-filter": "filter…",
     "gt-hide-done": "hide completed",
@@ -112,5 +108,9 @@
     "kp-import": "Import progress",
     "kp-note": "Backs up / restores ALL Kingdom Hearts tracker progress on this site as a JSON file.",
     "kp-import-confirm": "Importing will overwrite the saved progress of every KH tool on this site with the file's contents. Continue?",
-    "kp-import-error": "That file could not be read as a progress export."
+    "kp-import-error": "That file could not be read as a progress export.",
+    "nav-home": "Home",
+    "theme-to-day": "Day",
+    "theme-to-night": "Night",
+    "theme-toggle-aria": "Toggle bright theme"
 }

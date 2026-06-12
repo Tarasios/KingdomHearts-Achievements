@@ -1,12 +1,8 @@
 {
-    "page-title": "Cassiel Williams • Tools",
-    "logo-name": "Cassiel Williams",
+    "page-title": "Tools • KH Completionist",
+    "logo-name": "KH Completionist",
     "lang-toggle-aria": "Switch language to French",
-    "nav-projects": "Projects",
-    "nav-education": "Education",
-    "nav-experience": "Experience",
     "nav-tools": "Tools",
-    "nav-contact": "Contact Me",
     "tools-title": "Tools",
     "tools-subtitle": "Small web tools I've built. Useful, fun, or both.",
     "games-title": "Games",
@@ -49,5 +45,9 @@
     "tool-kh3-tracker-title": "Achievement Tracker",
     "tool-kh3-tracker-desc": "Full completion checklist — trophies, the whole Gummiphone (Lucky Emblems, treasures, records and more), synthesis, cooking, gummi ship and the Re Mind DLC.",
     "tool-kh3-tracker-tag1": "Checklist",
-    "tool-kh3-tracker-tag2": "100% completion"
+    "tool-kh3-tracker-tag2": "100% completion",
+    "nav-home": "Home",
+    "theme-to-day": "Day",
+    "theme-to-night": "Night",
+    "theme-toggle-aria": "Toggle bright theme"
 }

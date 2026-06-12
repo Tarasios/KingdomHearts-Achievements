@@ -1,12 +1,8 @@
 {
     "page-title": "Birth By Sleep — Suivi des trophées",
-    "logo-name": "Cassiel Williams",
+    "logo-name": "KH Completionist",
     "lang-toggle-aria": "Passer le site en anglais",
-    "nav-projects": "Projets",
-    "nav-education": "Formation",
-    "nav-experience": "Expérience",
     "nav-tools": "Outils",
-    "nav-contact": "Me contacter",
     "kh-title": "Birth By Sleep — Suivi des trophées",
     "kh-subtitle": "Tous les trophées, commandes, archives, trésors et missions dans une seule liste — par personnage, sauvegardée dans votre navigateur. Les commandes fusionnées dans le calculateur de fusion sont automatiquement marquées débloquées ici. Données tirées du guide de complétion de xenodusk.",
     "playing-as": "Personnage :",
@@ -99,5 +95,9 @@
     "kp-import": "Importer la progression",
     "kp-note": "Sauvegarde / restaure TOUTE la progression des outils Kingdom Hearts de ce site dans un fichier JSON.",
     "kp-import-confirm": "L'importation remplacera la progression enregistrée de tous les outils KH de ce site par le contenu du fichier. Continuer ?",
-    "kp-import-error": "Ce fichier n'a pas pu être lu comme un export de progression."
+    "kp-import-error": "Ce fichier n'a pas pu être lu comme un export de progression.",
+    "nav-home": "Accueil",
+    "theme-to-day": "Jour",
+    "theme-to-night": "Nuit",
+    "theme-toggle-aria": "Basculer le thème clair"
 }

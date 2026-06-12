@@ -1,0 +1,23 @@
+{
+    "page-title": "KH Completionist",
+    "logo-name": "KH Completionist",
+    "lang-toggle-aria": "Switch language to French",
+    "nav-home": "Home",
+    "nav-tools": "Tools",
+    "theme-to-day": "Day",
+    "theme-to-night": "Night",
+    "theme-toggle-aria": "Toggle bright theme",
+    "landing-title": "Kingdom Hearts Completion Tracker",
+    "landing-subtitle": "Track your 100% completion across the whole Kingdom Hearts series. Everything is saved in your browser — no account, nothing leaves your device.",
+    "lg-total-label": "Series progress",
+    "lg-total-count": "%1 / %2 complete (%3%)",
+    "lg-games-label": "Games",
+    "lg-open": "Open tracker",
+    "game-kh1": "Kingdom Hearts Final Mix",
+    "game-khcom": "Re:Chain of Memories",
+    "game-kh2": "Kingdom Hearts II",
+    "game-bbs": "Birth by Sleep",
+    "game-khddd": "Dream Drop Distance",
+    "game-kh02": "Kingdom Hearts 0.2 Birth by Sleep",
+    "game-kh3": "Kingdom Hearts III + Re Mind"
+}

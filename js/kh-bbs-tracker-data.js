@@ -10,7 +10,7 @@
    object keyed by character (Gluttonous Goo differs for Aqua).
    ===================================================================== */
 
-const BBS_DATA = {
+var BBS_DATA = {
 "trophies": [
   {"rarity": "Gold", "name": "Critical Competitor", "desc": "Clear game on Critical."},
   {"rarity": "Gold", "name": "The Lost Chapter", "desc": "Complete the secret episode."},
@@ -1955,3 +1955,5 @@ const BBS_DATA = {
   }
 }
 };
+
+window.KH_BBS_DATA = BBS_DATA;

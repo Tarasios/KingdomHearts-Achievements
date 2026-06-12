@@ -1,12 +1,8 @@
 {
     "page-title": "Birth By Sleep — Command Melding Calculator",
-    "logo-name": "Cassiel Williams",
+    "logo-name": "KH Completionist",
     "lang-toggle-aria": "Switch language to French",
-    "nav-projects": "Projects",
-    "nav-education": "Education",
-    "nav-experience": "Experience",
     "nav-tools": "Tools",
-    "nav-contact": "Contact Me",
     "kh-title": "Birth By Sleep — Command Melding Calculator",
     "kh-subtitle": "Pick ingredients to see what they make, or work backwards from a command or your owned abilities. Data from Final Fantasy Kingdom's melding chart.",
     "tabbtn-forward": "Forward Meld",
@@ -121,5 +117,9 @@
     "kp-import-error": "That file could not be read as a progress export.",
     "kh-none-ability": "None",
     "kh-tip-none": "meld this command without taking an ability",
-    "kh-tip-need-pick": "choose an ability (or None) — or pin a crystal above — then press Meld"
+    "kh-tip-need-pick": "choose an ability (or None) — or pin a crystal above — then press Meld",
+    "nav-home": "Home",
+    "theme-to-day": "Day",
+    "theme-to-night": "Night",
+    "theme-toggle-aria": "Toggle bright theme"
 }
