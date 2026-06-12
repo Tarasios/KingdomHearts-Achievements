@@ -1,11 +1,3 @@
-/* =====================================================================
-   KINGDOM HEARTS III Re Mind — completion checklist data + tracker config
-   Extracted from xenodusk's "KINGDOM HEARTS III Re Mind Checklist"
-   spreadsheet (v1.01, July 20, 2024).
-   Consumed by js/kh-tracker.js (generic engine). Item order is
-   load-bearing: saved progress is keyed by index. The PS4-only Platinum
-   trophy is intentionally omitted.
-   ===================================================================== */
 var TRACKER_GAME = {
   "id": "kh3",
   "storeKey": "kh3_progress_v1",
@@ -308,7 +300,7 @@ var TRACKER_GAME = {
       ]
     },
     {
-      "id": "gummiphone",
+      "id": "lucky",
       "sections": [
         {
           "id": "lucky",
@@ -866,431 +858,12 @@ var TRACKER_GAME = {
               "g": "The Caribbean"
             }
           ]
-        },
-        {
-          "id": "adversaries",
-          "cols": [
-            {
-              "k": "name",
-              "name": true
-            },
-            {
-              "k": "where"
-            }
-          ],
-          "items": [
-            {
-              "name": "Shadow",
-              "where": "Olympus",
-              "g": "Heartless"
-            },
-            {
-              "name": "Neoshadow",
-              "where": "Twilight Town",
-              "g": "Heartless"
-            },
-            {
-              "name": "Fluttering",
-              "where": "Kingdom of Corona",
-              "g": "Heartless"
-            },
-            {
-              "name": "Flame Core",
-              "where": "Olympus",
-              "g": "Heartless"
-            },
-            {
-              "name": "Water Core",
-              "where": "Olympus",
-              "g": "Heartless"
-            },
-            {
-              "name": "Earth Core",
-              "where": "Olympus",
-              "g": "Heartless"
-            },
-            {
-              "name": "Dark Inferno",
-              "where": "The Keyblade Graveyard",
-              "g": "Heartless"
-            },
-            {
-              "name": "Soldier",
-              "where": "Olympus",
-              "g": "Heartless"
-            },
-            {
-              "name": "High Soldier",
-              "where": "San Fransokyo",
-              "g": "Heartless"
-            },
-            {
-              "name": "Air Soldier",
-              "where": "Olympus",
-              "g": "Heartless"
-            },
-            {
-              "name": "Large Body",
-              "where": "Olympus",
-              "g": "Heartless"
-            },
-            {
-              "name": "Helmed Body",
-              "where": "Arendelle",
-              "g": "Heartless"
-            },
-            {
-              "name": "Vermilion Samba",
-              "where": "Twilight Town",
-              "g": "Heartless"
-            },
-            {
-              "name": "Marine Ramba",
-              "where": "Kingdom of Corona",
-              "g": "Heartless"
-            },
-            {
-              "name": "Gold Beat",
-              "where": "Toy Box",
-              "g": "Heartless"
-            },
-            {
-              "name": "Malachite Bolero",
-              "where": "Kingdom of Corona",
-              "g": "Heartless"
-            },
-            {
-              "name": "Popcat",
-              "where": "Olympus",
-              "g": "Heartless"
-            },
-            {
-              "name": "Vitality Popcat",
-              "where": "Toy Box",
-              "g": "Heartless"
-            },
-            {
-              "name": "Magic Popcat",
-              "where": "Toy Box",
-              "g": "Heartless"
-            },
-            {
-              "name": "Focus Popcat",
-              "where": "Toy Box",
-              "g": "Heartless"
-            },
-            {
-              "name": "Munny Popcat",
-              "where": "Twilight Town",
-              "g": "Heartless"
-            },
-            {
-              "name": "Bizarre Archer",
-              "where": "Olympus",
-              "g": "Heartless"
-            },
-            {
-              "name": "Rock Troll",
-              "where": "Olympus",
-              "g": "Heartless"
-            },
-            {
-              "name": "Metal Troll",
-              "where": "San Fransokyo",
-              "g": "Heartless"
-            },
-            {
-              "name": "Satyr",
-              "where": "Olympus",
-              "g": "Heartless"
-            },
-            {
-              "name": "Mechanitaur",
-              "where": "San Fransokyo",
-              "g": "Heartless"
-            },
-            {
-              "name": "Toy Trooper",
-              "where": "Toy Box",
-              "g": "Heartless"
-            },
-            {
-              "name": "Pole Cannon",
-              "where": "Toy Box",
-              "g": "Heartless"
-            },
-            {
-              "name": "Marionette",
-              "where": "Toy Box",
-              "g": "Heartless"
-            },
-            {
-              "name": "Powerwild",
-              "where": "Twilight Town",
-              "g": "Heartless"
-            },
-            {
-              "name": "Pogo Shovel",
-              "where": "Monstropolis",
-              "g": "Heartless"
-            },
-            {
-              "name": "Parasol Beauty",
-              "where": "Kingdom of Corona",
-              "g": "Heartless"
-            },
-            {
-              "name": "Chief Puff",
-              "where": "Kingdom of Corona",
-              "g": "Heartless"
-            },
-            {
-              "name": "Puffball",
-              "where": "Kingdom of Corona",
-              "g": "Heartless"
-            },
-            {
-              "name": "Chaos Carriage",
-              "where": "Kingdom of Corona",
-              "g": "Heartless"
-            },
-            {
-              "name": "Winterhorn",
-              "where": "Arendelle",
-              "g": "Heartless"
-            },
-            {
-              "name": "Frost Serpent",
-              "where": "Arendelle",
-              "g": "Heartless"
-            },
-            {
-              "name": "Vaporfly",
-              "where": "The Caribbean",
-              "g": "Heartless"
-            },
-            {
-              "name": "Sea Sprite",
-              "where": "The Caribbean",
-              "g": "Heartless"
-            },
-            {
-              "name": "Anchor Raider",
-              "where": "The Caribbean",
-              "g": "Heartless"
-            },
-            {
-              "name": "Tireblade",
-              "where": "San Fransokyo",
-              "g": "Heartless"
-            },
-            {
-              "name": "Darkside",
-              "where": "Dive to the Heart",
-              "g": "Heartless"
-            },
-            {
-              "name": "Demon Tide",
-              "where": "The Keyblade Graveyard",
-              "g": "Heartless"
-            },
-            {
-              "name": "Demon Tower",
-              "where": "Dark World",
-              "g": "Heartless"
-            },
-            {
-              "name": "King of Toys",
-              "where": "Toy Box",
-              "g": "Heartless"
-            },
-            {
-              "name": "Grim Guardianess",
-              "where": "Kingdom of Corona",
-              "g": "Heartless"
-            },
-            {
-              "name": "Sköll",
-              "where": "Arendelle",
-              "g": "Heartless"
-            },
-            {
-              "name": "Raging Vulture",
-              "where": "The Caribbean",
-              "g": "Heartless"
-            },
-            {
-              "name": "Lightning Angler",
-              "where": "The Caribbean",
-              "g": "Heartless"
-            },
-            {
-              "name": "Darkubes",
-              "where": "San Fransokyo",
-              "g": "Heartless"
-            },
-            {
-              "name": "Lich",
-              "where": "The Keyblade Graveyard",
-              "g": "Heartless"
-            },
-            {
-              "name": "Catastrochorus",
-              "where": "San Fransokyo",
-              "g": "Heartless"
-            },
-            {
-              "name": "Cherry Flan",
-              "where": "Olympus",
-              "g": "Heartless"
-            },
-            {
-              "name": "Strawberry Flan",
-              "where": "Toy Box",
-              "g": "Heartless"
-            },
-            {
-              "name": "Orange Flan",
-              "where": "Kingdom of Corona",
-              "g": "Heartless"
-            },
-            {
-              "name": "Banana Flan",
-              "where": "Monstropolis",
-              "g": "Heartless"
-            },
-            {
-              "name": "Grape Flan",
-              "where": "Arendelle",
-              "g": "Heartless"
-            },
-            {
-              "name": "Honeydew Flan",
-              "where": "San Fransokyo",
-              "g": "Heartless"
-            },
-            {
-              "name": "Watermelon Flan",
-              "where": "The Caribbean",
-              "g": "Heartless"
-            },
-            {
-              "name": "Dark Inferno χ",
-              "where": "Re Mind DLC (doesn't count towards the achievement)",
-              "g": "Heartless"
-            },
-            {
-              "name": "Darkside",
-              "where": "Re Mind DLC (doesn't count towards the achievement)",
-              "g": "Heartless"
-            },
-            {
-              "name": "Dusk",
-              "where": "Twilight Town",
-              "g": "Nobodies"
-            },
-            {
-              "name": "Sniper",
-              "where": "Twilight Town",
-              "g": "Nobodies"
-            },
-            {
-              "name": "Reaper",
-              "where": "Kingdom of Corona",
-              "g": "Nobodies"
-            },
-            {
-              "name": "Ninja",
-              "where": "Arendelle",
-              "g": "Nobodies"
-            },
-            {
-              "name": "Gambler",
-              "where": "The Caribbean",
-              "g": "Nobodies"
-            },
-            {
-              "name": "Berserker",
-              "where": "Arendelle - Battlegate 9",
-              "g": "Nobodies"
-            },
-            {
-              "name": "Sorcerer",
-              "where": "Twilight Town - Battlegate 3",
-              "g": "Nobodies"
-            },
-            {
-              "name": "Flood",
-              "where": "Monstropolis",
-              "g": "Unversed"
-            },
-            {
-              "name": "Flowersnake",
-              "where": "Monstropolis",
-              "g": "Unversed"
-            },
-            {
-              "name": "Spiked Turtletoad",
-              "where": "Monstropolis",
-              "g": "Unversed"
-            },
-            {
-              "name": "Turtletoad",
-              "where": "Monstropolis",
-              "g": "Unversed"
-            },
-            {
-              "name": "Lump of Horror",
-              "where": "Monstropolis",
-              "g": "Unversed"
-            },
-            {
-              "name": "Gigas: Power Class",
-              "where": "Toy Box",
-              "g": "Others"
-            },
-            {
-              "name": "Gigas: Speed Class",
-              "where": "Toy Box",
-              "g": "Others"
-            },
-            {
-              "name": "Gigas: Gunner Class",
-              "where": "Toy Box",
-              "g": "Others"
-            },
-            {
-              "name": "Beasts & Bugs",
-              "where": "Toy Box",
-              "g": "Others"
-            },
-            {
-              "name": "Patchwork Animals",
-              "where": "Toy Box",
-              "g": "Others"
-            },
-            {
-              "name": "Air Droids",
-              "where": "Toy Box",
-              "g": "Others"
-            },
-            {
-              "name": "Bouncy Pets",
-              "where": "Toy Box",
-              "g": "Others"
-            },
-            {
-              "name": "Supreme Smasher",
-              "where": "Toy Box",
-              "g": "Others"
-            },
-            {
-              "name": "Angelic Amber",
-              "where": "Toy Box",
-              "g": "Others"
-            }
-          ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "treasures",
+      "sections": [
         {
           "id": "treasures",
           "cols": [
@@ -2829,6 +2402,435 @@ var TRACKER_GAME = {
               "area": "Breezy Quarter",
               "where": "In a corner, in the very North border of the map",
               "g": "Scala ad Caelum"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gummiphone",
+      "sections": [
+        {
+          "id": "adversaries",
+          "cols": [
+            {
+              "k": "name",
+              "name": true
+            },
+            {
+              "k": "where"
+            }
+          ],
+          "items": [
+            {
+              "name": "Shadow",
+              "where": "Olympus",
+              "g": "Heartless"
+            },
+            {
+              "name": "Neoshadow",
+              "where": "Twilight Town",
+              "g": "Heartless"
+            },
+            {
+              "name": "Fluttering",
+              "where": "Kingdom of Corona",
+              "g": "Heartless"
+            },
+            {
+              "name": "Flame Core",
+              "where": "Olympus",
+              "g": "Heartless"
+            },
+            {
+              "name": "Water Core",
+              "where": "Olympus",
+              "g": "Heartless"
+            },
+            {
+              "name": "Earth Core",
+              "where": "Olympus",
+              "g": "Heartless"
+            },
+            {
+              "name": "Dark Inferno",
+              "where": "The Keyblade Graveyard",
+              "g": "Heartless"
+            },
+            {
+              "name": "Soldier",
+              "where": "Olympus",
+              "g": "Heartless"
+            },
+            {
+              "name": "High Soldier",
+              "where": "San Fransokyo",
+              "g": "Heartless"
+            },
+            {
+              "name": "Air Soldier",
+              "where": "Olympus",
+              "g": "Heartless"
+            },
+            {
+              "name": "Large Body",
+              "where": "Olympus",
+              "g": "Heartless"
+            },
+            {
+              "name": "Helmed Body",
+              "where": "Arendelle",
+              "g": "Heartless"
+            },
+            {
+              "name": "Vermilion Samba",
+              "where": "Twilight Town",
+              "g": "Heartless"
+            },
+            {
+              "name": "Marine Ramba",
+              "where": "Kingdom of Corona",
+              "g": "Heartless"
+            },
+            {
+              "name": "Gold Beat",
+              "where": "Toy Box",
+              "g": "Heartless"
+            },
+            {
+              "name": "Malachite Bolero",
+              "where": "Kingdom of Corona",
+              "g": "Heartless"
+            },
+            {
+              "name": "Popcat",
+              "where": "Olympus",
+              "g": "Heartless"
+            },
+            {
+              "name": "Vitality Popcat",
+              "where": "Toy Box",
+              "g": "Heartless"
+            },
+            {
+              "name": "Magic Popcat",
+              "where": "Toy Box",
+              "g": "Heartless"
+            },
+            {
+              "name": "Focus Popcat",
+              "where": "Toy Box",
+              "g": "Heartless"
+            },
+            {
+              "name": "Munny Popcat",
+              "where": "Twilight Town",
+              "g": "Heartless"
+            },
+            {
+              "name": "Bizarre Archer",
+              "where": "Olympus",
+              "g": "Heartless"
+            },
+            {
+              "name": "Rock Troll",
+              "where": "Olympus",
+              "g": "Heartless"
+            },
+            {
+              "name": "Metal Troll",
+              "where": "San Fransokyo",
+              "g": "Heartless"
+            },
+            {
+              "name": "Satyr",
+              "where": "Olympus",
+              "g": "Heartless"
+            },
+            {
+              "name": "Mechanitaur",
+              "where": "San Fransokyo",
+              "g": "Heartless"
+            },
+            {
+              "name": "Toy Trooper",
+              "where": "Toy Box",
+              "g": "Heartless"
+            },
+            {
+              "name": "Pole Cannon",
+              "where": "Toy Box",
+              "g": "Heartless"
+            },
+            {
+              "name": "Marionette",
+              "where": "Toy Box",
+              "g": "Heartless"
+            },
+            {
+              "name": "Powerwild",
+              "where": "Twilight Town",
+              "g": "Heartless"
+            },
+            {
+              "name": "Pogo Shovel",
+              "where": "Monstropolis",
+              "g": "Heartless"
+            },
+            {
+              "name": "Parasol Beauty",
+              "where": "Kingdom of Corona",
+              "g": "Heartless"
+            },
+            {
+              "name": "Chief Puff",
+              "where": "Kingdom of Corona",
+              "g": "Heartless"
+            },
+            {
+              "name": "Puffball",
+              "where": "Kingdom of Corona",
+              "g": "Heartless"
+            },
+            {
+              "name": "Chaos Carriage",
+              "where": "Kingdom of Corona",
+              "g": "Heartless"
+            },
+            {
+              "name": "Winterhorn",
+              "where": "Arendelle",
+              "g": "Heartless"
+            },
+            {
+              "name": "Frost Serpent",
+              "where": "Arendelle",
+              "g": "Heartless"
+            },
+            {
+              "name": "Vaporfly",
+              "where": "The Caribbean",
+              "g": "Heartless"
+            },
+            {
+              "name": "Sea Sprite",
+              "where": "The Caribbean",
+              "g": "Heartless"
+            },
+            {
+              "name": "Anchor Raider",
+              "where": "The Caribbean",
+              "g": "Heartless"
+            },
+            {
+              "name": "Tireblade",
+              "where": "San Fransokyo",
+              "g": "Heartless"
+            },
+            {
+              "name": "Darkside",
+              "where": "Dive to the Heart",
+              "g": "Heartless"
+            },
+            {
+              "name": "Demon Tide",
+              "where": "The Keyblade Graveyard",
+              "g": "Heartless"
+            },
+            {
+              "name": "Demon Tower",
+              "where": "Dark World",
+              "g": "Heartless"
+            },
+            {
+              "name": "King of Toys",
+              "where": "Toy Box",
+              "g": "Heartless"
+            },
+            {
+              "name": "Grim Guardianess",
+              "where": "Kingdom of Corona",
+              "g": "Heartless"
+            },
+            {
+              "name": "Sköll",
+              "where": "Arendelle",
+              "g": "Heartless"
+            },
+            {
+              "name": "Raging Vulture",
+              "where": "The Caribbean",
+              "g": "Heartless"
+            },
+            {
+              "name": "Lightning Angler",
+              "where": "The Caribbean",
+              "g": "Heartless"
+            },
+            {
+              "name": "Darkubes",
+              "where": "San Fransokyo",
+              "g": "Heartless"
+            },
+            {
+              "name": "Lich",
+              "where": "The Keyblade Graveyard",
+              "g": "Heartless"
+            },
+            {
+              "name": "Catastrochorus",
+              "where": "San Fransokyo",
+              "g": "Heartless"
+            },
+            {
+              "name": "Cherry Flan",
+              "where": "Olympus",
+              "g": "Heartless"
+            },
+            {
+              "name": "Strawberry Flan",
+              "where": "Toy Box",
+              "g": "Heartless"
+            },
+            {
+              "name": "Orange Flan",
+              "where": "Kingdom of Corona",
+              "g": "Heartless"
+            },
+            {
+              "name": "Banana Flan",
+              "where": "Monstropolis",
+              "g": "Heartless"
+            },
+            {
+              "name": "Grape Flan",
+              "where": "Arendelle",
+              "g": "Heartless"
+            },
+            {
+              "name": "Honeydew Flan",
+              "where": "San Fransokyo",
+              "g": "Heartless"
+            },
+            {
+              "name": "Watermelon Flan",
+              "where": "The Caribbean",
+              "g": "Heartless"
+            },
+            {
+              "name": "Dark Inferno χ",
+              "where": "Re Mind DLC (doesn't count towards the achievement)",
+              "g": "Heartless"
+            },
+            {
+              "name": "Darkside",
+              "where": "Re Mind DLC (doesn't count towards the achievement)",
+              "g": "Heartless"
+            },
+            {
+              "name": "Dusk",
+              "where": "Twilight Town",
+              "g": "Nobodies"
+            },
+            {
+              "name": "Sniper",
+              "where": "Twilight Town",
+              "g": "Nobodies"
+            },
+            {
+              "name": "Reaper",
+              "where": "Kingdom of Corona",
+              "g": "Nobodies"
+            },
+            {
+              "name": "Ninja",
+              "where": "Arendelle",
+              "g": "Nobodies"
+            },
+            {
+              "name": "Gambler",
+              "where": "The Caribbean",
+              "g": "Nobodies"
+            },
+            {
+              "name": "Berserker",
+              "where": "Arendelle - Battlegate 9",
+              "g": "Nobodies"
+            },
+            {
+              "name": "Sorcerer",
+              "where": "Twilight Town - Battlegate 3",
+              "g": "Nobodies"
+            },
+            {
+              "name": "Flood",
+              "where": "Monstropolis",
+              "g": "Unversed"
+            },
+            {
+              "name": "Flowersnake",
+              "where": "Monstropolis",
+              "g": "Unversed"
+            },
+            {
+              "name": "Spiked Turtletoad",
+              "where": "Monstropolis",
+              "g": "Unversed"
+            },
+            {
+              "name": "Turtletoad",
+              "where": "Monstropolis",
+              "g": "Unversed"
+            },
+            {
+              "name": "Lump of Horror",
+              "where": "Monstropolis",
+              "g": "Unversed"
+            },
+            {
+              "name": "Gigas: Power Class",
+              "where": "Toy Box",
+              "g": "Others"
+            },
+            {
+              "name": "Gigas: Speed Class",
+              "where": "Toy Box",
+              "g": "Others"
+            },
+            {
+              "name": "Gigas: Gunner Class",
+              "where": "Toy Box",
+              "g": "Others"
+            },
+            {
+              "name": "Beasts & Bugs",
+              "where": "Toy Box",
+              "g": "Others"
+            },
+            {
+              "name": "Patchwork Animals",
+              "where": "Toy Box",
+              "g": "Others"
+            },
+            {
+              "name": "Air Droids",
+              "where": "Toy Box",
+              "g": "Others"
+            },
+            {
+              "name": "Bouncy Pets",
+              "where": "Toy Box",
+              "g": "Others"
+            },
+            {
+              "name": "Supreme Smasher",
+              "where": "Toy Box",
+              "g": "Others"
+            },
+            {
+              "name": "Angelic Amber",
+              "where": "Toy Box",
+              "g": "Others"
             }
           ]
         },
@@ -4986,477 +4988,6 @@ var TRACKER_GAME = {
           ]
         },
         {
-          "id": "recipecol",
-          "cols": [
-            {
-              "k": "name",
-              "name": true
-            },
-            {
-              "k": "mats"
-            }
-          ],
-          "items": [
-            {
-              "name": "Mushroom Terrine",
-              "mats": "Morel, Chanterelle, King Oyster Mushroom, Black Trumpet",
-              "g": "Starters"
-            },
-            {
-              "name": "Scallop Poêlé",
-              "mats": "Scallop, Olive Oil",
-              "g": "Starters"
-            },
-            {
-              "name": "Ratatouille",
-              "mats": "Zucchini, Eggplant, Tomato, Garlic, Bay Leaf",
-              "g": "Starters"
-            },
-            {
-              "name": "Lobster Mousse",
-              "mats": "Lobster, Scallop, Dill",
-              "g": "Starters"
-            },
-            {
-              "name": "Caprese Salad",
-              "mats": "Strawberry, Tomato, Cheese, Basil",
-              "g": "Starters"
-            },
-            {
-              "name": "Consommé",
-              "mats": "Celery, Onion, Cloves",
-              "g": "Soup"
-            },
-            {
-              "name": "Pumpkin Velouté",
-              "mats": "Pumpkin, Black Truffle",
-              "g": "Soup"
-            },
-            {
-              "name": "Carrot Potage",
-              "mats": "Carrot, Onion, Rice, Butter",
-              "g": "Soup"
-            },
-            {
-              "name": "Crab Bisque",
-              "mats": "Crab, Tomato, Carrot, Celery, Olive Oil",
-              "g": "Soup"
-            },
-            {
-              "name": "Cold Tomato Soup",
-              "mats": "Watermelon, Tomato, Dill",
-              "g": "Soup"
-            },
-            {
-              "name": "Sole Meunière",
-              "mats": "Sole, Caviar",
-              "g": "Fish"
-            },
-            {
-              "name": "Eel Matelote",
-              "mats": "Eel, Bay Leaf, Parsley",
-              "g": "Fish"
-            },
-            {
-              "name": "Bouillabaisse",
-              "mats": "Mussel, Lobster, Cod, Garlic, Saffron",
-              "g": "Fish"
-            },
-            {
-              "name": "Sea Bass en Papillote",
-              "mats": "Sea Bass, Basil, Thyme, Olive Oil",
-              "g": "Fish"
-            },
-            {
-              "name": "Seafood Tartare",
-              "mats": "Blood Orange, Lobster, Sea Bass, Olive Oil",
-              "g": "Fish"
-            },
-            {
-              "name": "Sea Bass Poêlé",
-              "mats": "Grapes, Sea Bass, Zucchini, Chanterelle, Parsley",
-              "g": "Fish"
-            },
-            {
-              "name": "Sweetbread Poêlé",
-              "mats": "Porcini, Lemon, Veal",
-              "g": "Meat"
-            },
-            {
-              "name": "Beef Sauté",
-              "mats": "Cornichon, Eggplant, Zucchini, Beef",
-              "g": "Meat"
-            },
-            {
-              "name": "Beef Bourguignon",
-              "mats": "Rosemary, Bay Leaf, Thyme, Garlic, Beef",
-              "g": "Meat"
-            },
-            {
-              "name": "Stuffed Quail",
-              "mats": "Rice, Portobello, Porcini, Miller Mushroom, Parsley, Quail",
-              "g": "Meat"
-            },
-            {
-              "name": "Filet Mignon Poêlé",
-              "mats": "Sour Cherry, Butter, Black Truffle, Rosemary, Cloves, Filet Mignon",
-              "g": "Meat"
-            },
-            {
-              "name": "Chocolate Mousse",
-              "mats": "Chocolate, Lemon, Butter",
-              "g": "Dessert"
-            },
-            {
-              "name": "Fresh Fruit Compote",
-              "mats": "Pear, Apple, Apricot",
-              "g": "Dessert"
-            },
-            {
-              "name": "Crêpes Suzette",
-              "mats": "Orange, Butter, Honey",
-              "g": "Dessert"
-            },
-            {
-              "name": "Berries au Fromage",
-              "mats": "Cheese, Lemon, Gooseberry, Raspberry, Blackberry",
-              "g": "Dessert"
-            },
-            {
-              "name": "Warm Banana Soufflé",
-              "mats": "Banana, Butter, Honey",
-              "g": "Dessert"
-            },
-            {
-              "name": "Fruit Gelée",
-              "mats": "Melon, Pear, Gooseberry",
-              "g": "Dessert"
-            },
-            {
-              "name": "Tarte aux Fruits",
-              "mats": "Sour Cherry, Strawberry, Blood Orange, Banana, Grapes, Melon, Watermelon",
-              "g": "Dessert"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "cooking",
-      "sections": [
-        {
-          "id": "ingredients",
-          "cols": [
-            {
-              "k": "name",
-              "name": true
-            },
-            {
-              "k": "loc"
-            }
-          ],
-          "items": [
-            {
-              "name": "Veal",
-              "loc": "Moogle Shop, Olympus"
-            },
-            {
-              "name": "Beef",
-              "loc": "Moogle Shop, Olympus"
-            },
-            {
-              "name": "Quail",
-              "loc": "San Fransokyo"
-            },
-            {
-              "name": "Filet Mignon",
-              "loc": "Monstropolis"
-            },
-            {
-              "name": "Crab",
-              "loc": "The Caribbean"
-            },
-            {
-              "name": "Scallop",
-              "loc": "Kingdom of Corona"
-            },
-            {
-              "name": "Lobster",
-              "loc": "Kingdom of Corona"
-            },
-            {
-              "name": "Sole",
-              "loc": "Moogle Shop, Kingdom of Corona"
-            },
-            {
-              "name": "Eel",
-              "loc": "Moogle Shop, Kingdom of Corona"
-            },
-            {
-              "name": "Sea Bass",
-              "loc": "Kingdom of Corona"
-            },
-            {
-              "name": "Mussel",
-              "loc": "Kingdom of Corona"
-            },
-            {
-              "name": "Cod",
-              "loc": "Kingdom of Corona"
-            },
-            {
-              "name": "Pumpkin",
-              "loc": "Toy Box"
-            },
-            {
-              "name": "Zucchini",
-              "loc": "Kingdom of Corona"
-            },
-            {
-              "name": "Onion",
-              "loc": "Moogle Shop, Olympus"
-            },
-            {
-              "name": "Tomato",
-              "loc": "Toy Box"
-            },
-            {
-              "name": "Eggplant",
-              "loc": "Kingdom of Corona"
-            },
-            {
-              "name": "Carrot",
-              "loc": "100 Acre Wood"
-            },
-            {
-              "name": "Garlic",
-              "loc": "Toy Box"
-            },
-            {
-              "name": "Celery",
-              "loc": "Moogle Shop, Olympus"
-            },
-            {
-              "name": "Morel",
-              "loc": "Moogle Shop, Olympus"
-            },
-            {
-              "name": "Porcini",
-              "loc": "Moogle Shop, Olympus"
-            },
-            {
-              "name": "Chanterelle",
-              "loc": "Moogle Shop, Olympus"
-            },
-            {
-              "name": "Portobello",
-              "loc": "Arendelle"
-            },
-            {
-              "name": "Black Truffle",
-              "loc": "Moogle Shop, Olympus"
-            },
-            {
-              "name": "King Oyster Mushroom",
-              "loc": "Moogle Shop, Olympus"
-            },
-            {
-              "name": "Black Trumpet",
-              "loc": "Moogle Shop, Twilight Town"
-            },
-            {
-              "name": "Miller Mushroom",
-              "loc": "Arendelle"
-            },
-            {
-              "name": "Cloves",
-              "loc": "Moogle Shop, Olympus"
-            },
-            {
-              "name": "Rosemary",
-              "loc": "Moogle Shop, Olympus"
-            },
-            {
-              "name": "Thyme",
-              "loc": "Moogle Shop, Toy Box"
-            },
-            {
-              "name": "Bay Leaf",
-              "loc": "Moogle Shop, Toy Box"
-            },
-            {
-              "name": "Basil",
-              "loc": "Toy Box"
-            },
-            {
-              "name": "Dill",
-              "loc": "Monstropolis"
-            },
-            {
-              "name": "Parsley",
-              "loc": "Moogle Shop, Olympus"
-            },
-            {
-              "name": "Saffron",
-              "loc": "Moogle Shop, Monstropolis"
-            },
-            {
-              "name": "Apricot",
-              "loc": "Moogle Shop, Olympus"
-            },
-            {
-              "name": "Gooseberry",
-              "loc": "Arendelle"
-            },
-            {
-              "name": "Lemon",
-              "loc": "Olympus"
-            },
-            {
-              "name": "Orange",
-              "loc": "Monstropolis"
-            },
-            {
-              "name": "Raspberry",
-              "loc": "Arendelle"
-            },
-            {
-              "name": "Pear",
-              "loc": "Olympus"
-            },
-            {
-              "name": "Blackberry",
-              "loc": "Arendelle"
-            },
-            {
-              "name": "Apple",
-              "loc": "Moogle Shop, Olympus"
-            },
-            {
-              "name": "Cheese",
-              "loc": "Moogle Shop, Toy Box"
-            },
-            {
-              "name": "Chocolate",
-              "loc": "Moogle Shop, Twilight Town"
-            },
-            {
-              "name": "Caviar",
-              "loc": "Moogle Shop, Twilight Town"
-            },
-            {
-              "name": "Butter",
-              "loc": "Moogle Shop, Twilight Town"
-            },
-            {
-              "name": "Olive Oil",
-              "loc": "Moogle Shop, Toy Box"
-            },
-            {
-              "name": "Cornichon",
-              "loc": "Moogle Shop, Twilight Town"
-            },
-            {
-              "name": "Rice",
-              "loc": "Moogle Shop, Monstropolis"
-            },
-            {
-              "name": "Honey",
-              "loc": "100 Acre Wood"
-            },
-            {
-              "name": "Sour Cherry",
-              "loc": "Olympus (Flantastic Seven)"
-            },
-            {
-              "name": "Strawberry",
-              "loc": "Toy Box (Flantastic Seven)"
-            },
-            {
-              "name": "Blood Orange",
-              "loc": "Kingdom of Corona (Flantastic Seven)"
-            },
-            {
-              "name": "Banana",
-              "loc": "Monstropolis (Flantastic Seven)"
-            },
-            {
-              "name": "Grapes",
-              "loc": "Arendelle (Flantastic Seven)"
-            },
-            {
-              "name": "Melon",
-              "loc": "San Fransokyo (Flantastic Seven)"
-            },
-            {
-              "name": "Watermelon",
-              "loc": "The Caribbean (Flantastic Seven)"
-            }
-          ]
-        },
-        {
-          "id": "flan",
-          "cols": [
-            {
-              "k": "name",
-              "name": true
-            },
-            {
-              "k": "world"
-            },
-            {
-              "k": "area"
-            },
-            {
-              "k": "reward"
-            }
-          ],
-          "items": [
-            {
-              "name": "Cherry",
-              "world": "Olympus",
-              "area": "Overlook",
-              "reward": "10,000 or more: x1 Sour Cherry 20,000 or more: x3 Sour Cherry, Formchange Extender"
-            },
-            {
-              "name": "Strawberry",
-              "world": "Toy Box",
-              "area": "Rest Area",
-              "reward": "8,500 or more: x1 Strawberry 17,000 or more: x3 Strawberry, Attraction Extender"
-            },
-            {
-              "name": "Orange",
-              "world": "Kingdom of Corona",
-              "area": "Hills",
-              "reward": "10,000 or more: x1 Blood Orange 23,000 or more: x3 Blood Orange, Treasure Magnet"
-            },
-            {
-              "name": "Banana",
-              "world": "Monstropolis",
-              "area": "Upper Level",
-              "reward": "10,000 or more: x1 Banana 20,000 or more: x3 Banana, Grand Magic Extender"
-            },
-            {
-              "name": "Grape",
-              "world": "Arendelle",
-              "area": "Mountain Ridge",
-              "reward": "10,000 or more: x1 Grape 20,000 or more: x3 Grape, Unison Blizzard"
-            },
-            {
-              "name": "Honeydew",
-              "world": "San Frasokyo",
-              "area": "South District",
-              "reward": "7,500 or more: x1 Melon 15,000 or more: x3 Melon, Attraction Extender"
-            },
-            {
-              "name": "Watermelon",
-              "world": "The Caribbean",
-              "area": "Fort",
-              "reward": "14,000 or more: x1 Watermelon 28,000 or more: x3 Watermelon, Focus Syphon"
-            }
-          ]
-        },
-        {
           "id": "collector",
           "cols": [
             {
@@ -5797,7 +5328,483 @@ var TRACKER_GAME = {
               "reward": "Lost Illusion"
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "cooking",
+      "sections": [
+        {
+          "id": "ingredients",
+          "cols": [
+            {
+              "k": "name",
+              "name": true
+            },
+            {
+              "k": "loc"
+            }
+          ],
+          "items": [
+            {
+              "name": "Veal",
+              "loc": "Moogle Shop, Olympus"
+            },
+            {
+              "name": "Beef",
+              "loc": "Moogle Shop, Olympus"
+            },
+            {
+              "name": "Quail",
+              "loc": "San Fransokyo"
+            },
+            {
+              "name": "Filet Mignon",
+              "loc": "Monstropolis"
+            },
+            {
+              "name": "Crab",
+              "loc": "The Caribbean"
+            },
+            {
+              "name": "Scallop",
+              "loc": "Kingdom of Corona"
+            },
+            {
+              "name": "Lobster",
+              "loc": "Kingdom of Corona"
+            },
+            {
+              "name": "Sole",
+              "loc": "Moogle Shop, Kingdom of Corona"
+            },
+            {
+              "name": "Eel",
+              "loc": "Moogle Shop, Kingdom of Corona"
+            },
+            {
+              "name": "Sea Bass",
+              "loc": "Kingdom of Corona"
+            },
+            {
+              "name": "Mussel",
+              "loc": "Kingdom of Corona"
+            },
+            {
+              "name": "Cod",
+              "loc": "Kingdom of Corona"
+            },
+            {
+              "name": "Pumpkin",
+              "loc": "Toy Box"
+            },
+            {
+              "name": "Zucchini",
+              "loc": "Kingdom of Corona"
+            },
+            {
+              "name": "Onion",
+              "loc": "Moogle Shop, Olympus"
+            },
+            {
+              "name": "Tomato",
+              "loc": "Toy Box"
+            },
+            {
+              "name": "Eggplant",
+              "loc": "Kingdom of Corona"
+            },
+            {
+              "name": "Carrot",
+              "loc": "100 Acre Wood"
+            },
+            {
+              "name": "Garlic",
+              "loc": "Toy Box"
+            },
+            {
+              "name": "Celery",
+              "loc": "Moogle Shop, Olympus"
+            },
+            {
+              "name": "Morel",
+              "loc": "Moogle Shop, Olympus"
+            },
+            {
+              "name": "Porcini",
+              "loc": "Moogle Shop, Olympus"
+            },
+            {
+              "name": "Chanterelle",
+              "loc": "Moogle Shop, Olympus"
+            },
+            {
+              "name": "Portobello",
+              "loc": "Arendelle"
+            },
+            {
+              "name": "Black Truffle",
+              "loc": "Moogle Shop, Olympus"
+            },
+            {
+              "name": "King Oyster Mushroom",
+              "loc": "Moogle Shop, Olympus"
+            },
+            {
+              "name": "Black Trumpet",
+              "loc": "Moogle Shop, Twilight Town"
+            },
+            {
+              "name": "Miller Mushroom",
+              "loc": "Arendelle"
+            },
+            {
+              "name": "Cloves",
+              "loc": "Moogle Shop, Olympus"
+            },
+            {
+              "name": "Rosemary",
+              "loc": "Moogle Shop, Olympus"
+            },
+            {
+              "name": "Thyme",
+              "loc": "Moogle Shop, Toy Box"
+            },
+            {
+              "name": "Bay Leaf",
+              "loc": "Moogle Shop, Toy Box"
+            },
+            {
+              "name": "Basil",
+              "loc": "Toy Box"
+            },
+            {
+              "name": "Dill",
+              "loc": "Monstropolis"
+            },
+            {
+              "name": "Parsley",
+              "loc": "Moogle Shop, Olympus"
+            },
+            {
+              "name": "Saffron",
+              "loc": "Moogle Shop, Monstropolis"
+            },
+            {
+              "name": "Apricot",
+              "loc": "Moogle Shop, Olympus"
+            },
+            {
+              "name": "Gooseberry",
+              "loc": "Arendelle"
+            },
+            {
+              "name": "Lemon",
+              "loc": "Olympus"
+            },
+            {
+              "name": "Orange",
+              "loc": "Monstropolis"
+            },
+            {
+              "name": "Raspberry",
+              "loc": "Arendelle"
+            },
+            {
+              "name": "Pear",
+              "loc": "Olympus"
+            },
+            {
+              "name": "Blackberry",
+              "loc": "Arendelle"
+            },
+            {
+              "name": "Apple",
+              "loc": "Moogle Shop, Olympus"
+            },
+            {
+              "name": "Cheese",
+              "loc": "Moogle Shop, Toy Box"
+            },
+            {
+              "name": "Chocolate",
+              "loc": "Moogle Shop, Twilight Town"
+            },
+            {
+              "name": "Caviar",
+              "loc": "Moogle Shop, Twilight Town"
+            },
+            {
+              "name": "Butter",
+              "loc": "Moogle Shop, Twilight Town"
+            },
+            {
+              "name": "Olive Oil",
+              "loc": "Moogle Shop, Toy Box"
+            },
+            {
+              "name": "Cornichon",
+              "loc": "Moogle Shop, Twilight Town"
+            },
+            {
+              "name": "Rice",
+              "loc": "Moogle Shop, Monstropolis"
+            },
+            {
+              "name": "Honey",
+              "loc": "100 Acre Wood"
+            },
+            {
+              "name": "Sour Cherry",
+              "loc": "Olympus (Flantastic Seven)"
+            },
+            {
+              "name": "Strawberry",
+              "loc": "Toy Box (Flantastic Seven)"
+            },
+            {
+              "name": "Blood Orange",
+              "loc": "Kingdom of Corona (Flantastic Seven)"
+            },
+            {
+              "name": "Banana",
+              "loc": "Monstropolis (Flantastic Seven)"
+            },
+            {
+              "name": "Grapes",
+              "loc": "Arendelle (Flantastic Seven)"
+            },
+            {
+              "name": "Melon",
+              "loc": "San Fransokyo (Flantastic Seven)"
+            },
+            {
+              "name": "Watermelon",
+              "loc": "The Caribbean (Flantastic Seven)"
+            }
+          ]
         },
+        {
+          "id": "flan",
+          "cols": [
+            {
+              "k": "name",
+              "name": true
+            },
+            {
+              "k": "world"
+            },
+            {
+              "k": "area"
+            },
+            {
+              "k": "reward"
+            }
+          ],
+          "items": [
+            {
+              "name": "Cherry",
+              "world": "Olympus",
+              "area": "Overlook",
+              "reward": "10,000 or more: x1 Sour Cherry 20,000 or more: x3 Sour Cherry, Formchange Extender"
+            },
+            {
+              "name": "Strawberry",
+              "world": "Toy Box",
+              "area": "Rest Area",
+              "reward": "8,500 or more: x1 Strawberry 17,000 or more: x3 Strawberry, Attraction Extender"
+            },
+            {
+              "name": "Orange",
+              "world": "Kingdom of Corona",
+              "area": "Hills",
+              "reward": "10,000 or more: x1 Blood Orange 23,000 or more: x3 Blood Orange, Treasure Magnet"
+            },
+            {
+              "name": "Banana",
+              "world": "Monstropolis",
+              "area": "Upper Level",
+              "reward": "10,000 or more: x1 Banana 20,000 or more: x3 Banana, Grand Magic Extender"
+            },
+            {
+              "name": "Grape",
+              "world": "Arendelle",
+              "area": "Mountain Ridge",
+              "reward": "10,000 or more: x1 Grape 20,000 or more: x3 Grape, Unison Blizzard"
+            },
+            {
+              "name": "Honeydew",
+              "world": "San Frasokyo",
+              "area": "South District",
+              "reward": "7,500 or more: x1 Melon 15,000 or more: x3 Melon, Attraction Extender"
+            },
+            {
+              "name": "Watermelon",
+              "world": "The Caribbean",
+              "area": "Fort",
+              "reward": "14,000 or more: x1 Watermelon 28,000 or more: x3 Watermelon, Focus Syphon"
+            }
+          ]
+        },
+        {
+          "id": "recipecol",
+          "cols": [
+            {
+              "k": "name",
+              "name": true
+            },
+            {
+              "k": "mats"
+            }
+          ],
+          "items": [
+            {
+              "name": "Mushroom Terrine",
+              "mats": "Morel, Chanterelle, King Oyster Mushroom, Black Trumpet",
+              "g": "Starters"
+            },
+            {
+              "name": "Scallop Poêlé",
+              "mats": "Scallop, Olive Oil",
+              "g": "Starters"
+            },
+            {
+              "name": "Ratatouille",
+              "mats": "Zucchini, Eggplant, Tomato, Garlic, Bay Leaf",
+              "g": "Starters"
+            },
+            {
+              "name": "Lobster Mousse",
+              "mats": "Lobster, Scallop, Dill",
+              "g": "Starters"
+            },
+            {
+              "name": "Caprese Salad",
+              "mats": "Strawberry, Tomato, Cheese, Basil",
+              "g": "Starters"
+            },
+            {
+              "name": "Consommé",
+              "mats": "Celery, Onion, Cloves",
+              "g": "Soup"
+            },
+            {
+              "name": "Pumpkin Velouté",
+              "mats": "Pumpkin, Black Truffle",
+              "g": "Soup"
+            },
+            {
+              "name": "Carrot Potage",
+              "mats": "Carrot, Onion, Rice, Butter",
+              "g": "Soup"
+            },
+            {
+              "name": "Crab Bisque",
+              "mats": "Crab, Tomato, Carrot, Celery, Olive Oil",
+              "g": "Soup"
+            },
+            {
+              "name": "Cold Tomato Soup",
+              "mats": "Watermelon, Tomato, Dill",
+              "g": "Soup"
+            },
+            {
+              "name": "Sole Meunière",
+              "mats": "Sole, Caviar",
+              "g": "Fish"
+            },
+            {
+              "name": "Eel Matelote",
+              "mats": "Eel, Bay Leaf, Parsley",
+              "g": "Fish"
+            },
+            {
+              "name": "Bouillabaisse",
+              "mats": "Mussel, Lobster, Cod, Garlic, Saffron",
+              "g": "Fish"
+            },
+            {
+              "name": "Sea Bass en Papillote",
+              "mats": "Sea Bass, Basil, Thyme, Olive Oil",
+              "g": "Fish"
+            },
+            {
+              "name": "Seafood Tartare",
+              "mats": "Blood Orange, Lobster, Sea Bass, Olive Oil",
+              "g": "Fish"
+            },
+            {
+              "name": "Sea Bass Poêlé",
+              "mats": "Grapes, Sea Bass, Zucchini, Chanterelle, Parsley",
+              "g": "Fish"
+            },
+            {
+              "name": "Sweetbread Poêlé",
+              "mats": "Porcini, Lemon, Veal",
+              "g": "Meat"
+            },
+            {
+              "name": "Beef Sauté",
+              "mats": "Cornichon, Eggplant, Zucchini, Beef",
+              "g": "Meat"
+            },
+            {
+              "name": "Beef Bourguignon",
+              "mats": "Rosemary, Bay Leaf, Thyme, Garlic, Beef",
+              "g": "Meat"
+            },
+            {
+              "name": "Stuffed Quail",
+              "mats": "Rice, Portobello, Porcini, Miller Mushroom, Parsley, Quail",
+              "g": "Meat"
+            },
+            {
+              "name": "Filet Mignon Poêlé",
+              "mats": "Sour Cherry, Butter, Black Truffle, Rosemary, Cloves, Filet Mignon",
+              "g": "Meat"
+            },
+            {
+              "name": "Chocolate Mousse",
+              "mats": "Chocolate, Lemon, Butter",
+              "g": "Dessert"
+            },
+            {
+              "name": "Fresh Fruit Compote",
+              "mats": "Pear, Apple, Apricot",
+              "g": "Dessert"
+            },
+            {
+              "name": "Crêpes Suzette",
+              "mats": "Orange, Butter, Honey",
+              "g": "Dessert"
+            },
+            {
+              "name": "Berries au Fromage",
+              "mats": "Cheese, Lemon, Gooseberry, Raspberry, Blackberry",
+              "g": "Dessert"
+            },
+            {
+              "name": "Warm Banana Soufflé",
+              "mats": "Banana, Butter, Honey",
+              "g": "Dessert"
+            },
+            {
+              "name": "Fruit Gelée",
+              "mats": "Melon, Pear, Gooseberry",
+              "g": "Dessert"
+            },
+            {
+              "name": "Tarte aux Fruits",
+              "mats": "Sour Cherry, Strawberry, Blood Orange, Banana, Grapes, Melon, Watermelon",
+              "g": "Dessert"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "photo",
+      "sections": [
         {
           "id": "photo",
           "cols": [

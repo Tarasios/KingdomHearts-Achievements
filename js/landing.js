@@ -2,10 +2,10 @@
    Landing page — series-wide and per-game completion overview.
    Reads each game's totals via KHSummary (no tracker needs to have been
    opened) and renders a big series progress bar, then the games grouped
-   by HD collection: each group shows its collection hero strip and a
-   banner card per game (the banner is the natural "pick this game"
-   target), with a live progress bar. Text comes from
-   lang/messages/<lang>/index.json; re-renders on language change.
+   by HD collection: a short heading per collection over a uniform grid of
+   banner cards (the banner is the natural "pick this game" target), each
+   with a live progress bar. Text comes from lang/messages/<lang>/
+   index.json; re-renders on language change.
    ===================================================================== */
 document.addEventListener("DOMContentLoaded", async function () {
   await i18n.init();
@@ -84,7 +84,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     coll.innerHTML = "";
     COLLECTIONS.forEach(function (c) {
       var group = el("section", "collection");
-      group.appendChild(imageFigure("collection-hero", "images/heroes/" + c.hero, t("coll-" + c.id)));
       group.appendChild(el("h3", "collection-title", esc(t("coll-" + c.id))));
       var grid = el("div", "game-cards");
       c.games.forEach(function (id) {

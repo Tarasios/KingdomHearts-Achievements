@@ -669,7 +669,9 @@ a.project-card:hover h3 {
 
 .game-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* auto-fill (not auto-fit) keeps a single-game group's card the same
+       size as a multi-game group's, instead of stretching it full width. */
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
     gap: 1rem;
 }
 
@@ -875,6 +877,11 @@ body[data-page="kh-melding"] {
     font-weight: 600;
     padding: 0.5rem 0.7rem;
     border-radius: 7px;
+}
+
+/* Submenu (BBS) positions against its own row, not the whole menu. */
+.nav-menu li {
+    position: relative;
 }
 
 .nav-menu a:hover,
