@@ -20,19 +20,28 @@
                 <a href="../" class="logo" id="logo-name"></a>
                 <div class="nav-right">
                     <ul class="nav-links">
-                        <li><a href="../" id="nav-home"></a></li>
-                        <li><a href="../tools/" id="nav-tools"></a></li>
+                    <li class="has-menu">
+                        <button class="nav-menu-btn" id="games-menu-btn" type="button" aria-haspopup="true" aria-expanded="false">Games <span class="caret" aria-hidden="true">&#9662;</span></button>
+                        <ul class="nav-menu" id="games-menu">
+                        <li><a href="../tools/kh1-tracker.html">Kingdom Hearts Final Mix</a></li>
+                        <li><a href="../tools/kh-com-tracker.html">Re:Chain of Memories</a></li>
+                        <li><a href="../tools/kh2-tracker.html">Kingdom Hearts II</a></li>
+                        <li class="has-submenu">
+                            <a href="../tools/kh-bbs-tracker.html">Birth by Sleep <span class="caret" aria-hidden="true">&#9656;</span></a>
+                            <ul class="nav-submenu">
+                                <li><a href="../tools/kh-melding.html">Melding Calculator</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../tools/kh-ddd-tracker.html">Dream Drop Distance</a></li>
+                        <li><a href="../tools/kh02-tracker.html">Kingdom Hearts 0.2</a></li>
+                        <li><a href="../tools/kh3-tracker.html">Kingdom Hearts III</a></li>
+                        </ul>
+                    </li>
                     </ul>
                     <div class="theme-toggle">
                         <button id="themeToggle" class="theme-btn" type="button">
                             <span class="theme-icon" id="theme-icon" aria-hidden="true"></span>
                             <span class="theme-text" id="theme-text"></span>
-                        </button>
-                    </div>
-                    <div class="language-toggle">
-                        <button id="langToggle" class="lang-btn" type="button">
-                            <span class="flag" id="lang-flag" aria-hidden="true"></span>
-                            <span class="lang-text" id="lang-text"></span>
                         </button>
                     </div>
                 </div>
@@ -170,5 +179,6 @@
     <script src="../js/i18n.js"></script>
     <script src="../js/tools.js"></script>
     <script src="../js/banners.js"></script>
+    <script src="../js/nav.js"></script>
 </body>
 </html>
