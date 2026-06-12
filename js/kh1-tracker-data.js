@@ -5,7 +5,7 @@
    Consumed by js/kh-tracker.js (generic engine). Item order is
    load-bearing: saved progress is keyed by index.
    ===================================================================== */
-const TRACKER_GAME = {
+var TRACKER_GAME = {
   "id": "kh1",
   "storeKey": "kh1_progress_v1",
   "charKey": null,
@@ -5148,3 +5148,5 @@ const TRACKER_GAME = {
     }
   ]
 };
+
+(window.KH_GAMES = window.KH_GAMES || {})[TRACKER_GAME.id] = TRACKER_GAME;

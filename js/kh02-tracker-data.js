@@ -7,7 +7,7 @@
    game (charKey null). Item order is load-bearing: saved progress
    is keyed by index.
    ===================================================================== */
-const TRACKER_GAME = {
+var TRACKER_GAME = {
   "id": "kh02",
   "storeKey": "kh02_progress_v1",
   "charKey": null,
@@ -727,3 +727,5 @@ const TRACKER_GAME = {
     }
   ]
 };
+
+(window.KH_GAMES = window.KH_GAMES || {})[TRACKER_GAME.id] = TRACKER_GAME;

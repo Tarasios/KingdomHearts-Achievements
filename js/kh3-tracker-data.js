@@ -6,7 +6,7 @@
    load-bearing: saved progress is keyed by index. The PS4-only Platinum
    trophy is intentionally omitted.
    ===================================================================== */
-const TRACKER_GAME = {
+var TRACKER_GAME = {
   "id": "kh3",
   "storeKey": "kh3_progress_v1",
   "charKey": null,
@@ -6826,3 +6826,5 @@ const TRACKER_GAME = {
     }
   ]
 };
+
+(window.KH_GAMES = window.KH_GAMES || {})[TRACKER_GAME.id] = TRACKER_GAME;

@@ -1,11 +1,7 @@
 {
-    "logo-name": "Cassiel Williams",
+    "logo-name": "KH Completionist",
     "lang-toggle-aria": "Passer le site en anglais",
-    "nav-projects": "Projets",
-    "nav-education": "Formation",
-    "nav-experience": "Expérience",
     "nav-tools": "Outils",
-    "nav-contact": "Me contacter",
     "playing-as": "Personnage :",
     "gt-filter": "filtrer…",
     "gt-hide-done": "masquer les éléments terminés",
@@ -111,5 +107,9 @@
     "kp-import-confirm": "L'importation remplacera la progression enregistrée de tous les outils KH de ce site par le contenu du fichier. Continuer ?",
     "kp-import-error": "Ce fichier n'a pas pu être lu comme un export de progression.",
     "gt-auto-badge": "auto",
-    "gt-auto-tip": "Obtenu automatiquement via %1"
+    "gt-auto-tip": "Obtenu automatiquement via %1",
+    "nav-home": "Accueil",
+    "theme-to-day": "Jour",
+    "theme-to-night": "Nuit",
+    "theme-toggle-aria": "Basculer le thème clair"
 }

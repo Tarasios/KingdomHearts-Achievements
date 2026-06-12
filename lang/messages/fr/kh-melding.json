@@ -1,12 +1,8 @@
 {
     "page-title": "Birth By Sleep — Calculateur de fusion de commandes",
-    "logo-name": "Cassiel Williams",
+    "logo-name": "KH Completionist",
     "lang-toggle-aria": "Passer le site en anglais",
-    "nav-projects": "Projets",
-    "nav-education": "Formation",
-    "nav-experience": "Expérience",
     "nav-tools": "Outils",
-    "nav-contact": "Me contacter",
     "kh-title": "Birth By Sleep — Calculateur de fusion de commandes",
     "kh-subtitle": "Choisissez des ingrédients pour voir ce qu'ils donnent, ou partez à rebours d'une commande ou de vos capacités. Données tirées du tableau de fusion de Final Fantasy Kingdom.",
     "tabbtn-forward": "Fusion directe",
@@ -121,5 +117,9 @@
     "kp-import-error": "Ce fichier n'a pas pu être lu comme un export de progression.",
     "kh-none-ability": "Aucune",
     "kh-tip-none": "fusionner cette commande sans obtenir de capacité",
-    "kh-tip-need-pick": "choisissez une capacité (ou Aucune) — ou fixez un cristal ci-dessus — puis appuyez sur Fusionner"
+    "kh-tip-need-pick": "choisissez une capacité (ou Aucune) — ou fixez un cristal ci-dessus — puis appuyez sur Fusionner",
+    "nav-home": "Accueil",
+    "theme-to-day": "Jour",
+    "theme-to-night": "Nuit",
+    "theme-toggle-aria": "Basculer le thème clair"
 }

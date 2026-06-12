@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self'">
-    <title>Re:Chain of Memories — Achievement Tracker</title>
+    <title>KH Completionist</title>
     <script src="/js/theme.js"></script>
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/kh.css">
 </head>
-<body data-page="kh-com-tracker" data-root="/">
+<!--
+    Landing page. Shows total completion across the series plus one card
+    per game (progress read live from localStorage by js/kh-summary.js +
+    js/landing.js). All visible text lives in lang/messages/en/index.json.
+-->
+<body data-page="index" data-root="/">
     <nav>
         <div class="container">
             <div class="nav-content">
@@ -36,29 +40,38 @@
         </div>
     </nav>
 
-    <div class="container kh">
-        <header class="kh-header">
-            <figure class="banner kh-banner"><img class="banner-img" id="kh-banner" src="/images/banners/khcom.jpg" alt=""></figure>
-            <h1 id="kh-title"></h1>
-            <p class="sub" id="kh-subtitle"></p>
-        </header>
+    <div class="container">
+        <section class="project-hero landing-hero">
+            <figure class="banner landing-banner"><img class="banner-img" src="/images/banners/series.jpg" alt=""></figure>
+            <h1 id="landing-title"></h1>
+            <p id="landing-subtitle"></p>
+        </section>
 
-        <div class="charbar" id="charbar" style="margin-top:12px">
-            <span class="countbadge" style="margin:0" id="playing-as"></span>
-            <span class="countbadge" id="overallNote"></span>
-        </div>
+        <main class="main-content">
+            <section class="section">
+                <h2 id="lg-total-label"></h2>
+                <!-- Series progress bar, built by js/landing.js -->
+                <div id="series-total" class="series-total"></div>
+            </section>
 
-        <div class="tabs" id="tabs"></div>
-
-        <!-- Tabs and panel contents are built by js/kh-tracker.js from the
-             TRACKER_GAME config in the game data module. -->
-        <main class="kh-main" id="panels"></main>
+            <section class="section">
+                <h2 id="lg-games-label"></h2>
+                <!-- One card per game, built by js/landing.js -->
+                <div id="game-cards" class="game-cards"></div>
+            </section>
+        </main>
     </div>
 
     <script src="/js/i18n.js"></script>
+    <script src="/js/kh1-tracker-data.js"></script>
     <script src="/js/kh-com-tracker-data.js"></script>
-    <script src="/js/kh-tracker.js"></script>
-    <script src="/js/kh-progress.js"></script>
+    <script src="/js/kh2-tracker-data.js"></script>
+    <script src="/js/kh-ddd-tracker-data.js"></script>
+    <script src="/js/kh02-tracker-data.js"></script>
+    <script src="/js/kh3-tracker-data.js"></script>
+    <script src="/js/kh-bbs-tracker-data.js"></script>
+    <script src="/js/kh-summary.js"></script>
+    <script src="/js/landing.js"></script>
     <script src="/js/banners.js"></script>
 </body>
 </html>

@@ -517,4 +517,174 @@ a.project-card:hover h3 {
     .project-grid {
         grid-template-columns: 1fr;
     }
+
+    .game-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================================
+   Day (bright) theme — opt-in via the Night/Day toggle. Night
+   is the default (the :root palette above); this muted, low-glare
+   light palette only applies when the user opts in. Kept after
+   :root so it wins on equal specificity. Per-game backgrounds will
+   be layered on top of these later.
+   ============================================================ */
+[data-theme="day"] {
+    --bg: #e6eaf4;
+    --panel: #f2f4fb;
+    --panel2: #e8ecf7;
+    --line: #c3cadd;
+    --ink: #1b2440;
+    --dim: #515c7a;
+    --accent: #2c63c8;
+    --accent2: #8a6200;
+    --chip: #d8deee;
+}
+
+[data-theme="day"] body {
+    background: radial-gradient(1200px 700px at 70% -10%, #eef2fb 0%, var(--bg) 55%);
+}
+
+/* ---------- Theme toggle (mirrors the language toggle) ---------- */
+.theme-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--panel2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0.35rem 0.7rem;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--ink);
+}
+
+.theme-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.theme-icon {
+    font-size: 1rem;
+}
+
+/* ---------- Banner images (per game) ----------
+   Hidden by default; revealed by js/banners.js (or js/landing.js) only
+   when the image actually loads, so a missing file shows nothing. */
+.banner {
+    display: none;
+    margin: 0 0 1.2rem;
+}
+
+.banner img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+}
+
+/* ---------- Landing page ---------- */
+.landing-hero h1 {
+    font-size: 2rem;
+}
+
+.landing-hero p {
+    color: var(--dim);
+    font-weight: 400;
+    font-size: 0.97rem;
+    max-width: 70ch;
+    margin-top: 0.4rem;
+}
+
+.series-total {
+    background: var(--panel2);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1.1rem 1.2rem;
+}
+
+.series-headline {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.7rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.progbar {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.progbar-num {
+    font-variant-numeric: tabular-nums;
+    color: var(--dim);
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.progbar-track {
+    flex: 1;
+    height: 10px;
+    min-width: 80px;
+    border-radius: 6px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    overflow: hidden;
+}
+
+.progbar-track > i {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+}
+
+/* Completed bar turns green; the always-present "100%" number carries
+   the meaning too, so it is never colour-alone. */
+.progbar-track.full > i {
+    background: #6fe39a;
+}
+
+.progbar-pct {
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 0.85rem;
+    min-width: 3ch;
+    text-align: right;
+}
+
+.game-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.game-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.game-card .card-banner {
+    margin: 0;
+}
+
+.game-card .card-banner img {
+    border-radius: 8px;
+}
+
+.game-card h3 {
+    margin: 0;
+}
+
+.game-card-cta {
+    margin-top: auto;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.8rem;
 }
