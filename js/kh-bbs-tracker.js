@@ -90,8 +90,29 @@ function autoBadge(src) {
   return {
     meld: { label: t('bt-badge-meld'), tip: t('bt-badge-meld-tip') },
     mission: { label: t('bt-badge-mission'), tip: t('bt-badge-mission-tip') },
-    treasure: { label: t('bt-badge-treasure'), tip: t('bt-badge-treasure-tip') }
+    treasure: { label: t('bt-badge-treasure'), tip: t('bt-badge-treasure-tip') },
+    recipe: { label: t('bt-badge-recipe'), tip: t('bt-badge-recipe-tip') }
   }[src];
+}
+
+/* Ice-cream recipe ingredients. Each recipe slot (i1..i4) carries a
+   baked-in quantity, e.g. "Crystal Sugar x3". Returns a map of ingredient
+   name -> the recipes that use it [{ pIdx, qty, char }] across all three
+   characters; obtaining an ingredient is shared, so any character's
+   completed recipe counts it as obtained. */
+function recipeIngredients() {
+  const map = {};
+  BBS_DATA.patissier.forEach((r, pIdx) => {
+    ["i1", "i2", "i3", "i4"].forEach(k => {
+      const s = r[k];
+      if (!s) return;
+      const m = String(s).match(/^(.*?)\s*x\s*(\d+)\s*$/i);
+      const name = (m ? m[1] : s).trim();
+      const qty = m ? parseInt(m[2], 10) : 1;
+      (map[name] = map[name] || []).push({ pIdx, qty, char: r.g });
+    });
+  });
+  return map;
 }
 
 /* ---------- helpers ---------- */
@@ -519,19 +540,26 @@ function renderIcecream(p) {
     { th: t('bt-th-ingredients'), get: it => [it.i1, it.i2, it.i3, it.i4].filter(Boolean).join(", ") }
   ], p.state, { groupFilter: CHAR_LABEL[activeChar] });
 
+  // Checking an ice-cream recipe crosses off the ingredients it uses; each
+  // ingredient also shows how many this character needs (from the recipes).
+  const ingMap = recipeIngredients();
+  const ingAuto = it => (ingMap[it.name] || []).some(e => STORE.shared.patissier[e.pIdx]) ? "recipe" : null;
+  const neededQty = name => { const e = (ingMap[name] || []).find(x => x.char === CHAR_LABEL[activeChar]); return e ? e.qty : 0; };
+
   box.appendChild(el("div", "sub-title", fmt('bt-ingredients-for', CHAR_LABEL[activeChar])));
   // Ingredients the character can't obtain (no location) are hidden for them.
   const locKey = { terra: "locT", ventus: "locV", aqua: "locA" }[activeChar];
   const eligible = it => !!it[locKey];
   checklist(box, viewItems("flavors", BBS_DATA.flavors), STORE.shared.flavors, [
     { th: t('bt-th-ingredient'), get: it => it.name, name: true },
+    { th: t('bt-th-needed'), get: it => { const n = neededQty(it.name); return n ? "×" + n : ""; }, cls: "needcell" },
     { th: t('bt-th-icecream'), get: it => it.icecream || "" },
     { th: fmt('bt-th-location-for', CHAR_LABEL[activeChar]), get: it => it[locKey] || "" }
-  ], p.state, { itemFilter: eligible });
+  ], p.state, { itemFilter: eligible, auto: ingAuto });
 
   const [rx, ry] = groupCount("patissier", CHAR_LABEL[activeChar]);
   let fx = 0, fy = 0;
-  BBS_DATA.flavors.forEach((it, i) => { if (eligible(it)) { fy++; if (STORE.shared.flavors[i]) fx++; } });
+  BBS_DATA.flavors.forEach((it, i) => { if (eligible(it)) { fy++; if (STORE.shared.flavors[i] || ingAuto(it)) fx++; } });
   setCount(p, rx + fx, ry + fy);
 }
 

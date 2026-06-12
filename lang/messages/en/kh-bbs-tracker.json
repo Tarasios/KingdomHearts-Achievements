@@ -89,6 +89,9 @@
   "bt-ingredients-for": "Ingredients — %1",
   "bt-badge-treasure": "TREASURE",
   "bt-badge-treasure-tip": "Dropped by a treasure chest you've checked off",
+  "bt-badge-recipe": "RECIPE",
+  "bt-badge-recipe-tip": "Obtained for an ice cream recipe you've made",
+  "bt-th-needed": "Needed",
   "bt-toggle-all": "toggle all",
   "bt-legend-treasures": "Checking a chest whose reward is a command marks that command as unlocked on the Commands tab.",
   "kp-export": "Export progress",
@@ -1067,170 +1070,99 @@
     "patissier": [
       {
         "name": "Vanilla Glitz",
-        "style": "Critical Impact",
-        "i1": "Golden Jam x1",
-        "i2": "Bijou Bean x1",
-        "i3": "Crystal Sugar x3"
+        "style": "Critical Impact"
       },
       {
         "name": "Bueno Volcano",
-        "style": "Firestorm",
-        "i1": "Prickle Pepper x5",
-        "i2": "Toonbasco x3"
+        "style": "Firestorm"
       },
       {
         "name": "Snow Bear",
-        "style": "Diamond Dust",
-        "i1": "Open Sesame x3",
-        "i2": "Soy Milk x5"
+        "style": "Diamond Dust"
       },
       {
         "name": "Spark Lemon",
-        "style": "Thunderbolt",
-        "i1": "Thundercracker x4",
-        "i2": "Rocket Soda x2",
-        "i3": "Dancin' Lemon x3"
+        "style": "Thunderbolt"
       },
       {
         "name": "Royalberry",
-        "style": "Bladecharge",
-        "i1": "Gaspberry x7",
-        "i2": "Nebula Nectar x10",
-        "i3": "Birthday Cake x8",
-        "i4": "Rose Honey x7"
+        "style": "Bladecharge"
       },
       {
         "name": "Rockin' Crunch",
-        "style": "Rockbreaker",
-        "i1": "Galactic Caramel x15",
-        "i2": "Nutty Nut x12"
+        "style": "Rockbreaker"
       },
       {
         "name": "Big Bad Pete",
-        "style": "Dark Impulse",
-        "i1": "Bizarro Bean x20",
-        "i2": "Whipped Dream x20"
+        "style": "Dark Impulse"
       },
       {
         "name": "Daisy Sorbet",
-        "style": "Rhythm Mixer",
-        "i1": "Starry Sky Delight x8",
-        "i2": "Rich Marshmallow x15",
-        "i3": "Merry Mint x10",
-        "i4": "Melodious Grape x12"
+        "style": "Rhythm Mixer"
       },
       {
         "name": "Honeybunny",
-        "style": "Fever Pitch",
-        "i1": "Honeybunch x3",
-        "i2": "Apple Pie x2"
+        "style": "Fever Pitch"
       },
       {
         "name": "Bueno Volcano",
-        "style": "Firestorm",
-        "i1": "Prickle Pepper x5",
-        "i2": "Toonbasco x3"
+        "style": "Firestorm"
       },
       {
         "name": "Snow Bear",
-        "style": "Diamond Dust",
-        "i1": "Open Sesame x3",
-        "i2": "Soy Milk x5"
+        "style": "Diamond Dust"
       },
       {
         "name": "Spark Lemon",
-        "style": "Thunderbolt",
-        "i1": "Thundercracker x4",
-        "i2": "Rocket Soda x2",
-        "i3": "Dancin' Lemon x3"
+        "style": "Thunderbolt"
       },
       {
         "name": "Goofy Parfait",
-        "style": "Cyclone",
-        "i1": "Moogle Coffee x7",
-        "i2": "Jumbo Almond x6",
-        "i3": "Chocolate Valentine x5",
-        "i4": "Forest Muffin x10"
+        "style": "Cyclone"
       },
       {
         "name": "Sugary Skies",
-        "style": "Sky Climber",
-        "i1": "Cream Fluff x10",
-        "i2": "Rainbow Syrup x8",
-        "i3": "Cotton Cloudcandy x14"
+        "style": "Sky Climber"
       },
       {
         "name": "Double Crunch",
-        "style": "Wingblade",
-        "i1": "Cherryberry x9",
-        "i2": "Merry Dairy x5",
-        "i3": "Wedding Cake x14",
-        "i4": "Star Syrup x15"
+        "style": "Wingblade"
       },
       {
         "name": "Daisy Sorbet",
-        "style": "Rhythm Mixer",
-        "i1": "Starry Sky Delight x8",
-        "i2": "Rich Marshmallow x15",
-        "i3": "Merry Mint x10",
-        "i4": "Melodious Grape x12"
+        "style": "Rhythm Mixer"
       },
       {
         "name": "Fabracadabra",
-        "style": "Spellweaver",
-        "i1": "Balloon Melon x2",
-        "i2": "Heroic Orange x2",
-        "i3": "Peach Fantasy x1"
+        "style": "Spellweaver"
       },
       {
         "name": "Bueno Volcano",
-        "style": "Firestorm",
-        "i1": "Prickle Pepper x5",
-        "i2": "Toonbasco x3"
+        "style": "Firestorm"
       },
       {
         "name": "Snow Bear",
-        "style": "Diamond Dust",
-        "i1": "Open Sesame x3",
-        "i2": "Soy Milk x5"
+        "style": "Diamond Dust"
       },
       {
         "name": "Spark Lemon",
-        "style": "Thunderbolt",
-        "i1": "Thundercracker x4",
-        "i2": "Rocket Soda x2",
-        "i3": "Dancin' Lemon x3"
+        "style": "Thunderbolt"
       },
       {
         "name": "Royalberry",
-        "style": "Bladecharge",
-        "i1": "Gaspberry x7",
-        "i2": "Nebula Nectar x10",
-        "i3": "Birthday Cake x8",
-        "i4": "Rose Honey x7"
+        "style": "Bladecharge"
       },
       {
         "name": "Sugary Skies",
-        "style": "Sky Climber",
-        "i1": "Cream Fluff x10",
-        "i2": "Rainbow Syrup x8",
-        "i3": "Cotton Cloudcandy x14"
+        "style": "Sky Climber"
       },
       {
         "name": "Donald Fizz",
-        "style": "Ghost Drive",
-        "i1": "Crystal Soda x8",
-        "i2": "Mermaid Salt x13",
-        "i3": "Fizzy Tizzy x15",
-        "i4": "Sky Blue Mousse x8"
+        "style": "Ghost Drive"
       },
       {
         "name": "Daisy Sorbet",
-        "style": "Rhythm Mixer",
-        "i1": "Starry Sky Delight x8",
-        "i2": "Rich Marshmallow x15",
-        "i3": "Merry Mint x10",
-        "i4": "Melodious Grape x12"
+        "style": "Rhythm Mixer"
       }
     ],
     "flavors": [
