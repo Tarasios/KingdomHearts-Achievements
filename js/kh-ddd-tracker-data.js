@@ -2912,7 +2912,7 @@ var TRACKER_GAME = {
               "name": "Ultima Weapon",
               "sora": "Yes",
               "riku": "Yes",
-              "how": "Defeat Julius (see More Tips)"
+              "how": "Defeat Julius (Guide recommended)"
             }
           ]
         }

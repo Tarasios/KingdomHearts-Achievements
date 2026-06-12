@@ -378,7 +378,7 @@ var TRACKER_GAME = {
             },
             {
               "name": "Ansem Report 11",
-              "how": "Obtained by defeating Kurt Zisa in Agrabah. See More Tips."
+              "how": "Obtained by defeating Kurt Zisa in Agrabah. Guide recommended."
             },
             {
               "name": "Ansem Report 12",
@@ -386,7 +386,7 @@ var TRACKER_GAME = {
             },
             {
               "name": "Ansem Report 13",
-              "how": "Obtained by defeating the Mysterious Man in Hollow Bastion. See More Tips."
+              "how": "Obtained by defeating the Mysterious Man in Hollow Bastion. Guide recommended."
             }
           ]
         },
@@ -524,7 +524,7 @@ var TRACKER_GAME = {
             },
             {
               "name": "Sephiroth",
-              "how": "Defeat Sephiroth in the Platinum Match at Olympus Coliseum. See More Tips.",
+              "how": "Defeat Sephiroth in the Platinum Match at Olympus Coliseum. Guide recommended.",
               "g": "Characters 1"
             },
             {
@@ -594,7 +594,7 @@ var TRACKER_GAME = {
             },
             {
               "name": "?",
-              "how": "Defeat the Mysterious Man in Hollow Bastion. See More Tips.",
+              "how": "Defeat the Mysterious Man in Hollow Bastion. Guide recommended.",
               "g": "Characters 1"
             },
             {
@@ -1194,12 +1194,12 @@ var TRACKER_GAME = {
             },
             {
               "name": "Kurt Zisa",
-              "how": "Defeat Kurt Zisa in Agrabah. See More Tips.",
+              "how": "Defeat Kurt Zisa in Agrabah. Guide recommended.",
               "g": "The Heartless"
             },
             {
               "name": "Phantom",
-              "how": "Defeat the Phantom in Neverland. See More Tips.",
+              "how": "Defeat the Phantom in Neverland. Guide recommended.",
               "g": "The Heartless"
             }
           ]
@@ -2629,7 +2629,7 @@ var TRACKER_GAME = {
               "mp": "2",
               "crit": "40",
               "critstr": "2",
-              "how": "Crafted through item synthesis. See More Tips."
+              "how": "Crafted through item synthesis. Guide recommended."
             }
           ]
         },
@@ -2961,7 +2961,7 @@ var TRACKER_GAME = {
             {
               "name": "Stopga",
               "effect": "Enhanced area of effect",
-              "how": "Defeat Phantom (see More Tips)"
+              "how": "Defeat Phantom (Guide recommended)"
             },
             {
               "name": "Aero",
