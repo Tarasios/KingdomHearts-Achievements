@@ -540,10 +540,11 @@ function renderIcecream(p) {
     { th: t('bt-th-ingredients'), get: it => [it.i1, it.i2, it.i3, it.i4].filter(Boolean).join(", ") }
   ], p.state, { groupFilter: CHAR_LABEL[activeChar] });
 
-  // Checking an ice-cream recipe crosses off the ingredients it uses; each
-  // ingredient also shows how many this character needs (from the recipes).
+  // Checking an ice-cream recipe crosses off the ingredients it uses — but
+  // only for the character whose recipe it is (the tab is per-character).
+  // Each ingredient also shows how many this character needs.
   const ingMap = recipeIngredients();
-  const ingAuto = it => (ingMap[it.name] || []).some(e => STORE.shared.patissier[e.pIdx]) ? "recipe" : null;
+  const ingAuto = it => (ingMap[it.name] || []).some(e => e.char === CHAR_LABEL[activeChar] && STORE.shared.patissier[e.pIdx]) ? "recipe" : null;
   const neededQty = name => { const e = (ingMap[name] || []).find(x => x.char === CHAR_LABEL[activeChar]); return e ? e.qty : 0; };
 
   box.appendChild(el("div", "sub-title", fmt('bt-ingredients-for', CHAR_LABEL[activeChar])));
