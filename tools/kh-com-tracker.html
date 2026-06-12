@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <title>Re:Chain of Memories — Achievement Tracker</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/kh.css">
+</head>
+<body data-page="kh-com-tracker" data-root="/">
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="/" class="logo" id="logo-name"></a>
+                <div class="nav-right">
+                    <ul class="nav-links">
+                        <li><a href="/#projects" id="nav-projects"></a></li>
+                        <li><a href="/#education" id="nav-education"></a></li>
+                        <li><a href="/#experience" id="nav-experience"></a></li>
+                        <li><a href="/tools/" id="nav-tools"></a></li>
+                        <li><a href="/#contact" id="nav-contact"></a></li>
+                    </ul>
+                    <div class="language-toggle">
+                        <button id="langToggle" class="lang-btn" type="button">
+                            <span class="flag" id="lang-flag" aria-hidden="true"></span>
+                            <span class="lang-text" id="lang-text"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container kh">
+        <header class="kh-header">
+            <h1 id="kh-title"></h1>
+            <p class="sub" id="kh-subtitle"></p>
+        </header>
+
+        <div class="charbar" id="charbar" style="margin-top:12px">
+            <span class="countbadge" style="margin:0" id="playing-as"></span>
+            <span class="countbadge" id="overallNote"></span>
+        </div>
+
+        <div class="tabs" id="tabs"></div>
+
+        <!-- Tabs and panel contents are built by js/kh-tracker.js from the
+             TRACKER_GAME config in the game data module. -->
+        <main class="kh-main" id="panels"></main>
+    </div>
+
+    <script src="/js/i18n.js"></script>
+    <script src="/js/kh-com-tracker-data.js"></script>
+    <script src="/js/kh-tracker.js"></script>
+    <script src="/js/kh-progress.js"></script>
+</body>
+</html>

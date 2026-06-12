@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <title>Cassiel Williams</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<!--
+    Tools are organized as: section (e.g. Games) > series > game > tool cards.
+    To add a game or series, copy the matching div block and add the new
+    text keys to lang/messages/en/tools.json and lang/messages/fr/tools.json.
+-->
+<body data-page="tools" data-root="/">
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="/" class="logo" id="logo-name"></a>
+                <div class="nav-right">
+                    <ul class="nav-links">
+                        <li><a href="/#projects" id="nav-projects"></a></li>
+                        <li><a href="/#education" id="nav-education"></a></li>
+                        <li><a href="/#experience" id="nav-experience"></a></li>
+                        <li><a href="/tools/" id="nav-tools"></a></li>
+                        <li><a href="/#contact" id="nav-contact"></a></li>
+                    </ul>
+                    <div class="language-toggle">
+                        <button id="langToggle" class="lang-btn" type="button">
+                            <span class="flag" id="lang-flag" aria-hidden="true"></span>
+                            <span class="lang-text" id="lang-text"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="project-hero">
+            <h1 id="tools-title"></h1>
+            <p id="tools-subtitle"></p>
+        </section>
+
+        <main class="main-content">
+            <section class="section">
+                <h2 id="games-title"></h2>
+
+                <div class="series-group">
+                    <h3 class="series-title" id="series-kh"></h3>
+
+                    <!-- Game order: KH1, Chain of Memories, KH2, Birth by
+                         Sleep, Dream Drop Distance; later games go after
+                         DDD. -->
+
+                    <div class="game-group">
+                        <h4 class="game-title" id="game-kh1"></h4>
+                        <div class="project-grid">
+                            <a class="project-card" href="/tools/kh1-tracker.html">
+                                <h3 id="tool-kh1-tracker-title"></h3>
+                                <p id="tool-kh1-tracker-desc"></p>
+                                <div class="project-meta">
+                                    <span class="tech-tag" id="tool-kh1-tracker-tag1"></span>
+                                    <span class="tech-tag" id="tool-kh1-tracker-tag2"></span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="game-group">
+                        <h4 class="game-title" id="game-kh-com"></h4>
+                        <div class="project-grid">
+                            <a class="project-card" href="/tools/kh-com-tracker.html">
+                                <h3 id="tool-com-tracker-title"></h3>
+                                <p id="tool-com-tracker-desc"></p>
+                                <div class="project-meta">
+                                    <span class="tech-tag" id="tool-com-tracker-tag1"></span>
+                                    <span class="tech-tag" id="tool-com-tracker-tag2"></span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="game-group">
+                        <h4 class="game-title" id="game-kh2"></h4>
+                        <div class="project-grid">
+                            <a class="project-card" href="/tools/kh2-tracker.html">
+                                <h3 id="tool-kh2-tracker-title"></h3>
+                                <p id="tool-kh2-tracker-desc"></p>
+                                <div class="project-meta">
+                                    <span class="tech-tag" id="tool-kh2-tracker-tag1"></span>
+                                    <span class="tech-tag" id="tool-kh2-tracker-tag2"></span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="game-group">
+                        <h4 class="game-title" id="game-kh-bbs"></h4>
+                        <div class="project-grid">
+                            <a class="project-card" href="/tools/kh-bbs-tracker.html">
+                                <h3 id="tool-bbs-tracker-title"></h3>
+                                <p id="tool-bbs-tracker-desc"></p>
+                                <div class="project-meta">
+                                    <span class="tech-tag" id="tool-bbs-tracker-tag1"></span>
+                                    <span class="tech-tag" id="tool-bbs-tracker-tag2"></span>
+                                </div>
+                            </a>
+                            <a class="project-card" href="/tools/kh-melding.html">
+                                <h3 id="tool-kh-title"></h3>
+                                <p id="tool-kh-desc"></p>
+                                <div class="project-meta">
+                                    <span class="tech-tag" id="tool-kh-tag1"></span>
+                                    <span class="tech-tag" id="tool-kh-tag2"></span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="game-group">
+                        <h4 class="game-title" id="game-kh-ddd"></h4>
+                        <div class="project-grid">
+                            <a class="project-card" href="/tools/kh-ddd-tracker.html">
+                                <h3 id="tool-ddd-tracker-title"></h3>
+                                <p id="tool-ddd-tracker-desc"></p>
+                                <div class="project-meta">
+                                    <span class="tech-tag" id="tool-ddd-tracker-tag1"></span>
+                                    <span class="tech-tag" id="tool-ddd-tracker-tag2"></span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="game-group">
+                        <h4 class="game-title" id="game-kh02"></h4>
+                        <div class="project-grid">
+                            <a class="project-card" href="/tools/kh02-tracker.html">
+                                <h3 id="tool-kh02-tracker-title"></h3>
+                                <p id="tool-kh02-tracker-desc"></p>
+                                <div class="project-meta">
+                                    <span class="tech-tag" id="tool-kh02-tracker-tag1"></span>
+                                    <span class="tech-tag" id="tool-kh02-tracker-tag2"></span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="game-group">
+                        <h4 class="game-title" id="game-kh3"></h4>
+                        <div class="project-grid">
+                            <a class="project-card" href="/tools/kh3-tracker.html">
+                                <h3 id="tool-kh3-tracker-title"></h3>
+                                <p id="tool-kh3-tracker-desc"></p>
+                                <div class="project-meta">
+                                    <span class="tech-tag" id="tool-kh3-tracker-tag1"></span>
+                                    <span class="tech-tag" id="tool-kh3-tracker-tag2"></span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/js/i18n.js"></script>
+    <script src="/js/tools.js"></script>
+</body>
+</html>

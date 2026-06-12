@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <title>Birth By Sleep — Command Melding Calculator</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/kh.css">
+</head>
+<body data-page="kh-melding" data-root="/">
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="/" class="logo" id="logo-name"></a>
+                <div class="nav-right">
+                    <ul class="nav-links">
+                        <li><a href="/#projects" id="nav-projects"></a></li>
+                        <li><a href="/#education" id="nav-education"></a></li>
+                        <li><a href="/#experience" id="nav-experience"></a></li>
+                        <li><a href="/tools/" id="nav-tools"></a></li>
+                        <li><a href="/#contact" id="nav-contact"></a></li>
+                    </ul>
+                    <div class="language-toggle">
+                        <button id="langToggle" class="lang-btn" type="button">
+                            <span class="flag" id="lang-flag" aria-hidden="true"></span>
+                            <span class="lang-text" id="lang-text"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container kh">
+        <header class="kh-header">
+            <h1 id="kh-title"></h1>
+            <p class="sub" id="kh-subtitle"></p>
+            <p class="sub"><a href="/tools/kh-bbs-tracker.html" id="kh-tracker-link"></a></p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab active" data-tab="forward" id="tabbtn-forward"></button>
+            <button class="tab" data-tab="bycommand" id="tabbtn-bycommand"></button>
+            <button class="tab" data-tab="byability" id="tabbtn-byability"></button>
+            <button class="tab" data-tab="searchability" id="tabbtn-searchability"></button>
+            <button class="tab" data-tab="tracker" id="tabbtn-tracker"></button>
+            <button class="tab" data-tab="crystals" id="tabbtn-crystals"></button>
+        </div>
+
+        <main class="kh-main">
+            <!-- FORWARD -->
+            <section id="tab-forward" class="card">
+                <div class="charbar">
+                    <span class="countbadge" style="margin:0" id="playing-as-1"></span>
+                    <button class="charbtn" data-c="terra"><span class="dot"></span>Terra</button>
+                    <button class="charbtn" data-c="ventus"><span class="dot"></span>Ventus</button>
+                    <button class="charbtn" data-c="aqua"><span class="dot"></span>Aqua</button>
+                    <span class="countbadge" id="charNote"></span>
+                </div>
+                <div class="row" style="margin-top:14px">
+                    <div class="slot">
+                        <label for="f1" id="lbl-f1"></label>
+                        <div class="combo" data-combo="f1">
+                            <input type="text" id="f1" autocomplete="off">
+                            <button class="clearx" data-clear="f1" title="clear">×</button>
+                            <div class="menu" id="f1-menu"></div>
+                        </div>
+                    </div>
+                    <div class="slot">
+                        <label for="f2" id="lbl-f2"></label>
+                        <div class="combo" data-combo="f2">
+                            <input type="text" id="f2" autocomplete="off">
+                            <button class="clearx" data-clear="f2" title="clear">×</button>
+                            <div class="menu" id="f2-menu"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="crystal-row slot">
+                    <label for="crystal"><span id="lbl-crystal"></span> <span class="countbadge" id="crystal-note"></span></label>
+                    <div class="combo" data-combo="crystal">
+                        <input type="text" id="crystal" autocomplete="off">
+                        <button class="clearx" data-clear="crystal" title="clear">×</button>
+                        <div class="menu" id="crystal-menu"></div>
+                    </div>
+                </div>
+                <p class="hint" id="hint-forward"></p>
+                <div id="forwardResults" class="results"></div>
+            </section>
+
+            <!-- BY COMMAND -->
+            <section id="tab-bycommand" class="card" style="display:none">
+                <div class="charbar">
+                    <span class="countbadge" style="margin:0" id="playing-as-2"></span>
+                    <button class="charbtn" data-c="terra"><span class="dot"></span>Terra</button>
+                    <button class="charbtn" data-c="ventus"><span class="dot"></span>Ventus</button>
+                    <button class="charbtn" data-c="aqua"><span class="dot"></span>Aqua</button>
+                </div>
+                <div class="row" style="margin-top:14px">
+                    <div class="slot">
+                        <label for="targetCmd" id="lbl-targetCmd"></label>
+                        <div class="combo" data-combo="targetCmd">
+                            <input type="text" id="targetCmd" autocomplete="off">
+                            <button class="clearx" data-clear="targetCmd" title="clear">×</button>
+                            <div class="menu" id="targetCmd-menu"></div>
+                        </div>
+                    </div>
+                    <div class="slot">
+                        <label for="targetCrystal" id="lbl-targetCrystal"></label>
+                        <div class="combo" data-combo="targetCrystal">
+                            <input type="text" id="targetCrystal" autocomplete="off">
+                            <button class="clearx" data-clear="targetCrystal" title="clear">×</button>
+                            <div class="menu" id="targetCrystal-menu"></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="hint" id="hint-bycommand"></p>
+                <div id="commandResults" class="results"></div>
+            </section>
+
+            <!-- BY ABILITY (owned ingredients) -->
+            <section id="tab-byability" class="card" style="display:none">
+                <div class="charbar">
+                    <span class="countbadge" style="margin:0" id="playing-as-3"></span>
+                    <button class="charbtn" data-c="terra"><span class="dot"></span>Terra</button>
+                    <button class="charbtn" data-c="ventus"><span class="dot"></span>Ventus</button>
+                    <button class="charbtn" data-c="aqua"><span class="dot"></span>Aqua</button>
+                </div>
+                <div class="toolbar" style="margin-top:14px">
+                    <label style="margin:0" id="lbl-owned"></label>
+                    <button class="clearbtn" id="clearOwned"></button>
+                    <input type="text" id="ownedFilter" style="max-width:220px">
+                </div>
+                <div id="ownedPills" class="pillbar"></div>
+                <p class="hint" id="hint-byability"></p>
+                <div id="abilityResults" class="results"></div>
+            </section>
+
+            <!-- SEARCH BY ABILITY -->
+            <section id="tab-searchability" class="card" style="display:none">
+                <div class="charbar">
+                    <span class="countbadge" style="margin:0" id="playing-as-4"></span>
+                    <button class="charbtn" data-c="terra"><span class="dot"></span>Terra</button>
+                    <button class="charbtn" data-c="ventus"><span class="dot"></span>Ventus</button>
+                    <button class="charbtn" data-c="aqua"><span class="dot"></span>Aqua</button>
+                </div>
+                <div class="row" style="margin-top:14px">
+                    <div class="slot">
+                        <label for="abQuery" id="lbl-abQuery"></label>
+                        <div class="combo" data-combo="abQuery">
+                            <input type="text" id="abQuery" autocomplete="off">
+                            <button class="clearx" data-clear="abQuery" title="clear">×</button>
+                            <div class="menu" id="abQuery-menu"></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="hint" id="hint-searchability"></p>
+                <div id="searchAbilityResults" class="results"></div>
+            </section>
+
+            <!-- ABILITY TRACKER -->
+            <section id="tab-tracker" class="card" style="display:none">
+                <div class="charbar">
+                    <span class="countbadge" style="margin:0" id="tracking-for"></span>
+                    <button class="charbtn" data-c="terra"><span class="dot"></span>Terra</button>
+                    <button class="charbtn" data-c="ventus"><span class="dot"></span>Ventus</button>
+                    <button class="charbtn" data-c="aqua"><span class="dot"></span>Aqua</button>
+                </div>
+                <div class="trk-summary" id="trkSummary"></div>
+                <p class="hint" id="hint-tracker"></p>
+                <div class="toolbar" style="margin:6px 0 0">
+                    <input type="text" id="trkFilter" style="max-width:240px">
+                    <button class="clearbtn" id="trkReset"></button>
+                </div>
+                <div id="trackerResults" class="results"></div>
+            </section>
+
+            <!-- CRYSTAL CHART -->
+            <section id="tab-crystals" class="card" style="display:none">
+                <p class="hint" style="margin-top:0" id="hint-crystals"></p>
+                <div class="toolbar" style="margin:14px 0 4px">
+                    <input type="text" id="crystalFilter" style="max-width:300px">
+                    <span class="countbadge" id="crystalCount"></span>
+                </div>
+                <div id="crystalResults" class="results"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/js/i18n.js"></script>
+    <script src="/js/kh-melding-data.js"></script>
+    <script src="/js/kh-bbs-tracker-data.js"></script>
+    <script src="/js/kh-melding.js"></script>
+    <script src="/js/kh-progress.js"></script>
+</body>
+</html>
