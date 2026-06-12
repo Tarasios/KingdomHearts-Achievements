@@ -18,7 +18,9 @@ const fmt = (key, ...args) => i18n.format(key, ...args);
 const CHARS = ["terra", "ventus", "aqua"];
 const CHAR_LABEL = { terra: "Terra", ventus: "Ventus", aqua: "Aqua" };
 const PER_CHAR_SECTIONS = ["records", "characters", "unversed", "commands", "treasures"];
-const SHARED_SECTIONS = ["trophies", "ingame", "reports", "stickers", "arena", "flavors", "patissier", "warrior"];
+const SHARED_SECTIONS = ["trophies", "ingame", "reports", "stickers", "arena", "patissier", "warrior"];
+// Ingredients are tracked per character (each collects them in their own
+// playthrough); the flavor data list is shared but the store is per-char.
 
 /* ---------- persistent state ---------- */
 const KEY = "bbs_progress_v1";
@@ -28,7 +30,7 @@ const CHAR_KEY = MELD_KEY + "_char"; // shared with the melding calculator
 function blankStore() {
   const s = { shared: {}, missions: { done: {}, rank: {} } };
   SHARED_SECTIONS.forEach(k => { s.shared[k] = {}; });
-  CHARS.forEach(c => { s[c] = {}; PER_CHAR_SECTIONS.forEach(k => { s[c][k] = {}; }); });
+  CHARS.forEach(c => { s[c] = {}; PER_CHAR_SECTIONS.forEach(k => { s[c][k] = {}; }); s[c].flavors = {}; });
   return s;
 }
 function loadStore() {
@@ -39,7 +41,7 @@ function loadStore() {
       const o = JSON.parse(raw);
       SHARED_SECTIONS.forEach(k => { if (o.shared && o.shared[k]) s.shared[k] = o.shared[k]; });
       if (o.missions) { s.missions.done = o.missions.done || {}; s.missions.rank = o.missions.rank || {}; }
-      CHARS.forEach(c => PER_CHAR_SECTIONS.forEach(k => { if (o[c] && o[c][k]) s[c][k] = o[c][k]; }));
+      CHARS.forEach(c => { PER_CHAR_SECTIONS.forEach(k => { if (o[c] && o[c][k]) s[c][k] = o[c][k]; }); if (o[c] && o[c].flavors) s[c].flavors = o[c].flavors; });
     }
   } catch (e) { /* fresh store */ }
   return s;
@@ -170,12 +172,29 @@ function arenaByStars(n) {
   BBS_DATA.arena.forEach((it, i) => { if (starCount(it.rank) === n) { y++; if (STORE.shared.arena[i]) d++; } });
   return [d, y];
 }
+/* Ingredients a character can obtain (those with a location for them),
+   done when collected or auto-credited by one of that character's recipes. */
+function flavorsEligible(char) {
+  const locKey = { terra: "locT", ventus: "locV", aqua: "locA" }[char];
+  const label = CHAR_LABEL[char];
+  const ingMap = recipeIngredients();
+  const store = STORE[char].flavors;
+  let d = 0, y = 0;
+  BBS_DATA.flavors.forEach((it, i) => {
+    if (!it[locKey]) return;
+    y++;
+    const auto = (ingMap[it.name] || []).some(e => e.char === label && STORE.shared.patissier[e.pIdx]);
+    if (store[i] || auto) d++;
+  });
+  return [d, y];
+}
 function overallChar(char) {
   let d = 0, y = 0;
   PER_CHAR_SECTIONS.forEach(sec => { const [a, b] = charCount(char, sec); d += a; y += b; });
   ["warrior", "patissier", "stickers"].forEach(k => {
     const [a, b] = groupCount(k, CHAR_LABEL[char]); d += a; y += b;
   });
+  const [fa, fb] = flavorsEligible(char); d += fa; y += fb;
   const [md] = missionsCount(char, STORE.missions.done); d += md; y += BBS_DATA.missions.length;
   return [d, y];
 }
@@ -349,6 +368,7 @@ function renderTrophies(p) {
     [t('bt-dash-stickers'), c => groupCount("stickers", CHAR_LABEL[c])],
     [t('tabbtn-finish'), c => groupCount("warrior", CHAR_LABEL[c])],
     [t('bt-recipes-title'), c => groupCount("patissier", CHAR_LABEL[c])],
+    [t('bt-ingredients-title'), c => flavorsEligible(c)],
     [t('bt-dash-missions-done'), c => missionsCount(c, STORE.missions.done)],
     [t('bt-dash-missions-rank'), c => missionsCount(c, STORE.missions.rank)]
   ];
@@ -363,7 +383,7 @@ function renderTrophies(p) {
   tbl2.innerHTML = `<thead><tr><th>${t('bt-dash-shared')}</th><th></th></tr></thead>`;
   const tb2 = el("tbody");
   [["tabbtn-trophies", "trophies"], ["bt-ingame-title", "ingame"], ["tabbtn-reports", "reports"],
-   ["tabbtn-arena", "arena"], ["bt-ingredients-title", "flavors"]]
+   ["tabbtn-arena", "arena"]]
     .forEach(([k, sec]) => {
       const [x, y] = sharedCount(sec);
       tb2.appendChild(el("tr", null, `<td>${t(k)}</td><td>${bar(x, y)}</td>`));
@@ -551,7 +571,7 @@ function renderIcecream(p) {
   // Ingredients the character can't obtain (no location) are hidden for them.
   const locKey = { terra: "locT", ventus: "locV", aqua: "locA" }[activeChar];
   const eligible = it => !!it[locKey];
-  checklist(box, viewItems("flavors", BBS_DATA.flavors), STORE.shared.flavors, [
+  checklist(box, viewItems("flavors", BBS_DATA.flavors), STORE[activeChar].flavors, [
     { th: t('bt-th-ingredient'), get: it => it.name, name: true },
     { th: t('bt-th-needed'), get: it => { const n = neededQty(it.name); return n ? "×" + n : ""; }, cls: "needcell" },
     { th: t('bt-th-icecream'), get: it => it.icecream || "" },
@@ -559,8 +579,7 @@ function renderIcecream(p) {
   ], p.state, { itemFilter: eligible, auto: ingAuto });
 
   const [rx, ry] = groupCount("patissier", CHAR_LABEL[activeChar]);
-  let fx = 0, fy = 0;
-  BBS_DATA.flavors.forEach((it, i) => { if (eligible(it)) { fy++; if (STORE.shared.flavors[i] || ingAuto(it)) fx++; } });
+  const [fx, fy] = flavorsEligible(activeChar);
   setCount(p, rx + fx, ry + fy);
 }
 

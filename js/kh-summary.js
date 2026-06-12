@@ -121,13 +121,17 @@ var KHSummary = (function () {
     cmds.forEach(function (it, i) { if (cStore[i] || auto[it.name]) d++; });
     return [d, cmds.length];
   }
-  // Ingredients done = obtained, or used by a checked ice-cream recipe
-  // (recipe slots i1..i4 hold "Name xN"; obtaining is shared across chars).
-  function flavorsDone(D, store) {
+  // Ingredients are per character (each has their own store + eligibility by
+  // location). Done = obtained, or auto-credited by one of THAT character's
+  // checked ice-cream recipes (recipe slots i1..i4 hold "Name xN").
+  function flavorsDoneChar(D, store, c) {
+    var locKey = { terra: "locT", ventus: "locV", aqua: "locA" }[c];
+    var label = BBS_LABEL[c];
     var pat = (store.shared && store.shared.patissier) || {};
-    var fl = (store.shared && store.shared.flavors) || {};
+    var fl = (store[c] && store[c].flavors) || {};
     var used = {};
     D.patissier.forEach(function (r, pIdx) {
+      if (r.g !== label) return;
       ["i1", "i2", "i3", "i4"].forEach(function (k) {
         var s = r[k];
         if (!s) return;
@@ -136,11 +140,13 @@ var KHSummary = (function () {
         (used[name] = used[name] || []).push(pIdx);
       });
     });
-    var d = 0;
+    var d = 0, y = 0;
     D.flavors.forEach(function (f, i) {
+      if (!f[locKey]) return;
+      y++;
       if (fl[i] || (used[f.name] || []).some(function (pIdx) { return pat[pIdx]; })) d++;
     });
-    return d;
+    return [d, y];
   }
 
   function bbsTotals() {
@@ -156,6 +162,7 @@ var KHSummary = (function () {
         add([countMap(store[c] && store[c][sec], items.length), items.length]);
       });
       ["stickers", "warrior", "patissier"].forEach(function (k) { add(groupCount(D, store, k, BBS_LABEL[c])); });
+      add(flavorsDoneChar(D, store, c));   // per-character ingredients
       var done = (store.missions && store.missions.done) || {}, md = 0;
       D.missions.forEach(function (m, i) { if (done[i + "-" + c]) md++; });
       add([md, D.missions.length]);
@@ -163,8 +170,6 @@ var KHSummary = (function () {
     ["trophies", "ingame", "reports", "arena"].forEach(function (k) {
       add([countMap(store.shared && store.shared[k], D[k].length), D[k].length]);
     });
-    // Ingredients: obtained, or auto-credited by a completed ice-cream recipe.
-    add([flavorsDone(D, store), D.flavors.length]);
     var rank = (store.missions && store.missions.rank) || {}, sd = 0;
     D.missions.forEach(function (m, i) {
       if (BBS_CHARS.some(function (c) { return rank[i + "-" + c]; })) sd++;
