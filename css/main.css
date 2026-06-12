@@ -799,7 +799,10 @@ body[data-page="kh-ddd-tracker"],
 body[data-page="kh02-tracker"],
 body[data-page="kh3-tracker"],
 body[data-page="kh-melding"] {
-    background: var(--bg);
+    /* Transparent so the fixed ::before wallpaper shows through; the dark
+       html background is the fallback. (A solid body background here would
+       paint over the negative-z ::before and hide it.) */
+    background: transparent;
 }
 
 /* Fixed wallpaper layer (a real fixed element, unlike the buggy
