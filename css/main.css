@@ -770,11 +770,11 @@ a.project-card:hover h3 {
     background-attachment: fixed;
 }
 
-[data-theme="night"] body[data-page="kh1-tracker"]    { background-image: url("/images/backgrounds/Background_KH1.png"); }
-[data-theme="night"] body[data-page="kh-com-tracker"] { background-image: url("/images/backgrounds/Background_COM.png"); }
-[data-theme="night"] body[data-page="kh2-tracker"]    { background-image: url("/images/backgrounds/Background_KH2.png"); }
-[data-theme="night"] body[data-page="kh-bbs-tracker"] { background-image: url("/images/backgrounds/Background_BBS.png"); }
-[data-theme="night"] body[data-page="kh-ddd-tracker"] { background-image: url("/images/backgrounds/Background_3DS.png"); }
-[data-theme="night"] body[data-page="kh02-tracker"]   { background-image: url("/images/backgrounds/Background_KH02.png"); }
-[data-theme="night"] body[data-page="kh3-tracker"]    { background-image: url("/images/backgrounds/Background_KH3.png"); }
-[data-theme="night"] body[data-page="kh-melding"]     { background-image: url("/images/backgrounds/Background_BBS.png"); }
+[data-theme="night"] body[data-page="kh1-tracker"]    { background-image: url("../images/backgrounds/Background_KH1.png"); }
+[data-theme="night"] body[data-page="kh-com-tracker"] { background-image: url("../images/backgrounds/Background_COM.png"); }
+[data-theme="night"] body[data-page="kh2-tracker"]    { background-image: url("../images/backgrounds/Background_KH2.png"); }
+[data-theme="night"] body[data-page="kh-bbs-tracker"] { background-image: url("../images/backgrounds/Background_BBS.png"); }
+[data-theme="night"] body[data-page="kh-ddd-tracker"] { background-image: url("../images/backgrounds/Background_3DS.png"); }
+[data-theme="night"] body[data-page="kh02-tracker"]   { background-image: url("../images/backgrounds/Background_KH02.png"); }
+[data-theme="night"] body[data-page="kh3-tracker"]    { background-image: url("../images/backgrounds/Background_KH3.png"); }
+[data-theme="night"] body[data-page="kh-melding"]     { background-image: url("../images/backgrounds/Background_BBS.png"); }

@@ -175,7 +175,7 @@ const GROUP_ICON = {
 };
 function groupIconImg(g) {
   const ic = GROUP_ICON[g];
-  return ic ? `<img class="cmdicon" src="/images/commands/cmd-${ic}.png" alt="">` : "";
+  return ic ? `<img class="cmdicon" src="../images/commands/cmd-${ic}.png" alt="">` : "";
 }
 
 /* ---------- generic checklist table ---------- */

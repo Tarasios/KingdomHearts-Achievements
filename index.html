@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self'">
     <title>KH Completionist</title>
-    <script src="/js/theme.js"></script>
-    <link rel="stylesheet" href="/css/main.css">
+    <script src="js/theme.js"></script>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <!--
     Landing page. Shows total completion across the series plus one card
     per game (progress read live from localStorage by js/kh-summary.js +
     js/landing.js). All visible text lives in lang/messages/en/index.json.
 -->
-<body data-page="index" data-root="/">
+<body data-page="index" data-root="./">
     <nav>
         <div class="container">
             <div class="nav-content">
-                <a href="/" class="logo" id="logo-name"></a>
+                <a href="./" class="logo" id="logo-name"></a>
                 <div class="nav-right">
                     <ul class="nav-links">
-                        <li><a href="/" id="nav-home"></a></li>
-                        <li><a href="/tools/" id="nav-tools"></a></li>
+                        <li><a href="./" id="nav-home"></a></li>
+                        <li><a href="tools/" id="nav-tools"></a></li>
                     </ul>
                     <div class="theme-toggle">
                         <button id="themeToggle" class="theme-btn" type="button">
@@ -42,7 +42,7 @@
 
     <div class="container">
         <section class="project-hero landing-hero">
-            <figure class="banner landing-banner"><img class="banner-img" src="/images/banners/series.jpg" alt=""></figure>
+            <figure class="banner landing-banner"><img class="banner-img" src="images/banners/series.jpg" alt=""></figure>
             <h1 id="landing-title"></h1>
             <p id="landing-subtitle"></p>
         </section>
@@ -63,16 +63,16 @@
         </main>
     </div>
 
-    <script src="/js/i18n.js"></script>
-    <script src="/js/kh1-tracker-data.js"></script>
-    <script src="/js/kh-com-tracker-data.js"></script>
-    <script src="/js/kh2-tracker-data.js"></script>
-    <script src="/js/kh-ddd-tracker-data.js"></script>
-    <script src="/js/kh02-tracker-data.js"></script>
-    <script src="/js/kh3-tracker-data.js"></script>
-    <script src="/js/kh-bbs-tracker-data.js"></script>
-    <script src="/js/kh-summary.js"></script>
-    <script src="/js/landing.js"></script>
-    <script src="/js/banners.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/kh1-tracker-data.js"></script>
+    <script src="js/kh-com-tracker-data.js"></script>
+    <script src="js/kh2-tracker-data.js"></script>
+    <script src="js/kh-ddd-tracker-data.js"></script>
+    <script src="js/kh02-tracker-data.js"></script>
+    <script src="js/kh3-tracker-data.js"></script>
+    <script src="js/kh-bbs-tracker-data.js"></script>
+    <script src="js/kh-summary.js"></script>
+    <script src="js/landing.js"></script>
+    <script src="js/banners.js"></script>
 </body>
 </html>

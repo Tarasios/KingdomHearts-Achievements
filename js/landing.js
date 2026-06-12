@@ -15,13 +15,13 @@ document.addEventListener("DOMContentLoaded", async function () {
   // Per-game tracker page + banner file (note the mixed .png/.jpg).
   // `bbs` uses the bespoke engine; everything else is generic.
   var GAME = {
-    kh1:   { page: "/tools/kh1-tracker.html",    banner: "kh1.png" },
-    khcom: { page: "/tools/kh-com-tracker.html", banner: "khcom.png" },
-    kh2:   { page: "/tools/kh2-tracker.html",    banner: "kh2.jpg" },
-    bbs:   { page: "/tools/kh-bbs-tracker.html", banner: "bbs.png", bbs: true },
-    khddd: { page: "/tools/kh-ddd-tracker.html", banner: "khddd.png" },
-    kh02:  { page: "/tools/kh02-tracker.html",   banner: "kh02.png" },
-    kh3:   { page: "/tools/kh3-tracker.html",    banner: "kh3.jpg" }
+    kh1:   { page: "tools/kh1-tracker.html",    banner: "kh1.png" },
+    khcom: { page: "tools/kh-com-tracker.html", banner: "khcom.png" },
+    kh2:   { page: "tools/kh2-tracker.html",    banner: "kh2.jpg" },
+    bbs:   { page: "tools/kh-bbs-tracker.html", banner: "bbs.png", bbs: true },
+    khddd: { page: "tools/kh-ddd-tracker.html", banner: "khddd.png" },
+    kh02:  { page: "tools/kh02-tracker.html",   banner: "kh02.png" },
+    kh3:   { page: "tools/kh3-tracker.html",    banner: "kh3.jpg" }
   };
 
   // HD collections, in release order. `hero` is a file in images/heroes/.
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     var r = totalsFor(id);
     var card = el("a", "game-card");
     card.href = GAME[id].page;
-    card.appendChild(imageFigure("card-banner", "/images/banners/" + GAME[id].banner, t("game-" + id)));
+    card.appendChild(imageFigure("card-banner", "images/banners/" + GAME[id].banner, t("game-" + id)));
     var body = el("div", "game-card-body");
     body.appendChild(el("h3", null, esc(t("game-" + id))));
     body.appendChild(progBar(r[0], r[1]));
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     coll.innerHTML = "";
     COLLECTIONS.forEach(function (c) {
       var group = el("section", "collection");
-      group.appendChild(imageFigure("collection-hero", "/images/heroes/" + c.hero, t("coll-" + c.id)));
+      group.appendChild(imageFigure("collection-hero", "images/heroes/" + c.hero, t("coll-" + c.id)));
       group.appendChild(el("h3", "collection-title", esc(t("coll-" + c.id))));
       var grid = el("div", "game-cards");
       c.games.forEach(function (id) {

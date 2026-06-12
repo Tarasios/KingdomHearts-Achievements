@@ -95,9 +95,14 @@ from `tools/kh2-tracker.html` + two lang JSON files, then add it to the
 `GAMES` list in `js/landing.js`. Game order: KH1, Chain of Memories, KH2,
 Birth by Sleep, Dream Drop Distance, 0.2, then KH3.
 
-## URLs
+## URLs & paths
 
-Internal links use the `.html` suffix so they work on any server
-(including local `python -m http.server`). The home page is linked as `/`
-and the tools index as `/tools/`. GitHub Pages also serves every page
-without the suffix.
+All links and asset references are **relative**, never root-absolute, so
+the site works the same whether it is served from a domain root
+(`example.com/`), a GitHub project subpath
+(`user.github.io/KingdomHearts-Achievements/`), or a local
+`python -m http.server`. Root-level pages reference `css/…`, `js/…`,
+`images/…`; pages in `tools/` use `../css/…` etc., and each page's
+`data-root` (`./` at the root, `../` in `tools/`) tells `js/i18n.js` where
+to find `lang/`. Keep new references relative — a leading `/` will 404 on
+a project subpath.
