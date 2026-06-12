@@ -669,9 +669,10 @@ a.project-card:hover h3 {
 
 .game-cards {
     display: grid;
-    /* auto-fill (not auto-fit) keeps a single-game group's card the same
-       size as a multi-game group's, instead of stretching it full width. */
-    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    /* Two wide columns: a 4-game collection becomes a clean 2x2, a 2-game
+       collection fills one row, a single game takes one column. Collapses
+       to one column on mobile (see the media query below). */
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
 }
 
