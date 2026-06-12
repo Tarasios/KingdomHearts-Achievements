@@ -192,3 +192,28 @@
 /* import/export progress bar */
 .kh .kp-bar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
 .kh .kp-note { color: var(--dim); font-size: 12px; }
+
+/* ============================================================
+   Mobile: scrollable single-row tabs, smaller text, and
+   horizontally-scrollable wide tables. Desktop is untouched.
+   ============================================================ */
+@media (max-width: 768px) {
+  .kh-header h1 { font-size: 18px; }
+  .kh-header .sub { font-size: 12px; }
+
+  /* Tabs stay on one row and scroll horizontally (swipe) instead of
+     wrapping onto several rows. */
+  .kh .tabs { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
+  .kh .tab { flex: 0 0 auto; }
+
+  /* Denser tables so text wraps less on a phone. */
+  .kh table { font-size: 12px; }
+  .kh th, .kh td { padding: 7px 7px; }
+  .kh .grp-title, .kh .sub-title, .kh .trk-cat { font-size: 12px; }
+  .kh .countbadge { font-size: 11px; }
+
+  /* The progress-overview dashboards have fixed per-character columns;
+     let them scroll sideways rather than overflow the screen. */
+  .kh .dash { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .kh .dash-table { min-width: 480px; }
+}

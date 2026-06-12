@@ -359,7 +359,7 @@ function buildPage() {
     if (tab.id !== activeTab) panel.style.display = "none";
     const state = (PANEL[tab.id] && PANEL[tab.id].state) || { q: "", hide: false };
     const hasTrophies = tab.sections.some(s => s.trophies);
-    const dash = hasTrophies ? el("div") : null;
+    const dash = hasTrophies ? el("div", "dash") : null;
     if (dash) panel.appendChild(dash);
     const tbar = el("div", "toolbar");
     const flt = el("input");

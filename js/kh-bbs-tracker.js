@@ -302,7 +302,7 @@ function buildPanels() {
       };
       tbar.appendChild(reset);
     }
-    const dash = id === "trophies" ? el("div") : null;
+    const dash = id === "trophies" ? el("div", "dash") : null;
     if (dash) panel.appendChild(dash);
     panel.appendChild(tbar);
     const results = el("div", "results");

@@ -15,12 +15,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   // Per-game tracker page + banner file (note the mixed .png/.jpg).
   // `bbs` uses the bespoke engine; everything else is generic.
   var GAME = {
-    kh1:   { page: "tools/kh1-tracker.html",    banner: "kh1.png" },
-    khcom: { page: "tools/kh-com-tracker.html", banner: "khcom.png" },
+    kh1:   { page: "tools/kh1-tracker.html",    banner: "kh1.jpg" },
+    khcom: { page: "tools/kh-com-tracker.html", banner: "khcom.jpg" },
     kh2:   { page: "tools/kh2-tracker.html",    banner: "kh2.jpg" },
-    bbs:   { page: "tools/kh-bbs-tracker.html", banner: "bbs.png", bbs: true },
-    khddd: { page: "tools/kh-ddd-tracker.html", banner: "khddd.png" },
-    kh02:  { page: "tools/kh02-tracker.html",   banner: "kh02.png" },
+    bbs:   { page: "tools/kh-bbs-tracker.html", banner: "bbs.jpg", bbs: true },
+    khddd: { page: "tools/kh-ddd-tracker.html", banner: "khddd.jpg" },
+    kh02:  { page: "tools/kh02-tracker.html",   banner: "kh02.jpg" },
     kh3:   { page: "tools/kh3-tracker.html",    banner: "kh3.jpg" }
   };
 

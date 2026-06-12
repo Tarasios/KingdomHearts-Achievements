@@ -26,14 +26,18 @@
 
 html {
     scroll-behavior: smooth;
+    /* Dark base so a short page / iOS rubber-band never shows white. */
+    background: var(--bg);
 }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     color: var(--ink);
+    /* No background-attachment: fixed — it tears/leaves white gaps when
+       scrolling on iOS. The per-game wallpaper uses a fixed ::before
+       layer instead (see the per-game background block). */
     background: radial-gradient(1200px 700px at 70% -10%, #1a2a55 0%, var(--bg) 55%);
-    background-attachment: fixed;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
 }
@@ -524,6 +528,30 @@ a.project-card:hover h3 {
     .game-cards {
         grid-template-columns: 1fr;
     }
+
+    /* Scale headings down so they don't dominate a phone screen. */
+    .landing-hero h1,
+    .project-hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .series-headline {
+        font-size: 1.15rem;
+    }
+
+    .landing-hero p,
+    .about-text p {
+        font-size: 0.9rem;
+    }
+
+    .collection-title,
+    .section h2 {
+        font-size: 0.78rem;
+    }
+
+    .container {
+        padding: 0 14px;
+    }
 }
 
 /* ============================================================
@@ -593,7 +621,7 @@ a.project-card:hover h3 {
 
 /* ---------- Landing page ---------- */
 .landing-banner {
-    max-width: 480px;   /* series.jpg is small — don't upscale it blurry */
+    margin-bottom: 1.4rem;   /* spans the full content width */
 }
 
 .landing-hero h1 {
@@ -771,12 +799,27 @@ body[data-page="kh-ddd-tracker"],
 body[data-page="kh02-tracker"],
 body[data-page="kh3-tracker"],
 body[data-page="kh-melding"] {
-    background-color: var(--bg);
+    background: var(--bg);
+}
+
+/* Fixed wallpaper layer (a real fixed element, unlike the buggy
+   background-attachment: fixed) sat behind the page content. */
+body[data-page="kh1-tracker"]::before,
+body[data-page="kh-com-tracker"]::before,
+body[data-page="kh2-tracker"]::before,
+body[data-page="kh-bbs-tracker"]::before,
+body[data-page="kh-ddd-tracker"]::before,
+body[data-page="kh02-tracker"]::before,
+body[data-page="kh3-tracker"]::before,
+body[data-page="kh-melding"]::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
     background-image: var(--bg-scrim), var(--bg-img);
     background-repeat: no-repeat;
     background-position: center top;
     background-size: cover;
-    background-attachment: fixed;
 }
 
 [data-theme="night"] body[data-page="kh1-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH1.png"); }

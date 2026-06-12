@@ -9,12 +9,12 @@ Current files (the per-game filename, including extension, is listed in
 | File         | Game / use                         |
 |--------------|------------------------------------|
 | `series.jpg` | Landing hero                       |
-| `kh1.png`    | Kingdom Hearts Final Mix           |
-| `khcom.png`  | Re:Chain of Memories               |
+| `kh1.jpg`    | Kingdom Hearts Final Mix           |
+| `khcom.jpg`  | Re:Chain of Memories               |
 | `kh2.jpg`    | Kingdom Hearts II                  |
-| `bbs.png`    | Birth by Sleep                     |
-| `khddd.png`  | Dream Drop Distance                |
-| `kh02.png`   | Kingdom Hearts 0.2                 |
+| `bbs.jpg`    | Birth by Sleep                     |
+| `khddd.jpg`  | Dream Drop Distance                |
+| `kh02.jpg`   | Kingdom Hearts 0.2                 |
 | `kh3.jpg`    | Kingdom Hearts III                 |
 
 Any banner that fails to load is hidden (no broken-image icon), so the
