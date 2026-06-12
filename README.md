@@ -26,8 +26,11 @@ js/kh-tracker.js            Generic tracker engine (TRACKER_GAME data modules)
 js/kh-bbs-tracker.js        Birth by Sleep tracker engine
 js/kh-*-data.js             Per-game data modules
 lang/messages/en|fr/        All visible text, one JSON file per page
-images/banners/             Optional per-game banner photos — see its README
-images/kh/                  Command-type icons — see images/kh/README.md
+images/backgrounds/         Per-game page wallpapers (Background_<GAME>.png)
+images/banners/             Per-game selector banners (landing cards)
+images/heroes/              Wide hero strips (per game + per HD collection)
+images/logos/               Transparent game logos (shown in tracker headers)
+images/commands/            Command-type icons — see images/commands/README.md
 ```
 
 ## Landing page & progress totals
@@ -48,13 +51,27 @@ default** (the dark palette); Day is an opt-in, muted light palette. The
 choice persists in `localStorage` (`preferred-theme`) and is applied in
 `<head>` before first paint, so there is no bright flash. Both palettes
 are CSS variables in `css/main.css` (`:root` and `[data-theme="day"]`).
-Per-game background art and tinting will be layered on top of these.
 
-## Banners
+In **night** mode each tracker page also shows its own dark KH-motif
+wallpaper from `images/backgrounds/` (keyed on the page's `data-page` in
+`css/main.css`). 0.2 uses an Aqua-blue–tinted version of the Birth by
+Sleep wallpaper (`Background_KH02.png`, generated from `Background_BBS.png`).
+Bright per-game backgrounds for **day** mode are not wired up yet — day
+falls back to the shared light palette.
 
-Each game can have a banner photo in `images/banners/` — see
-`images/banners/README.md` for the expected filenames. Banners are
-optional: a missing file simply shows nothing (no broken-image icon).
+## Images
+
+All images live under `images/` and are referenced by fixed paths, so
+adding/replacing a file just works:
+
+- `backgrounds/Background_<GAME>.png` — night wallpaper per game.
+- `banners/<id>.(png|jpg)` — the selector banner on the landing page; the
+  exact filename per game is listed in `js/landing.js` (`GAME`).
+- `heroes/<name>.(png|jpg)` — wide hero strips; the landing page uses the
+  collection heroes `kh1525` and `kh28`, plus `kh3`.
+- `logos/<GAME>.png` — transparent logo shown at the top of each tracker.
+
+Any image that fails to load is hidden (no broken-image icon).
 
 ## Editing text
 

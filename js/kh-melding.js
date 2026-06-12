@@ -185,7 +185,7 @@ function achMarkOwned(names) {
 /* ---------- command category icons ----------
    Fine-grained category (movement/defense/reprisal…) comes from the
    tracker data's group headings; melding's own category is the
-   fallback. Icons live in /images/kh/cmd-<cat>.png. */
+   fallback. Icons live in /images/commands/cmd-<cat>.png. */
 const ICON_GROUP = {
   "Battle Commands - Attacks": "attack",
   "Battle Commands - Magic": "magic",
@@ -204,7 +204,7 @@ const CAT_ICON = { Attack: "attack", Magic: "magic", Action: "movement", Shotloc
 function iconFor(name, cat) { return CMD_ICON.get(name) || (cat ? CAT_ICON[cat] : null); }
 function cmdIcon(name, cat) {
   const ic = iconFor(name, cat);
-  return ic ? `<img class="cmdicon" src="/images/kh/cmd-${ic}.png" alt="" title="${ICON_LABEL[ic]}">` : "";
+  return ic ? `<img class="cmdicon" src="/images/commands/cmd-${ic}.png" alt="" title="${ICON_LABEL[ic]}">` : "";
 }
 
 /* ---------- helpers ---------- */
@@ -395,7 +395,7 @@ function renderForward() {
   CATS.forEach(cat => {
     const rows = matches.filter(m => m.cat === cat);
     if (!rows.length) return;
-    const catIc = CAT_ICON[cat] ? `<img class="cmdicon" src="/images/kh/cmd-${CAT_ICON[cat]}.png" alt="">` : "";
+    const catIc = CAT_ICON[cat] ? `<img class="cmdicon" src="/images/commands/cmd-${CAT_ICON[cat]}.png" alt="">` : "";
     box.appendChild(el("div", "grp-title", catIc + fmt('kh-group-commands', catLabel(cat))));
     const tbl = el("table");
     tbl.innerHTML = `<thead><tr><th>${t('kh-th-result')}</th><th>${t('kh-th-slot1')}</th><th>${t('kh-th-slot2')}</th><th>${t('kh-th-type')}</th><th>%</th><th>${cry ? fmt('kh-th-ability-with', cry) : t('kh-th-ability-per')}</th><th>${t('kh-th-meld')}</th></tr></thead>`;

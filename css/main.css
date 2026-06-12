@@ -587,6 +587,10 @@ a.project-card:hover h3 {
 }
 
 /* ---------- Landing page ---------- */
+.landing-banner {
+    max-width: 480px;   /* series.jpg is small — don't upscale it blurry */
+}
+
 .landing-hero h1 {
     font-size: 2rem;
 }
@@ -667,24 +671,110 @@ a.project-card:hover h3 {
 .game-card {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    background: var(--panel2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
 }
 
+.game-card:hover {
+    border-color: var(--accent);
+}
+
+/* Banner art sits flush at the top of the card (revealed by JS on load). */
 .game-card .card-banner {
     margin: 0;
 }
 
 .game-card .card-banner img {
-    border-radius: 8px;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid var(--line);
 }
 
-.game-card h3 {
+.game-card-body {
+    padding: 0.8rem 1rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.game-card-body h3 {
     margin: 0;
+    font-size: 0.98rem;
 }
 
-.game-card-cta {
-    margin-top: auto;
+.game-card:hover .game-card-body h3 {
     color: var(--accent);
-    font-weight: 700;
-    font-size: 0.8rem;
 }
+
+/* ---------- HD-collection grouping on the landing page ---------- */
+.collection {
+    margin-bottom: 2.2rem;
+}
+
+.collection-hero {
+    margin: 0 0 0.9rem;
+}
+
+.collection-hero img {
+    border-radius: 12px;
+    border: 1px solid var(--line);
+}
+
+.collection-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--accent2);
+    margin: 0 0 0.8rem;
+    font-weight: 700;
+}
+
+/* ---------- Game logo in each tracker header ----------
+   Logos are transparent PNGs; shown small with no box, revealed on load. */
+.kh-logo {
+    margin: 2px 0 10px;
+    text-align: left;
+}
+
+.kh-logo img {
+    width: auto;
+    max-width: 100%;
+    max-height: 78px;
+    border: 0;
+    border-radius: 0;
+}
+
+/* ============================================================
+   Per-game background art (night only). The wallpapers are dark,
+   near-black KH-motif tiles, so they sit behind the existing dark
+   panels without hurting readability. Suppressed in day mode (the
+   bright per-game variants come later). Keyed on data-page so each
+   tracker gets its own look while sharing the overall theme.
+   ============================================================ */
+[data-theme="night"] body[data-page="kh1-tracker"],
+[data-theme="night"] body[data-page="kh-com-tracker"],
+[data-theme="night"] body[data-page="kh2-tracker"],
+[data-theme="night"] body[data-page="kh-bbs-tracker"],
+[data-theme="night"] body[data-page="kh-ddd-tracker"],
+[data-theme="night"] body[data-page="kh02-tracker"],
+[data-theme="night"] body[data-page="kh3-tracker"],
+[data-theme="night"] body[data-page="kh-melding"] {
+    background-color: var(--bg);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+[data-theme="night"] body[data-page="kh1-tracker"]    { background-image: url("/images/backgrounds/Background_KH1.png"); }
+[data-theme="night"] body[data-page="kh-com-tracker"] { background-image: url("/images/backgrounds/Background_COM.png"); }
+[data-theme="night"] body[data-page="kh2-tracker"]    { background-image: url("/images/backgrounds/Background_KH2.png"); }
+[data-theme="night"] body[data-page="kh-bbs-tracker"] { background-image: url("/images/backgrounds/Background_BBS.png"); }
+[data-theme="night"] body[data-page="kh-ddd-tracker"] { background-image: url("/images/backgrounds/Background_3DS.png"); }
+[data-theme="night"] body[data-page="kh02-tracker"]   { background-image: url("/images/backgrounds/Background_KH02.png"); }
+[data-theme="night"] body[data-page="kh3-tracker"]    { background-image: url("/images/backgrounds/Background_KH3.png"); }
+[data-theme="night"] body[data-page="kh-melding"]     { background-image: url("/images/backgrounds/Background_BBS.png"); }

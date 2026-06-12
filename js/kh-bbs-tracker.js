@@ -161,9 +161,9 @@ const TROPHY_AUTO = {
   "King of the Arena": () => arenaByStars(4)
 };
 
-/* Command-collection group header icons (images/kh/cmd-*.png).
+/* Command-collection group header icons (images/commands/cmd-*.png).
    When the Finish / Dimension Link / Ability icons are added, drop the
-   PNGs into images/kh/ and extend this map (e.g.
+   PNGs into images/commands/ and extend this map (e.g.
    "Miscellaneous - Finish Commands": "finish"). */
 const GROUP_ICON = {
   "Battle Commands - Attacks": "attack",
@@ -175,7 +175,7 @@ const GROUP_ICON = {
 };
 function groupIconImg(g) {
   const ic = GROUP_ICON[g];
-  return ic ? `<img class="cmdicon" src="/images/kh/cmd-${ic}.png" alt="">` : "";
+  return ic ? `<img class="cmdicon" src="/images/commands/cmd-${ic}.png" alt="">` : "";
 }
 
 /* ---------- generic checklist table ---------- */

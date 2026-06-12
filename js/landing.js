@@ -1,45 +1,55 @@
 /* =====================================================================
    Landing page — series-wide and per-game completion overview.
    Reads each game's totals via KHSummary (no tracker needs to have been
-   opened) and renders a big series progress bar plus one card per game,
-   each linking to its tracker. Text comes from lang/messages/<lang>/
-   index.json (game-<id> names + lg-* chrome); re-renders on language
-   change. Game order matches the Tools page.
+   opened) and renders a big series progress bar, then the games grouped
+   by HD collection: each group shows its collection hero strip and a
+   banner card per game (the banner is the natural "pick this game"
+   target), with a live progress bar. Text comes from
+   lang/messages/<lang>/index.json; re-renders on language change.
    ===================================================================== */
 document.addEventListener("DOMContentLoaded", async function () {
   await i18n.init();
   var t = function (k) { return i18n.getMessage(k); };
   var fmt = function () { return i18n.format.apply(i18n, arguments); };
 
-  // id -> tracker page + banner basename. `bbs` uses the bespoke engine.
-  var GAMES = [
-    { id: "kh1",   page: "/tools/kh1-tracker.html" },
-    { id: "khcom", page: "/tools/kh-com-tracker.html" },
-    { id: "kh2",   page: "/tools/kh2-tracker.html" },
-    { id: "bbs",   page: "/tools/kh-bbs-tracker.html", bbs: true },
-    { id: "khddd", page: "/tools/kh-ddd-tracker.html" },
-    { id: "kh02",  page: "/tools/kh02-tracker.html" },
-    { id: "kh3",   page: "/tools/kh3-tracker.html" }
+  // Per-game tracker page + banner file (note the mixed .png/.jpg).
+  // `bbs` uses the bespoke engine; everything else is generic.
+  var GAME = {
+    kh1:   { page: "/tools/kh1-tracker.html",    banner: "kh1.png" },
+    khcom: { page: "/tools/kh-com-tracker.html", banner: "khcom.png" },
+    kh2:   { page: "/tools/kh2-tracker.html",    banner: "kh2.jpg" },
+    bbs:   { page: "/tools/kh-bbs-tracker.html", banner: "bbs.png", bbs: true },
+    khddd: { page: "/tools/kh-ddd-tracker.html", banner: "khddd.png" },
+    kh02:  { page: "/tools/kh02-tracker.html",   banner: "kh02.png" },
+    kh3:   { page: "/tools/kh3-tracker.html",    banner: "kh3.jpg" }
+  };
+
+  // HD collections, in release order. `hero` is a file in images/heroes/.
+  var COLLECTIONS = [
+    { id: "hd1525", hero: "kh1525.png", games: ["kh1", "khcom", "kh2", "bbs"] },
+    { id: "hd28",   hero: "kh28.jpg",   games: ["khddd", "kh02"] },
+    { id: "kh3",    hero: "kh3.jpg",    games: ["kh3"] }
   ];
 
   function pct(x, y) { return y ? Math.round(100 * x / y) : 0; }
   function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
 
-  function totalsFor(g) {
-    if (g.bbs) return KHSummary.bbsTotals();
-    var G = window.KH_GAMES && window.KH_GAMES[g.id];
+  function totalsFor(id) {
+    if (GAME[id].bbs) return KHSummary.bbsTotals();
+    var G = window.KH_GAMES && window.KH_GAMES[id];
     return G ? KHSummary.trackerTotals(G) : [0, 0];
   }
 
-  // A figure that only appears once its image loads (no broken-image icon).
-  function bannerFigure(id) {
-    var fig = el("figure", "banner card-banner");
+  // A .banner figure that only appears once its image loads (so a missing
+  // file leaves no broken-image icon).
+  function imageFigure(cls, src, alt) {
+    var fig = el("figure", "banner " + cls);
     var img = el("img", "banner-img");
-    img.alt = "";
+    img.alt = alt || "";
     img.addEventListener("load", function () { fig.style.display = ""; });
     img.addEventListener("error", function () { fig.style.display = "none"; });
-    img.src = "/images/banners/" + id + ".jpg";
+    img.src = src;
     fig.appendChild(img);
     return fig;
   }
@@ -55,37 +65,44 @@ document.addEventListener("DOMContentLoaded", async function () {
     return wrap;
   }
 
+  function gameCard(id) {
+    var r = totalsFor(id);
+    var card = el("a", "game-card");
+    card.href = GAME[id].page;
+    card.appendChild(imageFigure("card-banner", "/images/banners/" + GAME[id].banner, t("game-" + id)));
+    var body = el("div", "game-card-body");
+    body.appendChild(el("h3", null, esc(t("game-" + id))));
+    body.appendChild(progBar(r[0], r[1]));
+    card.appendChild(body);
+    return { node: card, x: r[0], y: r[1] };
+  }
+
   function render() {
     var sx = 0, sy = 0;
-    var rows = GAMES.map(function (g) {
-      var r = totalsFor(g);
-      sx += r[0]; sy += r[1];
-      return { g: g, x: r[0], y: r[1] };
+
+    var coll = document.getElementById("collections");
+    coll.innerHTML = "";
+    COLLECTIONS.forEach(function (c) {
+      var group = el("section", "collection");
+      group.appendChild(imageFigure("collection-hero", "/images/heroes/" + c.hero, t("coll-" + c.id)));
+      group.appendChild(el("h3", "collection-title", esc(t("coll-" + c.id))));
+      var grid = el("div", "game-cards");
+      c.games.forEach(function (id) {
+        var card = gameCard(id);
+        sx += card.x; sy += card.y;
+        grid.appendChild(card.node);
+      });
+      group.appendChild(grid);
+      coll.appendChild(group);
     });
 
-    // ----- series total -----
     var total = document.getElementById("series-total");
     total.innerHTML = "";
-    var headline = el("div", "series-headline", fmt("lg-total-count", sx, sy, pct(sx, sy)));
-    total.appendChild(headline);
+    total.appendChild(el("div", "series-headline", fmt("lg-total-count", sx, sy, pct(sx, sy))));
     total.appendChild(progBar(sx, sy));
-
-    // ----- per-game cards -----
-    var grid = document.getElementById("game-cards");
-    grid.innerHTML = "";
-    rows.forEach(function (row) {
-      var card = el("a", "project-card game-card");
-      card.href = row.g.page;
-      card.appendChild(bannerFigure(row.g.id));
-      card.appendChild(el("h3", null, esc(t("game-" + row.g.id))));
-      card.appendChild(progBar(row.x, row.y));
-      card.appendChild(el("span", "game-card-cta", t("lg-open")));
-      grid.appendChild(card);
-    });
   }
 
   render();
   document.addEventListener("i18n:updated", render);
-  // Reflect progress changes made in another tab.
-  window.addEventListener("storage", render);
+  window.addEventListener("storage", render);   // reflect changes from another tab
 });
