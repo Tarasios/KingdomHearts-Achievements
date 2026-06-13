@@ -4295,5 +4295,8 @@
   },
   "gt-toast-trophy": "Trophy ready: %1",
   "gt-toast-section": "%1 — 100% complete!",
-  "gt-toast-overall": "Everything is 100% complete! 🎉"
+  "gt-toast-overall": "Everything is 100% complete! 🎉",
+  "tabbtn-worlds": "Worlds",
+  "gt-worlds-title": "Collectibles by World",
+  "gt-world-complete": "✓ 100%"
 }

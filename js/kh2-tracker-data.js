@@ -5189,7 +5189,34 @@ var TRACKER_GAME = {
         "Assault of the Dreadnought 2": "Fenrir"
       }
     }
-  ]
+  ],
+  "worldSummary": {
+    "worlds": [
+      "Twilight Town",
+      "Hollow Bastion",
+      "Beast's Castle",
+      "Olympus Coliseum",
+      "Agrabah",
+      "The Land of Dragons",
+      "100 Acre Wood",
+      "Pride Lands",
+      "Disney Castle",
+      "Timeless River",
+      "Halloween Town",
+      "Port Royal",
+      "Space Paranoids",
+      "The World That Never Was",
+      "Atlantica"
+    ],
+    "sections": [
+      "treasures",
+      "puzzles",
+      "professor",
+      "conqueror",
+      "minigames",
+      "mushrooms"
+    ]
+  }
 };
 
 (window.KH_GAMES = window.KH_GAMES || {})[TRACKER_GAME.id] = TRACKER_GAME;

@@ -3473,7 +3473,28 @@ var TRACKER_GAME = {
         "Hades Cup (Time Trial)": "Save the King"
       }
     }
-  ]
+  ],
+  "worldSummary": {
+    "worlds": [
+      "Destiny Islands",
+      "Traverse Town",
+      "Wonderland",
+      "Olympus Coliseum",
+      "Deep Jungle",
+      "Agrabah",
+      "Monstro",
+      "Atlantica",
+      "Halloween Town",
+      "Neverland",
+      "Hollow Bastion",
+      "End of the World",
+      "Hundred Acre Wood"
+    ],
+    "sections": [
+      "treasures",
+      "gummim"
+    ]
+  }
 };
 
 (window.KH_GAMES = window.KH_GAMES || {})[TRACKER_GAME.id] = TRACKER_GAME;

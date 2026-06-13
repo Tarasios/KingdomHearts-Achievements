@@ -106,5 +106,8 @@
   "gt-toast-trophy": "Trophée prêt : %1",
   "gt-toast-section": "%1 — 100 % terminé !",
   "gt-toast-overall": "Tout est terminé à 100 % ! 🎉",
-  "tabbtn-mushrooms": "Mushroom XIII"
+  "tabbtn-mushrooms": "Mushroom XIII",
+  "tabbtn-worlds": "Mondes",
+  "gt-worlds-title": "Objets à collectionner par monde",
+  "gt-world-complete": "✓ 100 %"
 }

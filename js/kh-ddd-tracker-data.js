@@ -4224,7 +4224,22 @@ var TRACKER_GAME = {
         }
       ]
     }
-  ]
+  ],
+  "worldSummary": {
+    "worlds": [
+      "Traverse Town",
+      "La Cité des Cloches",
+      "Prankster's Paradise",
+      "The Grid",
+      "Country of the Musketeers",
+      "Symphony of Sorcery",
+      "The World That Never Was"
+    ],
+    "sections": [
+      "treasures",
+      "portals"
+    ]
+  }
 };
 
 (window.KH_GAMES = window.KH_GAMES || {})[TRACKER_GAME.id] = TRACKER_GAME;
