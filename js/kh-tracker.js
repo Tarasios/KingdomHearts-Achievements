@@ -96,8 +96,18 @@ function fmtText(s) {
    character. With no char filter (dashboard totals) everything counts. */
 function itemVisible(it, char) { return !it.c || !char || it.c === char; }
 
+/* Game tabs, plus a synthetic "Worlds" summary tab when the game declares
+   a G.worldSummary config (see renderWorlds). Inserted second so it sits
+   next to the trophies/dashboard tab. Real sections still come from G.tabs
+   only (allLists/overallCount/findSec), so the summary adds no new stores. */
+function gameTabs() {
+  if (!G.worldSummary) return G.tabs;
+  const tabs = G.tabs.slice();
+  tabs.splice(1, 0, { id: "worlds", sections: [], worldSummary: true });
+  return tabs;
+}
 /* Tabs tagged with a char only exist for that character. */
-function visibleTabs() { return G.tabs.filter(tb => !tb.char || tb.char === activeChar); }
+function visibleTabs() { return gameTabs().filter(tb => !tb.char || tb.char === activeChar); }
 function ensureActiveTab() {
   if (!visibleTabs().some(tb => tb.id === activeTab)) activeTab = visibleTabs()[0].id;
 }
@@ -365,7 +375,7 @@ function buildPage() {
       tabsBox.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
       btn.classList.add("active");
       activeTab = tab.id;
-      G.tabs.forEach(tb => { document.getElementById("tab-" + tb.id).style.display = tb.id === activeTab ? "block" : "none"; });
+      gameTabs().forEach(tb => { document.getElementById("tab-" + tb.id).style.display = tb.id === activeTab ? "block" : "none"; });
       render();
     };
     tabsBox.appendChild(btn);
@@ -374,7 +384,7 @@ function buildPage() {
   // panels + toolbars
   const main = document.getElementById("panels");
   main.innerHTML = "";
-  G.tabs.forEach(tab => {
+  gameTabs().forEach(tab => {
     const panel = el("section", "card");
     panel.id = "tab-" + tab.id;
     if (tab.id !== activeTab) panel.style.display = "none";
@@ -458,11 +468,118 @@ function checkMilestones() {
   prevMilestones = new Set(cur.keys());
 }
 
+/* ---------- Worlds summary (opt-in via G.worldSummary) ----------
+   A reusable, data-driven "collectibles by world" view: for the active
+   character it pulls items from the configured sections, buckets them by
+   world, and shows them as live checkboxes bound to the SAME store as
+   their home tab (so ticking one here ticks it there and vice-versa).
+   Config (in the game data, sibling of `tabs`):
+     worldSummary: {
+       worlds: ["World A", ...],          // ordered
+       sections: ["treasures", ...],      // or { id, key } — world key
+       alias: { "Raw": "Canonical" }      // optional world-name fixups
+     }
+   World for an item defaults to its group (it.g); `key` reads another
+   item/lang field instead. Reuses the BBS world CSS (.wgroup/.wsum/…). */
+function worldOf(secCfg, res, it, i) {
+  const key = secCfg.key || "g";
+  let w = (key === "g") ? it.g : (it[key] != null ? it[key] : cellText(res.storeId, i, key, it));
+  // Normalise whitespace — some data uses non-breaking spaces in group names.
+  w = String(w || "").replace(/ /g, " ").replace(/\s+/g, " ").trim();
+  const alias = G.worldSummary.alias || {};
+  return alias[w] || w;
+}
+function worldEntryTable(list) {
+  const tbl = el("table", "wtable"), tb = el("tbody");
+  list.forEach(e => {
+    const tr = el("tr", e.done ? "donerow" : null);
+    const td = el("td", "chkcell"), chk = el("input", "chk");
+    chk.type = "checkbox"; chk.checked = e.done;
+    if (e.auto) { chk.disabled = true; chk.title = fmt('gt-auto-tip', e.auto); }
+    else chk.addEventListener("change", () => toggle(e.store, e.i));
+    td.appendChild(chk); tr.appendChild(td);
+    let nameHtml = `<span class="itemname">${fmtText(e.name)}</span>`;
+    if (e.auto) nameHtml += ` <span class="srcbadge" title="${fmt('gt-auto-tip', e.auto)}">${t('gt-auto-badge')}</span>`;
+    tr.appendChild(el("td", null, nameHtml));
+    tr.appendChild(el("td", null, fmtText(e.where)));
+    tb.appendChild(tr);
+  });
+  tbl.appendChild(tb);
+  return tbl;
+}
+function renderWorlds(p) {
+  const cfg = G.worldSummary, box = p.results;
+  if (!p.state.open) p.state.open = {};
+  const open = p.state.open;
+  box.appendChild(el("div", "grp-title", fmtText(t('gt-worlds-title'))));
+  const q = p.state.q.toLowerCase();
+  const filtering = !!q || p.state.hide;
+  const secViews = cfg.sections.map(s => {
+    const secCfg = (typeof s === "string") ? { id: s } : s;
+    const sec = findSec(secCfg.id), res = resolved(sec);
+    const nameCol = sec.cols.find(c => c.name) || sec.cols[0];
+    return { secCfg, sec, res, store: smap(res.storeId), title: t('sec-' + sec.id),
+      nameCol, extra: sec.cols.filter(c => c !== nameCol) };
+  });
+  let dx = 0, dy = 0;
+  cfg.worlds.forEach((world, wi) => {
+    const slug = "w" + wi;
+    const groups = [];
+    secViews.forEach(sv => {
+      const list = [];
+      sv.res.items.forEach((it, i) => {
+        if (!itemVisible(it, activeChar)) return;
+        if (worldOf(sv.secCfg, sv.res, it, i) !== world) return;
+        const auto = autoSource(sv.sec, it);
+        list.push({ store: sv.store, i, done: !!sv.store[i] || !!auto, auto,
+          name: cellText(sv.res.storeId, i, sv.nameCol.k, it) || "",
+          where: sv.extra.map(c => cellText(sv.res.storeId, i, c.k, it)).filter(Boolean).join(" · ") });
+      });
+      if (list.length) groups.push({ title: sv.title, list });
+    });
+    let wdone = 0, wtotal = 0;
+    groups.forEach(g => g.list.forEach(e => { wtotal++; if (e.done) wdone++; }));
+    if (!wtotal) return;
+    dx += wdone; dy += wtotal;
+    let shown = groups.map(g => ({
+      title: g.title,
+      list: g.list.filter(e => (!q || (e.name + " " + e.where).toLowerCase().includes(q)) && (!p.state.hide || !e.done))
+    })).filter(g => g.list.length);
+    if (!shown.length) return;
+    const complete = wdone === wtotal, wkey = "w:" + slug;
+    const wdet = el("details", "wgroup");
+    wdet.open = filtering ? true : !!open[wkey];
+    wdet.addEventListener("toggle", () => { if (!filtering) open[wkey] = wdet.open; });
+    wdet.appendChild(el("summary", "wsum" + (complete ? " wdone" : ""),
+      fmtText(world) + ` <span class="wcount">${wdone} / ${wtotal}</span>`
+      + (complete ? ` <span class="wbadge">${t('gt-world-complete')}</span>` : "")));
+    shown.forEach(g => {
+      const tdone = g.list.filter(e => e.done).length, tkey = "t:" + slug + ":" + g.title;
+      const tdet = el("details", "tgroup");
+      tdet.open = filtering ? true : (open[tkey] !== false);
+      tdet.addEventListener("toggle", () => { if (!filtering) open[tkey] = tdet.open; });
+      tdet.appendChild(el("summary", "tsum", esc(g.title) + ` <span class="wcount">${tdone} / ${g.list.length}</span>`));
+      tdet.appendChild(worldEntryTable(g.list));
+      wdet.appendChild(tdet);
+    });
+    box.appendChild(wdet);
+  });
+  if (!dy) box.appendChild(el("div", "empty", t('gt-nothing')));
+  setCount(p, dx, dy);
+}
+
 /* ---------- render ---------- */
 function render() {
-  const tab = G.tabs.find(tb => tb.id === activeTab);
+  const tab = gameTabs().find(tb => tb.id === activeTab);
   const p = PANEL[activeTab];
   p.results.innerHTML = "";
+  if (tab.worldSummary) {
+    renderWorlds(p);
+    const [ox0, oy0] = overallCount();
+    document.getElementById("overallNote").textContent = fmt('gt-overall', ox0, oy0, oy0 ? Math.round(100 * ox0 / oy0) : 0);
+    checkMilestones();
+    return;
+  }
   if (p.dash) {
     p.dash.innerHTML = "";
     p.dash.appendChild(el("div", "grp-title", fmtText(t('gt-dash-title'))));

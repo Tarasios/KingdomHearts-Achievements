@@ -4796,7 +4796,28 @@ var TRACKER_GAME = {
         }
       ]
     }
-  ]
+  ],
+  "worldSummary": {
+    "worlds": [
+      "Olympus",
+      "Twilight Town",
+      "Toy Box",
+      "Kingdom of Corona",
+      "Monstropolis",
+      "Arendelle",
+      "The Caribbean",
+      "San Fransokyo",
+      "The Hundred Acre Wood",
+      "The Keyblade Graveyard",
+      "The Final World",
+      "Scala ad Caelum"
+    ],
+    "sections": [
+      "treasures",
+      "lucky",
+      "charfiles"
+    ]
+  }
 };
 
 (window.KH_GAMES = window.KH_GAMES || {})[TRACKER_GAME.id] = TRACKER_GAME;
