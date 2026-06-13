@@ -165,11 +165,31 @@ function charactersAutoFn(char) {
 }
 function commandAutoFn(char) { const m = commandAuto(char); return it => m.get(it.name) || null; }
 
-/* Sections whose completion can be auto-credited from other tabs. */
+/* Records that mirror another tab's single checkbox are *linked* (two-way)
+   rather than read-only auto: ticking the record ticks its arena stage /
+   Unversed mission, and vice-versa. */
+function recordsLinkFn(char) {
+  return it => {
+    if (it.g === "Unversed Missions") {
+      const mi = MISSION_IDX[it.cat];
+      if (mi != null) return { store: STORE.missions.done, key: mi + "-" + char, src: "uvmission" };
+    }
+    if (it.cat === "Arena Mode") {
+      for (let k = 0; k < BBS_DATA.arena.length; k++) {
+        const nm = BBS_DATA.arena[k].name;
+        if ((it.entry || "").indexOf(nm) >= 0) return { store: STORE.shared.arena, key: ARENA_IDX[nm], src: "arena" };
+      }
+    }
+    return null;
+  };
+}
+
+/* Sections whose completion is auto-credited (read-only) from other tabs… */
 const SECTION_AUTO = {
-  commands: commandAutoFn, records: recordsAutoFn,
-  characters: charactersAutoFn, unversed: unversedAutoFn
+  commands: commandAutoFn, characters: charactersAutoFn, unversed: unversedAutoFn
 };
+/* …and sections whose rows are two-way linked to another tab's store. */
+const SECTION_LINK = { records: recordsLinkFn };
 
 function autoBadge(src) {
   return {
@@ -252,12 +272,16 @@ function countMap(map, n) { let d = 0; for (let i = 0; i < n; i++) if (map[i]) d
 function sharedCount(key) { return [countMap(STORE.shared[key], BBS_DATA[key].length), BBS_DATA[key].length]; }
 function charCount(char, sec) {
   const items = BBS_DATA.perChar[char][sec];
-  const build = SECTION_AUTO[sec];
-  if (!build) return [countMap(STORE[char][sec], items.length), items.length];
-  const af = build(char);
+  const af = SECTION_AUTO[sec] ? SECTION_AUTO[sec](char) : null;
+  const lf = SECTION_LINK[sec] ? SECTION_LINK[sec](char) : null;
+  if (!af && !lf) return [countMap(STORE[char][sec], items.length), items.length];
   const merged = viewItems(char + "-" + sec, items);
   let d = 0;
-  merged.forEach((it, i) => { if (STORE[char][sec][i] || af(it)) d++; });
+  merged.forEach((it, i) => {
+    const lk = lf && lf(it);
+    if (lk) { if (lk.store[lk.key]) d++; }
+    else if (STORE[char][sec][i] || (af && af(it))) d++;
+  });
   return [d, items.length];
 }
 function groupCount(key, label) {
@@ -343,15 +367,20 @@ function groupIconImg(g) {
 /* cols: [{th, get(it), cls?, name?:true}] — first col is the checkbox.
    opts: groupFilter (only show items of this group, headers hidden),
    itemFilter(it) (hide ineligible items), auto(it) -> source or null,
-   groupIcons (prefix group headers with their command-type icon). */
+   link(it) -> {store,key,src} binds the row to another tab's store so it
+   reads/writes there (two-way sync, editable), groupIcons (prefix group
+   headers with their command-type icon). */
 function toggleGroup(items, store, g, opts) {
-  const idx = [];
-  items.forEach((it, i) => { if (it.g === g && (!opts.itemFilter || opts.itemFilter(it))) idx.push(i); });
-  const allDone = idx.every(i => store[i] || (opts.auto && opts.auto(items[i])));
-  idx.forEach(i => {
-    if (allDone) delete store[i];
-    else if (!store[i] && !(opts.auto && opts.auto(items[i]))) store[i] = true;
+  const targets = [];
+  items.forEach((it, i) => {
+    if (it.g !== g || (opts.itemFilter && !opts.itemFilter(it))) return;
+    const link = opts.link ? opts.link(it) : null;
+    if (link) { targets.push({ store: link.store, key: link.key }); return; }
+    if (opts.auto && opts.auto(it) && !store[i]) return;   // read-only auto row
+    targets.push({ store, key: i });
   });
+  const allDone = targets.every(tg => tg.store[tg.key]);
+  targets.forEach(tg => { if (allDone) delete tg.store[tg.key]; else tg.store[tg.key] = true; });
   saveStore();
   render();
 }
@@ -366,8 +395,10 @@ function checklist(box, items, store, cols, state, opts) {
   items.forEach((it, i) => {
     if (opts.groupFilter && it.g !== opts.groupFilter) return;
     if (opts.itemFilter && !opts.itemFilter(it)) return;
-    const auto = opts.auto ? opts.auto(it) : null;
-    const done = !!store[i] || !!auto;
+    const link = opts.link ? opts.link(it) : null;
+    const auto = (!link && opts.auto) ? opts.auto(it) : null;
+    const done = link ? !!link.store[link.key] : (!!store[i] || !!auto);
+    const badgeSrc = link ? link.src : auto;
     if (state.hide && done) return;
     const hay = (Object.values(it).join(" ") + " " + (it.g || "")).toLowerCase();
     if (q && !hay.includes(q)) return;
@@ -390,7 +421,9 @@ function checklist(box, items, store, cols, state, opts) {
     const chk = el("input", "chk");
     chk.type = "checkbox";
     chk.checked = done;
-    if (auto && !store[i]) {
+    if (link) {
+      chk.addEventListener("change", () => toggle(link.store, link.key));
+    } else if (auto && !store[i]) {
       chk.disabled = true;
       chk.title = autoBadge(auto).tip;
     } else {
@@ -400,8 +433,8 @@ function checklist(box, items, store, cols, state, opts) {
     tr.appendChild(td);
     cols.forEach(c => {
       let html = c.name ? `<span class="itemname">${fmtText(c.get(it))}</span>` : esc(c.get(it));
-      if (c.name && auto) {
-        const b = autoBadge(auto);
+      if (c.name && badgeSrc) {
+        const b = autoBadge(badgeSrc);
         html += ` <span class="srcbadge" title="${b.tip}">${b.label}</span>`;
       }
       tr.appendChild(el("td", c.cls || null, html));
@@ -597,9 +630,11 @@ function perCharListRenderer(sec, titleKey, cols) {
   return function (p) {
     const box = p.results;
     box.appendChild(el("div", "grp-title", fmtText(fmt(titleKey, CHAR_LABEL[activeChar]))));
-    const build = SECTION_AUTO[sec];
-    const opts = build ? { auto: build(activeChar) } : {};
+    const opts = {};
+    if (SECTION_AUTO[sec]) opts.auto = SECTION_AUTO[sec](activeChar);
+    if (SECTION_LINK[sec]) opts.link = SECTION_LINK[sec](activeChar);
     checklist(box, viewItems(activeChar + "-" + sec, BBS_DATA.perChar[activeChar][sec]), STORE[activeChar][sec], cols(), p.state, opts);
+    if (sec === "records") box.appendChild(el("p", "legend", t('bt-legend-records')));
     const [x, y] = charCount(activeChar, sec);
     setCount(p, x, y);
   };
@@ -938,6 +973,52 @@ document.querySelectorAll(".charbtn").forEach(btn => {
   btn.onclick = () => { setActiveChar(btn.dataset.c); syncCharButtons(); render(); };
 });
 
+/* ---------- completion toasts ---------- */
+let prevMilestones = null;
+function toast(text, icon) {
+  let host = document.getElementById("kh-toasts");
+  if (!host) { host = el("div"); host.id = "kh-toasts"; document.body.appendChild(host); }
+  const tn = el("div", "kh-toast");
+  tn.innerHTML = `<span class="kh-toast-ic">${icon || "✅"}</span><span>${esc(text)}</span>`;
+  host.appendChild(tn);
+  requestAnimationFrame(() => tn.classList.add("show"));
+  setTimeout(() => { tn.classList.add("hide"); setTimeout(() => tn.remove(), 450); }, 4600);
+}
+/* The set of "complete" milestones across every character: trophies whose
+   tracked requirements are all met, each fully-finished tab, and each
+   character's overall total. Compared between renders to toast new ones. */
+function computeMilestones() {
+  const m = new Set();
+  Object.keys(TROPHY_AUTO).forEach(name => { const [x, y] = TROPHY_AUTO[name](); if (y > 0 && x >= y) m.add("trophy::" + name); });
+  const sd = (id, x, y) => { if (y > 0 && x >= y) m.add("tab::" + id); };
+  { const [a, b] = sharedCount("trophies"), [c, d] = sharedCount("ingame"); sd("trophies", a + c, b + d); }
+  { const [x, y] = sharedCount("reports"); sd("reports", x, y); }
+  { const [x, y] = sharedCount("arena"); sd("arena", x, y); }
+  CHARS.forEach(ch => {
+    const lab = CHAR_LABEL[ch];
+    const cd = (id, x, y) => { if (y > 0 && x >= y) m.add("tab::" + id + "::" + ch); };
+    ["commands", "records", "characters"].forEach(s => { const [x, y] = charCount(ch, s); cd(s, x, y); });
+    { const [jx, jy] = charCount(ch, "unversed"); const [md] = missionsCount(ch, STORE.missions.done); cd("unversed", jx + md, jy + BBS_DATA.missions.length); }
+    { const [tx, ty] = charCount(ch, "treasures"); const [sx, sy] = groupCount("stickers", lab); cd("treasures", tx + sx, ty + sy); }
+    { const [x, y] = groupCount("warrior", lab); cd("finish", x, y); }
+    { const [rx, ry] = groupCount("patissier", lab); const [fx, fy] = flavorsEligible(ch); cd("icecream", rx + fx, ry + fy); }
+    { const [ox, oy] = overallChar(ch); if (oy > 0 && ox >= oy) m.add("overall::" + ch); }
+  });
+  return m;
+}
+function milestoneToast(k) {
+  const p = k.split("::");
+  if (p[0] === "trophy") return toast(fmt('bt-toast-trophy', p[1]), "🏆");
+  if (p[0] === "overall") return toast(fmt('bt-toast-overall', CHAR_LABEL[p[1]]), "🎉");
+  const label = t('tabbtn-' + p[1]);
+  return toast(p[2] ? fmt('bt-toast-tab-char', label, CHAR_LABEL[p[2]]) : fmt('bt-toast-tab', label), "✅");
+}
+function checkMilestones() {
+  const cur = computeMilestones();
+  if (prevMilestones) cur.forEach(k => { if (!prevMilestones.has(k)) milestoneToast(k); });
+  prevMilestones = cur;   // first run seeds without toasting
+}
+
 function render() {
   const p = PANEL[activeTab];
   p.results.innerHTML = "";
@@ -945,6 +1026,7 @@ function render() {
   RENDERERS[activeTab](p);
   const [x, y] = overallChar(activeChar);
   document.getElementById("overallNote").textContent = fmt('bt-overall', CHAR_LABEL[activeChar], x, y, y ? Math.round(100 * x / y) : 0);
+  checkMilestones();
 }
 
 buildPanels();

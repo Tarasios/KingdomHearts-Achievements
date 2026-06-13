@@ -238,3 +238,15 @@
 .kh .wcount { color: var(--dim); font-weight: 600; font-variant-numeric: tabular-nums; margin-left: 8px; text-transform: none; letter-spacing: 0; }
 .kh .wtable { margin: 0 0 6px 18px; }
 .kh .wtable td { padding: 7px 10px; }
+
+/* ---- completion toasts (appended to <body>, outside .kh) ---- */
+#kh-toasts { position: fixed; right: 16px; bottom: 16px; z-index: 9999; display: flex;
+  flex-direction: column; gap: 8px; max-width: min(340px, calc(100vw - 32px)); pointer-events: none; }
+.kh-toast { display: flex; align-items: center; gap: 10px; background: var(--panel2); color: var(--ink);
+  border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 10px;
+  padding: 11px 14px; font-size: 13.5px; line-height: 1.35; box-shadow: 0 10px 30px rgba(0,0,0,.38);
+  opacity: 0; transform: translateY(14px) scale(.98); transition: opacity .35s ease, transform .35s ease; }
+.kh-toast.show { opacity: 1; transform: translateY(0) scale(1); }
+.kh-toast.hide { opacity: 0; transform: translateY(8px) scale(.98); }
+.kh-toast-ic { font-size: 19px; line-height: 1; }
+@media (prefers-reduced-motion: reduce) { .kh-toast { transition: opacity .2s; transform: none; } }
