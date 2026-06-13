@@ -120,6 +120,24 @@ function recipeIngredients() {
 /* ---------- helpers ---------- */
 function el(tag, cls, html) { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
 function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+/* Inline markup for any lang string (everything else escaped):
+     {{name}}     -> small inline icon  images/icons/name.png
+     [[text|tip]] -> <span title="tip"> (hover for more info)
+   Lets an icon or tooltip be added to any header/name by editing the lang
+   file only. (Duplicated in js/kh-tracker.js — keep in sync.) */
+const ICON_BASE = "../images/icons/";
+function fmtText(s) {
+  s = String(s == null ? "" : s);
+  const re = /\{\{\s*([\w-]+)\s*\}\}|\[\[([^\]|]+)\|([^\]]+)\]\]/g;
+  let out = "", last = 0, m;
+  while ((m = re.exec(s))) {
+    out += esc(s.slice(last, m.index));
+    if (m[1] != null) out += `<img class="hdricon" src="${ICON_BASE}${m[1]}.png" alt="">`;
+    else out += `<span class="hasinfo" title="${esc(m[3].trim())}" tabindex="0">${esc(m[2].trim())}</span>`;
+    last = re.lastIndex;
+  }
+  return out + esc(s.slice(last));
+}
 function chip(x, y) { return `<span class="prgchip${x >= y && y > 0 ? " full" : ""}">${x} / ${y}</span>`; }
 function bar(x, y) {
   const pct = y ? Math.round(100 * x / y) : 0;
@@ -270,7 +288,7 @@ function checklist(box, items, store, cols, state, opts) {
       const gtd = el("td", "grp-title");
       gtd.colSpan = cols.length + 1;
       gtd.style.borderBottom = "1px solid var(--line)";
-      gtd.appendChild(el("span", null, (opts.groupIcons ? groupIconImg(g) : "") + esc(g)));
+      gtd.appendChild(el("span", null, (opts.groupIcons ? groupIconImg(g) : "") + fmtText(g)));
       const gbtn = el("button", "grpbtn", t('bt-toggle-all'));
       gbtn.onclick = () => toggleGroup(items, store, g, opts);
       gtd.appendChild(gbtn);
@@ -291,7 +309,7 @@ function checklist(box, items, store, cols, state, opts) {
     td.appendChild(chk);
     tr.appendChild(td);
     cols.forEach(c => {
-      let html = c.name ? `<span class="itemname">${esc(c.get(it))}</span>` : esc(c.get(it));
+      let html = c.name ? `<span class="itemname">${fmtText(c.get(it))}</span>` : esc(c.get(it));
       if (c.name && auto) {
         const b = autoBadge(auto);
         html += ` <span class="srcbadge" title="${b.tip}">${b.label}</span>`;
@@ -355,7 +373,7 @@ function buildPanels() {
 function renderTrophies(p) {
   // dashboard: what is missing, per character and shared
   const d = p.dash; d.innerHTML = "";
-  d.appendChild(el("div", "grp-title", t('bt-dash-title')));
+  d.appendChild(el("div", "grp-title", fmtText(t('bt-dash-title'))));
   const tbl = el("table", "dash-table");
   tbl.innerHTML = `<thead><tr><th>${t('bt-dash-section')}</th><th>Terra</th><th>Ventus</th><th>Aqua</th></tr></thead>`;
   const tb = el("tbody");
@@ -394,7 +412,7 @@ function renderTrophies(p) {
   d.appendChild(tbl2);
 
   const box = p.results;
-  box.appendChild(el("div", "grp-title", t('bt-trophies-title')));
+  box.appendChild(el("div", "grp-title", fmtText(t('bt-trophies-title'))));
   checklist(box, viewItems("trophies", BBS_DATA.trophies), STORE.shared.trophies, [
     { th: t('bt-th-rarity'), get: it => it.rarity, cls: "raritycell" },
     { th: t('bt-th-trophy'), get: it => it.name, name: true },
@@ -411,7 +429,7 @@ function renderTrophies(p) {
     if (TROPHY_AUTO[name]) { const [x, y] = TROPHY_AUTO[name](); cells[4].innerHTML = chip(x, y); }
   });
 
-  box.appendChild(el("div", "sub-title", t('bt-ingame-title')));
+  box.appendChild(el("div", "sub-title", fmtText(t('bt-ingame-title'))));
   box.appendChild(el("p", "hint", t('bt-ingame-hint')));
   checklist(box, viewItems("ingame", BBS_DATA.ingame), STORE.shared.ingame, [
     { th: t('bt-th-trophy'), get: it => it.name, name: true },
@@ -427,7 +445,7 @@ function renderCommands(p) {
   const box = p.results;
   const items = viewItems(activeChar + "-commands", BBS_DATA.perChar[activeChar].commands);
   const auto = commandAuto(activeChar);
-  box.appendChild(el("div", "grp-title", fmt('bt-commands-for', CHAR_LABEL[activeChar])));
+  box.appendChild(el("div", "grp-title", fmtText(fmt('bt-commands-for', CHAR_LABEL[activeChar]))));
   checklist(box, items, STORE[activeChar].commands, [
     { th: t('bt-th-command'), get: it => it.name, name: true },
     { th: t('bt-th-obtain'), get: it => it.how || "" }
@@ -441,7 +459,7 @@ function renderUnversed(p) {
   const box = p.results;
   const char = activeChar, label = CHAR_LABEL[char];
 
-  box.appendChild(el("div", "grp-title", t('bt-missions-title')));
+  box.appendChild(el("div", "grp-title", fmtText(t('bt-missions-title'))));
   box.appendChild(el("p", "hint", fmt('bt-missions-hint', label)));
   const tbl = el("table");
   tbl.innerHTML = `<thead><tr><th>${fmt('bt-th-done', label)}</th><th>${fmt('bt-th-maxrank', label)}</th><th>${t('bt-th-unversed')}</th><th>${t('bt-th-world')}</th><th>${t('bt-th-area')}</th><th>${t('bt-th-requirement')}</th><th>${t('bt-th-reward')}</th></tr></thead>`;
@@ -474,7 +492,7 @@ function renderUnversed(p) {
   const [sx, sy] = missionsRankAny();
   box.appendChild(el("p", "legend", fmt('bt-legend-missions', sx, sy)));
 
-  box.appendChild(el("div", "sub-title", fmt('bt-journal-for', label)));
+  box.appendChild(el("div", "sub-title", fmtText(fmt('bt-journal-for', label))));
   checklist(box, viewItems(char + "-unversed", BBS_DATA.perChar[char].unversed), STORE[char].unversed, [
     { th: t('bt-th-enemy'), get: it => it.name, name: true },
     { th: t('bt-th-location'), get: it => it.loc || "" }
@@ -488,7 +506,7 @@ function renderUnversed(p) {
 function perCharListRenderer(sec, titleKey, cols) {
   return function (p) {
     const box = p.results;
-    box.appendChild(el("div", "grp-title", fmt(titleKey, CHAR_LABEL[activeChar])));
+    box.appendChild(el("div", "grp-title", fmtText(fmt(titleKey, CHAR_LABEL[activeChar]))));
     checklist(box, viewItems(activeChar + "-" + sec, BBS_DATA.perChar[activeChar][sec]), STORE[activeChar][sec], cols(), p.state);
     const [x, y] = charCount(activeChar, sec);
     setCount(p, x, y);
@@ -509,7 +527,7 @@ const renderCharacters = perCharListRenderer("characters", 'bt-characters-for', 
 function renderTreasures(p) {
   const box = p.results;
   const label = CHAR_LABEL[activeChar];
-  box.appendChild(el("div", "grp-title", fmt('bt-treasures-for', label)));
+  box.appendChild(el("div", "grp-title", fmtText(fmt('bt-treasures-for', label))));
   checklist(box, viewItems(activeChar + "-treasures", BBS_DATA.perChar[activeChar].treasures), STORE[activeChar].treasures, [
     { th: t('bt-th-reward'), get: it => it.name, name: true },
     { th: t('bt-th-area'), get: it => it.area || "" },
@@ -517,7 +535,7 @@ function renderTreasures(p) {
   ], p.state);
   box.appendChild(el("p", "legend", t('bt-legend-treasures')));
 
-  box.appendChild(el("div", "sub-title", fmt('bt-stickers-for', label)));
+  box.appendChild(el("div", "sub-title", fmtText(fmt('bt-stickers-for', label))));
   checklist(box, viewItems("stickers", BBS_DATA.stickers), STORE.shared.stickers, [
     { th: t('bt-th-sticker'), get: it => it.name, name: true },
     { th: t('bt-th-world'), get: it => it.world || "" },
@@ -541,7 +559,7 @@ function renderReports(p) {
 
 function renderFinish(p) {
   const box = p.results;
-  box.appendChild(el("div", "grp-title", fmt('bt-finish-for', CHAR_LABEL[activeChar])));
+  box.appendChild(el("div", "grp-title", fmtText(fmt('bt-finish-for', CHAR_LABEL[activeChar]))));
   checklist(box, viewItems("warrior", BBS_DATA.warrior), STORE.shared.warrior, [
     { th: t('bt-th-finish'), get: it => it.name, name: true },
     { th: t('bt-th-equipped'), get: it => it.equip || "" },
@@ -553,7 +571,7 @@ function renderFinish(p) {
 
 function renderIcecream(p) {
   const box = p.results;
-  box.appendChild(el("div", "grp-title", fmt('bt-recipes-for', CHAR_LABEL[activeChar])));
+  box.appendChild(el("div", "grp-title", fmtText(fmt('bt-recipes-for', CHAR_LABEL[activeChar]))));
   checklist(box, viewItems("patissier", BBS_DATA.patissier), STORE.shared.patissier, [
     { th: t('bt-th-icecream'), get: it => it.name, name: true },
     { th: t('bt-th-style'), get: it => it.style || "" },
@@ -567,7 +585,7 @@ function renderIcecream(p) {
   const ingAuto = it => (ingMap[it.name] || []).some(e => e.char === CHAR_LABEL[activeChar] && STORE.shared.patissier[e.pIdx]) ? "recipe" : null;
   const neededQty = name => { const e = (ingMap[name] || []).find(x => x.char === CHAR_LABEL[activeChar]); return e ? e.qty : 0; };
 
-  box.appendChild(el("div", "sub-title", fmt('bt-ingredients-for', CHAR_LABEL[activeChar])));
+  box.appendChild(el("div", "sub-title", fmtText(fmt('bt-ingredients-for', CHAR_LABEL[activeChar]))));
   // Ingredients the character can't obtain (no location) are hidden for them.
   const locKey = { terra: "locT", ventus: "locV", aqua: "locA" }[activeChar];
   const eligible = it => !!it[locKey];

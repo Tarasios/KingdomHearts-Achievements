@@ -96,6 +96,19 @@ the engine falls back to the data module for any field not yet moved. Keep
 item order in sync between the two. All seven games work this way now. (The
 French files are a work in progress.)
 
+### Inline markup (icons & tooltips)
+
+Any tracker header or item name in a lang file can use two shorthands
+(everything else is escaped — no other HTML is allowed):
+
+- `{{name}}` → a small inline icon from `images/icons/name.png`, sized to
+  the text. E.g. set `bt-finish-for` to `{{finish}} Finish Commands — %1`.
+  Leave it out and the header is unchanged.
+- `[[text|tip]]` → `text` with a dotted underline that shows `tip` on
+  hover. E.g. `Defeat [[Vanitas|Badlands, after the Final Episode]]`.
+
+See `images/icons/README.md`.
+
 ## Trackers
 
 The two Birth by Sleep tools share `localStorage`: the active character is

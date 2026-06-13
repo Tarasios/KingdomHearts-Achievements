@@ -71,6 +71,27 @@ function cellText(storeId, i, key, it) {
   return (row && Object.prototype.hasOwnProperty.call(row, key)) ? row[key] : it[key];
 }
 
+/* ---------- inline markup in any lang string ----------
+   Everything is escaped; two optional shorthands are recognised so an
+   icon or a hover-tooltip can be added to any header/name by editing the
+   lang file only:
+     {{name}}        -> small inline icon  images/icons/name.png
+     [[text|tip]]    -> <span title="tip"> (hover for more info)
+   (Duplicated in js/kh-bbs-tracker.js — keep in sync.) */
+const ICON_BASE = "../images/icons/";
+function fmtText(s) {
+  s = String(s == null ? "" : s);
+  const re = /\{\{\s*([\w-]+)\s*\}\}|\[\[([^\]|]+)\|([^\]]+)\]\]/g;
+  let out = "", last = 0, m;
+  while ((m = re.exec(s))) {
+    out += esc(s.slice(last, m.index));
+    if (m[1] != null) out += `<img class="hdricon" src="${ICON_BASE}${m[1]}.png" alt="">`;
+    else out += `<span class="hasinfo" title="${esc(m[3].trim())}" tabindex="0">${esc(m[2].trim())}</span>`;
+    last = re.lastIndex;
+  }
+  return out + esc(s.slice(last));
+}
+
 /* Item-level character filter: items tagged c only count/show for that
    character. With no char filter (dashboard totals) everything counts. */
 function itemVisible(it, char) { return !it.c || !char || it.c === char; }
@@ -260,7 +281,7 @@ function checklist(box, sec, res, state) {
       const gtd = el("td", "grp-title");
       gtd.colSpan = cols.length + leadCount + 1;
       gtd.style.borderBottom = "1px solid var(--line)";
-      gtd.appendChild(el("span", null, esc(g)));
+      gtd.appendChild(el("span", null, fmtText(g)));
       const gbtn = el("button", "grpbtn", t('gt-toggle-all'));
       gbtn.onclick = () => toggleGroup(res.items, store, g, sec);
       gtd.appendChild(gbtn);
@@ -291,7 +312,7 @@ function checklist(box, sec, res, state) {
       const v = cellText(res.storeId, i, c.k, it) || "";
       let html;
       if (c.rarity && v) html = `<span class="rarity ${esc(v.toLowerCase())}">${esc(v)}</span>`;
-      else if (c.name) html = `<span class="itemname">${esc(v)}</span>${auto ? ` <span class="srcbadge" title="${fmt('gt-auto-tip', auto)}">${t('gt-auto-badge')}</span>` : ""}`;
+      else if (c.name) html = `<span class="itemname">${fmtText(v)}</span>${auto ? ` <span class="srcbadge" title="${fmt('gt-auto-tip', auto)}">${t('gt-auto-badge')}</span>` : ""}`;
       else html = esc(v);
       tr.appendChild(el("td", null, html));
     });
@@ -406,7 +427,7 @@ function render() {
   p.results.innerHTML = "";
   if (p.dash) {
     p.dash.innerHTML = "";
-    p.dash.appendChild(el("div", "grp-title", t('gt-dash-title')));
+    p.dash.appendChild(el("div", "grp-title", fmtText(t('gt-dash-title'))));
     const tbl = el("table", "dash-table");
     tbl.innerHTML = `<thead><tr><th>${t('gt-dash-section')}</th><th>${t('gt-dash-progress')}</th></tr></thead>`;
     const tb = el("tbody");
@@ -421,7 +442,7 @@ function render() {
   tab.sections.forEach((sec, i) => {
     const res = resolved(sec);
     const title = res.charLabel ? fmt('gt-section-for', t('sec-' + sec.id), res.charLabel) : t('sec-' + sec.id);
-    p.results.appendChild(el("div", i === 0 ? "grp-title" : "sub-title", title));
+    p.results.appendChild(el("div", i === 0 ? "grp-title" : "sub-title", fmtText(title)));
     checklist(p.results, sec, res, p.state);
     const [x, y] = entryCount({ sec, storeId: res.storeId, items: res.items, c: activeChar });
     cx += x; cy += y;
