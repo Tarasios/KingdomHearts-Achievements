@@ -72,6 +72,23 @@ function missionRewardFor(m, char) {
   if (!m.reward) return null;
   return typeof m.reward === "string" ? m.reward : (m.reward[char] || null);
 }
+/* Unversed missions that count once fought — every other mission needs its
+   max rank (high score) to count as complete. */
+const MISSION_NO_RANK = new Set(["Flame Box", "Jellyshade", "Gluttonous Goo"]);
+function missionNeedsRank(m) { return !MISSION_NO_RANK.has(m.name); }
+/* A mission's location for one character. Some areas are stored as a single
+   string covering all three (e.g. "Ballroom (T/A) Wardrobe Room (V)"); pick
+   the segment whose initials include this character's. */
+function missionArea(m, char) {
+  const init = { terra: "T", ventus: "V", aqua: "A" }[char];
+  const s = m.area || "";
+  if (s.indexOf("(") < 0) return s;
+  const re = /([^()]+?)\s*\(([^)]*)\)/g; let mm;
+  while ((mm = re.exec(s))) {
+    if (mm[2].split("/").map(x => x.trim()).indexOf(init) >= 0) return mm[1].trim();
+  }
+  return s;
+}
 /* Auto-unlocked commands for a character: melded in the calculator,
    rewarded by an Unversed mission at max rank, dropped by a checked-off
    treasure chest, made as an ice-cream recipe, or earned as a Finish
@@ -556,7 +573,7 @@ function renderUnversed(p) {
       tr.appendChild(td);
     });
     const reward = r ? `<span class="rewardbadge" title="${t('bt-reward-tip')}">${esc(r)}</span>` : '<span class="crystal-tag">—</span>';
-    [`<span class="itemname">${esc(m.name)}</span>`, esc(m.world), esc(m.area), esc(m.req), reward]
+    [`<span class="itemname">${esc(m.name)}</span>`, esc(m.world), esc(missionArea(m, char)), esc(m.req), reward]
       .forEach(html => tr.appendChild(el("td", null, html)));
     tb.appendChild(tr);
   });
@@ -764,12 +781,19 @@ function worldEntries(world, char) {
   const label = CHAR_LABEL[char];
   const locKey = { terra: "locT", ventus: "locV", aqua: "locA" }[char];
   const out = [];
-  // Unversed missions (shown once; the per-character "cleared" checkbox)
+  // Unversed missions. The clear ("done") row carries the per-character
+  // location; missions that need their high score also get a Max Rank row
+  // carrying the required score.
   viewItems("missions", BBS_DATA.missions).forEach((m, i) => {
     if (normWorld(m.world) !== world) return;
     const k = i + "-" + char;
-    out.push({ type: t('bt-wtype-mission'), name: m.name, where: m.area || "",
+    out.push({ type: t('bt-wtype-mission'), name: m.name, where: missionArea(m, char),
       done: !!STORE.missions.done[k], toggle: () => toggle(STORE.missions.done, k) });
+    if (missionNeedsRank(m)) {
+      out.push({ type: t('bt-wtype-mission'), name: m.name,
+        where: t('bt-world-maxrank') + (m.req ? ": " + m.req : ""),
+        done: !!STORE.missions.rank[k], toggle: () => toggle(STORE.missions.rank, k) });
+    }
   });
   // Treasures (per character; world is the data group)
   viewItems(char + "-treasures", BBS_DATA.perChar[char].treasures).forEach((it, i) => {
@@ -802,6 +826,7 @@ function worldEntries(world, char) {
   const recAuto = recordsAutoFn(char);
   viewItems(char + "-records", BBS_DATA.perChar[char].records).forEach((it, i) => {
     if (normWorld(it.world) !== world) return;
+    if (it.g === "Unversed Missions") return;   // shown as the mission entry above
     const a = recAuto(it);
     out.push({ type: t('bt-wtype-record'), name: it.cat, where: it.entry || "",
       done: !!STORE[char].records[i] || !!a, auto: a || null,

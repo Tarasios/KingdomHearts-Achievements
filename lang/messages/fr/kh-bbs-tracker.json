@@ -140,5 +140,6 @@
     "bt-badge-arena": "ARENA",
     "bt-badge-arena-tip": "Cleared via its Mirage Arena stage (Arena tab)",
     "bt-badge-board": "BOARD",
-    "bt-badge-board-tip": "Completed via the Hunny Pot Board (Records tab)"
+    "bt-badge-board-tip": "Completed via the Hunny Pot Board (Records tab)",
+    "bt-world-maxrank": "Max Rank"
 }
