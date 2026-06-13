@@ -250,3 +250,9 @@
 .kh-toast.hide { opacity: 0; transform: translateY(8px) scale(.98); }
 .kh-toast-ic { font-size: 19px; line-height: 1; }
 @media (prefers-reduced-motion: reduce) { .kh-toast { transition: opacity .2s; transform: none; } }
+
+/* World fully complete: gold header turns success-green with a check. */
+.kh summary.wsum.wdone { color: var(--ok); }
+.kh summary.wsum.wdone::before { color: var(--ok); }
+.kh summary.wsum.wdone .wcount { color: var(--ok); }
+.kh summary.wsum.wdone::after { content: " ✓"; font-weight: 700; color: var(--ok); }

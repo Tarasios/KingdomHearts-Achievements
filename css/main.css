@@ -12,6 +12,8 @@
     --dim: #9aa6c8;
     --accent: #5fb3ff;
     --accent2: #ffcb5f;
+    --ok: #56d98b;
+    --glow: #1a2a55;
     --chip: #243466;
     --nav-bg: rgba(20, 29, 56, 0.92);
     /* Scrim layered over per-game wallpapers so text stays readable. */
@@ -37,7 +39,7 @@ body {
     /* No background-attachment: fixed — it tears/leaves white gaps when
        scrolling on iOS. The per-game wallpaper uses a fixed ::before
        layer instead (see the per-game background block). */
-    background: radial-gradient(1200px 700px at 70% -10%, #1a2a55 0%, var(--bg) 55%);
+    background: radial-gradient(1200px 700px at 70% -10%, var(--glow) 0%, var(--bg) 55%);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
 }
@@ -570,14 +572,27 @@ a.project-card:hover h3 {
     --dim: #4a5570;
     --accent: #2c63c8;
     --accent2: #8a6200;
+    --ok: #1f9d5a;
+    --glow: #eef2fb;
     --chip: #d8deee;
     --nav-bg: rgba(238, 241, 248, 0.92);
     --bg-scrim: linear-gradient(rgba(230, 234, 244, 0.55), rgba(230, 234, 244, 0.72));
 }
 
 [data-theme="day"] body {
-    background: radial-gradient(1200px 700px at 70% -10%, #eef2fb 0%, var(--bg) 55%);
+    background: radial-gradient(1200px 700px at 70% -10%, var(--glow) 0%, var(--bg) 55%);
 }
+
+/* ---------- Per-character accent schemes (KH BBS tracker) ----------
+   Only the primary accent + background glow shift; the neutral panels, text
+   and the gold secondary accent stay put, so contrast/readability hold.
+   Terra = warm red, Ventus = green, Aqua = the original blue. */
+[data-char="terra"]  { --accent: #ff8a73; --glow: #34202a; }
+[data-char="ventus"] { --accent: #57d68f; --glow: #163a2c; }
+[data-char="aqua"]   { --accent: #5fb3ff; --glow: #1a2a55; }
+[data-theme="day"][data-char="terra"]  { --accent: #c24a30; --glow: #fbeeec; }
+[data-theme="day"][data-char="ventus"] { --accent: #1f9d5a; --glow: #ecf7f0; }
+[data-theme="day"][data-char="aqua"]   { --accent: #2c63c8; --glow: #eef2fb; }
 
 /* ---------- Theme toggle (mirrors the language toggle) ---------- */
 .theme-btn {

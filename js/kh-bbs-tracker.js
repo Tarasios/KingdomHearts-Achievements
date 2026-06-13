@@ -81,7 +81,7 @@ function missionRewardFor(m, char) {
 }
 /* Unversed missions that count once fought — every other mission needs its
    max rank (high score) to count as complete. */
-const MISSION_NO_RANK = new Set(["Flame Box", "Jellyshade", "Gluttonous Goo"]);
+const MISSION_NO_RANK = new Set(["Flame Box", "Jellyshade", "Gluttonous Goo", "Element Cluster"]);
 function missionNeedsRank(m) { return !MISSION_NO_RANK.has(m.name); }
 /* A mission's location for one character. Some areas are stored as a single
    string covering all three (e.g. "Ballroom (T/A) Wardrobe Room (V)"); pick
@@ -933,10 +933,12 @@ function renderWorlds(p) {
     if (!entries.length) return;
 
     const wkey = "w:" + slug;
+    const complete = wdone === all.length;
     const wdet = el("details", "wgroup");
     wdet.open = filtering ? true : !!open[wkey];   // worlds collapsed by default
     wdet.addEventListener("toggle", () => { if (!filtering) open[wkey] = wdet.open; });
-    wdet.appendChild(el("summary", "wsum", fmtText(t('bt-world-' + slug)) + ` <span class="wcount">${wdone} / ${all.length}</span>`));
+    wdet.appendChild(el("summary", "wsum" + (complete ? " wdone" : ""),
+      fmtText(t('bt-world-' + slug)) + ` <span class="wcount">${wdone} / ${all.length}</span>`));
 
     const order = [], byType = {};
     entries.forEach(e => { if (!byType[e.type]) { byType[e.type] = []; order.push(e.type); } byType[e.type].push(e); });
@@ -980,6 +982,8 @@ document.querySelectorAll(".kh .tab").forEach(tab => {
 
 function syncCharButtons() {
   document.querySelectorAll(".charbtn").forEach(b => b.classList.toggle("on", b.dataset.c === activeChar));
+  // Drive the per-character accent scheme (Terra red, Ventus green, Aqua blue).
+  document.documentElement.setAttribute("data-char", activeChar);
 }
 document.querySelectorAll(".charbtn").forEach(btn => {
   btn.onclick = () => { setActiveChar(btn.dataset.c); syncCharButtons(); render(); };
