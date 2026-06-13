@@ -13,8 +13,13 @@
     --accent: #5fb3ff;
     --accent2: #ffcb5f;
     --ok: #56d98b;
+    --ok-bg: rgba(86, 217, 139, 0.14);
     --glow: #1a2a55;
     --chip: #243466;
+    /* Fixed character signature colours (never themed by active character). */
+    --terra: #ff8a73;
+    --ventus: #6fd58c;
+    --aqua: #6fb8ff;
     --nav-bg: rgba(20, 29, 56, 0.92);
     /* Scrim layered over per-game wallpapers so text stays readable. */
     --bg-scrim: linear-gradient(rgba(12, 19, 38, 0.62), rgba(12, 19, 38, 0.78));
@@ -573,8 +578,12 @@ a.project-card:hover h3 {
     --accent: #2c63c8;
     --accent2: #8a6200;
     --ok: #1f9d5a;
+    --ok-bg: rgba(31, 157, 90, 0.13);
     --glow: #eef2fb;
     --chip: #d8deee;
+    --terra: #c24a30;
+    --ventus: #1f9d5a;
+    --aqua: #2c63c8;
     --nav-bg: rgba(238, 241, 248, 0.92);
     --bg-scrim: linear-gradient(rgba(230, 234, 244, 0.55), rgba(230, 234, 244, 0.72));
 }

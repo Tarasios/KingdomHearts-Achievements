@@ -509,7 +509,7 @@ function renderTrophies(p) {
   const d = p.dash; d.innerHTML = "";
   d.appendChild(el("div", "grp-title", fmtText(t('bt-dash-title'))));
   const tbl = el("table", "dash-table");
-  tbl.innerHTML = `<thead><tr><th>${t('bt-dash-section')}</th><th>Terra</th><th>Ventus</th><th>Aqua</th></tr></thead>`;
+  tbl.innerHTML = `<thead><tr><th>${t('bt-dash-section')}</th><th class="c-terra">Terra</th><th class="c-ventus">Ventus</th><th class="c-aqua">Aqua</th></tr></thead>`;
   const tb = el("tbody");
   const rows = [
     [t('tabbtn-commands'), c => charCount(c, "commands")],
@@ -526,7 +526,7 @@ function renderTrophies(p) {
     [t('bt-dash-missions-rank'), c => missionsCount(c, STORE.missions.rank)]
   ];
   rows.forEach(([label, get]) => {
-    const tds = CHARS.map(c => { const [x, y] = get(c); return `<td>${bar(x, y)}</td>`; }).join("");
+    const tds = CHARS.map(c => { const [x, y] = get(c); return `<td class="c-${c}">${bar(x, y)}</td>`; }).join("");
     tb.appendChild(el("tr", null, `<td>${label}</td>${tds}`));
   });
   tbl.appendChild(tb);
