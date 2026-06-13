@@ -3492,8 +3492,19 @@ var TRACKER_GAME = {
     ],
     "sections": [
       "treasures",
-      "gummim"
-    ]
+      {
+        "id": "trinities",
+        "key": "world"
+      },
+      {
+        "id": "minigames",
+        "key": "loc",
+        "split": " - "
+      }
+    ],
+    "alias": {
+      "Done during the 100 Acre Wood story.": "Hundred Acre Wood"
+    }
   }
 };
 

@@ -4815,7 +4815,11 @@ var TRACKER_GAME = {
     "sections": [
       "treasures",
       "lucky",
-      "charfiles"
+      "charfiles",
+      {
+        "id": "flan",
+        "key": "world"
+      }
     ]
   }
 };

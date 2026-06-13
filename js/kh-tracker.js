@@ -484,6 +484,9 @@ function checkMilestones() {
 function worldOf(secCfg, res, it, i) {
   const key = secCfg.key || "g";
   let w = (key === "g") ? it.g : (it[key] != null ? it[key] : cellText(res.storeId, i, key, it));
+  w = String(w || "");
+  // Optional: world is the part before a delimiter (e.g. "World - area").
+  if (secCfg.split && w.indexOf(secCfg.split) >= 0) w = w.slice(0, w.indexOf(secCfg.split));
   // Normalise whitespace — some data uses non-breaking spaces in group names.
   w = String(w || "").replace(/ /g, " ").replace(/\s+/g, " ").trim();
   const alias = G.worldSummary.alias || {};
