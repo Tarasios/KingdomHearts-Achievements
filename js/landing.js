@@ -40,6 +40,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     var G = window.KH_GAMES && window.KH_GAMES[id];
     return G ? KHSummary.trackerTotals(G) : [0, 0];
   }
+  // Achievement (platform-trophy) progress — distinct from 100% completion,
+  // since not everything tracked is needed for every achievement.
+  function achFor(id) {
+    if (GAME[id].bbs) return KHSummary.bbsAchievements();
+    var G = window.KH_GAMES && window.KH_GAMES[id];
+    return G ? KHSummary.trackerAchievements(G) : [0, 0];
+  }
 
   // A .banner figure that only appears once its image loads (so a missing
   // file leaves no broken-image icon).
@@ -64,21 +71,29 @@ document.addEventListener("DOMContentLoaded", async function () {
     wrap.appendChild(el("span", "progbar-pct", pct(x, y) + "%"));
     return wrap;
   }
+  // A bar with a small leading label (Achievements vs 100% completion).
+  function labeledBar(label, kind, x, y) {
+    var row = el("div", "prograw " + kind);
+    row.appendChild(el("span", "prograw-label", esc(label)));
+    row.appendChild(progBar(x, y));
+    return row;
+  }
 
   function gameCard(id) {
-    var r = totalsFor(id);
+    var r = totalsFor(id), a = achFor(id);
     var card = el("a", "game-card");
     card.href = GAME[id].page;
     card.appendChild(imageFigure("card-banner", "images/banners/" + GAME[id].banner, t("game-" + id)));
     var body = el("div", "game-card-body");
     body.appendChild(el("h3", null, esc(t("game-" + id))));
-    body.appendChild(progBar(r[0], r[1]));
+    body.appendChild(labeledBar(t("lg-ach-label"), "ach", a[0], a[1]));
+    body.appendChild(labeledBar(t("lg-100-label"), "full", r[0], r[1]));
     card.appendChild(body);
-    return { node: card, x: r[0], y: r[1] };
+    return { node: card, x: r[0], y: r[1], ax: a[0], ay: a[1] };
   }
 
   function render() {
-    var sx = 0, sy = 0;
+    var sx = 0, sy = 0, ax = 0, ay = 0;
 
     var coll = document.getElementById("collections");
     coll.innerHTML = "";
@@ -88,7 +103,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       var grid = el("div", "game-cards");
       c.games.forEach(function (id) {
         var card = gameCard(id);
-        sx += card.x; sy += card.y;
+        sx += card.x; sy += card.y; ax += card.ax; ay += card.ay;
         grid.appendChild(card.node);
       });
       group.appendChild(grid);
@@ -98,7 +113,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     var total = document.getElementById("series-total");
     total.innerHTML = "";
     total.appendChild(el("div", "series-headline", fmt("lg-total-count", sx, sy, pct(sx, sy))));
-    total.appendChild(progBar(sx, sy));
+    total.appendChild(labeledBar(t("lg-ach-label"), "ach", ax, ay));
+    total.appendChild(labeledBar(t("lg-100-label"), "full", sx, sy));
   }
 
   render();

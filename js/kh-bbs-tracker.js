@@ -96,6 +96,11 @@ function missionArea(m, char) {
   }
   return s;
 }
+/* Aqua's Realm of Darkness chests need a special save and aren't required
+   for any achievement — kept on the Treasures tab but excluded from every
+   completion total and from auto-unlocking commands (e.g. Transcendence). */
+function isRealmOfDarkness(g) { return String(g || "").indexOf("Realm of Darkness") === 0; }
+
 /* Auto-unlocked commands for a character: melded in the calculator,
    rewarded by an Unversed mission at max rank, dropped by a checked-off
    treasure chest, made as an ice-cream recipe, or earned as a Finish
@@ -110,6 +115,7 @@ function commandAuto(char) {
   });
   const cmdNames = new Set(BBS_DATA.perChar[char].commands.map(c => c.name));
   BBS_DATA.perChar[char].treasures.forEach((tr, i) => {
+    if (isRealmOfDarkness(tr.g)) return;
     if (STORE[char].treasures[i] && cmdNames.has(tr.name) && !m.has(tr.name)) m.set(tr.name, "treasure");
   });
   BBS_DATA.patissier.forEach((r, i) => {
@@ -279,6 +285,11 @@ function countMap(map, n) { let d = 0; for (let i = 0; i < n; i++) if (map[i]) d
 function sharedCount(key) { return [countMap(STORE.shared[key], BBS_DATA[key].length), BBS_DATA[key].length]; }
 function charCount(char, sec) {
   const items = BBS_DATA.perChar[char][sec];
+  if (sec === "treasures") {   // exclude Aqua's Realm of Darkness chests
+    let d = 0, y = 0;
+    items.forEach((it, i) => { if (isRealmOfDarkness(it.g)) return; y++; if (STORE[char].treasures[i]) d++; });
+    return [d, y];
+  }
   const af = SECTION_AUTO[sec] ? SECTION_AUTO[sec](char) : null;
   const lf = SECTION_LINK[sec] ? SECTION_LINK[sec](char) : null;
   if (!af && !lf) return [countMap(STORE[char][sec], items.length), items.length];
@@ -842,8 +853,10 @@ function worldEntries(world, char) {
         done: !!STORE.missions.rank[k], toggle: () => toggle(STORE.missions.rank, k) });
     }
   });
-  // Treasures (per character; world is the data group)
+  // Treasures (per character; world is the data group). Realm of Darkness
+  // chests are excluded — they don't count toward completion.
   viewItems(char + "-treasures", BBS_DATA.perChar[char].treasures).forEach((it, i) => {
+    if (isRealmOfDarkness(BBS_DATA.perChar[char].treasures[i].g)) return;
     if (normWorld(BBS_DATA.perChar[char].treasures[i].g) !== world) return;
     out.push({ type: t('bt-wtype-treasure'), name: it.name, where: it.area || "",
       done: !!STORE[char].treasures[i], toggle: () => toggle(STORE[char].treasures, i) });

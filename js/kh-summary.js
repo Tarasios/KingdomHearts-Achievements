@@ -116,7 +116,9 @@ var KHSummary = (function () {
     var cmds = D.perChar[char].commands, names = {};
     cmds.forEach(function (c) { names[c.name] = 1; });
     var trStore = (store[char] && store[char].treasures) || {};
-    D.perChar[char].treasures.forEach(function (tr, i) { if (trStore[i] && names[tr.name]) auto[tr.name] = 1; });
+    D.perChar[char].treasures.forEach(function (tr, i) {
+      if (trStore[i] && names[tr.name] && String(tr.g || "").indexOf("Realm of Darkness") !== 0) auto[tr.name] = 1;
+    });
     var cStore = (store[char] && store[char].commands) || {}, d = 0;
     cmds.forEach(function (it, i) { if (cStore[i] || auto[it.name]) d++; });
     return [d, cmds.length];
@@ -142,11 +144,42 @@ var KHSummary = (function () {
     });
     var d = 0, y = 0;
     D.flavors.forEach(function (f, i) {
-      if (!f[locKey]) return;
+      if (!(used[f.name] && used[f.name].length)) return;   // only ingredients this char's recipes use
       y++;
-      if (fl[i] || (used[f.name] || []).some(function (pIdx) { return pat[pIdx]; })) d++;
+      if (fl[i] || used[f.name].some(function (pIdx) { return pat[pIdx]; })) d++;
     });
     return [d, y];
+  }
+
+  // Treasures excluding Aqua's Realm of Darkness chests (special save, not
+  // required for any achievement) — mirrors charCount() in the BBS engine.
+  function treasuresDone(D, store, c) {
+    var ts = (store[c] && store[c].treasures) || {}, d = 0, y = 0;
+    D.perChar[c].treasures.forEach(function (it, i) {
+      if (String(it.g || "").indexOf("Realm of Darkness") === 0) return;
+      y++; if (ts[i]) d++;
+    });
+    return [d, y];
+  }
+
+  /* Achievement (platform-trophy) progress only — the trophies list — as
+   opposed to full 100% completion (everything tracked). */
+  function trackerAchievements(G) {
+    var STORE = getStore(G.storeKey), x = 0, y = 0;
+    G.tabs.forEach(function (tab) {
+      tab.sections.forEach(function (sec) {
+        if (!sec.trophies) return;
+        var r = entryCount(G, STORE, sec, sec.id, sec.items);
+        x += r[0]; y += r[1];
+      });
+    });
+    return [x, y];
+  }
+  function bbsAchievements() {
+    var D = window.KH_BBS_DATA;
+    if (!D) return [0, 0];
+    var store = getStore("bbs_progress_v1");
+    return [countMap(store.shared && store.shared.trophies, D.trophies.length), D.trophies.length];
   }
 
   function bbsTotals() {
@@ -157,17 +190,19 @@ var KHSummary = (function () {
 
     BBS_CHARS.forEach(function (c) {
       add(commandsDone(D, store, c));
-      ["records", "characters", "unversed", "treasures"].forEach(function (sec) {
+      ["records", "characters", "unversed"].forEach(function (sec) {
         var items = D.perChar[c][sec];
         add([countMap(store[c] && store[c][sec], items.length), items.length]);
       });
+      add(treasuresDone(D, store, c));     // excludes Realm of Darkness chests
+      add([countMap(store[c] && store[c].arena, D.arena.length), D.arena.length]);   // arena is per-character
       ["stickers", "warrior", "patissier"].forEach(function (k) { add(groupCount(D, store, k, BBS_LABEL[c])); });
       add(flavorsDoneChar(D, store, c));   // per-character ingredients
       var done = (store.missions && store.missions.done) || {}, md = 0;
       D.missions.forEach(function (m, i) { if (done[i + "-" + c]) md++; });
       add([md, D.missions.length]);
     });
-    ["trophies", "ingame", "reports", "arena"].forEach(function (k) {
+    ["trophies", "ingame", "reports"].forEach(function (k) {
       add([countMap(store.shared && store.shared[k], D[k].length), D[k].length]);
     });
     var rank = (store.missions && store.missions.rank) || {}, sd = 0;
@@ -178,5 +213,9 @@ var KHSummary = (function () {
     return [x, y];
   }
 
-  return { trackerTotals: trackerTotals, bbsTotals: bbsTotals, getStore: getStore };
+  return {
+    trackerTotals: trackerTotals, bbsTotals: bbsTotals,
+    trackerAchievements: trackerAchievements, bbsAchievements: bbsAchievements,
+    getStore: getStore
+  };
 })();

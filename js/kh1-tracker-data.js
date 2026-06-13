@@ -3476,7 +3476,6 @@ var TRACKER_GAME = {
   ],
   "worldSummary": {
     "worlds": [
-      "Destiny Islands",
       "Traverse Town",
       "Wonderland",
       "Olympus Coliseum",

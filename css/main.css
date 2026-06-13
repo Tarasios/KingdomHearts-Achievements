@@ -723,6 +723,30 @@ a.project-card:hover h3 {
     text-align: right;
 }
 
+/* Two-metric rows: Achievements (platform trophies) over full 100%
+   completion. The achievements bar is gold so the two read apart even
+   before either hits green at 100%. */
+.prograw {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 6px;
+}
+.prograw .progbar {
+    flex: 1;
+}
+.prograw-label {
+    min-width: 6.6rem;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    font-weight: 700;
+    color: var(--dim);
+}
+.prograw.ach .progbar-track:not(.full) > i {
+    background: var(--accent2);
+}
+
 .game-cards {
     display: grid;
     /* Two wide columns: a 4-game collection becomes a clean 2x2, a 2-game
