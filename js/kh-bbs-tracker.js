@@ -586,15 +586,45 @@ function renderIcecream(p) {
   const neededQty = name => { const e = (ingMap[name] || []).find(x => x.char === CHAR_LABEL[activeChar]); return e ? e.qty : 0; };
 
   box.appendChild(el("div", "sub-title", fmtText(fmt('bt-ingredients-for', CHAR_LABEL[activeChar]))));
-  // Ingredients the character can't obtain (no location) are hidden for them.
-  const locKey = { terra: "locT", ventus: "locV", aqua: "locA" }[activeChar];
-  const eligible = it => !!it[locKey];
-  checklist(box, viewItems("flavors", BBS_DATA.flavors), STORE[activeChar].flavors, [
-    { th: t('bt-th-ingredient'), get: it => it.name, name: true },
-    { th: t('bt-th-needed'), get: it => { const n = neededQty(it.name); return n ? "×" + n : ""; }, cls: "needcell" },
-    { th: t('bt-th-icecream'), get: it => it.icecream || "" },
-    { th: fmt('bt-th-location-for', CHAR_LABEL[activeChar]), get: it => it[locKey] || "" }
-  ], p.state, { itemFilter: eligible, auto: ingAuto });
+  // Ingredients the character can't obtain (no location) are hidden. They are
+  // grouped by spawn spot in world order, so each location note is shown once
+  // (ingredients that spawn together are listed together).
+  const char = activeChar;
+  const locKey = { terra: "locT", ventus: "locV", aqua: "locA" }[char];
+  const q = p.state.q.toLowerCase();
+  const groups = new Map();   // "world|area" -> { world, area, note, items:[] }
+  viewItems("flavors", BBS_DATA.flavors).forEach((it, i) => {
+    if (!it[locKey]) return;
+    if (q && it.name.toLowerCase().indexOf(q) < 0) return;
+    const auto = !!ingAuto(it);
+    const done = !!STORE[char].flavors[i] || auto;
+    if (p.state.hide && done) return;
+    const need = neededQty(it.name);
+    parseLocs(it[locKey]).forEach(loc => {
+      const key = loc.world + "|" + loc.area;
+      if (!groups.has(key)) groups.set(key, { world: loc.world, area: loc.area, note: loc.note, items: [] });
+      groups.get(key).items.push({ i: i, name: it.name, need: need, done: done, auto: auto });
+    });
+  });
+  Array.from(groups.values())
+    .sort((a, b) => worldIndex(a.world) - worldIndex(b.world) || a.area.localeCompare(b.area))
+    .forEach(g => {
+      box.appendChild(el("div", "trk-cat", fmtText(g.area + " (" + g.world + ")")));
+      if (g.note) box.appendChild(el("p", "hint", fmtText(g.note)));
+      const tbl = el("table"), tb = el("tbody");
+      g.items.forEach(item => {
+        const tr = el("tr", item.done ? "donerow" : null);
+        const td = el("td", "chkcell"), chk = el("input", "chk");
+        chk.type = "checkbox"; chk.checked = item.done;
+        if (item.auto) { chk.disabled = true; chk.title = autoBadge("recipe").tip; }
+        else chk.addEventListener("change", () => toggle(STORE[char].flavors, item.i));
+        td.appendChild(chk); tr.appendChild(td);
+        tr.appendChild(el("td", null, `<span class="itemname">${fmtText(item.name)}</span>`));
+        tr.appendChild(el("td", "needcell", item.need ? "×" + item.need : ""));
+        tb.appendChild(tr);
+      });
+      tbl.appendChild(tb); box.appendChild(tbl);
+    });
 
   const [rx, ry] = groupCount("patissier", CHAR_LABEL[activeChar]);
   const [fx, fy] = flavorsEligible(activeChar);
@@ -634,6 +664,21 @@ function normWorld(w) {
   if (w.indexOf("Realm of Darkness") === 0) return "Realm of Darkness";
   return w;
 }
+function worldIndex(w) {
+  w = normWorld(w);
+  for (let k = 0; k < WORLDS.length; k++) if (WORLDS[k][0] === w) return k;
+  return 99;
+}
+/* Parse an enriched ingredient location string
+   ("Area (World) — Note  |  Area2 (World2) — Note2") into parts. */
+function parseLocs(s) {
+  if (!s) return [];
+  return String(s).split("  |  ").map(part => {
+    const m = part.match(/^(.*?)\s*\(([^)]+)\)(?:\s*—\s*([\s\S]*))?$/);
+    return m ? { area: m[1].trim(), world: m[2].trim(), note: (m[3] || "").trim() }
+             : { area: part.trim(), world: "", note: "" };
+  });
+}
 // Optional superbosses (entries live in the Characters journal).
 const SECRET_BOSSES = [
   { name: "Vanitas Remnant", world: "Keyblade Graveyard", noteKey: "bt-boss-vanitas" },
@@ -663,14 +708,17 @@ function worldEntries(world, char) {
     out.push({ type: t('bt-wtype-sticker'), name: it.name, where: it.area || "",
       done: !!STORE.shared.stickers[i], toggle: () => toggle(STORE.shared.stickers, i) });
   });
-  // Ingredients (eligible for this character; world(s) parsed from location)
+  // Ingredients (eligible for this character; bucketed by the world in
+  // their location). Show how many this character needs + the spot.
   const ingMap = recipeIngredients();
   viewItems("flavors", BBS_DATA.flavors).forEach((it, i) => {
     if (!it[locKey]) return;
-    const worlds = (String(it[locKey]).match(/\(([^)]+)\)/g) || []).map(s => normWorld(s.slice(1, -1)));
-    if (worlds.indexOf(world) < 0) return;
+    const loc = parseLocs(it[locKey]).find(l => normWorld(l.world) === world);
+    if (!loc) return;
     const auto = (ingMap[it.name] || []).some(e => e.char === label && STORE.shared.patissier[e.pIdx]);
-    out.push({ type: t('bt-wtype-ingredient'), name: it.name, where: it.icecream || "",
+    const ne = (ingMap[it.name] || []).find(e => e.char === label);
+    const where = (ne ? "×" + ne.qty : "") + (ne && loc.area ? " · " : "") + (loc.area || "");
+    out.push({ type: t('bt-wtype-ingredient'), name: it.name, where: where,
       done: !!STORE[char].flavors[i] || auto, auto: auto ? "recipe" : null,
       toggle: () => toggle(STORE[char].flavors, i) });
   });
