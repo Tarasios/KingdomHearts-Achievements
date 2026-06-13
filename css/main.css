@@ -904,10 +904,12 @@ body[data-page="kh-melding"]::before {
     min-width: 200px;
 }
 
-.has-menu:hover > .nav-menu,
-.has-menu:focus-within > .nav-menu,
+/* Opening is driven by .open (js/nav.js hover-intent + click), with
+   :focus-within for keyboard users — no bare :hover, so the menu doesn't
+   snap shut the instant the pointer leaves the button. */
 .has-menu.open > .nav-menu,
-.has-submenu:hover > .nav-submenu,
+.has-menu:focus-within > .nav-menu,
+.has-submenu.open > .nav-submenu,
 .has-submenu:focus-within > .nav-submenu {
     display: block;
 }
@@ -951,11 +953,8 @@ body[data-page="kh-melding"]::before {
         margin: 2px 0 2px 0.9rem;
     }
 
-    .has-menu:hover > .nav-menu,
-    .has-submenu:hover > .nav-submenu {
-        display: none;   /* on touch, use the .open click toggle instead */
-    }
-
+    /* On touch the whole menu opens via .open (click); show the submenu
+       inline so the Melding Calculator is reachable. */
     .has-menu.open > .nav-menu {
         display: block;
     }

@@ -691,38 +691,63 @@ function worldEntries(world, char) {
   return out;
 }
 
+function entryTable(list) {
+  const tbl = el("table", "wtable");
+  const tb = el("tbody");
+  list.forEach(e => {
+    const tr = el("tr", e.done ? "donerow" : null);
+    const td = el("td", "chkcell");
+    const chk = el("input", "chk");
+    chk.type = "checkbox"; chk.checked = e.done;
+    if (e.auto) { chk.disabled = true; chk.title = autoBadge(e.auto).tip; }
+    else chk.addEventListener("change", e.toggle);
+    td.appendChild(chk); tr.appendChild(td);
+    tr.appendChild(el("td", null, `<span class="itemname">${fmtText(e.name)}</span>`));
+    tr.appendChild(el("td", null, fmtText(e.where)));
+    tb.appendChild(tr);
+  });
+  tbl.appendChild(tb);
+  return tbl;
+}
 function renderWorlds(p) {
   const box = p.results;
+  if (!p.state.open) p.state.open = {};
+  const open = p.state.open;   // persists collapse state across re-renders
   box.appendChild(el("div", "grp-title", fmtText(fmt('bt-worlds-for', CHAR_LABEL[activeChar]))));
   box.appendChild(el("p", "hint", t('bt-worlds-hint')));
   const q = p.state.q.toLowerCase();
+  const filtering = !!q || p.state.hide;
   let dx = 0, dy = 0;
   WORLDS.forEach(([world, slug]) => {
-    let entries = worldEntries(world, activeChar);
-    if (!entries.length) return;
-    dy += entries.length;
-    entries.forEach(e => { if (e.done) dx++; });
+    const all = worldEntries(world, activeChar);
+    if (!all.length) return;
+    const wdone = all.filter(e => e.done).length;
+    dy += all.length; dx += wdone;
+    let entries = all;
     if (q) entries = entries.filter(e => (e.type + " " + e.name + " " + e.where).toLowerCase().includes(q));
     if (p.state.hide) entries = entries.filter(e => !e.done);
     if (!entries.length) return;
-    box.appendChild(el("div", "sub-title", fmtText(t('bt-world-' + slug))));
-    const tbl = el("table");
-    tbl.innerHTML = `<thead><tr><th></th><th>${t('bt-wth-type')}</th><th>${t('bt-wth-item')}</th><th>${t('bt-wth-where')}</th></tr></thead>`;
-    const tb = el("tbody");
-    entries.forEach(e => {
-      const tr = el("tr", e.done ? "donerow" : null);
-      const td = el("td", "chkcell");
-      const chk = el("input", "chk");
-      chk.type = "checkbox"; chk.checked = e.done;
-      if (e.auto) { chk.disabled = true; chk.title = autoBadge(e.auto).tip; }
-      else chk.addEventListener("change", e.toggle);
-      td.appendChild(chk); tr.appendChild(td);
-      tr.appendChild(el("td", "crystal-tag", esc(e.type)));
-      tr.appendChild(el("td", null, `<span class="itemname">${fmtText(e.name)}</span>`));
-      tr.appendChild(el("td", null, fmtText(e.where)));
-      tb.appendChild(tr);
+
+    const wkey = "w:" + slug;
+    const wdet = el("details", "wgroup");
+    wdet.open = filtering ? true : !!open[wkey];   // worlds collapsed by default
+    wdet.addEventListener("toggle", () => { if (!filtering) open[wkey] = wdet.open; });
+    wdet.appendChild(el("summary", "wsum", fmtText(t('bt-world-' + slug)) + ` <span class="wcount">${wdone} / ${all.length}</span>`));
+
+    const order = [], byType = {};
+    entries.forEach(e => { if (!byType[e.type]) { byType[e.type] = []; order.push(e.type); } byType[e.type].push(e); });
+    order.forEach(type => {
+      const list = byType[type];
+      const tdone = list.filter(e => e.done).length;
+      const tkey = "t:" + slug + ":" + type;
+      const tdet = el("details", "tgroup");
+      tdet.open = filtering ? true : (open[tkey] !== false);   // type groups open by default
+      tdet.addEventListener("toggle", () => { if (!filtering) open[tkey] = tdet.open; });
+      tdet.appendChild(el("summary", "tsum", esc(type) + ` <span class="wcount">${tdone} / ${list.length}</span>`));
+      tdet.appendChild(entryTable(list));
+      wdet.appendChild(tdet);
     });
-    tbl.appendChild(tb); box.appendChild(tbl);
+    box.appendChild(wdet);
   });
   if (!dy) box.appendChild(el("div", "empty", t('bt-nothing')));
   setCount(p, dx, dy);
