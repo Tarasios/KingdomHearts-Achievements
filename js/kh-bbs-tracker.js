@@ -325,7 +325,7 @@ function checklist(box, items, store, cols, state, opts) {
 }
 
 /* ---------- panel skeletons ---------- */
-const TAB_IDS = ["trophies", "commands", "unversed", "records", "characters", "treasures", "reports", "finish", "icecream", "arena"];
+const TAB_IDS = ["trophies", "worlds", "commands", "unversed", "records", "characters", "treasures", "reports", "finish", "icecream", "arena"];
 const PANEL = {};   // id -> {state:{q,hide}, results, count, bar, dash}
 
 function setCount(p, x, y) {
@@ -616,8 +616,120 @@ function renderArena(p) {
   setCount(p, x, y);
 }
 
+/* ---------- Worlds: every collectible grouped by world, for the active
+   character, as live checkboxes bound to the same stores as their home
+   tabs (so checking here checks there, and vice-versa). ---------- */
+const WORLDS = [
+  ["Land of Departure", "land-of-departure"], ["Dwarf Woodlands", "dwarf-woodlands"],
+  ["Enchanted Dominion", "enchanted-dominion"], ["Castle of Dreams", "castle-of-dreams"],
+  ["Mysterious Tower", "mysterious-tower"], ["Radiant Garden", "radiant-garden"],
+  ["Disney Town", "disney-town"], ["Olympus Coliseum", "olympus-coliseum"],
+  ["Deep Space", "deep-space"], ["Never Land", "never-land"],
+  ["Keyblade Graveyard", "keyblade-graveyard"], ["Realm of Darkness", "realm-of-darkness"],
+  ["Mirage Arena", "mirage-arena"]
+];
+function normWorld(w) {
+  if (!w) return w;
+  w = String(w).replace(/^The /, "");
+  if (w.indexOf("Realm of Darkness") === 0) return "Realm of Darkness";
+  return w;
+}
+// Optional superbosses (entries live in the Characters journal).
+const SECRET_BOSSES = [
+  { name: "Vanitas Remnant", world: "Keyblade Graveyard", noteKey: "bt-boss-vanitas" },
+  { name: "Unknown", world: "Land of Departure", noteKey: "bt-boss-unknown" }
+];
+
+function worldEntries(world, char) {
+  const label = CHAR_LABEL[char];
+  const locKey = { terra: "locT", ventus: "locV", aqua: "locA" }[char];
+  const out = [];
+  // Unversed missions (shown once; the per-character "cleared" checkbox)
+  viewItems("missions", BBS_DATA.missions).forEach((m, i) => {
+    if (normWorld(m.world) !== world) return;
+    const k = i + "-" + char;
+    out.push({ type: t('bt-wtype-mission'), name: m.name, where: m.area || "",
+      done: !!STORE.missions.done[k], toggle: () => toggle(STORE.missions.done, k) });
+  });
+  // Treasures (per character; world is the data group)
+  viewItems(char + "-treasures", BBS_DATA.perChar[char].treasures).forEach((it, i) => {
+    if (normWorld(BBS_DATA.perChar[char].treasures[i].g) !== world) return;
+    out.push({ type: t('bt-wtype-treasure'), name: it.name, where: it.area || "",
+      done: !!STORE[char].treasures[i], toggle: () => toggle(STORE[char].treasures, i) });
+  });
+  // Stickers (this character's, grouped by data group = character)
+  viewItems("stickers", BBS_DATA.stickers).forEach((it, i) => {
+    if (BBS_DATA.stickers[i].g !== label || normWorld(it.world) !== world) return;
+    out.push({ type: t('bt-wtype-sticker'), name: it.name, where: it.area || "",
+      done: !!STORE.shared.stickers[i], toggle: () => toggle(STORE.shared.stickers, i) });
+  });
+  // Ingredients (eligible for this character; world(s) parsed from location)
+  const ingMap = recipeIngredients();
+  viewItems("flavors", BBS_DATA.flavors).forEach((it, i) => {
+    if (!it[locKey]) return;
+    const worlds = (String(it[locKey]).match(/\(([^)]+)\)/g) || []).map(s => normWorld(s.slice(1, -1)));
+    if (worlds.indexOf(world) < 0) return;
+    const auto = (ingMap[it.name] || []).some(e => e.char === label && STORE.shared.patissier[e.pIdx]);
+    out.push({ type: t('bt-wtype-ingredient'), name: it.name, where: it.icecream || "",
+      done: !!STORE[char].flavors[i] || auto, auto: auto ? "recipe" : null,
+      toggle: () => toggle(STORE[char].flavors, i) });
+  });
+  // Records
+  viewItems(char + "-records", BBS_DATA.perChar[char].records).forEach((it, i) => {
+    if (normWorld(it.world) !== world) return;
+    out.push({ type: t('bt-wtype-record'), name: it.cat, where: it.entry || "",
+      done: !!STORE[char].records[i], toggle: () => toggle(STORE[char].records, i) });
+  });
+  // Secret bosses
+  SECRET_BOSSES.forEach(sb => {
+    if (sb.world !== world) return;
+    const idx = BBS_DATA.perChar[char].characters.findIndex(x => x.name === sb.name);
+    if (idx < 0) return;
+    out.push({ type: t('bt-wtype-boss'), name: sb.name, where: t(sb.noteKey),
+      done: !!STORE[char].characters[idx], toggle: () => toggle(STORE[char].characters, idx) });
+  });
+  return out;
+}
+
+function renderWorlds(p) {
+  const box = p.results;
+  box.appendChild(el("div", "grp-title", fmtText(fmt('bt-worlds-for', CHAR_LABEL[activeChar]))));
+  box.appendChild(el("p", "hint", t('bt-worlds-hint')));
+  const q = p.state.q.toLowerCase();
+  let dx = 0, dy = 0;
+  WORLDS.forEach(([world, slug]) => {
+    let entries = worldEntries(world, activeChar);
+    if (!entries.length) return;
+    dy += entries.length;
+    entries.forEach(e => { if (e.done) dx++; });
+    if (q) entries = entries.filter(e => (e.type + " " + e.name + " " + e.where).toLowerCase().includes(q));
+    if (p.state.hide) entries = entries.filter(e => !e.done);
+    if (!entries.length) return;
+    box.appendChild(el("div", "sub-title", fmtText(t('bt-world-' + slug))));
+    const tbl = el("table");
+    tbl.innerHTML = `<thead><tr><th></th><th>${t('bt-wth-type')}</th><th>${t('bt-wth-item')}</th><th>${t('bt-wth-where')}</th></tr></thead>`;
+    const tb = el("tbody");
+    entries.forEach(e => {
+      const tr = el("tr", e.done ? "donerow" : null);
+      const td = el("td", "chkcell");
+      const chk = el("input", "chk");
+      chk.type = "checkbox"; chk.checked = e.done;
+      if (e.auto) { chk.disabled = true; chk.title = autoBadge(e.auto).tip; }
+      else chk.addEventListener("change", e.toggle);
+      td.appendChild(chk); tr.appendChild(td);
+      tr.appendChild(el("td", "crystal-tag", esc(e.type)));
+      tr.appendChild(el("td", null, `<span class="itemname">${fmtText(e.name)}</span>`));
+      tr.appendChild(el("td", null, fmtText(e.where)));
+      tb.appendChild(tr);
+    });
+    tbl.appendChild(tb); box.appendChild(tbl);
+  });
+  if (!dy) box.appendChild(el("div", "empty", t('bt-nothing')));
+  setCount(p, dx, dy);
+}
+
 const RENDERERS = {
-  trophies: renderTrophies, commands: renderCommands, unversed: renderUnversed,
+  trophies: renderTrophies, worlds: renderWorlds, commands: renderCommands, unversed: renderUnversed,
   records: renderRecords, characters: renderCharacters, treasures: renderTreasures,
   reports: renderReports, finish: renderFinish,
   icecream: renderIcecream, arena: renderArena
