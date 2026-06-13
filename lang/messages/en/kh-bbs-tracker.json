@@ -1169,243 +1169,243 @@
       {
         "name": "Dancin' Lemon",
         "icecream": "Spark Lemon",
-        "locT": "Skull Rock: Entrance (Never Land), Risky Riches (Mirage Arena)",
-        "locV": "Mermaid Lagoon (Never Land), Risky Riches (Mirage Arena)",
-        "locA": "Indian Camp (Never Land), Risky Riches (Mirage Arena)"
+        "locT": "Skull Rock: Entrance (Never Land) — Small cliff accessible via Air Slide from Skull Rock: Cavern. If Jellyshades and a Triple Wrecker appear, leave the area and come back.  |  Risky Riches (Mirage Arena) — The Prize Pods appear in the second-to-last wave of Round Three; eight appear this time.",
+        "locV": "Mermaid Lagoon (Never Land) — On the ledge accessible from the Cliff Path. A Wild Bruiser appears alone first, followed by the Prize Pods and four Yellow Mustards. If the Wild Bruiser and Yellow Mustards appear together, exit and re-enter.  |  Risky Riches (Mirage Arena) — The Prize Pods appear in the second-to-last wave of Round Three; eight appear this time.",
+        "locA": "Indian Camp (Never Land) — At the far north cliff-edge on the patch of green grass. Appears alongside a Wild Bruiser. If it doesn't appear, leave and re-enter the area.  |  Risky Riches (Mirage Arena) — The Prize Pods appear in the second-to-last wave of Round Three; eight appear this time."
       },
       {
         "name": "Cherryberry",
         "icecream": "Double Crunch",
-        "locV": "Audience Chamber (Enchanted Dominion)"
+        "locV": "Audience Chamber (Enchanted Dominion) — Columned area to the left of the entrance. If Red Hot Chilis appear, leave the area and return."
       },
       {
         "name": "Apple Pie",
         "icecream": "Honeybunny",
-        "locT": "Underground Waterway (Dwarf Woodlands)",
-        "locV": "The Mine (Dwarf Woodlands)",
-        "locA": "Flower Glade (Dwarf Woodlands)"
+        "locT": "Underground Waterway (Dwarf Woodlands) — Spawn point on top of a waterfall near the exit to the Courtyard. If four Red Hot Chilis appear leave the area and return.",
+        "locV": "The Mine (Dwarf Woodlands) — Lit area far on the right. Defeat the Monotruckers and Red Hot Chilis. If four Scrappers appear leave the area and return.",
+        "locA": "Flower Glade (Dwarf Woodlands) — Area to the left of the path from the Courtyard."
       },
       {
         "name": "Balloon Melon",
         "icecream": "Fabracadabra",
-        "locA": "Turo Prison Block (Deep Space)"
+        "locA": "Turo Prison Block (Deep Space) — Far end of the hall."
       },
       {
         "name": "Peach Fantasy",
         "icecream": "Fabracadabra",
-        "locA": "Flower Glade (Dwarf Woodlands)"
+        "locA": "Flower Glade (Dwarf Woodlands) — Area to the left of the path from the Courtyard."
       },
       {
         "name": "Heroic Orange",
         "icecream": "Fabracadabra",
-        "locA": "Town Near Thebes (Olympus Coliseum)"
+        "locA": "Town Near Thebes (Olympus Coliseum) — Southeast corner. If only Red Hot Chilis appear, or none appear at all, leave the area and come back until Red Hot Chilis and Prize Pots appear together."
       },
       {
         "name": "Melodious Grape",
         "icecream": "Daisy Sorbet",
-        "locT": "Raceway (Disney Town)",
-        "locV": "Raceway (Disney Town)",
-        "locA": "Raceway (Disney Town)"
+        "locT": "Raceway (Disney Town) — Defeat four Blue Sea Salts in the blue-walled roof across from the exit to Pete's Rec Room, only accessible via Air Sliding. If a Chrono Twister appears, leave the area and come back.",
+        "locV": "Raceway (Disney Town) — Roof leading from the exit to Pete's Rec Room. Defeat four Blue Sea Salts. If none appear, leave the area and come back.",
+        "locA": "Raceway (Disney Town) — After exiting the Raceway Registration, immediately to your left against the wall with the hidden Mickeys. Must defeat a few Blue Sea Salts beforehand."
       },
       {
         "name": "Open Sesame",
         "icecream": "Snow Bear",
-        "locT": "Treasure Tussle, Risky Riches (Mirage Arena)",
-        "locV": "Treasure Tussle, Risky Riches (Mirage Arena)",
-        "locA": "Treasure Tussle, Risky Riches (Mirage Arena)"
+        "locT": "Treasure Tussle (Mirage Arena) — Clear Round One and Round Two and the first two waves of Round Three; the Prize Pots appear on both floors.  |  Risky Riches (Mirage Arena) — The Prize Pods appear in the second-to-last wave of Round Three; eight appear this time.",
+        "locV": "Treasure Tussle (Mirage Arena) — Clear Round One and Round Two and the first two waves of Round Three; the Prize Pots appear on both floors.  |  Risky Riches (Mirage Arena) — The Prize Pods appear in the second-to-last wave of Round Three; eight appear this time.",
+        "locA": "Treasure Tussle (Mirage Arena) — Clear Round One and Round Two and the first two waves of Round Three; the Prize Pots appear on both floors.  |  Risky Riches (Mirage Arena) — The Prize Pods appear in the second-to-last wave of Round Three; eight appear this time."
       },
       {
         "name": "Bijou Bean",
         "icecream": "Vanilla Glitz",
-        "locT": "Waterside (Enchanted Dominion)"
+        "locT": "Waterside (Enchanted Dominion) — In-between the wall of fire and the two Scrappers (and sometimes one Bruiser) at the northernmost part."
       },
       {
         "name": "Nutty Nut",
         "icecream": "Rockin' Crunch",
-        "locT": "Underground Waterway (Dwarf Woodlands), Town Near Thebes (Olympus Coliseum)"
+        "locT": "Underground Waterway (Dwarf Woodlands) — Spawn point on top of a waterfall near the exit to the Courtyard. If four Red Hot Chilis appear leave the area and return.  |  Town Near Thebes (Olympus Coliseum) — Southeast corner. If only Red Hot Chilis appear, or none appear at all, leave the area and come back until Red Hot Chilis and Prize Pots appear together."
       },
       {
         "name": "Bizarro Bean",
         "icecream": "Big Bad Pete",
-        "locT": "Turo Prison Block (Deep Space)"
+        "locT": "Turo Prison Block (Deep Space) — Far end of the area."
       },
       {
         "name": "Gaspberry",
         "icecream": "Royalberry",
-        "locT": "Underground Waterway (Dwarf Woodlands)",
-        "locA": "Flower Glade (Dwarf Woodlands)"
+        "locT": "Underground Waterway (Dwarf Woodlands) — Spawn point on top of a waterfall near the exit to the Courtyard. If four Red Hot Chilis appear leave the area and return.",
+        "locA": "Flower Glade (Dwarf Woodlands) — Area to the left of the path from the Courtyard."
       },
       {
         "name": "Crystal Sugar",
         "icecream": "Vanilla Glitz",
-        "locT": "Palace Courtyard (Castle of Dreams)"
+        "locT": "Palace Courtyard (Castle of Dreams) — Go over to the fountain in the center and defeat four Red Hot Chilis. If another four appear, exit the area and come back."
       },
       {
         "name": "Jumbo Almond",
         "icecream": "Goofy Parfait",
-        "locV": "Audience Chamber (Enchanted Dominion)"
+        "locV": "Audience Chamber (Enchanted Dominion) — Columned area to the left of the entrance. If Red Hot Chilis appear, leave the area and return."
       },
       {
         "name": "Mermaid Salt",
         "icecream": "Donald Fizz",
-        "locA": "Indian Camp (Never Land)"
+        "locA": "Indian Camp (Never Land) — At the far north cliff-edge on the patch of green grass. Appears alongside a Wild Bruiser. If it doesn't appear, leave and re-enter the area."
       },
       {
         "name": "Prickle Pepper",
         "icecream": "Bueno Volcano",
-        "locT": "Raceway (Disney Town)",
-        "locV": "Raceway (Disney Town)",
-        "locA": "Raceway (Disney Town)"
+        "locT": "Raceway (Disney Town) — Defeat four Blue Sea Salts in the blue-walled roof across from the exit to Pete's Rec Room, only accessible via Air Sliding. If a Chrono Twister appears, leave the area and come back.",
+        "locV": "Raceway (Disney Town) — Roof leading from the exit to Pete's Rec Room. Defeat four Blue Sea Salts. If none appear, leave the area and come back.",
+        "locA": "Raceway (Disney Town) — After exiting the Raceway Registration, immediately to your left against the wall with the hidden Mickeys. Must defeat a few Blue Sea Salts beforehand."
       },
       {
         "name": "Toonbasco",
         "icecream": "Bueno Volcano",
-        "locT": "Raceway (Disney Town)",
-        "locV": "Raceway (Disney Town)",
-        "locA": "Raceway (Disney Town)"
+        "locT": "Raceway (Disney Town) — Defeat four Blue Sea Salts in the blue-walled roof across from the exit to Pete's Rec Room, only accessible via Air Sliding. If a Chrono Twister appears, leave the area and come back.",
+        "locV": "Raceway (Disney Town) — Roof leading from the exit to Pete's Rec Room. Defeat four Blue Sea Salts. If none appear, leave the area and come back.",
+        "locA": "Raceway (Disney Town) — After exiting the Raceway Registration, immediately to your left against the wall with the hidden Mickeys. Must defeat a few Blue Sea Salts beforehand."
       },
       {
         "name": "Merry Mint",
         "icecream": "Daisy Sorbet",
-        "locT": "Underground Waterway (Dwarf Woodlands)",
-        "locV": "The Mine (Dwarf Woodlands)",
-        "locA": "Flower Glade (Dwarf Woodlands)"
+        "locT": "Underground Waterway (Dwarf Woodlands) — Spawn point on top of a waterfall near the exit to the Courtyard. If four Red Hot Chilis appear leave the area and return.",
+        "locV": "The Mine (Dwarf Woodlands) — Lit area far on the right. Defeat the Monotruckers and Red Hot Chilis. If four Scrappers appear leave the area and return.",
+        "locA": "Flower Glade (Dwarf Woodlands) — Area to the left of the path from the Courtyard."
       },
       {
         "name": "Rose Honey",
         "icecream": "Royalberry",
-        "locT": "Waterside (Enchanted Dominion)",
-        "locA": "Waterside (Enchanted Dominion)"
+        "locT": "Waterside (Enchanted Dominion) — In-between the wall of fire and the two Scrappers (and sometimes one Bruiser) at the northernmost part.",
+        "locA": "Waterside (Enchanted Dominion) — After exiting the Forest Clearing, in the corner of the cliff on the left side."
       },
       {
         "name": "Golden Jam",
         "icecream": "Vanilla Glitz",
-        "locT": "Skull Rock: Entrance (Never Land)"
+        "locT": "Skull Rock: Entrance (Never Land) — Small cliff accessible via Air Slide from Skull Rock: Cavern. If Jellyshades and a Triple Wrecker appear, leave the area and come back."
       },
       {
         "name": "Whipped Dream",
         "icecream": "Big Bad Pete",
-        "locT": "Skull Rock: Entrance (Never Land)"
+        "locT": "Skull Rock: Entrance (Never Land) — Small cliff accessible via Air Slide from Skull Rock: Cavern. If Jellyshades and a Triple Wrecker appear, leave the area and come back."
       },
       {
         "name": "Honeybunch",
         "icecream": "Honeybunny",
-        "locV": "Mermaid Lagoon (Never Land)"
+        "locV": "Mermaid Lagoon (Never Land) — On the ledge accessible from the Cliff Path. A Wild Bruiser appears alone first, followed by the Prize Pods and four Yellow Mustards. If the Wild Bruiser and Yellow Mustards appear together, exit and re-enter."
       },
       {
         "name": "Star Syrup",
         "icecream": "Double Crunch",
-        "locV": "Durgon Transporter (Deep Space)"
+        "locV": "Durgon Transporter (Deep Space) — In the airlock leading to the Ship Exterior. Defeat the first wave of enemies that appear in the room, after which the Prize Pods will appear. If Sonic Blasters appear, leave the area and come back."
       },
       {
         "name": "Rainbow Syrup",
         "icecream": "Sugary Skies",
-        "locV": "Mermaid Lagoon (Never Land)",
-        "locA": "Indian Camp (Never Land)"
+        "locV": "Mermaid Lagoon (Never Land) — On the ledge accessible from the Cliff Path. A Wild Bruiser appears alone first, followed by the Prize Pods and four Yellow Mustards. If the Wild Bruiser and Yellow Mustards appear together, exit and re-enter.",
+        "locA": "Indian Camp (Never Land) — At the far north cliff-edge on the patch of green grass. Appears alongside a Wild Bruiser. If it doesn't appear, leave and re-enter the area."
       },
       {
         "name": "Sky Blue Mousse",
         "icecream": "Donald Fizz",
-        "locA": "Waterside (Enchanted Dominion)"
+        "locA": "Waterside (Enchanted Dominion) — After exiting the Forest Clearing, in the corner of the cliff on the left side."
       },
       {
         "name": "Cream Fluff",
         "icecream": "Sugary Skies",
-        "locV": "Durgon Transporter (Deep Space)",
-        "locA": "Turo Prison Block (Deep Space)"
+        "locV": "Durgon Transporter (Deep Space) — In the airlock leading to the Ship Exterior. Defeat the first wave of enemies that appear in the room, after which the Prize Pods will appear. If Sonic Blasters appear, leave the area and come back.",
+        "locA": "Turo Prison Block (Deep Space) — Far end of the hall."
       },
       {
         "name": "Soy Milk",
         "icecream": "Snow Bear",
-        "locT": "Fountain Court (Radiant Garden)",
-        "locV": "Fountain Court (Radiant Garden)",
-        "locA": "Fountain Court (Radiant Garden)"
+        "locT": "Fountain Court (Radiant Garden) — Defeat four Blue Sea Salts in the recess adjacent to the stairs. If Red Hot Chilis appear instead, leave the area and come back.",
+        "locV": "Fountain Court (Radiant Garden) — Defeat four Blue Sea Salts in the recess adjacent to the stairs. If Red Hot Chilis appear instead, leave the area and come back.",
+        "locA": "Fountain Court (Radiant Garden) — Defeat four Blue Sea Salts in the recess adjacent to the stairs. If Red Hot Chilis appear instead, leave the area and come back."
       },
       {
         "name": "Merry Dairy",
         "icecream": "Double Crunch",
-        "locV": "The Mine (Dwarf Woodlands)"
+        "locV": "The Mine (Dwarf Woodlands) — Lit area far on the right. Defeat the Monotruckers and Red Hot Chilis. If four Scrappers appear leave the area and return."
       },
       {
         "name": "Moogle Coffee",
         "icecream": "Goofy Parfait",
-        "locV": "Fountain Court (Radiant Garden)"
+        "locV": "Fountain Court (Radiant Garden) — Defeat four Blue Sea Salts in the recess adjacent to the stairs. If Red Hot Chilis appear instead, leave the area and come back."
       },
       {
         "name": "Crystal Soda",
         "icecream": "Donald Fizz",
-        "locA": "&#9;Foyer (Castle of Dreams)"
+        "locA": "&#9;Foyer (Castle of Dreams) — Underneath the stairs on the left side. If you don't encounter a single Bruiser beforehand, reenter the area until it appears."
       },
       {
         "name": "Rocket Soda",
         "icecream": "Spark Lemon",
-        "locT": "Fountain Court (Radiant Garden)",
-        "locV": "Fountain Court (Radiant Garden)",
-        "locA": "Fountain Court (Radiant Garden)"
+        "locT": "Fountain Court (Radiant Garden) — Defeat four Blue Sea Salts in the recess adjacent to the stairs. If Red Hot Chilis appear instead, leave the area and come back.",
+        "locV": "Fountain Court (Radiant Garden) — Defeat four Blue Sea Salts in the recess adjacent to the stairs. If Red Hot Chilis appear instead, leave the area and come back.",
+        "locA": "Fountain Court (Radiant Garden) — Defeat four Blue Sea Salts in the recess adjacent to the stairs. If Red Hot Chilis appear instead, leave the area and come back."
       },
       {
         "name": "Fizzy Tizzy",
         "icecream": "Donald Fizz",
-        "locA": "Turo Prison Block (Deep Space)"
+        "locA": "Turo Prison Block (Deep Space) — Far end of the hall."
       },
       {
         "name": "Galactic Caramel",
         "icecream": "Rockin' Crunch",
-        "locT": "Turo Prison Block (Deep Space)"
+        "locT": "Turo Prison Block (Deep Space) — Far end of the area."
       },
       {
         "name": "Chocolate Valentine",
         "icecream": "Goofy Parfait",
-        "locV": "Mousehole (Castle of Dreams)"
+        "locV": "Mousehole (Castle of Dreams) — Far end of the area next to the candle, accessible through the hole on top of the end table with a clock in the Wardrobe Room. Reenter until it appears."
       },
       {
         "name": "Thundercracker",
         "icecream": "Spark Lemon",
-        "locT": "Town Near Thebes (Olympus Coliseum)",
-        "locV": "Town Near Thebes (Olympus Coliseum)",
-        "locA": "Town Near Thebes (Olympus Coliseum)"
+        "locT": "Town Near Thebes (Olympus Coliseum) — Southeast corner. If only Red Hot Chilis appear, or none appear at all, leave the area and come back until Red Hot Chilis and Prize Pots appear together.",
+        "locV": "Town Near Thebes (Olympus Coliseum) — Southeast corner. If only Red Hot Chilis appear, or none appear at all, leave the area and come back until Red Hot Chilis and Prize Pots appear together.",
+        "locA": "Town Near Thebes (Olympus Coliseum) — Southeast corner. If only Red Hot Chilis appear, or none appear at all, leave the area and come back until Red Hot Chilis and Prize Pots appear together."
       },
       {
         "name": "Cotton Cloudcandy",
         "icecream": "Sugary Skies",
-        "locV": "Town Near Thebes (Olympus Coliseum)",
-        "locA": "Town Near Thebes (Olympus Coliseum)"
+        "locV": "Town Near Thebes (Olympus Coliseum) — Southeast corner. If only Red Hot Chilis appear, or none appear at all, leave the area and come back until Red Hot Chilis and Prize Pots appear together.",
+        "locA": "Town Near Thebes (Olympus Coliseum) — Southeast corner. If only Red Hot Chilis appear, or none appear at all, leave the area and come back until Red Hot Chilis and Prize Pots appear together."
       },
       {
         "name": "Nebula Nectar",
         "icecream": "Royalberry",
-        "locT": "Fountain Court (Radiant Garden)",
-        "locA": "Fountain Court (Radiant Garden)"
+        "locT": "Fountain Court (Radiant Garden) — Defeat four Blue Sea Salts in the recess adjacent to the stairs. If Red Hot Chilis appear instead, leave the area and come back.",
+        "locA": "Fountain Court (Radiant Garden) — Defeat four Blue Sea Salts in the recess adjacent to the stairs. If Red Hot Chilis appear instead, leave the area and come back."
       },
       {
         "name": "Birthday Cake",
         "icecream": "Royalberry",
-        "locT": "Palace Courtyard (Castle of Dreams)",
-        "locA": "&#9;Foyer (Castle of Dreams)"
+        "locT": "Palace Courtyard (Castle of Dreams) — Go over to the fountain in the center and defeat four Red Hot Chilis. If another four appear, exit the area and come back.",
+        "locA": "&#9;Foyer (Castle of Dreams) — Underneath the stairs on the left side. If you don't encounter a single Bruiser beforehand, reenter the area until it appears."
       },
       {
         "name": "Wedding Cake",
         "icecream": "Double Crunch",
-        "locV": "Mousehole (Castle of Dreams)"
+        "locV": "Mousehole (Castle of Dreams) — Far end of the area next to the candle, accessible through the hole on top of the end table with a clock in the Wardrobe Room. Reenter until it appears."
       },
       {
         "name": "Forest Muffin",
         "icecream": "Goofy Parfait",
-        "locV": "Audience Chamber (Enchanted Dominion)"
+        "locV": "Audience Chamber (Enchanted Dominion) — Columned area to the left of the entrance. If Red Hot Chilis appear, leave the area and return."
       },
       {
         "name": "Rich Marshmallow",
         "icecream": "Daisy Sorbet",
-        "locT": "Palace Courtyard (Castle of Dreams)",
-        "locV": "Mousehole (Castle of Dreams)",
-        "locA": "&#9;Foyer (Castle of Dreams)"
+        "locT": "Palace Courtyard (Castle of Dreams) — Go over to the fountain in the center and defeat four Red Hot Chilis. If another four appear, exit the area and come back.",
+        "locV": "Mousehole (Castle of Dreams) — Far end of the area next to the candle, accessible through the hole on top of the end table with a clock in the Wardrobe Room. Reenter until it appears.",
+        "locA": "&#9;Foyer (Castle of Dreams) — Underneath the stairs on the left side. If you don't encounter a single Bruiser beforehand, reenter the area until it appears."
       },
       {
         "name": "Starry Sky Delight",
         "icecream": "Daisy Sorbet",
-        "locT": "Treasure Tussle (Mirage Arena)",
-        "locV": "Treasure Tussle (Mirage Arena)",
-        "locA": "Treasure Tussle (Mirage Arena)"
+        "locT": "Treasure Tussle (Mirage Arena) — Clear Round One and Round Two and the first two waves of Round Three; the Prize Pots appear on both floors.",
+        "locV": "Treasure Tussle (Mirage Arena) — Clear Round One and Round Two and the first two waves of Round Three; the Prize Pots appear on both floors.",
+        "locA": "Treasure Tussle (Mirage Arena) — Clear Round One and Round Two and the first two waves of Round Three; the Prize Pots appear on both floors."
       }
     ],
     "arena": [
