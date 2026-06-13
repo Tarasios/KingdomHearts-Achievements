@@ -633,7 +633,7 @@ var BBS_DATA = {
     {"name": "Heat Slash 1", "g": "Miscellaneous - Finish Commands"},
     {"name": "Gold Rush", "g": "Miscellaneous - Finish Commands"},
     {"name": "Rising Rock 2", "g": "Miscellaneous - Finish Commands"},
-    {"name": "Ramuh's Judgement", "g": "Miscellaneous - Finish Commands"},
+    {"name": "Ramuh's Judgment", "g": "Miscellaneous - Finish Commands"},
     {"name": "Twisted Hours", "g": "Miscellaneous - Finish Commands"},
     {"name": "Surprise! 1", "g": "Miscellaneous - Finish Commands"},
     {"name": "Dark Star 1", "g": "Miscellaneous - Finish Commands"},

@@ -73,10 +73,12 @@ function missionRewardFor(m, char) {
   return typeof m.reward === "string" ? m.reward : (m.reward[char] || null);
 }
 /* Auto-unlocked commands for a character: melded in the calculator,
-   rewarded by an Unversed mission at max rank, or dropped by a treasure
-   chest that's been checked off. */
+   rewarded by an Unversed mission at max rank, dropped by a checked-off
+   treasure chest, made as an ice-cream recipe, or earned as a Finish
+   command (both share the command's name). */
 function commandAuto(char) {
   const m = new Map();
+  const label = CHAR_LABEL[char];
   meldOwned(char).forEach(n => m.set(n, "meld"));
   BBS_DATA.missions.forEach((ms, i) => {
     const r = missionRewardFor(ms, char);
@@ -86,14 +88,83 @@ function commandAuto(char) {
   BBS_DATA.perChar[char].treasures.forEach((tr, i) => {
     if (STORE[char].treasures[i] && cmdNames.has(tr.name) && !m.has(tr.name)) m.set(tr.name, "treasure");
   });
+  BBS_DATA.patissier.forEach((r, i) => {
+    if (r.g === label && STORE.shared.patissier[i] && cmdNames.has(r.name) && !m.has(r.name)) m.set(r.name, "icecream");
+  });
+  BBS_DATA.warrior.forEach((w, i) => {
+    if (w.g === label && STORE.shared.warrior[i] && cmdNames.has(w.name) && !m.has(w.name)) m.set(w.name, "finish");
+  });
   return m;
 }
+
+/* ---------- other cross-off cascades (all keyed by item name) ----------
+   Indexes + state probes shared by the auto functions below. */
+const ARENA_IDX = {}; BBS_DATA.arena.forEach((a, i) => { ARENA_IDX[a.name] = i; });
+const MISSION_IDX = {}; BBS_DATA.missions.forEach((m, i) => { MISSION_IDX[m.name] = i; });
+const HAW_CHARS = new Set(["Winnie the Pooh", "Tigger", "Rabbit"]);
+function arenaDone(stage) { const i = ARENA_IDX[stage]; return i != null && !!STORE.shared.arena[i]; }
+function missionDoneByName(name, char) { const i = MISSION_IDX[name]; return i != null && !!STORE.missions.done[i + "-" + char]; }
+function recordDoneBy(char, pred) {
+  const merged = viewItems(char + "-records", BBS_DATA.perChar[char].records);
+  for (let i = 0; i < merged.length; i++) if (pred(merged[i]) && STORE[char].records[i]) return true;
+  return false;
+}
+
+/* Unversed journal: filled by clearing its Unversed mission (done is
+   enough — max rank isn't needed) or any of its Mirage Arena stages. */
+function unversedAutoFn(char) {
+  return it => {
+    if (missionDoneByName(it.name, char)) return "uvmission";
+    const loc = it.loc || "";
+    if (loc.indexOf("Mirage Arena") >= 0) {
+      const stages = (loc.match(/"([^"]+)"/g) || []).map(s => s.slice(1, -1));
+      if (stages.some(s => arenaDone(s))) return "arena";
+    }
+    return null;
+  };
+}
+/* Records: the per-Unversed mission records cross off with their mission
+   (done); the Arena Mode records cross off with their arena stage. */
+function recordsAutoFn(char) {
+  return it => {
+    if (it.g === "Unversed Missions" && missionDoneByName(it.cat, char)) return "uvmission";
+    if (it.cat === "Arena Mode") {
+      for (let k = 0; k < BBS_DATA.arena.length; k++) {
+        const nm = BBS_DATA.arena[k].name;
+        if ((it.entry || "").indexOf(nm) >= 0 && arenaDone(nm)) return "arena";
+      }
+    }
+    return null;
+  };
+}
+/* Character journal: the Hundred Acre Wood trio fills when the Hunny Pot
+   command board is done; Monstro fills when "Monster of the Sea" is cleared. */
+function charactersAutoFn(char) {
+  return it => {
+    if (HAW_CHARS.has(it.name) && recordDoneBy(char, r => r.entry === "Hunny Pot Board")) return "board";
+    if (it.name === "Monstro" && arenaDone("Monster of the Sea")) return "arena";
+    return null;
+  };
+}
+function commandAutoFn(char) { const m = commandAuto(char); return it => m.get(it.name) || null; }
+
+/* Sections whose completion can be auto-credited from other tabs. */
+const SECTION_AUTO = {
+  commands: commandAutoFn, records: recordsAutoFn,
+  characters: charactersAutoFn, unversed: unversedAutoFn
+};
+
 function autoBadge(src) {
   return {
     meld: { label: t('bt-badge-meld'), tip: t('bt-badge-meld-tip') },
     mission: { label: t('bt-badge-mission'), tip: t('bt-badge-mission-tip') },
     treasure: { label: t('bt-badge-treasure'), tip: t('bt-badge-treasure-tip') },
-    recipe: { label: t('bt-badge-recipe'), tip: t('bt-badge-recipe-tip') }
+    recipe: { label: t('bt-badge-recipe'), tip: t('bt-badge-recipe-tip') },
+    icecream: { label: t('bt-badge-icecream'), tip: t('bt-badge-icecream-tip') },
+    finish: { label: t('bt-badge-finish'), tip: t('bt-badge-finish-tip') },
+    uvmission: { label: t('bt-badge-uvmission'), tip: t('bt-badge-uvmission-tip') },
+    arena: { label: t('bt-badge-arena'), tip: t('bt-badge-arena-tip') },
+    board: { label: t('bt-badge-board'), tip: t('bt-badge-board-tip') }
   }[src];
 }
 
@@ -164,10 +235,12 @@ function countMap(map, n) { let d = 0; for (let i = 0; i < n; i++) if (map[i]) d
 function sharedCount(key) { return [countMap(STORE.shared[key], BBS_DATA[key].length), BBS_DATA[key].length]; }
 function charCount(char, sec) {
   const items = BBS_DATA.perChar[char][sec];
-  if (sec !== "commands") return [countMap(STORE[char][sec], items.length), items.length];
-  const auto = commandAuto(char);
+  const build = SECTION_AUTO[sec];
+  if (!build) return [countMap(STORE[char][sec], items.length), items.length];
+  const af = build(char);
+  const merged = viewItems(char + "-" + sec, items);
   let d = 0;
-  items.forEach((it, i) => { if (STORE[char].commands[i] || auto.has(it.name)) d++; });
+  merged.forEach((it, i) => { if (STORE[char][sec][i] || af(it)) d++; });
   return [d, items.length];
 }
 function groupCount(key, label) {
@@ -496,7 +569,7 @@ function renderUnversed(p) {
   checklist(box, viewItems(char + "-unversed", BBS_DATA.perChar[char].unversed), STORE[char].unversed, [
     { th: t('bt-th-enemy'), get: it => it.name, name: true },
     { th: t('bt-th-location'), get: it => it.loc || "" }
-  ], p.state);
+  ], p.state, { auto: unversedAutoFn(char) });
 
   const [jx, jy] = charCount(char, "unversed");
   const [mx] = missionsCount(char, STORE.missions.done);
@@ -507,7 +580,9 @@ function perCharListRenderer(sec, titleKey, cols) {
   return function (p) {
     const box = p.results;
     box.appendChild(el("div", "grp-title", fmtText(fmt(titleKey, CHAR_LABEL[activeChar]))));
-    checklist(box, viewItems(activeChar + "-" + sec, BBS_DATA.perChar[activeChar][sec]), STORE[activeChar][sec], cols(), p.state);
+    const build = SECTION_AUTO[sec];
+    const opts = build ? { auto: build(activeChar) } : {};
+    checklist(box, viewItems(activeChar + "-" + sec, BBS_DATA.perChar[activeChar][sec]), STORE[activeChar][sec], cols(), p.state, opts);
     const [x, y] = charCount(activeChar, sec);
     setCount(p, x, y);
   };

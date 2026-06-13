@@ -130,5 +130,15 @@
     "bt-world-never-land": "Never Land",
     "bt-world-keyblade-graveyard": "Keyblade Graveyard",
     "bt-world-realm-of-darkness": "Realm of Darkness",
-    "bt-world-mirage-arena": "Mirage Arena"
+    "bt-world-mirage-arena": "Mirage Arena",
+    "bt-badge-icecream": "ICE CREAM",
+    "bt-badge-icecream-tip": "Earned by making this ice cream recipe (Ice Cream tab)",
+    "bt-badge-finish": "FINISH",
+    "bt-badge-finish-tip": "Earned as a Finish command (Finish tab)",
+    "bt-badge-uvmission": "MISSION",
+    "bt-badge-uvmission-tip": "Filled by clearing its Unversed mission (no max rank needed)",
+    "bt-badge-arena": "ARENA",
+    "bt-badge-arena-tip": "Cleared via its Mirage Arena stage (Arena tab)",
+    "bt-badge-board": "BOARD",
+    "bt-badge-board-tip": "Completed via the Hunny Pot Board (Records tab)"
 }
