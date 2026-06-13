@@ -797,19 +797,26 @@ function worldEntries(world, char) {
       done: !!STORE[char].flavors[i] || auto, auto: auto ? "recipe" : null,
       toggle: () => toggle(STORE[char].flavors, i) });
   });
-  // Records
+  // Records — reflect the same auto-cross-offs as the Records tab (e.g. an
+  // Unversed mission cleared fills its record), so the views stay in sync.
+  const recAuto = recordsAutoFn(char);
   viewItems(char + "-records", BBS_DATA.perChar[char].records).forEach((it, i) => {
     if (normWorld(it.world) !== world) return;
+    const a = recAuto(it);
     out.push({ type: t('bt-wtype-record'), name: it.cat, where: it.entry || "",
-      done: !!STORE[char].records[i], toggle: () => toggle(STORE[char].records, i) });
+      done: !!STORE[char].records[i] || !!a, auto: a || null,
+      toggle: () => toggle(STORE[char].records, i) });
   });
   // Secret bosses
+  const chAuto = charactersAutoFn(char);
   SECRET_BOSSES.forEach(sb => {
     if (sb.world !== world) return;
     const idx = BBS_DATA.perChar[char].characters.findIndex(x => x.name === sb.name);
     if (idx < 0) return;
+    const a = chAuto(BBS_DATA.perChar[char].characters[idx]);
     out.push({ type: t('bt-wtype-boss'), name: sb.name, where: t(sb.noteKey),
-      done: !!STORE[char].characters[idx], toggle: () => toggle(STORE[char].characters, idx) });
+      done: !!STORE[char].characters[idx] || !!a, auto: a || null,
+      toggle: () => toggle(STORE[char].characters, idx) });
   });
   return out;
 }
@@ -825,7 +832,9 @@ function entryTable(list) {
     if (e.auto) { chk.disabled = true; chk.title = autoBadge(e.auto).tip; }
     else chk.addEventListener("change", e.toggle);
     td.appendChild(chk); tr.appendChild(td);
-    tr.appendChild(el("td", null, `<span class="itemname">${fmtText(e.name)}</span>`));
+    let nameHtml = `<span class="itemname">${fmtText(e.name)}</span>`;
+    if (e.auto) { const b = autoBadge(e.auto); nameHtml += ` <span class="srcbadge" title="${b.tip}">${b.label}</span>`; }
+    tr.appendChild(el("td", null, nameHtml));
     tr.appendChild(el("td", null, fmtText(e.where)));
     tb.appendChild(tr);
   });
