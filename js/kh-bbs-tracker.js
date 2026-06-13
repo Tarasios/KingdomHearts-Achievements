@@ -18,7 +18,7 @@ const fmt = (key, ...args) => i18n.format(key, ...args);
 const CHARS = ["terra", "ventus", "aqua"];
 const CHAR_LABEL = { terra: "Terra", ventus: "Ventus", aqua: "Aqua" };
 const PER_CHAR_SECTIONS = ["records", "characters", "unversed", "commands", "treasures"];
-const SHARED_SECTIONS = ["trophies", "ingame", "reports", "stickers", "arena", "patissier", "warrior"];
+const SHARED_SECTIONS = ["trophies", "ingame", "reports", "stickers", "patissier", "warrior"];
 // Ingredients are tracked per character (each collects them in their own
 // playthrough); the flavor data list is shared but the store is per-char.
 
@@ -30,7 +30,7 @@ const CHAR_KEY = MELD_KEY + "_char"; // shared with the melding calculator
 function blankStore() {
   const s = { shared: {}, missions: { done: {}, rank: {} } };
   SHARED_SECTIONS.forEach(k => { s.shared[k] = {}; });
-  CHARS.forEach(c => { s[c] = {}; PER_CHAR_SECTIONS.forEach(k => { s[c][k] = {}; }); s[c].flavors = {}; });
+  CHARS.forEach(c => { s[c] = {}; PER_CHAR_SECTIONS.forEach(k => { s[c][k] = {}; }); s[c].flavors = {}; s[c].arena = {}; });
   return s;
 }
 function loadStore() {
@@ -41,7 +41,14 @@ function loadStore() {
       const o = JSON.parse(raw);
       SHARED_SECTIONS.forEach(k => { if (o.shared && o.shared[k]) s.shared[k] = o.shared[k]; });
       if (o.missions) { s.missions.done = o.missions.done || {}; s.missions.rank = o.missions.rank || {}; }
-      CHARS.forEach(c => { PER_CHAR_SECTIONS.forEach(k => { if (o[c] && o[c][k]) s[c][k] = o[c][k]; }); if (o[c] && o[c].flavors) s[c].flavors = o[c].flavors; });
+      CHARS.forEach(c => {
+        PER_CHAR_SECTIONS.forEach(k => { if (o[c] && o[c][k]) s[c][k] = o[c][k]; });
+        if (o[c] && o[c].flavors) s[c].flavors = o[c].flavors;
+        // arena used to be a single shared section; migrate old progress to
+        // every character so it isn't lost now that it's per-character.
+        if (o[c] && o[c].arena) s[c].arena = o[c].arena;
+        else if (o.shared && o.shared.arena) s[c].arena = Object.assign({}, o.shared.arena);
+      });
     }
   } catch (e) { /* fresh store */ }
   return s;
@@ -119,7 +126,7 @@ function commandAuto(char) {
 const ARENA_IDX = {}; BBS_DATA.arena.forEach((a, i) => { ARENA_IDX[a.name] = i; });
 const MISSION_IDX = {}; BBS_DATA.missions.forEach((m, i) => { MISSION_IDX[m.name] = i; });
 const HAW_CHARS = new Set(["Winnie the Pooh", "Tigger", "Rabbit"]);
-function arenaDone(stage) { const i = ARENA_IDX[stage]; return i != null && !!STORE.shared.arena[i]; }
+function arenaDone(stage, char) { const i = ARENA_IDX[stage]; return i != null && !!STORE[char].arena[i]; }
 function missionDoneByName(name, char) { const i = MISSION_IDX[name]; return i != null && !!STORE.missions.done[i + "-" + char]; }
 function recordDoneBy(char, pred) {
   const merged = viewItems(char + "-records", BBS_DATA.perChar[char].records);
@@ -135,7 +142,7 @@ function unversedAutoFn(char) {
     const loc = it.loc || "";
     if (loc.indexOf("Mirage Arena") >= 0) {
       const stages = (loc.match(/"([^"]+)"/g) || []).map(s => s.slice(1, -1));
-      if (stages.some(s => arenaDone(s))) return "arena";
+      if (stages.some(s => arenaDone(s, char))) return "arena";
     }
     return null;
   };
@@ -148,7 +155,7 @@ function recordsAutoFn(char) {
     if (it.cat === "Arena Mode") {
       for (let k = 0; k < BBS_DATA.arena.length; k++) {
         const nm = BBS_DATA.arena[k].name;
-        if ((it.entry || "").indexOf(nm) >= 0 && arenaDone(nm)) return "arena";
+        if ((it.entry || "").indexOf(nm) >= 0 && arenaDone(nm, char)) return "arena";
       }
     }
     return null;
@@ -159,7 +166,7 @@ function recordsAutoFn(char) {
 function charactersAutoFn(char) {
   return it => {
     if (HAW_CHARS.has(it.name) && recordDoneBy(char, r => r.entry === "Hunny Pot Board")) return "board";
-    if (it.name === "Monstro" && arenaDone("Monster of the Sea")) return "arena";
+    if (it.name === "Monstro" && arenaDone("Monster of the Sea", char)) return "arena";
     return null;
   };
 }
@@ -177,7 +184,7 @@ function recordsLinkFn(char) {
     if (it.cat === "Arena Mode") {
       for (let k = 0; k < BBS_DATA.arena.length; k++) {
         const nm = BBS_DATA.arena[k].name;
-        if ((it.entry || "").indexOf(nm) >= 0) return { store: STORE.shared.arena, key: ARENA_IDX[nm], src: "arena" };
+        if ((it.entry || "").indexOf(nm) >= 0) return { store: STORE[char].arena, key: ARENA_IDX[nm], src: "arena" };
       }
     }
     return null;
@@ -299,9 +306,12 @@ function missionsRankAny() {
   BBS_DATA.missions.forEach((m, i) => { if (CHARS.some(c => STORE.missions.rank[i + "-" + c])) d++; });
   return [d, BBS_DATA.missions.length];
 }
+/* Arena stages cleared by a character (the store is per-character now). */
+function arenaCount(char) { return [countMap(STORE[char].arena, BBS_DATA.arena.length), BBS_DATA.arena.length]; }
+/* Arena trophies are global — a stage counts once any character clears it. */
 function arenaByStars(n) {
   let d = 0, y = 0;
-  BBS_DATA.arena.forEach((it, i) => { if (starCount(it.rank) === n) { y++; if (STORE.shared.arena[i]) d++; } });
+  BBS_DATA.arena.forEach((it, i) => { if (starCount(it.rank) === n) { y++; if (CHARS.some(c => STORE[c].arena[i])) d++; } });
   return [d, y];
 }
 /* Ingredients a character can obtain (those with a location for them),
@@ -327,6 +337,7 @@ function overallChar(char) {
     const [a, b] = groupCount(k, CHAR_LABEL[char]); d += a; y += b;
   });
   const [fa, fb] = flavorsEligible(char); d += fa; y += fb;
+  const [aa, ab] = arenaCount(char); d += aa; y += ab;
   const [md] = missionsCount(char, STORE.missions.done); d += md; y += BBS_DATA.missions.length;
   return [d, y];
 }
@@ -510,6 +521,7 @@ function renderTrophies(p) {
     [t('tabbtn-finish'), c => groupCount("warrior", CHAR_LABEL[c])],
     [t('bt-recipes-title'), c => groupCount("patissier", CHAR_LABEL[c])],
     [t('bt-ingredients-title'), c => flavorsEligible(c)],
+    [t('tabbtn-arena'), c => arenaCount(c)],
     [t('bt-dash-missions-done'), c => missionsCount(c, STORE.missions.done)],
     [t('bt-dash-missions-rank'), c => missionsCount(c, STORE.missions.rank)]
   ];
@@ -523,8 +535,7 @@ function renderTrophies(p) {
   const tbl2 = el("table", "dash-table");
   tbl2.innerHTML = `<thead><tr><th>${t('bt-dash-shared')}</th><th></th></tr></thead>`;
   const tb2 = el("tbody");
-  [["tabbtn-trophies", "trophies"], ["bt-ingame-title", "ingame"], ["tabbtn-reports", "reports"],
-   ["tabbtn-arena", "arena"]]
+  [["tabbtn-trophies", "trophies"], ["bt-ingame-title", "ingame"], ["tabbtn-reports", "reports"]]
     .forEach(([k, sec]) => {
       const [x, y] = sharedCount(sec);
       tb2.appendChild(el("tr", null, `<td>${t(k)}</td><td>${bar(x, y)}</td>`));
@@ -760,7 +771,8 @@ function renderIcecream(p) {
 
 function renderArena(p) {
   const box = p.results;
-  checklist(box, viewItems("arena", BBS_DATA.arena), STORE.shared.arena, [
+  box.appendChild(el("div", "grp-title", fmtText(fmt('bt-arena-for', CHAR_LABEL[activeChar]))));
+  checklist(box, viewItems("arena", BBS_DATA.arena), STORE[activeChar].arena, [
     { th: t('bt-th-stage'), get: it => it.name, name: true },
     { th: t('bt-th-rank'), get: it => it.rank },
     { th: t('bt-th-unlock'), get: it => it.how || "" },
@@ -769,7 +781,7 @@ function renderArena(p) {
   box.querySelectorAll("tbody tr").forEach(tr => {
     if (tr.children.length >= 3) tr.children[2].innerHTML = stars(tr.children[2].textContent.trim());
   });
-  const [x, y] = sharedCount("arena");
+  const [x, y] = arenaCount(activeChar);
   setCount(p, x, y);
 }
 
@@ -993,11 +1005,11 @@ function computeMilestones() {
   const sd = (id, x, y) => { if (y > 0 && x >= y) m.add("tab::" + id); };
   { const [a, b] = sharedCount("trophies"), [c, d] = sharedCount("ingame"); sd("trophies", a + c, b + d); }
   { const [x, y] = sharedCount("reports"); sd("reports", x, y); }
-  { const [x, y] = sharedCount("arena"); sd("arena", x, y); }
   CHARS.forEach(ch => {
     const lab = CHAR_LABEL[ch];
     const cd = (id, x, y) => { if (y > 0 && x >= y) m.add("tab::" + id + "::" + ch); };
     ["commands", "records", "characters"].forEach(s => { const [x, y] = charCount(ch, s); cd(s, x, y); });
+    { const [x, y] = arenaCount(ch); cd("arena", x, y); }
     { const [jx, jy] = charCount(ch, "unversed"); const [md] = missionsCount(ch, STORE.missions.done); cd("unversed", jx + md, jy + BBS_DATA.missions.length); }
     { const [tx, ty] = charCount(ch, "treasures"); const [sx, sy] = groupCount("stickers", lab); cd("treasures", tx + sx, ty + sy); }
     { const [x, y] = groupCount("warrior", lab); cd("finish", x, y); }
