@@ -314,19 +314,19 @@ function arenaByStars(n) {
   BBS_DATA.arena.forEach((it, i) => { if (starCount(it.rank) === n) { y++; if (CHARS.some(c => STORE[c].arena[i])) d++; } });
   return [d, y];
 }
-/* Ingredients a character can obtain (those with a location for them),
-   done when collected or auto-credited by one of that character's recipes. */
+/* Ingredients a character actually needs (used by one of *their* recipes —
+   not merely collectible in their playthrough), done when collected or
+   auto-credited by one of that character's completed recipes. */
 function flavorsEligible(char) {
-  const locKey = { terra: "locT", ventus: "locV", aqua: "locA" }[char];
   const label = CHAR_LABEL[char];
   const ingMap = recipeIngredients();
   const store = STORE[char].flavors;
   let d = 0, y = 0;
   BBS_DATA.flavors.forEach((it, i) => {
-    if (!it[locKey]) return;
+    const recs = (ingMap[it.name] || []).filter(e => e.char === label);
+    if (!recs.length) return;
     y++;
-    const auto = (ingMap[it.name] || []).some(e => e.char === label && STORE.shared.patissier[e.pIdx]);
-    if (store[i] || auto) d++;
+    if (store[i] || recs.some(e => STORE.shared.patissier[e.pIdx])) d++;
   });
   return [d, y];
 }
@@ -732,7 +732,7 @@ function renderIcecream(p) {
   const q = p.state.q.toLowerCase();
   const groups = new Map();   // "world|area" -> { world, area, note, items:[] }
   viewItems("flavors", BBS_DATA.flavors).forEach((it, i) => {
-    if (!it[locKey]) return;
+    if (neededQty(it.name) <= 0 || !it[locKey]) return;   // only this character's needed ingredients
     if (q && it.name.toLowerCase().indexOf(q) < 0) return;
     const auto = !!ingAuto(it);
     const done = !!STORE[char].flavors[i] || auto;
@@ -858,12 +858,12 @@ function worldEntries(world, char) {
   // their location). Show how many this character needs + the spot.
   const ingMap = recipeIngredients();
   viewItems("flavors", BBS_DATA.flavors).forEach((it, i) => {
-    if (!it[locKey]) return;
+    const ne = (ingMap[it.name] || []).find(e => e.char === label);
+    if (!ne || !it[locKey]) return;   // only ingredients this character's recipes need
     const loc = parseLocs(it[locKey]).find(l => normWorld(l.world) === world);
     if (!loc) return;
     const auto = (ingMap[it.name] || []).some(e => e.char === label && STORE.shared.patissier[e.pIdx]);
-    const ne = (ingMap[it.name] || []).find(e => e.char === label);
-    const where = (ne ? "×" + ne.qty : "") + (ne && loc.area ? " · " : "") + (loc.area || "");
+    const where = "×" + ne.qty + (loc.area ? " · " + loc.area : "");
     out.push({ type: t('bt-wtype-ingredient'), name: it.name, where: where,
       done: !!STORE[char].flavors[i] || auto, auto: auto ? "recipe" : null,
       toggle: () => toggle(STORE[char].flavors, i) });
@@ -938,7 +938,8 @@ function renderWorlds(p) {
     wdet.open = filtering ? true : !!open[wkey];   // worlds collapsed by default
     wdet.addEventListener("toggle", () => { if (!filtering) open[wkey] = wdet.open; });
     wdet.appendChild(el("summary", "wsum" + (complete ? " wdone" : ""),
-      fmtText(t('bt-world-' + slug)) + ` <span class="wcount">${wdone} / ${all.length}</span>`));
+      fmtText(t('bt-world-' + slug)) + ` <span class="wcount">${wdone} / ${all.length}</span>`
+      + (complete ? ` <span class="wbadge">${t('bt-world-complete')}</span>` : "")));
 
     const order = [], byType = {};
     entries.forEach(e => { if (!byType[e.type]) { byType[e.type] = []; order.push(e.type); } byType[e.type].push(e); });

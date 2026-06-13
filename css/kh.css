@@ -251,8 +251,11 @@
 .kh-toast-ic { font-size: 19px; line-height: 1; }
 @media (prefers-reduced-motion: reduce) { .kh-toast { transition: opacity .2s; transform: none; } }
 
-/* World fully complete: gold header turns success-green with a check. */
+/* World fully complete: colour shifts AND an explicit bordered "✓ 100%"
+   badge so it's distinguishable without relying on hue (colour-blind safe). */
 .kh summary.wsum.wdone { color: var(--ok); }
 .kh summary.wsum.wdone::before { color: var(--ok); }
 .kh summary.wsum.wdone .wcount { color: var(--ok); }
-.kh summary.wsum.wdone::after { content: " ✓"; font-weight: 700; color: var(--ok); }
+.kh .wbadge { display: inline-block; margin-left: 8px; font-size: 10.5px; font-weight: 800;
+  letter-spacing: .4px; text-transform: none; color: var(--ok); border: 1.5px solid var(--ok);
+  border-radius: 999px; padding: 1px 8px; vertical-align: middle; }

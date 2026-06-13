@@ -147,5 +147,6 @@
     "bt-toast-tab": "%1 — 100% complete!",
     "bt-toast-tab-char": "%1 (%2) — 100% complete!",
     "bt-toast-overall": "%1 — everything tracked is done! 🎉",
-    "bt-arena-for": "Arène du Mirage — %1"
+    "bt-arena-for": "Arène du Mirage — %1",
+    "bt-world-complete": "✓ 100 %"
 }
