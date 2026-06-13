@@ -9,8 +9,8 @@
 
 .kh .tabs { display: flex; gap: 6px; max-width: 1100px; margin: 14px auto 0; flex-wrap: wrap; }
 .kh .tab { background: var(--panel); border: 1px solid var(--line); color: var(--dim); padding: 8px 14px;
-    border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 600; }
-.kh .tab.active { background: var(--panel2); color: var(--ink); border-color: var(--accent); }
+    border-radius: 10px 10px 0 0; cursor: pointer; font-size: 13px; font-weight: 600; }
+.kh .tab.active { background: var(--panel2); color: var(--ink); border-bottom-color: var(--panel2); }
 
 .kh-main { max-width: 1100px; margin: 0 auto; padding: 0 0 60px; }
 .kh .card { background: var(--panel2); border: 1px solid var(--line); border-radius: 0 12px 12px 12px; padding: 18px; }
