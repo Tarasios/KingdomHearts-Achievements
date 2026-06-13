@@ -413,11 +413,49 @@ function buildPage() {
 
 function syncCharButtons() {
   document.querySelectorAll(".charbtn").forEach(b => b.classList.toggle("on", b.dataset.c === activeChar));
+  // Drive the per-character accent scheme (e.g. Sora blue, Riku purple).
+  if (activeChar) document.documentElement.setAttribute("data-char", activeChar);
+  else document.documentElement.removeAttribute("data-char");
 }
 function setCount(p, x, y) {
   p.count.textContent = fmt('gt-count', x, y);
   p.bar.className = "dashbar" + (x >= y && y > 0 ? " full" : "");
   p.bar.firstChild.style.width = (y ? Math.round(100 * x / y) : 0) + "%";
+}
+
+/* ---------- completion toasts ---------- */
+let prevMilestones = null;
+function toast(text, icon) {
+  let host = document.getElementById("kh-toasts");
+  if (!host) { host = el("div"); host.id = "kh-toasts"; document.body.appendChild(host); }
+  const tn = el("div", "kh-toast");
+  tn.innerHTML = `<span class="kh-toast-ic">${icon || "✅"}</span><span>${esc(text)}</span>`;
+  host.appendChild(tn);
+  requestAnimationFrame(() => tn.classList.add("show"));
+  setTimeout(() => { tn.classList.add("hide"); setTimeout(() => tn.remove(), 450); }, 4600);
+}
+/* Completed milestones (key -> toast): each auto-trophy whose tracked
+   requirements are met, each fully-finished list, and the site total.
+   Compared between renders so only newly-completed ones toast; seeded on
+   first render so nothing fires on load or when navigating. */
+function currentMilestones() {
+  const m = new Map();
+  if (G.trophyAuto) Object.keys(G.trophyAuto).forEach(name => {
+    const r = trophyProgress(G.trophyAuto[name]);
+    if (r && r[1] > 0 && r[0] >= r[1]) m.set("trophy::" + name, { text: fmt('gt-toast-trophy', name), icon: "🏆" });
+  });
+  allLists().forEach(({ label, storeId, items, c, sec }) => {
+    const [x, y] = entryCount({ sec, storeId, items, c });
+    if (y > 0 && x >= y) m.set("list::" + storeId + "::" + (c || ""), { text: fmt('gt-toast-section', label), icon: "✅" });
+  });
+  const [ox, oy] = overallCount();
+  if (oy > 0 && ox >= oy) m.set("overall", { text: t('gt-toast-overall'), icon: "🎉" });
+  return m;
+}
+function checkMilestones() {
+  const cur = currentMilestones();
+  if (prevMilestones) cur.forEach((v, k) => { if (!prevMilestones.has(k)) toast(v.text, v.icon); });
+  prevMilestones = new Set(cur.keys());
 }
 
 /* ---------- render ---------- */
@@ -451,6 +489,7 @@ function render() {
 
   const [ox, oy] = overallCount();
   document.getElementById("overallNote").textContent = fmt('gt-overall', ox, oy, oy ? Math.round(100 * ox / oy) : 0);
+  checkMilestones();
 }
 
 buildPage();

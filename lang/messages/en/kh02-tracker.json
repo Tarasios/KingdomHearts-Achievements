@@ -652,5 +652,8 @@
         "how": "Post-game only. In the southeast side of the sandy area, on top of a pillar."
       }
     ]
-  }
+  },
+  "gt-toast-trophy": "Trophy ready: %1",
+  "gt-toast-section": "%1 — 100% complete!",
+  "gt-toast-overall": "Everything is 100% complete! 🎉"
 }

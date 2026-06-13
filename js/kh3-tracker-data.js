@@ -3967,47 +3967,6 @@ var TRACKER_GAME = {
           ]
         },
         {
-          "id": "flan",
-          "cols": [
-            {
-              "k": "name",
-              "name": true
-            },
-            {
-              "k": "world"
-            },
-            {
-              "k": "area"
-            },
-            {
-              "k": "reward"
-            }
-          ],
-          "items": [
-            {
-              "name": "Cherry"
-            },
-            {
-              "name": "Strawberry"
-            },
-            {
-              "name": "Orange"
-            },
-            {
-              "name": "Banana"
-            },
-            {
-              "name": "Grape"
-            },
-            {
-              "name": "Honeydew"
-            },
-            {
-              "name": "Watermelon"
-            }
-          ]
-        },
-        {
           "id": "recipecol",
           "cols": [
             {
@@ -4130,6 +4089,52 @@ var TRACKER_GAME = {
             {
               "name": "Tarte aux Fruits",
               "g": "Dessert"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "flan",
+      "sections": [
+        {
+          "id": "flan",
+          "cols": [
+            {
+              "k": "name",
+              "name": true
+            },
+            {
+              "k": "world"
+            },
+            {
+              "k": "area"
+            },
+            {
+              "k": "reward"
+            }
+          ],
+          "items": [
+            {
+              "name": "Cherry"
+            },
+            {
+              "name": "Strawberry"
+            },
+            {
+              "name": "Orange"
+            },
+            {
+              "name": "Banana"
+            },
+            {
+              "name": "Grape"
+            },
+            {
+              "name": "Honeydew"
+            },
+            {
+              "name": "Watermelon"
             }
           ]
         }

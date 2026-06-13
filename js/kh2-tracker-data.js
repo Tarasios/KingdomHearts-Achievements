@@ -3891,6 +3891,55 @@ var TRACKER_GAME = {
           ]
         },
         {
+          "id": "cups",
+          "cols": [
+            {
+              "k": "name",
+              "name": true
+            },
+            {
+              "k": "unlock"
+            },
+            {
+              "k": "score"
+            },
+            {
+              "k": "reward"
+            }
+          ],
+          "items": [
+            {
+              "name": "Pain and Panic"
+            },
+            {
+              "name": "Cerberus"
+            },
+            {
+              "name": "Titan"
+            },
+            {
+              "name": "Goddess of Fate"
+            },
+            {
+              "name": "Paradox: Pain and Panic"
+            },
+            {
+              "name": "Paradox: Cerberus"
+            },
+            {
+              "name": "Paradox: Titan"
+            },
+            {
+              "name": "Paradox: Hades"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mushrooms",
+      "sections": [
+        {
           "id": "mushrooms",
           "cols": [
             {
@@ -3946,50 +3995,6 @@ var TRACKER_GAME = {
             },
             {
               "name": "XIII"
-            }
-          ]
-        },
-        {
-          "id": "cups",
-          "cols": [
-            {
-              "k": "name",
-              "name": true
-            },
-            {
-              "k": "unlock"
-            },
-            {
-              "k": "score"
-            },
-            {
-              "k": "reward"
-            }
-          ],
-          "items": [
-            {
-              "name": "Pain and Panic"
-            },
-            {
-              "name": "Cerberus"
-            },
-            {
-              "name": "Titan"
-            },
-            {
-              "name": "Goddess of Fate"
-            },
-            {
-              "name": "Paradox: Pain and Panic"
-            },
-            {
-              "name": "Paradox: Cerberus"
-            },
-            {
-              "name": "Paradox: Titan"
-            },
-            {
-              "name": "Paradox: Hades"
             }
           ]
         }

@@ -599,9 +599,13 @@ a.project-card:hover h3 {
 [data-char="terra"]  { --accent: #ff8a73; --glow: #34202a; }
 [data-char="ventus"] { --accent: #57d68f; --glow: #163a2c; }
 [data-char="aqua"]   { --accent: #5fb3ff; --glow: #1a2a55; }
+[data-char="sora"]   { --accent: #5fb3ff; --glow: #1a2a55; }
+[data-char="riku"]   { --accent: #b98cff; --glow: #261a3a; }
 [data-theme="day"][data-char="terra"]  { --accent: #c24a30; --glow: #fbeeec; }
 [data-theme="day"][data-char="ventus"] { --accent: #1f9d5a; --glow: #ecf7f0; }
 [data-theme="day"][data-char="aqua"]   { --accent: #2c63c8; --glow: #eef2fb; }
+[data-theme="day"][data-char="sora"]   { --accent: #2c63c8; --glow: #eef2fb; }
+[data-theme="day"][data-char="riku"]   { --accent: #6a3fc0; --glow: #f1ecfb; }
 
 /* ---------- Theme toggle (mirrors the language toggle) ---------- */
 .theme-btn {

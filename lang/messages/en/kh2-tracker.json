@@ -5628,5 +5628,9 @@
         "cond": "Summon Genie, change \"Final\" Genie (select Drive? in the command menu), and use Infinity"
       }
     ]
-  }
+  },
+  "gt-toast-trophy": "Trophy ready: %1",
+  "gt-toast-section": "%1 — 100% complete!",
+  "gt-toast-overall": "Everything is 100% complete! 🎉",
+  "tabbtn-mushrooms": "Mushroom XIII"
 }
