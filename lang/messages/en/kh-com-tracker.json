@@ -1251,147 +1251,147 @@
       },
       {
         "name": "Tranquil Darkness",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Agrabah, Monstro, Halloween Town, Twilight Town, Castle Oblivion]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Teeming Darkness",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Olympus Coliseum, Agrabah, Monstro, Halloween Town, Twilight Town, Castle Oblivion]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Feeble Darkness",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Olympus Coliseum, Agrabah, Monstro, Atlantica, Hollow Bastion, Twilight Town, Castle Oblivion]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Almighty Darkness",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Olympus Coliseum, Halloween Town, Atlantica, Neverland, Hollow Bastion, Destiny Islands, Castle Oblivion]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Sleeping Darkness",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Olympus Coliseum, Monstro, Halloween Town, Atlantica, Neverland, Hollow Bastion, Twilight Town, Castle Oblivion]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Looming Darkness",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Olympus Coliseum, Agrabah, Halloween Town, Atlantica, Neverland, Hollow Bastion, Destiny Islands, Castle Oblivion]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Premium Room",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Olympus Coliseum, Agrabah, Monstro, Neverland, Hollow Bastion, Destiny Islands]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "White Room",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Olympus Coliseum, Monstro, Atlantica, Neverland, Hollow Bastion, Destiny Islands]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Black Room",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Traverse Town, Olympus Coliseum, Monstro, Halloween Town, Atlantica, Neverland, Hollow Bastion, Destiny Islands]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Bottomless Darkness",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Wonderland, Halloween Town, Atlantica, Neverland, Hollow Bastion, Twilight Town, Destiny Islands, Castle Oblivion]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Roulette Room",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Wonderland, Olympus Coliseum, Agrabah, Monstro, Atlantica, Neverland, Hollow Bastion, Twilight Town, Destiny Islands, Castle Oblivion]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Martial Waking",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Olympus Coliseum, Monstro, Atlantica, Neverland, Twilight Town — not on floors 12–13]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Sorcerous Waking",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Olympus Coliseum, Agrabah, Monstro, Halloween Town, Hollow Bastion, Twilight Town — not on floors 12–13]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Alchemic Waking",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Monstro, Halloween Town, Hollow Bastion — not on floors 12–13]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Meeting Ground",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Traverse Town, Olympus Coliseum, Agrabah, Halloween Town, Atlantica, Neverland, Twilight Town — not on floors 12–13]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Stagnant Space",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Olympus Coliseum, Monstro, Halloween Town, Twilight Town — not on floors 12–13]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Strong Initiative",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Olympus Coliseum, Agrabah, Monstro, Atlantica, Neverland, Hollow Bastion, Twilight Town — not on floors 12–13]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Lasting Daze",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Olympus Coliseum, Agrabah, Monstro, Halloween Town, Neverland, Twilight Town — not on floors 12–13]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Calm Bounty",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Wonderland, Olympus Coliseum, Agrabah, Monstro, Halloween Town, Twilight Town, Castle Oblivion]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Guarded Trove",
-        "loc": "All floors",
+        "loc": "[[Floors 8+|Drops in Atlantica, Neverland, Hollow Bastion, Destiny Islands, Castle Oblivion (after Floor 7)]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "False Bounty",
-        "loc": "All floors",
+        "loc": "[[Floors 8+|Drops in Atlantica, Neverland, Hollow Bastion, Destiny Islands, Castle Oblivion (after Floor 7)]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Moment's Reprieve",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Wonderland, Olympus Coliseum, Agrabah, Monstro, Halloween Town, Atlantica, Neverland, Hollow Bastion, Twilight Town, Destiny Islands, Castle Oblivion]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Mingling Worlds",
-        "loc": "All floors",
+        "loc": "[[Floors 12+|Drops in Twilight Town, Destiny Islands, Castle Oblivion (after Floor 11)]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Moogle Room",
-        "loc": "All floors",
+        "loc": "[[Most worlds|Drops in Wonderland, Olympus Coliseum, Agrabah, Monstro, Halloween Town, Atlantica, Neverland, Hollow Bastion, Twilight Town, Destiny Islands, Castle Oblivion]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Key to Rewards",
-        "loc": "All floors",
+        "loc": "[[Floors 7+|Drops in Atlantica, Neverland, Hollow Bastion, Twilight Town, Destiny Islands, Castle Oblivion]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Key of Beginnings",
-        "loc": "All floors",
+        "loc": "Received in story (not dropped)",
         "how": "Received during the story"
       },
       {
         "name": "Key of Guidance",
-        "loc": "All floors",
+        "loc": "Received in story (not dropped)",
         "how": "Received during the story"
       },
       {
         "name": "Key to Truth",
-        "loc": "All floors",
+        "loc": "Received in story (not dropped)",
         "how": "Received during the story"
       },
       {
         "name": "Random Joker",
-        "loc": "All floors",
+        "loc": "[[Any floor|Drops in Traverse Town, Wonderland, Olympus Coliseum, Agrabah, Monstro, Halloween Town, Atlantica, Neverland, Hollow Bastion, Twilight Town, Destiny Islands, Castle Oblivion]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
@@ -1603,102 +1603,102 @@
       },
       {
         "name": "Tranquil Darkness",
-        "loc": "All floors",
+        "loc": "Any floor",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Teeming Darkness",
-        "loc": "All floors",
+        "loc": "Any floor",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Feeble Darkness",
-        "loc": "All floors",
+        "loc": "Any floor",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Almighty Darkness",
-        "loc": "All floors",
+        "loc": "Any floor",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Sleeping Darkness",
-        "loc": "All floors",
+        "loc": "Any floor",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Looming Darkness",
-        "loc": "All floors",
+        "loc": "Any floor",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Black Room",
-        "loc": "All floors",
+        "loc": "Any floor",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Bottomless Darkness",
-        "loc": "All floors",
+        "loc": "Any floor",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Roulette Room",
-        "loc": "All floors",
+        "loc": "Any floor",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Martial Waking",
-        "loc": "All floors",
+        "loc": "Any floor",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Meeting Ground",
-        "loc": "All floors",
+        "loc": "Any floor",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Stagnant Space",
-        "loc": "All floors",
+        "loc": "Any floor",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Strong Initiative",
-        "loc": "All floors",
+        "loc": "Any floor",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Lasting Daze",
-        "loc": "All floors",
+        "loc": "Any floor",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Moment's Reprieve",
-        "loc": "All floors",
+        "loc": "[[Most floors|Any floor, in every world except Hollow Bastion]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Mingling Worlds",
-        "loc": "All floors",
+        "loc": "Any floor",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Key of Beginnings",
-        "loc": "All floors",
+        "loc": "Received in story (not dropped)",
         "how": "Received during the story"
       },
       {
         "name": "Key of Guidance",
-        "loc": "All floors",
+        "loc": "Received in story (not dropped)",
         "how": "Received during the story"
       },
       {
         "name": "Key to Truth",
-        "loc": "All floors",
+        "loc": "Received in story (not dropped)",
         "how": "Received during the story"
       },
       {
         "name": "Random Joker",
-        "loc": "All floors",
+        "loc": "Any floor",
         "how": "Randomly dropped at the end of battle"
       },
       {
@@ -2514,5 +2514,11 @@
   },
   "gt-toast-trophy": "Trophy ready: %1",
   "gt-toast-section": "%1 — 100% complete!",
-  "gt-toast-overall": "Everything is 100% complete! 🎉"
+  "gt-toast-overall": "Everything is 100% complete! 🎉",
+  "gnote-cards-sora": {
+    "Map Cards": "Drop chances vary by world (and a few by floor) — hover a card's location for where it drops, or see the full [drop table](https://www.khwiki.com/Map_Card#Obtainment_Rates). Keys of Beginnings, Guidance and to Truth are story-given, not dropped."
+  },
+  "gnote-cards-riku": {
+    "Map Cards": "Every droppable Map Card drops on any floor (Moment's Reprieve in every world except Hollow Bastion). Full [drop table](https://www.khwiki.com/Map_Card#Obtainment_Rates)."
+  }
 }

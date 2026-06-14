@@ -70,11 +70,16 @@ function cellText(storeId, i, key, it) {
   const row = langRow(storeId, i);
   return (row && Object.prototype.hasOwnProperty.call(row, key)) ? row[key] : it[key];
 }
-/* Per-group note shown under a group header (lang "gnote-<section>" maps a
-   group name -> note text), e.g. how each KH1 Trinity is unlocked. */
-function groupNote(secId, g) {
-  const map = (typeof i18n !== "undefined" && i18n.messages) ? i18n.messages['gnote-' + secId] : null;
-  return (map && typeof map === "object" && map[g]) || "";
+/* Per-group note shown under a group header: lang "gnote-<storeId>" (per
+   character) or "gnote-<section>" maps a group name -> note text (rendered
+   through fmtText, so it may carry a link). E.g. KH1 Trinity unlocks, or the
+   COM Map Card drop-table link. */
+function groupNote(storeId, secId, g) {
+  const msgs = (typeof i18n !== "undefined" && i18n.messages) || {};
+  const a = msgs['gnote-' + storeId];
+  if (a && typeof a === "object" && a[g]) return a[g];
+  const b = msgs['gnote-' + secId];
+  return (b && typeof b === "object" && b[g]) || "";
 }
 
 /* ---------- inline markup in any lang string ----------
@@ -87,12 +92,14 @@ function groupNote(secId, g) {
 const ICON_BASE = "../images/icons/";
 function fmtText(s) {
   s = String(s == null ? "" : s);
-  const re = /\{\{\s*([\w-]+)\s*\}\}|\[\[([^\]|]+)\|([^\]]+)\]\]/g;
+  // {{icon}} | [[text|tooltip]] | [text](url)
+  const re = /\{\{\s*([\w-]+)\s*\}\}|\[\[([^\]|]+)\|([^\]]+)\]\]|\[([^\]|]+)\]\(([^)\s]+)\)/g;
   let out = "", last = 0, m;
   while ((m = re.exec(s))) {
     out += esc(s.slice(last, m.index));
     if (m[1] != null) out += `<img class="hdricon" src="${ICON_BASE}${m[1]}.png" alt="">`;
-    else out += `<span class="hasinfo" title="${esc(m[3].trim())}" tabindex="0">${esc(m[2].trim())}</span>`;
+    else if (m[2] != null) out += `<span class="hasinfo" title="${esc(m[3].trim())}" tabindex="0">${esc(m[2].trim())}</span>`;
+    else { const u = m[5].trim(), safe = /^(https?:\/\/|\/|#)/.test(u) ? u : "#"; out += `<a href="${esc(safe)}" target="_blank" rel="noopener noreferrer">${esc(m[4].trim())}</a>`; }
     last = re.lastIndex;
   }
   return out + esc(s.slice(last));
@@ -303,12 +310,12 @@ function checklist(box, sec, res, state) {
       gtd.appendChild(gbtn);
       gtr.appendChild(gtd);
       tb.appendChild(gtr);
-      const gn = groupNote(sec.id, g);
+      const gn = groupNote(res.storeId, sec.id, g);
       if (gn) {
         const ntr = el("tr"), ntd = el("td", "gnote");
         ntd.colSpan = cols.length + leadCount + 1;
         ntd.style.borderBottom = "1px solid var(--line)";
-        ntd.appendChild(document.createTextNode(gn));
+        ntd.innerHTML = fmtText(gn);
         ntr.appendChild(ntd);
         tb.appendChild(ntr);
       }
@@ -338,7 +345,7 @@ function checklist(box, sec, res, state) {
       let html;
       if (c.rarity && v) html = `<span class="rarity ${esc(v.toLowerCase())}">${esc(v)}</span>`;
       else if (c.name) html = `<span class="itemname">${fmtText(v)}</span>${auto ? ` <span class="srcbadge" title="${fmt('gt-auto-tip', auto)}">${t('gt-auto-badge')}</span>` : ""}`;
-      else html = esc(v);
+      else html = fmtText(v);   // enables {{icon}} / [[text|tip]] / [text](url) in any column
       tr.appendChild(el("td", null, html));
     });
     if (sec.trophies && G.trophyAuto) {

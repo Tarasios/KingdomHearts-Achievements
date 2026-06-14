@@ -249,12 +249,14 @@ function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "
 const ICON_BASE = "../images/icons/";
 function fmtText(s) {
   s = String(s == null ? "" : s);
-  const re = /\{\{\s*([\w-]+)\s*\}\}|\[\[([^\]|]+)\|([^\]]+)\]\]/g;
+  // {{icon}} | [[text|tooltip]] | [text](url)
+  const re = /\{\{\s*([\w-]+)\s*\}\}|\[\[([^\]|]+)\|([^\]]+)\]\]|\[([^\]|]+)\]\(([^)\s]+)\)/g;
   let out = "", last = 0, m;
   while ((m = re.exec(s))) {
     out += esc(s.slice(last, m.index));
     if (m[1] != null) out += `<img class="hdricon" src="${ICON_BASE}${m[1]}.png" alt="">`;
-    else out += `<span class="hasinfo" title="${esc(m[3].trim())}" tabindex="0">${esc(m[2].trim())}</span>`;
+    else if (m[2] != null) out += `<span class="hasinfo" title="${esc(m[3].trim())}" tabindex="0">${esc(m[2].trim())}</span>`;
+    else { const u = m[5].trim(), safe = /^(https?:\/\/|\/|#)/.test(u) ? u : "#"; out += `<a href="${esc(safe)}" target="_blank" rel="noopener noreferrer">${esc(m[4].trim())}</a>`; }
     last = re.lastIndex;
   }
   return out + esc(s.slice(last));
