@@ -514,6 +514,18 @@ function buildPanels() {
   });
 }
 
+/* A dashboard label cell that links to its tab. */
+function dashLabelCell(label, tabId) {
+  const td = el("td");
+  if (tabId && TAB_IDS.indexOf(tabId) >= 0) {
+    const a = el("a", "dashlink");
+    a.href = "#"; a.innerHTML = fmtText(label);
+    a.onclick = e => { e.preventDefault(); bbsSelectTab(tabId); };
+    td.appendChild(a);
+  } else { td.innerHTML = fmtText(label); }
+  return td;
+}
+
 /* ---------- per-tab renderers ---------- */
 function renderTrophies(p) {
   // dashboard: what is missing, per character and shared
@@ -523,22 +535,24 @@ function renderTrophies(p) {
   tbl.innerHTML = `<thead><tr><th>${t('bt-dash-section')}</th><th class="c-terra">Terra</th><th class="c-ventus">Ventus</th><th class="c-aqua">Aqua</th></tr></thead>`;
   const tb = el("tbody");
   const rows = [
-    [t('tabbtn-commands'), c => charCount(c, "commands")],
-    [t('tabbtn-records'), c => charCount(c, "records")],
-    [t('tabbtn-characters'), c => charCount(c, "characters")],
-    [t('bt-journal-title'), c => charCount(c, "unversed")],
-    [t('tabbtn-treasures'), c => charCount(c, "treasures")],
-    [t('bt-dash-stickers'), c => groupCount("stickers", CHAR_LABEL[c])],
-    [t('tabbtn-finish'), c => groupCount("warrior", CHAR_LABEL[c])],
-    [t('bt-recipes-title'), c => groupCount("patissier", CHAR_LABEL[c])],
-    [t('bt-ingredients-title'), c => flavorsEligible(c)],
-    [t('tabbtn-arena'), c => arenaCount(c)],
-    [t('bt-dash-missions-done'), c => missionsCount(c, STORE.missions.done)],
-    [t('bt-dash-missions-rank'), c => missionsCount(c, STORE.missions.rank)]
+    [t('tabbtn-commands'), c => charCount(c, "commands"), "commands"],
+    [t('tabbtn-records'), c => charCount(c, "records"), "records"],
+    [t('tabbtn-characters'), c => charCount(c, "characters"), "characters"],
+    [t('bt-journal-title'), c => charCount(c, "unversed"), "unversed"],
+    [t('tabbtn-treasures'), c => charCount(c, "treasures"), "treasures"],
+    [t('bt-dash-stickers'), c => groupCount("stickers", CHAR_LABEL[c]), "treasures"],
+    [t('tabbtn-finish'), c => groupCount("warrior", CHAR_LABEL[c]), "finish"],
+    [t('bt-recipes-title'), c => groupCount("patissier", CHAR_LABEL[c]), "icecream"],
+    [t('bt-ingredients-title'), c => flavorsEligible(c), "icecream"],
+    [t('tabbtn-arena'), c => arenaCount(c), "arena"],
+    [t('bt-dash-missions-done'), c => missionsCount(c, STORE.missions.done), "unversed"],
+    [t('bt-dash-missions-rank'), c => missionsCount(c, STORE.missions.rank), "unversed"]
   ];
-  rows.forEach(([label, get]) => {
-    const tds = CHARS.map(c => { const [x, y] = get(c); return `<td class="c-${c}">${bar(x, y)}</td>`; }).join("");
-    tb.appendChild(el("tr", null, `<td>${label}</td>${tds}`));
+  rows.forEach(([label, get, tabId]) => {
+    const tr = el("tr");
+    tr.appendChild(dashLabelCell(label, tabId));
+    CHARS.forEach(c => { const [x, y] = get(c); tr.appendChild(el("td", "c-" + c, bar(x, y))); });
+    tb.appendChild(tr);
   });
   tbl.appendChild(tb);
   d.appendChild(tbl);
@@ -546,13 +560,19 @@ function renderTrophies(p) {
   const tbl2 = el("table", "dash-table");
   tbl2.innerHTML = `<thead><tr><th>${t('bt-dash-shared')}</th><th></th></tr></thead>`;
   const tb2 = el("tbody");
-  [["tabbtn-trophies", "trophies"], ["bt-ingame-title", "ingame"], ["tabbtn-reports", "reports"]]
-    .forEach(([k, sec]) => {
+  [["tabbtn-trophies", "trophies", "trophies"], ["bt-ingame-title", "ingame", "trophies"], ["tabbtn-reports", "reports", "reports"]]
+    .forEach(([k, sec, tabId]) => {
       const [x, y] = sharedCount(sec);
-      tb2.appendChild(el("tr", null, `<td>${t(k)}</td><td>${bar(x, y)}</td>`));
+      const tr = el("tr");
+      tr.appendChild(dashLabelCell(t(k), tabId));
+      tr.appendChild(el("td", null, bar(x, y)));
+      tb2.appendChild(tr);
     });
   const [sx, sy] = missionsRankAny();
-  tb2.appendChild(el("tr", null, `<td>${t('bt-dash-savage')}</td><td>${bar(sx, sy)}</td>`));
+  const str = el("tr");
+  str.appendChild(dashLabelCell(t('bt-dash-savage'), "unversed"));
+  str.appendChild(el("td", null, bar(sx, sy)));
+  tb2.appendChild(str);
   tbl2.appendChild(tb2);
   d.appendChild(tbl2);
 
@@ -982,15 +1002,16 @@ const RENDERERS = {
 
 /* ---------- tabs / charbar / render loop ---------- */
 let activeTab = "trophies";
+function bbsSelectTab(id) {
+  if (TAB_IDS.indexOf(id) < 0) return;
+  activeTab = id;
+  document.querySelectorAll(".kh .tab").forEach(x => x.classList.toggle("active", x.dataset.tab === id));
+  TAB_IDS.forEach(t2 => { document.getElementById("tab-" + t2).style.display = (t2 === id) ? "block" : "none"; });
+  render();
+}
 document.querySelectorAll(".kh .tab").forEach(tab => {
   tab.onclick = () => {
-    document.querySelectorAll(".kh .tab").forEach(x => x.classList.remove("active"));
-    tab.classList.add("active");
-    activeTab = tab.dataset.tab;
-    TAB_IDS.forEach(id => {
-      document.getElementById("tab-" + id).style.display = (id === activeTab) ? "block" : "none";
-    });
-    render();
+    bbsSelectTab(tab.dataset.tab);
   };
 });
 

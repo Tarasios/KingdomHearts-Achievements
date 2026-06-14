@@ -3507,6 +3507,13 @@ var TRACKER_GAME = {
             "Trinity Ladder": "#49d06a",
             "Trinity Push": "#ffd23f",
             "Trinity Detect": "#e8ecf7"
+          },
+          "titles": {
+            "Trinity Jump": "Blue",
+            "Trinity Charge": "Red",
+            "Trinity Ladder": "Green",
+            "Trinity Push": "Yellow",
+            "Trinity Detect": "White"
           }
         }
       },

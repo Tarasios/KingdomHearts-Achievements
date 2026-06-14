@@ -118,5 +118,11 @@
   "tabbtn-worlds": "Mondes",
   "gt-worlds-title": "Objets à collectionner par monde",
   "gt-world-complete": "✓ 100 %",
-  "note-trinities": "Comment débloquer chaque Trinité :\nTrinité Saut — terminez la Cité de Traverse.\nTrinité Charge — terminez la Jungle profonde.\nTrinité Échelle — terminez Agrabah.\nTrinité Poussée — terminez la Coupe Hercule.\nTrinité Détection — après le premier boss de la Forteresse Oubliée."
+  "gnote-trinities": {
+    "Trinity Jump": "Obtenue après avoir terminé la Cité de Traverse.",
+    "Trinity Charge": "Obtenue après avoir terminé la Jungle profonde.",
+    "Trinity Ladder": "Obtenue après avoir terminé Agrabah.",
+    "Trinity Push": "Obtenue après avoir terminé la Coupe Hercule.",
+    "Trinity Detect": "Obtenue après le premier boss de la Forteresse Oubliée."
+  }
 }

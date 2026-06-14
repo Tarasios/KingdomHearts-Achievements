@@ -70,6 +70,12 @@ function cellText(storeId, i, key, it) {
   const row = langRow(storeId, i);
   return (row && Object.prototype.hasOwnProperty.call(row, key)) ? row[key] : it[key];
 }
+/* Per-group note shown under a group header (lang "gnote-<section>" maps a
+   group name -> note text), e.g. how each KH1 Trinity is unlocked. */
+function groupNote(secId, g) {
+  const map = (typeof i18n !== "undefined" && i18n.messages) ? i18n.messages['gnote-' + secId] : null;
+  return (map && typeof map === "object" && map[g]) || "";
+}
 
 /* ---------- inline markup in any lang string ----------
    Everything is escaped; two optional shorthands are recognised so an
@@ -297,6 +303,15 @@ function checklist(box, sec, res, state) {
       gtd.appendChild(gbtn);
       gtr.appendChild(gtd);
       tb.appendChild(gtr);
+      const gn = groupNote(sec.id, g);
+      if (gn) {
+        const ntr = el("tr"), ntd = el("td", "gnote");
+        ntd.colSpan = cols.length + leadCount + 1;
+        ntd.style.borderBottom = "1px solid var(--line)";
+        ntd.appendChild(document.createTextNode(gn));
+        ntr.appendChild(ntd);
+        tb.appendChild(ntr);
+      }
     }
     const tr = el("tr", done ? "donerow" : null);
     if (checks) {
@@ -344,6 +359,19 @@ function checklist(box, sec, res, state) {
 const PANEL = {};
 let activeTab = G.tabs[0].id;
 
+/* Switch to a tab by id (used by the tab buttons and the dashboard links). */
+function selectTab(id) {
+  if (!gameTabs().some(tb => tb.id === id)) return;
+  activeTab = id;
+  document.querySelectorAll("#tabs .tab").forEach(b => b.classList.toggle("active", b.dataset.tab === id));
+  gameTabs().forEach(tb => { const p = document.getElementById("tab-" + tb.id); if (p) p.style.display = tb.id === id ? "block" : "none"; });
+  render();
+}
+function tabOfSection(secId) {
+  for (const tb of G.tabs) if (tb.sections.some(s => s.id === secId)) return tb.id;
+  return null;
+}
+
 function buildPage() {
   // character bar
   const charbar = document.getElementById("charbar");
@@ -371,13 +399,7 @@ function buildPage() {
   visibleTabs().forEach((tab, i) => {
     const btn = el("button", "tab" + (tab.id === activeTab ? " active" : ""), t('tabbtn-' + tab.id));
     btn.dataset.tab = tab.id;
-    btn.onclick = () => {
-      tabsBox.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
-      btn.classList.add("active");
-      activeTab = tab.id;
-      gameTabs().forEach(tb => { document.getElementById("tab-" + tb.id).style.display = tb.id === activeTab ? "block" : "none"; });
-      render();
-    };
+    btn.onclick = () => selectTab(tab.id);
     tabsBox.appendChild(btn);
   });
 
@@ -502,7 +524,7 @@ function worldEntryTable(list) {
     else chk.addEventListener("change", () => toggle(e.store, e.i));
     td.appendChild(chk); tr.appendChild(td);
     let nameHtml = "";
-    if (e.swatch) nameHtml += `<span class="wswatch" style="background:${e.swatch}"></span>`;
+    if (e.swatch) nameHtml += `<span class="wswatch" style="background:${e.swatch.c}"${e.swatch.t ? ` title="${esc(e.swatch.t)}" tabindex="0"` : ""}></span>`;
     nameHtml += `<span class="itemname">${fmtText(e.name)}</span>`;
     if (e.auto) nameHtml += ` <span class="srcbadge" title="${fmt('gt-auto-tip', e.auto)}">${t('gt-auto-badge')}</span>`;
     tr.appendChild(el("td", null, nameHtml));
@@ -529,8 +551,9 @@ function renderWorlds(p) {
   // A hex colour from the section's swatch map, validated (it builds inline style).
   const swatchOf = (secCfg, cell) => {
     if (!secCfg.swatch) return null;
-    const c = secCfg.swatch.colors[cell(secCfg.swatch.field)];
-    return (c && /^#[0-9a-fA-F]{3,8}$/.test(c)) ? c : null;
+    const v = cell(secCfg.swatch.field), c = secCfg.swatch.colors[v];
+    if (!c || !/^#[0-9a-fA-F]{3,8}$/.test(c)) return null;
+    return { c: c, t: (secCfg.swatch.titles && secCfg.swatch.titles[v]) || "" };
   };
   let dx = 0, dy = 0;
   cfg.worlds.forEach((world, wi) => {
@@ -602,7 +625,17 @@ function render() {
     const tb = el("tbody");
     allLists().forEach(({ label, storeId, items, c, sec }) => {
       const [x, y] = entryCount({ sec, storeId, items, c });
-      tb.appendChild(el("tr", null, `<td>${label}</td><td>${bar(x, y)}</td>`));
+      const tr = el("tr"), tdL = el("td");
+      const tabId = tabOfSection(sec.id);
+      if (tabId) {
+        const a = el("a", "dashlink", esc(label));
+        a.href = "#";
+        a.onclick = e => { e.preventDefault(); selectTab(tabId); };
+        tdL.appendChild(a);
+      } else { tdL.textContent = label; }
+      tr.appendChild(tdL);
+      tr.appendChild(el("td", null, bar(x, y)));
+      tb.appendChild(tr);
     });
     tbl.appendChild(tb);
     p.dash.appendChild(tbl);
