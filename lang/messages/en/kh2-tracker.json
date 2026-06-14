@@ -1714,1195 +1714,1493 @@
       },
       {
         "name": "Mythril Shard",
-        "area": "The Woods"
+        "area": "The Woods",
+        "where": "Along the outside of the perimeter, in the northwestern part of the area."
       },
       {
         "name": "Hi-Potion",
-        "area": "The Woods"
+        "area": "The Woods",
+        "where": "Along the outside of the perimeter, in the northeastern part of the area."
       },
       {
         "name": "Hi-Potion",
-        "area": "Tram Common"
+        "area": "Tram Common",
+        "where": "In front of a small, green roofed building north of the Sandlot entrance."
       },
       {
         "name": "AP Boost",
-        "area": "Tram Common"
+        "area": "Tram Common",
+        "where": "On top of the blue roofed building to the left of The Woods entrance. The roof can be accessed by jumping across the green rooftops on the building's left."
       },
       {
         "name": "Tent",
-        "area": "Tram Common"
+        "area": "Tram Common",
+        "where": "Take the stairs to the right of the Accessory Shop and follow the path to the downwards sloping stairs to find the chest resting against a wall beside a lamppost."
       },
       {
         "name": "Mythril Shard",
-        "area": "Tram Common"
+        "area": "Tram Common",
+        "where": "Head up the stairs to the right of the Accessory Shop and find the chest across the bridge and slightly right."
       },
       {
         "name": "Potion",
-        "area": "Tram Common"
+        "area": "Tram Common",
+        "where": "Against a wall behind the Moogle Shop, near Underground entrance number 4."
       },
       {
         "name": "Mythril Shard",
-        "area": "Tram Common"
+        "area": "Tram Common",
+        "where": "On the flat brown rooftop connected to the large green building in the north of the area."
       },
       {
         "name": "Potion",
-        "area": "Tram Common"
+        "area": "Tram Common",
+        "where": "Against one of the buildings to the right of The Woods entrance."
       },
       {
         "name": "Tent",
-        "area": "Central Station"
+        "area": "Central Station",
+        "where": "Along the west wall to the left of the train exit marked 2."
       },
       {
         "name": "Hi-Potion",
-        "area": "Central Station"
+        "area": "Central Station",
+        "where": "Along the west wall to the right of the train exit marked 0."
       },
       {
         "name": "Mythril Shard",
-        "area": "Central Station"
+        "area": "Central Station",
+        "where": "Against the far east wall, beside the train entrance marked 1."
       },
       {
         "name": "Potion",
-        "area": "Mysterious Tower"
+        "area": "Mysterious Tower",
+        "where": "By the bushes on the right of the path in front of the train."
       },
       {
         "name": "Hi-Potion",
-        "area": "Mysterious Tower"
+        "area": "Mysterious Tower",
+        "where": "By the trees on the left of the path in front of the train."
       },
       {
         "name": "Ether",
-        "area": "Mysterious Tower"
+        "area": "Mysterious Tower",
+        "where": "Hidden by the trees in the far corner to the left of the Tower entrance."
       },
       {
         "name": "Ether",
-        "area": "Entryway"
+        "area": "Entryway",
+        "where": "Against the wall, on the right when entering from outside the Tower."
       },
       {
         "name": "Mythril Shard",
-        "area": "Entryway"
+        "area": "Entryway",
+        "where": "Under the staircase, visible from the save point."
       },
       {
         "name": "Tower Map",
-        "area": "Sorcerer's Loft"
+        "area": "Sorcerer's Loft",
+        "where": "Beside the chalkboard, to the left of the Tower: Wardrobe entrance."
       },
       {
         "name": "Mythril Stone",
-        "area": "Wardrobe"
+        "area": "Wardrobe",
+        "where": "Beside the door."
       },
       {
         "name": "Mythril Gem",
-        "area": "Underground Concourse"
+        "area": "Underground Concourse",
+        "where": "(Unlocked during the story 3rd visit) Along the path in the far East, between door 2 (the Tunnelway entrance) and door 3 (the Back Alley entrance)."
       },
       {
         "name": "Orichalcum",
-        "area": "Underground Concourse"
+        "area": "Underground Concourse",
+        "where": "(Unlocked during the story 3rd visit) In the corner of the small room near door 2 (the Tunnelway entrance)."
       },
       {
         "name": "AP Boost",
-        "area": "Underground Concourse"
+        "area": "Underground Concourse",
+        "where": "(Unlocked during the story 3rd visit) From entrance 3, look for the graffiti pointing toward doors 4 and 5. Go down the stairs in that direction and the chest is immediately to the right."
       },
       {
         "name": "Mythril Crystal",
-        "area": "Underground Concourse"
+        "area": "Underground Concourse",
+        "where": "(Unlocked during the story 3rd visit) In the corner south of door 4 (the Market Street: Tram Common entrance)."
       },
       {
         "name": "Orichalcum",
-        "area": "Tunnelway"
+        "area": "Tunnelway",
+        "where": "(Unlocked during the story 3rd visit) Against a pillar in the largest room."
       },
       {
         "name": "Mythril Crystal",
-        "area": "Tunnelway"
+        "area": "Tunnelway",
+        "where": "(Unlocked during the story 3rd visit) In the corner in front of the Sunset Terrace entrance."
       },
       {
         "name": "Orichalcum+",
-        "area": "Sunset Terrace"
+        "area": "Sunset Terrace",
+        "where": "(Unlocked during the story 3rd visit) Climb to the top of the tram and use it to jump across to the rooftop near the Eastern end of the tracks that holds the chest."
       },
       {
         "name": "Mythril Shard",
-        "area": "Sunset Terrace"
+        "area": "Sunset Terrace",
+        "where": "(Unlocked during the story 3rd visit) In front of a building near the Western end of the tram tracks."
       },
       {
         "name": "Mythril Crystal",
-        "area": "Sunset Terrace"
+        "area": "Sunset Terrace",
+        "where": "(Unlocked during the story 3rd visit) Between two buildings near the Eastern end of the tram tracks."
       },
       {
         "name": "AP Boost",
-        "area": "Sunset Terrace"
+        "area": "Sunset Terrace",
+        "where": "(Unlocked during the story 3rd visit) In the north, at the end of the alley where the \"Friend From Beyond the Wall\" wonder was investigated."
       },
       {
         "name": "Mythril Crystal",
-        "area": "Mansion: Foyer"
+        "area": "Mansion: Foyer",
+        "where": "(Unlocked during the story 3rd visit) In front of the glass doors that overlook the gardens."
       },
       {
         "name": "Mythril Stone",
-        "area": "Mansion: Foyer"
+        "area": "Mansion: Foyer",
+        "where": "(Unlocked during the story 3rd visit) At the top of the first flight of stairs on the right."
       },
       {
         "name": "Serenity Crystal",
-        "area": "Mansion: Foyer"
+        "area": "Mansion: Foyer",
+        "where": "(Unlocked during the story 3rd visit) In the center of the landing at the top of the stairs."
       },
       {
         "name": "Mythril Crystal",
-        "area": "Mansion: Dining Room"
+        "area": "Mansion: Dining Room",
+        "where": "(Unlocked during the story 3rd visit) Against the wall opposite the door."
       },
       {
         "name": "Mythril Stone",
-        "area": "Mansion: Dining Room"
+        "area": "Mansion: Dining Room",
+        "where": "(Unlocked during the story 3rd visit) In the corner by the door."
       },
       {
         "name": "Orichalcum",
-        "area": "Mansion: Library"
+        "area": "Mansion: Library",
+        "where": "(Unlocked during the story 3rd visit) In the corner beside the statue in the bookcase."
       },
       {
         "name": "Ultimate Recipe",
-        "area": "Mansion: Basement Corridor"
+        "area": "Mansion: Basement Corridor",
+        "where": "(Unlocked during the story 3rd visit) Along the wall, at the end of a line of pods."
       },
       {
         "name": "Drive Recovery",
-        "area": "Borough"
+        "area": "Borough",
+        "where": "On the Western side of the walkway leading to the Bailey entrance."
       },
       {
         "name": "AP Boost",
-        "area": "Borough"
+        "area": "Borough",
+        "where": "In the southwest, hidden in the corner by the crane that sits at the top of the long stone stairs."
       },
       {
         "name": "Hi-Potion",
-        "area": "Borough"
+        "area": "Borough",
+        "where": "Beside the Merlin's House entrance."
       },
       {
         "name": "Mythril Shard",
-        "area": "Borough"
+        "area": "Borough",
+        "where": "To the east of the Bailey entrance."
       },
       {
         "name": "Dark Shard",
-        "area": "Borough"
+        "area": "Borough",
+        "where": "When exiting from Merlin's House, head right to find the chest at the bottom of a small set of stairs."
       },
       {
         "name": "Castle Perimeter Map",
-        "area": "Postern"
+        "area": "Postern",
+        "where": "(Unlocked during the story 2nd visit) On the southern railing of the circular area."
       },
       {
         "name": "Mythril Gem",
-        "area": "Postern"
+        "area": "Postern",
+        "where": "(Unlocked during the story 2nd visit) On a pipe to the right of the stairs leading to the Restoration Site."
       },
       {
         "name": "AP Boost",
-        "area": "Postern"
+        "area": "Postern",
+        "where": "(Unlocked during the story 2nd visit) In the south, next to a gold mechanical box at the bottom of the winding pathway."
       },
       {
         "name": "Mythril Stone",
-        "area": "Corridors"
+        "area": "Corridors",
+        "where": "(Unlocked during the story 2nd visit) From the Postern entrance, take the southern path at the first fork in the road, then the Eastern path at the fork after that. Head north at the next fork and follow the path straight past the next fork. Continue on to find the chest in front of a pile of debris."
       },
       {
         "name": "Mythril Crystal",
-        "area": "Corridors"
+        "area": "Corridors",
+        "where": "(Unlocked during the story 2nd visit) From the Postern entrance, take the southern path at the first fork in the road, then the Eastern path at the fork after that. At the next fork head south and follow the path to the chest."
       },
       {
         "name": "Dark Crystal",
-        "area": "Corridors"
+        "area": "Corridors",
+        "where": "(Unlocked during the story 2nd visit) From the Postern entrance, take the Eastern path at the first fork and follow to the chest in the corner."
       },
       {
         "name": "AP Boost",
-        "area": "Corridors"
+        "area": "Corridors",
+        "where": "(Unlocked during the story 2nd visit) From the Postern entrance, take the southern path at the first fork in the road, then the Western path at the fork after that. Follow the path to the chest in the corner."
       },
       {
         "name": "Skill Recipe",
-        "area": "Ansem's Study"
+        "area": "Ansem's Study",
+        "where": "(Unlocked during the story 2nd visit) In the south, next to the open doorway."
       },
       {
         "name": "Ukulele Charm",
-        "area": "Ansem's Study"
+        "area": "Ansem's Study",
+        "where": "(Unlocked during the story 2nd visit) In the corner, on the glass walkway between the computer area and the study."
       },
       {
         "name": "Moon Recipe",
-        "area": "Restoration Site"
+        "area": "Restoration Site",
+        "where": "(Unlocked during the story 2nd visit) From the Bailey entrance, hug the left wall to find the ledge that holds the chest."
       },
       {
         "name": "AP Boost",
-        "area": "Restoration Site"
+        "area": "Restoration Site",
+        "where": "(Unlocked during the story 2nd visit) From the Bailey entrance, hug the left wall to find a ledge. Jump onto the ledge and hug the right wall to find the chest next to a gold pipe."
       },
       {
         "name": "Torn Pages",
-        "area": "Crystal Fissure"
+        "area": "Crystal Fissure",
+        "where": "(Unlocked during the story 2nd visit) Opposite the Save Point."
       },
       {
         "name": "The Great Maw Map",
-        "area": "Crystal Fissure"
+        "area": "Crystal Fissure",
+        "where": "(Unlocked during the story 2nd visit) Behind the Save Point."
       },
       {
         "name": "Energy Crystal",
-        "area": "Crystal Fissure"
+        "area": "Crystal Fissure",
+        "where": "(Unlocked during the story 2nd visit) Behind the Save Point."
       },
       {
         "name": "AP Boost",
-        "area": "Crystal Fissure"
+        "area": "Crystal Fissure",
+        "where": "(Unlocked during the story 2nd visit) Behind the Save Point."
       },
       {
         "name": "Gull Wing",
-        "area": "Postern"
+        "area": "Postern",
+        "where": "(Unlocked after the story 2nd visit) talk to Yuna to make the chest appear."
       },
       {
         "name": "Cosmic Chain",
-        "area": "Heartless Manufactory"
+        "area": "Heartless Manufactory",
+        "where": "(Unlocked after the story 2nd visit) Directly opposite the entrance."
       },
       {
         "name": "AP Boost",
-        "area": "Cavern of Remembrance: Depths"
+        "area": "Cavern of Remembrance: Depths",
+        "where": "(Unlocked during the story 2nd visit) Requires Growth Abilities Just passed the red orb."
       },
       {
         "name": "Power Crystal",
-        "area": "Cavern of Remembrance: Depths"
+        "area": "Cavern of Remembrance: Depths",
+        "where": "(Unlocked during the story 2nd visit) Requires Growth Abilities On the floor next to the ramp."
       },
       {
         "name": "Frost Crystal",
-        "area": "Cavern of Remembrance: Depths"
+        "area": "Cavern of Remembrance: Depths",
+        "where": "(Unlocked during the story 2nd visit) Requires Growth Abilities From the Mineshaft doors, fall all the way to the floor and head north. It will be against the wall by a stone pillar."
       },
       {
         "name": "Manifest Illusion",
-        "area": "Cavern of Remembrance: Depths"
+        "area": "Cavern of Remembrance: Depths",
+        "where": "(Unlocked during the story 2nd visit) Requires Growth Abilities From the Mineshaft doors, High Jump and Glide immediately east to the nearest stone shelf. Follow the stairs up until you reach the chest."
       },
       {
         "name": "AP Boost",
-        "area": "Cavern of Remembrance: Depths"
+        "area": "Cavern of Remembrance: Depths",
+        "where": "(Unlocked during the story 2nd visit) Requires Growth Abilities On a tall pillar on the northwest side of the room."
       },
       {
         "name": "Remembrance Gem",
-        "area": "Cavern of Remembrance: Depths"
+        "area": "Cavern of Remembrance: Depths",
+        "where": "(Unlocked during the story 2nd visit) Requires Growth Abilities Near the entrance to Mining Area."
       },
       {
         "name": "Serenity Gem",
-        "area": "Cavern of Remembrance: Mining Area"
+        "area": "Cavern of Remembrance: Mining Area",
+        "where": "(Unlocked during the story 2nd visit) On the lowest section, in a crevasse to the East."
       },
       {
         "name": "AP Boost",
-        "area": "Cavern of Remembrance: Mining Area"
+        "area": "Cavern of Remembrance: Mining Area",
+        "where": "(2nd visit: Requires Growth Abilities) Near the northeast side of the room along the path."
       },
       {
         "name": "Serenity Crystal",
-        "area": "Cavern of Remembrance: Mining Area"
+        "area": "Cavern of Remembrance: Mining Area",
+        "where": "(2nd visit: Requires Growth Abilities) Near the east side of the room along the path."
       },
       {
         "name": "Manifest Illusion",
-        "area": "Cavern of Remembrance: Mining Area"
+        "area": "Cavern of Remembrance: Mining Area",
+        "where": "(2nd visit: Requires Growth Abilities) Near the east side of the room along the path."
       },
       {
         "name": "Serenity Gem",
-        "area": "Cavern of Remembrance: Mineshaft"
+        "area": "Cavern of Remembrance: Mineshaft",
+        "where": "(2nd visit: Requires Growth Abilities) small chest in most the northeast at the top of a structure."
       },
       {
         "name": "Dark Remembrance Map",
-        "area": "Cavern of Remembrance: Mining Area"
+        "area": "Cavern of Remembrance: Mining Area",
+        "where": "(2nd visit: Requires Growth Abilities) Large chest in the northeast at the top of a structure."
       },
       {
         "name": "Serenity Crystal",
-        "area": "Cavern of Remembrance: Engine Chamber"
+        "area": "Cavern of Remembrance: Engine Chamber",
+        "where": "(2nd visit: Requires Growth Abilities) At the very beginning of the conveyor in a side section."
       },
       {
         "name": "Remembrance Crystal",
-        "area": "Cavern of Remembrance: Engine Chamber"
+        "area": "Cavern of Remembrance: Engine Chamber",
+        "where": "(2nd visit: Requires Growth Abilities) At the very end of the conveyor on a chain-link structure."
       },
       {
         "name": "AP Boost",
-        "area": "Cavern of Remembrance: Engine Chamber"
+        "area": "Cavern of Remembrance: Engine Chamber",
+        "where": "(2nd visit: Requires Growth Abilities) Across the room from the door to the top of Mineshaft."
       },
       {
         "name": "Manifest Illusion",
-        "area": "Cavern of Remembrance: Engine Chamber"
+        "area": "Cavern of Remembrance: Engine Chamber",
+        "where": "(2nd visit: Requires Growth Abilities) Across the room from the door to the top of Mineshaft."
       },
       {
         "name": "AP Boost",
-        "area": "Cavern of Remembrance: Mineshaft"
+        "area": "Cavern of Remembrance: Mineshaft",
+        "where": "(2nd visit: Requires Growth Abilities) Next to the blue orb."
       },
       {
         "name": "AP Boost",
-        "area": "Cavern of Remembrance: Mineshaft"
+        "area": "Cavern of Remembrance: Mineshaft",
+        "where": "(2nd visit: Requires Growth Abilities) At the end of the Glide puzzle next to the door."
       },
       {
         "name": "Depths of Remembrance Map",
-        "area": "Cavern of Remembrance: Mineshaft"
+        "area": "Cavern of Remembrance: Mineshaft",
+        "where": "(2nd visit: Requires Growth Abilities) Before the Quick Run puzzle."
       },
       {
         "name": "Power Boost",
-        "area": "Cavern of Remembrance: Mineshaft"
+        "area": "Cavern of Remembrance: Mineshaft",
+        "where": "(2nd visit: Requires Growth Abilities) Before the Aerial Dodge puzzle."
       },
       {
         "name": "Magic Boost",
-        "area": "Cavern of Remembrance: Mineshaft"
+        "area": "Cavern of Remembrance: Mineshaft",
+        "where": "(2nd visit: Requires Growth Abilities) After the Glide puzzle."
       },
       {
         "name": "Garden of Assemblage Map",
-        "area": "Garden of Assemblage"
+        "area": "Garden of Assemblage",
+        "where": "(2nd visit: Requires Growth Abilities) On the west side of the room."
       },
       {
         "name": "Lost Illusion",
-        "area": "Garden of Assemblage"
+        "area": "Garden of Assemblage",
+        "where": "(2nd visit: Requires Growth Abilities) On the east side of the room."
       },
       {
         "name": "Proof of Nonexistence",
-        "area": "Garden of Assemblage"
+        "area": "Garden of Assemblage",
+        "where": "(2nd visit: Requires Growth Abilities and defeating Data Organization XIII) Next to the computer."
       },
       {
         "name": "AP Boost",
-        "area": "Courtyard"
+        "area": "Courtyard",
+        "where": "In the southwest corner of the area."
       },
       {
         "name": "Hi-Potion",
-        "area": "Courtyard"
+        "area": "Courtyard",
+        "where": "From the Castle entrance, turn left to find the chest in the northeast corner."
       },
       {
         "name": "Mythril Shard",
-        "area": "Courtyard"
+        "area": "Courtyard",
+        "where": "To the left of the entrance to the Bridge, against the wall."
       },
       {
         "name": "Castle Map",
-        "area": "Belle's Room"
+        "area": "Belle's Room",
+        "where": "Against the wall to the left of the bed."
       },
       {
         "name": "Mega-Recipe",
-        "area": "Belle's Room"
+        "area": "Belle's Room",
+        "where": "In the corner of the room, beside the vanity."
       },
       {
         "name": "Mythril Shard",
-        "area": "The East Wing"
+        "area": "The East Wing",
+        "where": "In the corner of the west end of the map, directly in front of the Entrance Hall entrance."
       },
       {
         "name": "Tent",
-        "area": "The East Wing"
+        "area": "The East Wing",
+        "where": "Against the south wall, halfway down the hall."
       },
       {
         "name": "Hi-Potion",
-        "area": "The West Hall"
+        "area": "The West Hall",
+        "where": "On the northern wall of the corridor that leads to the Entrance Hall, between two statues of armor."
       },
       {
         "name": "Mythril Shard",
-        "area": "The West Hall"
+        "area": "The West Hall",
+        "where": "Between two statues of armor, against the southern wall of the corridor that leads to the Entrance Hall."
       },
       {
         "name": "Power Shard",
-        "area": "The West Hall"
+        "area": "The West Hall",
+        "where": "Against the wall, by the large statue on the right of the staircase."
       },
       {
         "name": "Mythril Shard",
-        "area": "The West Hall"
+        "area": "The West Hall",
+        "where": "At the end of the narrow passage on the left of the staircase."
       },
       {
         "name": "AP Boost",
-        "area": "The West Hall"
+        "area": "The West Hall",
+        "where": "At the top of the first flight of stairs."
       },
       {
         "name": "Bright Stone",
-        "area": "The West Hall"
+        "area": "The West Hall",
+        "where": "By the corner of the wall to the left of the staircase."
       },
       {
         "name": "Basement Map",
-        "area": "Dungeon"
+        "area": "Dungeon",
+        "where": "In the corner by the door."
       },
       {
         "name": "AP Boost",
-        "area": "Dungeon"
+        "area": "Dungeon",
+        "where": "Against the Eastern wall, beside a chair."
       },
       {
         "name": "Mythril Shard",
-        "area": "Secret Passage"
+        "area": "Secret Passage",
+        "where": "Against a pillar in the small raised area in the middle of the area."
       },
       {
         "name": "Hi-Potion",
-        "area": "Secret Passage"
+        "area": "Secret Passage",
+        "where": "Against a pillar in the small raised area in the middle of the area."
       },
       {
         "name": "Lucid Shard",
-        "area": "Secret Passage"
+        "area": "Secret Passage",
+        "where": "Against the wall of the small room just before the The West Hall entrance."
       },
       {
         "name": "Mythril Shard",
-        "area": "The West Wing"
+        "area": "The West Wing",
+        "where": "To the right at the top of the stairs."
       },
       {
         "name": "Tent",
-        "area": "The West Wing"
+        "area": "The West Wing",
+        "where": "Directly in front of the The West Hall entrance."
       },
       {
         "name": "Blazing Shard",
-        "area": "The Beast's Room"
+        "area": "The Beast's Room",
+        "where": "Against the wall, to the right of the rose."
       },
       {
         "name": "Power Boost",
-        "area": "Underworld Entrance"
+        "area": "Underworld Entrance",
+        "where": "Only accessible after the Olympus Stone has been stolen. Along the path to the Underworld Caverns."
       },
       {
         "name": "Mythril Shard",
-        "area": "Cave of the Dead: Passage"
+        "area": "Cave of the Dead: Passage",
+        "where": "From the Cave of the Dead: Entrance entrance, take the ramp on the left at the fork in the road to find the chest on a ledge."
       },
       {
         "name": "Mythril Stone",
-        "area": "Cave of the Dead: Passage"
+        "area": "Cave of the Dead: Passage",
+        "where": "Against the wall, opposite the Cave of the Dead: Inner Chamber entrance."
       },
       {
         "name": "Ether",
-        "area": "Cave of the Dead: Passage"
+        "area": "Cave of the Dead: Passage",
+        "where": "From the Cave of the Dead: Entrance entrance, take the ramp on the left at the fork in the road and follow the passage. The chest is located halfway down the path."
       },
       {
         "name": "AP Boost",
-        "area": "Cave of the Dead: Passage"
+        "area": "Cave of the Dead: Passage",
+        "where": "From the Cave of the Dead: Entrance entrance, take the ramp on the left at the fork in the road and follow the passage. The chest is located near the end of the path, at the bottom of the stairs."
       },
       {
         "name": "Hi-Potion",
-        "area": "Cave of the Dead: Passage"
+        "area": "Cave of the Dead: Passage",
+        "where": "From the Cave of the Dead: Entrance entrance, take the right path at the fork in the road. The chest is found against the left wall."
       },
       {
         "name": "Underworld Map",
-        "area": "Cave of the Dead: Inner Chamber"
+        "area": "Cave of the Dead: Inner Chamber",
+        "where": "Against a pillar, near the Save Point."
       },
       {
         "name": "Mythril Shard",
-        "area": "Cave of the Dead: Inner Chamber"
+        "area": "Cave of the Dead: Inner Chamber",
+        "where": "Against the wall beside the Cave of the Dead: Passage entrance."
       },
       {
         "name": "Lucid Shard",
-        "area": "Underworld Caverns: Entrance"
+        "area": "Underworld Caverns: Entrance",
+        "where": "Travel through to Underworld Caverns: The Lost Road. Follow the path to the left until you reach a staircase that leads back to the Entrance. Enter to find the chest on a ledge."
       },
       {
         "name": "AP Boost",
-        "area": "Underworld Caverns: Entrance"
+        "area": "Underworld Caverns: Entrance",
+        "where": "Travel through to Underworld Caverns: The Lost Road. Follow the path to the left until you reach a staircase that leads back to the Entrance. Enter to find the chest on a ledge."
       },
       {
         "name": "Mythril Shard",
-        "area": "Underworld Caverns: Entrance"
+        "area": "Underworld Caverns: Entrance",
+        "where": "From the Underworld Entrance entrance, drop off the far right of the platform to find the chest on a small ledge."
       },
       {
         "name": "Bright Shard",
-        "area": "Underworld Caverns: The Lost Road"
+        "area": "Underworld Caverns: The Lost Road",
+        "where": "From the Underworld Caverns: Entrance entrance, follow the left path to find the chest against a pile of rocks."
       },
       {
         "name": "Ether",
-        "area": "Underworld Caverns: The Lost Road"
+        "area": "Underworld Caverns: The Lost Road",
+        "where": "From the Underworld Caverns: Entrance entrance, follow the path to the right to find the chest against the wall."
       },
       {
         "name": "Mythril Shard",
-        "area": "Underworld Caverns: The Lost Road"
+        "area": "Underworld Caverns: The Lost Road",
+        "where": "When facing the Underworld Caverns: Atrium entrance, take the path on the right to find the chest against a wall."
       },
       {
         "name": "Mythril Stone",
-        "area": "Underworld Caverns: The Lost Road"
+        "area": "Underworld Caverns: The Lost Road",
+        "where": "Follow the path past the staircase to the Underworld Caverns: Entrance to find the chest against the wall."
       },
       {
         "name": "Lucid Stone",
-        "area": "Underworld Caverns: Atrium"
+        "area": "Underworld Caverns: Atrium",
+        "where": "From the Underworld Caverns: The Lost Road entrance, follow the wall to the right to find the chest in an alcove."
       },
       {
         "name": "AP Boost",
-        "area": "Underworld Caverns: Atrium"
+        "area": "Underworld Caverns: Atrium",
+        "where": "Follow the main path until you reach a small flight of stone stairs. The chest is on a ledge to the right, accessible by jumping."
       },
       {
         "name": "Caverns Map",
-        "area": "Underworld Caverns: The Lock"
+        "area": "Underworld Caverns: The Lock",
+        "where": "Against the wall in the southwest."
       },
       {
         "name": "Mythril Shard",
-        "area": "Underworld Caverns: The Lock"
+        "area": "Underworld Caverns: The Lock",
+        "where": "Against the wall in the northwest."
       },
       {
         "name": "AP Boost",
-        "area": "Underworld Caverns: The Lock"
+        "area": "Underworld Caverns: The Lock",
+        "where": "Against the wall in the East."
       },
       {
         "name": "Dark Shard",
-        "area": "Agrabah"
+        "area": "Agrabah",
+        "where": "Directly opposite the Mythril Shard chest near the Peddler's Shop."
       },
       {
         "name": "Mythril Shard",
-        "area": "Agrabah"
+        "area": "Agrabah",
+        "where": "In the alley to the left of the Palace entrance. Against a wall at the top of the three ledges on the south."
       },
       {
         "name": "Hi-Potion",
-        "area": "Agrabah"
+        "area": "Agrabah",
+        "where": "At the top of the stairs near the Peddler's Shop entrance."
       },
       {
         "name": "AP Boost",
-        "area": "Agrabah"
+        "area": "Agrabah",
+        "where": "Near the alley to the left of the Palace entrance. Accessed by climbing the three ledges on the south side of the alley and dropping down to the smaller ledge, where the chest sits in the corner."
       },
       {
         "name": "Mythril Stone",
-        "area": "Agrabah"
+        "area": "Agrabah",
+        "where": "In a corner of the higher levels in the West, near the Bazaar entrance."
       },
       {
         "name": "Mythril Shard",
-        "area": "Agrabah"
+        "area": "Agrabah",
+        "where": "At the top of the stairs next to the Peddler's Shop, on the right of the Bazaar entrance."
       },
       {
         "name": "Serenity Shard",
-        "area": "Agrabah"
+        "area": "Agrabah",
+        "where": "On a ledge in the alley to the left of the Palace entrance."
       },
       {
         "name": "Mythril Gem",
-        "area": "Bazaar"
+        "area": "Bazaar",
+        "where": "On top of a high ledge in the far East."
       },
       {
         "name": "Power Shard",
-        "area": "Bazaar"
+        "area": "Bazaar",
+        "where": "Near the bottom of the staircase."
       },
       {
         "name": "Hi-Potion",
-        "area": "Bazaar"
+        "area": "Bazaar",
+        "where": "Among the merchant booths in the south."
       },
       {
         "name": "AP Boost",
-        "area": "Bazaar"
+        "area": "Bazaar",
+        "where": "Among the merchant booths in the south."
       },
       {
         "name": "Mythril Shard",
-        "area": "Bazaar"
+        "area": "Bazaar",
+        "where": "Among the merchant booths in the south."
       },
       {
         "name": "Skill Ring",
-        "area": "Palace Walls"
+        "area": "Palace Walls",
+        "where": "To the right of the Cave of Wonders entrance."
       },
       {
         "name": "Mythril Stone",
-        "area": "Palace Walls"
+        "area": "Palace Walls",
+        "where": "On top of a pile of boxes behind the Save Point."
       },
       {
         "name": "Power Stone",
-        "area": "The Cave of Wonders: Entrance"
+        "area": "The Cave of Wonders: Entrance",
+        "where": "To the left of the Valley of Stone entrance."
       },
       {
         "name": "Mythril Shard",
-        "area": "The Cave of Wonders: Entrance"
+        "area": "The Cave of Wonders: Entrance",
+        "where": "To the right of the Valley of Stone entrance."
       },
       {
         "name": "Mythril Stone",
-        "area": "The Cave of Wonders: Valley of Stone"
+        "area": "The Cave of Wonders: Valley of Stone",
+        "where": "On a purple ledge just in front of the entrance tunnel."
       },
       {
         "name": "AP Boost",
-        "area": "The Cave of Wonders: Valley of Stone"
+        "area": "The Cave of Wonders: Valley of Stone",
+        "where": "On a purple ledge along the south side of the room."
       },
       {
         "name": "Mythril Shard",
-        "area": "The Cave of Wonders: Valley of Stone"
+        "area": "The Cave of Wonders: Valley of Stone",
+        "where": "On a tall blue ledge along the south side of the room."
       },
       {
         "name": "Hi-Potion",
-        "area": "The Cave of Wonders: Valley of Stone"
+        "area": "The Cave of Wonders: Valley of Stone",
+        "where": "On a purple ledge along the north side of the room."
       },
       {
         "name": "Cave of Wonders Map",
-        "area": "The Cave of Wonders: Chasm of Challenges"
+        "area": "The Cave of Wonders: Chasm of Challenges",
+        "where": "Behind the Warp Point."
       },
       {
         "name": "AP Boost",
-        "area": "The Cave of Wonders: Chasm of Challenges"
+        "area": "The Cave of Wonders: Chasm of Challenges",
+        "where": "Behind the Save Point."
       },
       {
         "name": "AP Boost",
-        "area": "The Cave of Wonders: Treasure Room"
+        "area": "The Cave of Wonders: Treasure Room",
+        "where": "In the northwest corner of the area."
       },
       {
         "name": "Serenity Gem",
-        "area": "The Cave of Wonders: Treasure Room"
+        "area": "The Cave of Wonders: Treasure Room",
+        "where": "In the northeast corner of the area."
       },
       {
         "name": "Torn Pages",
-        "area": "Ruined Chamber"
+        "area": "Ruined Chamber",
+        "where": "Not accessible on first visit. Opposite the Save Point."
       },
       {
         "name": "Ruins Map",
-        "area": "Ruined Chamber"
+        "area": "Ruined Chamber",
+        "where": "Not accessible on first visit. Next to the Save Point."
       },
       {
         "name": "Dark Shard",
-        "area": "Bamboo Grove"
+        "area": "Bamboo Grove",
+        "where": "To the right of the tallest rock."
       },
       {
         "name": "Ether",
-        "area": "Bamboo Grove"
+        "area": "Bamboo Grove",
+        "where": "To the right of the Save Point."
       },
       {
         "name": "Mythril Shard",
-        "area": "Bamboo Grove"
+        "area": "Bamboo Grove",
+        "where": "To the left of the tallest rock."
       },
       {
         "name": "Hi-Potion",
-        "area": "Checkpoint"
+        "area": "Checkpoint",
+        "where": "In a corner on the north side of the stream, against the wooden fence."
       },
       {
         "name": "Mythril Shard",
-        "area": "Checkpoint"
+        "area": "Checkpoint",
+        "where": "Behind the wagon near the Imperial Square entrance."
       },
       {
         "name": "Lightning Shard",
-        "area": "Mountain Trail"
+        "area": "Mountain Trail",
+        "where": "At the top of the path leading to the Checkpoint entrance."
       },
       {
         "name": "Recovery Recipe",
-        "area": "Mountain Trail"
+        "area": "Mountain Trail",
+        "where": "From the Village entrance, follow the path right to find a ledge that holds the chest."
       },
       {
         "name": "Ether",
-        "area": "Mountain Trail"
+        "area": "Mountain Trail",
+        "where": "From the Village entrance, follow the path right to find a ledge that holds the chest."
       },
       {
         "name": "Mythril Shard",
-        "area": "Mountain Trail"
+        "area": "Mountain Trail",
+        "where": "From the Checkpoint entrance, follow the path right and up the stairs to find the chest on a ledge."
       },
       {
         "name": "AP Boost",
-        "area": "Village Cave"
+        "area": "Village Cave",
+        "where": "Behind a rickshaw against the Western side of the entrance path."
       },
       {
         "name": "Dark Shard",
-        "area": "Village Cave"
+        "area": "Village Cave",
+        "where": "Against the Eastern side of the entrance path."
       },
       {
         "name": "Frost Shard",
-        "area": "Ridge"
+        "area": "Ridge",
+        "where": "Behind the wind vortex."
       },
       {
         "name": "AP Boost",
-        "area": "Ridge"
+        "area": "Ridge",
+        "where": "Among the rickshaw gathering in the north."
       },
       {
         "name": "Torn Pages",
-        "area": "Throne Room"
+        "area": "Throne Room",
+        "where": "Not accessible on first visit. On the ledge to the right of the throne."
       },
       {
         "name": "Palace Map",
-        "area": "Throne Room"
+        "area": "Throne Room",
+        "where": "Not accessible on first visit. On the ledge to the left of the throne."
       },
       {
         "name": "AP Boost",
-        "area": "Throne Room"
+        "area": "Throne Room",
+        "where": "Not accessible on first visit. On the right when facing the stairs snaking east off the throne platform."
       },
       {
         "name": "Queen Recipe",
-        "area": "Throne Room"
+        "area": "Throne Room",
+        "where": "Not accessible on first visit. At the bottom of the stairs snaking east off the throne platform."
       },
       {
         "name": "AP Boost",
-        "area": "Throne Room"
+        "area": "Throne Room",
+        "where": "Not accessible on first visit. On the right when facing the stairs snaking east off the throne platform."
       },
       {
         "name": "Ogre Shield",
-        "area": "Throne Room"
+        "area": "Throne Room",
+        "where": "Not accessible on first visit. At the bottom of the stairs snaking west off the throne platform."
       },
       {
         "name": "Mythril Crystal",
-        "area": "Throne Room"
+        "area": "Throne Room",
+        "where": "Not accessible on first visit. On a ledge, behind the wall that is behind the throne."
       },
       {
         "name": "Orichalcum",
-        "area": "Throne Room"
+        "area": "Throne Room",
+        "where": "Not accessible on first visit. On a ledge, behind the wall that is behind the throne."
       },
       {
         "name": "100 Acre Wood Map",
-        "area": "Pooh Bear's House"
+        "area": "Pooh Bear's House",
+        "where": "At the end of the path."
       },
       {
         "name": "AP Boost",
-        "area": "Pooh Bear's House"
+        "area": "Pooh Bear's House",
+        "where": "To the right of the back side of the house."
       },
       {
         "name": "Mythril Stone",
-        "area": "Pooh Bear's House"
+        "area": "Pooh Bear's House",
+        "where": "To the right of the back side of the house."
       },
       {
         "name": "Defense Boost",
-        "area": "Piglet's House"
+        "area": "Piglet's House",
+        "where": "On top of a tree stump to the right of the house."
       },
       {
         "name": "AP Boost",
-        "area": "Piglet's House"
+        "area": "Piglet's House",
+        "where": "Leaning against the left side of the house."
       },
       {
         "name": "Mythril Gem",
-        "area": "Piglet's House"
+        "area": "Piglet's House",
+        "where": "In front of a tree stump to the left of the house."
       },
       {
         "name": "Draw Ring",
-        "area": "Rabbit's House"
+        "area": "Rabbit's House",
+        "where": "Behind Rabbit's washing line."
       },
       {
         "name": "Mythril Crystal",
-        "area": "Rabbit's House"
+        "area": "Rabbit's House",
+        "where": "In a corner, along the outside of the pumpkin patch fence."
       },
       {
         "name": "AP Boost",
-        "area": "Rabbit's House"
+        "area": "Rabbit's House",
+        "where": "In the pumpkin patch."
       },
       {
         "name": "Magic Boost",
-        "area": "Kanga's House"
+        "area": "Kanga's House",
+        "where": "Against the left side of the house."
       },
       {
         "name": "AP Boost",
-        "area": "Kanga's House"
+        "area": "Kanga's House",
+        "where": "On the far right of the house, in front of a tree stump."
       },
       {
         "name": "Orichalcum",
-        "area": "Kanga's House"
+        "area": "Kanga's House",
+        "where": "Against the right side of the house."
       },
       {
         "name": "Mythril Gem",
-        "area": "The Spooky Cave"
+        "area": "The Spooky Cave",
+        "where": "In the center of the first patch of ice."
       },
       {
         "name": "AP Boost",
-        "area": "The Spooky Cave"
+        "area": "The Spooky Cave",
+        "where": "At the end of the first path on the right in the room with the second bee attack."
       },
       {
         "name": "Orichalcum",
-        "area": "The Spooky Cave"
+        "area": "The Spooky Cave",
+        "where": "At the end of the first path on the left in the room with the second bee attack."
       },
       {
         "name": "Guard Recipe",
-        "area": "The Spooky Cave"
+        "area": "The Spooky Cave",
+        "where": "Along the third path in the room with the second bee attack."
       },
       {
         "name": "Mythril Crystal",
-        "area": "The Spooky Cave"
+        "area": "The Spooky Cave",
+        "where": "Along the third path in the room with the second bee attack."
       },
       {
         "name": "AP Boost",
-        "area": "The Spooky Cave"
+        "area": "The Spooky Cave",
+        "where": "On a patch of ice just before you rescue Pooh."
       },
       {
         "name": "Cosmic Ring",
-        "area": "Starry Hill"
+        "area": "Starry Hill",
+        "where": "Over the bridge, amongst the bushes."
       },
       {
         "name": "Style Recipe",
-        "area": "Starry Hill"
+        "area": "Starry Hill",
+        "where": "At the back of the right side of the hill."
       },
       {
         "name": "Savannah Map",
-        "area": "Gorge"
+        "area": "Gorge",
+        "where": "Beside the steaming pool."
       },
       {
         "name": "Dark Gem",
-        "area": "Gorge"
+        "area": "Gorge",
+        "where": "Against the Eastern wall, opposite the Save Point."
       },
       {
         "name": "Mythril Stone",
-        "area": "Gorge"
+        "area": "Gorge",
+        "where": "Against the northern wall, opposite the Save Point."
       },
       {
         "name": "Frost Gem",
-        "area": "Elephant Graveyard"
+        "area": "Elephant Graveyard",
+        "where": "From the Gorge entrance, follow the wall on the left to find the chest against a rock."
       },
       {
         "name": "Mythril Stone",
-        "area": "Elephant Graveyard"
+        "area": "Elephant Graveyard",
+        "where": "On the ledge near the Savannah entrance, near the giant elephant skull."
       },
       {
         "name": "Bright Stone",
-        "area": "Elephant Graveyard"
+        "area": "Elephant Graveyard",
+        "where": "Beside the Savannah entrance."
       },
       {
         "name": "AP Boost",
-        "area": "Elephant Graveyard"
+        "area": "Elephant Graveyard",
+        "where": "From the Gorge entrance, follow the wall on the right to find the chest down the path."
       },
       {
         "name": "Mythril Shard",
-        "area": "Elephant Graveyard"
+        "area": "Elephant Graveyard",
+        "where": "From the Savannah entrance, follow the left path to find the chest in a corner, beside a bone."
       },
       {
         "name": "Pride Rock Map",
-        "area": "Pride Rock"
+        "area": "Pride Rock",
+        "where": "Against the cliff edge in front of Pride Rock."
       },
       {
         "name": "Mythril Stone",
-        "area": "Pride Rock"
+        "area": "Pride Rock",
+        "where": "Against the wall underneath Pride Rock."
       },
       {
         "name": "Serenity Crystal",
-        "area": "Pride Rock"
+        "area": "Pride Rock",
+        "where": "Follow the edge of the map to find the chest against a wall in the north."
       },
       {
         "name": "Energy Stone",
-        "area": "Wildebeest Valley"
+        "area": "Wildebeest Valley",
+        "where": "In front of a rock near the northern end of the area, opposite the Savannah entrance."
       },
       {
         "name": "AP Boost",
-        "area": "Wildebeest Valley"
+        "area": "Wildebeest Valley",
+        "where": "In front of a rock near the southern end of the area, opposite the Wastelands entrance."
       },
       {
         "name": "Mythril Gem",
-        "area": "Wildebeest Valley"
+        "area": "Wildebeest Valley",
+        "where": "Against the Western wall of the area, nearer the Wastelands entrance."
       },
       {
         "name": "Mythril Stone",
-        "area": "Wildebeest Valley"
+        "area": "Wildebeest Valley",
+        "where": "Against the Western wall of the area, nearer the Savannah entrance."
       },
       {
         "name": "Lucid Gem",
-        "area": "Wildebeest Valley"
+        "area": "Wildebeest Valley",
+        "where": "To the left when facing the Wastelands entrance, in the corner by a tree."
       },
       {
         "name": "Mythril Shard",
-        "area": "Wastelands"
+        "area": "Wastelands",
+        "where": "Against the cliff edge, near the center of the map."
       },
       {
         "name": "Serenity Gem",
-        "area": "Wastelands"
+        "area": "Wastelands",
+        "where": "Against the rock wall, near the center of the map."
       },
       {
         "name": "Mythril Stone",
-        "area": "Wastelands"
+        "area": "Wastelands",
+        "where": "Against the rock wall just before the Jungle entrance."
       },
       {
         "name": "Serenity Gem",
-        "area": "Jungle"
+        "area": "Jungle",
+        "where": "In front of a collection of ant hills, on the ledge near the Wastelands entrance."
       },
       {
         "name": "Mythril Stone",
-        "area": "Jungle"
+        "area": "Jungle",
+        "where": "From the Oasis entrance, follow the path left to find the chest in front of a tree."
       },
       {
         "name": "Serenity Crystal",
-        "area": "Jungle"
+        "area": "Jungle",
+        "where": "Beside a tree directly opposite the Wastelands entrance."
       },
       {
         "name": "Oasis Map",
-        "area": "Oasis"
+        "area": "Oasis",
+        "where": "In the southwest corner of the map."
       },
       {
         "name": "Torn Pages",
-        "area": "Oasis"
+        "area": "Oasis",
+        "where": "In front of a tree in the far East."
       },
       {
         "name": "AP Boost",
-        "area": "Oasis"
+        "area": "Oasis",
+        "where": "On the small ledge with the waterfall in the north."
       },
       {
         "name": "Mythril Shard",
-        "area": "Courtyard"
+        "area": "Courtyard",
+        "where": "On the ledge beside the topiary of the pig playing the french horn."
       },
       {
         "name": "Star Recipe",
-        "area": "Courtyard"
+        "area": "Courtyard",
+        "where": "On the highest ledge of the topiary castle that houses the Gummi Hangar entrance."
       },
       {
         "name": "AP Boost",
-        "area": "Courtyard"
+        "area": "Courtyard",
+        "where": "On the ledge in the corner behind the topiary of the cow playing the cymbals."
       },
       {
         "name": "Mythril Stone",
-        "area": "Courtyard"
+        "area": "Courtyard",
+        "where": "On the ledge behind the topiary of the pig playing the trumpet."
       },
       {
         "name": "Blazing Stone",
-        "area": "Courtyard"
+        "area": "Courtyard",
+        "where": "On the ledge behind the topiary of the cow playing the flute."
       },
       {
         "name": "Blazing Shard",
-        "area": "Courtyard"
+        "area": "Courtyard",
+        "where": "Behind the topiary castle that houses the Gummi Hangar entrance."
       },
       {
         "name": "Mythril Shard",
-        "area": "Courtyard"
+        "area": "Courtyard",
+        "where": "On the ledge beside the topiary of the dog playing the trombone."
       },
       {
         "name": "Torn Pages",
-        "area": "Library"
+        "area": "Library",
+        "where": "In the northeast corner of the room."
       },
       {
         "name": "Cornerstone Hill Map",
-        "area": "Cornerstone Hill"
+        "area": "Cornerstone Hill",
+        "where": "On the ledge in the southwest."
       },
       {
         "name": "Frost Shard",
-        "area": "Cornerstone Hill"
+        "area": "Cornerstone Hill",
+        "where": "Against the fence in the northwest."
       },
       {
         "name": "Mythril Shard",
-        "area": "Pier"
+        "area": "Pier",
+        "where": "In front of a tree in the northeast."
       },
       {
         "name": "Hi-Potion",
-        "area": "Pier"
+        "area": "Pier",
+        "where": "Under the tree in the southwest."
       },
       {
         "name": "Mythril Stone",
-        "area": "Waterway"
+        "area": "Waterway",
+        "where": "Against the wall near the sign for the Wharf entrance."
       },
       {
         "name": "AP Boost",
-        "area": "Waterway"
+        "area": "Waterway",
+        "where": "Beside the river edge in the northernmost part of the area."
       },
       {
         "name": "Frost Stone",
-        "area": "Waterway"
+        "area": "Waterway",
+        "where": "Beside the windmill near the Pier entrance."
       },
       {
         "name": "Mythril Shard",
-        "area": "Graveyard"
+        "area": "Graveyard",
+        "where": "Against the wall in the middle of the fork in the road."
       },
       {
         "name": "Serenity Gem",
-        "area": "Graveyard"
+        "area": "Graveyard",
+        "where": "On the right of the Curly Hill entrance."
       },
       {
         "name": "Halloween Town Map",
-        "area": "Dr. Finkelstein's Lab"
+        "area": "Dr. Finkelstein's Lab",
+        "where": "Beside Finkelstein's notebook."
       },
       {
         "name": "Mythril Stone",
-        "area": "Halloween Town Square"
+        "area": "Halloween Town Square",
+        "where": "On the right of the gates with the pile of presents behind them."
       },
       {
         "name": "Energy Shard",
-        "area": "Halloween Town Square"
+        "area": "Halloween Town Square",
+        "where": "Beside the guillotine."
       },
       {
         "name": "Lightning Shard",
-        "area": "The Hinterlands"
+        "area": "The Hinterlands",
+        "where": "Between two trees in the northwest."
       },
       {
         "name": "Mythril Stone",
-        "area": "The Hinterlands"
+        "area": "The Hinterlands",
+        "where": "On the right when facing the Yuletide Hill entrance, against the edge of the map."
       },
       {
         "name": "AP Boost",
-        "area": "The Hinterlands"
+        "area": "The Hinterlands",
+        "where": "In the East, behind a tree."
       },
       {
         "name": "Mega-Potion",
-        "area": "Candy Cane Lane"
+        "area": "Candy Cane Lane",
+        "where": "On a snowy ledge in the southwest corner of the area."
       },
       {
         "name": "Mythril Gem",
-        "area": "Candy Cane Lane"
+        "area": "Candy Cane Lane",
+        "where": "east of the Yuletide Hill entrance, on a ledge."
       },
       {
         "name": "Lightning Stone",
-        "area": "Candy Cane Lane"
+        "area": "Candy Cane Lane",
+        "where": "To the right of the Christmas Tree Plaza entrance."
       },
       {
         "name": "Mythril Stone",
-        "area": "Candy Cane Lane"
+        "area": "Candy Cane Lane",
+        "where": "To the right of the Santa's House entrance."
       },
       {
         "name": "Christmas Town Map",
-        "area": "Santa's House"
+        "area": "Santa's House",
+        "where": "Beside Santa's chair, in front of the window that looks out on his sleigh."
       },
       {
         "name": "AP Boost",
-        "area": "Santa's House"
+        "area": "Santa's House",
+        "where": "To the right of the Save Point."
       },
       {
         "name": "Naval Map",
-        "area": "Rampart"
+        "area": "Rampart",
+        "where": "Left of the Save Point, beside a cannon."
       },
       {
         "name": "Mythril Stone",
-        "area": "Rampart"
+        "area": "Rampart",
+        "where": "Around the corner in the East, in front of the Town entrance."
       },
       {
         "name": "Dark Shard",
-        "area": "Rampart"
+        "area": "Rampart",
+        "where": "To the right of the stair platform, next to a cannon."
       },
       {
         "name": "Dark Stone",
-        "area": "Town"
+        "area": "Town",
+        "where": "At the end of the alley near the Harbor entrance."
       },
       {
         "name": "AP Boost",
-        "area": "Town"
+        "area": "Town",
+        "where": "Take the stairs near the Rampart entrance and destroy the boxes to expose an alley. Destroy the boxes at other end of this alley to expose a small alcove with the chest."
       },
       {
         "name": "Mythril Shard",
-        "area": "Town"
+        "area": "Town",
+        "where": "Take the stairs near the Rampart entrance and destroy the boxes to find the chest sitting against a building."
       },
       {
         "name": "Mythril Gem",
-        "area": "Town"
+        "area": "Town",
+        "where": "Destroy the boxes on the northern side of the alley near the Harbor entrance to reveal an alcove with the chest."
       },
       {
         "name": "Bright Shard",
-        "area": "Isla de Muerta: Cave Mouth"
+        "area": "Isla de Muerta: Cave Mouth",
+        "where": "Along the Western edge of the area."
       },
       {
         "name": "Mythril Shard",
-        "area": "Isla de Muerta: Cave Mouth"
+        "area": "Isla de Muerta: Cave Mouth",
+        "where": "Along the Western edge of the area."
       },
       {
         "name": "AP Boost",
-        "area": "Isla de Muerta: Powder Store"
+        "area": "Isla de Muerta: Powder Store",
+        "where": "Behind the explosive crates on the northeastern side of the path nearest the Moonlight Nook entrance."
       },
       {
         "name": "AP Boost",
-        "area": "Isla de Muerta: Powder Store"
+        "area": "Isla de Muerta: Powder Store",
+        "where": "Behind the explosive crates on the Western side of the path nearest the Cave Mouth entrance."
       },
       {
         "name": "Mythril Shard",
-        "area": "Isla de Muerta: Moonlight Nook"
+        "area": "Isla de Muerta: Moonlight Nook",
+        "where": "By the river in the southeast."
       },
       {
         "name": "Serenity Gem",
-        "area": "Isla de Muerta: Moonlight Nook"
+        "area": "Isla de Muerta: Moonlight Nook",
+        "where": "In the northeast corner of the area, by the stairs to the Treasure Heap."
       },
       {
         "name": "Power Stone",
-        "area": "Isla de Muerta: Moonlight Nook"
+        "area": "Isla de Muerta: Moonlight Nook",
+        "where": "Against the Western wall."
       },
       {
         "name": "Feather Charm",
-        "area": "Ship Graveyard: The Interceptor's Hold"
+        "area": "Ship Graveyard: The Interceptor's Hold",
+        "where": "Not accessible during first visit. To the right of the Save Point."
       },
       {
         "name": "AP Boost",
-        "area": "Ship Graveyard: Seadrift Keep"
+        "area": "Ship Graveyard: Seadrift Keep",
+        "where": "Not accessible during first visit. In the corner of the lowest level of the area."
       },
       {
         "name": "Orichalcum",
-        "area": "Ship Graveyard: Seadrift Keep"
+        "area": "Ship Graveyard: Seadrift Keep",
+        "where": "Not accessible during first visit. Tucked in the corner along the ramp that connects the upper and lower levels of the area."
       },
       {
         "name": "Meteor Staff",
-        "area": "Ship Graveyard: Seadrift Keep"
+        "area": "Ship Graveyard: Seadrift Keep",
+        "where": "Not accessible during first visit. Along the southern wall of the top level of the area."
       },
       {
         "name": "Serenity Gem",
-        "area": "Ship Graveyard: Seadrift Row"
+        "area": "Ship Graveyard: Seadrift Row",
+        "where": "Not accessible during first visit. Just before the bridge, near the Interceptor's Hold entrance."
       },
       {
         "name": "King Recipe",
-        "area": "Ship Graveyard: Seadrift Row"
+        "area": "Ship Graveyard: Seadrift Row",
+        "where": "Not accessible during first visit. In front of the circular walkway in the center of the area."
       },
       {
         "name": "Mythril Crystal",
-        "area": "Ship Graveyard: Seadrift Row"
+        "area": "Ship Graveyard: Seadrift Row",
+        "where": "Not accessible during first visit. Near the Seadrift Keep entrance, among the debris along the wall."
       },
       {
         "name": "Pit Cell Area Map",
-        "area": "Pit Cell"
+        "area": "Pit Cell",
+        "where": "Only accessible after the door is opened. In the middle of the hallway that leads to the Canyon."
       },
       {
         "name": "Mythril Crystal",
-        "area": "Pit Cell"
+        "area": "Pit Cell",
+        "where": "Only accessible after the door is opened. In the middle of the hallway that leads to the Canyon."
       },
       {
         "name": "Dark Crystal",
-        "area": "Canyon"
+        "area": "Canyon",
+        "where": "At the very top of the two ramps near the Datascape entrance."
       },
       {
         "name": "Mythril Stone",
-        "area": "Canyon"
+        "area": "Canyon",
+        "where": "At the top of the ramp in front of the Pit Cell entrance."
       },
       {
         "name": "Mythril Gem",
-        "area": "Canyon"
+        "area": "Canyon",
+        "where": "In the corner opposite the elevator to the Hallway."
       },
       {
         "name": "Frost Crystal",
-        "area": "Canyon"
+        "area": "Canyon",
+        "where": "Near the Pit Cell entrance, beside the door to the central room of the area."
       },
       {
         "name": "Power Crystal",
-        "area": "I/O Tower: Hallway"
+        "area": "I/O Tower: Hallway",
+        "where": "Against the wall, directly opposite the Canyon entrance."
       },
       {
         "name": "AP Boost",
-        "area": "I/O Tower: Hallway"
+        "area": "I/O Tower: Hallway",
+        "where": "To the right when facing the Simulation Hangar entrance."
       },
       {
         "name": "I/O Tower Map",
-        "area": "I/O Tower: Communications Room"
+        "area": "I/O Tower: Communications Room",
+        "where": "In the northeast part of the room."
       },
       {
         "name": "Gaia Belt",
-        "area": "I/O Tower: Communications Room"
+        "area": "I/O Tower: Communications Room",
+        "where": "In the southeast part of the room."
       },
       {
         "name": "AP Boost",
-        "area": "Central Computer Mesa"
+        "area": "Central Computer Mesa",
+        "where": "Not accessible during first visit. Beside the computer."
       },
       {
         "name": "Orichalcum+",
-        "area": "Central Computer Mesa"
+        "area": "Central Computer Mesa",
+        "where": "Not accessible during first visit. Beside the computer."
       },
       {
         "name": "Cosmic Arts",
-        "area": "Central Computer Mesa"
+        "area": "Central Computer Mesa",
+        "where": "Not accessible during first visit. Opposite the Save Point."
       },
       {
         "name": "Central Computer Core Map",
-        "area": "Central Computer Mesa"
+        "area": "Central Computer Mesa",
+        "where": "Not accessible during first visit. Opposite the Save Point."
       },
       {
         "name": "Mythril Stone",
-        "area": "Fragment Crossing"
+        "area": "Fragment Crossing",
+        "where": "From the Alley to Between entrance, follow the path to find the chest in a corner."
       },
       {
         "name": "Mythril Crystal",
-        "area": "Fragment Crossing"
+        "area": "Fragment Crossing",
+        "where": "From the Alley to Between entrance, follow the path to find the chest in a corner."
       },
       {
         "name": "AP Boost",
-        "area": "Fragment Crossing"
+        "area": "Fragment Crossing",
+        "where": "From the Alley to Between entrance, follow the path to the end of the black road and into the area with the wires in the ground. The chest is on a ledge opposite the entrance into this area."
       },
       {
         "name": "Orichalcum",
-        "area": "Fragment Crossing"
+        "area": "Fragment Crossing",
+        "where": "From the Alley to Between entrance, follow the path to the end of the black road and into the area with the wires in the ground. The chest is on a ledge to the left of the entrance into this area."
       },
       {
         "name": "Mythril Crystal",
-        "area": "Memory's Skyscraper"
+        "area": "Memory's Skyscraper",
+        "where": "Against the wall to the west of the skyscraper."
       },
       {
         "name": "AP Boost",
-        "area": "Memory's Skyscraper"
+        "area": "Memory's Skyscraper",
+        "where": "In the northeast corner, in front of an overturned truck."
       },
       {
         "name": "Mythril Stone",
-        "area": "Memory's Skyscraper"
+        "area": "Memory's Skyscraper",
+        "where": "To the left of the The Brink of Despair entrance."
       },
       {
         "name": "Dark City Map",
-        "area": "The Brink of Despair"
+        "area": "The Brink of Despair",
+        "where": "Beside the Moogle Shop."
       },
       {
         "name": "Orichalcum+",
-        "area": "The Brink of Despair"
+        "area": "The Brink of Despair",
+        "where": "On a ledge in the northwestern corner of the area."
       },
       {
         "name": "Mythril Gem",
-        "area": "Nothing's Call"
+        "area": "Nothing's Call",
+        "where": "To the left of the Crooked Ascension entrance."
       },
       {
         "name": "Orichalcum",
-        "area": "Nothing's Call"
+        "area": "Nothing's Call",
+        "where": "From the Brink of Despair entrance, take the first ramp to find a small ledge at the top that holds the chest."
       },
       {
         "name": "Cosmic Belt",
-        "area": "Twilight's View"
+        "area": "Twilight's View",
+        "where": "On the same landing as the Save Point."
       },
       {
         "name": "Mythril Gem",
-        "area": "Naught's Skyway"
+        "area": "Naught's Skyway",
+        "where": "Along the wall, near the Hall of Empty Memories entrance."
       },
       {
         "name": "Orichalcum",
-        "area": "Naught's Skyway"
+        "area": "Naught's Skyway",
+        "where": "On a tall ledge in the middle of the area."
       },
       {
         "name": "Mythril Crystal",
-        "area": "Naught's Skyway"
+        "area": "Naught's Skyway",
+        "where": "On the landing at the bottom of the ramp that leads up to the Hall of Empty Melodies."
       },
       {
         "name": "Mythril Stone",
-        "area": "Ruin and Creation's Passage"
+        "area": "Ruin and Creation's Passage",
+        "where": "On the second landing when entering from Naught's Approach."
       },
       {
         "name": "AP Boost",
-        "area": "Ruin and Creation's Passage"
+        "area": "Ruin and Creation's Passage",
+        "where": "On a small ledge on the third landing."
       },
       {
         "name": "Mythril Crystal",
-        "area": "Ruin and Creation's Passage"
+        "area": "Ruin and Creation's Passage",
+        "where": "On the fourth landing when entering from Naught's Approach."
       },
       {
         "name": "Orichalcum",
-        "area": "Ruin and Creation's Passage"
+        "area": "Ruin and Creation's Passage",
+        "where": "On the same landing as the Altar of Naught entrance."
       }
     ],
     "puzzles": [
