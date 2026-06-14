@@ -295,42 +295,42 @@
       {
         "name": "Sliding Dash",
         "combo": "3 attack cards of the same type Total value 10-15",
-        "how": "Reach level 2"
+        "how": "First unlockable at level 2"
       },
       {
         "name": "Stun Impact",
         "combo": "3 attack cards of the same type Total value 20-23",
-        "how": "Reach level 7"
+        "how": "First unlockable at level 7"
       },
       {
         "name": "Strike Raid",
         "combo": "3 attack cards Total value 24-26",
-        "how": "Reach level 12"
+        "how": "First unlockable at level 12"
       },
       {
         "name": "Blitz",
         "combo": "3 attack cards of differing types Total value 10-15",
-        "how": "Reach level 17"
+        "how": "First unlockable at level 17"
       },
       {
         "name": "Zantetsuken",
         "combo": "3 attack cards Total value 0 or 27",
-        "how": "Reach level 22"
+        "how": "First unlockable at level 22"
       },
       {
         "name": "Sonic Blade",
         "combo": "3 attack cards of differing types Total value 20-23",
-        "how": "Reach level 27"
+        "how": "First unlockable at level 27"
       },
       {
         "name": "Ars Arcanum",
         "combo": "3 attack cards Total value 1-6",
-        "how": "Reach level 42"
+        "how": "First unlockable at level 42"
       },
       {
         "name": "Ragnarok",
         "combo": "3 attack cards Total value 7-9",
-        "how": "Reach level 52"
+        "how": "First unlockable at level 52"
       },
       {
         "name": "Trinity Limit",
@@ -1346,17 +1346,17 @@
       },
       {
         "name": "Guarded Trove",
-        "loc": "[[Floors 8+|Drops in Atlantica, Neverland, Hollow Bastion, Destiny Islands, Castle Oblivion (after Floor 7)]]",
+        "loc": "[[Floors 7+|Excluding Twilight Town]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "False Bounty",
-        "loc": "[[Floors 8+|Drops in Atlantica, Neverland, Hollow Bastion, Destiny Islands, Castle Oblivion (after Floor 7)]]",
+        "loc": "[[Floors 7+|Excluding Twilight Town]]",
         "how": "Randomly dropped at the end of battle"
       },
       {
         "name": "Moment's Reprieve",
-        "loc": "[[Most worlds|Drops in Wonderland, Olympus Coliseum, Agrabah, Monstro, Halloween Town, Atlantica, Neverland, Hollow Bastion, Twilight Town, Destiny Islands, Castle Oblivion]]",
+        "loc": "Floors 2+",
         "how": "Randomly dropped at the end of battle"
       },
       {
@@ -1366,7 +1366,7 @@
       },
       {
         "name": "Moogle Room",
-        "loc": "[[Most worlds|Drops in Wonderland, Olympus Coliseum, Agrabah, Monstro, Halloween Town, Atlantica, Neverland, Hollow Bastion, Twilight Town, Destiny Islands, Castle Oblivion]]",
+        "loc": "Floors 2+",
         "how": "Randomly dropped at the end of battle"
       },
       {
@@ -1391,7 +1391,7 @@
       },
       {
         "name": "Random Joker",
-        "loc": "[[Any floor|Drops in Traverse Town, Wonderland, Olympus Coliseum, Agrabah, Monstro, Halloween Town, Atlantica, Neverland, Hollow Bastion, Twilight Town, Destiny Islands, Castle Oblivion]]",
+        "loc": "Any floor",
         "how": "Randomly dropped at the end of battle"
       },
       {
