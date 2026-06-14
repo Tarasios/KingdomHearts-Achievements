@@ -501,7 +501,9 @@ function worldEntryTable(list) {
     if (e.auto) { chk.disabled = true; chk.title = fmt('gt-auto-tip', e.auto); }
     else chk.addEventListener("change", () => toggle(e.store, e.i));
     td.appendChild(chk); tr.appendChild(td);
-    let nameHtml = `<span class="itemname">${fmtText(e.name)}</span>`;
+    let nameHtml = "";
+    if (e.swatch) nameHtml += `<span class="wswatch" style="background:${e.swatch}"></span>`;
+    nameHtml += `<span class="itemname">${fmtText(e.name)}</span>`;
     if (e.auto) nameHtml += ` <span class="srcbadge" title="${fmt('gt-auto-tip', e.auto)}">${t('gt-auto-badge')}</span>`;
     tr.appendChild(el("td", null, nameHtml));
     tr.appendChild(el("td", null, fmtText(e.where)));
@@ -521,9 +523,15 @@ function renderWorlds(p) {
     const secCfg = (typeof s === "string") ? { id: s } : s;
     const sec = findSec(secCfg.id), res = resolved(sec);
     const nameCol = sec.cols.find(c => c.name) || sec.cols[0];
-    return { secCfg, sec, res, store: smap(res.storeId), title: t('sec-' + sec.id),
-      nameCol, extra: sec.cols.filter(c => c !== nameCol) };
+    const whereKeys = secCfg.where || sec.cols.filter(c => c !== nameCol).map(c => c.k);
+    return { secCfg, sec, res, store: smap(res.storeId), title: t('sec-' + sec.id), nameCol, whereKeys };
   });
+  // A hex colour from the section's swatch map, validated (it builds inline style).
+  const swatchOf = (secCfg, cell) => {
+    if (!secCfg.swatch) return null;
+    const c = secCfg.swatch.colors[cell(secCfg.swatch.field)];
+    return (c && /^#[0-9a-fA-F]{3,8}$/.test(c)) ? c : null;
+  };
   let dx = 0, dy = 0;
   cfg.worlds.forEach((world, wi) => {
     const slug = "w" + wi;
@@ -534,9 +542,12 @@ function renderWorlds(p) {
         if (!itemVisible(it, activeChar)) return;
         if (worldOf(sv.secCfg, sv.res, it, i) !== world) return;
         const auto = autoSource(sv.sec, it);
-        list.push({ store: sv.store, i, done: !!sv.store[i] || !!auto, auto,
-          name: cellText(sv.res.storeId, i, sv.nameCol.k, it) || "",
-          where: sv.extra.map(c => cellText(sv.res.storeId, i, c.k, it)).filter(Boolean).join(" · ") });
+        const cell = k => cellText(sv.res.storeId, i, k, it) || "";
+        const name = sv.secCfg.label
+          ? sv.secCfg.label.replace(/\{(\w+)\}/g, (m, k) => cell(k)).trim()
+          : cell(sv.nameCol.k);
+        list.push({ store: sv.store, i, done: !!sv.store[i] || !!auto, auto, name,
+          where: sv.whereKeys.map(cell).filter(Boolean).join(" · "), swatch: swatchOf(sv.secCfg, cell) });
       });
       if (list.length) groups.push({ title: sv.title, list });
     });
@@ -601,6 +612,14 @@ function render() {
     const res = resolved(sec);
     const title = res.charLabel ? fmt('gt-section-for', t('sec-' + sec.id), res.charLabel) : t('sec-' + sec.id);
     p.results.appendChild(el("div", i === 0 ? "grp-title" : "sub-title", fmtText(title)));
+    // Optional explanatory note under a section title (lang key note-<id>);
+    // newlines become separate lines.
+    const note = t('note-' + sec.id);
+    if (note && note !== 'note-' + sec.id) {
+      const np = el("p", "hint");
+      note.split("\n").forEach((line, k) => { if (k) np.appendChild(el("br")); np.appendChild(document.createTextNode(line)); });
+      p.results.appendChild(np);
+    }
     checklist(p.results, sec, res, p.state);
     const [x, y] = entryCount({ sec, storeId: res.storeId, items: res.items, c: activeChar });
     cx += x; cy += y;

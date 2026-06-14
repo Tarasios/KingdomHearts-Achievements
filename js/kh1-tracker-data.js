@@ -3493,7 +3493,22 @@ var TRACKER_GAME = {
       "treasures",
       {
         "id": "trinities",
-        "key": "world"
+        "key": "world",
+        "label": "{g} {num}",
+        "where": [
+          "area",
+          "where"
+        ],
+        "swatch": {
+          "field": "g",
+          "colors": {
+            "Trinity Jump": "#3c93ff",
+            "Trinity Charge": "#ff5b5b",
+            "Trinity Ladder": "#49d06a",
+            "Trinity Push": "#ffd23f",
+            "Trinity Detect": "#e8ecf7"
+          }
+        }
       },
       {
         "id": "minigames",
