@@ -12,7 +12,17 @@
     --dim: #9aa6c8;
     --accent: #5fb3ff;
     --accent2: #ffcb5f;
+    --ok: #56d98b;
+    --ok-bg: rgba(86, 217, 139, 0.14);
+    --glow: #1a2a55;
     --chip: #243466;
+    /* Fixed character signature colours (never themed by active character). */
+    --terra: #ff8a73;
+    --ventus: #6fd58c;
+    --aqua: #6fb8ff;
+    --nav-bg: rgba(20, 29, 56, 0.92);
+    /* Scrim layered over per-game wallpapers so text stays readable. */
+    --bg-scrim: linear-gradient(rgba(12, 19, 38, 0.62), rgba(12, 19, 38, 0.78));
 }
 
 * {
@@ -23,14 +33,18 @@
 
 html {
     scroll-behavior: smooth;
+    /* Dark base so a short page / iOS rubber-band never shows white. */
+    background: var(--bg);
 }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     color: var(--ink);
-    background: radial-gradient(1200px 700px at 70% -10%, #1a2a55 0%, var(--bg) 55%);
-    background-attachment: fixed;
+    /* No background-attachment: fixed — it tears/leaves white gaps when
+       scrolling on iOS. The per-game wallpaper uses a fixed ::before
+       layer instead (see the per-game background block). */
+    background: radial-gradient(1200px 700px at 70% -10%, var(--glow) 0%, var(--bg) 55%);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
 }
@@ -52,7 +66,7 @@ a:focus, button:focus {
 
 /* ---------- Navigation ---------- */
 nav {
-    background: rgba(20, 29, 56, 0.92);
+    background: var(--nav-bg);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--line);
     position: sticky;
@@ -521,6 +535,30 @@ a.project-card:hover h3 {
     .game-cards {
         grid-template-columns: 1fr;
     }
+
+    /* Scale headings down so they don't dominate a phone screen. */
+    .landing-hero h1,
+    .project-hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .series-headline {
+        font-size: 1.15rem;
+    }
+
+    .landing-hero p,
+    .about-text p {
+        font-size: 0.9rem;
+    }
+
+    .collection-title,
+    .section h2 {
+        font-size: 0.78rem;
+    }
+
+    .container {
+        padding: 0 14px;
+    }
 }
 
 /* ============================================================
@@ -536,15 +574,38 @@ a.project-card:hover h3 {
     --panel2: #e8ecf7;
     --line: #c3cadd;
     --ink: #1b2440;
-    --dim: #515c7a;
+    --dim: #4a5570;
     --accent: #2c63c8;
     --accent2: #8a6200;
+    --ok: #1f9d5a;
+    --ok-bg: rgba(31, 157, 90, 0.13);
+    --glow: #eef2fb;
     --chip: #d8deee;
+    --terra: #c24a30;
+    --ventus: #1f9d5a;
+    --aqua: #2c63c8;
+    --nav-bg: rgba(238, 241, 248, 0.92);
+    --bg-scrim: linear-gradient(rgba(230, 234, 244, 0.55), rgba(230, 234, 244, 0.72));
 }
 
 [data-theme="day"] body {
-    background: radial-gradient(1200px 700px at 70% -10%, #eef2fb 0%, var(--bg) 55%);
+    background: radial-gradient(1200px 700px at 70% -10%, var(--glow) 0%, var(--bg) 55%);
 }
+
+/* ---------- Per-character accent schemes (KH BBS tracker) ----------
+   Only the primary accent + background glow shift; the neutral panels, text
+   and the gold secondary accent stay put, so contrast/readability hold.
+   Terra = warm red, Ventus = green, Aqua = the original blue. */
+[data-char="terra"]  { --accent: #ff8a73; --glow: #34202a; }
+[data-char="ventus"] { --accent: #57d68f; --glow: #163a2c; }
+[data-char="aqua"]   { --accent: #5fb3ff; --glow: #1a2a55; }
+[data-char="sora"]   { --accent: #5fb3ff; --glow: #1a2a55; }
+[data-char="riku"]   { --accent: #b98cff; --glow: #261a3a; }
+[data-theme="day"][data-char="terra"]  { --accent: #c24a30; --glow: #fbeeec; }
+[data-theme="day"][data-char="ventus"] { --accent: #1f9d5a; --glow: #ecf7f0; }
+[data-theme="day"][data-char="aqua"]   { --accent: #2c63c8; --glow: #eef2fb; }
+[data-theme="day"][data-char="sora"]   { --accent: #2c63c8; --glow: #eef2fb; }
+[data-theme="day"][data-char="riku"]   { --accent: #6a3fc0; --glow: #f1ecfb; }
 
 /* ---------- Theme toggle (mirrors the language toggle) ---------- */
 .theme-btn {
@@ -571,10 +632,10 @@ a.project-card:hover h3 {
 }
 
 /* ---------- Banner images (per game) ----------
-   Hidden by default; revealed by js/banners.js (or js/landing.js) only
-   when the image actually loads, so a missing file shows nothing. */
+   Shown by default; js/banners.js (or js/landing.js) hides a figure only
+   if its image fails to load, so a missing file shows nothing. */
 .banner {
-    display: none;
+    display: block;
     margin: 0 0 1.2rem;
 }
 
@@ -587,6 +648,10 @@ a.project-card:hover h3 {
 }
 
 /* ---------- Landing page ---------- */
+.landing-banner {
+    margin-bottom: 1.4rem;   /* spans the full content width */
+}
+
 .landing-hero h1 {
     font-size: 2rem;
 }
@@ -658,33 +723,315 @@ a.project-card:hover h3 {
     text-align: right;
 }
 
+/* Two-metric rows: Achievements (platform trophies) over full 100%
+   completion. The achievements bar is gold so the two read apart even
+   before either hits green at 100%. */
+.prograw {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 6px;
+}
+.prograw .progbar {
+    flex: 1;
+}
+.prograw-label {
+    min-width: 6.6rem;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    font-weight: 700;
+    color: var(--dim);
+}
+.prograw.ach .progbar-track:not(.full) > i {
+    background: var(--accent2);
+}
+
 .game-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Two wide columns: a 4-game collection becomes a clean 2x2, a 2-game
+       collection fills one row, a single game takes one column. Collapses
+       to one column on mobile (see the media query below). */
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
 }
 
 .game-card {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    background: var(--panel2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
 }
 
+.game-card:hover {
+    border-color: var(--accent);
+}
+
+/* Banner art sits flush at the top of the card (revealed by JS on load). */
 .game-card .card-banner {
     margin: 0;
 }
 
 .game-card .card-banner img {
-    border-radius: 8px;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid var(--line);
 }
 
-.game-card h3 {
+.game-card-body {
+    padding: 0.8rem 1rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.game-card-body h3 {
     margin: 0;
+    font-size: 0.98rem;
 }
 
-.game-card-cta {
-    margin-top: auto;
+.game-card:hover .game-card-body h3 {
     color: var(--accent);
+}
+
+/* ---------- HD-collection grouping on the landing page ---------- */
+.collection {
+    margin-bottom: 2.2rem;
+}
+
+.collection-hero {
+    margin: 0 0 0.9rem;
+}
+
+.collection-hero img {
+    border-radius: 12px;
+    border: 1px solid var(--line);
+}
+
+.collection-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--accent2);
+    margin: 0 0 0.8rem;
     font-weight: 700;
-    font-size: 0.8rem;
+}
+
+/* ---------- Game logo in each tracker header ----------
+   Logos are transparent PNGs; shown small with no box, revealed on load. */
+.kh-logo {
+    margin: 2px 0 10px;
+    text-align: left;
+}
+
+.kh-logo img {
+    width: auto;
+    max-width: 100%;
+    max-height: 78px;
+    border: 0;
+    border-radius: 0;
+}
+
+/* ============================================================
+   Per-game background art (night AND day). Each tracker gets its own
+   KH-motif wallpaper, keyed on data-page. A translucent scrim
+   (--bg-scrim) is layered over the image so page text stays readable;
+   day mode swaps in the lighter wallpaper variant. Per page we only set
+   --bg-img (dark vs _light per theme); the shared rule does the rest.
+   ============================================================ */
+body[data-page="kh1-tracker"],
+body[data-page="kh-com-tracker"],
+body[data-page="kh2-tracker"],
+body[data-page="kh-bbs-tracker"],
+body[data-page="kh-ddd-tracker"],
+body[data-page="kh02-tracker"],
+body[data-page="kh3-tracker"],
+body[data-page="kh-melding"] {
+    /* Transparent so the fixed ::before wallpaper shows through; the dark
+       html background is the fallback. (A solid body background here would
+       paint over the negative-z ::before and hide it.) */
+    background: transparent;
+}
+
+/* Fixed wallpaper layer (a real fixed element, unlike the buggy
+   background-attachment: fixed) sat behind the page content. */
+body[data-page="kh1-tracker"]::before,
+body[data-page="kh-com-tracker"]::before,
+body[data-page="kh2-tracker"]::before,
+body[data-page="kh-bbs-tracker"]::before,
+body[data-page="kh-ddd-tracker"]::before,
+body[data-page="kh02-tracker"]::before,
+body[data-page="kh3-tracker"]::before,
+body[data-page="kh-melding"]::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: var(--bg-scrim), var(--bg-img);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+}
+
+[data-theme="night"] body[data-page="kh1-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH1.png"); }
+[data-theme="night"] body[data-page="kh-com-tracker"] { --bg-img: url("../images/backgrounds/Background_COM.png"); }
+[data-theme="night"] body[data-page="kh2-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH2.png"); }
+[data-theme="night"] body[data-page="kh-bbs-tracker"] { --bg-img: url("../images/backgrounds/Background_BBS.png"); }
+[data-theme="night"] body[data-page="kh-ddd-tracker"] { --bg-img: url("../images/backgrounds/Background_3DS.png"); }
+[data-theme="night"] body[data-page="kh02-tracker"]   { --bg-img: url("../images/backgrounds/Background_KH02.png"); }
+[data-theme="night"] body[data-page="kh3-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH3.png"); }
+[data-theme="night"] body[data-page="kh-melding"]     { --bg-img: url("../images/backgrounds/Background_BBS.png"); }
+
+[data-theme="day"] body[data-page="kh1-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH1_light.png"); }
+[data-theme="day"] body[data-page="kh-com-tracker"] { --bg-img: url("../images/backgrounds/Background_COM_light.png"); }
+[data-theme="day"] body[data-page="kh2-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH2_light.png"); }
+[data-theme="day"] body[data-page="kh-bbs-tracker"] { --bg-img: url("../images/backgrounds/Background_BBS_light.png"); }
+[data-theme="day"] body[data-page="kh-ddd-tracker"] { --bg-img: url("../images/backgrounds/Background_3DS_light.png"); }
+[data-theme="day"] body[data-page="kh02-tracker"]   { --bg-img: url("../images/backgrounds/Background_KH02_light.png"); }
+[data-theme="day"] body[data-page="kh3-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH3_light.png"); }
+[data-theme="day"] body[data-page="kh-melding"]     { --bg-img: url("../images/backgrounds/Background_BBS_light.png"); }
+
+/* ============================================================
+   Games dropdown (header). Opens on hover/focus (desktop + keyboard)
+   or on click via the .open class (js/nav.js, for touch). Birth by
+   Sleep carries a submenu with the Melding Calculator.
+   ============================================================ */
+.has-menu {
+    position: relative;
+}
+
+.nav-menu-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: var(--panel2);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.nav-menu-btn:hover,
+.has-menu:hover .nav-menu-btn,
+.has-menu:focus-within .nav-menu-btn,
+.has-menu.open .nav-menu-btn {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.caret {
+    color: var(--dim);
+    font-size: 0.8em;
+}
+
+.nav-menu,
+.nav-submenu {
+    list-style: none;
+    position: absolute;
+    min-width: 232px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 6px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    display: none;
+    z-index: 200;
+}
+
+.nav-menu {
+    top: calc(100% + 6px);
+    left: 0;
+}
+
+.nav-submenu {
+    top: -7px;
+    left: calc(100% + 6px);
+    min-width: 200px;
+}
+
+/* Opening is driven by .open (js/nav.js hover-intent + click), with
+   :focus-within for keyboard users — no bare :hover, so the menu doesn't
+   snap shut the instant the pointer leaves the button. */
+.has-menu.open > .nav-menu,
+.has-menu:focus-within > .nav-menu,
+.has-submenu.open > .nav-submenu,
+.has-submenu:focus-within > .nav-submenu {
+    display: block;
+}
+
+.nav-menu a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    white-space: nowrap;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.86rem;
+    font-weight: 600;
+    padding: 0.5rem 0.7rem;
+    border-radius: 7px;
+}
+
+/* Submenu (BBS) positions against its own row, not the whole menu. */
+.nav-menu li {
+    position: relative;
+}
+
+.nav-menu a:hover,
+.nav-menu a:focus {
+    background: var(--panel2);
+    color: var(--accent);
+    outline: none;
+}
+
+/* Mobile: dropdowns flow inline (no hover on touch). */
+@media (max-width: 768px) {
+    .nav-menu,
+    .nav-submenu {
+        position: static;
+        box-shadow: none;
+        min-width: 0;
+    }
+
+    .nav-submenu {
+        margin: 2px 0 2px 0.9rem;
+    }
+
+    /* On touch the whole menu opens via .open (click); show the submenu
+       inline so the Melding Calculator is reachable. */
+    .has-menu.open > .nav-menu {
+        display: block;
+    }
+
+    .has-menu.open .nav-submenu {
+        display: block;
+    }
+}
+
+/* ---------- Tracker header readability over the wallpaper ---------- */
+.kh-header .sub {
+    max-width: 80ch;
+}
+
+/* Natural link to a game's extra tool (e.g. BBS -> Melding Calculator). */
+.kh-xlink {
+    margin: 8px 0 0;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.kh-xlink a {
+    text-decoration: none;
+}
+
+.kh-xlink a:hover {
+    text-decoration: underline;
 }

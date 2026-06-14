@@ -1,56 +1,2524 @@
 {
-    "logo-name": "KH Completionist",
-    "lang-toggle-aria": "Switch language to French",
-    "nav-tools": "Tools",
-    "playing-as": "Playing as:",
-    "gt-filter": "filter…",
-    "gt-hide-done": "hide completed",
-    "gt-count": "%1 / %2 done",
-    "gt-overall": "Total: %1 / %2 (%3%)",
-    "gt-nothing": "Nothing matches the current filter.",
-    "gt-reset": "Reset all progress",
-    "gt-reset-confirm": "Reset ALL tracker progress for this game?",
-    "gt-toggle-all": "toggle all",
-    "gt-dash-title": "Progress overview",
-    "gt-dash-section": "Section",
-    "gt-dash-progress": "Progress",
-    "gt-th-progress": "Tracked progress",
-    "gt-section-for": "%1 — %2",
-    "page-title": "Re:Chain of Memories — Achievement Tracker",
-    "kh-title": "Re:Chain of Memories — Achievement Tracker",
-    "kh-subtitle": "Every trophy, sleight, card, character file and minigame in one checklist — tracked separately for Sora and Riku, saved in your browser. Checklist data from xenodusk's completion guide.",
-    "tabbtn-trophies": "Trophies",
-    "tabbtn-sleights": "Sleights",
-    "tabbtn-cards": "Cards",
-    "tabbtn-characters": "Characters",
-    "tabbtn-minigames": "Minigames",
-    "sec-trophies": "Trophies / Achievements",
-    "sec-sleights": "Sleights",
-    "sec-cards": "Card Collection",
-    "sec-characters": "Character Files",
-    "sec-minigames": "Minigames",
-    "th-trophies-rarity": "Rarity",
-    "th-trophies-name": "Trophy",
-    "th-trophies-desc": "Description",
-    "th-sleights-name": "Sleight",
-    "th-sleights-combo": "Combination",
-    "th-sleights-how": "How to obtain it",
-    "th-cards-name": "Card",
-    "th-cards-loc": "Location",
-    "th-cards-how": "How to obtain it",
-    "th-characters-name": "Character",
-    "th-characters-loc": "Location",
-    "th-characters-how": "How to obtain it",
-    "th-minigames-name": "Minigame",
-    "th-minigames-world": "World",
-    "th-minigames-target": "Target Score",
-    "kp-export": "Export progress",
-    "kp-import": "Import progress",
-    "kp-note": "Backs up / restores ALL Kingdom Hearts tracker progress on this site as a JSON file.",
-    "kp-import-confirm": "Importing will overwrite the saved progress of every KH tool on this site with the file's contents. Continue?",
-    "kp-import-error": "That file could not be read as a progress export.",
-    "nav-home": "Home",
-    "theme-to-day": "Day",
-    "theme-to-night": "Night",
-    "theme-toggle-aria": "Toggle bright theme"
+  "logo-name": "KH Completionist",
+  "lang-toggle-aria": "Switch language to French",
+  "nav-tools": "Tools",
+  "playing-as": "Playing as:",
+  "gt-filter": "filter…",
+  "gt-hide-done": "hide completed",
+  "gt-count": "%1 / %2 done",
+  "gt-overall": "Total: %1 / %2 (%3%)",
+  "gt-nothing": "Nothing matches the current filter.",
+  "gt-reset": "Reset all progress",
+  "gt-reset-confirm": "Reset ALL tracker progress for this game?",
+  "gt-toggle-all": "toggle all",
+  "gt-dash-title": "Progress overview",
+  "gt-dash-section": "Section",
+  "gt-dash-progress": "Progress",
+  "gt-th-progress": "Tracked progress",
+  "gt-section-for": "%1 — %2",
+  "page-title": "Re:Chain of Memories — Achievement Tracker",
+  "kh-title": "Re:Chain of Memories — Achievement Tracker",
+  "kh-subtitle": "Every trophy, sleight, card, character file and minigame in one checklist — tracked separately for Sora and Riku, saved in your browser. Checklist data from xenodusk's completion guide.",
+  "tabbtn-trophies": "Trophies",
+  "tabbtn-sleights": "Sleights",
+  "tabbtn-cards": "Cards",
+  "tabbtn-characters": "Characters",
+  "tabbtn-minigames": "Minigames",
+  "sec-trophies": "Trophies / Achievements",
+  "sec-sleights": "Sleights",
+  "sec-cards": "Card Collection",
+  "sec-characters": "Character Files",
+  "sec-minigames": "Minigames",
+  "th-trophies-rarity": "Rarity",
+  "th-trophies-name": "Trophy",
+  "th-trophies-desc": "Description",
+  "th-sleights-name": "Sleight",
+  "th-sleights-combo": "Combination",
+  "th-sleights-how": "How to obtain it",
+  "th-cards-name": "Card",
+  "th-cards-loc": "Location",
+  "th-cards-how": "How to obtain it",
+  "th-characters-name": "Character",
+  "th-characters-loc": "Location",
+  "th-characters-how": "How to obtain it",
+  "th-minigames-name": "Minigame",
+  "th-minigames-world": "World",
+  "th-minigames-target": "Target Score",
+  "kp-export": "Export progress",
+  "kp-import": "Import progress",
+  "kp-note": "Backs up / restores ALL Kingdom Hearts tracker progress on this site as a JSON file.",
+  "kp-import-confirm": "Importing will overwrite the saved progress of every KH tool on this site with the file's contents. Continue?",
+  "kp-import-error": "That file could not be read as a progress export.",
+  "nav-home": "Home",
+  "theme-to-day": "Day",
+  "theme-to-night": "Night",
+  "theme-toggle-aria": "Toggle bright theme",
+  "items": {
+    "trophies": [
+      {
+        "rarity": "Gold",
+        "name": "Game Clear: Proud with Sora",
+        "desc": "Clear Proud Mode with Sora and watched the ending."
+      },
+      {
+        "rarity": "Silver",
+        "name": "Game Clear: Proud with Riku",
+        "desc": "Clear Proud Mode with Riku and watched the ending"
+      },
+      {
+        "rarity": "Silver",
+        "name": "Undefeated",
+        "desc": "Clear game without using a continue."
+      },
+      {
+        "rarity": "Silver",
+        "name": "Natural Player Sora",
+        "desc": "Clear Sora's Story on Standard."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Natural Player Riku",
+        "desc": "Clear Riku's Story on Standard."
+      },
+      {
+        "rarity": "Silver",
+        "name": "Novice Player Sora",
+        "desc": "Clear Sora's Story on Beginner."
+      },
+      {
+        "rarity": "Silver",
+        "name": "Novice Player Riku",
+        "desc": "Clear Riku's Story on Beginner."
+      },
+      {
+        "rarity": "Gold",
+        "name": "Veggie Master",
+        "desc": "Get a score of 150 points or higher in the Veggie Panic mini-game."
+      },
+      {
+        "rarity": "Silver",
+        "name": "Ace Pilot",
+        "desc": "Get a score of 500 points or higher in the Balloon Glider mini-game."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "High Jumper",
+        "desc": "Get a score of 120 points or higher in Tigger's Tigger's Jump-a-Thon mini-game."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Sky Diver",
+        "desc": "Get a score of 2,000 points or higher in the Whirlwind Plunge mini-game"
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Bee Buster",
+        "desc": "Clear all 70 bees within 1 minute and 40 seconds in the Bumble-Rumble mini-game."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "A Slumber to Remember",
+        "desc": "Clear Sora's story mode."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Sleight Master",
+        "desc": "Obtain all of Sora's sleights."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Card of Memories",
+        "desc": "Clear Castle Oblivion 1F."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Woven Memories",
+        "desc": "Clear Castle Oblivion 5F."
+      },
+      {
+        "rarity": "Silver",
+        "name": "The Truth",
+        "desc": "Clear Castle Oblivion 13F."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Road to Dawn",
+        "desc": "Clear Riku's story mode."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Hard Hitter",
+        "desc": "Obtain all attack bonuses for Riku."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Confronting with Darkness",
+        "desc": "Clear Castle Oblivion B12F."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Challenge from the Inner Darkness",
+        "desc": "Clear Castle Oblivion B8F."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Overcoming the Darkness",
+        "desc": "Clear Castle Oblivion B1F."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Complete Record",
+        "desc": "Completed all of Jiminy's Journal."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Card Master Sora",
+        "desc": "Collect all Card Collection entries in Jiminy's Journal."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Storyteller Sora",
+        "desc": "Collect all Story entries in Jiminy's Journal."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Character Professor Sora",
+        "desc": "Collect all Character entries in Jiminy's Journal."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Mini-game Maniac Sora",
+        "desc": "Collect all Mini-game entries in Jiminy's Journal."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Record Keeper Riku",
+        "desc": "Complete all D Report entries."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Card Master Riku",
+        "desc": "Collect all Card Collection entries in D Report."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Storyteller Riku",
+        "desc": "Collect all Story entires in the D Report."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Character Professor Riku",
+        "desc": "Collect all Character entries in the D Report."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Novice Deck Builder",
+        "desc": "Edit a card deck for the first time."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Expert Deck Builder",
+        "desc": "Edit a card deck 500 times."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Premium Card Maker",
+        "desc": "Make 20 cards become Premium Cards."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "No Escape",
+        "desc": "Clear the game without escaping from a single battle."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Level Counter Limit: Sora",
+        "desc": "Sora has reached the highest level."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Level Counter Limit: Riku",
+        "desc": "Riku has reached the highest level."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Card Breaker",
+        "desc": "Break an enemies card 1,500 times."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Tightrope Walker",
+        "desc": "Replenish HP when you have less than 5% HP."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Interceptor",
+        "desc": "Strike an enemy before entering battle 150 times."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Duel Master",
+        "desc": "Win 100 duels."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Battle Card Collector",
+        "desc": "Obtain over 300 battle cards."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Moogle Mogul",
+        "desc": "Get over 10,000 Moogle Points."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Regular Customer",
+        "desc": "Use over 20,000 Moogle Points at Moogle Shops."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Room Creator",
+        "desc": "Synthesize 300 rooms."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Treasure Hunter",
+        "desc": "Open 10 chests from hidden rooms."
+      },
+      {
+        "rarity": "Bronze",
+        "name": "Ace Striker",
+        "desc": "Hit an enemy with an object."
+      }
+    ],
+    "sleights": [
+      {
+        "name": "Sliding Dash",
+        "combo": "3 attack cards of the same type Total value 10-15",
+        "how": "First unlockable at level 2"
+      },
+      {
+        "name": "Stun Impact",
+        "combo": "3 attack cards of the same type Total value 20-23",
+        "how": "First unlockable at level 7"
+      },
+      {
+        "name": "Strike Raid",
+        "combo": "3 attack cards Total value 24-26",
+        "how": "First unlockable at level 12"
+      },
+      {
+        "name": "Blitz",
+        "combo": "3 attack cards of differing types Total value 10-15",
+        "how": "First unlockable at level 17"
+      },
+      {
+        "name": "Zantetsuken",
+        "combo": "3 attack cards Total value 0 or 27",
+        "how": "First unlockable at level 22"
+      },
+      {
+        "name": "Sonic Blade",
+        "combo": "3 attack cards of differing types Total value 20-23",
+        "how": "First unlockable at level 27"
+      },
+      {
+        "name": "Ars Arcanum",
+        "combo": "3 attack cards Total value 1-6",
+        "how": "First unlockable at level 42"
+      },
+      {
+        "name": "Ragnarok",
+        "combo": "3 attack cards Total value 7-9",
+        "how": "First unlockable at level 52"
+      },
+      {
+        "name": "Trinity Limit",
+        "combo": "Attack card + Donald + Goofy",
+        "how": "Reach Floor 13"
+      },
+      {
+        "name": "Fira",
+        "combo": "Fire + Fire",
+        "how": "Unlock the Fire card"
+      },
+      {
+        "name": "Firaga",
+        "combo": "Fire + Fire + Fire",
+        "how": "Unlock the Fire card"
+      },
+      {
+        "name": "Blizzara",
+        "combo": "Blizzard + Blizzard",
+        "how": "Received by default"
+      },
+      {
+        "name": "Blizzaga",
+        "combo": "Blizzard + Blizzard + Blizzard",
+        "how": "Received by default"
+      },
+      {
+        "name": "Thundara",
+        "combo": "Thunder + Thunder",
+        "how": "Unlock the Thunder card"
+      },
+      {
+        "name": "Thundaga",
+        "combo": "Thunder + Thunder + Thunder",
+        "how": "Unlock the Thunder card"
+      },
+      {
+        "name": "Cura",
+        "combo": "Cure + Cure",
+        "how": "Received by default"
+      },
+      {
+        "name": "Curaga",
+        "combo": "Cure + Cure + Cure",
+        "how": "Received by default"
+      },
+      {
+        "name": "Gravira",
+        "combo": "Gravity + Gravity",
+        "how": "Unlock the Gravity card"
+      },
+      {
+        "name": "Graviga",
+        "combo": "Gravity + Gravity + Gravity",
+        "how": "Unlock the Gravity card"
+      },
+      {
+        "name": "Stopra",
+        "combo": "Stop + Stop",
+        "how": "Unlock the Stop card"
+      },
+      {
+        "name": "Stopga",
+        "combo": "Stop + Stop + Stop",
+        "how": "Unlock the Stop card"
+      },
+      {
+        "name": "Aerora",
+        "combo": "Aero + Aero",
+        "how": "Unlock the Aero card"
+      },
+      {
+        "name": "Aeroga",
+        "combo": "Aero + Aero + Aero",
+        "how": "Unlock the Aero card"
+      },
+      {
+        "name": "Warpinator",
+        "combo": "Stop + Gravity + Aero",
+        "how": "Treasure chest in any bounty room in Twilight Town"
+      },
+      {
+        "name": "Warp",
+        "combo": "Stop + Aero + Aero",
+        "how": "Treasure chest in Room of Rewards in Agrabah"
+      },
+      {
+        "name": "Blizzard Raid",
+        "combo": "Blizzard + attack card + attack card",
+        "how": "Treasure chest in any bounty room in Olympus Coliseum"
+      },
+      {
+        "name": "Synchro",
+        "combo": "Cure + Gravity + Aero",
+        "how": "Treasure chest in Room of Rewards in Wonderland"
+      },
+      {
+        "name": "Fire Raid",
+        "combo": "Fire + attack card + attack card",
+        "how": "Treasure chest in any bounty room in Monstro"
+      },
+      {
+        "name": "Aqua Splash",
+        "combo": "Blizzard + Fire + Aero",
+        "how": "Treasure chest in Room of Rewards in Monstro"
+      },
+      {
+        "name": "Terror",
+        "combo": "Summon card + Summon card + Jack Simba + Mushu + Item card",
+        "how": "Earned at the start of Halloween Town"
+      },
+      {
+        "name": "Gifted Miracle",
+        "combo": "Summon card + Magic card + Jack Bambi + Blizzard + Item card",
+        "how": "Treasure chest in any bounty room in Halloween Town"
+      },
+      {
+        "name": "Bind",
+        "combo": "Gravity + Stop + Magic card",
+        "how": "Treasure chest in Room of Rewards in Halloween Town"
+      },
+      {
+        "name": "Shock Impact",
+        "combo": "Simba + Attack card + Attack card",
+        "how": "Treasure chest in any bounty room in Atlantica"
+      },
+      {
+        "name": "Homing Blizzara",
+        "combo": "Aero + Blizzard + Magic card",
+        "how": "Treasure chest in any bounty room in Atlantica"
+      },
+      {
+        "name": "Quake",
+        "combo": "Gravity + Simba + Magic card",
+        "how": "Treasure chest in Room of Rewards in Atlantica"
+      },
+      {
+        "name": "Teleport",
+        "combo": "Magic card + Magic card + Peter Pan Stop + Aero + Item card",
+        "how": "Treasure chest in any bounty room in Neverland"
+      },
+      {
+        "name": "Thunder Raid",
+        "combo": "Thunder + Attack card + Attack card",
+        "how": "Treasure chest in Room of Rewards in Neverland"
+      },
+      {
+        "name": "Confuse",
+        "combo": "Genie + Tinker Bell + Summon card",
+        "how": "Find Pigglet in the 100 Acre Wood"
+      },
+      {
+        "name": "Firaga Burst",
+        "combo": "Fire + Fire + Gravity",
+        "how": "Clear Balloon Glider in the 100 Acre Wood"
+      },
+      {
+        "name": "Reflect Raid",
+        "combo": "Cloud + Attack card + Attack card",
+        "how": "Treasure chest in any bounty room in Hollow Bastion"
+      },
+      {
+        "name": "Magnet Spiral",
+        "combo": "Gravity + Gravity + Attack card",
+        "how": "Defeat Riku in Floor 8"
+      },
+      {
+        "name": "Lethal Frame",
+        "combo": "Stop + Attack card + Attack card",
+        "how": "Reach level 32"
+      },
+      {
+        "name": "Tornado",
+        "combo": "Aero + Gravity + Summon card",
+        "how": "Reach level 37"
+      },
+      {
+        "name": "Freeze",
+        "combo": "Blizzard + Blizzard + Stop",
+        "how": "Defeat Vexen in Floor 10"
+      },
+      {
+        "name": "Judgment",
+        "combo": "Aero + Attack card + Attack card",
+        "how": "Treasure chest in any bounty room in Destiny Islands"
+      },
+      {
+        "name": "Holy",
+        "combo": "Mega-Ether + Megalixir + Item card",
+        "how": "Reach level 47"
+      },
+      {
+        "name": "Raging Storm",
+        "combo": "Aero + Fire + Fire",
+        "how": "Treasure chest in any bounty room in Castle Oblivion"
+      },
+      {
+        "name": "Mega Flare",
+        "combo": "Mushu + Fire + Fire",
+        "how": "Reach level 57"
+      },
+      {
+        "name": "Proud Roar LV2",
+        "combo": "Simba + Simba",
+        "how": "Unlock the Simba card"
+      },
+      {
+        "name": "Proud Roar LV3",
+        "combo": "Simba + Simba + Simba",
+        "how": "Unlock the Simba card"
+      },
+      {
+        "name": "Showtime LV2",
+        "combo": "Genie + Genie",
+        "how": "Unlock the Genie card"
+      },
+      {
+        "name": "Showtime LV3",
+        "combo": "Genie + Genie + Genie",
+        "how": "Unlock the Genie card"
+      },
+      {
+        "name": "Cross-slash",
+        "combo": "Cloud + Cloud",
+        "how": "Unlock the Cloud card"
+      },
+      {
+        "name": "Cross-slash+",
+        "combo": "Cloud + Stop + Attack card",
+        "how": "Clear Veggie Panic in the 100 Acre Wood"
+      },
+      {
+        "name": "Omnislash",
+        "combo": "Cloud + Cloud + Cloud",
+        "how": "Unlock the Cloud card"
+      },
+      {
+        "name": "Splash LV2",
+        "combo": "Dumbo + Dumbo",
+        "how": "Unlock the Dumbo card"
+      },
+      {
+        "name": "Splash LV3",
+        "combo": "Dumbo + Dumbo + Dumbo",
+        "how": "Unlock the Dumbo card"
+      },
+      {
+        "name": "Twinkle LV2",
+        "combo": "Tinker Bell + Tinker Bell",
+        "how": "Unlock the Tinker Bell card"
+      },
+      {
+        "name": "Twinkle LV3",
+        "combo": "Tinker Bell + Tinker Bell + Tinker Bell",
+        "how": "Unlock the Tinker Bell card"
+      },
+      {
+        "name": "Paradise LV2",
+        "combo": "Bambi + Bambi",
+        "how": "Unlock the Bambi card"
+      },
+      {
+        "name": "Paradise LV3",
+        "combo": "Bambi + Bambi + Bambi",
+        "how": "Unlock the Bambi card"
+      },
+      {
+        "name": "Idyll Romp",
+        "combo": "Bambi + Attack card + Attack card",
+        "how": "Clear Tigger's Jump-a-Thon in the 100 Acre Wood"
+      },
+      {
+        "name": "Flare Breath LV2",
+        "combo": "Mushu + Mushu",
+        "how": "Unlock the Mushu card"
+      },
+      {
+        "name": "Flare Breath LV3",
+        "combo": "Mushu + Mushu + Mushu",
+        "how": "Unlock the Mushu card"
+      },
+      {
+        "name": "Magic LV2",
+        "combo": "Donald + Donald",
+        "how": "Received by default"
+      },
+      {
+        "name": "Magic LV3",
+        "combo": "Donald + Donald + Donald",
+        "how": "Received by default"
+      },
+      {
+        "name": "Stardust Blitz",
+        "combo": "Donald + Fire",
+        "how": "Treasure chest in Room of Rewards in Twilight Town"
+      },
+      {
+        "name": "Goofy Tornado LV2",
+        "combo": "Goofy + Goofy",
+        "how": "Received by default"
+      },
+      {
+        "name": "Goofy Tornado LV3",
+        "combo": "Goofy + Goofy + Goofy",
+        "how": "Received by default"
+      },
+      {
+        "name": "Goofy Smash",
+        "combo": "Goofy + Attack card",
+        "how": "Received by default"
+      },
+      {
+        "name": "Wild Crash",
+        "combo": "Goofy + Donald + Attack card",
+        "how": "Received by default"
+      },
+      {
+        "name": "Lucky Bounty LV2",
+        "combo": "Pluto + Pluto",
+        "how": "Unlocked during the story"
+      },
+      {
+        "name": "Lucky Bounty LV3",
+        "combo": "Pluto + Pluto + Pluto",
+        "how": "Unlocked during the story"
+      },
+      {
+        "name": "Sandstorm LV2",
+        "combo": "Aladdin + Aladdin",
+        "how": "Unlocked during the story"
+      },
+      {
+        "name": "Sandstorm LV3",
+        "combo": "Aladdin + Aladdin + Aladdin",
+        "how": "Unlocked during the story"
+      },
+      {
+        "name": "Surprise! LV2",
+        "combo": "Jack + Jack",
+        "how": "Unlocked during the story"
+      },
+      {
+        "name": "Surprise! LV3",
+        "combo": "Jack + Jack + Jack",
+        "how": "Unlocked during the story"
+      },
+      {
+        "name": "Spiral Wave LV2",
+        "combo": "Ariel + Ariel",
+        "how": "Unlocked during the story"
+      },
+      {
+        "name": "Spiral Wave LV3",
+        "combo": "Ariel + Ariel + Ariel",
+        "how": "Unlocked during the story"
+      },
+      {
+        "name": "Hummingbird LV2",
+        "combo": "Peter Pan + Peter Pan",
+        "how": "Unlocked during the story"
+      },
+      {
+        "name": "Hummingbird LV3",
+        "combo": "Peter Pan + Peter Pan + Peter Pan",
+        "how": "Unlocked during the story"
+      },
+      {
+        "name": "Furious Volley LV2",
+        "combo": "The Beast + The Beast",
+        "how": "Unlocked during the story"
+      },
+      {
+        "name": "Furious Volley LV3",
+        "combo": "The Beast + The Beast + The Beast",
+        "how": "Unlocked during the story"
+      }
+    ],
+    "cards-sora": [
+      {
+        "name": "Kingdom Key",
+        "loc": "All floors",
+        "how": "Received by default"
+      },
+      {
+        "name": "Three Wishes",
+        "loc": "All floors",
+        "how": "Breakable objects, treasure chests and Moogle Shop after arriving in Agrabah"
+      },
+      {
+        "name": "Crabclaw",
+        "loc": "All floors",
+        "how": "Breakable objects, treasure chests and Moogle Shop after arriving in Atlantica"
+      },
+      {
+        "name": "Pumpkinhead",
+        "loc": "All floors",
+        "how": "Breakable objects, treasure chests and Moogle Shop after arriving in Halloween Town"
+      },
+      {
+        "name": "Fairy Harp",
+        "loc": "All floors",
+        "how": "Breakable objects, treasure chests and Moogle Shop after arriving in Neverland"
+      },
+      {
+        "name": "Wishing Star",
+        "loc": "All floors",
+        "how": "Breakable objects, treasure chests and Moogle Shop after arriving in Monstro"
+      },
+      {
+        "name": "Spellbinder",
+        "loc": "100 Acre Wood",
+        "how": "Treasure chest in Tigger's Playground"
+      },
+      {
+        "name": "Metal Chocobo",
+        "loc": "Olympus Coliseum",
+        "how": "Treasure chest in Room of Rewards (1st reward)"
+      },
+      {
+        "name": "Olympia",
+        "loc": "All floors",
+        "how": "Breakable objects, treasure chests and Moogle Shop after arriving in Olympus Coliseum"
+      },
+      {
+        "name": "Lionheart",
+        "loc": "Traverse Town",
+        "how": "Treasure chest in Room of Rewards (1st reward)"
+      },
+      {
+        "name": "Lady Luck",
+        "loc": "All floors",
+        "how": "Breakable objects, treasure chests and Moogle Shop after arriving in Wonderland"
+      },
+      {
+        "name": "Divine Rose",
+        "loc": "All floors",
+        "how": "Breakable objects, treasure chests and Moogle Shop after arriving in Hollow Bastion"
+      },
+      {
+        "name": "Oathkeeper",
+        "loc": "Destiny Islands",
+        "how": "Story progression (Floor 12)"
+      },
+      {
+        "name": "Oblivion",
+        "loc": "Castle Oblivion 12F",
+        "how": "Story progression (Floor 12)"
+      },
+      {
+        "name": "Ultima Weapon",
+        "loc": "Castle Oblivion",
+        "how": "Breakable objects and treasure chests in Castle Oblivion after clearing Riku's story"
+      },
+      {
+        "name": "Diamond Dust",
+        "loc": "All floors",
+        "how": "Breakable objects, treasure chests and Moogle Shop after the first battle with Marluxia"
+      },
+      {
+        "name": "One-Winged Angel",
+        "loc": "All floors",
+        "how": "Breakable objects, treasure chests and Moogle Shop after the first battle with Marluxia"
+      },
+      {
+        "name": "Star Seeker",
+        "loc": "Castle Oblivion",
+        "how": "Treasure chest in Room of Rewards (2nd reward) after watching all Kingdom Hearts 358/2 Days cutscenes"
+      },
+      {
+        "name": "Total Eclipse",
+        "loc": "Olympus Coliseum",
+        "how": "Treasure chest in Room of Rewards (2nd reward) after watching all Kingdom Hearts 358/2 Days cutscenes"
+      },
+      {
+        "name": "Midnight Roar",
+        "loc": "Neverland",
+        "how": "Treasure chest in Room of Rewards (2nd reward) after watching all Kingdom Hearts 358/2 Days cutscenes"
+      },
+      {
+        "name": "Maverick Flare",
+        "loc": "Traverse Town",
+        "how": "Treasure chest in any bounty room after watching all Kingdom Hearts 358/2 Days cutscenes"
+      },
+      {
+        "name": "Two Become One",
+        "loc": "Destiny Islands",
+        "how": "Treasure chest in Room of Rewards (2nd reward) after watching all Kingdom Hearts 358/2 Days cutscenes"
+      },
+      {
+        "name": "Bond of Flame",
+        "loc": "Halloween Town",
+        "how": "Treasure chest in Room of Rewards (2nd reward) after watching all Kingdom Hearts 358/2 Days cutscenes"
+      },
+      {
+        "name": "Fire",
+        "loc": "Castle Oblivion 1F",
+        "how": "Defeat Axel"
+      },
+      {
+        "name": "Blizzard",
+        "loc": "Traverse Town",
+        "how": "Clear the tutorial"
+      },
+      {
+        "name": "Thunder",
+        "loc": "Castle Oblivion 6F",
+        "how": "Defeat Larxene"
+      },
+      {
+        "name": "Cure",
+        "loc": "Traverse Town",
+        "how": "Received by default"
+      },
+      {
+        "name": "Gravity",
+        "loc": "Agrabah",
+        "how": "Treasure chest in any bounty room"
+      },
+      {
+        "name": "Stop",
+        "loc": "Wonderland",
+        "how": "Treasure chest in any bounty room"
+      },
+      {
+        "name": "Aero",
+        "loc": "Castle Oblivion 7F",
+        "how": "Defeat Riku"
+      },
+      {
+        "name": "Simba",
+        "loc": "Traverse Town",
+        "how": "Clear the Room of Beginnings"
+      },
+      {
+        "name": "Genie",
+        "loc": "Agrabah",
+        "how": "Clear the Room of Truth"
+      },
+      {
+        "name": "Bambi",
+        "loc": "100 Acre Wood",
+        "how": "Clear the story of this world"
+      },
+      {
+        "name": "Dumbo",
+        "loc": "Monstro",
+        "how": "Clear the Room of Truth"
+      },
+      {
+        "name": "Tinker Bell",
+        "loc": "Neverland",
+        "how": "Clear the Room of Truth"
+      },
+      {
+        "name": "Mushu",
+        "loc": "Hollow Bastion",
+        "how": "Treasure chest in Room of Rewards (1st reward)"
+      },
+      {
+        "name": "Cloud",
+        "loc": "Olympus Coliseum",
+        "how": "Clear the Room of Truth"
+      },
+      {
+        "name": "Potion",
+        "loc": "Traverse Town",
+        "how": "Received by default"
+      },
+      {
+        "name": "Hi-Potion",
+        "loc": "Olympus Coliseum",
+        "how": "Clear the Room of Guidance"
+      },
+      {
+        "name": "Mega-Potion",
+        "loc": "Castle Oblivion 11F",
+        "how": "Defeat Riku"
+      },
+      {
+        "name": "Ether",
+        "loc": "Agrabah",
+        "how": "Clear the Room of Guidance"
+      },
+      {
+        "name": "Mega-Ether",
+        "loc": "100 Acre Wood",
+        "how": "Clear the Whirlwind Plunge mini-game"
+      },
+      {
+        "name": "Elixir",
+        "loc": "100 Acre Wood",
+        "how": "Clear the Bumble-Rumble mini-game"
+      },
+      {
+        "name": "Megalixir",
+        "loc": "Destiny Islands",
+        "how": "Treasure chest in Room of Rewards (1st reward)"
+      },
+      {
+        "name": "Donald",
+        "loc": "All floors",
+        "how": "Pick it up during battle"
+      },
+      {
+        "name": "Goofy",
+        "loc": "All floors",
+        "how": "Pick it up during battle"
+      },
+      {
+        "name": "Aladdin",
+        "loc": "Agrabah",
+        "how": "Pick it up during battle"
+      },
+      {
+        "name": "Ariel",
+        "loc": "Atlantica",
+        "how": "Pick it up during battle (available after clearing the Room of Guidance)"
+      },
+      {
+        "name": "Jack",
+        "loc": "Halloween Town",
+        "how": "Pick it up during battle"
+      },
+      {
+        "name": "Peter Pan",
+        "loc": "Neverland",
+        "how": "Pick it up during battle (available after clearing the Room of Beginnings)"
+      },
+      {
+        "name": "The Beast",
+        "loc": "Hollow Bastion",
+        "how": "Pick it up during battle (available after clearing the Room of Guidance)"
+      },
+      {
+        "name": "Pluto",
+        "loc": "All floors",
+        "how": "Pick it up during battle (available when running out of cards; Tip: create a deck with only 3 cards and use sleights to run out of cards)"
+      },
+      {
+        "name": "Shadow",
+        "loc": "All early floors",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Soldier",
+        "loc": "Traverse Town, Wonderland, Twilight Town",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Powerwild",
+        "loc": "Olympus Coliseum",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Bouncywild",
+        "loc": "Olympus Coliseum",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Large Body",
+        "loc": "Olympus Coliseum, Wonderland",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Fat Bandit",
+        "loc": "Agrabah",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Sea Neon",
+        "loc": "Atlantica",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Bandit",
+        "loc": "Agrabah",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Pirate",
+        "loc": "Neverland",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Red Nocturne",
+        "loc": "Traverse Town, Wonderland",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Blue Rapsody",
+        "loc": "Traverse Town, Olympus Coliseum",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Yellow Opera",
+        "loc": "Agrabah, Monstro, Neverland",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Green Requiem",
+        "loc": "Agrabah, Monstro",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Wizard",
+        "loc": "Hollow Bastion, Castle Oblivion",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Air Soldier",
+        "loc": "Monstro, Twiilight Town",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Barrel Spider",
+        "loc": "Agrabah, Neverland",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Wight Knight",
+        "loc": "Halloween Town",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Air Pirate",
+        "loc": "Neverland",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Gargoyle",
+        "loc": "Halloween Town",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Search Ghost",
+        "loc": "Halloween Town, Atlantica",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Aquatank",
+        "loc": "Atlantica",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Screwdiver",
+        "loc": "Atlantica",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Wyvern",
+        "loc": "Hollow Bastion, Castle Oblivion",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Defender",
+        "loc": "Hollow Bastion, Castle Oblivion",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "White Mushroom",
+        "loc": "All floors",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Black Fungus",
+        "loc": "All floors",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Creeper Plant",
+        "loc": "Wonderland, Destiny Islands",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Tornado Step",
+        "loc": "Monstro, Destiny Islands",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Crescendo",
+        "loc": "Wonderland, Destiny Islands",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Neoshadow",
+        "loc": "Castle Oblivion",
+        "how": "Randomly dropped at the end of a battle with this Heartless"
+      },
+      {
+        "name": "Guard Armor",
+        "loc": "Traverse Town",
+        "how": "Clear Traverse Town"
+      },
+      {
+        "name": "Hades",
+        "loc": "Olympus Coliseum",
+        "how": "Clear Olympus Coliseum"
+      },
+      {
+        "name": "Trickmaster",
+        "loc": "Wonderland",
+        "how": "Clear Wonderland"
+      },
+      {
+        "name": "Jafar",
+        "loc": "Agrabah",
+        "how": "Clear Agrabah"
+      },
+      {
+        "name": "Ursula",
+        "loc": "Atlantica",
+        "how": "Clear Atlantica"
+      },
+      {
+        "name": "Oogie Boogie",
+        "loc": "Halloween Town",
+        "how": "Clear Halloween Town"
+      },
+      {
+        "name": "Parasite Cage",
+        "loc": "Monstro",
+        "how": "Clear Monstro"
+      },
+      {
+        "name": "Hook",
+        "loc": "Neverland",
+        "how": "Clear Neverland"
+      },
+      {
+        "name": "Malificent",
+        "loc": "Hollow Bastion",
+        "how": "Clear Hollow Bastion"
+      },
+      {
+        "name": "Darkside",
+        "loc": "Destiny Islands",
+        "how": "Clear Destiny Islands"
+      },
+      {
+        "name": "Riku Replica",
+        "loc": "Castle Oblivion",
+        "how": "During Castle Oblivion"
+      },
+      {
+        "name": "Card Soldier",
+        "loc": "Wonderland",
+        "how": "During Wonderland"
+      },
+      {
+        "name": "Ansem",
+        "loc": "Twilight Town",
+        "how": "Treasure chest in any bounty room after clearing Riku's story"
+      },
+      {
+        "name": "Xemnas",
+        "loc": "Wonderland",
+        "how": "Treasure chest in Room of Rewards (2nd reward) after watching all Kingdom Hearts 358/2 Days cutscenes"
+      },
+      {
+        "name": "Xigbar",
+        "loc": "Hollow Bastion",
+        "how": "Treasure chest in Room of Rewards (2nd reward) after watching all Kingdom Hearts 358/2 Days cutscenes"
+      },
+      {
+        "name": "Xaldin",
+        "loc": "Monstro",
+        "how": "Treasure chest in Room of Rewards (2nd reward) after watching all Kingdom Hearts 358/2 Days cutscenes"
+      },
+      {
+        "name": "Vexen",
+        "loc": "Twilight Town",
+        "how": "Clear Twilight Town"
+      },
+      {
+        "name": "Lexaeus",
+        "loc": "Castle Oblivion",
+        "how": "Treasure chest in any bounty room after clearing Riku's story"
+      },
+      {
+        "name": "Zexion",
+        "loc": "Destiny Islands",
+        "how": "Treasure chest in any bounty room after clearing Riku's story"
+      },
+      {
+        "name": "Saïx",
+        "loc": "Traverse Town",
+        "how": "Treasure chest in Room of Rewards (2nd reward) after watching all Kingdom Hearts 358/2 Days cutscenes"
+      },
+      {
+        "name": "Axel",
+        "loc": "Castle Oblivion",
+        "how": "During Castle Oblivion"
+      },
+      {
+        "name": "Demyx",
+        "loc": "Atlantica",
+        "how": "Treasure chest in Room of Rewards (2nd reward) after watching all Kingdom Hearts 358/2 Days cutscenes"
+      },
+      {
+        "name": "Luxord",
+        "loc": "Agrabah",
+        "how": "Treasure chest in Room of Rewards (2nd reward) after watching all Kingdom Hearts 358/2 Days cutscenes"
+      },
+      {
+        "name": "Marluxia",
+        "loc": "Castle Oblivion",
+        "how": "During Castle Oblivion"
+      },
+      {
+        "name": "Larxene",
+        "loc": "Castle Oblivion",
+        "how": "During Castle Oblivion"
+      },
+      {
+        "name": "Roxas",
+        "loc": "Twilight Town",
+        "how": "Treasure chest in Room of Rewards (2nd reward) after watching all Kingdom Hearts 358/2 Days cutscenes"
+      },
+      {
+        "name": "Tranquil Darkness",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Agrabah, Monstro, Halloween Town, Twilight Town, Castle Oblivion]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Teeming Darkness",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Olympus Coliseum, Agrabah, Monstro, Halloween Town, Twilight Town, Castle Oblivion]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Feeble Darkness",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Olympus Coliseum, Agrabah, Monstro, Atlantica, Hollow Bastion, Twilight Town, Castle Oblivion]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Almighty Darkness",
+        "loc": "[[Most worlds|Drops in Olympus Coliseum, Halloween Town, Atlantica, Neverland, Hollow Bastion, Destiny Islands, Castle Oblivion]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Sleeping Darkness",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Olympus Coliseum, Monstro, Halloween Town, Atlantica, Neverland, Hollow Bastion, Twilight Town, Castle Oblivion]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Looming Darkness",
+        "loc": "[[Most worlds|Drops in Olympus Coliseum, Agrabah, Halloween Town, Atlantica, Neverland, Hollow Bastion, Destiny Islands, Castle Oblivion]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Premium Room",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Olympus Coliseum, Agrabah, Monstro, Neverland, Hollow Bastion, Destiny Islands]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "White Room",
+        "loc": "[[Most worlds|Drops in Olympus Coliseum, Monstro, Atlantica, Neverland, Hollow Bastion, Destiny Islands]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Black Room",
+        "loc": "[[Most worlds|Drops in Traverse Town, Olympus Coliseum, Monstro, Halloween Town, Atlantica, Neverland, Hollow Bastion, Destiny Islands]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Bottomless Darkness",
+        "loc": "[[Most worlds|Drops in Wonderland, Halloween Town, Atlantica, Neverland, Hollow Bastion, Twilight Town, Destiny Islands, Castle Oblivion]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Roulette Room",
+        "loc": "[[Most worlds|Drops in Wonderland, Olympus Coliseum, Agrabah, Monstro, Atlantica, Neverland, Hollow Bastion, Twilight Town, Destiny Islands, Castle Oblivion]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Martial Waking",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Olympus Coliseum, Monstro, Atlantica, Neverland, Twilight Town — not on floors 12–13]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Sorcerous Waking",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Olympus Coliseum, Agrabah, Monstro, Halloween Town, Hollow Bastion, Twilight Town — not on floors 12–13]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Alchemic Waking",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Monstro, Halloween Town, Hollow Bastion — not on floors 12–13]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Meeting Ground",
+        "loc": "[[Most worlds|Drops in Traverse Town, Olympus Coliseum, Agrabah, Halloween Town, Atlantica, Neverland, Twilight Town — not on floors 12–13]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Stagnant Space",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Olympus Coliseum, Monstro, Halloween Town, Twilight Town — not on floors 12–13]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Strong Initiative",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Olympus Coliseum, Agrabah, Monstro, Atlantica, Neverland, Hollow Bastion, Twilight Town — not on floors 12–13]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Lasting Daze",
+        "loc": "[[Most worlds|Drops in Traverse Town, Wonderland, Olympus Coliseum, Agrabah, Monstro, Halloween Town, Neverland, Twilight Town — not on floors 12–13]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Calm Bounty",
+        "loc": "[[Most worlds|Drops in Wonderland, Olympus Coliseum, Agrabah, Monstro, Halloween Town, Twilight Town, Castle Oblivion]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Guarded Trove",
+        "loc": "[[Floors 7+|Excluding Twilight Town]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "False Bounty",
+        "loc": "[[Floors 7+|Excluding Twilight Town]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Moment's Reprieve",
+        "loc": "Floors 2+",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Mingling Worlds",
+        "loc": "[[Floors 12+|Drops in Twilight Town, Destiny Islands, Castle Oblivion (after Floor 11)]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Moogle Room",
+        "loc": "Floors 2+",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Key to Rewards",
+        "loc": "[[Floors 7+|Drops in Atlantica, Neverland, Hollow Bastion, Twilight Town, Destiny Islands, Castle Oblivion]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Key of Beginnings",
+        "loc": "Received in story (not dropped)",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Key of Guidance",
+        "loc": "Received in story (not dropped)",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Key to Truth",
+        "loc": "Received in story (not dropped)",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Random Joker",
+        "loc": "Any floor",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Traverse Town",
+        "loc": "Castle Oblivion 1F",
+        "how": "Received by default"
+      },
+      {
+        "name": "Agrabah",
+        "loc": "Castle Oblivion 1F",
+        "how": "Clear Floor 1"
+      },
+      {
+        "name": "Olympus Coliseum",
+        "loc": "Castle Oblivion 1F",
+        "how": "Clear Floor 1"
+      },
+      {
+        "name": "Wonderland",
+        "loc": "Castle Oblivion 1F",
+        "how": "Clear Floor 1"
+      },
+      {
+        "name": "Monstro",
+        "loc": "Castle Oblivion 1F",
+        "how": "Clear Floor 1"
+      },
+      {
+        "name": "Halloween Town",
+        "loc": "Castle Oblivion 1F",
+        "how": "Clear Floor 1"
+      },
+      {
+        "name": "Atlantica",
+        "loc": "Castle Oblivion 6F",
+        "how": "Clear Floor 6"
+      },
+      {
+        "name": "Neverland",
+        "loc": "Castle Oblivion 6F",
+        "how": "Clear Floor 6"
+      },
+      {
+        "name": "Hollow Bastion",
+        "loc": "Castle Oblivion 6F",
+        "how": "Clear Floor 6"
+      },
+      {
+        "name": "100 Acre Wood",
+        "loc": "Castle Oblivion 6F",
+        "how": "Clear Floor 6"
+      },
+      {
+        "name": "Twilight Town",
+        "loc": "Castle Oblivion 10F",
+        "how": "Clear Floor 10"
+      },
+      {
+        "name": "Destiny Islands",
+        "loc": "Castle Oblivion 11F",
+        "how": "Clear Floor 11"
+      },
+      {
+        "name": "Gimmick Card",
+        "how": "Pick it up during certain boss fights (this is the only missable card in the game, so make sure to pick it up at least once)"
+      },
+      {
+        "name": "Gold Card",
+        "loc": "Any floor",
+        "how": "Treasure chest in any bounty room after collecting every other card in the game (this card doesn't count towards the achievement)"
+      },
+      {
+        "name": "Platinum Card",
+        "loc": "Any floor",
+        "how": "Treasure chest in any bounty room after collecting every other card in the game (this card doesn't count towards the achievement)"
+      }
+    ],
+    "cards-riku": [
+      {
+        "name": "Soul Eater",
+        "how": "Received by default"
+      },
+      {
+        "name": "Potion",
+        "loc": "Twilight Town",
+        "how": "Reach Twilight Town"
+      },
+      {
+        "name": "Hi-Potion",
+        "how": "Received by default"
+      },
+      {
+        "name": "The King",
+        "how": "Received by default"
+      },
+      {
+        "name": "Gimmick Card",
+        "how": "Pick it up during certain boss fights (this is the only missable card in the game, so make sure to pick it up at least once)"
+      },
+      {
+        "name": "Shadow",
+        "loc": "Twilight Town",
+        "how": "Reach Twilight Town"
+      },
+      {
+        "name": "Large Body",
+        "loc": "Wonderland",
+        "how": "Reach Wonderland"
+      },
+      {
+        "name": "Powerwild",
+        "loc": "Olympus Coliseum",
+        "how": "Reach Olympus Coliseum"
+      },
+      {
+        "name": "Fat Bandit",
+        "loc": "Agrabah",
+        "how": "Reach Agrabah"
+      },
+      {
+        "name": "Search Ghost",
+        "loc": "Monstro",
+        "how": "Reach Monstro"
+      },
+      {
+        "name": "Sea Neon",
+        "loc": "Atlantica",
+        "how": "Reach Atlantica"
+      },
+      {
+        "name": "Wight Knight",
+        "loc": "Halloween Town",
+        "how": "Reach Halloween Town"
+      },
+      {
+        "name": "Pirate",
+        "loc": "Neverland",
+        "how": "Reach Neverland"
+      },
+      {
+        "name": "Defender",
+        "loc": "Hollow Bastion",
+        "how": "Reach Hollow Bastion"
+      },
+      {
+        "name": "Darkball",
+        "loc": "Atlantica",
+        "how": "Reach Atlantica"
+      },
+      {
+        "name": "Guard Armor",
+        "loc": "Traverse Town",
+        "how": "Clear Traverse Town"
+      },
+      {
+        "name": "Parasite Cage",
+        "loc": "Monstro",
+        "how": "Clear Monstro"
+      },
+      {
+        "name": "Trickmaster",
+        "loc": "Wonderland",
+        "how": "Clear Wonderland"
+      },
+      {
+        "name": "Darkside",
+        "loc": "Destiny Islands",
+        "how": "Defeat Darkside in Destiny Islands"
+      },
+      {
+        "name": "Hades",
+        "loc": "Olympus Coliseum",
+        "how": "Clear Olympus Coliseum"
+      },
+      {
+        "name": "Jafar-Genie",
+        "loc": "Agrabah",
+        "how": "Clear Agrabah"
+      },
+      {
+        "name": "Oogie Boogie",
+        "loc": "Halloween Town",
+        "how": "Clear Halloween Town"
+      },
+      {
+        "name": "Ursula",
+        "loc": "Atlantica",
+        "how": "Clear Atlantica"
+      },
+      {
+        "name": "Hook",
+        "loc": "Neverland",
+        "how": "Clear Neverland"
+      },
+      {
+        "name": "Dragon Maleficent",
+        "loc": "Hollow Bastion",
+        "how": "Clear Hollow Bastion"
+      },
+      {
+        "name": "Lexaeus",
+        "loc": "Castle Oblivion",
+        "how": "During Castle Oblivion"
+      },
+      {
+        "name": "Zexion",
+        "loc": "Destiny Islands",
+        "how": "Clear Destiny Islands"
+      },
+      {
+        "name": "Tranquil Darkness",
+        "loc": "Any floor",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Teeming Darkness",
+        "loc": "Any floor",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Feeble Darkness",
+        "loc": "Any floor",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Almighty Darkness",
+        "loc": "Any floor",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Sleeping Darkness",
+        "loc": "Any floor",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Looming Darkness",
+        "loc": "Any floor",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Black Room",
+        "loc": "Any floor",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Bottomless Darkness",
+        "loc": "Any floor",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Roulette Room",
+        "loc": "Any floor",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Martial Waking",
+        "loc": "Any floor",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Meeting Ground",
+        "loc": "Any floor",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Stagnant Space",
+        "loc": "Any floor",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Strong Initiative",
+        "loc": "Any floor",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Lasting Daze",
+        "loc": "Any floor",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Moment's Reprieve",
+        "loc": "[[Most floors|Any floor, in every world except Hollow Bastion]]",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Mingling Worlds",
+        "loc": "Any floor",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Key of Beginnings",
+        "loc": "Received in story (not dropped)",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Key of Guidance",
+        "loc": "Received in story (not dropped)",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Key to Truth",
+        "loc": "Received in story (not dropped)",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Random Joker",
+        "loc": "Any floor",
+        "how": "Randomly dropped at the end of battle"
+      },
+      {
+        "name": "Traverse Town",
+        "loc": "Defeat Ansem at the B12F Exit Hall",
+        "how": "Clear Basement Floor 12"
+      },
+      {
+        "name": "Agrabah",
+        "loc": "Defeat Ansem at the B12F Exit Hall",
+        "how": "Clear Basement Floor 12"
+      },
+      {
+        "name": "Olympus Coliseum",
+        "loc": "Defeat Riku Replica at the B8F Exit Hall",
+        "how": "Clear Basement Floor 8"
+      },
+      {
+        "name": "Wonderland",
+        "loc": "Defeat Riku Replica at the B8F Exit Hall",
+        "how": "Clear Basement Floor 8"
+      },
+      {
+        "name": "Monstro",
+        "loc": "Defeat Ansem at the B12F Exit Hall",
+        "how": "Clear Basement Floor 12"
+      },
+      {
+        "name": "Halloween Town",
+        "loc": "Defeat Riku Replica at the B8F Exit Hall",
+        "how": "Clear Basement Floor 8"
+      },
+      {
+        "name": "Atlantica",
+        "loc": "Defeat Riku Replica at the B8F Exit Hall",
+        "how": "Clear Basement Floor 8"
+      },
+      {
+        "name": "Neverland",
+        "loc": "Defeat Ansem at the B12F Exit Hall",
+        "how": "Clear Basement Floor 12"
+      },
+      {
+        "name": "Hollow Bastion",
+        "loc": "Begin the story",
+        "how": "Received by default"
+      },
+      {
+        "name": "Twilight Town",
+        "loc": "Reach the B2F Entrance Hall",
+        "how": "Clear Basement Floor 3"
+      },
+      {
+        "name": "Destiny Islands",
+        "loc": "Defeat Lexaeus at the B4F Exit Hall",
+        "how": "Clear Basement Floor 4"
+      },
+      {
+        "name": "Castle Oblivion",
+        "loc": "Reach the B2F Exit Hall",
+        "how": "Clear Basement Floor 2"
+      }
+    ],
+    "characters-sora": [
+      {
+        "name": "Sora",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Donald Duck",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Goofy",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Jiminy Cricket",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Pluto",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Riku",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Kairi",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Naminé",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Riku Replica",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Vexen",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Axel",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Marluxia",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Larxene",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Simba",
+        "loc": "Traverse Town",
+        "how": "Clear the Room of Beginnings"
+      },
+      {
+        "name": "Dumbo",
+        "loc": "Monstro",
+        "how": "Clear the Room of Truth"
+      },
+      {
+        "name": "Bambi",
+        "loc": "100 Acre Wood",
+        "how": "Clear the story of this world"
+      },
+      {
+        "name": "Mushu",
+        "loc": "Hollow Bastion",
+        "how": "Treasure chest in Room of Rewards"
+      },
+      {
+        "name": "The Moogles",
+        "loc": "All floors",
+        "how": "Use a Moogle Room card"
+      },
+      {
+        "name": "Leon",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Yuffie",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Aerith",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Cid",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Alice",
+        "how": "Received during the story"
+      },
+      {
+        "name": "The Queen of Hearts",
+        "how": "Received during the story"
+      },
+      {
+        "name": "The White Rabbit",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Card of Hearts",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Card of Spades",
+        "how": "Received during the story"
+      },
+      {
+        "name": "The Chesire Cat",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Hercules",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Philoctetes",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Hades",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Cloud",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Aladdin",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Genie",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Jasmine",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Iago",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Jafar",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Jafar-Genie",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Sora",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Donald Duck",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Goofy",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Jack",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Sally",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Dr. Finkelstein",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Oogie Boogie",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Pinocchio",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Geppetto",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Ariel",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Sebastian",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Flounder",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Ursula",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Peter Pan",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Tinker Bell",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Wendy",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Hook",
+        "how": "Received during the story"
+      },
+      {
+        "name": "The Beast",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Belle",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Maleficent",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Dragon Maleficent",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Winnie the Pooh",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Piglet",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Owl",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Roo",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Eeyore",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Tigger",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Rabbit",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Tidus",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Wakka",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Selphie",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Shadow",
+        "loc": "All early floors",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Soldier",
+        "loc": "Traverse Town, Wonderland, Twilight Town",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Large Body",
+        "loc": "Olympus Coliseum, Wonderland",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Red Nocturne",
+        "loc": "Traverse Town, Wonderland",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Blue Rapsody",
+        "loc": "Traverse Town, Olympus Coliseum",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Yellow Opera",
+        "loc": "Agrabah, Monstro, Neverland",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Green Requiem",
+        "loc": "Agrabah, Monstro",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Powerwild",
+        "loc": "Olympus Coliseum",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Bouncywild",
+        "loc": "Olympus Coliseum",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Air Soldier",
+        "loc": "Monstro, Halloween Town",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Bandit",
+        "loc": "Agrabah",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Fat Bandit",
+        "loc": "Agrabah",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Barrel Spider",
+        "loc": "Agrabah, Neverland",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Search Ghost",
+        "loc": "Halloween Town, Atlantica",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Sea Neon",
+        "loc": "Atlantica",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Screwdiver",
+        "loc": "Atlantica",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Aquatank",
+        "loc": "Atlantica",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Wight Knight",
+        "loc": "Halloween Town",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Gargoyle",
+        "loc": "Halloween Town",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Pirate",
+        "loc": "Neverland",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Air Pirate",
+        "loc": "Neverland",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Darkball",
+        "loc": "Destiny Islands, Castle Oblivion",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Defender",
+        "loc": "Hollow Bastion, Castle Oblivion",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Wyvern",
+        "loc": "Hollow Bastion, Castle Oblivion",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Wizard",
+        "loc": "Hollow Bastion, Castle Oblivion",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Neoshadow",
+        "loc": "Castle Oblivion",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "White Mushroom",
+        "loc": "All floors",
+        "how": "Use a White Room card"
+      },
+      {
+        "name": "Black Fungus",
+        "loc": "All floors",
+        "how": "Use a Black Room card"
+      },
+      {
+        "name": "Creeper Plant",
+        "loc": "Wonderland, Destiny Islands",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Tornado Step",
+        "loc": "Monstro, Destiny Islands",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Crescendo",
+        "loc": "Wonderland, Destiny Islands",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Guard Armor",
+        "loc": "Traverse Town",
+        "how": "Clear Traverse Town"
+      },
+      {
+        "name": "Parasite Cage",
+        "loc": "Monstro",
+        "how": "Clear Monstro"
+      },
+      {
+        "name": "Trickmaster",
+        "loc": "Wonderland",
+        "how": "Clear Wonderland"
+      },
+      {
+        "name": "Darkside",
+        "loc": "Destiny Islands",
+        "how": "Clear Destiny Islands"
+      }
+    ],
+    "characters-riku": [
+      {
+        "name": "Riku",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Riku (Halloween Town)",
+        "how": "Received during the story"
+      },
+      {
+        "name": "The King",
+        "how": "Received during the story"
+      },
+      {
+        "name": "The King (Halloween Town)",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Sora",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Kairi",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Naminé",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Riku Replica",
+        "how": "Received during the story"
+      },
+      {
+        "name": "DiZ",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Ansem",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Vexen",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Lexaeus",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Zexion",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Axel",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Marluxia",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Larxene",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Maleficent",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Jafar-Genie",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Ursula",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Hades",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Oogie Boogie",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Hook",
+        "how": "Received during the story"
+      },
+      {
+        "name": "Shadow",
+        "loc": "All early floors",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Soldier",
+        "loc": "Traverse Town, Wonderland, Twilight Town",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Large Body",
+        "loc": "Olympus Coliseum, Wonderland",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Red Nocturne",
+        "loc": "Traverse Town, Wonderland",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Blue Rapsody",
+        "loc": "Traverse Town, Olympus Coliseum",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Yellow Opera",
+        "loc": "Agrabah, Monstro, Neverland",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Green Requiem",
+        "loc": "Agrabah, Monstro",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Powerwild",
+        "loc": "Olympus Coliseum",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Bouncywild",
+        "loc": "Olympus Coliseum",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Air Soldier",
+        "loc": "Monstro, Halloween Town",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Bandit",
+        "loc": "Agrabah",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Fat Bandit",
+        "loc": "Agrabah",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Barrel Spider",
+        "loc": "Agrabah, Neverland",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Search Ghost",
+        "loc": "Halloween Town, Atlantica",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Sea Neon",
+        "loc": "Atlantica",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Screwdiver",
+        "loc": "Atlantica",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Aquatank",
+        "loc": "Atlantica",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Wight Knight",
+        "loc": "Halloween Town",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Gargoyle",
+        "loc": "Halloween Town",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Pirate",
+        "loc": "Neverland",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Air Pirate",
+        "loc": "Neverland",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Darkball",
+        "loc": "Destiny Islands, Castle Oblivion",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Defender",
+        "loc": "Hollow Bastion, Castle Oblivion",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Wyvern",
+        "loc": "Hollow Bastion, Castle Oblivion",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Wizard",
+        "loc": "Hollow Bastion, Castle Oblivion",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Neoshadow",
+        "loc": "Castle Oblivion",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Black Fungus",
+        "loc": "All floors",
+        "how": "Use a Black Room card"
+      },
+      {
+        "name": "Creeper Plant",
+        "loc": "Wonderland, Destiny Islands",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Tornado Step",
+        "loc": "Monstro, Destiny Islands",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Crescendo",
+        "loc": "Wonderland, Destiny Islands",
+        "how": "Encounter this enemy in any battle"
+      },
+      {
+        "name": "Guard Armor",
+        "loc": "Traverse Town",
+        "how": "Clear Traverse Town"
+      },
+      {
+        "name": "Parasite Cage",
+        "loc": "Monstro",
+        "how": "Clear Monstro"
+      },
+      {
+        "name": "Trickmaster",
+        "loc": "Wonderland",
+        "how": "Clear Wonderland"
+      },
+      {
+        "name": "Darkside",
+        "loc": "Destiny Islands",
+        "how": "Clear Destiny Islands"
+      }
+    ],
+    "minigames": [
+      {
+        "name": "Monstro's Belly Brawl",
+        "world": "Monstro"
+      },
+      {
+        "name": "Balloon Glider",
+        "world": "100 Acre Wood",
+        "target": "500 points or higher"
+      },
+      {
+        "name": "Whirlwind Plunge",
+        "world": "100 Acre Wood",
+        "target": "2000 points or higher"
+      },
+      {
+        "name": "Bumble-Rumble",
+        "world": "100 Acre Wood",
+        "target": "Clear all 70 bees within 1 minute and 40 seconds"
+      },
+      {
+        "name": "Tigger's Jump-a-Thon",
+        "world": "100 Acre Wood",
+        "target": "120 points or higher"
+      },
+      {
+        "name": "Veggie Panic",
+        "world": "100 Acre Wood",
+        "target": "150 points or higher"
+      }
+    ]
+  },
+  "gt-toast-trophy": "Trophy ready: %1",
+  "gt-toast-section": "%1 — 100% complete!",
+  "gt-toast-overall": "Everything is 100% complete! 🎉",
+  "gnote-cards-sora": {
+    "Map Cards": "Drop chances vary by world (and a few by floor) — hover a card's location for where it drops, or see the full [drop table](https://www.khwiki.com/Map_Card#Obtainment_Rates). Keys of Beginnings, Guidance and to Truth are story-given, not dropped."
+  },
+  "gnote-cards-riku": {
+    "Map Cards": "Every droppable Map Card drops on any floor (Moment's Reprieve in every world except Hollow Bastion). Full [drop table](https://www.khwiki.com/Map_Card#Obtainment_Rates)."
+  }
 }

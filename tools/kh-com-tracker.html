@@ -5,30 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self'">
     <title>Re:Chain of Memories — Achievement Tracker</title>
-    <script src="/js/theme.js"></script>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/kh.css">
+    <script src="../js/theme.js"></script>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/kh.css">
 </head>
-<body data-page="kh-com-tracker" data-root="/">
+<body data-page="kh-com-tracker" data-root="../">
     <nav>
         <div class="container">
             <div class="nav-content">
-                <a href="/" class="logo" id="logo-name"></a>
+                <a href="../" class="logo" id="logo-name"></a>
                 <div class="nav-right">
                     <ul class="nav-links">
-                        <li><a href="/" id="nav-home"></a></li>
-                        <li><a href="/tools/" id="nav-tools"></a></li>
+                    <li class="has-menu">
+                        <button class="nav-menu-btn" id="games-menu-btn" type="button" aria-haspopup="true" aria-expanded="false">Games <span class="caret" aria-hidden="true">&#9662;</span></button>
+                        <ul class="nav-menu" id="games-menu">
+                        <li><a href="../tools/kh1-tracker.html">Kingdom Hearts Final Mix</a></li>
+                        <li><a href="../tools/kh-com-tracker.html">Re:Chain of Memories</a></li>
+                        <li><a href="../tools/kh2-tracker.html">Kingdom Hearts II</a></li>
+                        <li class="has-submenu">
+                            <a href="../tools/kh-bbs-tracker.html">Birth by Sleep <span class="caret" aria-hidden="true">&#9656;</span></a>
+                            <ul class="nav-submenu">
+                                <li><a href="../tools/kh-melding.html">Melding Calculator</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../tools/kh-ddd-tracker.html">Dream Drop Distance</a></li>
+                        <li><a href="../tools/kh02-tracker.html">Kingdom Hearts 0.2</a></li>
+                        <li><a href="../tools/kh3-tracker.html">Kingdom Hearts III</a></li>
+                        </ul>
+                    </li>
                     </ul>
                     <div class="theme-toggle">
                         <button id="themeToggle" class="theme-btn" type="button">
                             <span class="theme-icon" id="theme-icon" aria-hidden="true"></span>
                             <span class="theme-text" id="theme-text"></span>
-                        </button>
-                    </div>
-                    <div class="language-toggle">
-                        <button id="langToggle" class="lang-btn" type="button">
-                            <span class="flag" id="lang-flag" aria-hidden="true"></span>
-                            <span class="lang-text" id="lang-text"></span>
                         </button>
                     </div>
                 </div>
@@ -38,7 +47,7 @@
 
     <div class="container kh">
         <header class="kh-header">
-            <figure class="banner kh-banner"><img class="banner-img" id="kh-banner" src="/images/banners/khcom.jpg" alt=""></figure>
+            <figure class="banner kh-logo"><img class="banner-img" id="kh-logo" src="../images/logos/KHCOM.png" alt=""></figure>
             <h1 id="kh-title"></h1>
             <p class="sub" id="kh-subtitle"></p>
         </header>
@@ -55,10 +64,11 @@
         <main class="kh-main" id="panels"></main>
     </div>
 
-    <script src="/js/i18n.js"></script>
-    <script src="/js/kh-com-tracker-data.js"></script>
-    <script src="/js/kh-tracker.js"></script>
-    <script src="/js/kh-progress.js"></script>
-    <script src="/js/banners.js"></script>
+    <script src="../js/i18n.js"></script>
+    <script src="../js/kh-com-tracker-data.js"></script>
+    <script src="../js/kh-tracker.js"></script>
+    <script src="../js/kh-progress.js"></script>
+    <script src="../js/banners.js"></script>
+    <script src="../js/nav.js"></script>
 </body>
 </html>

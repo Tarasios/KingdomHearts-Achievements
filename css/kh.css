@@ -192,3 +192,95 @@
 /* import/export progress bar */
 .kh .kp-bar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
 .kh .kp-note { color: var(--dim); font-size: 12px; }
+
+/* ============================================================
+   Mobile: scrollable single-row tabs, smaller text, and
+   horizontally-scrollable wide tables. Desktop is untouched.
+   ============================================================ */
+@media (max-width: 768px) {
+  .kh-header h1 { font-size: 18px; }
+  .kh-header .sub { font-size: 12px; }
+
+  /* Tabs stay on one row and scroll horizontally (swipe) instead of
+     wrapping onto several rows. */
+  .kh .tabs { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
+  .kh .tab { flex: 0 0 auto; }
+
+  /* Denser tables so text wraps less on a phone. */
+  .kh table { font-size: 12px; }
+  .kh th, .kh td { padding: 7px 7px; }
+  .kh .grp-title, .kh .sub-title, .kh .trk-cat { font-size: 12px; }
+  .kh .countbadge { font-size: 11px; }
+
+  /* The progress-overview dashboards have fixed per-character columns;
+     let them scroll sideways rather than overflow the screen. */
+  .kh .dash { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .kh .dash-table { min-width: 480px; }
+}
+
+/* Ice-cream ingredient "Needed ×N" cell. */
+.kh .needcell { font-variant-numeric: tabular-nums; color: var(--accent2); white-space: nowrap; font-weight: 600; }
+
+/* Inline header/name markup from the lang files:
+   {{name}} -> .hdricon (small inline icon), [[text|tip]] -> .hasinfo (hover). */
+.kh .hdricon { height: 1em; width: auto; vertical-align: -0.14em; margin-right: 0.35em; }
+.kh .hasinfo { border-bottom: 1px dotted currentColor; cursor: help; }
+
+/* ---- Worlds tab: collapsible world / collectible-type groups ---- */
+.kh .wgroup { border-bottom: 1px solid var(--line); }
+.kh summary.wsum, .kh summary.tsum { cursor: pointer; list-style: none; user-select: none; }
+.kh summary.wsum::-webkit-details-marker, .kh summary.tsum::-webkit-details-marker { display: none; }
+.kh summary.wsum::before, .kh summary.tsum::before {
+  content: "\25B8"; display: inline-block; margin-right: 7px; color: var(--dim); transition: transform .15s; }
+.kh details[open] > summary.wsum::before, .kh details[open] > summary.tsum::before { transform: rotate(90deg); }
+.kh summary.wsum { font-size: 13px; color: var(--accent2); text-transform: uppercase; letter-spacing: .7px; font-weight: 700; padding: 12px 0 8px; }
+.kh summary.tsum { font-size: 12px; color: var(--accent); text-transform: uppercase; letter-spacing: .6px; font-weight: 600; margin-left: 4px; padding: 8px 0 4px; }
+.kh .wcount { color: var(--dim); font-weight: 600; font-variant-numeric: tabular-nums; margin-left: 8px; text-transform: none; letter-spacing: 0; }
+.kh .wtable { margin: 0 0 6px 18px; }
+.kh .wtable td { padding: 7px 10px; }
+
+/* ---- completion toasts (appended to <body>, outside .kh) ---- */
+#kh-toasts { position: fixed; right: 16px; bottom: 16px; z-index: 9999; display: flex;
+  flex-direction: column; gap: 8px; max-width: min(340px, calc(100vw - 32px)); pointer-events: none; }
+.kh-toast { display: flex; align-items: center; gap: 10px; background: var(--panel2); color: var(--ink);
+  border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 10px;
+  padding: 11px 14px; font-size: 13.5px; line-height: 1.35; box-shadow: 0 10px 30px rgba(0,0,0,.38);
+  opacity: 0; transform: translateY(14px) scale(.98); transition: opacity .35s ease, transform .35s ease; }
+.kh-toast.show { opacity: 1; transform: translateY(0) scale(1); }
+.kh-toast.hide { opacity: 0; transform: translateY(8px) scale(.98); }
+.kh-toast-ic { font-size: 19px; line-height: 1; }
+@media (prefers-reduced-motion: reduce) { .kh-toast { transition: opacity .2s; transform: none; } }
+
+/* Progress Overview: each character's column wears its signature colour
+   (Terra red, Ventus green, Aqua blue) — fixed, never the themed accent. */
+.kh .dash-table th.c-terra { color: var(--terra); }
+.kh .dash-table th.c-ventus { color: var(--ventus); }
+.kh .dash-table th.c-aqua { color: var(--aqua); }
+.kh .dash-table td.c-terra .dashbar > i { background: var(--terra); }
+.kh .dash-table td.c-ventus .dashbar > i { background: var(--ventus); }
+.kh .dash-table td.c-aqua .dashbar > i { background: var(--aqua); }
+.kh .dash-table td.c-terra .dashnum { color: var(--terra); }
+.kh .dash-table td.c-ventus .dashnum { color: var(--ventus); }
+.kh .dash-table td.c-aqua .dashnum { color: var(--aqua); }
+
+/* World fully complete: a distinct colour for the name PLUS a highlighted
+   bar (left border + tinted fill) and an explicit bordered "✓ 100%" badge,
+   so completion reads through several cues, not hue alone (colour-blind). */
+.kh summary.wsum.wdone { color: var(--ok); background: var(--ok-bg);
+  border-left: 3px solid var(--ok); border-radius: 6px; padding-left: 9px; }
+.kh summary.wsum.wdone::before { color: var(--ok); }
+.kh summary.wsum.wdone .wcount { color: var(--ok); }
+.kh .wbadge { display: inline-block; margin-left: 8px; font-size: 10.5px; font-weight: 800;
+  letter-spacing: .4px; text-transform: none; color: var(--ok); border: 1.5px solid var(--ok);
+  border-radius: 999px; padding: 1px 8px; vertical-align: middle; }
+
+/* World-summary colour swatch (e.g. KH1 trinity colours); hover/focus shows
+   its colour name (colour-blind friendly). */
+.kh .wswatch { display: inline-block; width: 10px; height: 10px; border-radius: 50%;
+  border: 1px solid var(--line); margin-right: 7px; vertical-align: middle; cursor: help; }
+.kh .wswatch[title]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+/* Per-group note under a group header (e.g. how a Trinity is unlocked). */
+.kh .gnote { color: var(--dim); font-size: 12px; font-weight: 400; font-style: italic; padding: 2px 2px 8px; }
+/* Dashboard section labels link to their tab. */
+.kh a.dashlink { color: var(--ink); text-decoration: none; border-bottom: 1px dotted var(--line); cursor: pointer; }
+.kh a.dashlink:hover, .kh a.dashlink:focus { color: var(--accent); border-bottom-color: var(--accent); }

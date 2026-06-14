@@ -5,34 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self'">
     <title>Tools • KH Completionist</title>
-    <script src="/js/theme.js"></script>
-    <link rel="stylesheet" href="/css/main.css">
+    <script src="../js/theme.js"></script>
+    <link rel="stylesheet" href="../css/main.css">
 </head>
 <!--
     Tools are organized as: section (e.g. Games) > series > game > tool cards.
     To add a game or series, copy the matching div block and add the new
     text keys to lang/messages/en/tools.json and lang/messages/fr/tools.json.
 -->
-<body data-page="tools" data-root="/">
+<body data-page="tools" data-root="../">
     <nav>
         <div class="container">
             <div class="nav-content">
-                <a href="/" class="logo" id="logo-name"></a>
+                <a href="../" class="logo" id="logo-name"></a>
                 <div class="nav-right">
                     <ul class="nav-links">
-                        <li><a href="/" id="nav-home"></a></li>
-                        <li><a href="/tools/" id="nav-tools"></a></li>
+                    <li class="has-menu">
+                        <button class="nav-menu-btn" id="games-menu-btn" type="button" aria-haspopup="true" aria-expanded="false">Games <span class="caret" aria-hidden="true">&#9662;</span></button>
+                        <ul class="nav-menu" id="games-menu">
+                        <li><a href="../tools/kh1-tracker.html">Kingdom Hearts Final Mix</a></li>
+                        <li><a href="../tools/kh-com-tracker.html">Re:Chain of Memories</a></li>
+                        <li><a href="../tools/kh2-tracker.html">Kingdom Hearts II</a></li>
+                        <li class="has-submenu">
+                            <a href="../tools/kh-bbs-tracker.html">Birth by Sleep <span class="caret" aria-hidden="true">&#9656;</span></a>
+                            <ul class="nav-submenu">
+                                <li><a href="../tools/kh-melding.html">Melding Calculator</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../tools/kh-ddd-tracker.html">Dream Drop Distance</a></li>
+                        <li><a href="../tools/kh02-tracker.html">Kingdom Hearts 0.2</a></li>
+                        <li><a href="../tools/kh3-tracker.html">Kingdom Hearts III</a></li>
+                        </ul>
+                    </li>
                     </ul>
                     <div class="theme-toggle">
                         <button id="themeToggle" class="theme-btn" type="button">
                             <span class="theme-icon" id="theme-icon" aria-hidden="true"></span>
                             <span class="theme-text" id="theme-text"></span>
-                        </button>
-                    </div>
-                    <div class="language-toggle">
-                        <button id="langToggle" class="lang-btn" type="button">
-                            <span class="flag" id="lang-flag" aria-hidden="true"></span>
-                            <span class="lang-text" id="lang-text"></span>
                         </button>
                     </div>
                 </div>
@@ -60,7 +69,7 @@
                     <div class="game-group">
                         <h4 class="game-title" id="game-kh1"></h4>
                         <div class="project-grid">
-                            <a class="project-card" href="/tools/kh1-tracker.html">
+                            <a class="project-card" href="../tools/kh1-tracker.html">
                                 <h3 id="tool-kh1-tracker-title"></h3>
                                 <p id="tool-kh1-tracker-desc"></p>
                                 <div class="project-meta">
@@ -74,7 +83,7 @@
                     <div class="game-group">
                         <h4 class="game-title" id="game-kh-com"></h4>
                         <div class="project-grid">
-                            <a class="project-card" href="/tools/kh-com-tracker.html">
+                            <a class="project-card" href="../tools/kh-com-tracker.html">
                                 <h3 id="tool-com-tracker-title"></h3>
                                 <p id="tool-com-tracker-desc"></p>
                                 <div class="project-meta">
@@ -88,7 +97,7 @@
                     <div class="game-group">
                         <h4 class="game-title" id="game-kh2"></h4>
                         <div class="project-grid">
-                            <a class="project-card" href="/tools/kh2-tracker.html">
+                            <a class="project-card" href="../tools/kh2-tracker.html">
                                 <h3 id="tool-kh2-tracker-title"></h3>
                                 <p id="tool-kh2-tracker-desc"></p>
                                 <div class="project-meta">
@@ -102,7 +111,7 @@
                     <div class="game-group">
                         <h4 class="game-title" id="game-kh-bbs"></h4>
                         <div class="project-grid">
-                            <a class="project-card" href="/tools/kh-bbs-tracker.html">
+                            <a class="project-card" href="../tools/kh-bbs-tracker.html">
                                 <h3 id="tool-bbs-tracker-title"></h3>
                                 <p id="tool-bbs-tracker-desc"></p>
                                 <div class="project-meta">
@@ -110,7 +119,7 @@
                                     <span class="tech-tag" id="tool-bbs-tracker-tag2"></span>
                                 </div>
                             </a>
-                            <a class="project-card" href="/tools/kh-melding.html">
+                            <a class="project-card" href="../tools/kh-melding.html">
                                 <h3 id="tool-kh-title"></h3>
                                 <p id="tool-kh-desc"></p>
                                 <div class="project-meta">
@@ -124,7 +133,7 @@
                     <div class="game-group">
                         <h4 class="game-title" id="game-kh-ddd"></h4>
                         <div class="project-grid">
-                            <a class="project-card" href="/tools/kh-ddd-tracker.html">
+                            <a class="project-card" href="../tools/kh-ddd-tracker.html">
                                 <h3 id="tool-ddd-tracker-title"></h3>
                                 <p id="tool-ddd-tracker-desc"></p>
                                 <div class="project-meta">
@@ -138,7 +147,7 @@
                     <div class="game-group">
                         <h4 class="game-title" id="game-kh02"></h4>
                         <div class="project-grid">
-                            <a class="project-card" href="/tools/kh02-tracker.html">
+                            <a class="project-card" href="../tools/kh02-tracker.html">
                                 <h3 id="tool-kh02-tracker-title"></h3>
                                 <p id="tool-kh02-tracker-desc"></p>
                                 <div class="project-meta">
@@ -152,7 +161,7 @@
                     <div class="game-group">
                         <h4 class="game-title" id="game-kh3"></h4>
                         <div class="project-grid">
-                            <a class="project-card" href="/tools/kh3-tracker.html">
+                            <a class="project-card" href="../tools/kh3-tracker.html">
                                 <h3 id="tool-kh3-tracker-title"></h3>
                                 <p id="tool-kh3-tracker-desc"></p>
                                 <div class="project-meta">
@@ -167,8 +176,9 @@
         </main>
     </div>
 
-    <script src="/js/i18n.js"></script>
-    <script src="/js/tools.js"></script>
-    <script src="/js/banners.js"></script>
+    <script src="../js/i18n.js"></script>
+    <script src="../js/tools.js"></script>
+    <script src="../js/banners.js"></script>
+    <script src="../js/nav.js"></script>
 </body>
 </html>
