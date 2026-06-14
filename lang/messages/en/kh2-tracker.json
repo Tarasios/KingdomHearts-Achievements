@@ -1699,15 +1699,18 @@
     "treasures": [
       {
         "name": "Potion",
-        "area": "Old Mansion"
+        "area": "Old Mansion",
+        "where": "In the corner, to the west of the gates."
       },
       {
         "name": "Mythril Shard",
-        "area": "Old Mansion"
+        "area": "Old Mansion",
+        "where": "In the corner, to the right of the Mansion doors."
       },
       {
         "name": "Potion",
-        "area": "The Woods"
+        "area": "The Woods",
+        "where": "Along the outside of the perimeter, in the southwestern part of the map."
       },
       {
         "name": "Mythril Shard",
