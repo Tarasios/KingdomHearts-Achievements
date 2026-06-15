@@ -314,10 +314,27 @@ function missionsCount(char, map) {
   BBS_DATA.missions.forEach((m, i) => { if (map[i + "-" + char]) d++; });
   return [d, BBS_DATA.missions.length];
 }
-function missionsRankAny() {
-  let d = 0;
-  BBS_DATA.missions.forEach((m, i) => { if (CHARS.some(c => STORE.missions.rank[i + "-" + c])) d++; });
-  return [d, BBS_DATA.missions.length];
+/* Savage Slayer needs ONE character to max-rank every Unversed mission, so
+   progress is the best single character's max-ranked count (not any-character
+   per mission). */
+function bestCharMissionsRank() {
+  let best = 0;
+  CHARS.forEach(c => {
+    let d = 0;
+    BBS_DATA.missions.forEach((m, i) => { if (STORE.missions.rank[i + "-" + c]) d++; });
+    if (d > best) best = d;
+  });
+  return [best, BBS_DATA.missions.length];
+}
+/* Best single character's progress through a per-character group (e.g.
+   Pâtissier needs one character to make all of their ice-cream recipes). */
+function bestCharGroup(key) {
+  let best = null;
+  CHARS.forEach(c => {
+    const r = groupCount(key, CHAR_LABEL[c]);
+    if (!best || r[0] > best[0]) best = r;
+  });
+  return best || [0, 0];
 }
 /* Arena stages cleared by a character (the store is per-character now). */
 function arenaCount(char) { return [countMap(STORE[char].arena, BBS_DATA.arena.length), BBS_DATA.arena.length]; }
@@ -357,10 +374,10 @@ function overallChar(char) {
 
 /* Trophies whose progress can be computed from tracked sections. */
 const TROPHY_AUTO = {
-  "Savage Slayer": () => missionsRankAny(),
+  "Savage Slayer": () => bestCharMissionsRank(),
   "Profiler": () => sharedCount("reports"),
   "Collector": () => sharedCount("stickers"),
-  "Pâtissier": () => sharedCount("patissier"),
+  "Pâtissier": () => bestCharGroup("patissier"),
   "The Warrior: Terra": () => groupCount("warrior", "Terra"),
   "The Warrior: Ventus": () => groupCount("warrior", "Ventus"),
   "The Warrior: Aqua": () => groupCount("warrior", "Aqua"),
@@ -570,7 +587,7 @@ function renderTrophies(p) {
       tr.appendChild(el("td", null, bar(x, y)));
       tb2.appendChild(tr);
     });
-  const [sx, sy] = missionsRankAny();
+  const [sx, sy] = bestCharMissionsRank();
   const str = el("tr");
   str.appendChild(dashLabelCell(t('bt-dash-savage'), "unversed"));
   str.appendChild(el("td", null, bar(sx, sy)));
@@ -656,7 +673,7 @@ function renderUnversed(p) {
   });
   tbl.appendChild(tb);
   box.appendChild(tbl);
-  const [sx, sy] = missionsRankAny();
+  const [sx, sy] = bestCharMissionsRank();
   box.appendChild(el("p", "legend", fmt('bt-legend-missions', sx, sy)));
 
   box.appendChild(el("div", "sub-title", fmtText(fmt('bt-journal-for', label))));
