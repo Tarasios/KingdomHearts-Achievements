@@ -970,11 +970,14 @@ function renderWorlds(p) {
     const wkey = "w:" + slug;
     const complete = wdone === all.length;
     const wdet = el("details", "wgroup");
-    wdet.open = filtering ? true : !!open[wkey];   // worlds collapsed by default
-    wdet.addEventListener("toggle", () => { if (!filtering) open[wkey] = wdet.open; });
-    wdet.appendChild(el("summary", "wsum" + (complete ? " wdone" : ""),
+    wdet.open = filtering ? true : ((wkey in open) ? open[wkey] : false);   // worlds collapsed by default
+    const wsum = el("summary", "wsum" + (complete ? " wdone" : ""),
       fmtText(t('bt-world-' + slug)) + ` <span class="wcount">${wdone} / ${all.length}</span>`
-      + (complete ? ` <span class="wbadge">${t('bt-world-complete')}</span>` : "")));
+      + (complete ? ` <span class="wbadge">${t('bt-world-complete')}</span>` : ""));
+    // Record collapse state synchronously on click — the toggle event is async,
+    // so a re-render's programmatic open could otherwise clobber a fresh collapse.
+    wsum.addEventListener("click", () => { if (!filtering) open[wkey] = !((wkey in open) ? open[wkey] : false); });
+    wdet.appendChild(wsum);
 
     const order = [], byType = {};
     entries.forEach(e => { if (!byType[e.type]) { byType[e.type] = []; order.push(e.type); } byType[e.type].push(e); });
@@ -983,9 +986,10 @@ function renderWorlds(p) {
       const tdone = list.filter(e => e.done).length;
       const tkey = "t:" + slug + ":" + type;
       const tdet = el("details", "tgroup");
-      tdet.open = filtering ? true : (open[tkey] !== false);   // type groups open by default
-      tdet.addEventListener("toggle", () => { if (!filtering) open[tkey] = tdet.open; });
-      tdet.appendChild(el("summary", "tsum", esc(type) + ` <span class="wcount">${tdone} / ${list.length}</span>`));
+      tdet.open = filtering ? true : ((tkey in open) ? open[tkey] : true);   // type groups open by default
+      const tsum = el("summary", "tsum", esc(type) + ` <span class="wcount">${tdone} / ${list.length}</span>`);
+      tsum.addEventListener("click", () => { if (!filtering) open[tkey] = !((tkey in open) ? open[tkey] : true); });
+      tdet.appendChild(tsum);
       tdet.appendChild(entryTable(list));
       wdet.appendChild(tdet);
     });

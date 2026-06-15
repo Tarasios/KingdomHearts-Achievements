@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!btn) return;
   var menu = btn.closest(".has-menu");
   if (!menu) return;
-
   var DELAY = 320;   // ms grace period before a hovered menu closes
 
   function closeAll() {
@@ -43,3 +42,12 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("click", function (e) { if (!menu.contains(e.target)) closeAll(); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAll(); });
 });
+
+/* Register the caching service worker (see /sw.js). Resolved relative to the
+   site root via data-root so it works under a subpath (e.g. GitHub Pages). */
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    var root = (document.body && document.body.getAttribute("data-root")) || "./";
+    navigator.serviceWorker.register(root + "sw.js").catch(function () { /* caching is optional */ });
+  });
+}

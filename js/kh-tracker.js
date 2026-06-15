@@ -592,17 +592,21 @@ function renderWorlds(p) {
     if (!shown.length) return;
     const complete = wdone === wtotal, wkey = "w:" + slug;
     const wdet = el("details", "wgroup");
-    wdet.open = filtering ? true : !!open[wkey];
-    wdet.addEventListener("toggle", () => { if (!filtering) open[wkey] = wdet.open; });
-    wdet.appendChild(el("summary", "wsum" + (complete ? " wdone" : ""),
+    wdet.open = filtering ? true : ((wkey in open) ? open[wkey] : false);   // worlds collapsed by default
+    const wsum = el("summary", "wsum" + (complete ? " wdone" : ""),
       fmtText(world) + ` <span class="wcount">${wdone} / ${wtotal}</span>`
-      + (complete ? ` <span class="wbadge">${t('gt-world-complete')}</span>` : "")));
+      + (complete ? ` <span class="wbadge">${t('gt-world-complete')}</span>` : ""));
+    // Record collapse state synchronously on click (the toggle event is async,
+    // which lets a re-render's programmatic open clobber a just-made collapse).
+    wsum.addEventListener("click", () => { if (!filtering) open[wkey] = !((wkey in open) ? open[wkey] : false); });
+    wdet.appendChild(wsum);
     shown.forEach(g => {
       const tdone = g.list.filter(e => e.done).length, tkey = "t:" + slug + ":" + g.title;
       const tdet = el("details", "tgroup");
-      tdet.open = filtering ? true : (open[tkey] !== false);
-      tdet.addEventListener("toggle", () => { if (!filtering) open[tkey] = tdet.open; });
-      tdet.appendChild(el("summary", "tsum", esc(g.title) + ` <span class="wcount">${tdone} / ${g.list.length}</span>`));
+      tdet.open = filtering ? true : ((tkey in open) ? open[tkey] : true);   // type groups open by default
+      const tsum = el("summary", "tsum", esc(g.title) + ` <span class="wcount">${tdone} / ${g.list.length}</span>`);
+      tsum.addEventListener("click", () => { if (!filtering) open[tkey] = !((tkey in open) ? open[tkey] : true); });
+      tdet.appendChild(tsum);
       tdet.appendChild(worldEntryTable(g.list));
       wdet.appendChild(tdet);
     });
