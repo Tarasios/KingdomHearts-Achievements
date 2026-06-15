@@ -955,7 +955,9 @@ function renderWorlds(p) {
   box.appendChild(el("div", "grp-title", fmtText(fmt('bt-worlds-for', CHAR_LABEL[activeChar]))));
   box.appendChild(el("p", "hint", t('bt-worlds-hint')));
   const q = p.state.q.toLowerCase();
-  const filtering = !!q || p.state.hide;
+  // Only a search query force-opens sections (to reveal matches); "hide
+  // completed" must keep the user's collapse state.
+  const filtering = !!q;
   let dx = 0, dy = 0;
   WORLDS.forEach(([world, slug]) => {
     const all = worldEntries(world, activeChar);

@@ -547,7 +547,9 @@ function renderWorlds(p) {
   const open = p.state.open;
   box.appendChild(el("div", "grp-title", fmtText(t('gt-worlds-title'))));
   const q = p.state.q.toLowerCase();
-  const filtering = !!q || p.state.hide;
+  // Only a search query force-opens sections (to reveal matches); "hide
+  // completed" must keep the user's collapse state.
+  const filtering = !!q;
   const secViews = cfg.sections.map(s => {
     const secCfg = (typeof s === "string") ? { id: s } : s;
     const sec = findSec(secCfg.id), res = resolved(sec);
