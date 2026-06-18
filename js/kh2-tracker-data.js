@@ -28,6 +28,18 @@ var TRACKER_GAME = {
       "section": "gummim",
       "check": "ex",
       "perGroup": true
+    },
+    "Craftsman": [
+      "materials",
+      "recipes",
+      "lists"
+    ],
+    "To Rule Them All": {
+      "section": "conqueror",
+      "match": {
+        "field": "area",
+        "value": "Garden of Assemblage"
+      }
     }
   },
   "tabs": [
@@ -4012,9 +4024,6 @@ var TRACKER_GAME = {
             },
             {
               "k": "area"
-            },
-            {
-              "k": "score"
             }
           ],
           "items": [
@@ -5187,6 +5196,52 @@ var TRACKER_GAME = {
         "Sunlight Storm 2": "Cait Sith",
         "Assault of the Dreadnought 1": "Mushroom",
         "Assault of the Dreadnought 2": "Fenrir"
+      }
+    },
+    {
+      "from": "conqueror",
+      "to": "minigames",
+      "map": {
+        "Mail Delivery": "Mail Delivery",
+        "Cargo Climb": "Cargo Climb",
+        "Grandstander": "Grandstander",
+        "Poster Duty": "Poster Duty",
+        "Bumble-Buster": "Bumble-Buster",
+        "Junk Sweep": "Junk Sweep",
+        "SB Street Rave": "SB Street Rave",
+        "Mushroom XIII: No. 7": "Mushroom XIII: No. 7",
+        "Mushroom XIII: No. 8": "Mushroom XIII: No. 8",
+        "Mushroom XIII: No. 12": "Mushroom XIII: No. 12",
+        "SB Freestyle": "SB Freestyle",
+        "Mushroom XIII: No. 9": "Mushroom XIII: No. 9",
+        "Phil's Training": "Phil's Training",
+        "The Underdrome: Pain and Panic": "The Underdrome: Pain and Panic",
+        "The Underdrome: Cerberus": "The Underdrome: Cerberus",
+        "The Underdrome: Titan": "The Underdrome: Titan",
+        "The Underdrome: Goddess of Fate": "The Underdrome: Goddess of Fate",
+        "The Paradox Battles: Pain and Panic": "The Paradox Battles: Pain and Panic",
+        "The Paradox Battles: Cerberus": "The Paradox Battles: Cerberus",
+        "The Paradox Battles: Titan": "The Paradox Battles: Titan",
+        "The Paradox Battles: Hades": "The Paradox Battles: Hades",
+        "Mushroom XIII: No. 6": "Mushroom XIII: No. 6",
+        "Magic Carpet": "Magic Carpet",
+        "SB Sand Glider": "SB Sand Glider",
+        "Mushroom XIII: No. 5": "Mushroom XIII: No. 5",
+        "A Blustery Rescue": "A Blustery Rescue",
+        "Hunny Slider": "Hunny Slider",
+        "Balloon Bounce": "Balloon Bounce",
+        "The Expotition": "The Expotition",
+        "The Hunny Pot": "The Hunny Pot",
+        "Gift Wrapping": "Gift Wrapping",
+        "SB Workshop Rave": "SB Workshop Rave",
+        "Mushroom XIII: No. 2": "Mushroom XIII: No. 2",
+        "SB Time Attack": "SB Time Attack",
+        "Mushroom XIII: No. 10": "Mushroom XIII: No. 10",
+        "Light Cycle": "Light Cycle",
+        "Mushroom XIII: No. 3": "Mushroom XIII: No. 3",
+        "Mushroom XIII: No. 4": "Mushroom XIII: No. 4",
+        "Mushroom XIII: No. 11": "Mushroom XIII: No. 11",
+        "Mushroom XIII: No. 1": "Mushroom XIII: No. 1"
       }
     }
   ],

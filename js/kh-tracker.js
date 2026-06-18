@@ -207,10 +207,13 @@ function autoSource(sec, it) {
     if (!srcSec) continue;
     for (const mission in a.map) {
       if (a.map[mission] !== it[a.toKey || "name"]) continue;
-      const mi = (srcSec.items || []).findIndex(x => x.name === mission);
-      if (mi < 0) continue;
       const ci = a.check ? srcSec.checks.findIndex(c => c.k === a.check) : 0;
-      if (ci >= 0 && isChecked(srcStore, mi, srcSec, ci)) return mission;
+      if (ci < 0) continue;
+      // Any source row with this name being checked counts (a minigame can
+      // have several challenge rows; clearing any of them completes it).
+      for (let mi = 0; mi < (srcSec.items || []).length; mi++) {
+        if (srcSec.items[mi].name === mission && isChecked(srcStore, mi, srcSec, ci)) return mission;
+      }
     }
   }
   return null;
@@ -229,11 +232,18 @@ function entryCount(e) {
   });
   return [d, y];
 }
-/* Progress for a trophy: a whole section (string storeId), or a subset
-   { section, nameEndsWith?, check?, perGroup? } — a name-filtered slice,
-   a single check dimension across every item, or (perGroup) one unit per
-   item group ("route"), done when any item in the group has the check. */
+/* Progress for a trophy: a whole section (string storeId), an array of those
+   (summed — e.g. a whole multi-section tab), or a subset
+   { section, nameEndsWith?, match?:{field,value}, check?, perGroup? } — a
+   name-filtered slice, a field-matched slice (field read via the lang text),
+   a single check dimension across every item, or (perGroup) one unit per item
+   group, done when any item in the group has the check. */
 function trophyProgress(ref) {
+  if (Array.isArray(ref)) {   // sum several sections (e.g. the whole Synthesis tab)
+    let x = 0, y = 0;
+    ref.forEach(r => { const p = trophyProgress(r); if (p) { x += p[0]; y += p[1]; } });
+    return [x, y];
+  }
   if (typeof ref === "string") {
     const items = findList(ref);
     return items ? entryCount({ sec: findSec(ref), storeId: ref, items }) : null;
@@ -259,6 +269,7 @@ function trophyProgress(ref) {
   let d = 0, y = 0;
   sec.items.forEach((it, i) => {
     if (ref.nameEndsWith && !String(it.name).endsWith(ref.nameEndsWith)) return;
+    if (ref.match && String(cellText(ref.section, i, ref.match.field, it) || "").indexOf(ref.match.value) < 0) return;
     if (ref.check !== undefined && checkIdx < 0) return;
     y++; if (itemDone(it, i)) d++;
   });
