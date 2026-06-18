@@ -651,6 +651,15 @@ a.project-card:hover h3 {
 .landing-banner {
     margin-bottom: 1.4rem;   /* spans the full content width */
 }
+/* The series banner is a low-resolution source; at full width its natural
+   height looks over-stretched. Cap it to a wide hero strip with object-fit
+   cover so it keeps full width and aspect (cropped, never squished). */
+.landing-banner img {
+    aspect-ratio: 2.95;
+    height: auto;
+    object-fit: cover;
+    object-position: center 40%;
+}
 
 .landing-hero h1 {
     font-size: 2rem;

@@ -314,10 +314,27 @@ function missionsCount(char, map) {
   BBS_DATA.missions.forEach((m, i) => { if (map[i + "-" + char]) d++; });
   return [d, BBS_DATA.missions.length];
 }
-function missionsRankAny() {
-  let d = 0;
-  BBS_DATA.missions.forEach((m, i) => { if (CHARS.some(c => STORE.missions.rank[i + "-" + c])) d++; });
-  return [d, BBS_DATA.missions.length];
+/* Savage Slayer needs ONE character to max-rank every Unversed mission, so
+   progress is the best single character's max-ranked count (not any-character
+   per mission). */
+function bestCharMissionsRank() {
+  let best = 0;
+  CHARS.forEach(c => {
+    let d = 0;
+    BBS_DATA.missions.forEach((m, i) => { if (STORE.missions.rank[i + "-" + c]) d++; });
+    if (d > best) best = d;
+  });
+  return [best, BBS_DATA.missions.length];
+}
+/* Best single character's progress through a per-character group (e.g.
+   Pâtissier needs one character to make all of their ice-cream recipes). */
+function bestCharGroup(key) {
+  let best = null;
+  CHARS.forEach(c => {
+    const r = groupCount(key, CHAR_LABEL[c]);
+    if (!best || r[0] > best[0]) best = r;
+  });
+  return best || [0, 0];
 }
 /* Arena stages cleared by a character (the store is per-character now). */
 function arenaCount(char) { return [countMap(STORE[char].arena, BBS_DATA.arena.length), BBS_DATA.arena.length]; }
@@ -357,10 +374,10 @@ function overallChar(char) {
 
 /* Trophies whose progress can be computed from tracked sections. */
 const TROPHY_AUTO = {
-  "Savage Slayer": () => missionsRankAny(),
+  "Savage Slayer": () => bestCharMissionsRank(),
   "Profiler": () => sharedCount("reports"),
   "Collector": () => sharedCount("stickers"),
-  "Pâtissier": () => sharedCount("patissier"),
+  "Pâtissier": () => bestCharGroup("patissier"),
   "The Warrior: Terra": () => groupCount("warrior", "Terra"),
   "The Warrior: Ventus": () => groupCount("warrior", "Ventus"),
   "The Warrior: Aqua": () => groupCount("warrior", "Aqua"),
@@ -570,7 +587,7 @@ function renderTrophies(p) {
       tr.appendChild(el("td", null, bar(x, y)));
       tb2.appendChild(tr);
     });
-  const [sx, sy] = missionsRankAny();
+  const [sx, sy] = bestCharMissionsRank();
   const str = el("tr");
   str.appendChild(dashLabelCell(t('bt-dash-savage'), "unversed"));
   str.appendChild(el("td", null, bar(sx, sy)));
@@ -656,7 +673,7 @@ function renderUnversed(p) {
   });
   tbl.appendChild(tb);
   box.appendChild(tbl);
-  const [sx, sy] = missionsRankAny();
+  const [sx, sy] = bestCharMissionsRank();
   box.appendChild(el("p", "legend", fmt('bt-legend-missions', sx, sy)));
 
   box.appendChild(el("div", "sub-title", fmtText(fmt('bt-journal-for', label))));
@@ -955,7 +972,9 @@ function renderWorlds(p) {
   box.appendChild(el("div", "grp-title", fmtText(fmt('bt-worlds-for', CHAR_LABEL[activeChar]))));
   box.appendChild(el("p", "hint", t('bt-worlds-hint')));
   const q = p.state.q.toLowerCase();
-  const filtering = !!q || p.state.hide;
+  // Only a search query force-opens sections (to reveal matches); "hide
+  // completed" must keep the user's collapse state.
+  const filtering = !!q;
   let dx = 0, dy = 0;
   WORLDS.forEach(([world, slug]) => {
     const all = worldEntries(world, activeChar);
@@ -970,11 +989,14 @@ function renderWorlds(p) {
     const wkey = "w:" + slug;
     const complete = wdone === all.length;
     const wdet = el("details", "wgroup");
-    wdet.open = filtering ? true : !!open[wkey];   // worlds collapsed by default
-    wdet.addEventListener("toggle", () => { if (!filtering) open[wkey] = wdet.open; });
-    wdet.appendChild(el("summary", "wsum" + (complete ? " wdone" : ""),
+    wdet.open = filtering ? true : ((wkey in open) ? open[wkey] : false);   // worlds collapsed by default
+    const wsum = el("summary", "wsum" + (complete ? " wdone" : ""),
       fmtText(t('bt-world-' + slug)) + ` <span class="wcount">${wdone} / ${all.length}</span>`
-      + (complete ? ` <span class="wbadge">${t('bt-world-complete')}</span>` : "")));
+      + (complete ? ` <span class="wbadge">${t('bt-world-complete')}</span>` : ""));
+    // Record collapse state synchronously on click — the toggle event is async,
+    // so a re-render's programmatic open could otherwise clobber a fresh collapse.
+    wsum.addEventListener("click", () => { if (!filtering) open[wkey] = !((wkey in open) ? open[wkey] : false); });
+    wdet.appendChild(wsum);
 
     const order = [], byType = {};
     entries.forEach(e => { if (!byType[e.type]) { byType[e.type] = []; order.push(e.type); } byType[e.type].push(e); });
@@ -983,9 +1005,10 @@ function renderWorlds(p) {
       const tdone = list.filter(e => e.done).length;
       const tkey = "t:" + slug + ":" + type;
       const tdet = el("details", "tgroup");
-      tdet.open = filtering ? true : (open[tkey] !== false);   // type groups open by default
-      tdet.addEventListener("toggle", () => { if (!filtering) open[tkey] = tdet.open; });
-      tdet.appendChild(el("summary", "tsum", esc(type) + ` <span class="wcount">${tdone} / ${list.length}</span>`));
+      tdet.open = filtering ? true : ((tkey in open) ? open[tkey] : true);   // type groups open by default
+      const tsum = el("summary", "tsum", esc(type) + ` <span class="wcount">${tdone} / ${list.length}</span>`);
+      tsum.addEventListener("click", () => { if (!filtering) open[tkey] = !((tkey in open) ? open[tkey] : true); });
+      tdet.appendChild(tsum);
       tdet.appendChild(entryTable(list));
       wdet.appendChild(tdet);
     });
@@ -1072,6 +1095,21 @@ function checkMilestones() {
   prevMilestones = cur;   // first run seeds without toasting
 }
 
+/* Cache the full 100% total (every character's sections — which already
+   include the auto-cross-offs — plus the shared sections and Savage Slayer)
+   so the landing page can show an accurate number without re-deriving all
+   the auto logic. Only writes when the value changes. */
+function cacheBbsTotal() {
+  let x = 0, y = 0;
+  CHARS.forEach(c => { const [a, b] = overallChar(c); x += a; y += b; });
+  ["trophies", "ingame", "reports"].forEach(k => { const [a, b] = sharedCount(k); x += a; y += b; });
+  const [sx, sy] = bestCharMissionsRank(); x += sx; y += sy;
+  try {
+    const v = JSON.stringify([x, y]);
+    if (localStorage.getItem("bbs_totals_v1") !== v) localStorage.setItem("bbs_totals_v1", v);
+  } catch (e) { /* private browsing */ }
+}
+
 function render() {
   const p = PANEL[activeTab];
   p.results.innerHTML = "";
@@ -1080,6 +1118,7 @@ function render() {
   const [x, y] = overallChar(activeChar);
   document.getElementById("overallNote").textContent = fmt('bt-overall', CHAR_LABEL[activeChar], x, y, y ? Math.round(100 * x / y) : 0);
   checkMilestones();
+  cacheBbsTotal();
 }
 
 buildPanels();
