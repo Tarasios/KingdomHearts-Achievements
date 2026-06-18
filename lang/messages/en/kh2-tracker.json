@@ -3959,22 +3959,22 @@
       },
       {
         "name": "Cavern of Remembrance",
-        "area": "[[Garden of Assemblage|After completing the game once]]",
+        "area": "[[Garden of Assemblage|After defeating Xaldin in the story]]",
         "cond": "Fight Xaldin again."
       },
       {
         "name": "Cavern of Remembrance",
-        "area": "Garden of Assemblage",
+        "area": "[[Garden of Assemblage|After defeating Vexen's Absent Silhouette]]",
         "cond": "Fight Vexen again."
       },
       {
         "name": "Cavern of Remembrance",
-        "area": "Garden of Assemblage",
+        "area": "[[Garden of Assemblage|After defeating Lexaeus's Absent Silhouette]]",
         "cond": "Fight Lexaeus again."
       },
       {
         "name": "Cavern of Remembrance",
-        "area": "Garden of Assemblage",
+        "area": "[[Garden of Assemblage|After defeating Zexion's Absent Silhouette]]",
         "cond": "Fight Zexion again."
       },
       {
@@ -3984,12 +3984,12 @@
       },
       {
         "name": "Cavern of Remembrance",
-        "area": "[[Garden of Assemblage|After completing the game once]]",
+        "area": "[[Garden of Assemblage|After defeating Axel in the story]]",
         "cond": "Fight Axel again."
       },
       {
         "name": "Cavern of Remembrance",
-        "area": "[[Garden of Assemblage|After completing the game once]]",
+        "area": "[[Garden of Assemblage|After defeating Demyx in the story]]",
         "cond": "Fight Demyx again."
       },
       {
@@ -3999,12 +3999,12 @@
       },
       {
         "name": "Cavern of Remembrance",
-        "area": "Garden of Assemblage",
+        "area": "[[Garden of Assemblage|After defeating Marluxia's Absent Silhouette]]",
         "cond": "Fight Marluxia again."
       },
       {
         "name": "Cavern of Remembrance",
-        "area": "Garden of Assemblage",
+        "area": "[[Garden of Assemblage|After defeating Larxene's Absent Silhouette]]",
         "cond": "Fight Larxene again."
       },
       {
