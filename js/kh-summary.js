@@ -119,6 +119,11 @@ var KHSummary = (function () {
     D.perChar[char].treasures.forEach(function (tr, i) {
       if (trStore[i] && names[tr.name] && String(tr.g || "").indexOf("Realm of Darkness") !== 0) auto[tr.name] = 1;
     });
+    var label = BBS_LABEL[char];
+    var pat = (store.shared && store.shared.patissier) || {};
+    D.patissier.forEach(function (r, i) { if (r.g === label && pat[i] && names[r.name]) auto[r.name] = 1; });
+    var war = (store.shared && store.shared.warrior) || {};
+    D.warrior.forEach(function (w, i) { if (w.g === label && war[i] && names[w.name]) auto[w.name] = 1; });
     var cStore = (store[char] && store[char].commands) || {}, d = 0;
     cmds.forEach(function (it, i) { if (cStore[i] || auto[it.name]) d++; });
     return [d, cmds.length];
@@ -185,6 +190,11 @@ var KHSummary = (function () {
   function bbsTotals() {
     var D = window.KH_BBS_DATA;
     if (!D) return [0, 0];
+    // Prefer the exact total the BBS tracker cached — it already counts every
+    // auto-cross-off (greyed checkboxes). Fall back to a DOM-free recompute
+    // (close, but without the lang-dependent auto-cross-offs) if it hasn't run.
+    var cached = getStore("bbs_totals_v1");
+    if (Array.isArray(cached) && cached.length === 2) return cached;
     var store = getStore("bbs_progress_v1"), x = 0, y = 0;
     function add(r) { x += r[0]; y += r[1]; }
 

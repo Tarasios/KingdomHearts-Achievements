@@ -1095,6 +1095,21 @@ function checkMilestones() {
   prevMilestones = cur;   // first run seeds without toasting
 }
 
+/* Cache the full 100% total (every character's sections — which already
+   include the auto-cross-offs — plus the shared sections and Savage Slayer)
+   so the landing page can show an accurate number without re-deriving all
+   the auto logic. Only writes when the value changes. */
+function cacheBbsTotal() {
+  let x = 0, y = 0;
+  CHARS.forEach(c => { const [a, b] = overallChar(c); x += a; y += b; });
+  ["trophies", "ingame", "reports"].forEach(k => { const [a, b] = sharedCount(k); x += a; y += b; });
+  const [sx, sy] = bestCharMissionsRank(); x += sx; y += sy;
+  try {
+    const v = JSON.stringify([x, y]);
+    if (localStorage.getItem("bbs_totals_v1") !== v) localStorage.setItem("bbs_totals_v1", v);
+  } catch (e) { /* private browsing */ }
+}
+
 function render() {
   const p = PANEL[activeTab];
   p.results.innerHTML = "";
@@ -1103,6 +1118,7 @@ function render() {
   const [x, y] = overallChar(activeChar);
   document.getElementById("overallNote").textContent = fmt('bt-overall', CHAR_LABEL[activeChar], x, y, y ? Math.round(100 * x / y) : 0);
   checkMilestones();
+  cacheBbsTotal();
 }
 
 buildPanels();
