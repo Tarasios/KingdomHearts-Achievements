@@ -44,15 +44,14 @@ var KHSummary = (function () {
       if (!srcSec) continue;
       for (var mission in a.map) {
         if (a.map[mission] !== it[a.toKey || "name"]) continue;
-        var items = srcSec.items || [], mi = -1;
-        for (var j = 0; j < items.length; j++) if (items[j].name === mission) { mi = j; break; }
-        if (mi < 0) continue;
+        var items = srcSec.items || [];
         var ci = 0;
         if (a.check) {
           ci = -1;
           for (var c = 0; c < srcSec.checks.length; c++) if (srcSec.checks[c].k === a.check) { ci = c; break; }
         }
-        if (ci >= 0 && isChecked(srcStore, mi, srcSec, ci)) return true;
+        if (ci < 0) continue;
+        for (var j = 0; j < items.length; j++) if (items[j].name === mission && isChecked(srcStore, j, srcSec, ci)) return true;
       }
     }
     return false;
