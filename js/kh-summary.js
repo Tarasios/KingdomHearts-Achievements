@@ -1,225 +1,228 @@
 /* =====================================================================
    DOM-free completion totals, shared by the landing page (and reusable
    anywhere). Computes [done, total] for any game straight from its data
-   module + localStorage, without rendering — so the landing page can
-   show progress for every game whether or not its tracker was opened.
+   module + localStorage, without rendering — so the landing page can show
+   progress for every game whether or not its tracker was opened.
 
-   The counting mirrors the tracker engines exactly:
-     trackerTotals(G) — generic engine, mirrors overallCount() in
-                        js/kh-tracker.js (variants, multi-checks, the
-                        cross-section autoChecks auto-completion).
-     bbsTotals()      — Birth by Sleep, mirrors the two dashboard tables
-                        in js/kh-bbs-tracker.js (per-character sections +
-                        shared sections counted once, command auto-unlocks
-                        from melding / missions / treasures included).
+   The counting deliberately MIRRORS the two tracker engines (kept in sync
+   by hand, since this file must run without a DOM):
+     trackerTotals(game) — generic engine, mirrors overallCount() in
+                           js/kh-tracker.js (variants, multi-checks, the
+                           cross-section autoChecks auto-completion).
+     bbsTotals()         — Birth by Sleep, mirrors the dashboard totals in
+                           js/kh-bbs-tracker.js (per-character + shared
+                           sections, command auto-unlocks from melding /
+                           missions / treasures). Prefers the exact total
+                           the BBS tracker caches under bbs_totals_v1.
+   Achievement-only progress (platform trophies, not full 100%):
+     trackerAchievements(game) / bbsAchievements().
 
-   Generic games register themselves on window.KH_GAMES (see the
-   kh-*-tracker-data.js modules); BBS exposes window.KH_BBS_DATA.
+   Generic games register on window.KH_GAMES (see the kh-*-tracker-data.js
+   modules); BBS exposes window.KH_BBS_DATA. Needs js/kh-common.js (KH.*).
    ===================================================================== */
 var KHSummary = (function () {
   function getStore(key) {
-    try { var r = localStorage.getItem(key); return r ? JSON.parse(r) : {}; }
+    try { var raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : {}; }
     catch (e) { return {}; }
   }
 
   /* ---------- generic engine (mirror of js/kh-tracker.js) ---------- */
-  function findSec(G, id) {
-    for (var t = 0; t < G.tabs.length; t++) {
-      var secs = G.tabs[t].sections;
-      for (var s = 0; s < secs.length; s++) if (secs[s].id === id) return secs[s];
+  function findSec(game, sectionId) {
+    for (var tabIndex = 0; tabIndex < game.tabs.length; tabIndex++) {
+      var sections = game.tabs[tabIndex].sections;
+      for (var secIndex = 0; secIndex < sections.length; secIndex++) if (sections[secIndex].id === sectionId) return sections[secIndex];
     }
     return null;
   }
-  function checkKey(i, k, idx) { return idx === 0 ? String(i) : i + "::" + k; }
-  function isChecked(store, i, sec, idx) {
-    var checks = sec && sec.checks;
-    return checks ? !!store[checkKey(i, checks[idx].k, idx)] : !!store[i];
+  function checkKey(index, checkId, checkIndex) { return checkIndex === 0 ? String(index) : index + "::" + checkId; }
+  function isChecked(store, index, section, checkIndex) {
+    var checks = section && section.checks;
+    return checks ? !!store[checkKey(index, checks[checkIndex].k, checkIndex)] : !!store[index];
   }
-  function autoDone(G, STORE, sec, it) {
-    if (!G.autoChecks) return false;
-    for (var n = 0; n < G.autoChecks.length; n++) {
-      var a = G.autoChecks[n];
-      if (a.to !== sec.id) continue;
-      var srcSec = findSec(G, a.from), srcStore = STORE[a.from] || {};
-      if (!srcSec) continue;
-      for (var mission in a.map) {
-        if (a.map[mission] !== it[a.toKey || "name"]) continue;
-        var items = srcSec.items || [];
-        var ci = 0;
-        if (a.check) {
-          ci = -1;
-          for (var c = 0; c < srcSec.checks.length; c++) if (srcSec.checks[c].k === a.check) { ci = c; break; }
+  function autoDone(game, allStores, section, item) {
+    if (!game.autoChecks) return false;
+    for (var ruleIndex = 0; ruleIndex < game.autoChecks.length; ruleIndex++) {
+      var rule = game.autoChecks[ruleIndex];
+      if (rule.to !== section.id) continue;
+      var sourceSec = findSec(game, rule.from), sourceStore = allStores[rule.from] || {};
+      if (!sourceSec) continue;
+      for (var mission in rule.map) {
+        if (rule.map[mission] !== item[rule.toKey || "name"]) continue;
+        var sourceItems = sourceSec.items || [];
+        var checkIndex = 0;
+        if (rule.check) {
+          checkIndex = -1;
+          for (var ci = 0; ci < sourceSec.checks.length; ci++) if (sourceSec.checks[ci].k === rule.check) { checkIndex = ci; break; }
         }
-        if (ci < 0) continue;
-        for (var j = 0; j < items.length; j++) if (items[j].name === mission && isChecked(srcStore, j, srcSec, ci)) return true;
+        if (checkIndex < 0) continue;
+        for (var itemIndex = 0; itemIndex < sourceItems.length; itemIndex++) if (sourceItems[itemIndex].name === mission && isChecked(sourceStore, itemIndex, sourceSec, checkIndex)) return true;
       }
     }
     return false;
   }
-  function entryCount(G, STORE, sec, storeId, items) {
-    var store = STORE[storeId] || {}, checks = sec && sec.checks, d = 0, y = 0;
-    (items || []).forEach(function (it, i) {
-      if (checks) checks.forEach(function (c, idx) { y++; if (store[checkKey(i, c.k, idx)]) d++; });
-      else { y++; if (store[i] || autoDone(G, STORE, sec, it)) d++; }
+  function entryCount(game, allStores, section, storeId, items) {
+    var store = allStores[storeId] || {}, checks = section && section.checks, done = 0, total = 0;
+    (items || []).forEach(function (item, index) {
+      if (checks) checks.forEach(function (check, checkIndex) { total++; if (store[checkKey(index, check.k, checkIndex)]) done++; });
+      else { total++; if (store[index] || autoDone(game, allStores, section, item)) done++; }
     });
-    return [d, y];
+    return [done, total];
   }
-  function trackerTotals(G) {
-    var STORE = getStore(G.storeKey), CHARS = G.chars || [], x = 0, y = 0;
-    G.tabs.forEach(function (tab) {
-      tab.sections.forEach(function (sec) {
-        if (sec.variants) {
-          CHARS.forEach(function (c) {
-            var r = entryCount(G, STORE, sec, sec.id + "-" + c.id, sec.variants[c.id] || []);
-            x += r[0]; y += r[1];
+  function trackerTotals(game) {
+    var allStores = getStore(game.storeKey), chars = game.chars || [], done = 0, total = 0;
+    game.tabs.forEach(function (tab) {
+      tab.sections.forEach(function (section) {
+        if (section.variants) {
+          chars.forEach(function (char) {
+            var count = entryCount(game, allStores, section, section.id + "-" + char.id, section.variants[char.id] || []);
+            done += count[0]; total += count[1];
           });
         } else {
-          var r = entryCount(G, STORE, sec, sec.id, sec.items);
-          x += r[0]; y += r[1];
+          var count = entryCount(game, allStores, section, section.id, section.items);
+          done += count[0]; total += count[1];
         }
       });
     });
-    return [x, y];
+    return [done, total];
   }
 
   /* ---------- Birth by Sleep (mirror of js/kh-bbs-tracker.js) ---------- */
-  var BBS_CHARS = ["terra", "ventus", "aqua"];
-  var BBS_LABEL = { terra: "Terra", ventus: "Ventus", aqua: "Aqua" };
+  var BBS_CHARS = KH.BBS_CHARS;
+  var BBS_LABEL = KH.BBS_CHAR_LABEL;
 
-  function countMap(map, n) { var d = 0; map = map || {}; for (var i = 0; i < n; i++) if (map[i]) d++; return d; }
-  function groupCount(D, store, key, label) {
-    var d = 0, y = 0, m = (store.shared && store.shared[key]) || {};
-    (D[key] || []).forEach(function (it, i) { if (it.g === label) { y++; if (m[i]) d++; } });
-    return [d, y];
+  function countMap(map, length) { var done = 0; map = map || {}; for (var index = 0; index < length; index++) if (map[index]) done++; return done; }
+  function groupCount(data, store, section, label) {
+    var done = 0, total = 0, sectionStore = (store.shared && store.shared[section]) || {};
+    (data[section] || []).forEach(function (item, index) { if (item.g === label) { total++; if (sectionStore[index]) done++; } });
+    return [done, total];
   }
   function meldOwned(char) {
     try {
       var raw = localStorage.getItem("bbs_meld_tracker_v1");
       if (!raw) return {};
-      var o = JSON.parse(raw), set = {};
-      ((o[char] && o[char].owned) || []).forEach(function (n) { set[n] = 1; });
-      return set;
+      var saved = JSON.parse(raw), owned = {};
+      ((saved[char] && saved[char].owned) || []).forEach(function (name) { owned[name] = 1; });
+      return owned;
     } catch (e) { return {}; }
   }
-  function rewardFor(m, char) {
-    if (!m.reward) return null;
-    return typeof m.reward === "string" ? m.reward : (m.reward[char] || null);
+  function rewardFor(mission, char) {
+    if (!mission.reward) return null;
+    return typeof mission.reward === "string" ? mission.reward : (mission.reward[char] || null);
   }
-  function commandsDone(D, store, char) {
+  function commandsDone(data, store, char) {
     var auto = meldOwned(char);
     var rank = (store.missions && store.missions.rank) || {};
-    D.missions.forEach(function (ms, i) {
-      var r = rewardFor(ms, char);
-      if (r && rank[i + "-" + char]) auto[r] = 1;
+    data.missions.forEach(function (mission, index) {
+      var reward = rewardFor(mission, char);
+      if (reward && rank[index + "-" + char]) auto[reward] = 1;
     });
-    var cmds = D.perChar[char].commands, names = {};
-    cmds.forEach(function (c) { names[c.name] = 1; });
-    var trStore = (store[char] && store[char].treasures) || {};
-    D.perChar[char].treasures.forEach(function (tr, i) {
-      if (trStore[i] && names[tr.name] && String(tr.g || "").indexOf("Realm of Darkness") !== 0) auto[tr.name] = 1;
+    var commands = data.perChar[char].commands, cmdNames = {};
+    commands.forEach(function (cmd) { cmdNames[cmd.name] = 1; });
+    var treasureStore = (store[char] && store[char].treasures) || {};
+    data.perChar[char].treasures.forEach(function (treasure, index) {
+      if (treasureStore[index] && cmdNames[treasure.name] && String(treasure.g || "").indexOf("Realm of Darkness") !== 0) auto[treasure.name] = 1;
     });
     var label = BBS_LABEL[char];
-    var pat = (store.shared && store.shared.patissier) || {};
-    D.patissier.forEach(function (r, i) { if (r.g === label && pat[i] && names[r.name]) auto[r.name] = 1; });
-    var war = (store.shared && store.shared.warrior) || {};
-    D.warrior.forEach(function (w, i) { if (w.g === label && war[i] && names[w.name]) auto[w.name] = 1; });
-    var cStore = (store[char] && store[char].commands) || {}, d = 0;
-    cmds.forEach(function (it, i) { if (cStore[i] || auto[it.name]) d++; });
-    return [d, cmds.length];
+    var recipeStore = (store.shared && store.shared.patissier) || {};
+    data.patissier.forEach(function (recipe, index) { if (recipe.g === label && recipeStore[index] && cmdNames[recipe.name]) auto[recipe.name] = 1; });
+    var finishStore = (store.shared && store.shared.warrior) || {};
+    data.warrior.forEach(function (finish, index) { if (finish.g === label && finishStore[index] && cmdNames[finish.name]) auto[finish.name] = 1; });
+    var commandStore = (store[char] && store[char].commands) || {}, done = 0;
+    commands.forEach(function (cmd, index) { if (commandStore[index] || auto[cmd.name]) done++; });
+    return [done, commands.length];
   }
   // Ingredients are per character (each has their own store + eligibility by
   // location). Done = obtained, or auto-credited by one of THAT character's
   // checked ice-cream recipes (recipe slots i1..i4 hold "Name xN").
-  function flavorsDoneChar(D, store, c) {
-    var locKey = { terra: "locT", ventus: "locV", aqua: "locA" }[c];
-    var label = BBS_LABEL[c];
-    var pat = (store.shared && store.shared.patissier) || {};
-    var fl = (store[c] && store[c].flavors) || {};
-    var used = {};
-    D.patissier.forEach(function (r, pIdx) {
-      if (r.g !== label) return;
-      ["i1", "i2", "i3", "i4"].forEach(function (k) {
-        var s = r[k];
-        if (!s) return;
-        var m = String(s).match(/^(.*?)\s*x\s*\d+\s*$/i);
-        var name = (m ? m[1] : s).trim();
-        (used[name] = used[name] || []).push(pIdx);
+  function flavorsDoneChar(data, store, char) {
+    var label = BBS_LABEL[char];
+    var recipeStore = (store.shared && store.shared.patissier) || {};
+    var flavorStore = (store[char] && store[char].flavors) || {};
+    var usedBy = {};
+    data.patissier.forEach(function (recipe, recipeIndex) {
+      if (recipe.g !== label) return;
+      ["i1", "i2", "i3", "i4"].forEach(function (slot) {
+        var text = recipe[slot];
+        if (!text) return;
+        var match = String(text).match(/^(.*?)\s*x\s*\d+\s*$/i);
+        var name = (match ? match[1] : text).trim();
+        (usedBy[name] = usedBy[name] || []).push(recipeIndex);
       });
     });
-    var d = 0, y = 0;
-    D.flavors.forEach(function (f, i) {
-      if (!(used[f.name] && used[f.name].length)) return;   // only ingredients this char's recipes use
-      y++;
-      if (fl[i] || used[f.name].some(function (pIdx) { return pat[pIdx]; })) d++;
+    var done = 0, total = 0;
+    data.flavors.forEach(function (flavor, index) {
+      if (!(usedBy[flavor.name] && usedBy[flavor.name].length)) return;   // only ingredients this char's recipes use
+      total++;
+      if (flavorStore[index] || usedBy[flavor.name].some(function (recipeIndex) { return recipeStore[recipeIndex]; })) done++;
     });
-    return [d, y];
+    return [done, total];
   }
 
   // Treasures excluding Aqua's Realm of Darkness chests (special save, not
   // required for any achievement) — mirrors charCount() in the BBS engine.
-  function treasuresDone(D, store, c) {
-    var ts = (store[c] && store[c].treasures) || {}, d = 0, y = 0;
-    D.perChar[c].treasures.forEach(function (it, i) {
-      if (String(it.g || "").indexOf("Realm of Darkness") === 0) return;
-      y++; if (ts[i]) d++;
+  function treasuresDone(data, store, char) {
+    var treasureStore = (store[char] && store[char].treasures) || {}, done = 0, total = 0;
+    data.perChar[char].treasures.forEach(function (treasure, index) {
+      if (String(treasure.g || "").indexOf("Realm of Darkness") === 0) return;
+      total++; if (treasureStore[index]) done++;
     });
-    return [d, y];
+    return [done, total];
   }
 
   /* Achievement (platform-trophy) progress only — the trophies list — as
    opposed to full 100% completion (everything tracked). */
-  function trackerAchievements(G) {
-    var STORE = getStore(G.storeKey), x = 0, y = 0;
-    G.tabs.forEach(function (tab) {
-      tab.sections.forEach(function (sec) {
-        if (!sec.trophies) return;
-        var r = entryCount(G, STORE, sec, sec.id, sec.items);
-        x += r[0]; y += r[1];
+  function trackerAchievements(game) {
+    var allStores = getStore(game.storeKey), done = 0, total = 0;
+    game.tabs.forEach(function (tab) {
+      tab.sections.forEach(function (section) {
+        if (!section.trophies) return;
+        var count = entryCount(game, allStores, section, section.id, section.items);
+        done += count[0]; total += count[1];
       });
     });
-    return [x, y];
+    return [done, total];
   }
   function bbsAchievements() {
-    var D = window.KH_BBS_DATA;
-    if (!D) return [0, 0];
+    var data = window.KH_BBS_DATA;
+    if (!data) return [0, 0];
     var store = getStore("bbs_progress_v1");
-    return [countMap(store.shared && store.shared.trophies, D.trophies.length), D.trophies.length];
+    return [countMap(store.shared && store.shared.trophies, data.trophies.length), data.trophies.length];
   }
 
   function bbsTotals() {
-    var D = window.KH_BBS_DATA;
-    if (!D) return [0, 0];
+    var data = window.KH_BBS_DATA;
+    if (!data) return [0, 0];
     // Prefer the exact total the BBS tracker cached — it already counts every
     // auto-cross-off (greyed checkboxes). Fall back to a DOM-free recompute
     // (close, but without the lang-dependent auto-cross-offs) if it hasn't run.
     var cached = getStore("bbs_totals_v1");
     if (Array.isArray(cached) && cached.length === 2) return cached;
-    var store = getStore("bbs_progress_v1"), x = 0, y = 0;
-    function add(r) { x += r[0]; y += r[1]; }
+    var store = getStore("bbs_progress_v1"), done = 0, total = 0;
+    function add(count) { done += count[0]; total += count[1]; }
 
-    BBS_CHARS.forEach(function (c) {
-      add(commandsDone(D, store, c));
-      ["records", "characters", "unversed"].forEach(function (sec) {
-        var items = D.perChar[c][sec];
-        add([countMap(store[c] && store[c][sec], items.length), items.length]);
+    BBS_CHARS.forEach(function (char) {
+      add(commandsDone(data, store, char));
+      ["records", "characters", "unversed"].forEach(function (section) {
+        var items = data.perChar[char][section];
+        add([countMap(store[char] && store[char][section], items.length), items.length]);
       });
-      add(treasuresDone(D, store, c));     // excludes Realm of Darkness chests
-      add([countMap(store[c] && store[c].arena, D.arena.length), D.arena.length]);   // arena is per-character
-      ["stickers", "warrior", "patissier"].forEach(function (k) { add(groupCount(D, store, k, BBS_LABEL[c])); });
-      add(flavorsDoneChar(D, store, c));   // per-character ingredients
-      var done = (store.missions && store.missions.done) || {}, md = 0;
-      D.missions.forEach(function (m, i) { if (done[i + "-" + c]) md++; });
-      add([md, D.missions.length]);
+      add(treasuresDone(data, store, char));     // excludes Realm of Darkness chests
+      add([countMap(store[char] && store[char].arena, data.arena.length), data.arena.length]);   // arena is per-character
+      ["stickers", "warrior", "patissier"].forEach(function (section) { add(groupCount(data, store, section, BBS_LABEL[char])); });
+      add(flavorsDoneChar(data, store, char));   // per-character ingredients
+      var missionDone = (store.missions && store.missions.done) || {}, doneCount = 0;
+      data.missions.forEach(function (mission, index) { if (missionDone[index + "-" + char]) doneCount++; });
+      add([doneCount, data.missions.length]);
     });
-    ["trophies", "ingame", "reports"].forEach(function (k) {
-      add([countMap(store.shared && store.shared[k], D[k].length), D[k].length]);
+    ["trophies", "ingame", "reports"].forEach(function (section) {
+      add([countMap(store.shared && store.shared[section], data[section].length), data[section].length]);
     });
-    var rank = (store.missions && store.missions.rank) || {}, sd = 0;
-    D.missions.forEach(function (m, i) {
-      if (BBS_CHARS.some(function (c) { return rank[i + "-" + c]; })) sd++;
+    var rank = (store.missions && store.missions.rank) || {}, rankedCount = 0;
+    data.missions.forEach(function (mission, index) {
+      if (BBS_CHARS.some(function (char) { return rank[index + "-" + char]; })) rankedCount++;
     });
-    add([sd, D.missions.length]);
-    return [x, y];
+    add([rankedCount, data.missions.length]);
+    return [done, total];
   }
 
   return {

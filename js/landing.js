@@ -6,15 +6,18 @@
    banner cards (the banner is the natural "pick this game" target), each
    with a live progress bar. Text comes from lang/messages/<lang>/
    index.json; re-renders on language change.
+   Depends on: js/kh-common.js (KH.el / KH.esc), js/kh-summary.js, the
+   per-game data modules and js/i18n.js.
    ===================================================================== */
 document.addEventListener("DOMContentLoaded", async function () {
   await i18n.init();
-  var t = function (k) { return i18n.getMessage(k); };
-  var fmt = function () { return i18n.format.apply(i18n, arguments); };
+  var el = KH.el, esc = KH.esc;
+  var translate = function (key) { return i18n.getMessage(key); };
+  var format = function () { return i18n.format.apply(i18n, arguments); };
 
   // Per-game tracker page + banner file (note the mixed .png/.jpg).
   // `bbs` uses the bespoke engine; everything else is generic.
-  var GAME = {
+  var GAMES = {
     kh1:   { page: "tools/kh1-tracker.html",    banner: "kh1.jpg" },
     khcom: { page: "tools/kh-com-tracker.html", banner: "khcom.jpg" },
     kh2:   { page: "tools/kh2-tracker.html",    banner: "kh2.jpg" },
@@ -31,90 +34,88 @@ document.addEventListener("DOMContentLoaded", async function () {
     { id: "kh3",    hero: "kh3.jpg",    games: ["kh3"] }
   ];
 
-  function pct(x, y) { return y ? Math.round(100 * x / y) : 0; }
-  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
-  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
+  function pct(done, total) { return total ? Math.round(100 * done / total) : 0; }
 
-  function totalsFor(id) {
-    if (GAME[id].bbs) return KHSummary.bbsTotals();
-    var G = window.KH_GAMES && window.KH_GAMES[id];
-    return G ? KHSummary.trackerTotals(G) : [0, 0];
+  function totalsFor(gameId) {
+    if (GAMES[gameId].bbs) return KHSummary.bbsTotals();
+    var game = window.KH_GAMES && window.KH_GAMES[gameId];
+    return game ? KHSummary.trackerTotals(game) : [0, 0];
   }
   // Achievement (platform-trophy) progress — distinct from 100% completion,
   // since not everything tracked is needed for every achievement.
-  function achFor(id) {
-    if (GAME[id].bbs) return KHSummary.bbsAchievements();
-    var G = window.KH_GAMES && window.KH_GAMES[id];
-    return G ? KHSummary.trackerAchievements(G) : [0, 0];
+  function achievementsFor(gameId) {
+    if (GAMES[gameId].bbs) return KHSummary.bbsAchievements();
+    var game = window.KH_GAMES && window.KH_GAMES[gameId];
+    return game ? KHSummary.trackerAchievements(game) : [0, 0];
   }
 
   // A .banner figure that only appears once its image loads (so a missing
   // file leaves no broken-image icon).
-  function imageFigure(cls, src, alt) {
-    var fig = el("figure", "banner " + cls);
+  function imageFigure(className, src, alt) {
+    var figure = el("figure", "banner " + className);
     var img = el("img", "banner-img");
     img.alt = alt || "";
-    img.addEventListener("load", function () { fig.style.display = ""; });
-    img.addEventListener("error", function () { fig.style.display = "none"; });
+    img.addEventListener("load", function () { figure.style.display = ""; });
+    img.addEventListener("error", function () { figure.style.display = "none"; });
     img.src = src;
-    fig.appendChild(img);
-    return fig;
+    figure.appendChild(img);
+    return figure;
   }
 
-  function progBar(x, y) {
+  function progBar(done, total) {
     var wrap = el("div", "progbar");
-    wrap.appendChild(el("span", "progbar-num", esc(x + " / " + y)));
-    var track = el("span", "progbar-track" + (x >= y && y > 0 ? " full" : ""));
-    var fill = el("i"); fill.style.width = pct(x, y) + "%";
+    wrap.appendChild(el("span", "progbar-num", esc(done + " / " + total)));
+    var track = el("span", "progbar-track" + (done >= total && total > 0 ? " full" : ""));
+    var fill = el("i"); fill.style.width = pct(done, total) + "%";
     track.appendChild(fill);
     wrap.appendChild(track);
-    wrap.appendChild(el("span", "progbar-pct", pct(x, y) + "%"));
+    wrap.appendChild(el("span", "progbar-pct", pct(done, total) + "%"));
     return wrap;
   }
   // A bar with a small leading label (Achievements vs 100% completion).
-  function labeledBar(label, kind, x, y) {
+  function labeledBar(label, kind, done, total) {
     var row = el("div", "prograw " + kind);
     row.appendChild(el("span", "prograw-label", esc(label)));
-    row.appendChild(progBar(x, y));
+    row.appendChild(progBar(done, total));
     return row;
   }
 
-  function gameCard(id) {
-    var r = totalsFor(id), a = achFor(id);
+  function gameCard(gameId) {
+    var totals = totalsFor(gameId), achievements = achievementsFor(gameId);
     var card = el("a", "game-card");
-    card.href = GAME[id].page;
-    card.appendChild(imageFigure("card-banner", "images/banners/" + GAME[id].banner, t("game-" + id)));
+    card.href = GAMES[gameId].page;
+    card.appendChild(imageFigure("card-banner", "images/banners/" + GAMES[gameId].banner, translate("game-" + gameId)));
     var body = el("div", "game-card-body");
-    body.appendChild(el("h3", null, esc(t("game-" + id))));
-    body.appendChild(labeledBar(t("lg-ach-label"), "ach", a[0], a[1]));
-    body.appendChild(labeledBar(t("lg-100-label"), "full", r[0], r[1]));
+    body.appendChild(el("h3", null, esc(translate("game-" + gameId))));
+    body.appendChild(labeledBar(translate("lg-ach-label"), "ach", achievements[0], achievements[1]));
+    body.appendChild(labeledBar(translate("lg-100-label"), "full", totals[0], totals[1]));
     card.appendChild(body);
-    return { node: card, x: r[0], y: r[1], ax: a[0], ay: a[1] };
+    return { node: card, done: totals[0], total: totals[1], achDone: achievements[0], achTotal: achievements[1] };
   }
 
   function render() {
-    var sx = 0, sy = 0, ax = 0, ay = 0;
+    var seriesDone = 0, seriesTotal = 0, achDone = 0, achTotal = 0;
 
-    var coll = document.getElementById("collections");
-    coll.innerHTML = "";
-    COLLECTIONS.forEach(function (c) {
-      var group = el("section", "collection");
-      group.appendChild(el("h3", "collection-title", esc(t("coll-" + c.id))));
+    var collectionsBox = document.getElementById("collections");
+    collectionsBox.innerHTML = "";
+    COLLECTIONS.forEach(function (collection) {
+      var section = el("section", "collection");
+      section.appendChild(el("h3", "collection-title", esc(translate("coll-" + collection.id))));
       var grid = el("div", "game-cards");
-      c.games.forEach(function (id) {
-        var card = gameCard(id);
-        sx += card.x; sy += card.y; ax += card.ax; ay += card.ay;
+      collection.games.forEach(function (gameId) {
+        var card = gameCard(gameId);
+        seriesDone += card.done; seriesTotal += card.total; achDone += card.achDone; achTotal += card.achTotal;
         grid.appendChild(card.node);
       });
-      group.appendChild(grid);
-      coll.appendChild(group);
+      section.appendChild(grid);
+      collectionsBox.appendChild(section);
     });
 
-    var total = document.getElementById("series-total");
-    total.innerHTML = "";
-    total.appendChild(el("div", "series-headline", fmt("lg-total-count", sx, sy, pct(sx, sy))));
-    total.appendChild(labeledBar(t("lg-ach-label"), "ach", ax, ay));
-    total.appendChild(labeledBar(t("lg-100-label"), "full", sx, sy));
+    var totalBox = document.getElementById("series-total");
+    totalBox.innerHTML = "";
+    totalBox.appendChild(el("div", "series-headline", format("lg-total-count", seriesDone, seriesTotal, pct(seriesDone, seriesTotal))));
+    totalBox.appendChild(labeledBar(translate("lg-ach-label"), "ach", achDone, achTotal));
+    totalBox.appendChild(labeledBar(translate("lg-100-label"), "full", seriesDone, seriesTotal));
   }
 
   render();

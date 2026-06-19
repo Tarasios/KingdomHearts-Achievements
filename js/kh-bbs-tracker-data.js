@@ -1,3 +1,29 @@
+/* =====================================================================
+   Kingdom Hearts Birth by Sleep — data for the bespoke BBS engine
+   (js/kh-bbs-tracker.js) and the melding calculator (js/kh-melding.js).
+   Defines the global BBS_DATA and exposes it as window.KH_BBS_DATA (read by
+   js/kh-summary.js for the landing-page totals).
+
+   Game terms (names, ranks, rewards, locations) stay in English here as
+   stable ids; the per-language lang/messages/<lang>/kh-bbs-tracker.json
+   "items" map overrides the DISPLAY columns (matched by store id + index).
+
+   Top-level shape:
+     trophies / ingame / reports / stickers / patissier / warrior  — shared
+       lists. perChar: { terra|ventus|aqua: { records, characters, unversed,
+       commands, treasures } }  — per-character lists. missions, arena,
+       flavors — shared lists with per-character progress.
+
+   Terse keys you may grep for:
+     g       = group header (also the world for treasures, the character for
+               stickers/patissier/warrior, or "Realm of Darkness …" chests)
+     name    = stable English id;  how = how to obtain;  area / world = place
+     cat / entry = record category / entry;  loc = unversed location
+     reward  = mission reward command (string, or { terra|ventus|aqua });
+     req     = mission max-rank requirement;  rank = arena star rating (★)
+     i1..i4  = ice-cream recipe ingredient slots ("Name xN")
+     locT / locV / locA = ingredient pickup spots per character
+   ===================================================================== */
 var BBS_DATA = {
 "trophies": [
   {"name": "Critical Competitor"},
