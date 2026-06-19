@@ -1,8 +1,15 @@
 /* =====================================================================
    Generic KH game completion tracker engine.
-   Depends on: js/i18n.js (i18n) and a game data module that defines the
-   TRACKER_GAME global (see js/kh-com-tracker-data.js for the shape):
-     { id, storeKey, charKey, chars, trophyAuto, tabs: [{id, sections}] }
+
+   Drives every game except Birth by Sleep (which has its own engine in
+   js/kh-bbs-tracker.js). One page = one game data module that defines the
+   global TRACKER_GAME; this file reads that config and renders the tabs,
+   checklists, dashboard and optional "Worlds" summary, persisting ticks
+   to localStorage.
+
+   Depends on: js/kh-common.js (KH.*), js/i18n.js (i18n) and a game data
+   module (see js/kh-com-tracker-data.js for the shape):
+     TRACKER_GAME = { id, storeKey, charKey, chars, trophyAuto, tabs: [...] }
    Tab:     { id, sections, char? } — char-tagged tabs only appear for
             that character (switching characters falls back to tab 1)
    Section: { id, cols:[{k, name?, rarity?}], items:[...] } — shared list
@@ -10,47 +17,50 @@
             { ..., variants: {sora: [...], riku: [...]} } — per character
    Items in a shared section may carry c: "sora"/"riku" — they share the
    section's progress store but only show for that character.
+
    UI text comes from the page's lang JSON: tabbtn-<tab>, sec-<section>,
-   th-<section>-<col>, plus the shared gt-* keys.
+   th-<section>-<col>, plus the shared gt-* keys. Item display text lives
+   under the lang "items" map (see langRow/cellText below).
    Progress is keyed by item index per section, in localStorage.
+
+   Where to look:
+     persistent state ....... loadStore / saveStore / sectionStore / toggleCheck
+     counting ............... entryCount / overallCount / trophyProgress
+     checklist table ........ checklist / toggleGroup
+     page skeleton .......... buildPage / selectTab
+     Worlds summary ......... renderWorlds (opt-in via game.worldSummary)
+     toasts ................. currentMilestones / checkMilestones
    ===================================================================== */
 
 document.addEventListener('DOMContentLoaded', async function () {
 await i18n.init();
 
-const G = TRACKER_GAME;
-const t = (key) => i18n.getMessage(key);
-const fmt = (key, ...args) => i18n.format(key, ...args);
+const { el, esc, fmtText, chip, bar, toast } = KH;
 
-const CHARS = G.chars || [];
+const game = TRACKER_GAME;
+const translate = (key) => i18n.getMessage(key);
+const format = (key, ...args) => i18n.format(key, ...args);
+
+const CHARS = game.chars || [];
 const CHAR_LABEL = {};
-CHARS.forEach(c => { CHAR_LABEL[c.id] = c.label; });
+CHARS.forEach(character => { CHAR_LABEL[character.id] = character.label; });
 
 /* ---------- persistent state ---------- */
 function loadStore() {
-  try { const raw = localStorage.getItem(G.storeKey); return raw ? JSON.parse(raw) : {}; }
+  try { const raw = localStorage.getItem(game.storeKey); return raw ? JSON.parse(raw) : {}; }
   catch (e) { return {}; }
 }
 let STORE = loadStore();
-function saveStore() { try { localStorage.setItem(G.storeKey, JSON.stringify(STORE)); } catch (e) { /* private browsing */ } }
-function smap(id) { if (!STORE[id]) STORE[id] = {}; return STORE[id]; }
-function toggle(map, i) { if (map[i]) delete map[i]; else map[i] = true; saveStore(); render(); }
+function saveStore() { try { localStorage.setItem(game.storeKey, JSON.stringify(STORE)); } catch (e) { /* private browsing */ } }
+function sectionStore(storeId) { if (!STORE[storeId]) STORE[storeId] = {}; return STORE[storeId]; }
+function toggleCheck(store, key) { if (store[key]) delete store[key]; else store[key] = true; saveStore(); render(); }
 
 let activeChar = (function () {
   if (!CHARS.length) return null;
-  try { const c = localStorage.getItem(G.charKey); return CHARS.some(x => x.id === c) ? c : CHARS[0].id; }
+  try { const saved = localStorage.getItem(game.charKey); return CHARS.some(c => c.id === saved) ? saved : CHARS[0].id; }
   catch (e) { return CHARS[0].id; }
 })();
-function setActiveChar(c) { activeChar = c; try { localStorage.setItem(G.charKey, c); } catch (e) { /* ignore */ } }
-
-/* ---------- helpers ---------- */
-function el(tag, cls, html) { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
-function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
-function chip(x, y) { return `<span class="prgchip${x >= y && y > 0 ? " full" : ""}">${x} / ${y}</span>`; }
-function bar(x, y) {
-  const pct = y ? Math.round(100 * x / y) : 0;
-  return `<span class="dashnum">${x} / ${y}</span><span class="dashbar${x >= y && y > 0 ? " full" : ""}"><i style="width:${pct}%"></i></span>`;
-}
+function setActiveChar(charId) { activeChar = charId; try { localStorage.setItem(game.charKey, charId); } catch (e) { /* ignore */ } }
 
 /* ---------- item display text from the lang file ----------
    All user-facing item text (names, "where to find it", "how to obtain
@@ -61,126 +71,109 @@ function bar(x, y) {
    stable id (used for trophy/auto-unlock matching). cellText prefers the
    lang text and falls back to the data value, so a game whose text has
    not been moved out yet keeps working unchanged. */
-function langRow(storeId, i) {
+function langRow(storeId, index) {
   const items = (typeof i18n !== "undefined" && i18n.messages && i18n.messages.items) || null;
   const rows = items && items[storeId];
-  return (rows && rows[i]) || null;
+  return (rows && rows[index]) || null;
 }
-function cellText(storeId, i, key, it) {
-  const row = langRow(storeId, i);
-  return (row && Object.prototype.hasOwnProperty.call(row, key)) ? row[key] : it[key];
+function cellText(storeId, index, key, item) {
+  const row = langRow(storeId, index);
+  return (row && Object.prototype.hasOwnProperty.call(row, key)) ? row[key] : item[key];
 }
 /* Per-group note shown under a group header: lang "gnote-<storeId>" (per
    character) or "gnote-<section>" maps a group name -> note text (rendered
    through fmtText, so it may carry a link). E.g. KH1 Trinity unlocks, or the
    COM Map Card drop-table link. */
-function groupNote(storeId, secId, g) {
-  const msgs = (typeof i18n !== "undefined" && i18n.messages) || {};
-  const a = msgs['gnote-' + storeId];
-  if (a && typeof a === "object" && a[g]) return a[g];
-  const b = msgs['gnote-' + secId];
-  return (b && typeof b === "object" && b[g]) || "";
-}
-
-/* ---------- inline markup in any lang string ----------
-   Everything is escaped; two optional shorthands are recognised so an
-   icon or a hover-tooltip can be added to any header/name by editing the
-   lang file only:
-     {{name}}        -> small inline icon  images/icons/name.png
-     [[text|tip]]    -> <span title="tip"> (hover for more info)
-   (Duplicated in js/kh-bbs-tracker.js — keep in sync.) */
-const ICON_BASE = "../images/icons/";
-function fmtText(s) {
-  s = String(s == null ? "" : s);
-  // {{icon}} | [[text|tooltip]] | [text](url)
-  const re = /\{\{\s*([\w-]+)\s*\}\}|\[\[([^\]|]+)\|([^\]]+)\]\]|\[([^\]|]+)\]\(([^)\s]+)\)/g;
-  let out = "", last = 0, m;
-  while ((m = re.exec(s))) {
-    out += esc(s.slice(last, m.index));
-    if (m[1] != null) out += `<img class="hdricon" src="${ICON_BASE}${m[1]}.png" alt="">`;
-    else if (m[2] != null) out += `<span class="hasinfo" title="${esc(m[3].trim())}" tabindex="0">${esc(m[2].trim())}</span>`;
-    else { const u = m[5].trim(), safe = /^(https?:\/\/|\/|#)/.test(u) ? u : "#"; out += `<a href="${esc(safe)}" target="_blank" rel="noopener noreferrer">${esc(m[4].trim())}</a>`; }
-    last = re.lastIndex;
-  }
-  return out + esc(s.slice(last));
+function groupNote(storeId, sectionId, groupName) {
+  const messages = (typeof i18n !== "undefined" && i18n.messages) || {};
+  const byStore = messages['gnote-' + storeId];
+  if (byStore && typeof byStore === "object" && byStore[groupName]) return byStore[groupName];
+  const bySection = messages['gnote-' + sectionId];
+  return (bySection && typeof bySection === "object" && bySection[groupName]) || "";
 }
 
 /* Item-level character filter: items tagged c only count/show for that
    character. With no char filter (dashboard totals) everything counts. */
-function itemVisible(it, char) { return !it.c || !char || it.c === char; }
+function itemVisible(item, charId) { return !item.c || !charId || item.c === charId; }
 
 /* Game tabs, plus a synthetic "Worlds" summary tab when the game declares
-   a G.worldSummary config (see renderWorlds). Inserted second so it sits
-   next to the trophies/dashboard tab. Real sections still come from G.tabs
-   only (allLists/overallCount/findSec), so the summary adds no new stores. */
+   a game.worldSummary config (see renderWorlds). Inserted second so it sits
+   next to the trophies/dashboard tab. Real sections still come from
+   game.tabs only (allLists/overallCount/findSec), so the summary adds no
+   new stores. */
 function gameTabs() {
-  if (!G.worldSummary) return G.tabs;
-  const tabs = G.tabs.slice();
+  if (!game.worldSummary) return game.tabs;
+  const tabs = game.tabs.slice();
   tabs.splice(1, 0, { id: "worlds", sections: [], worldSummary: true });
   return tabs;
 }
 /* Tabs tagged with a char only exist for that character. */
-function visibleTabs() { return gameTabs().filter(tb => !tb.char || tb.char === activeChar); }
+function visibleTabs() { return gameTabs().filter(tab => !tab.char || tab.char === activeChar); }
 function ensureActiveTab() {
-  if (!visibleTabs().some(tb => tb.id === activeTab)) activeTab = visibleTabs()[0].id;
+  if (!visibleTabs().some(tab => tab.id === activeTab)) activeTab = visibleTabs()[0].id;
 }
 
-/* Resolve a section for the active character. */
-function resolved(sec) {
-  if (sec.variants) {
-    const c = activeChar;
-    return { storeId: sec.id + "-" + c, items: sec.variants[c] || [], charLabel: CHAR_LABEL[c] };
+/* Resolve a section into the view for the active character: its store id,
+   item list and (where relevant) character label. */
+function resolveSection(section) {
+  if (section.variants) {
+    const charId = activeChar;
+    return { storeId: section.id + "-" + charId, items: section.variants[charId] || [], charLabel: CHAR_LABEL[charId] };
   }
-  if (sec.char) return { storeId: sec.id, items: sec.items, charLabel: CHAR_LABEL[sec.char] };
-  return { storeId: sec.id, items: sec.items, charLabel: null };
+  if (section.char) return { storeId: section.id, items: section.items, charLabel: CHAR_LABEL[section.char] };
+  return { storeId: section.id, items: section.items, charLabel: null };
 }
 /* Every trackable list (all variants), for the dashboard. Shared
    sections with c-tagged items get one row per character. */
 function allLists() {
-  const out = [];
-  G.tabs.forEach(tab => tab.sections.forEach(sec => {
-    if (sec.variants) {
-      CHARS.forEach(c => out.push({
-        label: fmt('gt-section-for', t('sec-' + sec.id), c.label),
-        storeId: sec.id + "-" + c.id, items: sec.variants[c.id] || [], sec
+  const lists = [];
+  game.tabs.forEach(tab => tab.sections.forEach(section => {
+    if (section.variants) {
+      CHARS.forEach(character => lists.push({
+        label: format('gt-section-for', translate('sec-' + section.id), character.label),
+        storeId: section.id + "-" + character.id, items: section.variants[character.id] || [], section
       }));
-    } else if (CHARS.length && (sec.items || []).some(it => it.c)) {
-      CHARS.forEach(c => out.push({
-        label: fmt('gt-section-for', t('sec-' + sec.id), c.label),
-        storeId: sec.id, items: sec.items, c: c.id, sec
+    } else if (CHARS.length && (section.items || []).some(item => item.c)) {
+      CHARS.forEach(character => lists.push({
+        label: format('gt-section-for', translate('sec-' + section.id), character.label),
+        storeId: section.id, items: section.items, charId: character.id, section
       }));
     } else {
-      out.push({
-        label: sec.char ? fmt('gt-section-for', t('sec-' + sec.id), CHAR_LABEL[sec.char]) : t('sec-' + sec.id),
-        storeId: sec.id, items: sec.items, sec
+      lists.push({
+        label: section.char ? format('gt-section-for', translate('sec-' + section.id), CHAR_LABEL[section.char]) : translate('sec-' + section.id),
+        storeId: section.id, items: section.items, section
       });
     }
   }));
-  return out;
+  return lists;
 }
 /* Site total: every store counted once, unfiltered (c-tagged items are
    each completable by exactly one character). */
 function overallCount() {
-  let x = 0, y = 0;
-  G.tabs.forEach(tab => tab.sections.forEach(sec => {
-    if (sec.variants) {
-      CHARS.forEach(c => { const [a, b] = entryCount({ sec, storeId: sec.id + "-" + c.id, items: sec.variants[c.id] || [] }); x += a; y += b; });
+  let done = 0, total = 0;
+  game.tabs.forEach(tab => tab.sections.forEach(section => {
+    if (section.variants) {
+      CHARS.forEach(character => {
+        const [secDone, secTotal] = entryCount({ section, storeId: section.id + "-" + character.id, items: section.variants[character.id] || [] });
+        done += secDone; total += secTotal;
+      });
     } else {
-      const [a, b] = entryCount({ sec, storeId: sec.id, items: sec.items }); x += a; y += b;
+      const [secDone, secTotal] = entryCount({ section, storeId: section.id, items: section.items });
+      done += secDone; total += secTotal;
     }
   }));
-  return [x, y];
+  return [done, total];
 }
 function findList(storeId) {
-  for (const tab of G.tabs) for (const sec of tab.sections) {
-    if (sec.variants) {
-      for (const c of CHARS) if (sec.id + "-" + c.id === storeId) return sec.variants[c.id] || [];
-    } else if (sec.id === storeId) return sec.items;
+  for (const tab of game.tabs) for (const section of tab.sections) {
+    if (section.variants) {
+      for (const character of CHARS) if (section.id + "-" + character.id === storeId) return section.variants[character.id] || [];
+    } else if (section.id === storeId) return section.items;
   }
   return null;
 }
-function findSec(id) {
-  for (const tab of G.tabs) for (const sec of tab.sections) if (sec.id === id) return sec;
+function findSec(sectionId) {
+  for (const tab of game.tabs) for (const section of tab.sections) if (section.id === sectionId) return section;
   return null;
 }
 
@@ -189,48 +182,48 @@ function findSec(id) {
    checkbox per check instead of a single one. The first check keeps the
    bare item index as its store key (backward-compatible "done"); extra
    checks are keyed `<i>::<k>`.
-   `G.autoChecks: [{from, check, to, map, toKey?}]` auto-completes items
+   `game.autoChecks: [{from, check, to, map, toKey?}]` auto-completes items
    in the `to` section: when the `from` section's mission (a map key) has
    its `check` set (primary checkbox if omitted), the mapped item (the
    value, matched on `toKey`/name) counts as done and locks. */
-function checkKey(i, k, idx) { return idx === 0 ? String(i) : i + "::" + k; }
-function isChecked(store, i, sec, idx) {
-  const checks = sec && sec.checks;
-  return checks ? !!store[checkKey(i, checks[idx].k, idx)] : !!store[i];
+function checkKey(index, checkId, checkIndex) { return checkIndex === 0 ? String(index) : index + "::" + checkId; }
+function isChecked(store, index, section, checkIndex) {
+  const checks = section && section.checks;
+  return checks ? !!store[checkKey(index, checks[checkIndex].k, checkIndex)] : !!store[index];
 }
 /* Source mission whose S-rank (etc.) auto-completed this item, or null. */
-function autoSource(sec, it) {
-  if (!G.autoChecks) return null;
-  for (const a of G.autoChecks) {
-    if (a.to !== sec.id) continue;
-    const srcSec = findSec(a.from), srcStore = STORE[a.from] || {};
-    if (!srcSec) continue;
-    for (const mission in a.map) {
-      if (a.map[mission] !== it[a.toKey || "name"]) continue;
-      const ci = a.check ? srcSec.checks.findIndex(c => c.k === a.check) : 0;
-      if (ci < 0) continue;
+function autoSource(section, item) {
+  if (!game.autoChecks) return null;
+  for (const rule of game.autoChecks) {
+    if (rule.to !== section.id) continue;
+    const sourceSec = findSec(rule.from), sourceStore = STORE[rule.from] || {};
+    if (!sourceSec) continue;
+    for (const mission in rule.map) {
+      if (rule.map[mission] !== item[rule.toKey || "name"]) continue;
+      const checkIndex = rule.check ? sourceSec.checks.findIndex(c => c.k === rule.check) : 0;
+      if (checkIndex < 0) continue;
       // Any source row with this name being checked counts (a minigame can
       // have several challenge rows; clearing any of them completes it).
-      for (let mi = 0; mi < (srcSec.items || []).length; mi++) {
-        if (srcSec.items[mi].name === mission && isChecked(srcStore, mi, srcSec, ci)) return mission;
+      for (let sourceIndex = 0; sourceIndex < (sourceSec.items || []).length; sourceIndex++) {
+        if (sourceSec.items[sourceIndex].name === mission && isChecked(sourceStore, sourceIndex, sourceSec, checkIndex)) return mission;
       }
     }
   }
   return null;
 }
-function autoDone(sec, it) { return !!autoSource(sec, it); }
+function autoDone(section, item) { return !!autoSource(section, item); }
 
 /* Count one list (a resolved section view). Handles multi-check
    sections (every check counts) and cross-section auto-completion. */
-function entryCount(e) {
-  const sec = e.sec, store = STORE[e.storeId] || {}, checks = sec && sec.checks, char = e.c || null;
-  let d = 0, y = 0;
-  (e.items || []).forEach((it, i) => {
-    if (!itemVisible(it, char)) return;
-    if (checks) checks.forEach((c, idx) => { y++; if (store[checkKey(i, c.k, idx)]) d++; });
-    else { y++; if (store[i] || autoDone(sec, it)) d++; }
+function entryCount(view) {
+  const section = view.section, store = STORE[view.storeId] || {}, checks = section && section.checks, charId = view.charId || null;
+  let done = 0, total = 0;
+  (view.items || []).forEach((item, index) => {
+    if (!itemVisible(item, charId)) return;
+    if (checks) checks.forEach((check, checkIndex) => { total++; if (store[checkKey(index, check.k, checkIndex)]) done++; });
+    else { total++; if (store[index] || autoDone(section, item)) done++; }
   });
-  return [d, y];
+  return [done, total];
 }
 /* Progress for a trophy: a whole section (string storeId), an array of those
    (summed — e.g. a whole multi-section tab), or a subset
@@ -240,169 +233,169 @@ function entryCount(e) {
    group, done when any item in the group has the check. */
 function trophyProgress(ref) {
   if (Array.isArray(ref)) {   // sum several sections (e.g. the whole Synthesis tab)
-    let x = 0, y = 0;
-    ref.forEach(r => { const p = trophyProgress(r); if (p) { x += p[0]; y += p[1]; } });
-    return [x, y];
+    let done = 0, total = 0;
+    ref.forEach(part => { const progress = trophyProgress(part); if (progress) { done += progress[0]; total += progress[1]; } });
+    return [done, total];
   }
   if (typeof ref === "string") {
     const items = findList(ref);
-    return items ? entryCount({ sec: findSec(ref), storeId: ref, items }) : null;
+    return items ? entryCount({ section: findSec(ref), storeId: ref, items }) : null;
   }
-  const sec = findSec(ref.section);
-  if (!sec) return null;
+  const section = findSec(ref.section);
+  if (!section) return null;
   const store = STORE[ref.section] || {};
-  const checkIdx = (ref.check !== undefined && sec.checks) ? sec.checks.findIndex(c => c.k === ref.check) : -1;
-  const itemDone = (it, i) => {
-    if (ref.check !== undefined) return checkIdx >= 0 && !!store[checkKey(i, ref.check, checkIdx)];
-    return !!store[i] || autoDone(sec, it);
+  const checkIndex = (ref.check !== undefined && section.checks) ? section.checks.findIndex(c => c.k === ref.check) : -1;
+  const itemDone = (item, index) => {
+    if (ref.check !== undefined) return checkIndex >= 0 && !!store[checkKey(index, ref.check, checkIndex)];
+    return !!store[index] || autoDone(section, item);
   };
   if (ref.perGroup) {
-    const groups = new Map();   // group -> any item done
-    sec.items.forEach((it, i) => {
-      const grp = it.g || it.name;
-      groups.set(grp, groups.get(grp) || itemDone(it, i));
+    const groupsDone = new Map();   // group -> any item done
+    section.items.forEach((item, index) => {
+      const groupName = item.g || item.name;
+      groupsDone.set(groupName, groupsDone.get(groupName) || itemDone(item, index));
     });
-    let d = 0;
-    groups.forEach(v => { if (v) d++; });
-    return [d, groups.size];
+    let done = 0;
+    groupsDone.forEach(isDone => { if (isDone) done++; });
+    return [done, groupsDone.size];
   }
-  let d = 0, y = 0;
-  sec.items.forEach((it, i) => {
-    if (ref.nameEndsWith && !String(it.name).endsWith(ref.nameEndsWith)) return;
-    if (ref.match && String(cellText(ref.section, i, ref.match.field, it) || "").indexOf(ref.match.value) < 0) return;
-    if (ref.check !== undefined && checkIdx < 0) return;
-    y++; if (itemDone(it, i)) d++;
+  let done = 0, total = 0;
+  section.items.forEach((item, index) => {
+    if (ref.nameEndsWith && !String(item.name).endsWith(ref.nameEndsWith)) return;
+    if (ref.match && String(cellText(ref.section, index, ref.match.field, item) || "").indexOf(ref.match.value) < 0) return;
+    if (ref.check !== undefined && checkIndex < 0) return;
+    total++; if (itemDone(item, index)) done++;
   });
-  return [d, y];
+  return [done, total];
 }
 
 /* ---------- checklist table ---------- */
-function toggleGroup(items, store, g, sec) {
-  const idx = [];
-  items.forEach((it, i) => { if (it.g === g && itemVisible(it, activeChar)) idx.push(i); });
+function toggleGroup(items, store, groupName, section) {
+  const indexes = [];
+  items.forEach((item, index) => { if (item.g === groupName && itemVisible(item, activeChar)) indexes.push(index); });
   // toggle-all acts on the primary check (idx 0)
-  const allDone = idx.every(i => store[i]);
-  idx.forEach(i => { if (allDone) delete store[i]; else store[i] = true; });
+  const allDone = indexes.every(index => store[index]);
+  indexes.forEach(index => { if (allDone) delete store[index]; else store[index] = true; });
   saveStore();
   render();
 }
-function checklist(box, sec, res, state) {
-  const store = smap(res.storeId);
-  const cols = sec.cols;
-  const checks = sec.checks;
+function checklist(container, section, view, panelState) {
+  const store = sectionStore(view.storeId);
+  const cols = section.cols;
+  const checks = section.checks;
   const leadCount = checks ? checks.length : 1;
-  const ths = cols.map(c => `<th>${t('th-' + sec.id + '-' + c.k)}</th>`).join("");
-  const leadThs = checks ? checks.map(c => `<th class="chkhead">${t(c.th)}</th>`).join("") : "<th></th>";
-  const tbl = el("table");
-  tbl.innerHTML = `<thead><tr>${leadThs}${ths}${sec.trophies && G.trophyAuto ? `<th>${t('gt-th-progress')}</th>` : ""}</tr></thead>`;
-  const tb = el("tbody");
-  let shown = 0;
-  const q = state.q.toLowerCase();
+  const colHeaders = cols.map(col => `<th>${translate('th-' + section.id + '-' + col.k)}</th>`).join("");
+  const checkHeaders = checks ? checks.map(check => `<th class="chkhead">${translate(check.th)}</th>`).join("") : "<th></th>";
+  const table = el("table");
+  table.innerHTML = `<thead><tr>${checkHeaders}${colHeaders}${section.trophies && game.trophyAuto ? `<th>${translate('gt-th-progress')}</th>` : ""}</tr></thead>`;
+  const tbody = el("tbody");
+  let shownCount = 0;
+  const query = panelState.q.toLowerCase();
   let lastGroup = null;
-  res.items.forEach((it, i) => {
-    if (!itemVisible(it, activeChar)) return;
-    const auto = checks ? null : autoSource(sec, it);
-    const done = checks ? checks.every((c, idx) => store[checkKey(i, c.k, idx)])
-                        : (!!store[i] || !!auto);
-    if (state.hide && done) return;
-    const lrow = langRow(res.storeId, i);
-    const hay = (Object.values(it).join(" ") + (lrow ? " " + Object.values(lrow).join(" ") : "")).toLowerCase();
-    if (q && !hay.includes(q)) return;
-    if (it.g && it.g !== lastGroup) {
-      lastGroup = it.g;
-      const g = it.g;
-      const gtr = el("tr");
-      const gtd = el("td", "grp-title");
-      gtd.colSpan = cols.length + leadCount + 1;
-      gtd.style.borderBottom = "1px solid var(--line)";
-      gtd.appendChild(el("span", null, fmtText(g)));
-      const gbtn = el("button", "grpbtn", t('gt-toggle-all'));
-      gbtn.onclick = () => toggleGroup(res.items, store, g, sec);
-      gtd.appendChild(gbtn);
-      gtr.appendChild(gtd);
-      tb.appendChild(gtr);
-      const gn = groupNote(res.storeId, sec.id, g);
-      if (gn) {
-        const ntr = el("tr"), ntd = el("td", "gnote");
-        ntd.colSpan = cols.length + leadCount + 1;
-        ntd.style.borderBottom = "1px solid var(--line)";
-        ntd.innerHTML = fmtText(gn);
-        ntr.appendChild(ntd);
-        tb.appendChild(ntr);
+  view.items.forEach((item, index) => {
+    if (!itemVisible(item, activeChar)) return;
+    const auto = checks ? null : autoSource(section, item);
+    const done = checks ? checks.every((check, checkIndex) => store[checkKey(index, check.k, checkIndex)])
+                        : (!!store[index] || !!auto);
+    if (panelState.hide && done) return;
+    const langData = langRow(view.storeId, index);
+    const haystack = (Object.values(item).join(" ") + (langData ? " " + Object.values(langData).join(" ") : "")).toLowerCase();
+    if (query && !haystack.includes(query)) return;
+    if (item.g && item.g !== lastGroup) {
+      lastGroup = item.g;
+      const groupName = item.g;
+      const groupRow = el("tr");
+      const groupCell = el("td", "grp-title");
+      groupCell.colSpan = cols.length + leadCount + 1;
+      groupCell.style.borderBottom = "1px solid var(--line)";
+      groupCell.appendChild(el("span", null, fmtText(groupName)));
+      const toggleAllBtn = el("button", "grpbtn", translate('gt-toggle-all'));
+      toggleAllBtn.onclick = () => toggleGroup(view.items, store, groupName, section);
+      groupCell.appendChild(toggleAllBtn);
+      groupRow.appendChild(groupCell);
+      tbody.appendChild(groupRow);
+      const note = groupNote(view.storeId, section.id, groupName);
+      if (note) {
+        const noteRow = el("tr"), noteCell = el("td", "gnote");
+        noteCell.colSpan = cols.length + leadCount + 1;
+        noteCell.style.borderBottom = "1px solid var(--line)";
+        noteCell.innerHTML = fmtText(note);
+        noteRow.appendChild(noteCell);
+        tbody.appendChild(noteRow);
       }
     }
-    const tr = el("tr", done ? "donerow" : null);
+    const row = el("tr", done ? "donerow" : null);
     if (checks) {
-      checks.forEach((c, idx) => {
-        const key = checkKey(i, c.k, idx);
-        const td = el("td", "chkcell");
-        const chk = el("input", "chk");
-        chk.type = "checkbox"; chk.checked = !!store[key];
-        chk.addEventListener("change", () => toggle(store, key));
-        td.appendChild(chk);
-        tr.appendChild(td);
+      checks.forEach((check, checkIndex) => {
+        const key = checkKey(index, check.k, checkIndex);
+        const cell = el("td", "chkcell");
+        const checkbox = el("input", "chk");
+        checkbox.type = "checkbox"; checkbox.checked = !!store[key];
+        checkbox.addEventListener("change", () => toggleCheck(store, key));
+        cell.appendChild(checkbox);
+        row.appendChild(cell);
       });
     } else {
-      const td = el("td", "chkcell");
-      const chk = el("input", "chk");
-      chk.type = "checkbox"; chk.checked = done;
-      if (auto && !store[i]) { chk.disabled = true; chk.title = fmt('gt-auto-tip', auto); }
-      else chk.addEventListener("change", () => toggle(store, i));
-      td.appendChild(chk);
-      tr.appendChild(td);
+      const cell = el("td", "chkcell");
+      const checkbox = el("input", "chk");
+      checkbox.type = "checkbox"; checkbox.checked = done;
+      if (auto && !store[index]) { checkbox.disabled = true; checkbox.title = format('gt-auto-tip', auto); }
+      else checkbox.addEventListener("change", () => toggleCheck(store, index));
+      cell.appendChild(checkbox);
+      row.appendChild(cell);
     }
-    cols.forEach(c => {
-      const v = cellText(res.storeId, i, c.k, it) || "";
+    cols.forEach(col => {
+      const value = cellText(view.storeId, index, col.k, item) || "";
       let html;
-      if (c.rarity && v) html = `<span class="rarity ${esc(v.toLowerCase())}">${esc(v)}</span>`;
-      else if (c.name) html = `<span class="itemname">${fmtText(v)}</span>${auto ? ` <span class="srcbadge" title="${fmt('gt-auto-tip', auto)}">${t('gt-auto-badge')}</span>` : ""}`;
-      else html = fmtText(v);   // enables {{icon}} / [[text|tip]] / [text](url) in any column
-      tr.appendChild(el("td", null, html));
+      if (col.rarity && value) html = `<span class="rarity ${esc(value.toLowerCase())}">${esc(value)}</span>`;
+      else if (col.name) html = `<span class="itemname">${fmtText(value)}</span>${auto ? ` <span class="srcbadge" title="${format('gt-auto-tip', auto)}">${translate('gt-auto-badge')}</span>` : ""}`;
+      else html = fmtText(value);   // enables {{icon}} / [[text|tip]] / [text](url) in any column
+      row.appendChild(el("td", null, html));
     });
-    if (sec.trophies && G.trophyAuto) {
-      const ref = G.trophyAuto[it.name];
+    if (section.trophies && game.trophyAuto) {
+      const ref = game.trophyAuto[item.name];
       let html = "";
-      if (ref) { const r = trophyProgress(ref); if (r) html = chip(r[0], r[1]); }
-      tr.appendChild(el("td", null, html));
+      if (ref) { const progress = trophyProgress(ref); if (progress) html = chip(progress[0], progress[1]); }
+      row.appendChild(el("td", null, html));
     }
-    tb.appendChild(tr);
-    shown++;
+    tbody.appendChild(row);
+    shownCount++;
   });
-  tbl.appendChild(tb);
-  if (shown) box.appendChild(tbl);
-  else box.appendChild(el("div", "empty", t('gt-nothing')));
+  table.appendChild(tbody);
+  if (shownCount) container.appendChild(table);
+  else container.appendChild(el("div", "empty", translate('gt-nothing')));
 }
 
 /* ---------- page skeleton ---------- */
 const PANEL = {};
-let activeTab = G.tabs[0].id;
+let activeTab = game.tabs[0].id;
 
 /* Switch to a tab by id (used by the tab buttons and the dashboard links). */
-function selectTab(id) {
-  if (!gameTabs().some(tb => tb.id === id)) return;
-  activeTab = id;
-  document.querySelectorAll("#tabs .tab").forEach(b => b.classList.toggle("active", b.dataset.tab === id));
-  gameTabs().forEach(tb => { const p = document.getElementById("tab-" + tb.id); if (p) p.style.display = tb.id === id ? "block" : "none"; });
+function selectTab(tabId) {
+  if (!gameTabs().some(tab => tab.id === tabId)) return;
+  activeTab = tabId;
+  document.querySelectorAll("#tabs .tab").forEach(btn => btn.classList.toggle("active", btn.dataset.tab === tabId));
+  gameTabs().forEach(tab => { const panel = document.getElementById("tab-" + tab.id); if (panel) panel.style.display = tab.id === tabId ? "block" : "none"; });
   render();
 }
-function tabOfSection(secId) {
-  for (const tb of G.tabs) if (tb.sections.some(s => s.id === secId)) return tb.id;
+function tabOfSection(sectionId) {
+  for (const tab of game.tabs) if (tab.sections.some(section => section.id === sectionId)) return tab.id;
   return null;
 }
 
 function buildPage() {
   // character bar
   const charbar = document.getElementById("charbar");
-  charbar.querySelectorAll(".charbtn").forEach(b => b.remove());
+  charbar.querySelectorAll(".charbtn").forEach(btn => btn.remove());
   const playingAs = document.getElementById("playing-as");
   if (CHARS.length) {
     playingAs.style.display = "";
     const anchor = document.getElementById("overallNote");
-    CHARS.forEach(c => {
+    CHARS.forEach(character => {
       const btn = el("button", "charbtn");
-      btn.dataset.c = c.id;
-      btn.innerHTML = `<span class="dot"></span>${esc(c.label)}`;
-      btn.onclick = () => { setActiveChar(c.id); buildPage(); render(); };
+      btn.dataset.c = character.id;
+      btn.innerHTML = `<span class="dot"></span>${esc(character.label)}`;
+      btn.onclick = () => { setActiveChar(character.id); buildPage(); render(); };
       charbar.insertBefore(btn, anchor);
     });
   } else {
@@ -414,8 +407,8 @@ function buildPage() {
   ensureActiveTab();
   const tabsBox = document.getElementById("tabs");
   tabsBox.innerHTML = "";
-  visibleTabs().forEach((tab, i) => {
-    const btn = el("button", "tab" + (tab.id === activeTab ? " active" : ""), t('tabbtn-' + tab.id));
+  visibleTabs().forEach(tab => {
+    const btn = el("button", "tab" + (tab.id === activeTab ? " active" : ""), translate('tabbtn-' + tab.id));
     btn.dataset.tab = tab.id;
     btn.onclick = () => selectTab(tab.id);
     tabsBox.appendChild(btn);
@@ -428,87 +421,78 @@ function buildPage() {
     const panel = el("section", "card");
     panel.id = "tab-" + tab.id;
     if (tab.id !== activeTab) panel.style.display = "none";
-    const state = (PANEL[tab.id] && PANEL[tab.id].state) || { q: "", hide: false };
-    const hasTrophies = tab.sections.some(s => s.trophies);
+    const panelState = (PANEL[tab.id] && PANEL[tab.id].state) || { q: "", hide: false };
+    const hasTrophies = tab.sections.some(section => section.trophies);
     const dash = hasTrophies ? el("div", "dash") : null;
     if (dash) panel.appendChild(dash);
-    const tbar = el("div", "toolbar");
-    const flt = el("input");
-    flt.type = "text"; flt.placeholder = t('gt-filter'); flt.style.maxWidth = "240px"; flt.value = state.q;
-    flt.addEventListener("input", () => { state.q = flt.value.trim(); render(); });
-    const lbl = el("label", "hidelbl");
-    const hide = el("input", "chk");
-    hide.type = "checkbox"; hide.checked = state.hide;
-    hide.addEventListener("change", () => { state.hide = hide.checked; render(); });
-    lbl.appendChild(hide);
-    lbl.appendChild(document.createTextNode(" " + t('gt-hide-done')));
-    const count = el("span", "countbadge");
-    const barEl = el("span", "dashbar");
-    barEl.appendChild(el("i"));
-    tbar.appendChild(flt); tbar.appendChild(lbl); tbar.appendChild(count); tbar.appendChild(barEl);
+    const toolbar = el("div", "toolbar");
+    const filterInput = el("input");
+    filterInput.type = "text"; filterInput.placeholder = translate('gt-filter'); filterInput.style.maxWidth = "240px"; filterInput.value = panelState.q;
+    filterInput.addEventListener("input", () => { panelState.q = filterInput.value.trim(); render(); });
+    const hideLabel = el("label", "hidelbl");
+    const hideToggle = el("input", "chk");
+    hideToggle.type = "checkbox"; hideToggle.checked = panelState.hide;
+    hideToggle.addEventListener("change", () => { panelState.hide = hideToggle.checked; render(); });
+    hideLabel.appendChild(hideToggle);
+    hideLabel.appendChild(document.createTextNode(" " + translate('gt-hide-done')));
+    const countBadge = el("span", "countbadge");
+    const progressBar = el("span", "dashbar");
+    progressBar.appendChild(el("i"));
+    toolbar.appendChild(filterInput); toolbar.appendChild(hideLabel); toolbar.appendChild(countBadge); toolbar.appendChild(progressBar);
     if (hasTrophies) {
-      const reset = el("button", "clearbtn", t('gt-reset'));
-      reset.onclick = () => {
-        if (confirm(t('gt-reset-confirm'))) { STORE = {}; saveStore(); render(); }
+      const resetBtn = el("button", "clearbtn", translate('gt-reset'));
+      resetBtn.onclick = () => {
+        if (confirm(translate('gt-reset-confirm'))) { STORE = {}; saveStore(); render(); }
       };
-      tbar.appendChild(reset);
+      toolbar.appendChild(resetBtn);
     }
-    panel.appendChild(tbar);
+    panel.appendChild(toolbar);
     const results = el("div", "results");
     panel.appendChild(results);
     main.appendChild(panel);
-    PANEL[tab.id] = { state, results, count, bar: barEl, dash };
+    PANEL[tab.id] = { state: panelState, results, count: countBadge, bar: progressBar, dash };
   });
 }
 
 function syncCharButtons() {
-  document.querySelectorAll(".charbtn").forEach(b => b.classList.toggle("on", b.dataset.c === activeChar));
+  document.querySelectorAll(".charbtn").forEach(btn => btn.classList.toggle("on", btn.dataset.c === activeChar));
   // Drive the per-character accent scheme (e.g. Sora blue, Riku purple).
   if (activeChar) document.documentElement.setAttribute("data-char", activeChar);
   else document.documentElement.removeAttribute("data-char");
 }
-function setCount(p, x, y) {
-  p.count.textContent = fmt('gt-count', x, y);
-  p.bar.className = "dashbar" + (x >= y && y > 0 ? " full" : "");
-  p.bar.firstChild.style.width = (y ? Math.round(100 * x / y) : 0) + "%";
+function setCount(panel, done, total) {
+  panel.count.textContent = format('gt-count', done, total);
+  panel.bar.className = "dashbar" + (done >= total && total > 0 ? " full" : "");
+  panel.bar.firstChild.style.width = (total ? Math.round(100 * done / total) : 0) + "%";
 }
 
 /* ---------- completion toasts ---------- */
 let prevMilestones = null;
-function toast(text, icon) {
-  let host = document.getElementById("kh-toasts");
-  if (!host) { host = el("div"); host.id = "kh-toasts"; document.body.appendChild(host); }
-  const tn = el("div", "kh-toast");
-  tn.innerHTML = `<span class="kh-toast-ic">${icon || "✅"}</span><span>${esc(text)}</span>`;
-  host.appendChild(tn);
-  requestAnimationFrame(() => tn.classList.add("show"));
-  setTimeout(() => { tn.classList.add("hide"); setTimeout(() => tn.remove(), 450); }, 4600);
-}
 /* Completed milestones (key -> toast): each auto-trophy whose tracked
    requirements are met, each fully-finished list, and the site total.
    Compared between renders so only newly-completed ones toast; seeded on
    first render so nothing fires on load or when navigating. */
 function currentMilestones() {
-  const m = new Map();
-  if (G.trophyAuto) Object.keys(G.trophyAuto).forEach(name => {
-    const r = trophyProgress(G.trophyAuto[name]);
-    if (r && r[1] > 0 && r[0] >= r[1]) m.set("trophy::" + name, { text: fmt('gt-toast-trophy', name), icon: "🏆" });
+  const milestones = new Map();
+  if (game.trophyAuto) Object.keys(game.trophyAuto).forEach(name => {
+    const progress = trophyProgress(game.trophyAuto[name]);
+    if (progress && progress[1] > 0 && progress[0] >= progress[1]) milestones.set("trophy::" + name, { text: format('gt-toast-trophy', name), icon: "🏆" });
   });
-  allLists().forEach(({ label, storeId, items, c, sec }) => {
-    const [x, y] = entryCount({ sec, storeId, items, c });
-    if (y > 0 && x >= y) m.set("list::" + storeId + "::" + (c || ""), { text: fmt('gt-toast-section', label), icon: "✅" });
+  allLists().forEach(({ label, storeId, items, charId, section }) => {
+    const [done, total] = entryCount({ section, storeId, items, charId });
+    if (total > 0 && done >= total) milestones.set("list::" + storeId + "::" + (charId || ""), { text: format('gt-toast-section', label), icon: "✅" });
   });
-  const [ox, oy] = overallCount();
-  if (oy > 0 && ox >= oy) m.set("overall", { text: t('gt-toast-overall'), icon: "🎉" });
-  return m;
+  const [overallDone, overallTotal] = overallCount();
+  if (overallTotal > 0 && overallDone >= overallTotal) milestones.set("overall", { text: translate('gt-toast-overall'), icon: "🎉" });
+  return milestones;
 }
 function checkMilestones() {
-  const cur = currentMilestones();
-  if (prevMilestones) cur.forEach((v, k) => { if (!prevMilestones.has(k)) toast(v.text, v.icon); });
-  prevMilestones = new Set(cur.keys());
+  const current = currentMilestones();
+  if (prevMilestones) current.forEach((milestone, key) => { if (!prevMilestones.has(key)) toast(milestone.text, milestone.icon); });
+  prevMilestones = new Set(current.keys());
 }
 
-/* ---------- Worlds summary (opt-in via G.worldSummary) ----------
+/* ---------- Worlds summary (opt-in via game.worldSummary) ----------
    A reusable, data-driven "collectibles by world" view: for the active
    character it pulls items from the configured sections, buckets them by
    world, and shows them as live checkboxes bound to the SAME store as
@@ -521,170 +505,170 @@ function checkMilestones() {
      }
    World for an item defaults to its group (it.g); `key` reads another
    item/lang field instead. Reuses the BBS world CSS (.wgroup/.wsum/…). */
-function worldOf(secCfg, res, it, i) {
-  const key = secCfg.key || "g";
-  let w = (key === "g") ? it.g : (it[key] != null ? it[key] : cellText(res.storeId, i, key, it));
-  w = String(w || "");
+function worldOf(sectionCfg, view, item, index) {
+  const key = sectionCfg.key || "g";
+  let world = (key === "g") ? item.g : (item[key] != null ? item[key] : cellText(view.storeId, index, key, item));
+  world = String(world || "");
   // Optional: world is the part before a delimiter (e.g. "World - area").
-  if (secCfg.split && w.indexOf(secCfg.split) >= 0) w = w.slice(0, w.indexOf(secCfg.split));
+  if (sectionCfg.split && world.indexOf(sectionCfg.split) >= 0) world = world.slice(0, world.indexOf(sectionCfg.split));
   // Normalise whitespace — some data uses non-breaking spaces in group names.
-  w = String(w || "").replace(/ /g, " ").replace(/\s+/g, " ").trim();
-  const alias = G.worldSummary.alias || {};
-  return alias[w] || w;
+  world = String(world || "").replace(/ /g, " ").replace(/\s+/g, " ").trim();
+  const alias = game.worldSummary.alias || {};
+  return alias[world] || world;
 }
-function worldEntryTable(list) {
-  const tbl = el("table", "wtable"), tb = el("tbody");
-  list.forEach(e => {
-    const tr = el("tr", e.done ? "donerow" : null);
-    const td = el("td", "chkcell"), chk = el("input", "chk");
-    chk.type = "checkbox"; chk.checked = e.done;
-    if (e.auto) { chk.disabled = true; chk.title = fmt('gt-auto-tip', e.auto); }
-    else chk.addEventListener("change", () => toggle(e.store, e.i));
-    td.appendChild(chk); tr.appendChild(td);
+function worldEntryTable(entries) {
+  const table = el("table", "wtable"), tbody = el("tbody");
+  entries.forEach(entry => {
+    const row = el("tr", entry.done ? "donerow" : null);
+    const cell = el("td", "chkcell"), checkbox = el("input", "chk");
+    checkbox.type = "checkbox"; checkbox.checked = entry.done;
+    if (entry.auto) { checkbox.disabled = true; checkbox.title = format('gt-auto-tip', entry.auto); }
+    else checkbox.addEventListener("change", () => toggleCheck(entry.store, entry.index));
+    cell.appendChild(checkbox); row.appendChild(cell);
     let nameHtml = "";
-    if (e.swatch) nameHtml += `<span class="wswatch" style="background:${e.swatch.c}"${e.swatch.t ? ` title="${esc(e.swatch.t)}" tabindex="0"` : ""}></span>`;
-    nameHtml += `<span class="itemname">${fmtText(e.name)}</span>`;
-    if (e.auto) nameHtml += ` <span class="srcbadge" title="${fmt('gt-auto-tip', e.auto)}">${t('gt-auto-badge')}</span>`;
-    tr.appendChild(el("td", null, nameHtml));
-    tr.appendChild(el("td", null, fmtText(e.where)));
-    tb.appendChild(tr);
+    if (entry.swatch) nameHtml += `<span class="wswatch" style="background:${entry.swatch.c}"${entry.swatch.t ? ` title="${esc(entry.swatch.t)}" tabindex="0"` : ""}></span>`;
+    nameHtml += `<span class="itemname">${fmtText(entry.name)}</span>`;
+    if (entry.auto) nameHtml += ` <span class="srcbadge" title="${format('gt-auto-tip', entry.auto)}">${translate('gt-auto-badge')}</span>`;
+    row.appendChild(el("td", null, nameHtml));
+    row.appendChild(el("td", null, fmtText(entry.where)));
+    tbody.appendChild(row);
   });
-  tbl.appendChild(tb);
-  return tbl;
+  table.appendChild(tbody);
+  return table;
 }
-function renderWorlds(p) {
-  const cfg = G.worldSummary, box = p.results;
-  if (!p.state.open) p.state.open = {};
-  const open = p.state.open;
-  box.appendChild(el("div", "grp-title", fmtText(t('gt-worlds-title'))));
-  const q = p.state.q.toLowerCase();
+function renderWorlds(panel) {
+  const cfg = game.worldSummary, container = panel.results;
+  if (!panel.state.open) panel.state.open = {};
+  const openState = panel.state.open;
+  container.appendChild(el("div", "grp-title", fmtText(translate('gt-worlds-title'))));
+  const query = panel.state.q.toLowerCase();
   // Only a search query force-opens sections (to reveal matches); "hide
   // completed" must keep the user's collapse state.
-  const filtering = !!q;
-  const secViews = cfg.sections.map(s => {
-    const secCfg = (typeof s === "string") ? { id: s } : s;
-    const sec = findSec(secCfg.id), res = resolved(sec);
-    const nameCol = sec.cols.find(c => c.name) || sec.cols[0];
-    const whereKeys = secCfg.where || sec.cols.filter(c => c !== nameCol).map(c => c.k);
-    return { secCfg, sec, res, store: smap(res.storeId), title: t('sec-' + sec.id), nameCol, whereKeys };
+  const filtering = !!query;
+  const sectionViews = cfg.sections.map(entry => {
+    const sectionCfg = (typeof entry === "string") ? { id: entry } : entry;
+    const section = findSec(sectionCfg.id), view = resolveSection(section);
+    const nameCol = section.cols.find(col => col.name) || section.cols[0];
+    const whereKeys = sectionCfg.where || section.cols.filter(col => col !== nameCol).map(col => col.k);
+    return { sectionCfg, section, view, store: sectionStore(view.storeId), title: translate('sec-' + section.id), nameCol, whereKeys };
   });
   // A hex colour from the section's swatch map, validated (it builds inline style).
-  const swatchOf = (secCfg, cell) => {
-    if (!secCfg.swatch) return null;
-    const v = cell(secCfg.swatch.field), c = secCfg.swatch.colors[v];
-    if (!c || !/^#[0-9a-fA-F]{3,8}$/.test(c)) return null;
-    return { c: c, t: (secCfg.swatch.titles && secCfg.swatch.titles[v]) || "" };
+  const swatchOf = (sectionCfg, cell) => {
+    if (!sectionCfg.swatch) return null;
+    const value = cell(sectionCfg.swatch.field), color = sectionCfg.swatch.colors[value];
+    if (!color || !/^#[0-9a-fA-F]{3,8}$/.test(color)) return null;
+    return { c: color, t: (sectionCfg.swatch.titles && sectionCfg.swatch.titles[value]) || "" };
   };
-  let dx = 0, dy = 0;
-  cfg.worlds.forEach((world, wi) => {
-    const slug = "w" + wi;
-    const groups = [];
-    secViews.forEach(sv => {
-      const list = [];
-      sv.res.items.forEach((it, i) => {
-        if (!itemVisible(it, activeChar)) return;
-        if (worldOf(sv.secCfg, sv.res, it, i) !== world) return;
-        const auto = autoSource(sv.sec, it);
-        const cell = k => cellText(sv.res.storeId, i, k, it) || "";
-        const name = sv.secCfg.label
-          ? sv.secCfg.label.replace(/\{(\w+)\}/g, (m, k) => cell(k)).trim()
-          : cell(sv.nameCol.k);
-        list.push({ store: sv.store, i, done: !!sv.store[i] || !!auto, auto, name,
-          where: sv.whereKeys.map(cell).filter(Boolean).join(" · "), swatch: swatchOf(sv.secCfg, cell) });
+  let totalDone = 0, totalAll = 0;
+  cfg.worlds.forEach((world, worldIndex) => {
+    const slug = "w" + worldIndex;
+    const typeGroups = [];
+    sectionViews.forEach(sectionView => {
+      const entries = [];
+      sectionView.view.items.forEach((item, index) => {
+        if (!itemVisible(item, activeChar)) return;
+        if (worldOf(sectionView.sectionCfg, sectionView.view, item, index) !== world) return;
+        const auto = autoSource(sectionView.section, item);
+        const cell = key => cellText(sectionView.view.storeId, index, key, item) || "";
+        const name = sectionView.sectionCfg.label
+          ? sectionView.sectionCfg.label.replace(/\{(\w+)\}/g, (m, key) => cell(key)).trim()
+          : cell(sectionView.nameCol.k);
+        entries.push({ store: sectionView.store, index, done: !!sectionView.store[index] || !!auto, auto, name,
+          where: sectionView.whereKeys.map(cell).filter(Boolean).join(" · "), swatch: swatchOf(sectionView.sectionCfg, cell) });
       });
-      if (list.length) groups.push({ title: sv.title, list });
+      if (entries.length) typeGroups.push({ title: sectionView.title, entries });
     });
-    let wdone = 0, wtotal = 0;
-    groups.forEach(g => g.list.forEach(e => { wtotal++; if (e.done) wdone++; }));
-    if (!wtotal) return;
-    dx += wdone; dy += wtotal;
-    let shown = groups.map(g => ({
-      title: g.title,
-      list: g.list.filter(e => (!q || (e.name + " " + e.where).toLowerCase().includes(q)) && (!p.state.hide || !e.done))
-    })).filter(g => g.list.length);
-    if (!shown.length) return;
-    const complete = wdone === wtotal, wkey = "w:" + slug;
-    const wdet = el("details", "wgroup");
-    wdet.open = filtering ? true : ((wkey in open) ? open[wkey] : false);   // worlds collapsed by default
-    const wsum = el("summary", "wsum" + (complete ? " wdone" : ""),
-      fmtText(world) + ` <span class="wcount">${wdone} / ${wtotal}</span>`
-      + (complete ? ` <span class="wbadge">${t('gt-world-complete')}</span>` : ""));
+    let worldDone = 0, worldTotal = 0;
+    typeGroups.forEach(group => group.entries.forEach(entry => { worldTotal++; if (entry.done) worldDone++; }));
+    if (!worldTotal) return;
+    totalDone += worldDone; totalAll += worldTotal;
+    let shownGroups = typeGroups.map(group => ({
+      title: group.title,
+      entries: group.entries.filter(entry => (!query || (entry.name + " " + entry.where).toLowerCase().includes(query)) && (!panel.state.hide || !entry.done))
+    })).filter(group => group.entries.length);
+    if (!shownGroups.length) return;
+    const complete = worldDone === worldTotal, worldKey = "w:" + slug;
+    const worldDetails = el("details", "wgroup");
+    worldDetails.open = filtering ? true : ((worldKey in openState) ? openState[worldKey] : false);   // worlds collapsed by default
+    const worldSummary = el("summary", "wsum" + (complete ? " wdone" : ""),
+      fmtText(world) + ` <span class="wcount">${worldDone} / ${worldTotal}</span>`
+      + (complete ? ` <span class="wbadge">${translate('gt-world-complete')}</span>` : ""));
     // Record collapse state synchronously on click (the toggle event is async,
     // which lets a re-render's programmatic open clobber a just-made collapse).
-    wsum.addEventListener("click", () => { if (!filtering) open[wkey] = !((wkey in open) ? open[wkey] : false); });
-    wdet.appendChild(wsum);
-    shown.forEach(g => {
-      const tdone = g.list.filter(e => e.done).length, tkey = "t:" + slug + ":" + g.title;
-      const tdet = el("details", "tgroup");
-      tdet.open = filtering ? true : ((tkey in open) ? open[tkey] : true);   // type groups open by default
-      const tsum = el("summary", "tsum", esc(g.title) + ` <span class="wcount">${tdone} / ${g.list.length}</span>`);
-      tsum.addEventListener("click", () => { if (!filtering) open[tkey] = !((tkey in open) ? open[tkey] : true); });
-      tdet.appendChild(tsum);
-      tdet.appendChild(worldEntryTable(g.list));
-      wdet.appendChild(tdet);
+    worldSummary.addEventListener("click", () => { if (!filtering) openState[worldKey] = !((worldKey in openState) ? openState[worldKey] : false); });
+    worldDetails.appendChild(worldSummary);
+    shownGroups.forEach(group => {
+      const groupDone = group.entries.filter(entry => entry.done).length, typeKey = "t:" + slug + ":" + group.title;
+      const typeDetails = el("details", "tgroup");
+      typeDetails.open = filtering ? true : ((typeKey in openState) ? openState[typeKey] : true);   // type groups open by default
+      const typeSummary = el("summary", "tsum", esc(group.title) + ` <span class="wcount">${groupDone} / ${group.entries.length}</span>`);
+      typeSummary.addEventListener("click", () => { if (!filtering) openState[typeKey] = !((typeKey in openState) ? openState[typeKey] : true); });
+      typeDetails.appendChild(typeSummary);
+      typeDetails.appendChild(worldEntryTable(group.entries));
+      worldDetails.appendChild(typeDetails);
     });
-    box.appendChild(wdet);
+    container.appendChild(worldDetails);
   });
-  if (!dy) box.appendChild(el("div", "empty", t('gt-nothing')));
-  setCount(p, dx, dy);
+  if (!totalAll) container.appendChild(el("div", "empty", translate('gt-nothing')));
+  setCount(panel, totalDone, totalAll);
 }
 
 /* ---------- render ---------- */
 function render() {
-  const tab = gameTabs().find(tb => tb.id === activeTab);
-  const p = PANEL[activeTab];
-  p.results.innerHTML = "";
+  const tab = gameTabs().find(tab => tab.id === activeTab);
+  const panel = PANEL[activeTab];
+  panel.results.innerHTML = "";
   if (tab.worldSummary) {
-    renderWorlds(p);
-    const [ox0, oy0] = overallCount();
-    document.getElementById("overallNote").textContent = fmt('gt-overall', ox0, oy0, oy0 ? Math.round(100 * ox0 / oy0) : 0);
+    renderWorlds(panel);
+    const [overallDone, overallTotal] = overallCount();
+    document.getElementById("overallNote").textContent = format('gt-overall', overallDone, overallTotal, overallTotal ? Math.round(100 * overallDone / overallTotal) : 0);
     checkMilestones();
     return;
   }
-  if (p.dash) {
-    p.dash.innerHTML = "";
-    p.dash.appendChild(el("div", "grp-title", fmtText(t('gt-dash-title'))));
-    const tbl = el("table", "dash-table");
-    tbl.innerHTML = `<thead><tr><th>${t('gt-dash-section')}</th><th>${t('gt-dash-progress')}</th></tr></thead>`;
-    const tb = el("tbody");
-    allLists().forEach(({ label, storeId, items, c, sec }) => {
-      const [x, y] = entryCount({ sec, storeId, items, c });
-      const tr = el("tr"), tdL = el("td");
-      const tabId = tabOfSection(sec.id);
+  if (panel.dash) {
+    panel.dash.innerHTML = "";
+    panel.dash.appendChild(el("div", "grp-title", fmtText(translate('gt-dash-title'))));
+    const table = el("table", "dash-table");
+    table.innerHTML = `<thead><tr><th>${translate('gt-dash-section')}</th><th>${translate('gt-dash-progress')}</th></tr></thead>`;
+    const tbody = el("tbody");
+    allLists().forEach(({ label, storeId, items, charId, section }) => {
+      const [done, total] = entryCount({ section, storeId, items, charId });
+      const row = el("tr"), labelCell = el("td");
+      const tabId = tabOfSection(section.id);
       if (tabId) {
-        const a = el("a", "dashlink", esc(label));
-        a.href = "#";
-        a.onclick = e => { e.preventDefault(); selectTab(tabId); };
-        tdL.appendChild(a);
-      } else { tdL.textContent = label; }
-      tr.appendChild(tdL);
-      tr.appendChild(el("td", null, bar(x, y)));
-      tb.appendChild(tr);
+        const link = el("a", "dashlink", esc(label));
+        link.href = "#";
+        link.onclick = event => { event.preventDefault(); selectTab(tabId); };
+        labelCell.appendChild(link);
+      } else { labelCell.textContent = label; }
+      row.appendChild(labelCell);
+      row.appendChild(el("td", null, bar(done, total)));
+      tbody.appendChild(row);
     });
-    tbl.appendChild(tb);
-    p.dash.appendChild(tbl);
+    table.appendChild(tbody);
+    panel.dash.appendChild(table);
   }
-  let cx = 0, cy = 0;
-  tab.sections.forEach((sec, i) => {
-    const res = resolved(sec);
-    const title = res.charLabel ? fmt('gt-section-for', t('sec-' + sec.id), res.charLabel) : t('sec-' + sec.id);
-    p.results.appendChild(el("div", i === 0 ? "grp-title" : "sub-title", fmtText(title)));
+  let panelDone = 0, panelTotal = 0;
+  tab.sections.forEach((section, sectionIndex) => {
+    const view = resolveSection(section);
+    const title = view.charLabel ? format('gt-section-for', translate('sec-' + section.id), view.charLabel) : translate('sec-' + section.id);
+    panel.results.appendChild(el("div", sectionIndex === 0 ? "grp-title" : "sub-title", fmtText(title)));
     // Optional explanatory note under a section title (lang key note-<id>);
     // newlines become separate lines.
-    const note = t('note-' + sec.id);
-    if (note && note !== 'note-' + sec.id) {
-      const np = el("p", "hint");
-      note.split("\n").forEach((line, k) => { if (k) np.appendChild(el("br")); np.appendChild(document.createTextNode(line)); });
-      p.results.appendChild(np);
+    const note = translate('note-' + section.id);
+    if (note && note !== 'note-' + section.id) {
+      const noteEl = el("p", "hint");
+      note.split("\n").forEach((line, lineIndex) => { if (lineIndex) noteEl.appendChild(el("br")); noteEl.appendChild(document.createTextNode(line)); });
+      panel.results.appendChild(noteEl);
     }
-    checklist(p.results, sec, res, p.state);
-    const [x, y] = entryCount({ sec, storeId: res.storeId, items: res.items, c: activeChar });
-    cx += x; cy += y;
+    checklist(panel.results, section, view, panel.state);
+    const [secDone, secTotal] = entryCount({ section, storeId: view.storeId, items: view.items, charId: activeChar });
+    panelDone += secDone; panelTotal += secTotal;
   });
-  setCount(p, cx, cy);
+  setCount(panel, panelDone, panelTotal);
 
-  const [ox, oy] = overallCount();
-  document.getElementById("overallNote").textContent = fmt('gt-overall', ox, oy, oy ? Math.round(100 * ox / oy) : 0);
+  const [overallDone, overallTotal] = overallCount();
+  document.getElementById("overallNote").textContent = format('gt-overall', overallDone, overallTotal, overallTotal ? Math.round(100 * overallDone / overallTotal) : 0);
   checkMilestones();
 }
 
@@ -692,10 +676,10 @@ buildPage();
 render();
 
 document.addEventListener('i18n:updated', () => { buildPage(); render(); });
-window.addEventListener("storage", (e) => {
-  if (e.key === G.storeKey) { STORE = loadStore(); render(); }
-  if (G.charKey && e.key === G.charKey && CHARS.some(c => c.id === e.newValue)) {
-    activeChar = e.newValue; buildPage(); render();
+window.addEventListener("storage", (event) => {
+  if (event.key === game.storeKey) { STORE = loadStore(); render(); }
+  if (game.charKey && event.key === game.charKey && CHARS.some(c => c.id === event.newValue)) {
+    activeChar = event.newValue; buildPage(); render();
   }
 });
 

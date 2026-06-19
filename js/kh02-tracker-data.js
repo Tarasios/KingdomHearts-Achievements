@@ -1,3 +1,19 @@
+/* =====================================================================
+   Kingdom Hearts 0.2 Birth by Sleep -A fragmentary passage- — tracker data
+   for the generic engine (js/kh-tracker.js). Defines the global
+   TRACKER_GAME and registers it on window.KH_GAMES (read by
+   js/kh-summary.js for the landing-page totals).
+
+   Only structure + stable English ids live here; all DISPLAY TEXT (item
+   names, "where"/"how to obtain", notes, column headers) lives in
+   lang/messages/<lang>/<page>.json and is matched by section id + item
+   index — keep the item ORDER here in sync with the lang "items" map.
+
+   The full data schema is documented at the top of js/kh-tracker.js.
+   Terse keys to grep for: k = column/check field key, g = group header,
+   c = per-character filter, th = check-header lang key; cross-section
+   auto-completion = autoChecks, optional "Worlds" tab = worldSummary.
+   ===================================================================== */
 var TRACKER_GAME = {
   "id": "kh02",
   "storeKey": "kh02_progress_v1",
