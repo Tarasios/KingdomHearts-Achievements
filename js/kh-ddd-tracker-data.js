@@ -517,35 +517,45 @@ var TRACKER_GAME = {
             },
             {
               "name": "Slingshot",
-              "g": "Reality Shifts"
+              "g": "Reality Shifts",
+              "w": "Traverse Town"
             },
             {
               "name": "Faithline",
-              "g": "Reality Shifts"
+              "g": "Reality Shifts",
+              "w": "La Cité des Cloches"
             },
             {
               "name": "Bubble Burst",
-              "g": "Reality Shifts"
+              "g": "Reality Shifts",
+              "w": "Prankster's Paradise"
             },
             {
               "name": "Code Break",
-              "g": "Reality Shifts"
+              "g": "Reality Shifts",
+              "w": "The Grid"
             },
             {
               "name": "Wonder Comic",
-              "g": "Reality Shifts"
+              "g": "Reality Shifts",
+              "w": "Country of the Musketeers"
             },
             {
               "name": "Melody Catcher",
-              "g": "Reality Shifts"
+              "g": "Reality Shifts",
+              "w": "Symphony of Sorcery"
             },
             {
               "name": "Nightmare's End",
-              "g": "Reality Shifts"
+              "g": "Reality Shifts",
+              "w": "The World That Never Was",
+              "c": "sora"
             },
             {
               "name": "Mirage Split",
-              "g": "Reality Shifts"
+              "g": "Reality Shifts",
+              "w": "The World That Never Was",
+              "c": "riku"
             },
             {
               "name": "Kick Dive",
@@ -648,7 +658,9 @@ var TRACKER_GAME = {
             },
             {
               "name": "Light Cycle",
-              "g": "Mini-games"
+              "g": "Mini-games",
+              "w": "The Grid",
+              "c": "riku"
             },
             {
               "name": "Balloon",
@@ -682,165 +694,393 @@ var TRACKER_GAME = {
           ],
           "items": [
             {
-              "name": "Meow Wow"
+              "name": "Meow Wow",
+              "nw": [
+                "Traverse Town",
+                "La Cité des Cloches"
+              ],
+              "rw": [
+                "Traverse Town",
+                "The Grid"
+              ]
             },
             {
-              "name": "Tama Sheep"
+              "name": "Tama Sheep",
+              "nw": [
+                "Traverse Town",
+                "La Cité des Cloches"
+              ],
+              "rw": [
+                "Traverse Town"
+              ]
             },
             {
-              "name": "Yoggy Ram"
+              "name": "Yoggy Ram",
+              "nw": [
+                "Traverse Town",
+                "La Cité des Cloches"
+              ],
+              "rw": [
+                "The Grid"
+              ]
             },
             {
               "name": "Komory Bat",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "Traverse Town",
+                "La Cité des Cloches"
+              ]
             },
             {
               "name": "Pricklemane",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "Traverse Town",
+                "La Cité des Cloches"
+              ]
             },
             {
               "name": "Hebby Repp",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "Traverse Town",
+                "La Cité des Cloches"
+              ]
             },
             {
               "name": "Sir Kyroo",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "Prankster's Paradise",
+                "Country of the Musketeers"
+              ]
             },
             {
               "name": "Toximander",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "La Cité des Cloches",
+                "Country of the Musketeers"
+              ]
             },
             {
               "name": "Fin Fatale",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "Prankster's Paradise",
+                "Symphony of Sorcery"
+              ]
             },
             {
               "name": "Tatsu Steed",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "Prankster's Paradise",
+                "Symphony of Sorcery"
+              ]
             },
             {
-              "name": "Necho Cat"
+              "name": "Necho Cat",
+              "nw": [
+                "Traverse Town",
+                "La Cité des Cloches"
+              ],
+              "rw": [
+                "La Cité des Cloches"
+              ]
             },
             {
-              "name": "Thunderaffe"
+              "name": "Thunderaffe",
+              "nw": [
+                "Symphony of Sorcery",
+                "The World That Never Was"
+              ],
+              "rw": [
+                "The World That Never Was"
+              ]
             },
             {
-              "name": "Kooma Panda"
+              "name": "Kooma Panda",
+              "nw": [
+                "Traverse Town",
+                "La Cité des Cloches"
+              ],
+              "rw": [
+                "Traverse Town",
+                "Prankster's Paradise"
+              ]
             },
             {
-              "name": "Pegaslick"
+              "name": "Pegaslick",
+              "nw": [
+                "Symphony of Sorcery",
+                "The World That Never Was"
+              ],
+              "rw": [
+                "Symphony of Sorcery"
+              ]
             },
             {
-              "name": "Iceguin Ace"
+              "name": "Iceguin Ace",
+              "nw": [
+                "Prankster's Paradise",
+                "Country of the Musketeers"
+              ],
+              "rw": [
+                "Prankster's Paradise"
+              ]
             },
             {
               "name": "Peepsta Hoo",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "The Grid",
+                "Country of the Musketeers"
+              ]
             },
             {
               "name": "Escarglow",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "The Grid",
+                "Symphony of Sorcery"
+              ]
             },
             {
-              "name": "KO Kabuto"
+              "name": "KO Kabuto",
+              "nw": [
+                "The Grid",
+                "Country of the Musketeers"
+              ],
+              "rw": [
+                "The Grid"
+              ]
             },
             {
               "name": "Wheeflower",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "La Cité des Cloches"
+              ]
             },
             {
-              "name": "Ghostabocky"
+              "name": "Ghostabocky",
+              "nw": [
+                "Symphony of Sorcery",
+                "The World That Never Was"
+              ],
+              "rw": [
+                "Symphony of Sorcery"
+              ]
             },
             {
-              "name": "Zolephant"
+              "name": "Zolephant",
+              "nw": [
+                "La Cité des Cloches",
+                "Country of the Musketeers"
+              ],
+              "rw": [
+                "La Cité des Cloches"
+              ]
             },
             {
-              "name": "Juggle Pup"
+              "name": "Juggle Pup",
+              "nw": [
+                "Prankster's Paradise",
+                "Symphony of Sorcery"
+              ],
+              "rw": [
+                "Prankster's Paradise"
+              ]
             },
             {
-              "name": "Halbird"
+              "name": "Halbird",
+              "nw": [
+                "The Grid",
+                "Country of the Musketeers"
+              ],
+              "rw": [
+                "Country of the Musketeers"
+              ]
             },
             {
               "name": "Staggerceps",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "Country of the Musketeers",
+                "Symphony of Sorcery"
+              ]
             },
             {
               "name": "Fishboné",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "Country of the Musketeers",
+                "Symphony of Sorcery"
+              ]
             },
             {
               "name": "Flowbermeow",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "Traverse Town",
+                "Prankster's Paradise"
+              ]
             },
             {
               "name": "Cyber Yog",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "The Grid"
+              ]
             },
             {
               "name": "Chef Kyroo",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "Country of the Musketeers",
+                "Symphony of Sorcery"
+              ]
             },
             {
               "name": "Lord Kyroo",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "Prankster's Paradise"
+              ]
             },
             {
               "name": "Tatsu Blaze",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "Traverse Town",
+                "Country of the Musketeers"
+              ]
             },
             {
               "name": "Electricorn",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "Symphony of Sorcery",
+                "The World That Never Was"
+              ]
             },
             {
               "name": "Woeflower",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "La Cité des Cloches",
+                "Symphony of Sorcery"
+              ]
             },
             {
               "name": "Jestabocky",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "Prankster's Paradise",
+                "Country of the Musketeers"
+              ]
             },
             {
               "name": "Eaglider",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "The Grid",
+                "The World That Never Was"
+              ]
             },
             {
-              "name": "Me Me Bunny"
+              "name": "Me Me Bunny",
+              "nw": [
+                "Country of the Musketeers"
+              ],
+              "rw": [
+                "Country of the Musketeers"
+              ]
             },
             {
-              "name": "Drill Sye"
+              "name": "Drill Sye",
+              "nw": [
+                "Traverse Town",
+                "La Cité des Cloches"
+              ],
+              "rw": [
+                "La Cité des Cloches"
+              ]
             },
             {
-              "name": "Tyranto Rex"
+              "name": "Tyranto Rex",
+              "nw": [
+                "Country of the Musketeers"
+              ],
+              "rw": [
+                "Country of the Musketeers"
+              ]
             },
             {
               "name": "Majik Lapin",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "The World That Never Was"
+              ]
             },
             {
               "name": "Cera Terror",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "Traverse Town",
+                "The World That Never Was"
+              ]
             },
             {
               "name": "Skelterwild",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "The World That Never Was"
+              ]
             },
             {
-              "name": "Ducky Goose"
+              "name": "Ducky Goose",
+              "nw": [
+                "Country of the Musketeers"
+              ],
+              "rw": [
+                "Country of the Musketeers"
+              ]
             },
             {
-              "name": "Aura Lion"
+              "name": "Aura Lion",
+              "nw": [
+                "Country of the Musketeers"
+              ],
+              "rw": [
+                "Country of the Musketeers"
+              ]
             },
             {
-              "name": "Ryu Dragon"
+              "name": "Ryu Dragon",
+              "nw": [
+                "Symphony of Sorcery",
+                "The World That Never Was"
+              ],
+              "rw": [
+                "Symphony of Sorcery"
+              ]
             },
             {
               "name": "Drak Quack",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "The World That Never Was"
+              ]
             },
             {
               "name": "Keeba Tiger",
-              "rare": false
+              "rare": false,
+              "nw": [
+                "The World That Never Was"
+              ]
             },
             {
               "name": "Meowjesty",
@@ -3965,27 +4205,115 @@ var TRACKER_GAME = {
             "sora": [
               {
                 "name": "Special Portal #1",
-                "g": "Traverse Town"
+                "g": "Traverse Town",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Kooma Panda",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "recipes",
+                    "name": "Kooma Panda"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Troubling Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Rampant Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Vibrant Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #2",
-                "g": "Traverse Town"
+                "g": "Traverse Town",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Meow Wow",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Troubling Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Rampant Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Vibrant Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #3",
-                "g": "Traverse Town"
+                "g": "Traverse Town",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Kooma Panda",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreameaters",
+                    "name": "Tama Sheep",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Troubling Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Rampant Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Vibrant Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #4",
-                "g": "Traverse Town"
+                "g": "Traverse Town",
+                "gives": [
+                  {
+                    "sec": "recipes",
+                    "name": "Thunderaffe"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Malleable Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #5",
-                "g": "Traverse Town"
+                "g": "Traverse Town",
+                "gives": [
+                  {
+                    "sec": "dreampieces",
+                    "name": "Malleable Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #6",
-                "g": "Traverse Town"
+                "g": "Traverse Town",
+                "gives": [
+                  {
+                    "sec": "dreampieces",
+                    "name": "Malleable Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Secret Portal",
@@ -3993,27 +4321,134 @@ var TRACKER_GAME = {
               },
               {
                 "name": "Special Portal #1",
-                "g": "La Cité des Cloches"
+                "g": "La Cité des Cloches",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Necho Cat",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Dulcet Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Lofty Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Noble Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #2",
-                "g": "La Cité des Cloches"
+                "g": "La Cité des Cloches",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Drill Sye",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "recipes",
+                    "name": "Drill Sye"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Dulcet Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Lofty Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Noble Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #3",
-                "g": "La Cité des Cloches"
+                "g": "La Cité des Cloches",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Zolephant",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Dulcet Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Lofty Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Noble Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #4",
-                "g": "La Cité des Cloches"
+                "g": "La Cité des Cloches",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Zolephant",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Dulcet Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Lofty Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Noble Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #5",
-                "g": "La Cité des Cloches"
+                "g": "La Cité des Cloches",
+                "gives": [
+                  {
+                    "sec": "dreampieces",
+                    "name": "Malleable Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #6",
-                "g": "La Cité des Cloches"
+                "g": "La Cité des Cloches",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Necho Cat",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreameaters",
+                    "name": "Zolephant",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreameaters",
+                    "name": "Drill Sye",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Malleable Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Secret Portal",
@@ -4021,27 +4456,116 @@ var TRACKER_GAME = {
               },
               {
                 "name": "Special Portal #1",
-                "g": "Prankster's Paradise"
+                "g": "Prankster's Paradise",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Iceguin Ace",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "recipes",
+                    "name": "Iceguin Ace"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Troubling Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Rampant Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Vibrant Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #2",
-                "g": "Prankster's Paradise"
+                "g": "Prankster's Paradise",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Juggle Pup",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Dulcet Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Lofty Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Noble Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #3",
-                "g": "Prankster's Paradise"
+                "g": "Prankster's Paradise",
+                "gives": [
+                  {
+                    "sec": "dreampieces",
+                    "name": "Troubling Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Rampant Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Vibrant Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #4",
-                "g": "Prankster's Paradise"
+                "g": "Prankster's Paradise",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Juggle Pup",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Prickly Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #5",
-                "g": "Prankster's Paradise"
+                "g": "Prankster's Paradise",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Iceguin Ace",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Prickly Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #6",
-                "g": "Prankster's Paradise"
+                "g": "Prankster's Paradise",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Juggle Pup",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Prickly Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Secret Portal",
@@ -4049,27 +4573,127 @@ var TRACKER_GAME = {
               },
               {
                 "name": "Special Portal #1",
-                "g": "The Grid"
+                "g": "The Grid",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "KO Kabuto",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Dulcet Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Lofty Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Noble Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #2",
-                "g": "The Grid"
+                "g": "The Grid",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Yoggy Ram",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Dulcet Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Lofty Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Noble Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #3",
-                "g": "The Grid"
+                "g": "The Grid",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "KO Kabuto",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreameaters",
+                    "name": "Yoggy Ram",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Dulcet Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Lofty Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Noble Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #4",
-                "g": "The Grid"
+                "g": "The Grid",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "KO Kabuto",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Malleable Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #5",
-                "g": "The Grid"
+                "g": "The Grid",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "KO Kabuto",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreameaters",
+                    "name": "Yoggy Ram",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Malleable Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #6",
-                "g": "The Grid"
+                "g": "The Grid",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Meow Wow",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Malleable Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Secret Portal",
@@ -4077,27 +4701,114 @@ var TRACKER_GAME = {
               },
               {
                 "name": "Special Portal #1",
-                "g": "Country of the Musketeers"
+                "g": "Country of the Musketeers",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Me Me Bunny",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Fleeting Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Grim Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #2",
-                "g": "Country of the Musketeers"
+                "g": "Country of the Musketeers",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Halbird",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "recipes",
+                    "name": "Halbird"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Fleeting Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Grim Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #3",
-                "g": "Country of the Musketeers"
+                "g": "Country of the Musketeers",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Tyranto Rex",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Fleeting Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Grim Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #4",
-                "g": "Country of the Musketeers"
+                "g": "Country of the Musketeers",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Ducky Goose",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreameaters",
+                    "name": "Tyranto Rex",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Prickly Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #5",
-                "g": "Country of the Musketeers"
+                "g": "Country of the Musketeers",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Halbird",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Prickly Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #6",
-                "g": "Country of the Musketeers"
+                "g": "Country of the Musketeers",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Aura Lion",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Prickly Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Secret Portal",
@@ -4105,27 +4816,134 @@ var TRACKER_GAME = {
               },
               {
                 "name": "Special Portal #1",
-                "g": "Symphony of Sorcery"
+                "g": "Symphony of Sorcery",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Pegaslick",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "recipes",
+                    "name": "Pegaslick"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Fleeting Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Savage Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Grim Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #2",
-                "g": "Symphony of Sorcery"
+                "g": "Symphony of Sorcery",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Ryu Dragon",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Intrepid Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Savage Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Grim Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #3",
-                "g": "Symphony of Sorcery"
+                "g": "Symphony of Sorcery",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Ghostabocky",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Fleeting Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Intrepid Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Savage Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #4",
-                "g": "Symphony of Sorcery"
+                "g": "Symphony of Sorcery",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Ryu Dragon",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Prickly Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Savage Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #5",
-                "g": "Symphony of Sorcery"
+                "g": "Symphony of Sorcery",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Pegaslick",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Prickly Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Savage Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #6",
-                "g": "Symphony of Sorcery"
+                "g": "Symphony of Sorcery",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Pegaslick",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreameaters",
+                    "name": "Ryu Dragon",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Wild Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Secret Portal",
@@ -4133,41 +4951,158 @@ var TRACKER_GAME = {
               },
               {
                 "name": "Special Portal #1",
-                "g": "The World That Never Was"
+                "g": "The World That Never Was",
+                "gives": [
+                  {
+                    "sec": "dreampieces",
+                    "name": "Intrepid Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Savage Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Wild Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #2",
-                "g": "The World That Never Was"
+                "g": "The World That Never Was",
+                "gives": [
+                  {
+                    "sec": "dreampieces",
+                    "name": "Savage Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Wild Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #3",
-                "g": "The World That Never Was"
+                "g": "The World That Never Was",
+                "gives": [
+                  {
+                    "sec": "dreampieces",
+                    "name": "Wild Fantasy"
+                  }
+                ]
               }
             ],
             "riku": [
               {
                 "name": "Special Portal #1",
-                "g": "Traverse Town"
+                "g": "Traverse Town",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Meow Wow",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Troubling Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Rampant Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Vibrant Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #2",
-                "g": "Traverse Town"
+                "g": "Traverse Town",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Kooma Panda",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "recipes",
+                    "name": "Flowbermeow"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Troubling Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Rampant Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Vibrant Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #3",
-                "g": "Traverse Town"
+                "g": "Traverse Town",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Tama Sheep",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "recipes",
+                    "name": "Tama Sheep"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Troubling Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Rampant Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Vibrant Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #4",
-                "g": "Traverse Town"
+                "g": "Traverse Town",
+                "gives": [
+                  {
+                    "sec": "recipes",
+                    "name": "Thunderaffe"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Charming Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #5",
-                "g": "Traverse Town"
+                "g": "Traverse Town",
+                "gives": [
+                  {
+                    "sec": "dreampieces",
+                    "name": "Charming Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #6",
-                "g": "Traverse Town"
+                "g": "Traverse Town",
+                "gives": [
+                  {
+                    "sec": "dreampieces",
+                    "name": "Charming Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Secret Portal",
@@ -4175,27 +5110,126 @@ var TRACKER_GAME = {
               },
               {
                 "name": "Special Portal #1",
-                "g": "La Cité des Cloches"
+                "g": "La Cité des Cloches",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Zolephant",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreameaters",
+                    "name": "Drill Sye",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Dulcet Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Lofty Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Noble Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #2",
-                "g": "La Cité des Cloches"
+                "g": "La Cité des Cloches",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Necho Cat",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Dulcet Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Lofty Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Noble Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #3",
-                "g": "La Cité des Cloches"
+                "g": "La Cité des Cloches",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Necho Cat",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "recipes",
+                    "name": "Necho Cat"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Dulcet Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Lofty Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Noble Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #4",
-                "g": "La Cité des Cloches"
+                "g": "La Cité des Cloches",
+                "gives": [
+                  {
+                    "sec": "dreampieces",
+                    "name": "Charming Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #5",
-                "g": "La Cité des Cloches"
+                "g": "La Cité des Cloches",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Necho Cat",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Charming Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #6",
-                "g": "La Cité des Cloches"
+                "g": "La Cité des Cloches",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Zolephant",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreameaters",
+                    "name": "Drill Sye",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Charming Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Secret Portal",
@@ -4203,27 +5237,126 @@ var TRACKER_GAME = {
               },
               {
                 "name": "Special Portal #1",
-                "g": "Prankster's Paradise"
+                "g": "Prankster's Paradise",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Juggle Pup",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Troubling Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Rampant Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Vibrant Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #2",
-                "g": "Prankster's Paradise"
+                "g": "Prankster's Paradise",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Iceguin Ace",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Dulcet Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Lofty Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Noble Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #3",
-                "g": "Prankster's Paradise"
+                "g": "Prankster's Paradise",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Juggle Pup",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "recipes",
+                    "name": "Juggle Pup"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Troubling Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Rampant Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Vibrant Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #4",
-                "g": "Prankster's Paradise"
+                "g": "Prankster's Paradise",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Juggle Pup",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreameaters",
+                    "name": "Iceguin Ace",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Epic Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #5",
-                "g": "Prankster's Paradise"
+                "g": "Prankster's Paradise",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Iceguin Ace",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Epic Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #6",
-                "g": "Prankster's Paradise"
+                "g": "Prankster's Paradise",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Iceguin Ace",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Epic Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Secret Portal",
@@ -4231,27 +5364,127 @@ var TRACKER_GAME = {
               },
               {
                 "name": "Special Portal #1",
-                "g": "The Grid"
+                "g": "The Grid",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "KO Kabuto",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Dulcet Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Lofty Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Noble Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #2",
-                "g": "The Grid"
+                "g": "The Grid",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Yoggy Ram",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Dulcet Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Lofty Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Noble Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #3",
-                "g": "The Grid"
+                "g": "The Grid",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "KO Kabuto",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreameaters",
+                    "name": "Yoggy Ram",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Dulcet Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Lofty Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Noble Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #4",
-                "g": "The Grid"
+                "g": "The Grid",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "KO Kabuto",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Charming Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #5",
-                "g": "The Grid"
+                "g": "The Grid",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "KO Kabuto",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreameaters",
+                    "name": "Yoggy Ram",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Charming Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #6",
-                "g": "The Grid"
+                "g": "The Grid",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Meow Wow",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Charming Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Secret Portal",
@@ -4259,27 +5492,119 @@ var TRACKER_GAME = {
               },
               {
                 "name": "Special Portal #1",
-                "g": "Country of the Musketeers"
+                "g": "Country of the Musketeers",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Aura Lion",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "recipes",
+                    "name": "Aura Lion"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Fleeting Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Grim Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #2",
-                "g": "Country of the Musketeers"
+                "g": "Country of the Musketeers",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Ducky Goose",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreameaters",
+                    "name": "Me Me Bunny",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Fleeting Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Grim Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #3",
-                "g": "Country of the Musketeers"
+                "g": "Country of the Musketeers",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Me Me Bunny",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Fleeting Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Grim Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #4",
-                "g": "Country of the Musketeers"
+                "g": "Country of the Musketeers",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Aura Lion",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Epic Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #5",
-                "g": "Country of the Musketeers"
+                "g": "Country of the Musketeers",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Halbird",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Epic Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #6",
-                "g": "Country of the Musketeers"
+                "g": "Country of the Musketeers",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Aura Lion",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreameaters",
+                    "name": "Me Me Bunny",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Epic Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Secret Portal",
@@ -4287,39 +5612,181 @@ var TRACKER_GAME = {
               },
               {
                 "name": "Special Portal #1",
-                "g": "Symphony of Sorcery"
+                "g": "Symphony of Sorcery",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Ryu Dragon",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Fleeting Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Intrepid Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Grim Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #2",
-                "g": "Symphony of Sorcery"
+                "g": "Symphony of Sorcery",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Ghostabocky",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "recipes",
+                    "name": "Ghostabocky"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Fleeting Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Intrepid Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Grim Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #3",
-                "g": "Symphony of Sorcery"
+                "g": "Symphony of Sorcery",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Pegaslick",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Fleeting Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Intrepid Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Grim Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #4",
-                "g": "Symphony of Sorcery"
+                "g": "Symphony of Sorcery",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Ryu Dragon",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Savage Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Epic Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #5",
-                "g": "Symphony of Sorcery"
+                "g": "Symphony of Sorcery",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Pegaslick",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Savage Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Epic Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #6",
-                "g": "Symphony of Sorcery"
+                "g": "Symphony of Sorcery",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Pegaslick",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreameaters",
+                    "name": "Ryu Dragon",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Brilliant Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #1",
-                "g": "The World That Never Was"
+                "g": "The World That Never Was",
+                "gives": [
+                  {
+                    "sec": "dreampieces",
+                    "name": "Brilliant Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Intrepid Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Savage Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #2",
-                "g": "The World That Never Was"
+                "g": "The World That Never Was",
+                "gives": [
+                  {
+                    "sec": "dreameaters",
+                    "name": "Thunderaffe",
+                    "check": "rare"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Brilliant Fantasy"
+                  },
+                  {
+                    "sec": "dreampieces",
+                    "name": "Savage Fantasy"
+                  }
+                ]
               },
               {
                 "name": "Special Portal #3",
-                "g": "The World That Never Was"
+                "g": "The World That Never Was",
+                "gives": [
+                  {
+                    "sec": "dreampieces",
+                    "name": "Brilliant Fantasy"
+                  }
+                ]
               }
             ]
           }
@@ -4388,7 +5855,43 @@ var TRACKER_GAME = {
     ],
     "sections": [
       "treasures",
-      "portals"
+      "portals",
+      {
+        "id": "records",
+        "group": "Dive Mode",
+        "key": "name",
+        "label": "{how}",
+        "title": "wt-dive",
+        "where": []
+      },
+      {
+        "id": "records",
+        "group": "Reality Shifts",
+        "key": "w",
+        "title": "wt-reality",
+        "where": []
+      },
+      {
+        "id": "records",
+        "group": "Mini-games",
+        "key": "w",
+        "title": "wt-minigame",
+        "where": []
+      },
+      {
+        "id": "dreameaters",
+        "check": "nightmare",
+        "worldsKey": "nw",
+        "title": "wt-nightmare",
+        "where": []
+      },
+      {
+        "id": "dreameaters",
+        "check": "rare",
+        "worldsKey": "rw",
+        "title": "wt-rare",
+        "where": []
+      }
     ]
   }
 };

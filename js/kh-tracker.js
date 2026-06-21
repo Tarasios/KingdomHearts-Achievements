@@ -61,6 +61,33 @@ function setItemCount(store, index, value, max) {
   if (value <= 0) delete store[index]; else store[index] = value;
   saveStore(); render();
 }
+/* Cross-section cascade: a checked item may auto-grant other collectibles —
+   e.g. a Link Portal grants the rare Nightmare it contains and the recipe /
+   dream pieces it drops. The item lists targets in
+   `gives: [{sec, name, check?}]`; they are SET (never unset) when the source
+   item is turned on, so they remain independently editable afterwards. */
+function applyGives(item) {
+  (item.gives || []).forEach(target => {
+    const targetSec = findSec(target.sec);
+    if (!targetSec) return;
+    let storeId = target.sec, list;
+    if (targetSec.variants) { storeId = target.sec + "-" + activeChar; list = targetSec.variants[activeChar] || []; }
+    else list = targetSec.items || [];
+    const ti = list.findIndex(x => x.name === target.name);
+    if (ti < 0) return;
+    const targetStore = sectionStore(storeId);
+    if (target.check && targetSec.checks) {
+      const ci = targetSec.checks.findIndex(c => c.k === target.check);
+      if (ci >= 0) targetStore[checkKey(ti, target.check, ci)] = true;
+    } else targetStore[ti] = true;
+  });
+}
+function toggleWithGives(store, key, item) {
+  const turningOn = !store[key];
+  if (store[key]) delete store[key]; else store[key] = true;
+  if (turningOn) applyGives(item);
+  saveStore(); render();
+}
 
 let activeChar = (function () {
   if (!CHARS.length) return null;
@@ -390,6 +417,7 @@ function checklist(container, section, view, panelState) {
       const checkbox = el("input", "chk");
       checkbox.type = "checkbox"; checkbox.checked = done;
       if (auto && !store[index]) { checkbox.disabled = true; checkbox.title = format('gt-auto-tip', auto); }
+      else if (item.gives) checkbox.addEventListener("change", () => toggleWithGives(store, index, item));
       else checkbox.addEventListener("change", () => toggleCheck(store, index));
       cell.appendChild(checkbox);
       row.appendChild(cell);
@@ -555,16 +583,20 @@ function checkMilestones() {
      }
    World for an item defaults to its group (it.g); `key` reads another
    item/lang field instead. Reuses the BBS world CSS (.wgroup/.wsum/…). */
+function aliasWorld(world) {
+  // Normalise whitespace (some data uses non-breaking spaces) then apply any
+  // configured world-name fixups.
+  world = String(world || "").replace(/ /g, " ").replace(/\s+/g, " ").trim();
+  const alias = (game.worldSummary && game.worldSummary.alias) || {};
+  return alias[world] || world;
+}
 function worldOf(sectionCfg, view, item, index) {
   const key = sectionCfg.key || "g";
   let world = (key === "g") ? item.g : (item[key] != null ? item[key] : cellText(view.storeId, index, key, item));
   world = String(world || "");
   // Optional: world is the part before a delimiter (e.g. "World - area").
   if (sectionCfg.split && world.indexOf(sectionCfg.split) >= 0) world = world.slice(0, world.indexOf(sectionCfg.split));
-  // Normalise whitespace — some data uses non-breaking spaces in group names.
-  world = String(world || "").replace(/ /g, " ").replace(/\s+/g, " ").trim();
-  const alias = game.worldSummary.alias || {};
-  return alias[world] || world;
+  return aliasWorld(world);
 }
 function worldEntryTable(entries) {
   const table = el("table", "wtable"), tbody = el("tbody");
@@ -573,7 +605,8 @@ function worldEntryTable(entries) {
     const cell = el("td", "chkcell"), checkbox = el("input", "chk");
     checkbox.type = "checkbox"; checkbox.checked = entry.done;
     if (entry.auto) { checkbox.disabled = true; checkbox.title = format('gt-auto-tip', entry.auto); }
-    else checkbox.addEventListener("change", () => toggleCheck(entry.store, entry.index));
+    else if (entry.gives) checkbox.addEventListener("change", () => toggleWithGives(entry.store, entry.key, entry.gives));
+    else checkbox.addEventListener("change", () => toggleCheck(entry.store, entry.key));
     cell.appendChild(checkbox); row.appendChild(cell);
     let nameHtml = "";
     if (entry.swatch) nameHtml += `<span class="wswatch" style="background:${entry.swatch.c}"${entry.swatch.t ? ` title="${esc(entry.swatch.t)}" tabindex="0"` : ""}></span>`;
@@ -595,13 +628,6 @@ function renderWorlds(panel) {
   // Only a search query force-opens sections (to reveal matches); "hide
   // completed" must keep the user's collapse state.
   const filtering = !!query;
-  const sectionViews = cfg.sections.map(entry => {
-    const sectionCfg = (typeof entry === "string") ? { id: entry } : entry;
-    const section = findSec(sectionCfg.id), view = resolveSection(section);
-    const nameCol = section.cols.find(col => col.name) || section.cols[0];
-    const whereKeys = sectionCfg.where || section.cols.filter(col => col !== nameCol).map(col => col.k);
-    return { sectionCfg, section, view, store: sectionStore(view.storeId), title: translate('sec-' + section.id), nameCol, whereKeys };
-  });
   // A hex colour from the section's swatch map, validated (it builds inline style).
   const swatchOf = (sectionCfg, cell) => {
     if (!sectionCfg.swatch) return null;
@@ -609,25 +635,55 @@ function renderWorlds(panel) {
     if (!color || !/^#[0-9a-fA-F]{3,8}$/.test(color)) return null;
     return { c: color, t: (sectionCfg.swatch.titles && sectionCfg.swatch.titles[value]) || "" };
   };
+  // Build each configured source into a world -> entries map. A source config
+  // may: filter to one item group (sectionCfg.group), give the type-header its
+  // own label (sectionCfg.title), bind to a specific check column
+  // (sectionCfg.check) instead of the primary checkbox, and place an item in
+  // several worlds at once (sectionCfg.worldsKey — an array field on the item,
+  // e.g. a Dream Eater that is a Nightmare in two worlds bound to its
+  // Nightmare checkbox).
+  const sectionViews = cfg.sections.map(entry => {
+    const sectionCfg = (typeof entry === "string") ? { id: entry } : entry;
+    const section = findSec(sectionCfg.id), view = resolveSection(section);
+    const nameCol = section.cols.find(col => col.name) || section.cols[0];
+    const whereKeys = sectionCfg.where || section.cols.filter(col => col !== nameCol).map(col => col.k);
+    const title = sectionCfg.title ? translate(sectionCfg.title) : translate('sec-' + section.id);
+    const checkIndex = (sectionCfg.check && section.checks) ? section.checks.findIndex(c => c.k === sectionCfg.check) : -1;
+    const store = sectionStore(view.storeId);
+    const byWorld = new Map();
+    view.items.forEach((item, index) => {
+      if (!itemVisible(item, activeChar)) return;
+      if (sectionCfg.group && item.g !== sectionCfg.group) return;
+      let key = index, done, auto = null, gives = null;
+      if (checkIndex >= 0) {
+        const chk = section.checks[checkIndex];
+        if (!checkApplies(item, chk)) return;
+        key = checkKey(index, chk.k, checkIndex);
+        done = !!store[key];
+      } else {
+        auto = autoSource(section, item);
+        done = !!store[index] || !!auto;
+        if (item.gives) gives = item;
+      }
+      const cell = k => cellText(view.storeId, index, k, item) || "";
+      const name = sectionCfg.label ? sectionCfg.label.replace(/\{(\w+)\}/g, (m, k) => cell(k)).trim() : cell(nameCol.k);
+      const worlds = sectionCfg.worldsKey
+        ? (Array.isArray(item[sectionCfg.worldsKey]) ? item[sectionCfg.worldsKey].map(aliasWorld) : [])
+        : [worldOf(sectionCfg, view, item, index)];
+      worlds.forEach(world => {
+        if (!world) return;
+        if (!byWorld.has(world)) byWorld.set(world, []);
+        byWorld.get(world).push({ store, key, done, auto, gives, name,
+          where: whereKeys.map(cell).filter(Boolean).join(" · "), swatch: swatchOf(sectionCfg, cell) });
+      });
+    });
+    return { title, byWorld };
+  });
   let totalDone = 0, totalAll = 0;
   cfg.worlds.forEach((world, worldIndex) => {
     const slug = "w" + worldIndex;
     const typeGroups = [];
-    sectionViews.forEach(sectionView => {
-      const entries = [];
-      sectionView.view.items.forEach((item, index) => {
-        if (!itemVisible(item, activeChar)) return;
-        if (worldOf(sectionView.sectionCfg, sectionView.view, item, index) !== world) return;
-        const auto = autoSource(sectionView.section, item);
-        const cell = key => cellText(sectionView.view.storeId, index, key, item) || "";
-        const name = sectionView.sectionCfg.label
-          ? sectionView.sectionCfg.label.replace(/\{(\w+)\}/g, (m, key) => cell(key)).trim()
-          : cell(sectionView.nameCol.k);
-        entries.push({ store: sectionView.store, index, done: !!sectionView.store[index] || !!auto, auto, name,
-          where: sectionView.whereKeys.map(cell).filter(Boolean).join(" · "), swatch: swatchOf(sectionView.sectionCfg, cell) });
-      });
-      if (entries.length) typeGroups.push({ title: sectionView.title, entries });
-    });
+    sectionViews.forEach(sv => { const entries = sv.byWorld.get(world); if (entries && entries.length) typeGroups.push({ title: sv.title, entries }); });
     let worldDone = 0, worldTotal = 0;
     typeGroups.forEach(group => group.entries.forEach(entry => { worldTotal++; if (entry.done) worldDone++; }));
     if (!worldTotal) return;

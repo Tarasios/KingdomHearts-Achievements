@@ -4686,5 +4686,10 @@
   "gt-toast-overall": "Everything is 100% complete! 🎉",
   "tabbtn-worlds": "Worlds",
   "gt-worlds-title": "Collectibles by World",
-  "gt-world-complete": "✓ 100%"
+  "gt-world-complete": "✓ 100%",
+  "wt-dive": "Dive Mode",
+  "wt-reality": "Reality Shifts",
+  "wt-minigame": "Mini-games",
+  "wt-nightmare": "Nightmares",
+  "wt-rare": "Rare Nightmares"
 }
