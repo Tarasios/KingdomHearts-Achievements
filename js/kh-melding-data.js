@@ -1,7 +1,20 @@
 /* =====================================================================
    KH Birth by Sleep — melding data
    Source: Final Fantasy Kingdom's melding chart.
-   Loaded before js/kh-melding.js; exposes globals consumed there.
+   Loaded before js/kh-melding.js; exposes the globals consumed there.
+   Game terms stay in English (the calculator's UI chrome is translated).
+
+   Globals defined here (each documented inline below):
+     CRYSTALS       — the 7 crystal columns, in chart order.
+     CRYSTAL_TABLE  — recipe type letter (A–P) -> ability per crystal,
+                      same column order as CRYSTALS.
+     RECIPES        — array of fixed-length tuples; the field order is
+                      [command, ing1, ing2, type, pct, category, usableBy].
+                      js/kh-melding.js maps these to named fields (cmd, a, b,
+                      type, pct, cat, own) in its `recipes` array.
+     ABILITY_META   — ability name -> { cat, crystal, max } (max = how many
+                      copies count as "complete"); declaration order is the
+                      in-game ability order used by the Ability Tracker.
    ===================================================================== */
 
 // Crystal columns, in chart order.

@@ -1,34 +1,47 @@
 /* =====================================================================
    KH Birth by Sleep — Command Melding Calculator
    Logic ported from the original single-file version.
-   Depends on: js/i18n.js (i18n), js/kh-melding-data.js
-   (CRYSTALS, CRYSTAL_TABLE, RECIPES, ABILITY_META) and
-   js/kh-bbs-tracker-data.js (BBS_DATA) for two-way integration with
-   the Achievement Tracker: ownership recorded there is shown here,
-   and the Meld button writes back to it (bbs_progress_v1).
-   Game terms (commands, abilities, crystals, character names) are kept
-   in English in every language; UI chrome goes through i18n.
+
+   Depends on: js/kh-common.js (KH.*), js/i18n.js (i18n),
+   js/kh-melding-data.js (CRYSTALS, CRYSTAL_TABLE, RECIPES, ABILITY_META)
+   and js/kh-bbs-tracker-data.js (BBS_DATA) for two-way integration with
+   the Achievement Tracker: ownership recorded there is shown here, and the
+   Meld button writes back to it (bbs_progress_v1).
+   Game terms (commands, abilities, crystals, character names) are kept in
+   English in every language; UI chrome goes through i18n.
+
+   Where to look (top → bottom):
+     derived data ............. recipes / ingredients / commands / ownable
+     ability cell renderers ... abilityTags / abilitySingle
+     character ownership ...... recipeAllowed / commandAllowed / ownerBadge
+     per-character state ....... loadStore / curAbilities / toggleOwned
+     achievement-tracker sync . achOwnedSets / achMarkOwned
+     combobox engine .......... makeCombo (type-ahead input + menu)
+     meld action .............. doMeld / wireMeld
+     the six tabs ............. renderForward / renderCommand / renderAbility
+                                / renderCrystals / renderSearchAbility / renderTracker
    ===================================================================== */
 
 document.addEventListener('DOMContentLoaded', async function () {
 await i18n.init();
 
-const t = (key) => i18n.getMessage(key);
-const fmt = (key, ...args) => i18n.format(key, ...args);
+const { el, esc } = KH;
+const translate = (key) => i18n.getMessage(key);
+const format = (key, ...args) => i18n.format(key, ...args);
 
 /* ---------- derived data ---------- */
-const R = RECIPES.map(r => ({ cmd: r[0], a: r[1], b: r[2], type: r[3], pct: r[4], cat: r[5], own: r[6] || "" }));
+const recipes = RECIPES.map(row => ({ cmd: row[0], a: row[1], b: row[2], type: row[3], pct: row[4], cat: row[5], own: row[6] || "" }));
 const CATS = ["Attack", "Magic", "Action", "Shotlock"];
-const ingredients = [...new Set(R.flatMap(r => [r.a, r.b]))].sort((x, y) => x.localeCompare(y));
-const commands = [...new Set(R.map(r => r.cmd))].sort((x, y) => x.localeCompare(y));
+const ingredients = [...new Set(recipes.flatMap(recipe => [recipe.a, recipe.b]))].sort((x, y) => x.localeCompare(y));
+const commands = [...new Set(recipes.map(recipe => recipe.cmd))].sort((x, y) => x.localeCompare(y));
 const ownable = [...new Set([...ingredients, ...commands])].sort((x, y) => x.localeCompare(y));
 const ABILITY_NAMES = Object.keys(ABILITY_META);
 
 function abilityFor(type, crystal) {
   if (type === "-" || !CRYSTAL_TABLE[type]) return null;
-  const i = CRYSTALS.indexOf(crystal);
-  if (i < 0) return null;
-  return CRYSTAL_TABLE[type][i];
+  const crystalIndex = CRYSTALS.indexOf(crystal);
+  if (crystalIndex < 0) return null;
+  return CRYSTAL_TABLE[type][crystalIndex];
 }
 
 // Shared ability-cell renderers. Show all 7 crystal outcomes as tags;
@@ -38,54 +51,54 @@ function abilityFor(type, crystal) {
 // With opts {pick, rk} the tags become click-to-select for melding,
 // and a leading "None" tag lets you meld without taking an ability.
 function abilityTags(type, opts) {
-  if (type === "-") return '<span class="crystal-tag">' + t('kh-no-ability') + '</span>';
-  const o = opts || {};
-  const tags = CRYSTALS.map((cn, i) => {
-    const ab = CRYSTAL_TABLE[type][i];
-    const done = abilityCompleted(ab);
-    const ach = achHas(ab);
-    const sel = o.pick && meldPick && meldPick.rk === o.rk && meldPick.ability === ab;
-    const cls = "abtag" + (done ? " done" : "") + (ach ? " ach" : "") + (o.pick ? " pick" : "") + (sel ? " sel" : "");
-    const data = o.pick ? ` data-rk="${esc(o.rk)}" data-ab="${esc(ab)}"` : "";
-    return `<span class="${cls}" title="${esc(cn)}"${data}>${ab}</span>`;
+  if (type === "-") return '<span class="crystal-tag">' + translate('kh-no-ability') + '</span>';
+  opts = opts || {};
+  const tags = CRYSTALS.map((crystalName, crystalIndex) => {
+    const ability = CRYSTAL_TABLE[type][crystalIndex];
+    const completed = abilityCompleted(ability);
+    const owned = achHas(ability);
+    const selected = opts.pick && meldPick && meldPick.rk === opts.rk && meldPick.ability === ability;
+    const className = "abtag" + (completed ? " done" : "") + (owned ? " ach" : "") + (opts.pick ? " pick" : "") + (selected ? " sel" : "");
+    const data = opts.pick ? ` data-rk="${esc(opts.rk)}" data-ab="${esc(ability)}"` : "";
+    return `<span class="${className}" title="${esc(crystalName)}"${data}>${ability}</span>`;
   });
-  if (o.pick) {
-    const sel = meldPick && meldPick.rk === o.rk && meldPick.ability === null;
-    tags.unshift(`<span class="abtag none pick${sel ? " sel" : ""}" data-rk="${esc(o.rk)}" data-none="1" title="${t('kh-tip-none')}">${t('kh-none-ability')}</span>`);
+  if (opts.pick) {
+    const selected = meldPick && meldPick.rk === opts.rk && meldPick.ability === null;
+    tags.unshift(`<span class="abtag none pick${selected ? " sel" : ""}" data-rk="${esc(opts.rk)}" data-none="1" title="${translate('kh-tip-none')}">${translate('kh-none-ability')}</span>`);
   }
   return '<div class="ablist">' + tags.join("") + '</div>';
 }
 // Single ability (when a specific crystal is chosen), red if completed,
 // gold if owned per the Achievement Tracker. Tooltip = the crystal.
 function abilitySingle(type, crystal) {
-  const ab = abilityFor(type, crystal);
-  if (!ab) return '<span class="crystal-tag">— (' + t('kh-no-ability') + ')</span>';
-  const done = abilityCompleted(ab);
-  const ach = achHas(ab);
-  return `<span class="ability${done ? ' done' : ''}${ach ? ' ach' : ''}" title="${esc(crystal)}">${ab}</span>`;
+  const ability = abilityFor(type, crystal);
+  if (!ability) return '<span class="crystal-tag">— (' + translate('kh-no-ability') + ')</span>';
+  const completed = abilityCompleted(ability);
+  const owned = achHas(ability);
+  return `<span class="ability${completed ? ' done' : ''}${owned ? ' ach' : ''}" title="${esc(crystal)}">${ability}</span>`;
 }
 
 /* ---------- character ownership ----------
    Each recipe carries an `own` code: T = Terra, V = Ventus, A = Aqua.
    A character can perform a recipe only if their letter is present. */
 const CHAR_LETTER = { terra: "T", ventus: "V", aqua: "A" };
-const CHAR_LABEL = { terra: "Terra", ventus: "Ventus", aqua: "Aqua" };
+const CHAR_LABEL = KH.BBS_CHAR_LABEL;
 
-function recipeAllowed(rec, char) {
+function recipeAllowed(recipe, char) {
   if (!char) return true;
-  return (rec.own || "").includes(CHAR_LETTER[char]);
+  return (recipe.own || "").includes(CHAR_LETTER[char]);
 }
 function ownerBadge(own) {
   const code = own || "";
-  return '<span class="userbadge">' + ["terra", "ventus", "aqua"].map(c => {
-    const has = code.includes(CHAR_LETTER[c]);
-    const tip = has ? CHAR_LABEL[c] : fmt('kh-tip-cannot-use', CHAR_LABEL[c]);
-    return `<span class="ub ${c} ${has ? '' : 'off'}" title="${tip}"></span>`;
+  return '<span class="userbadge">' + ["terra", "ventus", "aqua"].map(char => {
+    const has = code.includes(CHAR_LETTER[char]);
+    const tip = has ? CHAR_LABEL[char] : format('kh-tip-cannot-use', CHAR_LABEL[char]);
+    return `<span class="ub ${char} ${has ? '' : 'off'}" title="${tip}"></span>`;
   }).join("") + '</span>';
 }
 function commandAllowed(cmd, char) {
   if (!char) return true;
-  return R.some(r => r.cmd === cmd && recipeAllowed(r, char));
+  return recipes.some(recipe => recipe.cmd === cmd && recipeAllowed(recipe, char));
 }
 
 /* ---------- per-character persistent state ----------
@@ -93,12 +106,12 @@ function commandAllowed(cmd, char) {
      abilities: { "Magic Haste": craftedCount, ... }
      owned:     [ "Fira", "Sliding Dash", ... ] */
 const STORE_KEY = "bbs_meld_tracker_v1";
-const CHARS = ["terra", "ventus", "aqua"];
+const CHARS = KH.BBS_CHARS;
 function blankChar() { return { abilities: {}, owned: [] }; }
 function loadStore() {
   try {
     const raw = localStorage.getItem(STORE_KEY);
-    if (raw) { const o = JSON.parse(raw); for (const c of CHARS) if (!o[c]) o[c] = blankChar(); return o; }
+    if (raw) { const saved = JSON.parse(raw); for (const char of CHARS) if (!saved[char]) saved[char] = blankChar(); return saved; }
   } catch (e) { /* fall through to a fresh store */ }
   return { terra: blankChar(), ventus: blankChar(), aqua: blankChar() };
 }
@@ -107,23 +120,23 @@ function saveStore() { try { localStorage.setItem(STORE_KEY, JSON.stringify(STOR
 
 // active character is persistent and always set (defaults to Terra)
 let activeChar = (function () {
-  try { const c = localStorage.getItem(STORE_KEY + "_char"); return CHARS.includes(c) ? c : "terra"; }
+  try { const saved = localStorage.getItem(STORE_KEY + "_char"); return CHARS.includes(saved) ? saved : "terra"; }
   catch (e) { return "terra"; }
 })();
-function setActiveChar(c) { activeChar = c; try { localStorage.setItem(STORE_KEY + "_char", c); } catch (e) { /* ignore */ } }
+function setActiveChar(char) { activeChar = char; try { localStorage.setItem(STORE_KEY + "_char", char); } catch (e) { /* ignore */ } }
 
 function curAbilities() { return STORE[activeChar].abilities; }
 function curOwnedSet() { return new Set(STORE[activeChar].owned); }
 function abilityCount(name) { return curAbilities()[name] || 0; }
 function abilityMax(name) { return (ABILITY_META[name] || {}).max || 1; }
-function abilityCompleted(name) { const m = ABILITY_META[name]; return m ? abilityCount(name) >= m.max : false; }
-function setAbilityCount(name, n) {
-  n = Math.max(0, Math.min(n, abilityMax(name) * 99)); // allow overshoot but keep sane
-  curAbilities()[name] = n; saveStore();
+function abilityCompleted(name) { const meta = ABILITY_META[name]; return meta ? abilityCount(name) >= meta.max : false; }
+function setAbilityCount(name, count) {
+  count = Math.max(0, Math.min(count, abilityMax(name) * 99)); // allow overshoot but keep sane
+  curAbilities()[name] = count; saveStore();
 }
 function toggleOwned(cmd) {
-  const s = STORE[activeChar].owned; const i = s.indexOf(cmd);
-  if (i >= 0) s.splice(i, 1); else s.push(cmd);
+  const owned = STORE[activeChar].owned; const index = owned.indexOf(cmd);
+  if (index >= 0) owned.splice(index, 1); else owned.push(cmd);
   saveStore();
 }
 function isOwned(cmd) { return STORE[activeChar].owned.includes(cmd); }
@@ -138,45 +151,45 @@ const ACH_KEY = "bbs_progress_v1";
 function loadAch() { try { return JSON.parse(localStorage.getItem(ACH_KEY)) || {}; } catch (e) { return {}; } }
 let ACH = loadAch();
 const ACH_INDEX = {};   // char -> Map(name -> index in the tracker's commands list)
-CHARS.forEach(c => {
-  const m = new Map();
-  ((BBS_DATA.perChar[c] || {}).commands || []).forEach((it, i) => { if (!m.has(it.name)) m.set(it.name, i); });
-  ACH_INDEX[c] = m;
+CHARS.forEach(char => {
+  const index = new Map();
+  ((BBS_DATA.perChar[char] || {}).commands || []).forEach((item, itemIndex) => { if (!index.has(item.name)) index.set(item.name, itemIndex); });
+  ACH_INDEX[char] = index;
 });
 /* Names counted as owned by the tracker for a character: checked off
    there, rewarded by a max-ranked Unversed mission, or found in a
    checked treasure chest (mirrors the tracker's own auto sources). */
 function achOwnedSets() {
   ACH = loadAch();
-  const out = {};
+  const sets = {};
   CHARS.forEach(char => {
-    const s = new Set();
-    const cs = (ACH[char] && ACH[char].commands) || {};
-    ((BBS_DATA.perChar[char] || {}).commands || []).forEach((it, i) => { if (cs[i]) s.add(it.name); });
+    const owned = new Set();
+    const commandStore = (ACH[char] && ACH[char].commands) || {};
+    ((BBS_DATA.perChar[char] || {}).commands || []).forEach((item, itemIndex) => { if (commandStore[itemIndex]) owned.add(item.name); });
     const rank = (ACH.missions && ACH.missions.rank) || {};
-    (BBS_DATA.missions || []).forEach((m, i) => {
-      const r = m.reward && (typeof m.reward === "string" ? m.reward : m.reward[char]);
-      if (r && rank[i + "-" + char]) s.add(r);
+    (BBS_DATA.missions || []).forEach((mission, missionIndex) => {
+      const reward = mission.reward && (typeof mission.reward === "string" ? mission.reward : mission.reward[char]);
+      if (reward && rank[missionIndex + "-" + char]) owned.add(reward);
     });
-    const tch = (ACH[char] && ACH[char].treasures) || {};
-    ((BBS_DATA.perChar[char] || {}).treasures || []).forEach((tr, i) => { if (tch[i]) s.add(tr.name); });
-    out[char] = s;
+    const treasureStore = (ACH[char] && ACH[char].treasures) || {};
+    ((BBS_DATA.perChar[char] || {}).treasures || []).forEach((treasure, treasureIndex) => { if (treasureStore[treasureIndex]) owned.add(treasure.name); });
+    sets[char] = owned;
   });
-  return out;
+  return sets;
 }
 let ACH_OWNED = achOwnedSets();
 function achHas(name) { return ACH_OWNED[activeChar].has(name); }
 function ownedAnywhere(name) { return isOwned(name) || achHas(name); }
 /* Owned set for "what can I meld" checks: melding-calculator ticks
    plus everything the Achievement Tracker says this character has. */
-function curOwnedAll() { const s = curOwnedSet(); ACH_OWNED[activeChar].forEach(n => s.add(n)); return s; }
+function curOwnedAll() { const owned = curOwnedSet(); ACH_OWNED[activeChar].forEach(name => owned.add(name)); return owned; }
 function achMarkOwned(names) {
   ACH = loadAch();
   if (!ACH[activeChar]) ACH[activeChar] = {};
   if (!ACH[activeChar].commands) ACH[activeChar].commands = {};
-  names.forEach(n => {
-    const i = ACH_INDEX[activeChar].get(n);
-    if (i != null) ACH[activeChar].commands[i] = true;
+  names.forEach(name => {
+    const index = ACH_INDEX[activeChar].get(name);
+    if (index != null) ACH[activeChar].commands[index] = true;
   });
   try { localStorage.setItem(ACH_KEY, JSON.stringify(ACH)); } catch (e) { /* private browsing */ }
   ACH_OWNED = achOwnedSets();
@@ -196,29 +209,27 @@ const ICON_GROUP = {
 };
 const ICON_LABEL = { attack: "Attack", magic: "Magic", movement: "Movement", defense: "Defense", reprisal: "Reprisal", shotlock: "Shotlock" };
 const CMD_ICON = new Map();
-CHARS.forEach(c => ((BBS_DATA.perChar[c] || {}).commands || []).forEach(it => {
-  const ic = ICON_GROUP[it.g];
-  if (ic && !CMD_ICON.has(it.name)) CMD_ICON.set(it.name, ic);
+CHARS.forEach(char => ((BBS_DATA.perChar[char] || {}).commands || []).forEach(item => {
+  const icon = ICON_GROUP[item.g];
+  if (icon && !CMD_ICON.has(item.name)) CMD_ICON.set(item.name, icon);
 }));
 const CAT_ICON = { Attack: "attack", Magic: "magic", Action: "movement", Shotlock: "shotlock" };
 function iconFor(name, cat) { return CMD_ICON.get(name) || (cat ? CAT_ICON[cat] : null); }
 function cmdIcon(name, cat) {
-  const ic = iconFor(name, cat);
-  return ic ? `<img class="cmdicon" src="../images/commands/cmd-${ic}.png" alt="" title="${ICON_LABEL[ic]}">` : "";
+  const icon = iconFor(name, cat);
+  return icon ? `<img class="cmdicon" src="../images/commands/cmd-${icon}.png" alt="" title="${ICON_LABEL[icon]}">` : "";
 }
 
 /* ---------- helpers ---------- */
-function el(tag, cls, html) { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
-function pctCls(p) { return p <= 20 ? "pct low" : "pct"; }
-function typePill(tp) { return tp === "-" ? '<span class="type-pill">—</span>' : `<span class="type-pill">${tp}</span>`; }
-function esc(s) { return s.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c])); }
-function highlight(name, q) {
-  if (!q) return esc(name);
-  const i = name.toLowerCase().indexOf(q.toLowerCase());
-  if (i < 0) return esc(name);
-  return esc(name.slice(0, i)) + '<span class="match">' + esc(name.slice(i, i + q.length)) + '</span>' + esc(name.slice(i + q.length));
+function pctCls(percent) { return percent <= 20 ? "pct low" : "pct"; }
+function typePill(type) { return type === "-" ? '<span class="type-pill">—</span>' : `<span class="type-pill">${type}</span>`; }
+function highlight(name, query) {
+  if (!query) return esc(name);
+  const matchIndex = name.toLowerCase().indexOf(query.toLowerCase());
+  if (matchIndex < 0) return esc(name);
+  return esc(name.slice(0, matchIndex)) + '<span class="match">' + esc(name.slice(matchIndex, matchIndex + query.length)) + '</span>' + esc(name.slice(matchIndex + query.length));
 }
-function catLabel(cat) { return t('kh-cat-' + cat.toLowerCase()); }
+function catLabel(cat) { return translate('kh-cat-' + cat.toLowerCase()); }
 
 /* ---------- combobox engine ----------
    Type-ahead behaviour for a text input + menu pair.
@@ -227,52 +238,52 @@ function makeCombo(id, getOptions, onChange) {
   const input = document.getElementById(id);
   const menu = document.getElementById(id + "-menu");
   const clearBtn = document.querySelector(`[data-clear="${id}"]`);
-  let value = "";        // committed value
-  let active = -1;       // highlighted option index
-  let current = [];      // currently shown options
+  let value = "";          // committed value
+  let activeIndex = -1;    // highlighted option index
+  let shownOptions = [];   // currently shown options
 
-  function commit(v) { value = v; input.value = v; close(); onChange(value); }
-  function open() { render(input.value); menu.classList.add("open"); }
-  function close() { menu.classList.remove("open"); active = -1; }
+  function commit(chosen) { value = chosen; input.value = chosen; close(); onChange(value); }
+  function open() { renderMenu(input.value); menu.classList.add("open"); }
+  function close() { menu.classList.remove("open"); activeIndex = -1; }
 
-  function render(q) {
-    const opts = getOptions();
-    const ql = q.trim().toLowerCase();
+  function renderMenu(query) {
+    const options = getOptions();
+    const queryLower = query.trim().toLowerCase();
     // rank: startsWith first, then includes
-    current = opts.filter(o => !ql || o.toLowerCase().includes(ql))
+    shownOptions = options.filter(option => !queryLower || option.toLowerCase().includes(queryLower))
       .sort((a, b) => {
-        const as = a.toLowerCase().startsWith(ql) ? 0 : 1, bs = b.toLowerCase().startsWith(ql) ? 0 : 1;
-        return as - bs || a.localeCompare(b);
+        const aStarts = a.toLowerCase().startsWith(queryLower) ? 0 : 1, bStarts = b.toLowerCase().startsWith(queryLower) ? 0 : 1;
+        return aStarts - bStarts || a.localeCompare(b);
       }).slice(0, 60);
     menu.innerHTML = "";
-    if (!current.length) { menu.appendChild(el("div", "opt none", t('kh-no-matches'))); return; }
-    current.forEach((o, idx) => {
-      const d = el("div", "opt" + (idx === active ? " active" : ""));
-      d.innerHTML = highlight(o, q);
-      d.onmousedown = (e) => { e.preventDefault(); commit(o); };
-      menu.appendChild(d);
+    if (!shownOptions.length) { menu.appendChild(el("div", "opt none", translate('kh-no-matches'))); return; }
+    shownOptions.forEach((option, index) => {
+      const optionEl = el("div", "opt" + (index === activeIndex ? " active" : ""));
+      optionEl.innerHTML = highlight(option, query);
+      optionEl.onmousedown = (event) => { event.preventDefault(); commit(option); };
+      menu.appendChild(optionEl);
     });
   }
 
   input.addEventListener("focus", open);
   input.addEventListener("input", () => {
-    active = -1; render(input.value); menu.classList.add("open");
+    activeIndex = -1; renderMenu(input.value); menu.classList.add("open");
     // typing without commit clears committed value until a match is chosen
     if (value && input.value !== value) { value = ""; onChange(value); }
   });
-  input.addEventListener("keydown", (e) => {
-    if (!menu.classList.contains("open") && (e.key === "ArrowDown")) { open(); return; }
-    if (e.key === "ArrowDown") { active = Math.min(active + 1, current.length - 1); render(input.value); scrollActive(); e.preventDefault(); }
-    else if (e.key === "ArrowUp") { active = Math.max(active - 1, 0); render(input.value); scrollActive(); e.preventDefault(); }
-    else if (e.key === "Enter") { if (active >= 0 && current[active]) commit(current[active]); else if (current.length === 1) commit(current[0]); e.preventDefault(); }
-    else if (e.key === "Escape") { close(); }
+  input.addEventListener("keydown", (event) => {
+    if (!menu.classList.contains("open") && (event.key === "ArrowDown")) { open(); return; }
+    if (event.key === "ArrowDown") { activeIndex = Math.min(activeIndex + 1, shownOptions.length - 1); renderMenu(input.value); scrollActive(); event.preventDefault(); }
+    else if (event.key === "ArrowUp") { activeIndex = Math.max(activeIndex - 1, 0); renderMenu(input.value); scrollActive(); event.preventDefault(); }
+    else if (event.key === "Enter") { if (activeIndex >= 0 && shownOptions[activeIndex]) commit(shownOptions[activeIndex]); else if (shownOptions.length === 1) commit(shownOptions[0]); event.preventDefault(); }
+    else if (event.key === "Escape") { close(); }
   });
-  function scrollActive() { const a = menu.querySelector(".opt.active"); if (a) a.scrollIntoView({ block: "nearest" }); }
+  function scrollActive() { const active = menu.querySelector(".opt.active"); if (active) active.scrollIntoView({ block: "nearest" }); }
   input.addEventListener("blur", () => {
     setTimeout(() => { // allow option mousedown to fire first
       // if typed text exactly matches an option, accept it
-      const opts = getOptions();
-      const exact = opts.find(o => o.toLowerCase() === input.value.trim().toLowerCase());
+      const options = getOptions();
+      const exact = options.find(option => option.toLowerCase() === input.value.trim().toLowerCase());
       if (exact) { if (exact !== value) commit(exact); }
       else if (!value) { input.value = ""; }
       else { input.value = value; }
@@ -286,15 +297,15 @@ function makeCombo(id, getOptions, onChange) {
 
 /* ---------- character selector (shared, persistent) ---------- */
 function syncCharButtons() {
-  document.querySelectorAll(".charbtn").forEach(b => b.classList.toggle("on", b.dataset.c === activeChar));
+  document.querySelectorAll(".charbtn").forEach(btn => btn.classList.toggle("on", btn.dataset.c === activeChar));
 }
 function rerenderAll() {
   ACH_OWNED = achOwnedSets();   // pick up Achievement Tracker changes
   renderForward(); renderCommand(); buildPills(); renderAbility();
   renderCrystals(); renderSearchAbility(); renderTracker();
 }
-function wireCharBar(scopeSel) {
-  document.querySelectorAll(scopeSel + " .charbtn").forEach(btn => {
+function wireCharBar(scopeSelector) {
+  document.querySelectorAll(scopeSelector + " .charbtn").forEach(btn => {
     btn.onclick = () => {
       setActiveChar(btn.dataset.c);   // always selects (never clears)
       syncCharButtons();
@@ -306,7 +317,7 @@ function wireCharBar(scopeSel) {
 /* ---------- tabs ---------- */
 document.querySelectorAll(".kh .tab").forEach(tab => {
   tab.onclick = () => {
-    document.querySelectorAll(".kh .tab").forEach(x => x.classList.remove("active"));
+    document.querySelectorAll(".kh .tab").forEach(other => other.classList.remove("active"));
     tab.classList.add("active");
     ["forward", "bycommand", "byability", "searchability", "tracker", "crystals"].forEach(id => {
       document.getElementById("tab-" + id).style.display = (id === tab.dataset.tab) ? "block" : "none";
@@ -321,170 +332,170 @@ document.querySelectorAll(".kh .tab").forEach(tab => {
    Tracker, ability +1 in the Ability Tracker and checked off in the
    tracker's Miscellaneous - Abilities list. */
 let meldPick = null;   // { rk, ability } — rk identifies a recipe row
-function rowKey(prefix, m) { return prefix + "|" + m.cmd + "|" + m.a + "|" + m.b + "|" + m.type + "|" + m.pct; }
-function doMeld(rec, ability) {
-  if (!isOwned(rec.cmd)) toggleOwned(rec.cmd);
+function rowKey(prefix, recipe) { return prefix + "|" + recipe.cmd + "|" + recipe.a + "|" + recipe.b + "|" + recipe.type + "|" + recipe.pct; }
+function doMeld(recipe, ability) {
+  if (!isOwned(recipe.cmd)) toggleOwned(recipe.cmd);
   if (ability) setAbilityCount(ability, abilityCount(ability) + 1);
-  achMarkOwned(ability ? [rec.cmd, ability] : [rec.cmd]);
+  achMarkOwned(ability ? [recipe.cmd, ability] : [recipe.cmd]);
   meldPick = null;
-  showToast(ability ? fmt('kh-melded-ab', rec.cmd, ability) : fmt('kh-melded', rec.cmd));
+  showToast(ability ? format('kh-melded-ab', recipe.cmd, ability) : format('kh-melded', recipe.cmd));
   rerenderAll();
 }
 let toastTimer = null;
-function showToast(msg) {
-  let box = document.getElementById("meldToast");
-  if (!box) { box = el("div", "meldtoast"); box.id = "meldToast"; document.body.appendChild(box); }
-  box.textContent = msg;
-  box.classList.add("show");
+function showToast(message) {
+  let toastEl = document.getElementById("meldToast");
+  if (!toastEl) { toastEl = el("div", "meldtoast"); toastEl.id = "meldToast"; document.body.appendChild(toastEl); }
+  toastEl.textContent = message;
+  toastEl.classList.add("show");
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => box.classList.remove("show"), 2600);
+  toastTimer = setTimeout(() => toastEl.classList.remove("show"), 2600);
 }
 /* Icon + command name on one line; ownership is shown by the row tint
    (and the green/grey chip colours), not by a ✓/✗ marker. */
 function ownName(name, cat) {
-  const o = ownedAnywhere(name);
-  return `<span class="ownname" title="${o ? t('kh-own-yes') : t('kh-own-no')}">${cmdIcon(name, cat)}${name}</span>`;
+  const owned = ownedAnywhere(name);
+  return `<span class="ownname" title="${owned ? translate('kh-own-yes') : translate('kh-own-no')}">${cmdIcon(name, cat)}${name}</span>`;
 }
-function meldCell(rk, canMeld) {
-  return `<td><button class="meldbtn" data-rk="${esc(rk)}" ${canMeld ? "" : "disabled"} title="${canMeld ? "" : t('kh-tip-need-pick')}">${t('kh-meld-btn')}</button></td>`;
+function meldCell(rowId, canMeld) {
+  return `<td><button class="meldbtn" data-rk="${esc(rowId)}" ${canMeld ? "" : "disabled"} title="${canMeld ? "" : translate('kh-tip-need-pick')}">${translate('kh-meld-btn')}</button></td>`;
 }
-/* Wire up the pickable tags and meld buttons rendered into `box`.
-   meldables: Map(rk -> {rec, ability}); rerender: tab's own renderer. */
-function wireMeld(box, meldables, rerender) {
-  box.querySelectorAll(".abtag.pick").forEach(tag => {
+/* Wire up the pickable tags and meld buttons rendered into `container`.
+   meldables: Map(rowId -> {rec, ability}); rerender: tab's own renderer. */
+function wireMeld(container, meldables, rerender) {
+  container.querySelectorAll(".abtag.pick").forEach(tag => {
     tag.onclick = () => {
-      const rk = tag.dataset.rk;
-      const ab = tag.dataset.none === "1" ? null : tag.dataset.ab;   // None → no ability
-      meldPick = (meldPick && meldPick.rk === rk && meldPick.ability === ab) ? null : { rk, ability: ab };
+      const rowId = tag.dataset.rk;
+      const ability = tag.dataset.none === "1" ? null : tag.dataset.ab;   // None → no ability
+      meldPick = (meldPick && meldPick.rk === rowId && meldPick.ability === ability) ? null : { rk: rowId, ability };
       rerender();
     };
   });
-  box.querySelectorAll(".meldbtn").forEach(btn => {
+  container.querySelectorAll(".meldbtn").forEach(btn => {
     btn.onclick = () => {
-      const m = meldables.get(btn.dataset.rk);
-      if (m) doMeld(m.rec, m.ability);
+      const meldable = meldables.get(btn.dataset.rk);
+      if (meldable) doMeld(meldable.rec, meldable.ability);
     };
   });
 }
 
 /* ---------- forward meld ---------- */
-const f1 = makeCombo("f1", () => ingredients, renderForward);
-const f2 = makeCombo("f2", () => ingredients, renderForward);
-const crystal = makeCombo("crystal", () => CRYSTALS.slice(), renderForward);
+const slot1Combo = makeCombo("f1", () => ingredients, renderForward);
+const slot2Combo = makeCombo("f2", () => ingredients, renderForward);
+const crystalCombo = makeCombo("crystal", () => CRYSTALS.slice(), renderForward);
 wireCharBar("#tab-forward");
 
 function renderForward() {
-  const s1 = f1.value, s2 = f2.value, cry = crystal.value;
-  const box = document.getElementById("forwardResults"); box.innerHTML = "";
-  document.getElementById("charNote").textContent = activeChar ? fmt('kh-note-filtering', CHAR_LABEL[activeChar]) : "";
-  if (!s1 && !s2) { box.appendChild(el("div", "empty", t('kh-forward-empty'))); return; }
+  const slot1Value = slot1Combo.value, slot2Value = slot2Combo.value, crystalValue = crystalCombo.value;
+  const container = document.getElementById("forwardResults"); container.innerHTML = "";
+  document.getElementById("charNote").textContent = activeChar ? format('kh-note-filtering', CHAR_LABEL[activeChar]) : "";
+  if (!slot1Value && !slot2Value) { container.appendChild(el("div", "empty", translate('kh-forward-empty'))); return; }
 
   // slot order doesn't matter in BBS — match either arrangement
-  const matches = R.filter(r => {
-    const setHas = (x) => x === "" || r.a === x || r.b === x;
-    const combo = (s1 && s2) ? ((r.a === s1 && r.b === s2) || (r.a === s2 && r.b === s1)) : (setHas(s1) && setHas(s2));
-    return combo && recipeAllowed(r, activeChar);
+  const matches = recipes.filter(recipe => {
+    const slotHas = (slotValue) => slotValue === "" || recipe.a === slotValue || recipe.b === slotValue;
+    const combo = (slot1Value && slot2Value) ? ((recipe.a === slot1Value && recipe.b === slot2Value) || (recipe.a === slot2Value && recipe.b === slot1Value)) : (slotHas(slot1Value) && slotHas(slot2Value));
+    return combo && recipeAllowed(recipe, activeChar);
   });
 
   if (!matches.length) {
-    box.appendChild(el("div", "empty", activeChar ? fmt('kh-forward-none-char', CHAR_LABEL[activeChar]) : t('kh-forward-none')));
+    container.appendChild(el("div", "empty", activeChar ? format('kh-forward-none-char', CHAR_LABEL[activeChar]) : translate('kh-forward-none')));
     return;
   }
 
   const meldables = new Map();
   CATS.forEach(cat => {
-    const rows = matches.filter(m => m.cat === cat);
+    const rows = matches.filter(recipe => recipe.cat === cat);
     if (!rows.length) return;
-    const catIc = CAT_ICON[cat] ? `<img class="cmdicon" src="../images/commands/cmd-${CAT_ICON[cat]}.png" alt="">` : "";
-    box.appendChild(el("div", "grp-title", catIc + fmt('kh-group-commands', catLabel(cat))));
-    const tbl = el("table");
-    tbl.innerHTML = `<thead><tr><th>${t('kh-th-result')}</th><th>${t('kh-th-slot1')}</th><th>${t('kh-th-slot2')}</th><th>${t('kh-th-type')}</th><th>%</th><th>${cry ? fmt('kh-th-ability-with', cry) : t('kh-th-ability-per')}</th><th>${t('kh-th-meld')}</th></tr></thead>`;
-    const tb = el("tbody");
-    rows.forEach(m => {
-      const rk = rowKey("fwd", m);
+    const catIcon = CAT_ICON[cat] ? `<img class="cmdicon" src="../images/commands/cmd-${CAT_ICON[cat]}.png" alt="">` : "";
+    container.appendChild(el("div", "grp-title", catIcon + format('kh-group-commands', catLabel(cat))));
+    const table = el("table");
+    table.innerHTML = `<thead><tr><th>${translate('kh-th-result')}</th><th>${translate('kh-th-slot1')}</th><th>${translate('kh-th-slot2')}</th><th>${translate('kh-th-type')}</th><th>%</th><th>${crystalValue ? format('kh-th-ability-with', crystalValue) : translate('kh-th-ability-per')}</th><th>${translate('kh-th-meld')}</th></tr></thead>`;
+    const tbody = el("tbody");
+    rows.forEach(recipe => {
+      const rowId = rowKey("fwd", recipe);
       // show the slot-1 ingredient in the Slot 1 column (and slot-2 in
       // Slot 2) regardless of how the recipe is stored
-      let A = m.a, B = m.b;
-      if (s1 && A !== s1 && B === s1) { A = m.b; B = m.a; }
-      else if (!s1 && s2 && A === s2 && B !== s2) { A = m.b; B = m.a; }
-      let abilityCell, selAb = null, hasSel = false;
-      if (cry) {
-        selAb = abilityFor(m.type, cry); hasSel = true;
-        abilityCell = abilitySingle(m.type, cry);
-      } else if (m.type === "-") {
-        abilityCell = '<span class="crystal-tag">' + t('kh-no-ability-shotlock') + '</span>';
-        hasSel = true;   // Shotlocks have no ability — always meldable
-      } else if (meldPick && meldPick.rk === rk) {
-        selAb = meldPick.ability; hasSel = true;   // ability or null (None)
-        abilityCell = abilityTags(m.type, { pick: true, rk });
+      let slotA = recipe.a, slotB = recipe.b;
+      if (slot1Value && slotA !== slot1Value && slotB === slot1Value) { slotA = recipe.b; slotB = recipe.a; }
+      else if (!slot1Value && slot2Value && slotA === slot2Value && slotB !== slot2Value) { slotA = recipe.b; slotB = recipe.a; }
+      let abilityCell, selectedAbility = null, canMeld = false;
+      if (crystalValue) {
+        selectedAbility = abilityFor(recipe.type, crystalValue); canMeld = true;
+        abilityCell = abilitySingle(recipe.type, crystalValue);
+      } else if (recipe.type === "-") {
+        abilityCell = '<span class="crystal-tag">' + translate('kh-no-ability-shotlock') + '</span>';
+        canMeld = true;   // Shotlocks have no ability — always meldable
+      } else if (meldPick && meldPick.rk === rowId) {
+        selectedAbility = meldPick.ability; canMeld = true;   // ability or null (None)
+        abilityCell = abilityTags(recipe.type, { pick: true, rk: rowId });
       } else {
-        abilityCell = abilityTags(m.type, { pick: true, rk });
+        abilityCell = abilityTags(recipe.type, { pick: true, rk: rowId });
       }
-      meldables.set(rk, { rec: m, ability: m.type === "-" ? null : selAb });
-      const owned = ownedAnywhere(m.cmd);
-      const tr = el("tr", owned ? "owned-row" : null);
-      tr.innerHTML = `<td class="cmd">${ownName(m.cmd, m.cat)}${ownerBadge(m.own)}</td>
-        <td class="ing">${ingChip(A)}</td><td class="ing">${ingChip(B)}</td>
-        <td>${typePill(m.type)}</td><td class="${pctCls(m.pct)}">${m.pct}%</td><td>${abilityCell}</td>${meldCell(rk, hasSel)}`;
-      tb.appendChild(tr);
+      meldables.set(rowId, { rec: recipe, ability: recipe.type === "-" ? null : selectedAbility });
+      const owned = ownedAnywhere(recipe.cmd);
+      const row = el("tr", owned ? "owned-row" : null);
+      row.innerHTML = `<td class="cmd">${ownName(recipe.cmd, recipe.cat)}${ownerBadge(recipe.own)}</td>
+        <td class="ing">${ingChip(slotA)}</td><td class="ing">${ingChip(slotB)}</td>
+        <td>${typePill(recipe.type)}</td><td class="${pctCls(recipe.pct)}">${recipe.pct}%</td><td>${abilityCell}</td>${meldCell(rowId, canMeld)}`;
+      tbody.appendChild(row);
     });
-    tbl.appendChild(tb); box.appendChild(tbl);
+    table.appendChild(tbody); container.appendChild(table);
   });
-  wireMeld(box, meldables, renderForward);
+  wireMeld(container, meldables, renderForward);
 
-  if (cry) {
-    box.appendChild(el("p", "legend", fmt('kh-legend-pinned', cry)));
+  if (crystalValue) {
+    container.appendChild(el("p", "legend", format('kh-legend-pinned', crystalValue)));
   } else {
-    box.appendChild(el("p", "legend", fmt('kh-legend-order', CRYSTALS.join(" · "))));
+    container.appendChild(el("p", "legend", format('kh-legend-order', CRYSTALS.join(" · "))));
   }
-  box.appendChild(el("p", "legend", t('kh-legend-meld')));
+  container.appendChild(el("p", "legend", translate('kh-legend-meld')));
 }
 /* Ingredient chip — green when owned (per either tracker), grey when
    not; nowrap via CSS. No check mark, the colour carries the meaning. */
 function ingChip(name) {
-  const o = ownedAnywhere(name);
-  return `<span class="${o ? 'chip-have' : 'chip-need'}" title="${o ? t('kh-own-yes') : t('kh-own-no')}">${name}</span>`;
+  const owned = ownedAnywhere(name);
+  return `<span class="${owned ? 'chip-have' : 'chip-need'}" title="${owned ? translate('kh-own-yes') : translate('kh-own-no')}">${name}</span>`;
 }
 
 /* ---------- by command ---------- */
-const targetCmd = makeCombo("targetCmd", () => commands.filter(c => commandAllowed(c, activeChar)), renderCommand);
+const targetCmd = makeCombo("targetCmd", () => commands.filter(cmd => commandAllowed(cmd, activeChar)), renderCommand);
 const targetCrystal = makeCombo("targetCrystal", () => CRYSTALS.slice(), renderCommand);
 wireCharBar("#tab-bycommand");
 
 function renderCommand() {
-  const cmd = targetCmd.value, cry = targetCrystal.value;
-  const box = document.getElementById("commandResults"); box.innerHTML = "";
-  if (!cmd) { box.appendChild(el("div", "empty", t('kh-cmd-empty'))); return; }
+  const cmd = targetCmd.value, crystalValue = targetCrystal.value;
+  const container = document.getElementById("commandResults"); container.innerHTML = "";
+  if (!cmd) { container.appendChild(el("div", "empty", translate('kh-cmd-empty'))); return; }
   if (activeChar && !commandAllowed(cmd, activeChar)) {
-    box.appendChild(el("div", "empty", fmt('kh-cmd-cant', cmd, CHAR_LABEL[activeChar])));
+    container.appendChild(el("div", "empty", format('kh-cmd-cant', cmd, CHAR_LABEL[activeChar])));
     return;
   }
-  let rows = R.filter(r => r.cmd === cmd).sort((a, b) => b.pct - a.pct);
-  if (activeChar) rows = rows.filter(r => recipeAllowed(r, activeChar));
-  box.appendChild(el("div", "grp-title", ownName(cmd, rows.length ? rows[0].cat : null)));
+  let rows = recipes.filter(recipe => recipe.cmd === cmd).sort((a, b) => b.pct - a.pct);
+  if (activeChar) rows = rows.filter(recipe => recipeAllowed(recipe, activeChar));
+  container.appendChild(el("div", "grp-title", ownName(cmd, rows.length ? rows[0].cat : null)));
   const meldables = new Map();
-  const tbl = el("table");
-  tbl.innerHTML = `<thead><tr><th>${t('kh-th-slot1')}</th><th>${t('kh-th-slot2')}</th><th>${t('kh-th-type')}</th><th>%</th><th>${t('kh-th-usedby')}</th><th>${cry ? fmt('kh-th-ability-with', cry) : t('kh-th-ability-per')}</th><th>${t('kh-th-meld')}</th></tr></thead>`;
-  const tb = el("tbody");
-  rows.forEach(m => {
-    const rk = rowKey("cmd", m);
-    let abilityCell, selAb = null, hasSel = false;
-    if (m.type === "-") { abilityCell = '<span class="crystal-tag">' + t('kh-no-ability-shotlock') + '</span>'; hasSel = true; }
-    else if (cry) { selAb = abilityFor(m.type, cry); hasSel = true; abilityCell = abilitySingle(m.type, cry); }
+  const table = el("table");
+  table.innerHTML = `<thead><tr><th>${translate('kh-th-slot1')}</th><th>${translate('kh-th-slot2')}</th><th>${translate('kh-th-type')}</th><th>%</th><th>${translate('kh-th-usedby')}</th><th>${crystalValue ? format('kh-th-ability-with', crystalValue) : translate('kh-th-ability-per')}</th><th>${translate('kh-th-meld')}</th></tr></thead>`;
+  const tbody = el("tbody");
+  rows.forEach(recipe => {
+    const rowId = rowKey("cmd", recipe);
+    let abilityCell, selectedAbility = null, canMeld = false;
+    if (recipe.type === "-") { abilityCell = '<span class="crystal-tag">' + translate('kh-no-ability-shotlock') + '</span>'; canMeld = true; }
+    else if (crystalValue) { selectedAbility = abilityFor(recipe.type, crystalValue); canMeld = true; abilityCell = abilitySingle(recipe.type, crystalValue); }
     else {
-      if (meldPick && meldPick.rk === rk) { selAb = meldPick.ability; hasSel = true; }
-      abilityCell = abilityTags(m.type, { pick: true, rk });
+      if (meldPick && meldPick.rk === rowId) { selectedAbility = meldPick.ability; canMeld = true; }
+      abilityCell = abilityTags(recipe.type, { pick: true, rk: rowId });
     }
-    meldables.set(rk, { rec: m, ability: m.type === "-" ? null : selAb });
-    const tr = el("tr", ownedAnywhere(m.cmd) ? "owned-row" : null);
-    tr.innerHTML = `<td class="ing">${ingChip(m.a)}</td><td class="ing">${ingChip(m.b)}</td><td>${typePill(m.type)}</td><td class="${pctCls(m.pct)}">${m.pct}%</td><td>${ownerBadge(m.own)}</td><td>${abilityCell}</td>${meldCell(rk, hasSel)}`;
-    tb.appendChild(tr);
+    meldables.set(rowId, { rec: recipe, ability: recipe.type === "-" ? null : selectedAbility });
+    const row = el("tr", ownedAnywhere(recipe.cmd) ? "owned-row" : null);
+    row.innerHTML = `<td class="ing">${ingChip(recipe.a)}</td><td class="ing">${ingChip(recipe.b)}</td><td>${typePill(recipe.type)}</td><td class="${pctCls(recipe.pct)}">${recipe.pct}%</td><td>${ownerBadge(recipe.own)}</td><td>${abilityCell}</td>${meldCell(rowId, canMeld)}`;
+    tbody.appendChild(row);
   });
-  tbl.appendChild(tb); box.appendChild(tbl);
-  wireMeld(box, meldables, renderCommand);
-  box.appendChild(el("p", "legend", cry
-    ? fmt('kh-legend-cmd-pinned', cry, CHAR_LABEL[activeChar])
-    : fmt('kh-legend-cmd-tags', CRYSTALS.join(" · "), CHAR_LABEL[activeChar])));
+  table.appendChild(tbody); container.appendChild(table);
+  wireMeld(container, meldables, renderCommand);
+  container.appendChild(el("p", "legend", crystalValue
+    ? format('kh-legend-cmd-pinned', crystalValue, CHAR_LABEL[activeChar])
+    : format('kh-legend-cmd-tags', CRYSTALS.join(" · "), CHAR_LABEL[activeChar])));
 }
 
 /* ---------- by ability (owned ingredients) ---------- */
@@ -498,19 +509,19 @@ const ownedFilter = document.getElementById("ownedFilter");
 function nameUsableBy(name, char) {
   if (!char) return true;
   if (ACH_INDEX[char].has(name)) return true;
-  return R.some(r => recipeAllowed(r, char) && (r.cmd === name || r.a === name || r.b === name));
+  return recipes.some(recipe => recipeAllowed(recipe, char) && (recipe.cmd === name || recipe.a === name || recipe.b === name));
 }
 
 function buildPills() {
   ownedPills.innerHTML = "";
-  const q = ownedFilter.value.trim().toLowerCase();
-  ownable.filter(n => nameUsableBy(n, activeChar))
-    .filter(n => !q || n.toLowerCase().includes(q)).forEach(name => {
-    const ach = achHas(name);
-    const p = el("button", "pill" + (isOwned(name) ? " on" : "") + (ach ? " ach" : ""), cmdIcon(name) + name);
-    if (ach) p.title = t('kh-tip-ach-cmd');
-    p.onclick = () => { toggleOwned(name); buildPills(); renderAbility(); renderForward(); renderCommand(); renderSearchAbility(); };
-    ownedPills.appendChild(p);
+  const query = ownedFilter.value.trim().toLowerCase();
+  ownable.filter(name => nameUsableBy(name, activeChar))
+    .filter(name => !query || name.toLowerCase().includes(query)).forEach(name => {
+    const owned = achHas(name);
+    const pill = el("button", "pill" + (isOwned(name) ? " on" : "") + (owned ? " ach" : ""), cmdIcon(name) + name);
+    if (owned) pill.title = translate('kh-tip-ach-cmd');
+    pill.onclick = () => { toggleOwned(name); buildPills(); renderAbility(); renderForward(); renderCommand(); renderSearchAbility(); };
+    ownedPills.appendChild(pill);
   });
 }
 document.getElementById("clearOwned").onclick = () => {
@@ -520,61 +531,61 @@ document.getElementById("clearOwned").onclick = () => {
 ownedFilter.addEventListener("input", buildPills);
 
 function renderAbility() {
-  const box = document.getElementById("abilityResults"); box.innerHTML = "";
+  const container = document.getElementById("abilityResults"); container.innerHTML = "";
   // ticked here OR owned per the Achievement Tracker
   const owned = curOwnedAll();
-  if (!owned.size) { box.appendChild(el("div", "empty", fmt('kh-owned-empty', CHAR_LABEL[activeChar]))); return; }
-  const craftable = R.filter(r => owned.has(r.a) && owned.has(r.b) && recipeAllowed(r, activeChar));
-  if (!craftable.length) { box.appendChild(el("div", "empty", t('kh-owned-none'))); return; }
-  const byCmd = {};
-  craftable.forEach(m => { (byCmd[m.cmd] = byCmd[m.cmd] || []).push(m); });
-  const names = Object.keys(byCmd).sort((a, b) => a.localeCompare(b));
-  box.appendChild(el("div", "grp-title", fmt('kh-owned-can-make', CHAR_LABEL[activeChar], names.length)));
-  const tbl = el("table");
-  tbl.innerHTML = `<thead><tr><th>${t('kh-th-command')}</th><th>${t('kh-th-recipe-owned')}</th><th>${t('kh-th-type')}</th><th>%</th><th>${t('kh-th-usedby')}</th><th>${t('kh-th-abilities-all')}</th></tr></thead>`;
-  const tb = el("tbody");
-  names.forEach(cmd => {
-    byCmd[cmd].sort((a, b) => b.pct - a.pct).forEach((m, idx) => {
-      const tr = el("tr", ownedAnywhere(cmd) ? "owned-row" : null);
-      tr.innerHTML = `<td class="cmd">${idx === 0 ? ownName(cmd, m.cat) : ""}</td>
-        <td class="recipe-line"><span class="havechip">${m.a}</span> + <span class="havechip">${m.b}</span></td>
-        <td>${typePill(m.type)}</td><td class="${pctCls(m.pct)}">${m.pct}%</td><td>${ownerBadge(m.own)}</td><td>${abilityTags(m.type)}</td>`;
-      tb.appendChild(tr);
+  if (!owned.size) { container.appendChild(el("div", "empty", format('kh-owned-empty', CHAR_LABEL[activeChar]))); return; }
+  const craftable = recipes.filter(recipe => owned.has(recipe.a) && owned.has(recipe.b) && recipeAllowed(recipe, activeChar));
+  if (!craftable.length) { container.appendChild(el("div", "empty", translate('kh-owned-none'))); return; }
+  const byCommand = {};
+  craftable.forEach(recipe => { (byCommand[recipe.cmd] = byCommand[recipe.cmd] || []).push(recipe); });
+  const commandNames = Object.keys(byCommand).sort((a, b) => a.localeCompare(b));
+  container.appendChild(el("div", "grp-title", format('kh-owned-can-make', CHAR_LABEL[activeChar], commandNames.length)));
+  const table = el("table");
+  table.innerHTML = `<thead><tr><th>${translate('kh-th-command')}</th><th>${translate('kh-th-recipe-owned')}</th><th>${translate('kh-th-type')}</th><th>%</th><th>${translate('kh-th-usedby')}</th><th>${translate('kh-th-abilities-all')}</th></tr></thead>`;
+  const tbody = el("tbody");
+  commandNames.forEach(cmd => {
+    byCommand[cmd].sort((a, b) => b.pct - a.pct).forEach((recipe, index) => {
+      const row = el("tr", ownedAnywhere(cmd) ? "owned-row" : null);
+      row.innerHTML = `<td class="cmd">${index === 0 ? ownName(cmd, recipe.cat) : ""}</td>
+        <td class="recipe-line"><span class="havechip">${recipe.a}</span> + <span class="havechip">${recipe.b}</span></td>
+        <td>${typePill(recipe.type)}</td><td class="${pctCls(recipe.pct)}">${recipe.pct}%</td><td>${ownerBadge(recipe.own)}</td><td>${abilityTags(recipe.type)}</td>`;
+      tbody.appendChild(row);
     });
   });
-  tbl.appendChild(tb); box.appendChild(tbl);
-  box.appendChild(el("p", "legend", fmt('kh-legend-owned', CRYSTALS.join(" · "), CHAR_LABEL[activeChar])));
+  table.appendChild(tbody); container.appendChild(table);
+  container.appendChild(el("p", "legend", format('kh-legend-owned', CRYSTALS.join(" · "), CHAR_LABEL[activeChar])));
 }
 wireCharBar("#tab-byability");
 
 /* ---------- crystal chart ---------- */
 const crystalFilter = document.getElementById("crystalFilter");
 function renderCrystals() {
-  const box = document.getElementById("crystalResults"); box.innerHTML = "";
-  const q = crystalFilter.value.trim().toLowerCase();
+  const container = document.getElementById("crystalResults"); container.innerHTML = "";
+  const query = crystalFilter.value.trim().toLowerCase();
   const types = Object.keys(CRYSTAL_TABLE); // A..P
-  const wrap = el("div", "scrollx");
-  const tbl = el("table", "crystal-table");
-  tbl.innerHTML = `<thead><tr><th>${t('kh-th-type')}</th>${CRYSTALS.map(c => `<th class="cryhead">${c}</th>`).join("")}</tr></thead>`;
-  const tb = el("tbody");
+  const scroller = el("div", "scrollx");
+  const table = el("table", "crystal-table");
+  table.innerHTML = `<thead><tr><th>${translate('kh-th-type')}</th>${CRYSTALS.map(crystal => `<th class="cryhead">${crystal}</th>`).join("")}</tr></thead>`;
+  const tbody = el("tbody");
   let hits = 0;
-  types.forEach(tp => {
-    const cells = CRYSTAL_TABLE[tp].map((ab) => {
-      const hit = q && ab.toLowerCase().includes(q);
+  types.forEach(type => {
+    const cells = CRYSTAL_TABLE[type].map((ability) => {
+      const hit = query && ability.toLowerCase().includes(query);
       if (hit) hits++;
-      const done = abilityCompleted(ab);
-      const ach = achHas(ab);
-      const cls = [hit ? 'cellhit' : '', done ? 'celldone' : '', ach ? 'cellach' : ''].filter(Boolean).join(' ');
-      const tip = [done ? fmt('kh-tip-completed-for', ab, CHAR_LABEL[activeChar]) : '', ach ? t('kh-tip-ach') : ''].filter(Boolean).join(' — ');
-      return `<td class="${cls}" title="${tip}">${ab}</td>`;
+      const completed = abilityCompleted(ability);
+      const owned = achHas(ability);
+      const className = [hit ? 'cellhit' : '', completed ? 'celldone' : '', owned ? 'cellach' : ''].filter(Boolean).join(' ');
+      const tip = [completed ? format('kh-tip-completed-for', ability, CHAR_LABEL[activeChar]) : '', owned ? translate('kh-tip-ach') : ''].filter(Boolean).join(' — ');
+      return `<td class="${className}" title="${tip}">${ability}</td>`;
     }).join("");
-    const tr = el("tr");
-    tr.innerHTML = `<td class="ctype">${tp}</td>${cells}`;
-    tb.appendChild(tr);
+    const row = el("tr");
+    row.innerHTML = `<td class="ctype">${type}</td>${cells}`;
+    tbody.appendChild(row);
   });
-  tbl.appendChild(tb); wrap.appendChild(tbl); box.appendChild(wrap);
-  document.getElementById("crystalCount").textContent = q ? fmt('kh-chart-matches', hits, crystalFilter.value.trim()) : "";
-  box.appendChild(el("p", "legend", fmt('kh-legend-chart', CHAR_LABEL[activeChar])));
+  table.appendChild(tbody); scroller.appendChild(table); container.appendChild(scroller);
+  document.getElementById("crystalCount").textContent = query ? format('kh-chart-matches', hits, crystalFilter.value.trim()) : "";
+  container.appendChild(el("p", "legend", format('kh-legend-chart', CHAR_LABEL[activeChar])));
 }
 crystalFilter.addEventListener("input", renderCrystals);
 
@@ -582,118 +593,118 @@ crystalFilter.addEventListener("input", renderCrystals);
 // For an ability, which crystal(s) produce it for a given type:
 function crystalsForAbilityType(ability, type) {
   if (!CRYSTAL_TABLE[type]) return [];
-  const out = [];
-  CRYSTAL_TABLE[type].forEach((ab, i) => { if (ab === ability) out.push(CRYSTALS[i]); });
-  return out;
+  const crystals = [];
+  CRYSTAL_TABLE[type].forEach((candidate, index) => { if (candidate === ability) crystals.push(CRYSTALS[index]); });
+  return crystals;
 }
 // All recipes that can yield this ability (type contains it), with the crystal needed.
 function recipesForAbility(ability) {
-  const out = [];
-  R.forEach(r => {
-    const crys = crystalsForAbilityType(ability, r.type);
-    if (crys.length) out.push({ rec: r, crystals: crys });
+  const results = [];
+  recipes.forEach(recipe => {
+    const crystals = crystalsForAbilityType(ability, recipe.type);
+    if (crystals.length) results.push({ rec: recipe, crystals });
   });
-  return out;
+  return results;
 }
 const abQuery = makeCombo("abQuery", () => ABILITY_NAMES.slice().sort(), renderSearchAbility);
 wireCharBar("#tab-searchability");
 
 function renderSearchAbility() {
-  const box = document.getElementById("searchAbilityResults"); box.innerHTML = "";
-  const ab = abQuery.value;
-  if (!ab) { box.appendChild(el("div", "empty", t('kh-ab-empty'))); return; }
-  const meta = ABILITY_META[ab];
-  const done = abilityCompleted(ab);
+  const container = document.getElementById("searchAbilityResults"); container.innerHTML = "";
+  const ability = abQuery.value;
+  if (!ability) { container.appendChild(el("div", "empty", translate('kh-ab-empty'))); return; }
+  const meta = ABILITY_META[ability];
+  const completed = abilityCompleted(ability);
   // header with progress
-  const head = el("div", "trk-summary");
-  head.innerHTML = `<span><b class="${done ? 'trk-name done' : 'trk-name'}">${ab}</b></span>` +
-    `<span>${t('kh-abcat-' + meta.cat.toLowerCase())}</span>` +
-    `<span>${fmt('kh-ab-crystal', meta.crystal)}</span>` +
-    `<span>${abilityCount(ab)} / ${meta.max} ${done ? '<span class="donepill">' + t('kh-completed') + '</span>' : ''}` +
-    `${achHas(ab) ? ' <span class="achpill" title="' + t('kh-tip-ach') + '">' + t('kh-ach-pill') + '</span>' : ''}</span>`;
-  box.appendChild(head);
+  const header = el("div", "trk-summary");
+  header.innerHTML = `<span><b class="${completed ? 'trk-name done' : 'trk-name'}">${ability}</b></span>` +
+    `<span>${translate('kh-abcat-' + meta.cat.toLowerCase())}</span>` +
+    `<span>${format('kh-ab-crystal', meta.crystal)}</span>` +
+    `<span>${abilityCount(ability)} / ${meta.max} ${completed ? '<span class="donepill">' + translate('kh-completed') + '</span>' : ''}` +
+    `${achHas(ability) ? ' <span class="achpill" title="' + translate('kh-tip-ach') + '">' + translate('kh-ach-pill') + '</span>' : ''}</span>`;
+  container.appendChild(header);
 
-  const list = recipesForAbility(ab).filter(x => recipeAllowed(x.rec, activeChar));
-  if (!list.length) { box.appendChild(el("div", "empty", fmt('kh-ab-none', CHAR_LABEL[activeChar], ab))); return; }
+  const results = recipesForAbility(ability).filter(result => recipeAllowed(result.rec, activeChar));
+  if (!results.length) { container.appendChild(el("div", "empty", format('kh-ab-none', CHAR_LABEL[activeChar], ability))); return; }
 
   // sort: fully-owned recipes first, then by % desc
   const owned = curOwnedAll();
-  list.sort((a, b) => {
-    const ah = (owned.has(a.rec.a) && owned.has(a.rec.b)) ? 0 : 1;
-    const bh = (owned.has(b.rec.a) && owned.has(b.rec.b)) ? 0 : 1;
-    return ah - bh || b.rec.pct - a.rec.pct || a.rec.cmd.localeCompare(b.rec.cmd);
+  results.sort((a, b) => {
+    const aHas = (owned.has(a.rec.a) && owned.has(a.rec.b)) ? 0 : 1;
+    const bHas = (owned.has(b.rec.a) && owned.has(b.rec.b)) ? 0 : 1;
+    return aHas - bHas || b.rec.pct - a.rec.pct || a.rec.cmd.localeCompare(b.rec.cmd);
   });
 
-  const tbl = el("table");
-  tbl.innerHTML = `<thead><tr><th>${t('kh-th-command')}</th><th>${t('kh-th-slot1')}</th><th>${t('kh-th-slot2')}</th><th>${t('kh-th-crystal')}</th><th>${t('kh-th-type')}</th><th>%</th><th>${t('kh-th-usedby')}</th></tr></thead>`;
-  const tb = el("tbody");
-  list.forEach(({ rec, crystals }) => {
+  const table = el("table");
+  table.innerHTML = `<thead><tr><th>${translate('kh-th-command')}</th><th>${translate('kh-th-slot1')}</th><th>${translate('kh-th-slot2')}</th><th>${translate('kh-th-crystal')}</th><th>${translate('kh-th-type')}</th><th>%</th><th>${translate('kh-th-usedby')}</th></tr></thead>`;
+  const tbody = el("tbody");
+  results.forEach(({ rec, crystals }) => {
     const haveA = owned.has(rec.a), haveB = owned.has(rec.b), both = haveA && haveB;
     const slot = (name, have) => have
-      ? `<span class="chip-have" title="${t('kh-tip-owned')}">${name}</span>`
+      ? `<span class="chip-have" title="${translate('kh-tip-owned')}">${name}</span>`
       : `<span class="chip-need">${name}</span>`;
-    const tr = el("tr"); if (both) tr.className = "recipe-have";
-    tr.innerHTML = `<td class="cmd">${ownName(rec.cmd, rec.cat)}</td>
+    const row = el("tr"); if (both) row.className = "recipe-have";
+    row.innerHTML = `<td class="cmd">${ownName(rec.cmd, rec.cat)}</td>
       <td>${slot(rec.a, haveA)}</td><td>${slot(rec.b, haveB)}</td>
       <td>${crystals.join(", ")}</td><td>${typePill(rec.type)}</td>
       <td class="${pctCls(rec.pct)}">${rec.pct}%</td><td>${ownerBadge(rec.own)}</td>`;
-    tb.appendChild(tr);
+    tbody.appendChild(row);
   });
-  tbl.appendChild(tb); box.appendChild(tbl);
-  const haveCount = list.filter(x => owned.has(x.rec.a) && owned.has(x.rec.b)).length;
-  box.appendChild(el("p", "legend", fmt('kh-ab-legend', list.length, CHAR_LABEL[activeChar], haveCount, meta.crystal, ab)));
+  table.appendChild(tbody); container.appendChild(table);
+  const haveCount = results.filter(result => owned.has(result.rec.a) && owned.has(result.rec.b)).length;
+  container.appendChild(el("p", "legend", format('kh-ab-legend', results.length, CHAR_LABEL[activeChar], haveCount, meta.crystal, ability)));
 }
 
 /* ---------- ability tracker ---------- */
 const trkFilter = document.getElementById("trkFilter");
 const TRK_CATS = ["Prize", "Stats", "Support"];
 function renderTracker() {
-  const box = document.getElementById("trackerResults"); box.innerHTML = "";
-  const q = trkFilter.value.trim().toLowerCase();
+  const container = document.getElementById("trackerResults"); container.innerHTML = "";
+  const query = trkFilter.value.trim().toLowerCase();
   // summary
-  const all = ABILITY_NAMES;
-  const completed = all.filter(abilityCompleted).length;
-  const crafted = all.reduce((s, a) => s + Math.min(abilityCount(a), abilityMax(a)), 0);
-  const totalMax = all.reduce((s, a) => s + abilityMax(a), 0);
+  const allAbilities = ABILITY_NAMES;
+  const completedCount = allAbilities.filter(abilityCompleted).length;
+  const craftedCount = allAbilities.reduce((sum, ability) => sum + Math.min(abilityCount(ability), abilityMax(ability)), 0);
+  const totalMax = allAbilities.reduce((sum, ability) => sum + abilityMax(ability), 0);
   document.getElementById("trkSummary").innerHTML =
     `<span><b>${CHAR_LABEL[activeChar]}</b></span>` +
-    `<span>${fmt('kh-trk-completed', completed, all.length)}</span>` +
-    `<span>${fmt('kh-trk-copies', crafted, totalMax)}</span>`;
+    `<span>${format('kh-trk-completed', completedCount, allAbilities.length)}</span>` +
+    `<span>${format('kh-trk-copies', craftedCount, totalMax)}</span>`;
 
   TRK_CATS.forEach(cat => {
-    let names = all.filter(a => ABILITY_META[a].cat === cat);
-    if (q) names = names.filter(a => a.toLowerCase().includes(q));
+    let names = allAbilities.filter(ability => ABILITY_META[ability].cat === cat);
+    if (query) names = names.filter(ability => ability.toLowerCase().includes(query));
     if (!names.length) return;
-    box.appendChild(el("div", "trk-cat", fmt('kh-trk-group', t('kh-abcat-' + cat.toLowerCase()))));
-    const tbl = el("table", "trk-table");
-    tbl.innerHTML = `<thead><tr><th>${t('kh-th-ability')}</th><th>${t('kh-th-crystal')}</th><th>${t('kh-th-crafted')}</th><th>${t('kh-th-progress')}</th><th>${t('kh-th-status')}</th></tr></thead>`;
-    const tb = el("tbody");
+    container.appendChild(el("div", "trk-cat", format('kh-trk-group', translate('kh-abcat-' + cat.toLowerCase()))));
+    const table = el("table", "trk-table");
+    table.innerHTML = `<thead><tr><th>${translate('kh-th-ability')}</th><th>${translate('kh-th-crystal')}</th><th>${translate('kh-th-crafted')}</th><th>${translate('kh-th-progress')}</th><th>${translate('kh-th-status')}</th></tr></thead>`;
+    const tbody = el("tbody");
     names.forEach(name => {   // ABILITY_META declaration order = in-game order
       const meta = ABILITY_META[name];
-      const n = abilityCount(name), mx = meta.max, done = n >= mx;
-      const tr = el("tr");
-      const frac = Math.min(1, n / mx) * 100;
-      tr.innerHTML =
+      const count = abilityCount(name), max = meta.max, done = count >= max;
+      const row = el("tr");
+      const fraction = Math.min(1, count / max) * 100;
+      row.innerHTML =
         `<td class="trk-name ${done ? 'done' : ''}">${name}</td>` +
         `<td class="crystaltag">${meta.crystal}</td>` +
         `<td><span class="stepper">
             <button class="stepbtn" data-act="dec" data-ab="${name}">−</button>
-            <span class="stepval"><b>${n}</b> <span class="mx">/ ${mx}</span></span>
+            <span class="stepval"><b>${count}</b> <span class="mx">/ ${max}</span></span>
             <button class="stepbtn" data-act="inc" data-ab="${name}">+</button>
          </span></td>` +
-        `<td><span class="trk-progress ${done ? 'full' : ''}"><i style="width:${frac}%"></i></span></td>` +
-        `<td>${done ? '<span class="donepill">' + t('kh-completed') + '</span> ' : ''}${achHas(name) ? '<span class="achpill" title="' + t('kh-tip-ach') + '">' + t('kh-ach-pill') + '</span>' : ''}</td>`;
-      tb.appendChild(tr);
+        `<td><span class="trk-progress ${done ? 'full' : ''}"><i style="width:${fraction}%"></i></span></td>` +
+        `<td>${done ? '<span class="donepill">' + translate('kh-completed') + '</span> ' : ''}${achHas(name) ? '<span class="achpill" title="' + translate('kh-tip-ach') + '">' + translate('kh-ach-pill') + '</span>' : ''}</td>`;
+      tbody.appendChild(row);
     });
-    tbl.appendChild(tb); box.appendChild(tbl);
+    table.appendChild(tbody); container.appendChild(table);
   });
 
   // wire steppers
-  box.querySelectorAll(".stepbtn").forEach(btn => {
+  container.querySelectorAll(".stepbtn").forEach(btn => {
     btn.onclick = () => {
       const name = btn.dataset.ab;
-      const cur = abilityCount(name);
-      setAbilityCount(name, btn.dataset.act === "inc" ? cur + 1 : cur - 1);
+      const current = abilityCount(name);
+      setAbilityCount(name, btn.dataset.act === "inc" ? current + 1 : current - 1);
       renderTracker();
       // also refresh other tabs' completed highlighting
       renderForward(); renderCommand(); renderAbility(); renderCrystals(); renderSearchAbility();
@@ -702,7 +713,7 @@ function renderTracker() {
 }
 trkFilter.addEventListener("input", renderTracker);
 document.getElementById("trkReset").onclick = () => {
-  if (confirm(fmt('kh-trk-reset-confirm', CHAR_LABEL[activeChar]))) {
+  if (confirm(format('kh-trk-reset-confirm', CHAR_LABEL[activeChar]))) {
     STORE[activeChar].abilities = {}; saveStore();
     renderTracker(); renderForward(); renderCommand(); renderAbility(); renderCrystals(); renderSearchAbility();
   }
@@ -715,13 +726,13 @@ rerenderAll();
 document.addEventListener('i18n:updated', rerenderAll);
 
 /* close any open combo menu when clicking elsewhere */
-document.addEventListener("click", (e) => {
-  if (!e.target.closest(".combo")) document.querySelectorAll(".menu.open").forEach(m => m.classList.remove("open"));
+document.addEventListener("click", (event) => {
+  if (!event.target.closest(".combo")) document.querySelectorAll(".menu.open").forEach(menu => menu.classList.remove("open"));
 });
 
 /* Live-sync when the Achievement Tracker (in another tab) changes. */
-window.addEventListener("storage", (e) => {
-  if (e.key === ACH_KEY) rerenderAll();
+window.addEventListener("storage", (event) => {
+  if (event.key === ACH_KEY) rerenderAll();
 });
 
 });

@@ -14,26 +14,26 @@ const HEAVY = /(?:-tracker-data|kh-melding-data)\.js$|\/images\//;
 
 self.addEventListener("install", () => self.skipWaiting());
 
-self.addEventListener("activate", (e) => e.waitUntil(
+self.addEventListener("activate", (event) => event.waitUntil(
   caches.keys()
-    .then((keys) => Promise.all(keys.filter((k) => k !== VERSION).map((k) => caches.delete(k))))
+    .then((cacheNames) => Promise.all(cacheNames.filter((name) => name !== VERSION).map((name) => caches.delete(name))))
     .then(() => self.clients.claim())
 ));
 
-self.addEventListener("fetch", (e) => {
-  const req = e.request;
-  if (req.method !== "GET") return;
-  const url = new URL(req.url);
+self.addEventListener("fetch", (event) => {
+  const request = event.request;
+  if (request.method !== "GET") return;
+  const url = new URL(request.url);
   // Let the browser handle anything cross-origin or not a heavy static asset.
   if (url.origin !== location.origin || !HEAVY.test(url.pathname)) return;
-  e.respondWith(
+  event.respondWith(
     caches.open(VERSION).then((cache) =>
-      cache.match(req).then((cached) => {
-        const network = fetch(req).then((res) => {
-          if (res && res.ok) cache.put(req, res.clone());
-          return res;
+      cache.match(request).then((cached) => {
+        const fromNetwork = fetch(request).then((response) => {
+          if (response && response.ok) cache.put(request, response.clone());
+          return response;
         }).catch(() => cached);
-        return cached || network;   // cache first, fall back to network
+        return cached || fromNetwork;   // cache first, fall back to network
       })
     )
   );
