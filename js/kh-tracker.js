@@ -54,6 +54,13 @@ let STORE = loadStore();
 function saveStore() { try { localStorage.setItem(game.storeKey, JSON.stringify(STORE)); } catch (e) { /* private browsing */ } }
 function sectionStore(storeId) { if (!STORE[storeId]) STORE[storeId] = {}; return STORE[storeId]; }
 function toggleCheck(store, key) { if (store[key]) delete store[key]; else store[key] = true; saveStore(); render(); }
+/* Counter sections store a number per item (0..max); 0 is removed so the
+   store stays sparse. */
+function setItemCount(store, index, value, max) {
+  value = Math.min(Math.max(value, 0), max);
+  if (value <= 0) delete store[index]; else store[index] = value;
+  saveStore(); render();
+}
 
 let activeChar = (function () {
   if (!CHARS.length) return null;
@@ -213,14 +220,32 @@ function autoSource(section, item) {
 }
 function autoDone(section, item) { return !!autoSource(section, item); }
 
-/* Count one list (a resolved section view). Handles multi-check
-   sections (every check counts) and cross-section auto-completion. */
+/* A section's checks need not all apply to every item: an item opts a check
+   OUT by setting that check's key to false in the DATA (e.g. a Spirit-only
+   Dream Eater carries nightmare:false, rare:false). Absent or true means the
+   check applies, so check-sections whose items don't carry the flags behave
+   exactly as before. */
+function checkApplies(item, check) { return item[check.k] !== false; }
+/* Counter sections (section.counter) track 0..max copies per item instead of
+   a single checkbox; the store holds a number. A legacy `true` (an item
+   completed before the section became a counter) counts as fully maxed. */
+function itemMax(item) { const max = +item.max; return max > 0 ? max : 1; }
+function counterValue(store, index, item) {
+  const raw = store[index];
+  if (raw === true) return itemMax(item);
+  return Math.min(Math.max(+raw || 0, 0), itemMax(item));
+}
+
+/* Count one list (a resolved section view). Handles counter sections (each
+   item contributes its max), multi-check sections (every applicable check
+   counts) and cross-section auto-completion. */
 function entryCount(view) {
   const section = view.section, store = STORE[view.storeId] || {}, checks = section && section.checks, charId = view.charId || null;
   let done = 0, total = 0;
   (view.items || []).forEach((item, index) => {
     if (!itemVisible(item, charId)) return;
-    if (checks) checks.forEach((check, checkIndex) => { total++; if (store[checkKey(index, check.k, checkIndex)]) done++; });
+    if (section && section.counter) { total += itemMax(item); done += counterValue(store, index, item); }
+    else if (checks) checks.forEach((check, checkIndex) => { if (!checkApplies(item, check)) return; total++; if (store[checkKey(index, check.k, checkIndex)]) done++; });
     else { total++; if (store[index] || autoDone(section, item)) done++; }
   });
   return [done, total];
@@ -245,8 +270,9 @@ function trophyProgress(ref) {
   if (!section) return null;
   const store = STORE[ref.section] || {};
   const checkIndex = (ref.check !== undefined && section.checks) ? section.checks.findIndex(c => c.k === ref.check) : -1;
+  const checkObj = checkIndex >= 0 ? section.checks[checkIndex] : null;
   const itemDone = (item, index) => {
-    if (ref.check !== undefined) return checkIndex >= 0 && !!store[checkKey(index, ref.check, checkIndex)];
+    if (ref.check !== undefined) return checkIndex >= 0 && checkApplies(item, checkObj) && !!store[checkKey(index, ref.check, checkIndex)];
     return !!store[index] || autoDone(section, item);
   };
   if (ref.perGroup) {
@@ -264,6 +290,7 @@ function trophyProgress(ref) {
     if (ref.nameEndsWith && !String(item.name).endsWith(ref.nameEndsWith)) return;
     if (ref.match && String(cellText(ref.section, index, ref.match.field, item) || "").indexOf(ref.match.value) < 0) return;
     if (ref.check !== undefined && checkIndex < 0) return;
+    if (ref.check !== undefined && checkObj && !checkApplies(item, checkObj)) return;   // skip items that lack this form
     total++; if (itemDone(item, index)) done++;
   });
   return [done, total];
@@ -294,9 +321,10 @@ function checklist(container, section, view, panelState) {
   let lastGroup = null;
   view.items.forEach((item, index) => {
     if (!itemVisible(item, activeChar)) return;
-    const auto = checks ? null : autoSource(section, item);
-    const done = checks ? checks.every((check, checkIndex) => store[checkKey(index, check.k, checkIndex)])
-                        : (!!store[index] || !!auto);
+    const auto = (checks || section.counter) ? null : autoSource(section, item);
+    const done = section.counter ? counterValue(store, index, item) >= itemMax(item)
+               : checks ? checks.every((check, checkIndex) => !checkApplies(item, check) || store[checkKey(index, check.k, checkIndex)])
+               : (!!store[index] || !!auto);
     if (panelState.hide && done) return;
     const langData = langRow(view.storeId, index);
     const haystack = (Object.values(item).join(" ") + (langData ? " " + Object.values(langData).join(" ") : "")).toLowerCase();
@@ -325,8 +353,30 @@ function checklist(container, section, view, panelState) {
       }
     }
     const row = el("tr", done ? "donerow" : null);
-    if (checks) {
+    if (section.counter) {
+      const max = itemMax(item), current = counterValue(store, index, item);
+      const cell = el("td", "chkcell");
+      if (max <= 1) {
+        // A single-copy ability is just a checkbox, like any other row.
+        const checkbox = el("input", "chk");
+        checkbox.type = "checkbox"; checkbox.checked = current >= 1;
+        checkbox.addEventListener("change", () => setItemCount(store, index, current >= 1 ? 0 : 1, max));
+        cell.appendChild(checkbox);
+      } else {
+        // Multi-copy abilities track partial progress (e.g. 2 / 5).
+        const stepper = el("span", "stepper");
+        const decBtn = el("button", "stepbtn", "−");
+        decBtn.onclick = () => setItemCount(store, index, current - 1, max);
+        const valEl = el("span", "stepval", `<b>${current}</b> <span class="mx">/ ${max}</span>`);
+        const incBtn = el("button", "stepbtn", "+");
+        incBtn.onclick = () => setItemCount(store, index, current + 1, max);
+        stepper.appendChild(decBtn); stepper.appendChild(valEl); stepper.appendChild(incBtn);
+        cell.appendChild(stepper);
+      }
+      row.appendChild(cell);
+    } else if (checks) {
       checks.forEach((check, checkIndex) => {
+        if (!checkApplies(item, check)) { row.appendChild(el("td", "chkcell na", "—")); return; }
         const key = checkKey(index, check.k, checkIndex);
         const cell = el("td", "chkcell");
         const checkbox = el("input", "chk");
@@ -648,22 +698,38 @@ function render() {
     table.appendChild(tbody);
     panel.dash.appendChild(table);
   }
+  // Each section is a collapsible <details>; its open/closed state is
+  // remembered per tab (panel.state.open). A search query force-opens every
+  // section so matches are never hidden inside a collapsed one.
+  if (!panel.state.open) panel.state.open = {};
+  const openState = panel.state.open;
+  const filtering = !!panel.state.q;
   let panelDone = 0, panelTotal = 0;
   tab.sections.forEach((section, sectionIndex) => {
     const view = resolveSection(section);
     const title = view.charLabel ? format('gt-section-for', translate('sec-' + section.id), view.charLabel) : translate('sec-' + section.id);
-    panel.results.appendChild(el("div", sectionIndex === 0 ? "grp-title" : "sub-title", fmtText(title)));
+    const [secDone, secTotal] = entryCount({ section, storeId: view.storeId, items: view.items, charId: activeChar });
+    panelDone += secDone; panelTotal += secTotal;
+
+    const sectionKey = "sec:" + section.id;
+    const details = el("details", "secgroup");
+    details.open = filtering ? true : ((sectionKey in openState) ? openState[sectionKey] : true);   // expanded by default
+    const summary = el("summary", sectionIndex === 0 ? "secsum secsum-main" : "secsum",
+      `<span class="secsum-title">${fmtText(title)}</span> ${chip(secDone, secTotal)}`);
+    // Record collapse state synchronously on click (the toggle event is async,
+    // which would let a re-render's programmatic open clobber a fresh collapse).
+    summary.addEventListener("click", () => { if (!filtering) openState[sectionKey] = !((sectionKey in openState) ? openState[sectionKey] : true); });
+    details.appendChild(summary);
     // Optional explanatory note under a section title (lang key note-<id>);
     // newlines become separate lines.
     const note = translate('note-' + section.id);
     if (note && note !== 'note-' + section.id) {
       const noteEl = el("p", "hint");
       note.split("\n").forEach((line, lineIndex) => { if (lineIndex) noteEl.appendChild(el("br")); noteEl.appendChild(document.createTextNode(line)); });
-      panel.results.appendChild(noteEl);
+      details.appendChild(noteEl);
     }
-    checklist(panel.results, section, view, panel.state);
-    const [secDone, secTotal] = entryCount({ section, storeId: view.storeId, items: view.items, charId: activeChar });
-    panelDone += secDone; panelTotal += secTotal;
+    checklist(details, section, view, panel.state);
+    panel.results.appendChild(details);
   });
   setCount(panel, panelDone, panelTotal);
 

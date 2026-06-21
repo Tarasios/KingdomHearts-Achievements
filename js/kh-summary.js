@@ -60,10 +60,19 @@ var KHSummary = (function () {
     }
     return false;
   }
+  // Mirrors checkApplies/itemMax/counterValue in js/kh-tracker.js.
+  function checkApplies(item, check) { return item[check.k] !== false; }
+  function itemMax(item) { var max = +item.max; return max > 0 ? max : 1; }
+  function counterValue(store, index, item) {
+    var raw = store[index];
+    if (raw === true) return itemMax(item);
+    return Math.min(Math.max(+raw || 0, 0), itemMax(item));
+  }
   function entryCount(game, allStores, section, storeId, items) {
     var store = allStores[storeId] || {}, checks = section && section.checks, done = 0, total = 0;
     (items || []).forEach(function (item, index) {
-      if (checks) checks.forEach(function (check, checkIndex) { total++; if (store[checkKey(index, check.k, checkIndex)]) done++; });
+      if (section && section.counter) { total += itemMax(item); done += counterValue(store, index, item); }
+      else if (checks) checks.forEach(function (check, checkIndex) { if (!checkApplies(item, check)) return; total++; if (store[checkKey(index, check.k, checkIndex)]) done++; });
       else { total++; if (store[index] || autoDone(game, allStores, section, item)) done++; }
     });
     return [done, total];

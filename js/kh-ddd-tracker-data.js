@@ -219,6 +219,74 @@ var TRACKER_GAME = {
               "name": "Seekers of Secrets"
             }
           ]
+        },
+        {
+          "id": "shelf",
+          "cols": [
+            {
+              "k": "name",
+              "name": true
+            },
+            {
+              "k": "desc"
+            }
+          ],
+          "items": [
+            {
+              "name": "In the Clear"
+            },
+            {
+              "name": "Badge of Pride"
+            },
+            {
+              "name": "Stop Drop Roller"
+            },
+            {
+              "name": "King of Rush"
+            },
+            {
+              "name": "Keyslinger"
+            },
+            {
+              "name": "In the Munny"
+            },
+            {
+              "name": "Dream Pleaser"
+            },
+            {
+              "name": "Portal Champ"
+            },
+            {
+              "name": "Daring Diver"
+            },
+            {
+              "name": "Motion Slickness"
+            },
+            {
+              "name": "Treasure Seeker"
+            },
+            {
+              "name": "Spirit Guide"
+            },
+            {
+              "name": "Critical Praise"
+            },
+            {
+              "name": "Reality Shifter"
+            },
+            {
+              "name": "Pro Linker"
+            },
+            {
+              "name": "Stat Builder"
+            },
+            {
+              "name": "Ribbit Reaper"
+            },
+            {
+              "name": "Keyblade Conqueror"
+            }
+          ]
         }
       ]
     },
@@ -599,79 +667,6 @@ var TRACKER_GAME = {
       ]
     },
     {
-      "id": "shelf",
-      "sections": [
-        {
-          "id": "shelf",
-          "cols": [
-            {
-              "k": "name",
-              "name": true
-            },
-            {
-              "k": "desc"
-            }
-          ],
-          "items": [
-            {
-              "name": "In the Clear"
-            },
-            {
-              "name": "Badge of Pride"
-            },
-            {
-              "name": "Stop Drop Roller"
-            },
-            {
-              "name": "King of Rush"
-            },
-            {
-              "name": "Keyslinger"
-            },
-            {
-              "name": "In the Munny"
-            },
-            {
-              "name": "Dream Pleaser"
-            },
-            {
-              "name": "Portal Champ"
-            },
-            {
-              "name": "Daring Diver"
-            },
-            {
-              "name": "Motion Slickness"
-            },
-            {
-              "name": "Treasure Seeker"
-            },
-            {
-              "name": "Spirit Guide"
-            },
-            {
-              "name": "Critical Praise"
-            },
-            {
-              "name": "Reality Shifter"
-            },
-            {
-              "name": "Pro Linker"
-            },
-            {
-              "name": "Stat Builder"
-            },
-            {
-              "name": "Ribbit Reaper"
-            },
-            {
-              "name": "Keyblade Conqueror"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "dreameaters",
       "sections": [
         {
@@ -680,15 +675,6 @@ var TRACKER_GAME = {
             {
               "k": "name",
               "name": true
-            },
-            {
-              "k": "spirit"
-            },
-            {
-              "k": "nightmare"
-            },
-            {
-              "k": "rare"
             },
             {
               "k": "loc"
@@ -705,25 +691,32 @@ var TRACKER_GAME = {
               "name": "Yoggy Ram"
             },
             {
-              "name": "Komory Bat"
+              "name": "Komory Bat",
+              "rare": false
             },
             {
-              "name": "Pricklemane"
+              "name": "Pricklemane",
+              "rare": false
             },
             {
-              "name": "Hebby Repp"
+              "name": "Hebby Repp",
+              "rare": false
             },
             {
-              "name": "Sir Kyroo"
+              "name": "Sir Kyroo",
+              "rare": false
             },
             {
-              "name": "Toximander"
+              "name": "Toximander",
+              "rare": false
             },
             {
-              "name": "Fin Fatale"
+              "name": "Fin Fatale",
+              "rare": false
             },
             {
-              "name": "Tatsu Steed"
+              "name": "Tatsu Steed",
+              "rare": false
             },
             {
               "name": "Necho Cat"
@@ -741,16 +734,19 @@ var TRACKER_GAME = {
               "name": "Iceguin Ace"
             },
             {
-              "name": "Peepsta Hoo"
+              "name": "Peepsta Hoo",
+              "rare": false
             },
             {
-              "name": "Escarglow"
+              "name": "Escarglow",
+              "rare": false
             },
             {
               "name": "KO Kabuto"
             },
             {
-              "name": "Wheeflower"
+              "name": "Wheeflower",
+              "rare": false
             },
             {
               "name": "Ghostabocky"
@@ -765,37 +761,48 @@ var TRACKER_GAME = {
               "name": "Halbird"
             },
             {
-              "name": "Staggerceps"
+              "name": "Staggerceps",
+              "rare": false
             },
             {
-              "name": "Fishboné"
+              "name": "Fishboné",
+              "rare": false
             },
             {
-              "name": "Flowbermeow"
+              "name": "Flowbermeow",
+              "rare": false
             },
             {
-              "name": "Cyber Yog"
+              "name": "Cyber Yog",
+              "rare": false
             },
             {
-              "name": "Chef Kyroo"
+              "name": "Chef Kyroo",
+              "rare": false
             },
             {
-              "name": "Lord Kyroo"
+              "name": "Lord Kyroo",
+              "rare": false
             },
             {
-              "name": "Tatsu Blaze"
+              "name": "Tatsu Blaze",
+              "rare": false
             },
             {
-              "name": "Electricorn"
+              "name": "Electricorn",
+              "rare": false
             },
             {
-              "name": "Woeflower"
+              "name": "Woeflower",
+              "rare": false
             },
             {
-              "name": "Jestabocky"
+              "name": "Jestabocky",
+              "rare": false
             },
             {
-              "name": "Eaglider"
+              "name": "Eaglider",
+              "rare": false
             },
             {
               "name": "Me Me Bunny"
@@ -807,13 +814,16 @@ var TRACKER_GAME = {
               "name": "Tyranto Rex"
             },
             {
-              "name": "Majik Lapin"
+              "name": "Majik Lapin",
+              "rare": false
             },
             {
-              "name": "Cera Terror"
+              "name": "Cera Terror",
+              "rare": false
             },
             {
-              "name": "Skelterwild"
+              "name": "Skelterwild",
+              "rare": false
             },
             {
               "name": "Ducky Goose"
@@ -825,67 +835,121 @@ var TRACKER_GAME = {
               "name": "Ryu Dragon"
             },
             {
-              "name": "Drak Quack"
+              "name": "Drak Quack",
+              "rare": false
             },
             {
-              "name": "Keeba Tiger"
+              "name": "Keeba Tiger",
+              "rare": false
             },
             {
-              "name": "Meowjesty"
+              "name": "Meowjesty",
+              "nightmare": false,
+              "rare": false
             },
             {
-              "name": "Sudo Neku"
+              "name": "Sudo Neku",
+              "nightmare": false,
+              "rare": false
             },
             {
-              "name": "Frootz Cat"
+              "name": "Frootz Cat",
+              "nightmare": false,
+              "rare": false
             },
             {
-              "name": "Ursa Circus"
+              "name": "Ursa Circus",
+              "nightmare": false,
+              "rare": false
             },
             {
-              "name": "Kab Kannon"
+              "name": "Kab Kannon",
+              "nightmare": false,
+              "rare": false
             },
             {
-              "name": "R & R Seal"
+              "name": "R & R Seal",
+              "nightmare": false,
+              "rare": false
             },
             {
-              "name": "Catanuki"
+              "name": "Catanuki",
+              "nightmare": false,
+              "rare": false
             },
             {
-              "name": "Beatalike"
+              "name": "Beatalike",
+              "nightmare": false,
+              "rare": false
             },
             {
-              "name": "Tubguin Ace"
+              "name": "Tubguin Ace",
+              "nightmare": false,
+              "rare": false
             },
             {
-              "name": "Spellican"
+              "name": "Spellican",
+              "spirit": false,
+              "rare": false
             },
             {
-              "name": "Commantis"
+              "name": "Commantis",
+              "spirit": false,
+              "rare": false
             },
             {
-              "name": "Char Clawbster"
+              "name": "Char Clawbster",
+              "spirit": false,
+              "rare": false
             },
             {
-              "name": "Chill Clawbster"
+              "name": "Chill Clawbster",
+              "spirit": false,
+              "rare": false
             },
             {
-              "name": "Hockomonkey"
+              "name": "Hockomonkey",
+              "spirit": false,
+              "rare": false
             },
             {
-              "name": "Holey Moley"
+              "name": "Holey Moley",
+              "spirit": false,
+              "rare": false
             },
             {
-              "name": "Wargoyle"
+              "name": "Wargoyle",
+              "spirit": false,
+              "rare": false
             },
             {
-              "name": "Brawlamari"
+              "name": "Brawlamari",
+              "spirit": false,
+              "rare": false
             },
             {
-              "name": "Queen Buzzerfly"
+              "name": "Queen Buzzerfly",
+              "spirit": false,
+              "rare": false
             },
             {
-              "name": "Anti Black Coat"
+              "name": "Anti Black Coat",
+              "spirit": false,
+              "rare": false
+            }
+          ],
+          "checks": [
+            {
+              "k": "spirit",
+              "th": "th-dreameaters-spirit"
+            },
+            {
+              "k": "nightmare",
+              "th": "th-dreameaters-nightmare"
+            },
+            {
+              "k": "rare",
+              "th": "th-dreameaters-rare"
             }
           ]
         },
@@ -1084,74 +1148,87 @@ var TRACKER_GAME = {
               "name": true
             },
             {
-              "k": "max"
-            },
-            {
               "k": "how"
             }
           ],
           "items": [
             {
               "name": "Combo Plus",
-              "g": "Support"
+              "g": "Support",
+              "max": 3
             },
             {
               "name": "Air Combo Plus",
-              "g": "Support"
+              "g": "Support",
+              "max": 3
             },
             {
               "name": "Combo Master",
-              "g": "Support"
+              "g": "Support",
+              "max": 1
             },
             {
               "name": "EXP Boost",
-              "g": "Support"
+              "g": "Support",
+              "max": 1
             },
             {
               "name": "EXP Walker",
-              "g": "Support"
+              "g": "Support",
+              "max": 1
             },
             {
               "name": "EXP Zero",
-              "g": "Support"
+              "g": "Support",
+              "max": 1
             },
             {
               "name": "Damage Syphon",
-              "g": "Support"
+              "g": "Support",
+              "max": 1
             },
             {
               "name": "Second Chance",
-              "g": "Support"
+              "g": "Support",
+              "max": 1
             },
             {
               "name": "Once More",
-              "g": "Support"
+              "g": "Support",
+              "max": 1
             },
             {
               "name": "Scan",
-              "g": "Support"
+              "g": "Support",
+              "max": 1
             },
             {
               "name": "Leaf Bracer",
-              "g": "Support"
+              "g": "Support",
+              "max": 1
             },
             {
               "name": "Treasure Magnet",
-              "g": "Support"
+              "g": "Support",
+              "max": 5
             },
             {
               "name": "Link Critical",
-              "g": "Spirit"
+              "g": "Spirit",
+              "max": 1
             },
             {
               "name": "Support Boost",
-              "g": "Spirit"
+              "g": "Spirit",
+              "max": 3
             },
             {
               "name": "Waking Dream",
-              "g": "Spirit"
+              "g": "Spirit",
+              "max": 1
             }
-          ]
+          ],
+          "counter": true
         },
         {
           "id": "abstats",
@@ -1161,126 +1238,152 @@ var TRACKER_GAME = {
               "name": true
             },
             {
-              "k": "max"
-            },
-            {
               "k": "how"
             }
           ],
           "items": [
             {
               "name": "HP Boost",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 5
             },
             {
               "name": "Fire Boost",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 3
             },
             {
               "name": "Blizzard Boost",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 3
             },
             {
               "name": "Thunder Boost",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 3
             },
             {
               "name": "Water Boost",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 3
             },
             {
               "name": "Cure Boost",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 3
             },
             {
               "name": "Item Boost",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 3
             },
             {
               "name": "Attack Haste",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 5
             },
             {
               "name": "Magic Haste",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 5
             },
             {
               "name": "Attack Boost",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 3
             },
             {
               "name": "Magic Boost",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 3
             },
             {
               "name": "Defense Boost",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 3
             },
             {
               "name": "Fire Screen",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 5
             },
             {
               "name": "Blizzard Screen",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 5
             },
             {
               "name": "Thunder Screen",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 5
             },
             {
               "name": "Water Screen",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 5
             },
             {
               "name": "Dark Screen",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 5
             },
             {
               "name": "Light Screen",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 5
             },
             {
               "name": "Mini Block",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 1
             },
             {
               "name": "Blindness Block",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 1
             },
             {
               "name": "Confusion Block",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 1
             },
             {
               "name": "Bind Block",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 1
             },
             {
               "name": "Poison Block",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 1
             },
             {
               "name": "Slow Block",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 1
             },
             {
               "name": "Sleep Block",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 1
             },
             {
               "name": "Stop Block",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 1
             },
             {
               "name": "Reload Boost",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 1
             },
             {
               "name": "Defender",
-              "g": "Stats"
+              "g": "Stats",
+              "max": 1
             }
-          ]
+          ],
+          "counter": true
         }
       ]
     },
@@ -1967,62 +2070,93 @@ var TRACKER_GAME = {
               "name": true
             },
             {
-              "k": "sora"
-            },
-            {
-              "k": "riku"
-            },
-            {
               "k": "how"
             }
           ],
-          "items": [
-            {
-              "name": "Kingdom Key"
-            },
-            {
-              "name": "Way to the Dawn"
-            },
-            {
-              "name": "Skull Noise"
-            },
-            {
-              "name": "Guardian Bell"
-            },
-            {
-              "name": "Ferris Gear"
-            },
-            {
-              "name": "Ocean's Rage"
-            },
-            {
-              "name": "Dual Disc"
-            },
-            {
-              "name": "Knockout Punch"
-            },
-            {
-              "name": "All for One"
-            },
-            {
-              "name": "Counterpoint"
-            },
-            {
-              "name": "Divewing"
-            },
-            {
-              "name": "End of Pain"
-            },
-            {
-              "name": "Sweet Dreams"
-            },
-            {
-              "name": "Unbound"
-            },
-            {
-              "name": "Ultima Weapon"
-            }
-          ]
+          "variants": {
+            "sora": [
+              {
+                "name": "Kingdom Key"
+              },
+              {
+                "name": "Skull Noise"
+              },
+              {
+                "name": "Guardian Bell"
+              },
+              {
+                "name": "Ferris Gear"
+              },
+              {
+                "name": "Dual Disc"
+              },
+              {
+                "name": "Knockout Punch"
+              },
+              {
+                "name": "All for One"
+              },
+              {
+                "name": "Counterpoint"
+              },
+              {
+                "name": "Divewing"
+              },
+              {
+                "name": "End of Pain"
+              },
+              {
+                "name": "Sweet Dreams"
+              },
+              {
+                "name": "Unbound"
+              },
+              {
+                "name": "Ultima Weapon"
+              }
+            ],
+            "riku": [
+              {
+                "name": "Way to the Dawn"
+              },
+              {
+                "name": "Skull Noise"
+              },
+              {
+                "name": "Guardian Bell"
+              },
+              {
+                "name": "Ocean's Rage"
+              },
+              {
+                "name": "Dual Disc"
+              },
+              {
+                "name": "Knockout Punch"
+              },
+              {
+                "name": "All for One"
+              },
+              {
+                "name": "Counterpoint"
+              },
+              {
+                "name": "Divewing"
+              },
+              {
+                "name": "End of Pain"
+              },
+              {
+                "name": "Sweet Dreams"
+              },
+              {
+                "name": "Unbound"
+              },
+              {
+                "name": "Ultima Weapon"
+              }
+            ]
+          }
         }
       ]
     },
