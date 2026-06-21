@@ -742,441 +742,258 @@
     "dreameaters": [
       {
         "name": "Meow Wow",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "Yes",
         "loc": "Nightmare: Traverse Town, La Cité des Cloches Rare N.: Special Portals in Traverse Town, The Grid"
       },
       {
         "name": "Tama Sheep",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "Yes",
         "loc": "Nightmare: Traverse Town, La Cité des Cloches Rare Nightmare: Special Portal in Traverse Town"
       },
       {
         "name": "Yoggy Ram",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "Yes",
         "loc": "Nightmare: Traverse Town, La Cité des Cloches Rare Nightmare: Special Portal in The Grid"
       },
       {
         "name": "Komory Bat",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: Traverse Town, La Cité des Cloches"
       },
       {
         "name": "Pricklemane",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: Traverse Town, La Cité des Cloches"
       },
       {
         "name": "Hebby Repp",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: Traverse Town, La Cité des Cloches"
       },
       {
         "name": "Sir Kyroo",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: Prankster's Paradise, Country of the Musketeers"
       },
       {
         "name": "Toximander",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: La Cité des Cloches, Country of the Musketeers"
       },
       {
         "name": "Fin Fatale",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: Prankster's Paradise, Symphony of Sorcery"
       },
       {
         "name": "Tatsu Steed",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: Prankster's Paradise, Symphony of Sorcery"
       },
       {
         "name": "Necho Cat",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "Yes",
         "loc": "Nightmare: Traverse Town, La Cité des Cloches Rare Nightmare: Special Portal in La Cité des Cloches"
       },
       {
         "name": "Thunderaffe",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "Yes",
         "loc": "Nightmare: Symphony of Sorcery, The World That Never Was Rare Nightmare: Special Portal in The World That Never Was"
       },
       {
         "name": "Kooma Panda",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "Yes",
         "loc": "Nightmare: Traverse Town, La Cité des Cloches Rare N.: Special Portals in Traverse Town, Prankster's Paradise"
       },
       {
         "name": "Pegaslick",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "Yes",
         "loc": "Nightmare: Symphony of Sorcery, The World That Never Was Rare Nightmare: Special Portal in Symphony of Sorcery"
       },
       {
         "name": "Iceguin Ace",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "Yes",
         "loc": "Nightmare: Prankster's Paradise, Country of the Musketeers Rare Nightmare: Special Portal in Prankster's Paradise"
       },
       {
         "name": "Peepsta Hoo",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: The Grid, Country of the Musketeers"
       },
       {
         "name": "Escarglow",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: The Grid, Symphony of Sorcery"
       },
       {
         "name": "KO Kabuto",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "Yes",
         "loc": "Nightmare: The Grid, Country of the Musketeers Rare Nightmare: Special Portal in The Grid"
       },
       {
         "name": "Wheeflower",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: La Cité des Cloches"
       },
       {
         "name": "Ghostabocky",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "Yes",
         "loc": "Nightmare: Symphony of Sorcery, The World That Never Was Rare Nightmare: Special Portal in Symphony of Sorcery"
       },
       {
         "name": "Zolephant",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "Yes",
         "loc": "Nightmare: La Cité des Cloches, Country of the Musketeers Rare Nightmare: Special Portal in La Cité des Cloches"
       },
       {
         "name": "Juggle Pup",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "Yes",
         "loc": "Nightmare: Prankster's Paradise, Symphony of Sorcery Rare Nightmare: Special Portal in Prankster's Paradise"
       },
       {
         "name": "Halbird",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "Yes",
         "loc": "Nightmare: The Grid, Country of the Musketeers Rare Nightmare: Special Portal in Country of the Musketeers"
       },
       {
         "name": "Staggerceps",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: Country of the Musketeers, Symphony of Sorcery"
       },
       {
         "name": "Fishboné",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: Country of the Musketeers, Symphony of Sorcery"
       },
       {
         "name": "Flowbermeow",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: Special Portals in Traverse Town, Prankster's Paradise"
       },
       {
         "name": "Cyber Yog",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: The Grid"
       },
       {
         "name": "Chef Kyroo",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: Country of the Musketeers, Symphony of Sorcery"
       },
       {
         "name": "Lord Kyroo",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: Special Portal in Prankster's Paradise"
       },
       {
         "name": "Tatsu Blaze",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: Traverse Town, Country of the Musketeers"
       },
       {
         "name": "Electricorn",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: Symphony of Sorcery, The World That Never Was"
       },
       {
         "name": "Woeflower",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: La Cité des Cloches, Symphony of Sorcery"
       },
       {
         "name": "Jestabocky",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: Prankster's Paradise, Country of the Musketeers"
       },
       {
         "name": "Eaglider",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: The Grid, The World That Never Was"
       },
       {
         "name": "Me Me Bunny",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "Yes",
         "loc": "Nightmare: Country of the Musketeers Rare Nightmare: Special Portal in Country of the Musketeers"
       },
       {
         "name": "Drill Sye",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "Yes",
         "loc": "Nightmare: La Cité des Cloches, Traverse Town (2nd visit) Rare Nightmare: Special Portal in La Cité des Cloches"
       },
       {
         "name": "Tyranto Rex",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "Yes",
         "loc": "Nightmare: Country of the Musketeers Rare Nightmare: Special Portal in Country of the Musketeers"
       },
       {
         "name": "Majik Lapin",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: The World That Never Was"
       },
       {
         "name": "Cera Terror",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: Traverse Town (2nd visit), The World That Never Was"
       },
       {
         "name": "Skelterwild",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: The World That Never Was"
       },
       {
         "name": "Ducky Goose",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "Yes",
         "loc": "Nightmare: Country of the Musketeers Rare Nightmare: Special Portal in Country of the Musketeers"
       },
       {
         "name": "Aura Lion",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "Yes",
         "loc": "Nightmare: Country of the Musketeers Rare Nightmare: Special Portal in Country of the Musketeers"
       },
       {
         "name": "Ryu Dragon",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "Yes",
         "loc": "Nightmare: Symphony of Sorcery, The World That Never Was Rare Nightmare: Special Portal in Symphony of Sorcery"
       },
       {
         "name": "Drak Quack",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: The World That Never Was"
       },
       {
         "name": "Keeba Tiger",
-        "spirit": "Yes",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Nightmare: The World That Never Was"
       },
       {
         "name": "Meowjesty",
-        "spirit": "Yes",
-        "nightmare": "—",
-        "rare": "—"
+        "loc": ""
       },
       {
         "name": "Sudo Neku",
-        "spirit": "Yes",
-        "nightmare": "—",
-        "rare": "—"
+        "loc": ""
       },
       {
         "name": "Frootz Cat",
-        "spirit": "Yes",
-        "nightmare": "—",
-        "rare": "—"
+        "loc": ""
       },
       {
         "name": "Ursa Circus",
-        "spirit": "Yes",
-        "nightmare": "—",
-        "rare": "—"
+        "loc": ""
       },
       {
         "name": "Kab Kannon",
-        "spirit": "Yes",
-        "nightmare": "—",
-        "rare": "—"
+        "loc": ""
       },
       {
         "name": "R & R Seal",
-        "spirit": "Yes",
-        "nightmare": "—",
-        "rare": "—"
+        "loc": ""
       },
       {
         "name": "Catanuki",
-        "spirit": "Yes",
-        "nightmare": "—",
-        "rare": "—"
+        "loc": ""
       },
       {
         "name": "Beatalike",
-        "spirit": "Yes",
-        "nightmare": "—",
-        "rare": "—"
+        "loc": ""
       },
       {
         "name": "Tubguin Ace",
-        "spirit": "Yes",
-        "nightmare": "—",
-        "rare": "—"
+        "loc": ""
       },
       {
         "name": "Spellican",
-        "spirit": "—",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Story boss"
       },
       {
         "name": "Commantis",
-        "spirit": "—",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Story boss"
       },
       {
         "name": "Char Clawbster",
-        "spirit": "—",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Story boss"
       },
       {
         "name": "Chill Clawbster",
-        "spirit": "—",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Story boss"
       },
       {
         "name": "Hockomonkey",
-        "spirit": "—",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Story boss"
       },
       {
         "name": "Holey Moley",
-        "spirit": "—",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Story boss"
       },
       {
         "name": "Wargoyle",
-        "spirit": "—",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Story boss"
       },
       {
         "name": "Brawlamari",
-        "spirit": "—",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Dive boss"
       },
       {
         "name": "Queen Buzzerfly",
-        "spirit": "—",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Dive boss"
       },
       {
         "name": "Anti Black Coat",
-        "spirit": "—",
-        "nightmare": "Yes",
-        "rare": "—",
         "loc": "Story boss"
       }
     ],
@@ -1509,219 +1326,176 @@
     "abilities": [
       {
         "name": "Combo Plus",
-        "max": "3",
         "how": "Kooma Panda, Lord Kyroo, Me Me Bunny, Pricklemane, Ryu Dragon, Staggerceps, Sir Kyroo"
       },
       {
         "name": "Air Combo Plus",
-        "max": "3",
         "how": "Halbird, Chef Kyroo, Eaglider, Pegaslick"
       },
       {
         "name": "Combo Master",
-        "max": "1",
         "how": "Lord Kyroo, Ryu Dragon"
       },
       {
         "name": "EXP Boost",
-        "max": "1",
         "how": "Cera Terror, Drill Sye, Keeba Tiger"
       },
       {
         "name": "EXP Walker",
-        "max": "1",
         "how": "Skelterwild"
       },
       {
         "name": "EXP Zero",
-        "max": "1",
         "how": "Received by default (Proud and Critical mode only)"
       },
       {
         "name": "Damage Syphon",
-        "max": "1",
         "how": "Ducky Goose, Thunderaffe, Ursa Circus"
       },
       {
         "name": "Second Chance",
-        "max": "1",
         "how": "Aura Lion, Escarglow, Meowjesty, R & R Seal, Zolephant"
       },
       {
         "name": "Once More",
-        "max": "1",
         "how": "Drak Quack, Flowbermeow, Tyranto Rex"
       },
       {
         "name": "Scan",
-        "max": "1",
         "how": "Received by default"
       },
       {
         "name": "Leaf Bracer",
-        "max": "1",
         "how": "Aura Lion, Electricorn, Fishboné, Juggle Pup, Meow Wow"
       },
       {
         "name": "Treasure Magnet",
-        "max": "5",
         "how": "Cyber Yog, Drak Quack, Ducky Goose, Ghostabocky, Jestabocky, Toximander, Woeflower, Yoggy Ram"
       },
       {
         "name": "Link Critical",
-        "max": "1",
         "how": "Meow Wow"
       },
       {
         "name": "Support Boost",
-        "max": "3",
         "how": "Ducky Goose, Electricorn, Fin Fatale, Frootz Cat, Necho Cat, Peepsta Hoo, Tama Sheep, Tatsu Blaze"
       },
       {
         "name": "Waking Dream",
-        "max": "1",
         "how": "Komory Bat"
       }
     ],
     "abstats": [
       {
         "name": "HP Boost",
-        "max": "5",
         "how": "R & R Seal, Zolephant, Cera Terror, Keeba Tiger, Skelterwild, Tama Sheep, Wheeflower, Yoggy Ram, and more"
       },
       {
         "name": "Fire Boost",
-        "max": "3",
         "how": "Hebby Repp, Tyranto Rex, Chef Kyroo, Peepsta Hoo, Ryu Dragon, Tatsu Blaze, Sudo Neku, Yoggy Ram, and more"
       },
       {
         "name": "Blizzard Boost",
-        "max": "3",
         "how": "Iceguin Ace, Skelterwild, Peepsta Hoo, Tatsu Steed, Juggle Pup, Sudo Neku"
       },
       {
         "name": "Thunder Boost",
-        "max": "3",
         "how": "Cyber Yog, Necho Cat, Thunderaffe, Lord Kyroo, Peepsta Hoo, Sudo Neku, Electricorn, Frootz Cat"
       },
       {
         "name": "Water Boost",
-        "max": "3",
         "how": "Fin Fatale, Fishboné, Sir Kyroo, Zolephant"
       },
       {
         "name": "Cure Boost",
-        "max": "3",
         "how": "Sir Kyroo, Lord Kyroo, Wheeflower, Aura Lion, Electricorn, Iceguin Ace, Zolephant"
       },
       {
         "name": "Item Boost",
-        "max": "3",
         "how": "Chef Kyroo, Drak Quack, Ducky Goose, Escarglow, Juggle Pup, Kooma Panda, Ursa Circus, Drill Sye, Meow Wow, Pricklemane"
       },
       {
         "name": "Attack Haste",
-        "max": "5",
         "how": "Frootz Cat, Thunderaffe, Ursa Circus, Eaglider, Electricorn, Flowbermeow, Halbird, Keeba Tiger, Meow Wow, Sir Kyroo, Toximander, and more"
       },
       {
         "name": "Magic Haste",
-        "max": "5",
         "how": "Frootz Cat, Majik Lapin, Flowbermeow, Halbird, Necho Cat, Pegaslick, Sudo Neku, Meow Wow, Toximander, and more"
       },
       {
         "name": "Attack Boost",
-        "max": "3",
         "how": "Keeba Tiger, Tyranto Rex, Ursa Circus, Sir Kyroo, Staggerceps, Tatsu Blaze, Toximander, and more"
       },
       {
         "name": "Magic Boost",
-        "max": "3",
         "how": "Majik Lapin, Sudo Neku, Peepsta Hoo, R & R Seal, Sir Kyroo, Tama Sheep, Woeflower, and more"
       },
       {
         "name": "Defense Boost",
-        "max": "3",
         "how": "Kab Kannon, KO Kabuto, Skelterwild, Pricklemane, R & R Seal, Staggerceps, Tama Sheep, and more"
       },
       {
         "name": "Fire Screen",
-        "max": "5",
         "how": "Yoggy Ram, Hebby Repp, Chef Kyroo, Eaglider, Escarglow, Kab Kannon, KO Kabuto, Tatsu Blaze, Tyranto Rex, Pricklemane"
       },
       {
         "name": "Blizzard Screen",
-        "max": "5",
         "how": "Juggle Pup, KO Kabuto, Tatsu Steed, Escarglow, Iceguin Ace, Kab Kannon, Majik Lapin, Ducky Goose"
       },
       {
         "name": "Thunder Screen",
-        "max": "5",
         "how": "Jestabocky, KO Kabuto, Cyber Yog, Kab Kannon, Thunderaffe, Escarglow"
       },
       {
         "name": "Water Screen",
-        "max": "5",
         "how": "Sir Kyroo, Wheeflower, Zolephant, Escarglow, Kab Kannon, Tama Sheep, Fin Fatale"
       },
       {
         "name": "Dark Screen",
-        "max": "5",
         "how": "Ghostabocky, Staggerceps, Fishboné, Komory Bat, Toximander, Woeflower, Escarglow, Majik Lapin, Me Me Bunny, Meowjesty"
       },
       {
         "name": "Light Screen",
-        "max": "5",
         "how": "Pegaslick, Aura Lion, Flowbermeow, Staggerceps, Escarglow, Me Me Bunny, Meow Wow, Meowjesty"
       },
       {
         "name": "Mini Block",
-        "max": "1",
         "how": "Cera Terror, Drill Sye, Kooma Panda, R & R Seal, Toximander"
       },
       {
         "name": "Blindness Block",
-        "max": "1",
         "how": "Ghostabocky, Iceguin Ace, Jestabocky, Kooma Panda, Peepsta Hoo, Toximander, Ursa Circus, Woeflower"
       },
       {
         "name": "Confusion Block",
-        "max": "1",
         "how": "Cyber Yog, Electricorn, Komory Bat, Kooma Panda, Meow Wow, Necho Cat, Peepsta Hoo, R & R Seal, Tatsu Steed, Toximander"
       },
       {
         "name": "Bind Block",
-        "max": "1",
         "how": "Eaglider, Kooma Panda, Meowjesty, Peepsta Hoo, R & R Seal, Tatsu Blaze, Tatsu Steed, Toximander, Wheeflower, Yoggy Ram"
       },
       {
         "name": "Poison Block",
-        "max": "1",
         "how": "Drill Sye, Fishboné, Meow Wow, Peepsta Hoo, Pricklemane, R & R Seal, Skelterwild, Toximander"
       },
       {
         "name": "Slow Block",
-        "max": "1",
         "how": "Drill Sye, Eaglider, Fin Fatale, Ghostabocky, Hebby Repp, Me Me Bunny, R & R Seal, Sudo Neku, Tama Sheep, Thunderaffe"
       },
       {
         "name": "Sleep Block",
-        "max": "1",
         "how": "Cera Terror, Fin Fatale, Keeba Tiger, Necho Cat, Pricklemane, Tama Sheep, Ursa Circus, Wheeflower"
       },
       {
         "name": "Stop Block",
-        "max": "1",
         "how": "Drill Sye, Halbird, Iceguin Ace, Majik Lapin, Pricklemane, Sir Kyroo, Tama Sheep"
       },
       {
         "name": "Reload Boost",
-        "max": "1",
         "how": "Drak Quack, Flowbermeow, Frootz Cat, Kab Kannon, KO Kabuto, Ryu Dragon, Skelterwild, Sudo Neku"
       },
       {
         "name": "Defender",
-        "max": "1",
         "how": "Cera Terror, Drak Quack, Escarglow, Kab Kannon, Lord Kyroo, Me Me Bunny, Staggerceps, Ursa Circus"
       }
     ],
@@ -2371,98 +2145,6 @@
       {
         "name": "Wondrous Fantasy",
         "how": "Purchase from the Moogle Shop after reaching Shop Lv. 8"
-      }
-    ],
-    "keyblades": [
-      {
-        "name": "Kingdom Key",
-        "sora": "Yes",
-        "riku": "—",
-        "how": "Received by default"
-      },
-      {
-        "name": "Way to the Dawn",
-        "sora": "—",
-        "riku": "Yes",
-        "how": "Received by default"
-      },
-      {
-        "name": "Skull Noise",
-        "sora": "Yes",
-        "riku": "Yes",
-        "how": "Complete the story of Traverse Town (1st visit)"
-      },
-      {
-        "name": "Guardian Bell",
-        "sora": "Yes",
-        "riku": "Yes",
-        "how": "Complete the story of La Cité des Cloches"
-      },
-      {
-        "name": "Ferris Gear",
-        "sora": "Yes",
-        "riku": "—",
-        "how": "Complete the story of Prankster's Paradise"
-      },
-      {
-        "name": "Ocean's Rage",
-        "sora": "—",
-        "riku": "Yes",
-        "how": "Complete the story of Prankster's Paradise"
-      },
-      {
-        "name": "Dual Disc",
-        "sora": "Yes",
-        "riku": "Yes",
-        "how": "Complete the story of The Grid"
-      },
-      {
-        "name": "Knockout Punch",
-        "sora": "Yes",
-        "riku": "Yes",
-        "how": "Complete the story of Traverse Town (2nd visit)"
-      },
-      {
-        "name": "All for One",
-        "sora": "Yes",
-        "riku": "Yes",
-        "how": "Complete the story of Country of the Musketeers"
-      },
-      {
-        "name": "Counterpoint",
-        "sora": "Yes",
-        "riku": "Yes",
-        "how": "Complete the story of Symphony of Sorcery"
-      },
-      {
-        "name": "Divewing",
-        "sora": "Yes",
-        "riku": "Yes",
-        "how": "Complete every Dive with an \"A\" rank"
-      },
-      {
-        "name": "End of Pain",
-        "sora": "Yes",
-        "riku": "Yes",
-        "how": "Complete all Special Portals"
-      },
-      {
-        "name": "Sweet Dreams",
-        "sora": "Yes",
-        "riku": "Yes",
-        "how": "Complete all Flick Rush cups"
-      },
-      {
-        "name": "Unbound",
-        "sora": "Yes",
-        "riku": "Yes",
-        "how": "Complete all Secret Portals"
-      },
-      {
-        "name": "Ultima Weapon",
-        "sora": "Yes",
-        "riku": "Yes",
-        "how": "Defeat Julius (Guide recommended)"
       }
     ],
     "treasures-sora": [
@@ -4889,6 +4571,114 @@
         "name": "Secret Cup",
         "how": "Reach Flick Rush Level 16"
       }
+    ],
+    "keyblades-sora": [
+      {
+        "name": "Kingdom Key",
+        "how": "Received by default"
+      },
+      {
+        "name": "Skull Noise",
+        "how": "Complete the story of Traverse Town (1st visit)"
+      },
+      {
+        "name": "Guardian Bell",
+        "how": "Complete the story of La Cité des Cloches"
+      },
+      {
+        "name": "Ferris Gear",
+        "how": "Complete the story of Prankster's Paradise"
+      },
+      {
+        "name": "Dual Disc",
+        "how": "Complete the story of The Grid"
+      },
+      {
+        "name": "Knockout Punch",
+        "how": "Complete the story of Traverse Town (2nd visit)"
+      },
+      {
+        "name": "All for One",
+        "how": "Complete the story of Country of the Musketeers"
+      },
+      {
+        "name": "Counterpoint",
+        "how": "Complete the story of Symphony of Sorcery"
+      },
+      {
+        "name": "Divewing",
+        "how": "Complete every Dive with an \"A\" rank"
+      },
+      {
+        "name": "End of Pain",
+        "how": "Complete all Special Portals"
+      },
+      {
+        "name": "Sweet Dreams",
+        "how": "Complete all Flick Rush cups"
+      },
+      {
+        "name": "Unbound",
+        "how": "Complete all Secret Portals"
+      },
+      {
+        "name": "Ultima Weapon",
+        "how": "Defeat Julius (Guide recommended)"
+      }
+    ],
+    "keyblades-riku": [
+      {
+        "name": "Way to the Dawn",
+        "how": "Received by default"
+      },
+      {
+        "name": "Skull Noise",
+        "how": "Complete the story of Traverse Town (1st visit)"
+      },
+      {
+        "name": "Guardian Bell",
+        "how": "Complete the story of La Cité des Cloches"
+      },
+      {
+        "name": "Ocean's Rage",
+        "how": "Complete the story of Prankster's Paradise"
+      },
+      {
+        "name": "Dual Disc",
+        "how": "Complete the story of The Grid"
+      },
+      {
+        "name": "Knockout Punch",
+        "how": "Complete the story of Traverse Town (2nd visit)"
+      },
+      {
+        "name": "All for One",
+        "how": "Complete the story of Country of the Musketeers"
+      },
+      {
+        "name": "Counterpoint",
+        "how": "Complete the story of Symphony of Sorcery"
+      },
+      {
+        "name": "Divewing",
+        "how": "Complete every Dive with an \"A\" rank"
+      },
+      {
+        "name": "End of Pain",
+        "how": "Complete all Special Portals"
+      },
+      {
+        "name": "Sweet Dreams",
+        "how": "Complete all Flick Rush cups"
+      },
+      {
+        "name": "Unbound",
+        "how": "Complete all Secret Portals"
+      },
+      {
+        "name": "Ultima Weapon",
+        "how": "Defeat Julius (Guide recommended)"
+      }
     ]
   },
   "gt-toast-trophy": "Trophy ready: %1",
@@ -4896,5 +4686,10 @@
   "gt-toast-overall": "Everything is 100% complete! 🎉",
   "tabbtn-worlds": "Worlds",
   "gt-worlds-title": "Collectibles by World",
-  "gt-world-complete": "✓ 100%"
+  "gt-world-complete": "✓ 100%",
+  "wt-dive": "Dive Mode",
+  "wt-reality": "Reality Shifts",
+  "wt-minigame": "Mini-games",
+  "wt-nightmare": "Nightmares",
+  "wt-rare": "Rare Nightmares"
 }
