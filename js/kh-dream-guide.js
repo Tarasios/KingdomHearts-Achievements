@@ -382,13 +382,168 @@ function renderRecipes() {
 }
 
 /* =====================================================================
+   TAB 4 — Creation calculator
+
+   Implements the wiki's Spirit-creation stat formula:
+     Stat = base × (rank correction + random) × level correction ÷ 10
+            + Forecast bonus, capped at the per-stat maximum.
+   Plus per-Forecast initial-disposition odds, the breed's elemental
+   resistances, and an optional sacrificed Deck Command bonus.
+   ===================================================================== */
+const CREATE = DG.create;
+const C_EL = {
+  spirit: document.getElementById("dg-c-spirit"),
+  forecast: document.getElementById("dg-c-forecast"),
+  rank: document.getElementById("dg-c-rank"),
+  level: document.getElementById("dg-c-level"),
+  command: document.getElementById("dg-c-command"),
+  out: document.getElementById("dg-c-output"),
+};
+const RES_KEYS = [["fire", "Fire"], ["blz", "Blizzard"], ["thn", "Thunder"], ["wtr", "Water"], ["drk", "Dark"], ["lgt", "Light"]];
+
+function fillCreateControls() {
+  C_EL.spirit.innerHTML = DG.spirits.map((s, i) => `<option value="${i}">${esc(s.name)}</option>`).join("");
+  C_EL.forecast.innerHTML = CREATE.forecasts.map(f => `<option value="${esc(f)}">${esc(f)}</option>`).join("");
+  // ranks shown high → low for a natural dropdown
+  C_EL.rank.innerHTML = CREATE.ranks.slice().reverse().map(r => `<option value="${esc(r)}">${esc(r)}</option>`).join("");
+  // commands grouped by category; first option = none
+  const groups = {};
+  DG.commands.forEach((c, i) => { (groups[c.cat] = groups[c.cat] || []).push(`<option value="${i}">${esc(c.name)}</option>`); });
+  let cmdHtml = `<option value="">${esc(translate("dg-c-none"))}</option>`;
+  Object.keys(groups).forEach(cat => { cmdHtml += `<optgroup label="${esc(cat)}">${groups[cat].join("")}</optgroup>`; });
+  C_EL.command.innerHTML = cmdHtml;
+}
+
+function levelCorrection(level) { return level <= 50 ? 10 + level : 35 + level / 2; }
+
+// One stat's [floor(min), floor(max)] given base, rank, level, forecast
+// flat-bonus range [bMin,bMax] and the command flat bonus. Capped at the
+// stat's maximum (max-rank-correction formula).
+function statRange(base, rank, level, bonusRange, cmdFlat) {
+  if (typeof base !== "number") return null;        // "???" breed stat
+  const rc = CREATE.rankCorr[rank], mrc = CREATE.maxRankCorr[rank];
+  const lc = levelCorrection(level);
+  const lo = base * (rc + (rc - 1.1) / 10) * lc / 10 + bonusRange[0] + cmdFlat;
+  const hi = base * (rc + (rc - 0.9) / 10) * lc / 10 + bonusRange[1] + cmdFlat;
+  const cap = base * (mrc + (mrc - 0.9) / 10) * lc / 10 + cmdFlat;
+  return { lo: Math.floor(lo), hi: Math.min(Math.floor(hi), Math.floor(cap)), cap: Math.floor(cap), base: base };
+}
+
+function rangeText(r) {
+  if (!r) return "—";
+  return r.lo === r.hi ? `${r.lo}` : `${r.lo}–${r.hi}`;
+}
+
+function renderCreation() {
+  const spirit = DG.spirits[+C_EL.spirit.value] || DG.spirits[0];
+  const forecast = C_EL.forecast.value || CREATE.forecasts[0];
+  const baseRank = C_EL.rank.value || spirit.rank || "C";
+  const level = Math.min(99, Math.max(1, parseInt(C_EL.level.value, 10) || 1));
+  const cmd = C_EL.command.value === "" ? null : DG.commands[+C_EL.command.value];
+
+  // Risky Winds creates a Spirit one rank higher.
+  const ranks = CREATE.ranks;
+  const isRisky = forecast === "Risky Winds";
+  const effRank = isRisky ? ranks[Math.min(ranks.indexOf(baseRank) + 1, ranks.length - 1)] : baseRank;
+
+  const fb = CREATE.forecastBonus[forecast] || {};
+  const cmdFor = key => (cmd && cmd[key]) || 0;
+  const stats = [
+    { key: "hp", label: translate("dg-c-hp"), base: spirit.hp, bonus: fb.hp || [0, 0] },
+    { key: "str", label: translate("dg-c-str"), base: spirit.str, bonus: fb.str || [0, 0] },
+    { key: "mag", label: translate("dg-c-mag"), base: spirit.mag, bonus: fb.mag || [0, 0] },
+    { key: "def", label: translate("dg-c-def"), base: spirit.def, bonus: fb.def || [0, 0] },
+  ];
+
+  // ---- header / summary ----
+  let html = `<div class="dg-c-summary">` +
+    `<img class="dg-c-portrait" src="${esc(SPIRIT_IMG + spirit.name.replace(/ /g, "_") + ".png")}" alt="">` +
+    `<div><div class="dg-c-title">${esc(spirit.name)}</div>` +
+    `<div class="dg-c-meta">` +
+      `<span><b>${esc(translate("dg-c-attr"))}:</b> ${esc(spirit.attr || "—")}</span>` +
+      `<span><b>${esc(translate("dg-c-style"))}:</b> ${esc(spirit.style || "—")}</span>` +
+      `<span><b>${esc(translate("dg-c-dp"))}:</b> ${esc(spirit.dp || "—")}</span>` +
+      `<span><b>${esc(translate("dg-c-rank-out"))}:</b> ${esc(effRank)}${isRisky && effRank !== baseRank ? ` <span class="dg-c-up">(${esc(baseRank)}→${esc(effRank)})</span>` : ""}</span>` +
+      `<span><b>${esc(translate("dg-c-level-out"))}:</b> ${level}</span>` +
+    `</div></div></div>`;
+
+  // ---- stats table ----
+  html += `<table class="dg-c-stats"><thead><tr>` +
+    `<th>${esc(translate("dg-c-th-stat"))}</th><th>${esc(translate("dg-c-th-base"))}</th>` +
+    `<th>${esc(translate("dg-c-th-result"))}</th><th>${esc(translate("dg-c-th-cap"))}</th></tr></thead><tbody>`;
+  stats.forEach(s => {
+    const r = statRange(s.base, effRank, level, s.bonus, cmdFor(s.key));
+    const bonusNote = [];
+    if (r && (s.bonus[0] || s.bonus[1])) bonusNote.push(`${translate("dg-c-forecast")} +${s.bonus[0]}${s.bonus[1] !== s.bonus[0] ? "–" + s.bonus[1] : ""}`);
+    if (r && cmdFor(s.key)) bonusNote.push(`${esc(cmd.name)} +${cmdFor(s.key)}`);
+    html += `<tr><td class="dg-c-statname">${esc(s.label)}</td>` +
+      `<td>${typeof s.base === "number" ? s.base : esc(String(s.base))}</td>` +
+      `<td class="dg-c-result">${rangeText(r)}` +
+        (bonusNote.length ? ` <span class="dg-c-bonus">${esc(bonusNote.join(", "))}</span>` : "") + `</td>` +
+      `<td class="dg-c-cap">${r ? r.cap : "—"}</td></tr>`;
+  });
+  html += `</tbody></table>`;
+
+  // ---- resistances ----
+  html += `<h3 class="grp-title">${esc(translate("dg-c-resist"))}</h3><div class="dg-c-res">`;
+  RES_KEYS.forEach(([k, label]) => {
+    const mult = spirit.res ? spirit.res[k] : null;
+    const cmdBonus = cmdFor(k);
+    const weak = typeof mult === "number" && mult > 1;
+    const strong = typeof mult === "number" && mult < 1;
+    html += `<span class="dg-c-res-chip${weak ? " weak" : strong ? " strong" : ""}">` +
+      `<span class="dg-c-res-el">${esc(label)}</span>` +
+      `<b>${typeof mult === "number" ? "×" + mult : "—"}</b>` +
+      (cmdBonus ? `<span class="dg-c-res-add">+${cmdBonus}%</span>` : "") + `</span>`;
+  });
+  html += `</div>`;
+
+  // ---- disposition odds ----
+  const odds = CREATE.dispoOdds[forecast] || [0, 0, 0, 0];
+  html += `<h3 class="grp-title">${esc(translate("dg-c-dispo"))} <span class="dg-c-sub">— ${esc(forecast)}</span></h3>` +
+    `<div class="dg-c-dispos">`;
+  (spirit.disps || []).forEach((d, i) => {
+    const pct = odds[i] || 0;
+    html += `<div class="dg-c-dispo${pct ? "" : " off"}">` +
+      `<div class="dg-c-dispo-head"><span class="dg-c-dispo-no">${["I", "II", "III", "IV"][i]}</span>` +
+        `<span class="dg-c-dispo-name">${esc(d.n)}</span><span class="dg-c-dispo-pct">${pct}%</span></div>` +
+      `<div class="dg-c-dispo-bar"><i style="width:${pct}%"></i></div>` +
+      (d.b ? `<div class="dg-c-dispo-beh">${esc(d.b)}</div>` : "") + `</div>`;
+  });
+  html += `</div>`;
+
+  // ---- forecast effect note ----
+  const fi = (CREATE.forecastInfo || {})[forecast];
+  if (fi) {
+    html += `<div class="dg-c-forecast-note"><b>${esc(forecast)}.</b> ${esc(fi.desc || "")}` +
+      (fi.effect && fi.effect !== "—" ? ` <span class="dg-c-forecast-eff">${esc(fi.effect)}</span>` : "") + `</div>`;
+  }
+
+  C_EL.out.innerHTML = html;
+}
+
+function initCreation() {
+  fillCreateControls();
+  // default rank to the selected Spirit's recipe rank
+  const syncRankToSpirit = () => {
+    const s = DG.spirits[+C_EL.spirit.value];
+    if (s && s.rank) C_EL.rank.value = s.rank;
+  };
+  C_EL.spirit.addEventListener("change", () => { syncRankToSpirit(); renderCreation(); });
+  [C_EL.forecast, C_EL.rank, C_EL.command].forEach(el => el.addEventListener("change", renderCreation));
+  C_EL.level.addEventListener("input", renderCreation);
+  syncRankToSpirit();
+  renderCreation();
+}
+
+/* =====================================================================
    Tabs, filters, language + cross-tab sync
    ===================================================================== */
 document.querySelectorAll(".kh .tab").forEach(tab => {
   tab.onclick = () => {
     document.querySelectorAll(".kh .tab").forEach(other => other.classList.remove("active"));
     tab.classList.add("active");
-    ["spirits", "materials", "recipes"].forEach(id => {
+    ["spirits", "materials", "recipes", "creation"].forEach(id => {
       document.getElementById("tab-" + id).style.display = (id === tab.dataset.tab) ? "block" : "none";
     });
     hidePop();
@@ -401,7 +556,7 @@ materialsFilter.addEventListener("input", renderMaterials);
 recipesFilter.addEventListener("input", renderRecipes);
 document.getElementById("dg-recipes-reset").addEventListener("click", () => { recipesFilter.value = ""; renderRecipes(); });
 
-function renderAll() { renderSpirits(); renderMaterials(); renderRecipes(); }
+function renderAll() { renderSpirits(); renderMaterials(); renderRecipes(); renderCreation(); }
 
 // Re-render dynamic content when the language changes.
 document.addEventListener("i18n:updated", () => { buildTreasureIndex(); renderAll(); });
@@ -414,5 +569,8 @@ window.addEventListener("storage", e => {
 
 await fetchTrackerLang();
 buildTreasureIndex();
-renderAll();
+renderSpirits();
+renderMaterials();
+renderRecipes();
+initCreation();   // fills the creation controls, then renders the calculator
 });

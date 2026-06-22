@@ -71,6 +71,7 @@
             <button class="tab active" data-tab="spirits" id="tabbtn-spirits"></button>
             <button class="tab" data-tab="materials" id="tabbtn-materials"></button>
             <button class="tab" data-tab="recipes" id="tabbtn-recipes"></button>
+            <button class="tab" data-tab="creation" id="tabbtn-creation"></button>
         </div>
 
         <main class="kh-main">
@@ -103,6 +104,34 @@
                 </div>
                 <p class="hint" id="dg-recipes-hint"></p>
                 <div id="dg-recipes-list" class="results"></div>
+            </section>
+
+            <!-- CREATION CALCULATOR -->
+            <section id="tab-creation" class="card" style="display:none">
+                <div class="dg-create-controls">
+                    <div class="slot">
+                        <label for="dg-c-spirit" id="dg-c-spirit-lbl"></label>
+                        <select id="dg-c-spirit"></select>
+                    </div>
+                    <div class="slot">
+                        <label for="dg-c-forecast" id="dg-c-forecast-lbl"></label>
+                        <select id="dg-c-forecast"></select>
+                    </div>
+                    <div class="slot dg-create-narrow">
+                        <label for="dg-c-rank" id="dg-c-rank-lbl"></label>
+                        <select id="dg-c-rank"></select>
+                    </div>
+                    <div class="slot dg-create-narrow">
+                        <label for="dg-c-level" id="dg-c-level-lbl"></label>
+                        <input type="number" id="dg-c-level" min="1" max="99" value="50">
+                    </div>
+                    <div class="slot">
+                        <label for="dg-c-command" id="dg-c-command-lbl"></label>
+                        <select id="dg-c-command"></select>
+                    </div>
+                </div>
+                <p class="hint" style="margin-top:10px" id="dg-c-hint"></p>
+                <div id="dg-c-output" class="dg-create-output"></div>
             </section>
         </main>
     </div>
