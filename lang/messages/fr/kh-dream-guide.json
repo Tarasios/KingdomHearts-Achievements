@@ -94,5 +94,10 @@
   "dg-abcat-command": "Commandes",
   "dg-abcat-secret": "Secrets",
   "dg-ab-from": "%1 Esprit(s)",
+  "dg-leg-stat": "Stat",
+  "dg-leg-cmd": "Commande",
+  "dg-leg-gate": "Barrière",
+  "dg-leg-secret": "Secret",
+  "dg-board-tip": "Survolez un nœud pour sa capacité, son coût et sa condition de déblocage.",
   "dg-empty": "Rien ne correspond à votre filtre."
 }

@@ -254,6 +254,49 @@ function nodeIcon(node) {
 }
 function isPermanent(node) { return node.t === "Support Ability"; }
 
+/* ---------- Ability Link board grid (columns = letters, rows = numbers) ---------- */
+function parseCoord(g) {
+  const m = /^([A-Z]+)\s*-\s*(\d+)$/.exec((g || "").trim());
+  if (!m) return null;
+  let col = 0; for (const ch of m[1]) col = col * 26 + (ch.charCodeAt(0) - 64);
+  return { col, row: parseInt(m[2], 10) };
+}
+function colLabel(n) { let s = ""; while (n > 0) { s = String.fromCharCode(65 + (n - 1) % 26) + s; n = Math.floor((n - 1) / 26); } return s; }
+function buildBoardGrid(board) {
+  const cells = {}; let maxCol = 1, maxRow = 1;
+  board.forEach(node => {
+    const c = parseCoord(node.g); if (!c) return;
+    maxCol = Math.max(maxCol, c.col); maxRow = Math.max(maxRow, c.row);
+    (cells[c.col + "," + c.row] = cells[c.col + "," + c.row] || []).push(node);
+  });
+  let html = `<div class="dg-grid-board" style="grid-template-columns:26px repeat(${maxCol}, minmax(34px, 1fr))">`;
+  html += `<div class="dg-gcorner"></div>`;
+  for (let col = 1; col <= maxCol; col++) html += `<div class="dg-gcol-h">${esc(colLabel(col))}</div>`;
+  for (let row = 1; row <= maxRow; row++) {
+    html += `<div class="dg-grow-h">${row}</div>`;
+    for (let col = 1; col <= maxCol; col++) {
+      const nodes = cells[col + "," + row];
+      if (!nodes) { html += `<div class="dg-gcell"></div>`; continue; }
+      const primary = nodes[0];
+      const tip = nodes.map(n => {
+        const perm = isPermanent(n) ? " (" + translate("dg-permanent") + ")" : "";
+        return `<b>${esc(n.n)}</b>${perm}<span class="dg-pop-src">${esc(n.t)}${n.c ? " · " + esc(n.c) : ""}</span>` + (n.cond ? `<span class="dg-pop-cond">${esc(n.cond)}</span>` : "");
+      }).join('<span class="dg-pop-hr"></span>');
+      html += `<div class="dg-gcell filled" tabindex="0" data-pop="${esc(tip)}">` +
+        `<img src="${esc(BOARD_IMG + nodeIcon(primary))}" alt="${esc(primary.n)}">` +
+        (nodes.length > 1 ? `<span class="dg-gmore">${nodes.length}</span>` : "") + `</div>`;
+    }
+  }
+  return html + `</div>`;
+}
+function boardLegend() {
+  const items = [["Ability_Icon.png", "dg-leg-stat"], ["Perm_Ability_Icon.png", "dg-permanent"],
+    ["Attack_Icon.png", "dg-leg-cmd"], ["Link_Door.png", "dg-leg-gate"], ["Green_Secret.png", "dg-leg-secret"]];
+  return `<div class="dg-board-legend">` + items.map(([ic, k]) =>
+    `<span><img src="${esc(BOARD_IMG + ic)}" alt="">${esc(translate(k))}</span>`).join("") +
+    `<span class="dg-board-legend-tip">${esc(translate("dg-board-tip"))}</span></div>`;
+}
+
 /* ---------- modal ---------- */
 const modal = document.getElementById("dg-modal");
 const modalBody = document.getElementById("dg-modal-body");
@@ -306,21 +349,11 @@ function renderModal() {
     html += `</div>`;
   }
 
-  // ability link board
+  // ability link board (rendered as the in-game grid)
   const board = (DG.boards || {})[spirit.name] || [];
   if (board.length) {
     html += `<h3 class="grp-title">${esc(translate("dg-board"))} <span class="dg-c-sub">— ${board.length} ${esc(translate("dg-board-nodes"))}</span></h3>`;
-    html += `<table class="dg-board"><thead><tr><th></th><th>${esc(translate("dg-board-node"))}</th>` +
-      `<th>${esc(translate("dg-board-cost"))}</th><th>${esc(translate("dg-board-cond"))}</th></tr></thead><tbody>`;
-    board.forEach(node => {
-      const perm = isPermanent(node);
-      html += `<tr><td class="dg-board-ic"><img src="${esc(BOARD_IMG + nodeIcon(node))}" alt="${esc(node.t)}" title="${esc(node.t)}"></td>` +
-        `<td><span class="dg-board-grid">${esc(node.g || "")}</span> <span class="dg-board-name">${esc(node.n)}</span>` +
-          (perm ? ` <span class="dg-perm-badge">${esc(translate("dg-permanent"))}</span>` : "") + `</td>` +
-        `<td class="dg-board-cost">${esc(node.c || "")}</td>` +
-        `<td class="dg-board-cond">${esc(node.cond || "")}</td></tr>`;
-    });
-    html += `</tbody></table>`;
+    html += buildBoardGrid(board) + boardLegend();
   }
 
   // recipes to create it
@@ -340,6 +373,7 @@ function renderModal() {
   modalBody.innerHTML = html;
   const ownBtn = document.getElementById("dg-m-own");
   if (ownBtn) ownBtn.addEventListener("click", () => toggleSpirit(spirit.name));
+  wirePop(modalBody);
 }
 
 /* =====================================================================
@@ -538,7 +572,9 @@ let abCat = "all";
 const ABILITY_INDEX = {};
 Object.keys(DG.boards || {}).forEach(spirit => {
   DG.boards[spirit].forEach(node => {
-    if (node.t === "Quota") return;                       // quotas aren't abilities
+    // Quotas are board gates, Secrets only reshape the board — neither is a
+    // real ability the player gains, so they're left out of the search.
+    if (node.t === "Quota" || node.t === "Secret") return;
     const key = node.n;
     const entry = ABILITY_INDEX[key] || (ABILITY_INDEX[key] = { type: node.t, perm: isPermanent(node), grants: [] });
     if (isPermanent(node)) entry.perm = true;
@@ -549,10 +585,9 @@ function abCategoryOf(name) {
   const e = ABILITY_INDEX[name];
   if (e.perm) return "permanent";
   if (/Command$/.test(e.type)) return "command";
-  if (e.type === "Secret") return "secret";
   return "stat";
 }
-const AB_CATS = ["all", "permanent", "stat", "command", "secret"];
+const AB_CATS = ["all", "permanent", "stat", "command"];
 
 function fillAbCats() {
   abCats.innerHTML = AB_CATS.map(c =>
@@ -631,55 +666,67 @@ function treasurePop(matTier) {
   });
   return parts.join("");
 }
-function obtainText(material, tier) {
-  const blob = (DG.obtain[material] || {}); const out = [];
-  ["Rewards", "Other methods"].forEach(section => {
-    const text = blob[section]; if (!text) return;
-    const slice = sliceTier(text, material, tier); if (slice) out.push({ section, text: slice });
+// Portal rewards, grouped by character then world (parsed at build time).
+function rewardsHtml(ob) {
+  if (!ob.rewards || !ob.rewards.length) return "";
+  const byChar = {};
+  ob.rewards.forEach(r => { (byChar[r.char] = byChar[r.char] || []).push(r); });
+  let html = `<div class="dg-rewards"><span class="dg-obtain-label">${esc(translate("dg-rewards"))}</span>`;
+  ["Sora", "Riku"].forEach(ch => {
+    const rows = byChar[ch]; if (!rows) return;
+    html += `<div class="dg-reward-char"><span class="dg-rw-char">${esc(ch)}</span><div class="dg-rw-worlds">` +
+      rows.map(r => `<div class="dg-rw-row"><span class="dg-rw-world">${esc(r.world)}</span>` +
+        `<span class="dg-rw-items">${r.items.map(esc).join(" · ")}</span></div>`).join("") +
+      `</div></div>`;
   });
-  return out;
+  return html + `</div>`;
 }
-function sliceTier(text, material, tier) {
-  const start = text.indexOf(material + " " + tier); if (start < 0) return "";
-  let from = text.indexOf(":", start); from = from < 0 ? start + (material + " " + tier).length : from + 1;
-  let end = text.length;
-  DG.tiers.forEach(t => { if (t === tier) return; const h = text.indexOf(material + " " + t, from); if (h >= 0 && h < end) end = h; });
-  return text.slice(from, end).trim();
+function otherHtml(ob) {
+  return ob.other ? `<div class="dg-obtain"><span class="dg-obtain-label">${esc(translate("dg-other"))}:</span> ${esc(ob.other)}</div>` : "";
 }
+const collapsedMats = new Set();
 function renderMaterials() {
   const query = (materialsFilter.value || "").trim().toLowerCase();
   materialsList.innerHTML = ""; let shown = 0;
   DG.materials.forEach(material => {
-    const block = el("div", "dg-mat"); const tiersHtml = [];
+    const tiersHtml = []; const searchBits = [material.toLowerCase()];
     DG.tiers.forEach(tier => {
       const matTier = material + " " + tier;
       const drops = DROPS_BY_MT[material + "|" + tier] || [];
       const treasures = TREASURE_BY_MAT[matTier] || [];
-      const obtains = obtainText(material, tier);
-      if (!drops.length && !treasures.length && !obtains.length) return;
+      const ob = (DG.obtain[material] || {})[tier] || {};
+      const hasRewards = ob.rewards && ob.rewards.length, hasOther = !!ob.other;
+      if (!drops.length && !treasures.length && !hasRewards && !hasOther) return;
       const chips = [];
       if (treasures.length) chips.push(`<span class="dg-chip dg-chip-treasure" tabindex="0" data-pop="${esc(treasurePop(matTier))}">${esc(translate("dg-treasure"))}</span>`);
       drops.forEach(d => {
-        const cls = "dg-chip dg-chip-drop" + (d.src === "Rare Nightmares" ? " rare" : "") + (d.src === "Streetpass Portals" ? " sp" : "");
+        const cls = "dg-chip dg-chip-drop" + (d.src === "Rare Nightmares" ? " rare" : "");
         chips.push(`<span class="${cls}" tabindex="0" data-pop="${esc(enemyPop(d.e, d.src))}">${esc(d.e)} <b class="dg-rate">${d.r != null ? d.r + "%" : "?"}</b></span>`);
       });
-      const obtainHtml = obtains.map(o => `<div class="dg-obtain"><span class="dg-obtain-label">${esc(translate(o.section === "Rewards" ? "dg-rewards" : "dg-other"))}:</span> ${esc(o.text)}</div>`).join("");
-      tiersHtml.push(`<div class="dg-tier" data-search="${esc((matTier + " " + drops.map(d => d.e).join(" ")).toLowerCase())}">` +
-        `<div class="dg-tier-name">${esc(matTier)}</div><div class="dg-chips">${chips.join("")}</div>${obtainHtml}</div>`);
+      searchBits.push((matTier + " " + drops.map(d => d.e).join(" ")).toLowerCase());
+      tiersHtml.push(`<div class="dg-tier">` +
+        `<div class="dg-tier-name">${esc(matTier)}</div>` +
+        (chips.length ? `<div class="dg-chips">${chips.join("")}</div>` : "") +
+        rewardsHtml(ob) + otherHtml(ob) + `</div>`);
     });
     if (!tiersHtml.length) return;
-    block.innerHTML = `<h3 class="grp-title dg-mat-title">${esc(material)}</h3>` + tiersHtml.join("");
-    if (query) {
-      let any = false;
-      block.querySelectorAll(".dg-tier").forEach(t => {
-        const match = (t.getAttribute("data-search") || "").indexOf(query) >= 0 || material.toLowerCase().indexOf(query) >= 0;
-        t.style.display = match ? "" : "none"; if (match) any = true;
-      });
-      if (!any) return;
-    }
+    if (query && searchBits.join(" ").indexOf(query) < 0) return;
+    const collapsed = collapsedMats.has(material);
+    const block = el("div", "dg-mat" + (collapsed ? " collapsed" : ""));
+    block.innerHTML =
+      `<button class="dg-mat-title grp-title" data-mat="${esc(material)}" aria-expanded="${!collapsed}">` +
+        `<span class="dg-mat-caret" aria-hidden="true">▾</span> ${esc(material)}</button>` +
+      `<div class="dg-mat-body">${tiersHtml.join("")}</div>`;
     shown++; materialsList.appendChild(block);
   });
-  if (!shown) materialsList.innerHTML = `<p class="empty">${esc(translate("dg-empty"))}</p>`;
+  if (!shown) { materialsList.innerHTML = `<p class="empty">${esc(translate("dg-empty"))}</p>`; return; }
+  materialsList.querySelectorAll(".dg-mat-title").forEach(btn => btn.addEventListener("click", () => {
+    const m = btn.getAttribute("data-mat");
+    const nowCollapsed = !collapsedMats.has(m);
+    if (nowCollapsed) collapsedMats.add(m); else collapsedMats.delete(m);
+    btn.closest(".dg-mat").classList.toggle("collapsed", nowCollapsed);
+    btn.setAttribute("aria-expanded", !nowCollapsed);
+  }));
   wirePop(materialsList);
 }
 

@@ -94,5 +94,10 @@
   "dg-abcat-command": "Commands",
   "dg-abcat-secret": "Secrets",
   "dg-ab-from": "%1 Spirit(s)",
+  "dg-leg-stat": "Stat",
+  "dg-leg-cmd": "Command",
+  "dg-leg-gate": "Gate",
+  "dg-leg-secret": "Secret",
+  "dg-board-tip": "Hover a node for its ability, cost and unlock condition.",
   "dg-empty": "Nothing matches your filter."
 }

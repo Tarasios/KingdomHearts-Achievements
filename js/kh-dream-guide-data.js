@@ -59,34 +59,6 @@ window.DREAM_GUIDE = {
   },
   "drops": [
     {
-      "m": "Brilliant",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Lord Kyroo",
-      "r": 4
-    },
-    {
-      "m": "Brilliant",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Keeba Tiger",
-      "r": 4
-    },
-    {
-      "m": "Brilliant",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Kab Kannon",
-      "r": 4
-    },
-    {
-      "m": "Charming",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Frootz Cat",
-      "r": 4
-    },
-    {
       "m": "Dulcet",
       "t": "Fancy",
       "src": "Nightmares",
@@ -113,27 +85,6 @@ window.DREAM_GUIDE = {
       "src": "Rare Nightmares",
       "e": "Necho Cat",
       "r": 8
-    },
-    {
-      "m": "Dulcet",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Keeba Tiger",
-      "r": 16
-    },
-    {
-      "m": "Dulcet",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Ducky Goose",
-      "r": 16
-    },
-    {
-      "m": "Dulcet",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Frootz Cat",
-      "r": 16
     },
     {
       "m": "Dulcet",
@@ -147,27 +98,6 @@ window.DREAM_GUIDE = {
       "t": "Fantasy",
       "src": "Rare Nightmares",
       "e": "Ducky Goose",
-      "r": 8
-    },
-    {
-      "m": "Dulcet",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Ducky Goose",
-      "r": 8
-    },
-    {
-      "m": "Dulcet",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Necho Cat",
-      "r": 8
-    },
-    {
-      "m": "Dulcet",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Majik Lapin",
       "r": 8
     },
     {
@@ -192,20 +122,6 @@ window.DREAM_GUIDE = {
       "r": 16
     },
     {
-      "m": "Dulcet",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Necho Cat",
-      "r": 16
-    },
-    {
-      "m": "Epic",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Ursa Circus",
-      "r": 4
-    },
-    {
       "m": "Grim",
       "t": "Fancy",
       "src": "Nightmares",
@@ -228,20 +144,6 @@ window.DREAM_GUIDE = {
     },
     {
       "m": "Grim",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Staggerceps",
-      "r": 16
-    },
-    {
-      "m": "Grim",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Tatsu Blaze",
-      "r": 16
-    },
-    {
-      "m": "Grim",
       "t": "Fantasy",
       "src": "Nightmares",
       "e": "Cera Terror",
@@ -253,34 +155,6 @@ window.DREAM_GUIDE = {
       "src": "Nightmares",
       "e": "Skelterwild",
       "r": 12
-    },
-    {
-      "m": "Grim",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Cera Terror",
-      "r": 16
-    },
-    {
-      "m": "Grim",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Skelterwild",
-      "r": 16
-    },
-    {
-      "m": "Grim",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Staggerceps",
-      "r": 8
-    },
-    {
-      "m": "Grim",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Tatsu Blaze",
-      "r": 8
     },
     {
       "m": "Grim",
@@ -332,13 +206,6 @@ window.DREAM_GUIDE = {
       "r": 16
     },
     {
-      "m": "Grim",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Yoggy Ram",
-      "r": 16
-    },
-    {
       "m": "Intrepid",
       "t": "Fancy",
       "src": "Nightmares",
@@ -379,34 +246,6 @@ window.DREAM_GUIDE = {
       "src": "Rare Nightmares",
       "e": "Drill Sye",
       "r": 8
-    },
-    {
-      "m": "Intrepid",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Aura Lion",
-      "r": 16
-    },
-    {
-      "m": "Intrepid",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Ursa Circus",
-      "r": 16
-    },
-    {
-      "m": "Intrepid",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Sudo Neku",
-      "r": 16
-    },
-    {
-      "m": "Intrepid",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Me Me Bunny",
-      "r": 16
     },
     {
       "m": "Intrepid",
@@ -445,20 +284,6 @@ window.DREAM_GUIDE = {
     },
     {
       "m": "Intrepid",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Me Me Bunny",
-      "r": 8
-    },
-    {
-      "m": "Intrepid",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Cera Terror",
-      "r": 8
-    },
-    {
-      "m": "Intrepid",
       "t": "Figment",
       "src": "Nightmares",
       "e": "Pricklemane",
@@ -486,20 +311,6 @@ window.DREAM_GUIDE = {
       "r": 6
     },
     {
-      "m": "Intrepid",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Pricklemane",
-      "r": 16
-    },
-    {
-      "m": "Intrepid",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Hebby Repp",
-      "r": 16
-    },
-    {
       "m": "Lofty",
       "t": "Fancy",
       "src": "Nightmares",
@@ -543,27 +354,6 @@ window.DREAM_GUIDE = {
     },
     {
       "m": "Lofty",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Halbird",
-      "r": 16
-    },
-    {
-      "m": "Lofty",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Pegaslick",
-      "r": 16
-    },
-    {
-      "m": "Lofty",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Ryu Dragon",
-      "r": 16
-    },
-    {
-      "m": "Lofty",
       "t": "Fantasy",
       "src": "Rare Nightmares",
       "e": "Halbird",
@@ -581,41 +371,6 @@ window.DREAM_GUIDE = {
       "t": "Fantasy",
       "src": "Rare Nightmares",
       "e": "Ryu Dragon",
-      "r": 8
-    },
-    {
-      "m": "Lofty",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Halbird",
-      "r": 8
-    },
-    {
-      "m": "Lofty",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Pegaslick",
-      "r": 8
-    },
-    {
-      "m": "Lofty",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Eaglider",
-      "r": 8
-    },
-    {
-      "m": "Lofty",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Tatsu Steed",
-      "r": 8
-    },
-    {
-      "m": "Lofty",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Escarglow",
       "r": 8
     },
     {
@@ -654,44 +409,9 @@ window.DREAM_GUIDE = {
       "r": 6
     },
     {
-      "m": "Lofty",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Wheeflower",
-      "r": 16
-    },
-    {
-      "m": "Lofty",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Eaglider",
-      "r": 16
-    },
-    {
-      "m": "Lofty",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Tatsu Steed",
-      "r": 16
-    },
-    {
       "m": "Malleable",
       "t": "Fantasy",
       "src": "Nightmares",
-      "e": "Flowbermeow",
-      "r": 3
-    },
-    {
-      "m": "Malleable",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Meowjesty",
-      "r": 4
-    },
-    {
-      "m": "Malleable",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
       "e": "Flowbermeow",
       "r": 3
     },
@@ -714,62 +434,6 @@ window.DREAM_GUIDE = {
       "t": "Fancy",
       "src": "Rare Nightmares",
       "e": "KO Kabuto",
-      "r": 8
-    },
-    {
-      "m": "Noble",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Lord Kyroo",
-      "r": 16
-    },
-    {
-      "m": "Noble",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Sir Kyroo",
-      "r": 16
-    },
-    {
-      "m": "Noble",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Kab Kannon",
-      "r": 16
-    },
-    {
-      "m": "Noble",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Sir Kyroo",
-      "r": 8
-    },
-    {
-      "m": "Noble",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Zolephant",
-      "r": 8
-    },
-    {
-      "m": "Noble",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "KO Kabuto",
-      "r": 8
-    },
-    {
-      "m": "Noble",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Drill Sye",
-      "r": 8
-    },
-    {
-      "m": "Noble",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Cyber Yog",
       "r": 8
     },
     {
@@ -829,41 +493,6 @@ window.DREAM_GUIDE = {
       "r": 16
     },
     {
-      "m": "Noble",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Zolephant",
-      "r": 16
-    },
-    {
-      "m": "Noble",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "KO Kabuto",
-      "r": 16
-    },
-    {
-      "m": "Noble",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Drill Sye",
-      "r": 16
-    },
-    {
-      "m": "Noble",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Cyber Yog",
-      "r": 16
-    },
-    {
-      "m": "Prickly",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "R & R Seal",
-      "r": 4
-    },
-    {
       "m": "Rampant",
       "t": "Fancy",
       "src": "Nightmares",
@@ -907,86 +536,9 @@ window.DREAM_GUIDE = {
     },
     {
       "m": "Rampant",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Iceguin Ace",
-      "r": 16
-    },
-    {
-      "m": "Rampant",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Fin Fatale",
-      "r": 16
-    },
-    {
-      "m": "Rampant",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Meowjesty",
-      "r": 16
-    },
-    {
-      "m": "Rampant",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Meow Wow",
-      "r": 8
-    },
-    {
-      "m": "Rampant",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Zolephant",
-      "r": 8
-    },
-    {
-      "m": "Rampant",
       "t": "Fantasy",
       "src": "Rare Nightmares",
       "e": "Iceguin Ace",
-      "r": 8
-    },
-    {
-      "m": "Rampant",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Iceguin Ace",
-      "r": 8
-    },
-    {
-      "m": "Rampant",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Wheeflower",
-      "r": 8
-    },
-    {
-      "m": "Rampant",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Fin Fatale",
-      "r": 8
-    },
-    {
-      "m": "Rampant",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Drak Quack",
-      "r": 8
-    },
-    {
-      "m": "Rampant",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Pricklemane",
-      "r": 8
-    },
-    {
-      "m": "Rampant",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Meow Wow",
       "r": 8
     },
     {
@@ -1060,20 +612,6 @@ window.DREAM_GUIDE = {
       "r": 16
     },
     {
-      "m": "Rampant",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Meow Wow",
-      "r": 16
-    },
-    {
-      "m": "Rampant",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Flowbermeow",
-      "r": 16
-    },
-    {
       "m": "Savage",
       "t": "Fantasy",
       "src": "Nightmares",
@@ -1092,34 +630,6 @@ window.DREAM_GUIDE = {
       "t": "Fantasy",
       "src": "Rare Nightmares",
       "e": "Tyranto Rex",
-      "r": 4
-    },
-    {
-      "m": "Savage",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Tyranto Rex",
-      "r": 4
-    },
-    {
-      "m": "Savage",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Aura Lion",
-      "r": 4
-    },
-    {
-      "m": "Savage",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Skelterwild",
-      "r": 4
-    },
-    {
-      "m": "Savage",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Ryu Dragon",
       "r": 4
     },
     {
@@ -1186,55 +696,6 @@ window.DREAM_GUIDE = {
       "r": 8
     },
     {
-      "m": "Troubling",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Komory Bat",
-      "r": 16
-    },
-    {
-      "m": "Troubling",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Toximander",
-      "r": 16
-    },
-    {
-      "m": "Troubling",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Woeflower",
-      "r": 16
-    },
-    {
-      "m": "Troubling",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Ghostabocky",
-      "r": 8
-    },
-    {
-      "m": "Troubling",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Komory Bat",
-      "r": 8
-    },
-    {
-      "m": "Troubling",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Toximander",
-      "r": 8
-    },
-    {
-      "m": "Troubling",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Woeflower",
-      "r": 8
-    },
-    {
       "m": "Vibrant",
       "t": "Figment",
       "src": "Nightmares",
@@ -1354,90 +815,6 @@ window.DREAM_GUIDE = {
       "r": 8
     },
     {
-      "m": "Vibrant",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Tama Sheep",
-      "r": 16
-    },
-    {
-      "m": "Vibrant",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Kooma Panda",
-      "r": 16
-    },
-    {
-      "m": "Vibrant",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Juggle Pup",
-      "r": 16
-    },
-    {
-      "m": "Vibrant",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Jestabocky",
-      "r": 16
-    },
-    {
-      "m": "Vibrant",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "R & R Seal",
-      "r": 16
-    },
-    {
-      "m": "Vibrant",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Juggle Pup",
-      "r": 8
-    },
-    {
-      "m": "Vibrant",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Jestabocky",
-      "r": 8
-    },
-    {
-      "m": "Vibrant",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Kooma Panda",
-      "r": 8
-    },
-    {
-      "m": "Vibrant",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Tama Sheep",
-      "r": 8
-    },
-    {
-      "m": "Vibrant",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Hebby Repp",
-      "r": 8
-    },
-    {
-      "m": "Vibrant",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Yoggy Ram",
-      "r": 8
-    },
-    {
-      "m": "Wild",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Sudo Neku",
-      "r": 4
-    },
-    {
       "m": "Wondrous",
       "t": "Fancy",
       "src": "Nightmares",
@@ -1467,20 +844,6 @@ window.DREAM_GUIDE = {
     },
     {
       "m": "Wondrous",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Chef Kyroo",
-      "r": 16
-    },
-    {
-      "m": "Wondrous",
-      "t": "Fancy",
-      "src": "Streetpass Portals",
-      "e": "Tyranto Rex",
-      "r": 16
-    },
-    {
-      "m": "Wondrous",
       "t": "Fantasy",
       "src": "Nightmares",
       "e": "Ghostabocky",
@@ -1502,34 +865,6 @@ window.DREAM_GUIDE = {
     },
     {
       "m": "Wondrous",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Ghostabocky",
-      "r": 16
-    },
-    {
-      "m": "Wondrous",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Drak Quack",
-      "r": 16
-    },
-    {
-      "m": "Wondrous",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Chef Kyroo",
-      "r": 8
-    },
-    {
-      "m": "Wondrous",
-      "t": "Fantasy",
-      "src": "Streetpass Portals",
-      "e": "Peepsta Hoo",
-      "r": 8
-    },
-    {
-      "m": "Wondrous",
       "t": "Figment",
       "src": "Nightmares",
       "e": "Peepsta Hoo",
@@ -1548,78 +883,1107 @@ window.DREAM_GUIDE = {
       "src": "Nightmares",
       "e": "Chef Kyroo",
       "r": 6
-    },
-    {
-      "m": "Wondrous",
-      "t": "Figment",
-      "src": "Streetpass Portals",
-      "e": "Peepsta Hoo",
-      "r": 16
     }
   ],
   "obtain": {
-    "Lofty": {
-      "Rewards": "Lofty Figment : Sora : La Cité des Cloches : Reward for Battle Portal 11, 20, 37, and 46 (67%); reward for Battle Portal 17 and 22 (33%). The Grid : Reward for Battle Portal 15 (67%). Riku : La Cité des Cloches : Reward for Battle Portal 11, 20, and 33 (67%); reward for Battle Portal 22 (33%). The Grid : Reward for Battle Portal 15 (67%). Lofty Fancy : Sora : Symphony of Sorcery : Reward for Battle Portal 5 (67%); reward for Battle Portal 16 (33%). Riku : Symphony of Sorcery : Reward for Battle Portal 37 (67%). The World That Never Was : Reward for Battle Portal 7 (67%). Lofty Fantasy : Sora : La Cité des Cloches : Reward for Sora's first, second, third, and fourth Special Portal (33%); reward for Battle Portal 17 and 22 (67%); reward for Battle Portal 25, 37, and 46 (33%). The Grid : Reward for Sora's first, second, and third Special Portal (33%); reward for Battle Portal 2, 20, 25, and 27 (33%). Prankster's Paradise : Reward for Sora's second Special Portal (33%); reward for Battle Portal 5, 9, 14, and 16 (33%). Country of the Musketeers : Reward for Battle Portal 8, 9, and 31 (33%). Riku : La Cité des Cloches : Reward for Riku's first, second, and third Special Portal (33%); reward for Battle Portal 22 (67%); reward for Battle Portal 25 and 33 (33%). The Grid : Reward for Riku's first, second, and third Special Portal (33%); reward for Battle Portal 2, 20, 27, and 28 (33%). Prankster's Paradise : Reward for Riku's second Special Portal (33%); reward for Battle Portal 30, 34, 37, 42, and 43 (33%). Country of the Musketeers : Reward for Battle Portal 21, 22, and 31 (33%)."
-    },
-    "Rampant": {
-      "Rewards": "Rampant Figment : Sora : Traverse Town : Reward for Battle Portal 3, 4, and 35 (67%); reward for Battle Portal 19 (33%). Riku : Traverse Town : Reward for Battle Portal 4 and 35 (67%). Rampant Fancy : Sora : Prankster's Paradise : Reward for Battle Portal 5, 14, 15, 18, and 19 (67%). Riku : Prankster's Paradise : Reward for Battle Portal 26, 37, 42, and 43 (67%). Rampant Fantasy : Sora : Traverse Town : Reward for Sora's first, second, and third Special Portal (33%); reward for Battle Portal 19 (67%); reward for Battle Portal 4, 27, 28, 35, and 44 (33%). The Grid : Reward for Battle Portal 12 and 22 (33%). Prankster's Paradise : Reward for Sora's first and third Special Portal (33%). Riku : Traverse Town : Reward for Riku's first, second, and third Special Portal (33%); reward for Battle Portal 4, 27, 28, 33, 35, and 44 (33%). The Grid : Reward for Battle Portal 12 and 22 (33%). Prankster's Paradise : Reward for Riku's first and third Special Portal (33%).",
-      "Other methods": "Rampant Figment : Obtained during the Create Spirits tutorial (Sora: x5, Riku: x3); random Treasure Goggles treasure [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty C, battle rating 4 or 5) [ KH 3D ] . Rampant Fancy : Random Treasure Goggles treasure (Shop Lv 4 or higher) [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty A or B, battle rating 4 or 5) [ KH 3D ] . Rampant Fantasy : Random Treasure Goggles treasure (Shop Lv 2 or higher, Affinity Lv 4 or higher) [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty A, B, or C, battle rating 5) [ KH 3D ] ; obtained for an expired Iceguin Ace, Wheeflower, Fin Fatale, Drak Quack, Pricklemane or Meow Wow."
-    },
-    "Dulcet": {
-      "Rewards": "Dulcet Figment : Sora : La Cité des Cloches : Reward for Battle Portal 7, 15, 35, 36, 39, 40, and 41 (67%); reward for Battle Portal 28 (33%). The Grid : Reward for Battle Portal 21 (67%). Riku : La Cité des Cloches : Reward for Battle Portal 7, 13, 15, and 21 (67%); reward for Battle Portal 28 (33%). The Grid : Reward for Battle Portal 21 (67%). Dulcet Fancy : Sora : Symphony of Sorcery : Reward for Battle Portal 12 (67%). The World That Never Was : Reward for Battle Portal 4 (67%). Riku : Symphony of Sorcery : Reward for Battle Portal 30 (67%); reward for Battle Portal 28 (33%). Dulcet Fantasy : Sora : La Cité des Cloches : Reward for Sora's first, second, third, and fourth Special Portal (33%); reward for Battle Portal 28 (67%), reward for Battle Portal 7, 15, 35, 36, 39, 40, and 41 (33%). The Grid : Reward for Sora's first, second, and third Special Portal (33%); reward for Battle Portal 21 (33%). Prankster's Paradise : Reward for Sora's second Special Portal (33%); reward for Battle Portal 2, 12, and 15 (33%). Country of the Musketeers : Reward for Battle Portal 11 (33%). Riku : La Cité des Cloches : Reward for Riku's first, second, and third fourth Special Portal (33%); reward for Battle Portal 28 (67%), reward for Battle Portal 7, 13, 15, and 21 (33%). The Grid : Reward for Riku's first, second, and third Special Portal (33%); reward for Battle Portal 21 (33%). Prankster's Paradise : Reward for Riku's second Special Portal (33%); reward for Battle Portal 26, 31, 33, 39, 40, and 46 (33%). Country of the Musketeers : Reward for Battle Portal 29 (33%).",
-      "Other methods": "Dulcet Figment : Random Treasure Goggles treasure (Shop Lv 2 or higher) [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty B, battle rating 4 or 5) [ KH 3D ] . Dulcet Fancy : Random Treasure Goggles treasure (Shop Lv 7 or higher) [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty A, battle rating 4 or 5) [ KH 3D ] . Dulcet Fantasy : Random Treasure Goggles treasure (Shop Lv 3 or higher, Affinity Lv 4 or higher) [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty A, or B, battle rating 5) [ KH 3D ] ; obtained for an expired Necho Cat, Ducky Goose, or Majik Lapin."
+    "Malleable": {
+      "Fantasy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Traverse Town",
+            "items": [
+              "Sora's fourth, fifth, and sixth Special Portal (100%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "La Cité des Cloches",
+            "items": [
+              "Sora's fifth and sixth Special Portal (100%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "The Grid",
+            "items": [
+              "Sora's fourth, fifth, and sixth Special Portal (100%)"
+            ]
+          }
+        ],
+        "other": "obtained for an expired Meowjesty or Flowbermeow."
+      }
     },
     "Intrepid": {
-      "Rewards": "Intrepid Figment : Sora : Traverse Town : Reward for Battle Portal 17, 28, and 37 (67%); reward for Battle Portal 38 (33%). Riku : Traverse Town : Reward for Battle Portal 28 (67%); reward for Battle Portal 26 (33%). Intrepid Fancy : Sora : Symphony of Sorcery : Reward for Battle Portal 1b and 21 (67%); reward for Battle Portal 2b and 19 (33%) The World That Never Was : Reward for Battle Portal 5 (67%). Riku : Symphony of Sorcery : Reward for Battle Portal 1b and 27 (67%); reward for Battle Portal 2b (33%). The World That Never Was : Reward for Battle Portal 10 (67%). Intrepid Fantasy : Sora : Symphony of Sorcery : Reward for Sora's second and third Special Portal (33%); reward for Battle Portal 2b and 19 (67%); reward for Battle Portal 1b and 21 (33%). The World That Never Was : Reward for Sora's first Special Portal (33%); reward for Battle Portal 5 (67%). Riku : Symphony of Sorcery : Reward for Riku's first, second, and third Special Portal (33%); reward for Battle Portal 2b (67%); reward for Battle Portal 1b and 27 (33%). The World That Never Was : Reward for Riku's first Special Portal (33%); reward for Battle Portal 10 (67%).",
-      "Other methods": "Intrepid Figment : Random Treasure Goggles treasure [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty C, battle rating 4 or 5) [ KH 3D ] . Intrepid Fancy : Random Treasure Goggles treasure (Shop Lv 7 or higher) [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty A, battle rating 4 or 5) [ KH 3D ] . Intrepid Fantasy : Random Treasure Goggles treasure (Shop Lv 7 or higher, Affinity Lv 4 or higher) [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty A, battle rating 5) [ KH 3D ] ; obtained for an expired Cera Terror or Me Me Bunny."
-    },
-    "Noble": {
-      "Rewards": "Noble Figment : Sora : The Grid : Reward for Battle Portal 12 (67%). Riku : The Grid : Reward for Battle Portal 12 (67%). Noble Fancy : Sora : Prankster's Paradise : Reward for Battle Portal 3, 7, 9, 16, 22, and 25 (67%). Riku : Prankster's Paradise : Reward for Battle Portal 30, 33, 34, and 46 (67%). Noble Fantasy : Sora : La Cité des Cloches : Reward for Sora's first, second, third, and fourth Special Portal (33%); reward for Battle Portal 1, 11, 20, 30, 42, and 47 (33%). The Grid : Reward for Sora's first, second, and third Special Portal (33%); reward for Battle Portal 5, 11, 14, and 26 (33%). Prankster's Paradise : Reward for Sora's second Special Portal (33%); reward for Battle Portal 3, 7, 19, 22, and 25 (33%). Country of the Musketeers : Reward for Battle Portal 17 (67%); reward for Battle Portal 14 and 21 (33%). Riku : La Cité des Cloches : Reward for Riku's first, second, and third fourth Special Portal (33%); reward for Battle Portal 2 (67%), reward for Battle Portal 1, 11, 20, and 30 (33%). The Grid : Reward for Riku's first, second, and third Special Portal (33%); reward for Battle Portal 5, 11, 14, 26, and 29 (33%). Prankster's Paradise : Reward for Riku's second Special Portal (33%); reward for Battle Portal 27 and 46 (33%). Country of the Musketeers : Reward for Battle Portal 33 (33%).",
-      "Other methods": "Noble Figment : Random Treasure Goggles treasure (Shop Lv 2 or higher) [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty B, battle rating 4 or 5) [ KH 3D ] . Noble Fancy : Random Treasure Goggles treasure (Shop Lv 4 or higher) [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty A or B, battle rating 4 or 5) [ KH 3D ] . Noble Fantasy : Random Treasure Goggles treasure (Shop Lv 3 or higher, Affinity Lv 4 or higher) [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty A, or B, battle rating 5) [ KH 3D ] ; obtained for an expired Sir Kyroo, Zolephant, KO Kabuto, Drill Sye, or Cyber Yog; obtained for an expired Catanuki [ KH 3D HD ] ."
-    },
-    "Grim": {
-      "Rewards": "Grim Figment : Sora : Traverse Town : Reward for Battle Portal 14, 15, 27, and 44 (67%); reward for Battle Portal 34 (33%). Riku : Traverse Town : Reward for Battle Portal 14, 15, 27, and 44 (67%); reward for Battle Portal 42 (33%). Grim Fancy : Sora : Country of the Musketeers : Reward for Battle Portal 25 (67%); reward for Battle Portal 1, 13, and 17 (33%). Symphony of Sorcery : Reward for Battle Portal 4 (67%). Riku : Country of the Musketeers : Reward for Battle Portal 21, 22, 25, and 36 (67%). Symphony of Sorcery : Reward for Battle Portal 35 (67%). Grim Fantasy : Sora : Country of the Musketeers : Reward for Sora's first, second, and third Special Portal (33%/67%/33%); reward for Battle Portal 1 (67%); reward for Battle Portal 2 (33%). Symphony of Sorcery : Reward for Sora's first and second Special Portal (33%); reward for Battle Portal 2, 4, 12, 15 (33%). The World That Never Was : Reward for Battle Portal 4 (33%). Riku : Country of the Musketeers : Reward for Riku's first, second, and third Special Portal (33%/67%/67%); reward for Battle Portal 28 (67%); reward for Battle Portal 36, 41, and 46 (33%). Symphony of Sorcery : Reward for Riku's first, second, and third Special Portal (33%); reward for Battle Portal 28 (67%); reward for Battle Portal 2, 30, and 35 (33%).",
-      "Other methods": "Grim Figment : Random Treasure Goggles treasure [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty C, battle rating 4 or 5) [ KH 3D ] . Grim Fancy : Random Treasure Goggles treasure (Shop Lv 5 or higher) [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty A, battle rating 4 or 5) [ KH 3D ] . Grim Fantasy : Random Treasure Goggles treasure (Shop Lv 5 or higher) [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty A, battle rating 4 or 5) [ KH 3D ] ; obtained for an expired Staggerceps or Tatsu Blaze."
+      "Figment": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Traverse Town",
+            "items": [
+              "Battle Portal 17, 28, and 37 (67%)",
+              "Battle Portal 38 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Traverse Town",
+            "items": [
+              "Battle Portal 28 (67%)",
+              "Battle Portal 26 (33%)"
+            ]
+          }
+        ]
+      },
+      "Fancy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Battle Portal 1b and 21 (67%)",
+              "Battle Portal 2b and 19 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "The World That Never Was",
+            "items": [
+              "Battle Portal 5 (67%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Battle Portal 1b and 27 (67%)",
+              "Battle Portal 2b (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "The World That Never Was",
+            "items": [
+              "Battle Portal 10 (67%)"
+            ]
+          }
+        ]
+      },
+      "Fantasy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Sora's second and third Special Portal (33%)",
+              "Battle Portal 2b and 19 (67%)",
+              "Battle Portal 1b and 21 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "The World That Never Was",
+            "items": [
+              "Sora's first Special Portal (33%)",
+              "Battle Portal 5 (67%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Riku's first, second, and third Special Portal (33%)",
+              "Battle Portal 2b (67%)",
+              "Battle Portal 1b and 27 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "The World That Never Was",
+            "items": [
+              "Riku's first Special Portal (33%)",
+              "Battle Portal 10 (67%)"
+            ]
+          }
+        ],
+        "other": "obtained for an expired Cera Terror or Me Me Bunny."
+      }
     },
     "Vibrant": {
-      "Rewards": "Vibrant Figment : Sora : Traverse Town : Reward for Battle Portal 6 and 7 (67%). Riku : Traverse Town : Reward for Battle Portal 6 and 7 (67%); reward for Battle Portal 9 (33%). Vibrant Fancy : Sora : Prankster's Paradise : Reward for Battle Portal 2, 10, and 12 (67%). Riku : Prankster's Paradise : Reward for Battle Portal 27, 31, 39, 40, and 46 (67%). Vibrant Fantasy : Sora : Traverse Town : Reward for Sora's first, second, and third Special Portal (33%); reward for Battle Portal 6, 7, 14, and 37 (33%). Prankster's Paradise : Reward for Sora's first and third Special Portal (33%). Riku : Traverse Town : Reward for Riku's first, second, and third Special Portal (33%); reward for Battle Portal 9, 26, and 42 (67%); reward for Battle Portal 6, 7, and 14 (33%). The Grid : Reward for Battle Portal 32 (33%). Prankster's Paradise : Reward for Riku's first and third Special Portal (33%).",
-      "Other methods": "Vibrant Figment : Obtained during the Create Spirits tutorial (Sora: x3); random Treasure Goggles treasure [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty C, battle rating 4 or 5) [ KH 3D ] . Vibrant Fancy : Random Treasure Goggles treasure (Shop Lv 4 or higher) [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty A or B, battle rating 4 or 5) [ KH 3D ] . Vibrant Fantasy : Random Treasure Goggles treasure (Shop Lv 2 or higher, Affinity Lv 4 or higher) [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty A, B, or C, battle rating 5) [ KH 3D ] ; obtained for an expired Juggle Pup, Jestabocky, Kooma Panda, Tama Sheep, Hebby Repp, or Yoggy Ram."
+      "Figment": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Traverse Town",
+            "items": [
+              "Battle Portal 6 and 7 (67%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Traverse Town",
+            "items": [
+              "Battle Portal 6 and 7 (67%)",
+              "Battle Portal 9 (33%)"
+            ]
+          }
+        ],
+        "other": "Obtained during the Create Spirits tutorial (Sora: x3)."
+      },
+      "Fancy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Battle Portal 2, 10, and 12 (67%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Battle Portal 27, 31, 39, 40, and 46 (67%)"
+            ]
+          }
+        ]
+      },
+      "Fantasy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Traverse Town",
+            "items": [
+              "Sora's first, second, and third Special Portal (33%)",
+              "Battle Portal 6, 7, 14, and 37 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Sora's first and third Special Portal (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Traverse Town",
+            "items": [
+              "Riku's first, second, and third Special Portal (33%)",
+              "Battle Portal 9, 26, and 42 (67%)",
+              "Battle Portal 6, 7, and 14 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "The Grid",
+            "items": [
+              "Battle Portal 32 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Riku's first and third Special Portal (33%)"
+            ]
+          }
+        ],
+        "other": "obtained for an expired Juggle Pup, Jestabocky, Kooma Panda, Tama Sheep, Hebby Repp, or Yoggy Ram."
+      }
     },
-    "Troubling": {
-      "Rewards": "Troubling Figment : Riku : Traverse Town : Reward for Battle Portal 20, 23, 33, and 40 (67%). Troubling Fancy : Sora : La Cité des Cloches : Reward for Battle Portal 1, 25, 30, 42, and 47 (67%). The Grid : Reward for Battle Portal 5 (67%). Riku : La Cité des Cloches : Reward for Battle Portal 1, 25, 30 (67%); reward for Battle Portal 2 (33%). The Grid : Reward for Battle Portal 5 and 28 (67%). Troubling Fantasy : Sora : Traverse Town : Reward for Sora's first, second, and third Special Portal (33%); reward for Battle Portal 34 and 38 (67%); reward for Battle Portal 3, 15, and 17 (33%). The Grid : Reward for Battle Portal 1 and 15 (33%). Prankster's Paradise : Reward for Sora's first and third Special Portal (33%). Riku : Traverse Town : Reward for Riku's first, second, and third Special Portal (33%); reward for Battle Portal 15, 20, 23, and 40 (33%). The Grid : Reward for Battle Portal 1 and 15 (33%). Prankster's Paradise : Reward for Riku's first and third Special Portal (33%).",
-      "Other methods": "Troubling Figment : Obtained during the Create Spirits tutorial (Riku: x5); random Treasure Goggles treasure [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty C, battle rating 4 or 5) [ KH 3D ] . Troubling Fancy : Random Treasure Goggles treasure (Shop Lv 2 or higher) [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty B, battle rating 4 or 5) [ KH 3D ] . Troubling Fantasy : Random Treasure Goggles treasure (Shop Lv 2 or higher, Affinity Lv 4 or higher) [ KH 3D ] ; random Streetpass Battle Portal reward (Battle rating 5) [ KH 3D ] ; obtained for an expired Ghostabocky, Komory Bat, Toximander, or Woeflower."
+    "Grim": {
+      "Figment": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Traverse Town",
+            "items": [
+              "Battle Portal 14, 15, 27, and 44 (67%)",
+              "Battle Portal 34 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Traverse Town",
+            "items": [
+              "Battle Portal 14, 15, 27, and 44 (67%)",
+              "Battle Portal 42 (33%)"
+            ]
+          }
+        ]
+      },
+      "Fancy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Country of the Musketeers",
+            "items": [
+              "Battle Portal 25 (67%)",
+              "Battle Portal 1, 13, and 17 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Battle Portal 4 (67%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Country of the Musketeers",
+            "items": [
+              "Battle Portal 21, 22, 25, and 36 (67%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Battle Portal 35 (67%)"
+            ]
+          }
+        ]
+      },
+      "Fantasy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Country of the Musketeers",
+            "items": [
+              "Sora's first, second, and third Special Portal (33%/67%/33%)",
+              "Battle Portal 1 (67%)",
+              "Battle Portal 2 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Sora's first and second Special Portal (33%)",
+              "Battle Portal 2, 4, 12, 15 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "The World That Never Was",
+            "items": [
+              "Battle Portal 4 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Country of the Musketeers",
+            "items": [
+              "Riku's first, second, and third Special Portal (33%/67%/67%)",
+              "Battle Portal 28 (67%)",
+              "Battle Portal 36, 41, and 46 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Riku's first, second, and third Special Portal (33%)",
+              "Battle Portal 28 (67%)",
+              "Battle Portal 2, 30, and 35 (33%)"
+            ]
+          }
+        ],
+        "other": "obtained for an expired Staggerceps or Tatsu Blaze."
+      }
     },
-    "Wondrous": {
-      "Rewards": "Wondrous Figment : Sora : The Grid : Reward for Battle Portal 1, 2, 11, 25, and 26 (67%). Riku : The Grid : Reward for Battle Portal 1, 2, 11, 25, 26, and 32 (67%). Wondrous Fancy : Sora : Country of the Musketeers : Reward for Battle Portal 2, 8, 9, 14, and 21 (67%). Symphony of Sorcery : Reward for Battle Portal 2a and 15 (67%). Riku : Country of the Musketeers : Reward for Battle Portal 33, 42, and 45 (67%); reward for Battle Portal 32 (33%). Symphony of Sorcery : Reward for Battle Portal 2a (67%). Wondrous Fantasy : Sora : The World That Never Was : Reward for Battle Portal 1 (67%). Riku : The World That Never Was : Reward for Battle Portal 14 (67%).",
-      "Other methods": "Wondrous Figment : Random Treasure Goggles treasure (Shop Lv 3 or higher) [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty A or B, battle rating 4 or 5) [ KH 3D ] . Wondrous Fancy : Random Treasure Goggles treasure (Shop Lv 5 or higher) [ KH 3D ] ; random Streetpass Battle Portal reward (Difficulty A, battle rating 4 or 5) [ KH 3D ] . Wondrous Fantasy : Random Treasure Goggles treasure (Shop Lv 8) [ KH 3D ] ; random Streetpass Battle Portal reward (Battle rating A, battle rating 4 or 5) [ KH 3D ] ; obtained for an expired Chef Kyroo, Peepsta Hoo, or Fishboné."
-    },
-    "Malleable": {
-      "Rewards": "Malleable Fantasy : Sora : Traverse Town : Reward for Sora's fourth, fifth, and sixth Special Portal (100%). La Cité des Cloches : Reward for Sora's fifth and sixth Special Portal (100%). The Grid : Reward for Sora's fourth, fifth, and sixth Special Portal (100%).",
-      "Other methods": "Malleable Fantasy : Random Streetpass Battle Portal reward (Difficulty A, or B, battle rating 5) [ KH 3D ] ; obtained for an expired Meowjesty or Flowbermeow."
-    },
-    "Prickly": {
-      "Rewards": "Prickly Fantasy : Sora : Prankster's Paradise : Reward for Sora's fourth, fifth, and sixth Special Portal (100%). Country of the Musketeers : Reward for Sora's fourth, fifth, and sixth Special Portal (100%). Symphony of Sorcery : Reward for Sora's fourth and fifth Special Portal (67%).",
-      "Other methods": "Prickly Fantasy : Random Streetpass Battle Portal reward (Difficulty A, battle rating 5) [ KH 3D ] ; obtained for an expired R & R Seal."
-    },
-    "Wild": {
-      "Rewards": "Wild Fantasy : Sora : Symphony of Sorcery : Reward for Sora's sixth Special Portal (100%). The World That Never Was : Reward for Sora's first Special Portal (33%); reward for Sora's second Special Portal (67%); reward for Sora's third Special Portal (100%).",
-      "Other methods": "Wild Fantasy : Obtained for an expired Sudo Neku."
-    },
-    "Epic": {
-      "Rewards": "Epic Fantasy : Riku : Prankster's Paradise : Reward for Riku's fourth, fifth, and sixth Special Portal (100%). Country of the Musketeers : Reward for Riku's fourth, fifth, and sixth Special Portal (100%). Symphony of Sorcery : Reward for Riku's fourth and fifth Special Portal (67%).",
-      "Other methods": "Epic Fantasy : Random Streetpass Battle Portal reward (Difficulty A, battle rating 5) [ KH 3D ] ; obtained for an expired Ursa Circus; obtained for an expired Kab Kannon [ KH 3D HD ] ."
-    },
-    "Charming": {
-      "Rewards": "Charming Fantasy : Riku : Traverse Town : Reward for Riku's fourth, fifth, and sixth Special Portal (100%). La Cité des Cloches : Reward for Riku's fourth, fifth, and sixth Special Portal (100%). The Grid : Reward for Riku's fourth, fifth, and sixth Special Portal (100%).",
-      "Other methods": "Charming Fantasy : Random Streetpass Battle Portal reward (Difficulty A, battle rating 5) [ KH 3D ] ; obtained for an expired Frootz Cat"
+    "Rampant": {
+      "Figment": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Traverse Town",
+            "items": [
+              "Battle Portal 3, 4, and 35 (67%)",
+              "Battle Portal 19 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Traverse Town",
+            "items": [
+              "Battle Portal 4 and 35 (67%)"
+            ]
+          }
+        ],
+        "other": "Obtained during the Create Spirits tutorial (Sora: x5, Riku: x3)."
+      },
+      "Fancy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Battle Portal 5, 14, 15, 18, and 19 (67%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Battle Portal 26, 37, 42, and 43 (67%)"
+            ]
+          }
+        ]
+      },
+      "Fantasy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Traverse Town",
+            "items": [
+              "Sora's first, second, and third Special Portal (33%)",
+              "Battle Portal 19 (67%)",
+              "Battle Portal 4, 27, 28, 35, and 44 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "The Grid",
+            "items": [
+              "Battle Portal 12 and 22 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Sora's first and third Special Portal (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Traverse Town",
+            "items": [
+              "Riku's first, second, and third Special Portal (33%)",
+              "Battle Portal 4, 27, 28, 33, 35, and 44 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "The Grid",
+            "items": [
+              "Battle Portal 12 and 22 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Riku's first and third Special Portal (33%)"
+            ]
+          }
+        ],
+        "other": "obtained for an expired Iceguin Ace, Wheeflower, Fin Fatale, Drak Quack, Pricklemane or Meow Wow."
+      }
     },
     "Brilliant": {
-      "Rewards": "Brilliant Fantasy : Riku : Symphony of Sorcery : Reward for Riku's sixth Special Portal (100%). The World That Never Was : Reward for Riku's first Special Portal (33%); reward for Riku's second Special Portal (67%); reward for Riku's third Special Portal (100%).",
-      "Other methods": "Brilliant Fantasy : Obtained for an expired Lord Kyroo or Keeba Tiger; obtained for an expired Kab Kannon [ KH 3D ] ."
+      "Fantasy": {
+        "rewards": [
+          {
+            "char": "Riku",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Riku's sixth Special Portal (100%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "The World That Never Was",
+            "items": [
+              "Riku's first Special Portal (33%)",
+              "Riku's second Special Portal (67%)",
+              "Riku's third Special Portal (100%)"
+            ]
+          }
+        ],
+        "other": "Obtained for an expired Lord Kyroo or Keeba Tiger."
+      }
     },
     "Savage": {
-      "Rewards": "Savage Fantasy : Sora : Symphony of Sorcery : Reward for Sora's first, second, third, fourth, and fifth Special Portal (33%). The World That Never Was : Reward for Sora's first and second Special Portal (33%); reward for Battle Portal 1 (33%). Riku : Symphony of Sorcery : Reward for Riku's fourth and fifth Special Portal (33%). The World That Never Was : Reward for Riku's first and second Special Portal (33%); reward for Battle Portal 14 (33%).",
-      "Other methods": "Savage Fantasy : Random Streetpass Battle Portal reward (Difficulty A, battle rating 5) [ KH 3D ] ; obtained for an expired Aura Lion, Tyranto Rex, Skelterwild, or Ryu Dragon; obtained for an expired Beatalike [ KH 3D HD ] ."
+      "Fantasy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Sora's first, second, third, fourth, and fifth Special Portal (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "The World That Never Was",
+            "items": [
+              "Sora's first and second Special Portal (33%)",
+              "Battle Portal 1 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Riku's fourth and fifth Special Portal (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "The World That Never Was",
+            "items": [
+              "Riku's first and second Special Portal (33%)",
+              "Battle Portal 14 (33%)"
+            ]
+          }
+        ],
+        "other": "obtained for an expired Aura Lion, Tyranto Rex, Skelterwild, or Ryu Dragon; obtained for an expired Beatalike."
+      }
+    },
+    "Wild": {
+      "Fantasy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Sora's sixth Special Portal (100%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "The World That Never Was",
+            "items": [
+              "Sora's first Special Portal (33%)",
+              "Sora's second Special Portal (67%)",
+              "Sora's third Special Portal (100%)"
+            ]
+          }
+        ],
+        "other": "Obtained for an expired Sudo Neku."
+      }
+    },
+    "Prickly": {
+      "Fantasy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Sora's fourth, fifth, and sixth Special Portal (100%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "Country of the Musketeers",
+            "items": [
+              "Sora's fourth, fifth, and sixth Special Portal (100%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Sora's fourth and fifth Special Portal (67%)"
+            ]
+          }
+        ],
+        "other": "obtained for an expired R & R Seal."
+      }
+    },
+    "Lofty": {
+      "Figment": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "La Cité des Cloches",
+            "items": [
+              "Battle Portal 11, 20, 37, and 46 (67%)",
+              "Battle Portal 17 and 22 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "The Grid",
+            "items": [
+              "Battle Portal 15 (67%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "La Cité des Cloches",
+            "items": [
+              "Battle Portal 11, 20, and 33 (67%)",
+              "Battle Portal 22 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "The Grid",
+            "items": [
+              "Battle Portal 15 (67%)"
+            ]
+          }
+        ]
+      },
+      "Fancy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Battle Portal 5 (67%)",
+              "Battle Portal 16 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Battle Portal 37 (67%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "The World That Never Was",
+            "items": [
+              "Battle Portal 7 (67%)"
+            ]
+          }
+        ]
+      },
+      "Fantasy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "La Cité des Cloches",
+            "items": [
+              "Sora's first, second, third, and fourth Special Portal (33%)",
+              "Battle Portal 17 and 22 (67%)",
+              "Battle Portal 25, 37, and 46 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "The Grid",
+            "items": [
+              "Sora's first, second, and third Special Portal (33%)",
+              "Battle Portal 2, 20, 25, and 27 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Sora's second Special Portal (33%)",
+              "Battle Portal 5, 9, 14, and 16 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "Country of the Musketeers",
+            "items": [
+              "Battle Portal 8, 9, and 31 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "La Cité des Cloches",
+            "items": [
+              "Riku's first, second, and third Special Portal (33%)",
+              "Battle Portal 22 (67%)",
+              "Battle Portal 25 and 33 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "The Grid",
+            "items": [
+              "Riku's first, second, and third Special Portal (33%)",
+              "Battle Portal 2, 20, 27, and 28 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Riku's second Special Portal (33%)",
+              "Battle Portal 30, 34, 37, 42, and 43 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Country of the Musketeers",
+            "items": [
+              "Battle Portal 21, 22, and 31 (33%)"
+            ]
+          }
+        ]
+      }
+    },
+    "Dulcet": {
+      "Figment": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "La Cité des Cloches",
+            "items": [
+              "Battle Portal 7, 15, 35, 36, 39, 40, and 41 (67%)",
+              "Battle Portal 28 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "The Grid",
+            "items": [
+              "Battle Portal 21 (67%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "La Cité des Cloches",
+            "items": [
+              "Battle Portal 7, 13, 15, and 21 (67%)",
+              "Battle Portal 28 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "The Grid",
+            "items": [
+              "Battle Portal 21 (67%)"
+            ]
+          }
+        ]
+      },
+      "Fancy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Battle Portal 12 (67%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "The World That Never Was",
+            "items": [
+              "Battle Portal 4 (67%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Battle Portal 30 (67%)",
+              "Battle Portal 28 (33%)"
+            ]
+          }
+        ]
+      },
+      "Fantasy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "La Cité des Cloches",
+            "items": [
+              "Sora's first, second, third, and fourth Special Portal (33%)",
+              "Battle Portal 28 (67%), Battle Portal 7, 15, 35, 36, 39, 40, and 41 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "The Grid",
+            "items": [
+              "Sora's first, second, and third Special Portal (33%)",
+              "Battle Portal 21 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Sora's second Special Portal (33%)",
+              "Battle Portal 2, 12, and 15 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "Country of the Musketeers",
+            "items": [
+              "Battle Portal 11 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "La Cité des Cloches",
+            "items": [
+              "Riku's first, second, and third fourth Special Portal (33%)",
+              "Battle Portal 28 (67%), Battle Portal 7, 13, 15, and 21 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "The Grid",
+            "items": [
+              "Riku's first, second, and third Special Portal (33%)",
+              "Battle Portal 21 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Riku's second Special Portal (33%)",
+              "Battle Portal 26, 31, 33, 39, 40, and 46 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Country of the Musketeers",
+            "items": [
+              "Battle Portal 29 (33%)"
+            ]
+          }
+        ],
+        "other": "obtained for an expired Necho Cat, Ducky Goose, or Majik Lapin."
+      }
+    },
+    "Wondrous": {
+      "Figment": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "The Grid",
+            "items": [
+              "Battle Portal 1, 2, 11, 25, and 26 (67%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "The Grid",
+            "items": [
+              "Battle Portal 1, 2, 11, 25, 26, and 32 (67%)"
+            ]
+          }
+        ]
+      },
+      "Fancy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Country of the Musketeers",
+            "items": [
+              "Battle Portal 2, 8, 9, 14, and 21 (67%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Battle Portal 2a and 15 (67%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Country of the Musketeers",
+            "items": [
+              "Battle Portal 33, 42, and 45 (67%)",
+              "Battle Portal 32 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Battle Portal 2a (67%)"
+            ]
+          }
+        ]
+      },
+      "Fantasy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "The World That Never Was",
+            "items": [
+              "Battle Portal 1 (67%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "The World That Never Was",
+            "items": [
+              "Battle Portal 14 (67%)"
+            ]
+          }
+        ],
+        "other": "obtained for an expired Chef Kyroo, Peepsta Hoo, or Fishboné."
+      }
+    },
+    "Noble": {
+      "Figment": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "The Grid",
+            "items": [
+              "Battle Portal 12 (67%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "The Grid",
+            "items": [
+              "Battle Portal 12 (67%)"
+            ]
+          }
+        ]
+      },
+      "Fancy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Battle Portal 3, 7, 9, 16, 22, and 25 (67%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Battle Portal 30, 33, 34, and 46 (67%)"
+            ]
+          }
+        ]
+      },
+      "Fantasy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "La Cité des Cloches",
+            "items": [
+              "Sora's first, second, third, and fourth Special Portal (33%)",
+              "Battle Portal 1, 11, 20, 30, 42, and 47 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "The Grid",
+            "items": [
+              "Sora's first, second, and third Special Portal (33%)",
+              "Battle Portal 5, 11, 14, and 26 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Sora's second Special Portal (33%)",
+              "Battle Portal 3, 7, 19, 22, and 25 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "Country of the Musketeers",
+            "items": [
+              "Battle Portal 17 (67%)",
+              "Battle Portal 14 and 21 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "La Cité des Cloches",
+            "items": [
+              "Riku's first, second, and third fourth Special Portal (33%)",
+              "Battle Portal 2 (67%), Battle Portal 1, 11, 20, and 30 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "The Grid",
+            "items": [
+              "Riku's first, second, and third Special Portal (33%)",
+              "Battle Portal 5, 11, 14, 26, and 29 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Riku's second Special Portal (33%)",
+              "Battle Portal 27 and 46 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Country of the Musketeers",
+            "items": [
+              "Battle Portal 33 (33%)"
+            ]
+          }
+        ],
+        "other": "obtained for an expired Sir Kyroo, Zolephant, KO Kabuto, Drill Sye, or Cyber Yog; obtained for an expired Catanuki."
+      }
+    },
+    "Charming": {
+      "Fantasy": {
+        "rewards": [
+          {
+            "char": "Riku",
+            "world": "Traverse Town",
+            "items": [
+              "Riku's fourth, fifth, and sixth Special Portal (100%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "La Cité des Cloches",
+            "items": [
+              "Riku's fourth, fifth, and sixth Special Portal (100%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "The Grid",
+            "items": [
+              "Riku's fourth, fifth, and sixth Special Portal (100%)"
+            ]
+          }
+        ],
+        "other": "obtained for an expired Frootz Cat."
+      }
+    },
+    "Epic": {
+      "Fantasy": {
+        "rewards": [
+          {
+            "char": "Riku",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Riku's fourth, fifth, and sixth Special Portal (100%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Country of the Musketeers",
+            "items": [
+              "Riku's fourth, fifth, and sixth Special Portal (100%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Symphony of Sorcery",
+            "items": [
+              "Riku's fourth and fifth Special Portal (67%)"
+            ]
+          }
+        ],
+        "other": "obtained for an expired Ursa Circus; obtained for an expired Kab Kannon."
+      }
+    },
+    "Troubling": {
+      "Figment": {
+        "rewards": [
+          {
+            "char": "Riku",
+            "world": "Traverse Town",
+            "items": [
+              "Battle Portal 20, 23, 33, and 40 (67%)"
+            ]
+          }
+        ],
+        "other": "Obtained during the Create Spirits tutorial (Riku: x5)."
+      },
+      "Fancy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "La Cité des Cloches",
+            "items": [
+              "Battle Portal 1, 25, 30, 42, and 47 (67%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "The Grid",
+            "items": [
+              "Battle Portal 5 (67%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "La Cité des Cloches",
+            "items": [
+              "Battle Portal 1, 25, 30 (67%)",
+              "Battle Portal 2 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "The Grid",
+            "items": [
+              "Battle Portal 5 and 28 (67%)"
+            ]
+          }
+        ]
+      },
+      "Fantasy": {
+        "rewards": [
+          {
+            "char": "Sora",
+            "world": "Traverse Town",
+            "items": [
+              "Sora's first, second, and third Special Portal (33%)",
+              "Battle Portal 34 and 38 (67%)",
+              "Battle Portal 3, 15, and 17 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "The Grid",
+            "items": [
+              "Battle Portal 1 and 15 (33%)"
+            ]
+          },
+          {
+            "char": "Sora",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Sora's first and third Special Portal (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Traverse Town",
+            "items": [
+              "Riku's first, second, and third Special Portal (33%)",
+              "Battle Portal 15, 20, 23, and 40 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "The Grid",
+            "items": [
+              "Battle Portal 1 and 15 (33%)"
+            ]
+          },
+          {
+            "char": "Riku",
+            "world": "Prankster's Paradise",
+            "items": [
+              "Riku's first and third Special Portal (33%)"
+            ]
+          }
+        ],
+        "other": "obtained for an expired Ghostabocky, Komory Bat, Toximander, or Woeflower."
+      }
     }
   },
   "recipes": [
