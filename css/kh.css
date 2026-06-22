@@ -416,3 +416,116 @@
     border-radius: 10px; font-size: 12.5px; color: var(--dim); line-height: 1.5; }
 .kh .dg-c-forecast-note b { color: var(--ink); }
 .kh .dg-c-forecast-eff { display: block; margin-top: 3px; }
+
+/* =====================================================================
+   Dream Guide — Creation calculator redesign, Abilities, spirit modal
+   ===================================================================== */
+
+/* Spirit card: owned star + click-to-open */
+.kh .dg-spirit { position: relative; }
+.kh .dg-star { position: absolute; top: 5px; right: 6px; background: none; border: none; cursor: pointer;
+    font-size: 16px; line-height: 1; color: var(--line); padding: 2px; z-index: 2; }
+.kh .dg-star:hover { color: var(--accent2); }
+.kh .dg-star.on { color: var(--accent2); }
+.kh .dg-owned-toggle { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--dim); cursor: pointer; }
+.kh .dg-owned-toggle input { width: auto; }
+
+/* Mode bar */
+.kh .dg-mode-bar { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-end; justify-content: space-between; }
+.kh .dg-modes { display: inline-flex; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 3px; }
+.kh .dg-mode { background: none; border: none; color: var(--dim); padding: 8px 16px; border-radius: 7px; cursor: pointer; font-size: 13px; font-weight: 600; }
+.kh .dg-mode.active { background: var(--accent); color: #06203b; }
+.kh .dg-ctx { display: flex; gap: 12px; flex-wrap: wrap; }
+.kh .dg-ctx-field { display: flex; flex-direction: column; gap: 4px; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--dim); }
+.kh .dg-ctx-narrow select, .kh .dg-ctx-narrow input { min-width: 90px; }
+.kh .dg-cmode { margin-top: 16px; }
+
+/* Material slots */
+.kh .dg-slots { display: flex; gap: 14px; align-items: flex-end; flex-wrap: wrap; }
+.kh .dg-slot { flex: 1; min-width: 240px; }
+.kh .dg-slot-h { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .6px; color: var(--dim); margin-bottom: 6px; }
+.kh .dg-slot-row { display: flex; gap: 6px; }
+.kh .dg-sel-mat { flex: 2; }
+.kh .dg-sel-tier { flex: 1.4; }
+.kh .dg-sel-qty { width: 64px; flex: none; text-align: center; }
+.kh .dg-slot-plus { font-size: 20px; color: var(--dim); padding-bottom: 8px; }
+
+/* Result cards (forward mode) */
+.kh .dg-c-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; }
+.kh .dg-c-cardhead { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.kh .dg-c-cardimg { width: 46px; height: 46px; object-fit: contain; }
+.kh .dg-c-cardname { background: none; border: none; color: var(--ink); font-size: 17px; font-weight: 700; cursor: pointer; padding: 0; text-align: left; }
+button.dg-c-cardname:hover { color: var(--accent); text-decoration: underline; }
+.kh .dg-c-rankbig { font-size: 13px; font-weight: 700; color: var(--accent2); margin-left: auto; }
+.kh .dg-c-up { color: var(--accent); font-weight: 600; font-size: 11.5px; }
+.kh .dg-c-pct { font-weight: 700; color: #6fe39a; font-variant-numeric: tabular-nums; }
+.kh .dg-c-pct.low { color: #ff8e8e; }
+.kh .dg-c-cardrecipe { margin: 10px 0 4px; font-size: 13.5px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.kh .dg-c-total { font-size: 11.5px; color: var(--dim); }
+.kh .dg-rare { font-size: 11.5px; color: var(--accent2); }
+.kh .dg-c-more { margin-top: 8px; }
+.kh .dg-c-more summary { cursor: pointer; font-size: 12px; color: var(--accent); }
+.kh .dg-c-more[open] summary { margin-bottom: 10px; }
+
+/* Recipe rows (backward mode) */
+.kh .dg-c-reciperow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 9px 4px; border-bottom: 1px solid var(--line); font-size: 13.5px; }
+.kh .dg-c-boostnote { font-size: 11px; color: var(--accent); background: rgba(95,179,255,.1); border-radius: 5px; padding: 1px 7px; }
+.kh .dg-c-asis, .kh .dg-c-boostnote { white-space: nowrap; }
+
+/* Shared bits */
+.kh .dg-rank-pill { display: inline-block; min-width: 20px; text-align: center; background: var(--chip); border: 1px solid var(--line); border-radius: 6px; padding: 0 7px; font-weight: 700; font-size: 12px; }
+.kh .dg-ing { color: var(--ink); }
+.kh .dg-ing b { color: var(--accent); }
+.kh .dg-ing b.dg-ing-up { color: var(--accent2); }
+.kh .dg-perm-badge { font-size: 10px; text-transform: uppercase; letter-spacing: .4px; background: #3a2f12; border: 1px solid #6b5a2c; color: #e0c66a; border-radius: 5px; padding: 1px 6px; }
+.kh .dg-off-badge { font-size: 10px; text-transform: uppercase; background: #15351f; border: 1px solid #2c5b3c; color: #6fe39a; border-radius: 5px; padding: 1px 6px; }
+
+/* Spirit detail modal */
+.dg-modal { position: fixed; inset: 0; z-index: 120; display: none; }
+.dg-modal.open { display: block; }
+.dg-modal-back { position: absolute; inset: 0; background: rgba(4,8,18,.72); }
+.dg-modal-panel { position: relative; max-width: 880px; margin: 4vh auto; max-height: 92vh; overflow-y: auto;
+    background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 22px; box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+.dg-modal-close { position: absolute; top: 12px; right: 14px; background: none; border: none; color: var(--dim); font-size: 26px; line-height: 1; cursor: pointer; }
+.dg-modal-close:hover { color: var(--ink); }
+.dg-m-head { display: flex; gap: 16px; align-items: center; }
+.dg-m-portrait { width: 92px; height: 92px; object-fit: contain; }
+.dg-m-title { font-size: 22px; font-weight: 700; color: var(--ink); }
+.dg-m-meta { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 6px 0 8px; font-size: 12.5px; color: var(--dim); }
+.dg-m-meta b { color: var(--ink); font-weight: 600; }
+.dg-m-own { background: var(--panel); border: 1px solid var(--line); color: var(--dim); border-radius: 8px; padding: 6px 12px; font-size: 12.5px; cursor: pointer; }
+.dg-m-own.on { background: #3a2f12; border-color: #6b5a2c; color: #e0c66a; }
+.dg-m-statline { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 14px 0 2px; font-size: 13px; color: var(--dim); }
+.dg-m-statline b { color: var(--ink); }
+.dg-m-dispos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 8px; }
+.dg-m-dispo { display: flex; gap: 8px; background: var(--panel); border: 1px solid var(--line); border-radius: 9px; padding: 8px 10px; }
+table.dg-board { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.dg-board th, .dg-board td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.dg-board th { color: var(--dim); font-size: 11px; text-transform: uppercase; letter-spacing: .5px; }
+.dg-board-ic { width: 30px; }
+.dg-board-ic img { width: 24px; height: 24px; object-fit: contain; }
+.dg-board-grid { color: var(--dim); font-variant-numeric: tabular-nums; font-size: 11px; border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; }
+.dg-board-name { font-weight: 600; color: var(--ink); }
+.dg-board-cost { white-space: nowrap; color: var(--accent); }
+.dg-board-cond { color: var(--dim); font-size: 11.5px; }
+.dg-m-recipes { display: flex; flex-direction: column; gap: 6px; }
+.dg-m-recipe { font-size: 13px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.dg-m-pct { color: #6fe39a; font-weight: 700; }
+.dg-m-pct.low { color: #ff8e8e; }
+
+/* Abilities tab */
+.kh .dg-ab-filters { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+.kh .dg-ab-cat { background: var(--panel); border: 1px solid var(--line); color: var(--dim); border-radius: 999px; padding: 5px 12px; font-size: 12px; cursor: pointer; }
+.kh .dg-ab-cat.active { background: var(--accent); color: #06203b; border-color: var(--accent); font-weight: 700; }
+.kh .dg-ab { background: var(--panel); border: 1px solid var(--line); border-radius: 11px; padding: 11px 14px; margin-bottom: 10px; }
+.kh .dg-ab-head { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+.kh .dg-ab-ic { width: 26px; height: 26px; object-fit: contain; }
+.kh .dg-ab-name { font-weight: 700; font-size: 14.5px; }
+.kh .dg-ab-type { font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: .4px; }
+.kh .dg-ab-count { margin-left: auto; font-size: 11.5px; color: var(--dim); }
+.kh .dg-ab-spirits { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+.kh .dg-ab-chip { display: inline-flex; align-items: center; gap: 5px; background: var(--chip); border: 1px solid var(--line); color: var(--ink);
+    border-radius: 999px; padding: 3px 10px 3px 4px; font-size: 12px; cursor: pointer; }
+.kh .dg-ab-chip img { width: 20px; height: 20px; object-fit: contain; }
+.kh .dg-ab-chip:hover { border-color: var(--accent); }
+.kh .dg-ab-chip.cond { border-style: dashed; }

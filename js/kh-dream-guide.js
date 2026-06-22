@@ -1,27 +1,33 @@
 /* =====================================================================
    Kingdom Hearts Dream Drop Distance — Dream Guide
 
-   A DDD sub-tool (sibling of the BBS Melding Calculator). Three tabs:
-     Spirits ... gallery of the 54 Spirits; click to own, greyed when not.
-     Materials . every crafting material's drop sources — Dream Eaters
-                 (hover → the worlds they appear in) and Treasures (hover →
-                 each chest's character + location, struck through when the
-                 matching DDD-tracker treasure is already checked off).
-     Recipes ... a checklist of the Spirits' Recipe items.
+   A DDD sub-tool (sibling of the BBS Melding Calculator). Five tabs:
+     Spirits ... gallery of the 54 Spirits; star to own, click for a detail
+                 modal (stats, resistances, dispositions, full Ability Link
+                 board with unlock conditions, and creation recipes).
+     Creation . the creation calculator, two ways round (like BBS melding):
+                  • By Materials — pick the Dream Pieces + amounts you'll
+                    use and see the Spirit, rank, success % and stats.
+                  • By Spirit — pick a Spirit + the rank you want and see
+                    every recipe that reaches it (with the amounts needed,
+                    and whether a Risky Winds Forecast is required).
+     Abilities  search every Ability Link board at once — including the
+                 permanent (Support) unlocks — to see which Spirits grant
+                 each ability and under what condition.
+     Materials  every crafting material's drop sources (Dream Eater worlds
+                 on hover, Treasure chest locations with tracker cross-offs).
+     Recipes .. a checklist of each Spirit's Recipe item (shared with the
+                 DDD Achievement Tracker).
 
-   Reuse, not duplication: Dream Eater → world data, the Treasure list and
-   the Recipe-item checklist all come from the Dream Drop Distance tracker
-   (TRACKER_GAME in js/kh-dream-guide-data.js's sibling kh-ddd-tracker-data.js)
-   and its progress store (khddd_progress_v1). Only the material drop %s and
-   synthesis recipes come from js/kh-dream-guide-data.js (DREAM_GUIDE).
+   Reuse, not duplication: Dream Eater→world data, the Treasure list and the
+   Recipe-item checklist come from the DDD tracker (TRACKER_GAME) + its
+   progress store (khddd_progress_v1). Material drops, synthesis recipes,
+   Spirit stats, Ability Link boards, Deck Command bonuses and the creation
+   formula constants come from js/kh-dream-guide-data.js (DREAM_GUIDE).
 
-   Stores touched:
-     khddd_progress_v1  - DDD tracker. Read: treasures-<char> (cross-offs).
-                          Read/write: recipes (the checklist is the same data).
-     khddd_guide_v1     - this tool's own "owned Spirit" set.
-
-   Game terms (Spirit/Dream Eater names, materials, tiers, worlds, Sora/Riku)
-   stay English in every language; only UI chrome is translated.
+   Stores: khddd_progress_v1 (DDD tracker — treasures read; recipes r/w),
+           khddd_guide_v1 (this tool's owned-Spirit set).
+   Game terms stay English in every language; only UI chrome is translated.
    ===================================================================== */
 document.addEventListener('DOMContentLoaded', async function () {
 await i18n.init();
@@ -31,14 +37,17 @@ const translate = (key) => i18n.getMessage(key);
 const format = (key, ...args) => i18n.format(key, ...args);
 
 const DG = window.DREAM_GUIDE;
-const GAME = window.TRACKER_GAME;          // the DDD tracker config
-const DDD_STORE_KEY = GAME.storeKey;       // "khddd_progress_v1"
+const CREATE = DG.create;
+const GAME = window.TRACKER_GAME;
+const DDD_STORE_KEY = GAME.storeKey;
 const GUIDE_KEY = "khddd_guide_v1";
-const CHARS = (GAME.chars || []).map(c => c.id);          // ["sora","riku"]
+const CHARS = (GAME.chars || []).map(c => c.id);
 const CHAR_LABEL = {}; (GAME.chars || []).forEach(c => CHAR_LABEL[c.id] = c.label);
 const SPIRIT_IMG = "../images/dreamdrop/spirits/";
+const BOARD_IMG = "../images/dreamdrop/spiritboard/";
+const RANKS = CREATE.ranks;                       // F,E,D,C,B,A,S (low→high)
 
-/* ---------- pull the sections we reuse out of the tracker config ---------- */
+/* ---------- reused tracker sections ---------- */
 function findSec(id) {
   for (const tab of GAME.tabs) for (const sec of tab.sections) if (sec.id === id) return sec;
   return null;
@@ -47,52 +56,41 @@ const DREAMEATERS = (findSec("dreameaters") || {}).items || [];
 const RECIPE_ITEMS = (findSec("recipes") || {}).items || [];
 const TREASURE_SEC = findSec("treasures") || {};
 const TREASURE_VARIANTS = TREASURE_SEC.variants || {};
-
-// Dream Eater name -> { nw:[worlds], rw:[worlds] } for the drop hovers.
 const EATER_WORLDS = {};
 DREAMEATERS.forEach(item => { EATER_WORLDS[item.name] = { nw: item.nw || [], rw: item.rw || [] }; });
-
-// Recipe-item name -> index into the tracker's recipes store.
 const RECIPE_INDEX = new Map();
 RECIPE_ITEMS.forEach((item, i) => { if (!RECIPE_INDEX.has(item.name)) RECIPE_INDEX.set(item.name, i); });
 
-/* ---------- DDD tracker store (read; recipes also written) ---------- */
+const SPIRIT_BY_NAME = {};
+DG.spirits.forEach(s => { SPIRIT_BY_NAME[s.name] = s; });
+
+/* ---------- stores ---------- */
 function loadDDD() { try { return JSON.parse(localStorage.getItem(DDD_STORE_KEY)) || {}; } catch (e) { return {}; } }
 let DDD = loadDDD();
-function saveDDD() { try { localStorage.setItem(DDD_STORE_KEY, JSON.stringify(DDD)); } catch (e) { /* private browsing */ } }
+function saveDDD() { try { localStorage.setItem(DDD_STORE_KEY, JSON.stringify(DDD)); } catch (e) { /* private */ } }
 function dddSection(id) { if (!DDD[id]) DDD[id] = {}; return DDD[id]; }
 
-/* ---------- this tool's own "owned Spirit" set ---------- */
 function loadGuide() { try { return JSON.parse(localStorage.getItem(GUIDE_KEY)) || {}; } catch (e) { return {}; } }
 let GUIDE = loadGuide();
 if (!GUIDE.owned) GUIDE.owned = {};
-function saveGuide() { try { localStorage.setItem(GUIDE_KEY, JSON.stringify(GUIDE)); } catch (e) { /* private browsing */ } }
+function saveGuide() { try { localStorage.setItem(GUIDE_KEY, JSON.stringify(GUIDE)); } catch (e) { /* private */ } }
 function spiritOwned(name) { return !!GUIDE.owned[name]; }
 function toggleSpirit(name) {
   if (GUIDE.owned[name]) delete GUIDE.owned[name]; else GUIDE.owned[name] = true;
-  saveGuide(); renderSpirits();
+  saveGuide(); renderSpirits(); if (modalSpirit === name) renderModal();
 }
 
-/* ---------- treasure index (built once the tracker lang is fetched) ----------
-   Maps "<Material> <Tier>" -> [ { char, world, area, idx } ] using the
-   tracker's per-character treasure lists (name + world group `g`) and the
-   tracker lang file (the human "area" text). Cross-off state is read live
-   from DDD["treasures-<char>"][idx]. */
+/* ---------- treasure index (tracker lang gives the chest "area" text) ---------- */
 let TREASURE_BY_MAT = {};
 let trackerLang = null;
-
 async function fetchTrackerLang() {
   const root = (document.body && document.body.getAttribute("data-root")) || "../";
-  const langs = [i18n.getCurrentLanguage(), "en"];
-  for (const lang of langs) {
-    try {
-      const res = await fetch(`${root}lang/messages/${lang}/kh-ddd-tracker.json`);
-      if (res.ok) { trackerLang = await res.json(); return; }
-    } catch (e) { /* try next */ }
+  for (const lang of [i18n.getCurrentLanguage(), "en"]) {
+    try { const r = await fetch(`${root}lang/messages/${lang}/kh-ddd-tracker.json`); if (r.ok) { trackerLang = await r.json(); return; } }
+    catch (e) { /* next */ }
   }
   trackerLang = {};
 }
-
 function buildTreasureIndex() {
   TREASURE_BY_MAT = {};
   const items = (trackerLang && trackerLang.items) || {};
@@ -101,36 +99,24 @@ function buildTreasureIndex() {
     const langRows = items["treasures-" + char] || [];
     list.forEach((entry, idx) => {
       const key = entry.name;
-      const area = (langRows[idx] && langRows[idx].area) || "";
       (TREASURE_BY_MAT[key] = TREASURE_BY_MAT[key] || []).push({
-        char: char, world: entry.g || "", area: area, idx: idx
+        char, world: entry.g || "", area: (langRows[idx] && langRows[idx].area) || "", idx
       });
     });
   });
 }
-function treasureCrossed(char, idx) {
-  const store = DDD["treasures-" + char];
-  return !!(store && store[idx]);
-}
+function treasureCrossed(char, idx) { const s = DDD["treasures-" + char]; return !!(s && s[idx]); }
 
-/* ---------- hover popover (worlds / treasure locations) ---------- */
+/* ---------- hover popover ---------- */
 const pop = document.getElementById("dg-pop");
 function showPop(target, html) {
-  pop.innerHTML = html;
-  pop.classList.add("open");
-  pop.setAttribute("aria-hidden", "false");
-  const rect = target.getBoundingClientRect();
-  // measure, then clamp into the viewport
-  const pw = pop.offsetWidth, ph = pop.offsetHeight, margin = 8;
-  let left = rect.left + rect.width / 2 - pw / 2;
-  left = Math.max(margin, Math.min(left, window.innerWidth - pw - margin));
-  let top = rect.top - ph - 10;
-  if (top < margin) top = rect.bottom + 10;   // flip below if no room above
-  pop.style.left = left + "px";
-  pop.style.top = top + "px";
+  pop.innerHTML = html; pop.classList.add("open"); pop.setAttribute("aria-hidden", "false");
+  const rect = target.getBoundingClientRect(), pw = pop.offsetWidth, ph = pop.offsetHeight, m = 8;
+  let left = Math.max(m, Math.min(rect.left + rect.width / 2 - pw / 2, window.innerWidth - pw - m));
+  let top = rect.top - ph - 10; if (top < m) top = rect.bottom + 10;
+  pop.style.left = left + "px"; pop.style.top = top + "px";
 }
 function hidePop() { pop.classList.remove("open"); pop.setAttribute("aria-hidden", "true"); }
-// One delegated set of handlers for every [data-pop] trigger.
 function wirePop(container) {
   container.querySelectorAll("[data-pop]").forEach(node => {
     const html = node.getAttribute("data-pop");
@@ -142,54 +128,485 @@ function wirePop(container) {
 }
 window.addEventListener("scroll", hidePop, true);
 
+/* ---------- shared rendering helpers ---------- */
+function spiritFile(name) { return SPIRIT_IMG + name.replace(/ /g, "_") + ".png"; }
+
 /* =====================================================================
-   TAB 1 — Spirits gallery
+   Creation formula + rank boosting (from the KH Wiki Spirit article)
+   ===================================================================== */
+function levelCorrection(level) { return level <= 50 ? 10 + level : 35 + level / 2; }
+function rankIdx(r) { return RANKS.indexOf(r); }
+// thresholds: how many of a Dream Piece (required = recipe amount) are needed
+// for a +1/+2/+3/+4 rank boost. Reproduces the wiki's table exactly.
+function boostThresholds(req) {
+  return { t1: req <= 1 ? Infinity : Math.ceil(req * 1.5), t2: 2 * req, t3: 3 * req, t4: 5 * req };
+}
+function boostFor(req, used) {
+  if (used < req) return 0;
+  const t = boostThresholds(req);
+  if (used >= t.t4) return 4; if (used >= t.t3) return 3; if (used >= t.t2) return 2; if (used >= t.t1) return 1;
+  return 0;
+}
+function qtyForBoost(req, b) {
+  const t = boostThresholds(req);
+  return b <= 0 ? req : b === 1 ? t.t1 : b === 2 ? t.t2 : b === 3 ? t.t3 : t.t4;
+}
+function levelBonusForTotal(total) {
+  for (const row of CREATE.levelBonusPerTotal) if (total >= row[0] && total <= row[1]) return row[2];
+  const last = CREATE.levelBonusPerTotal[CREATE.levelBonusPerTotal.length - 1];
+  return total > last[1] ? last[2] : 0;
+}
+// One stat's floored [min,max] + cap, given base, rank, level, forecast range.
+function statRange(base, rank, level, bonusRange) {
+  if (typeof base !== "number") return null;
+  const rc = CREATE.rankCorr[rank], mrc = CREATE.maxRankCorr[rank], lc = levelCorrection(level);
+  const lo = base * (rc + (rc - 1.1) / 10) * lc / 10 + bonusRange[0];
+  const hi = base * (rc + (rc - 0.9) / 10) * lc / 10 + bonusRange[1];
+  const cap = base * (mrc + (mrc - 0.9) / 10) * lc / 10;
+  return { lo: Math.floor(lo), hi: Math.min(Math.floor(hi), Math.floor(cap)), cap: Math.floor(cap) };
+}
+function rangeText(r) { return !r ? "—" : r.lo === r.hi ? `${r.lo}` : `${r.lo}–${r.hi}`; }
+
+// Build the four-stat block for a Spirit at a rank/level/forecast.
+function statsTable(spirit, rank, level, forecast) {
+  const fb = CREATE.forecastBonus[forecast] || {};
+  const defs = [
+    { label: translate("dg-c-hp"), base: spirit.hp, bonus: fb.hp || [0, 0] },
+    { label: translate("dg-c-str"), base: spirit.str, bonus: fb.str || [0, 0] },
+    { label: translate("dg-c-mag"), base: spirit.mag, bonus: fb.mag || [0, 0] },
+    { label: translate("dg-c-def"), base: spirit.def, bonus: fb.def || [0, 0] },
+  ];
+  let rows = defs.map(d => {
+    const r = statRange(d.base, rank, level, d.bonus);
+    const note = r && (d.bonus[0] || d.bonus[1]) ? ` <span class="dg-c-bonus">+${d.bonus[0]}${d.bonus[1] !== d.bonus[0] ? "–" + d.bonus[1] : ""}</span>` : "";
+    return `<tr><td class="dg-c-statname">${esc(d.label)}</td>` +
+      `<td>${typeof d.base === "number" ? d.base : esc(String(d.base))}</td>` +
+      `<td class="dg-c-result">${rangeText(r)}${note}</td>` +
+      `<td class="dg-c-cap">${r ? r.cap : "—"}</td></tr>`;
+  }).join("");
+  return `<table class="dg-c-stats"><thead><tr><th>${esc(translate("dg-c-th-stat"))}</th>` +
+    `<th>${esc(translate("dg-c-th-base"))}</th><th>${esc(translate("dg-c-th-result"))}</th>` +
+    `<th>${esc(translate("dg-c-th-cap"))}</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function rankPill(rank) { return `<span class="dg-rank-pill">${esc(rank)}</span>`; }
+function matChip(mat, tier, qty, baseQty) {
+  const boosted = qty != null && baseQty != null && qty > baseQty;
+  return `<span class="dg-ing">${esc(mat + " " + tier)}` +
+    (qty != null ? ` <b class="${boosted ? "dg-ing-up" : ""}">×${qty}</b>` : "") + `</span>`;
+}
+
+/* =====================================================================
+   TAB 1 — Spirits gallery + detail modal
    ===================================================================== */
 const spiritsGrid = document.getElementById("dg-spirits-grid");
 const spiritsCount = document.getElementById("dg-spirits-count");
 const spiritsFilter = document.getElementById("dg-spirits-filter");
+const spiritsOwnedOnly = document.getElementById("dg-spirits-ownedonly");
 
 function renderSpirits() {
   const query = (spiritsFilter.value || "").trim().toLowerCase();
+  const ownedOnly = spiritsOwnedOnly.checked;
   const owned = DG.spirits.filter(s => spiritOwned(s.name)).length;
   spiritsCount.innerHTML = format("dg-owned-count", owned, DG.spirits.length);
   spiritsGrid.innerHTML = "";
   let shown = 0;
   DG.spirits.forEach(spirit => {
     if (query && spirit.name.toLowerCase().indexOf(query) < 0) return;
-    shown++;
     const has = spiritOwned(spirit.name);
-    const card = el("button", "dg-spirit" + (has ? " owned" : ""));
-    card.type = "button";
-    card.setAttribute("aria-pressed", has ? "true" : "false");
-    const file = spirit.name.replace(/ /g, "_") + ".png";
+    if (ownedOnly && !has) return;
+    shown++;
+    const card = el("div", "dg-spirit" + (has ? " owned" : ""));
+    card.setAttribute("role", "button"); card.tabIndex = 0;
     card.innerHTML =
-      `<span class="dg-spirit-img"><img src="${esc(SPIRIT_IMG + file)}" alt="" loading="lazy"></span>` +
+      `<button class="dg-star${has ? " on" : ""}" title="${esc(translate("dg-own-toggle"))}" aria-pressed="${has}">★</button>` +
+      `<span class="dg-spirit-img"><img src="${esc(spiritFile(spirit.name))}" alt="" loading="lazy"></span>` +
       `<span class="dg-spirit-name">${esc(spirit.name)}</span>` +
-      (spirit.attr ? `<span class="dg-spirit-attr">${esc(spirit.attr)}</span>` : "");
-    card.addEventListener("click", () => toggleSpirit(spirit.name));
+      (spirit.rank ? `<span class="dg-spirit-attr">${esc(translate("dg-c-attr"))}: ${esc(spirit.attr || "—")}</span>` : "");
+    card.querySelector(".dg-star").addEventListener("click", e => { e.stopPropagation(); toggleSpirit(spirit.name); });
+    const open = () => openModal(spirit.name);
+    card.addEventListener("click", open);
+    card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
     spiritsGrid.appendChild(card);
   });
   if (!shown) spiritsGrid.innerHTML = `<p class="empty">${esc(translate("dg-empty"))}</p>`;
 }
 
+/* ---------- Ability Link board icon mapping ---------- */
+function nodeIcon(node) {
+  const t = node.t, n = node.n || "", req = (node.c || "").toLowerCase();
+  if (t === "Secret") return /red/i.test(n) ? "Red_Secret.png" : "Green_Secret.png";
+  if (t === "Quota") {
+    if (req.startsWith("link")) return "Link_Door.png";
+    if (req.startsWith("level")) return "Level_Door.png";
+    return "Premium_Icon.png";
+  }
+  if (t === "Magic Command") return "Magic_Icon.png";
+  if (t === "Attack Command") return "Attack_Icon.png";
+  if (t === "Item Command") return "Item_Icon.png";
+  if (/Command$/.test(t)) return "Ability_Icon.png";
+  if (t === "Support Ability" || t === "Spirits Ability" || t === "Defense Ability") return "Perm_Ability_Icon.png";
+  if (/HP Boost/i.test(n)) return "Health_Stat_Icon.png";
+  if (/Attack (Boost|Haste)/i.test(n)) return "Attack_Stat_Icon.png";
+  if (/Magic (Boost|Haste)/i.test(n)) return "Magic_Stat_Icon.png";
+  if (/Defense Boost|Defender/i.test(n)) return "Defense_Stat_Icon.png";
+  return "Ability_Icon.png";
+}
+function isPermanent(node) { return node.t === "Support Ability"; }
+
+/* ---------- modal ---------- */
+const modal = document.getElementById("dg-modal");
+const modalBody = document.getElementById("dg-modal-body");
+let modalSpirit = null;
+function openModal(name) { modalSpirit = name; renderModal(); modal.classList.add("open"); modal.setAttribute("aria-hidden", "false"); }
+function closeModal() { modal.classList.remove("open"); modal.setAttribute("aria-hidden", "true"); modalSpirit = null; }
+document.getElementById("dg-modal-close").addEventListener("click", closeModal);
+document.getElementById("dg-modal-back").addEventListener("click", closeModal);
+document.addEventListener("keydown", e => { if (e.key === "Escape" && modal.classList.contains("open")) closeModal(); });
+
+function renderModal() {
+  const spirit = SPIRIT_BY_NAME[modalSpirit];
+  if (!spirit) return;
+  const has = spiritOwned(spirit.name);
+  let html = `<div class="dg-m-head">` +
+    `<img class="dg-m-portrait" src="${esc(spiritFile(spirit.name))}" alt="">` +
+    `<div class="dg-m-headinfo">` +
+      `<div class="dg-m-title" id="dg-modal-title">${esc(spirit.name)}</div>` +
+      `<div class="dg-m-meta">` +
+        `<span><b>${esc(translate("dg-c-attr"))}:</b> ${esc(spirit.attr || "—")}</span>` +
+        `<span><b>${esc(translate("dg-c-style"))}:</b> ${esc(spirit.style || "—")}</span>` +
+        `<span><b>${esc(translate("dg-c-dp"))}:</b> ${esc(spirit.dp || "—")}</span>` +
+        (spirit.rank ? `<span><b>${esc(translate("dg-c-rank-out"))}:</b> ${esc(spirit.rank)}</span>` : "") +
+      `</div>` +
+      `<button class="dg-m-own${has ? " on" : ""}" id="dg-m-own">★ ${esc(translate(has ? "dg-owned" : "dg-mark-owned"))}</button>` +
+    `</div></div>`;
+
+  // base stats
+  html += `<div class="dg-m-statline">` +
+    [["dg-c-hp", spirit.hp], ["dg-c-str", spirit.str], ["dg-c-mag", spirit.mag], ["dg-c-def", spirit.def], ["dg-c-exp", spirit.exp]]
+      .map(([k, v]) => `<span><b>${esc(translate(k))}</b> ${typeof v === "number" ? v : esc(String(v))}</span>`).join("") +
+    `</div>`;
+
+  // resistances
+  html += `<h3 class="grp-title">${esc(translate("dg-c-resist"))}</h3><div class="dg-c-res">`;
+  [["fire", "Fire"], ["blz", "Blizzard"], ["thn", "Thunder"], ["wtr", "Water"], ["drk", "Dark"], ["lgt", "Light"]].forEach(([k, label]) => {
+    const mult = spirit.res ? spirit.res[k] : null;
+    const cls = typeof mult === "number" ? (mult > 1 ? " weak" : mult < 1 ? " strong" : "") : "";
+    html += `<span class="dg-c-res-chip${cls}"><span class="dg-c-res-el">${esc(label)}</span><b>${typeof mult === "number" ? "×" + mult : "—"}</b></span>`;
+  });
+  html += `</div>`;
+
+  // dispositions
+  if (spirit.disps && spirit.disps.length) {
+    html += `<h3 class="grp-title">${esc(translate("dg-c-dispo-list"))}</h3><div class="dg-m-dispos">`;
+    spirit.disps.forEach((d, i) => {
+      html += `<div class="dg-m-dispo"><span class="dg-c-dispo-no">${["I", "II", "III", "IV"][i]}</span>` +
+        `<div><div class="dg-c-dispo-name">${esc(d.n)}</div>${d.b ? `<div class="dg-c-dispo-beh">${esc(d.b)}</div>` : ""}</div></div>`;
+    });
+    html += `</div>`;
+  }
+
+  // ability link board
+  const board = (DG.boards || {})[spirit.name] || [];
+  if (board.length) {
+    html += `<h3 class="grp-title">${esc(translate("dg-board"))} <span class="dg-c-sub">— ${board.length} ${esc(translate("dg-board-nodes"))}</span></h3>`;
+    html += `<table class="dg-board"><thead><tr><th></th><th>${esc(translate("dg-board-node"))}</th>` +
+      `<th>${esc(translate("dg-board-cost"))}</th><th>${esc(translate("dg-board-cond"))}</th></tr></thead><tbody>`;
+    board.forEach(node => {
+      const perm = isPermanent(node);
+      html += `<tr><td class="dg-board-ic"><img src="${esc(BOARD_IMG + nodeIcon(node))}" alt="${esc(node.t)}" title="${esc(node.t)}"></td>` +
+        `<td><span class="dg-board-grid">${esc(node.g || "")}</span> <span class="dg-board-name">${esc(node.n)}</span>` +
+          (perm ? ` <span class="dg-perm-badge">${esc(translate("dg-permanent"))}</span>` : "") + `</td>` +
+        `<td class="dg-board-cost">${esc(node.c || "")}</td>` +
+        `<td class="dg-board-cond">${esc(node.cond || "")}</td></tr>`;
+    });
+    html += `</tbody></table>`;
+  }
+
+  // recipes to create it
+  const recs = DG.recipes.filter(r => r.sp === spirit.name);
+  if (recs.length) {
+    html += `<h3 class="grp-title">${esc(translate("dg-m-recipes"))}</h3><div class="dg-m-recipes">`;
+    recs.forEach(r => {
+      html += `<div class="dg-m-recipe">${rankPill(r.rank)} ` +
+        matChip(r.m1, r.t1, r.q1) + ` <span class="dg-plus">+</span> ` + matChip(r.m2, r.t2, r.q2) +
+        (r.pct != null ? ` <span class="dg-m-pct${r.pct < 100 ? " low" : ""}">${r.pct}%</span>` : "") +
+        (r.off ? ` <span class="dg-off-badge">${esc(translate("dg-official"))}</span>` : "") +
+        (r.rare ? ` <span class="dg-rare">→ ${esc(r.rare)}</span>` : "") + `</div>`;
+    });
+    html += `</div>`;
+  }
+
+  modalBody.innerHTML = html;
+  const ownBtn = document.getElementById("dg-m-own");
+  if (ownBtn) ownBtn.addEventListener("click", () => toggleSpirit(spirit.name));
+}
+
 /* =====================================================================
-   TAB 2 — Materials + drop locations
+   TAB 2 — Creation calculator (two modes)
+   ===================================================================== */
+const C = {
+  forecast: document.getElementById("dg-c-forecast"),
+  level: document.getElementById("dg-c-level"),
+  m1mat: document.getElementById("dg-c-m1-mat"), m1tier: document.getElementById("dg-c-m1-tier"), m1qty: document.getElementById("dg-c-m1-qty"),
+  m2mat: document.getElementById("dg-c-m2-mat"), m2tier: document.getElementById("dg-c-m2-tier"), m2qty: document.getElementById("dg-c-m2-qty"),
+  matOut: document.getElementById("dg-c-materials-out"),
+  spirit: document.getElementById("dg-c-spirit"), rank: document.getElementById("dg-c-rank"),
+  spiritOut: document.getElementById("dg-c-spirit-out"),
+};
+let createMode = "materials";
+
+function fillCreateControls() {
+  C.forecast.innerHTML = CREATE.forecasts.map(f => `<option value="${esc(f)}">${esc(f)}</option>`).join("");
+  const anyMat = `<option value="">${esc(translate("dg-any"))}</option>`;
+  const matOpts = anyMat + DG.materials.map(m => `<option value="${esc(m)}">${esc(m)}</option>`).join("");
+  const anyTier = `<option value="">${esc(translate("dg-any"))}</option>`;
+  const tierOpts = anyTier + DG.tiers.map(t => `<option value="${esc(t)}">${esc(t)}</option>`).join("");
+  C.m1mat.innerHTML = matOpts; C.m2mat.innerHTML = matOpts;
+  C.m1tier.innerHTML = tierOpts; C.m2tier.innerHTML = tierOpts;
+  C.spirit.innerHTML = DG.spirits.map((s, i) => `<option value="${i}">${esc(s.name)}</option>`).join("");
+  C.rank.innerHTML = RANKS.slice().reverse().map(r => `<option value="${esc(r)}">${esc(r)}</option>`).join("");
+  // sensible defaults: Rampant Figment + Vibrant Figment → Meow Wow
+  C.m1mat.value = "Rampant"; C.m1tier.value = "Figment"; C.m1qty.value = 3;
+  C.m2mat.value = "Vibrant"; C.m2tier.value = "Figment"; C.m2qty.value = 2;
+}
+
+function curLevel() { return Math.min(99, Math.max(1, parseInt(C.level.value, 10) || 1)); }
+function curForecast() { return C.forecast.value || CREATE.forecasts[0]; }
+
+// dispositions + forecast note block, shared by both modes
+function forecastExtras(spirit, forecast) {
+  const odds = CREATE.dispoOdds[forecast] || [0, 0, 0, 0];
+  let html = `<div class="dg-c-dispos">`;
+  (spirit.disps || []).forEach((d, i) => {
+    const pct = odds[i] || 0;
+    html += `<div class="dg-c-dispo${pct ? "" : " off"}"><div class="dg-c-dispo-head">` +
+      `<span class="dg-c-dispo-no">${["I", "II", "III", "IV"][i]}</span>` +
+      `<span class="dg-c-dispo-name">${esc(d.n)}</span><span class="dg-c-dispo-pct">${pct}%</span></div>` +
+      `<div class="dg-c-dispo-bar"><i style="width:${pct}%"></i></div></div>`;
+  });
+  html += `</div>`;
+  const fi = (CREATE.forecastInfo || {})[forecast];
+  if (fi) html += `<div class="dg-c-forecast-note"><b>${esc(forecast)}.</b> ${esc(fi.desc || "")}` +
+    (fi.effect && fi.effect !== "—" ? ` <span class="dg-c-forecast-eff">${esc(fi.effect)}</span>` : "") + `</div>`;
+  return html;
+}
+
+/* ----- By Materials (forward) ----- */
+function slotMatch(slot, mat, tier) { return (!slot.mat || slot.mat === mat) && (!slot.tier || slot.tier === tier); }
+function recipeMatchSlots(r, s1, s2) {
+  const a = { mat: r.m1, tier: r.t1, q: r.q1 }, b = { mat: r.m2, tier: r.t2, q: r.q2 };
+  if (slotMatch(s1, a.mat, a.tier) && slotMatch(s2, b.mat, b.tier)) return [a, b];
+  if (slotMatch(s1, b.mat, b.tier) && slotMatch(s2, a.mat, a.tier)) return [b, a];
+  return null;
+}
+function renderMaterialsMode() {
+  const s1 = { mat: C.m1mat.value, tier: C.m1tier.value }, s2 = { mat: C.m2mat.value, tier: C.m2tier.value };
+  const q1 = Math.max(1, parseInt(C.m1qty.value, 10) || 1), q2 = Math.max(1, parseInt(C.m2qty.value, 10) || 1);
+  const forecast = curForecast(), level = curLevel(), isRisky = forecast === "Risky Winds";
+
+  if (!s1.mat && !s2.mat) { C.matOut.innerHTML = `<p class="empty">${esc(translate("dg-c-pick-mat"))}</p>`; return; }
+
+  // match every recipe; align the two entered quantities to the recipe's two materials.
+  // A slot with a chosen material uses the entered amount (and must meet the recipe's
+  // minimum); an "any" slot just uses that recipe's base amount (discovery, no boost).
+  const results = [];
+  DG.recipes.forEach(r => {
+    const aligned = recipeMatchSlots(r, s1, s2);
+    if (!aligned) return;
+    const [first, second] = aligned;       // first ← slot1, second ← slot2
+    const used1 = s1.mat ? q1 : first.q, used2 = s2.mat ? q2 : second.q;
+    if (s1.mat && used1 < first.q) return;
+    if (s2.mat && used2 < second.q) return;
+    const boost = Math.min(boostFor(first.q, used1), boostFor(second.q, used2));
+    const baseI = rankIdx(r.rank);
+    const finalRank = RANKS[Math.min(baseI + boost + (isRisky ? 1 : 0), RANKS.length - 1)];
+    const total = used1 + used2;
+    results.push({ r, first, second, used1, used2, boost, finalRank, total, baseRank: r.rank });
+  });
+
+  if (!results.length) { C.matOut.innerHTML = `<p class="empty">${esc(translate("dg-c-no-recipe"))}</p>`; return; }
+  // sort by resulting rank desc, then success desc
+  results.sort((a, b) => rankIdx(b.finalRank) - rankIdx(a.finalRank) || (b.r.pct || 0) - (a.r.pct || 0));
+
+  let html = "";
+  results.forEach(res => {
+    const r = res.r, spirit = SPIRIT_BY_NAME[r.sp];
+    const pct = r.pct != null ? (isRisky && r.pct < 100 ? Math.max(0, r.pct - 50) : r.pct) : null;
+    html += `<div class="dg-c-card">` +
+      `<div class="dg-c-cardhead">` +
+        `<img class="dg-c-cardimg" src="${esc(spiritFile(r.sp))}" alt="" loading="lazy">` +
+        `<button class="dg-c-cardname" data-spirit="${esc(r.sp)}">${esc(r.sp)}</button>` +
+        `<span class="dg-c-rankbig">${esc(translate("dg-c-rank-out"))} ${esc(res.finalRank)}` +
+          (res.boost || (isRisky && res.finalRank !== res.baseRank) ? ` <span class="dg-c-up">(${esc(res.baseRank)}${res.boost ? " +" + res.boost : ""}${isRisky ? " +Risky" : ""})</span>` : "") + `</span>` +
+        (pct != null ? `<span class="dg-c-pct${pct < 100 ? " low" : ""}">${pct}%</span>` : "") +
+      `</div>` +
+      `<div class="dg-c-cardrecipe">` + matChip(res.first.mat, res.first.tier, res.used1, res.first.q) +
+        ` <span class="dg-plus">+</span> ` + matChip(res.second.mat, res.second.tier, res.used2, res.second.q) +
+        ` <span class="dg-c-total">${esc(format("dg-c-total", res.total, levelBonusForTotal(res.total)))}</span>` +
+        (r.rare ? ` <span class="dg-rare">${esc(format("dg-c-rare-out", r.rare, pct != null ? 100 - pct : 0))}</span>` : "") +
+      `</div>` +
+      statsTable(spirit, res.finalRank, level, forecast) +
+      `<details class="dg-c-more"><summary>${esc(translate("dg-c-more"))}</summary>` +
+        forecastExtras(spirit, forecast) + `</details>` +
+      `</div>`;
+  });
+  C.matOut.innerHTML = html;
+  wireResultNames(C.matOut);
+}
+
+/* ----- By Spirit (backward) ----- */
+function renderSpiritMode() {
+  const spirit = DG.spirits[+C.spirit.value] || DG.spirits[0];
+  const target = C.rank.value || "S";
+  const forecast = curForecast(), level = curLevel(), isRisky = forecast === "Risky Winds";
+  const targetI = rankIdx(target);
+  const recs = DG.recipes.filter(r => r.sp === spirit.name);
+
+  // which recipes can hit exactly the target rank?
+  const viable = [];
+  recs.forEach(r => {
+    const baseI = rankIdx(r.rank);
+    const needed = targetI - baseI - (isRisky ? 1 : 0);   // boost required
+    if (needed < 0 || needed > 4) return;                  // unreachable at this forecast
+    const q1 = qtyForBoost(r.q1, needed), q2 = qtyForBoost(r.q2, needed);
+    if (!isFinite(q1) || !isFinite(q2)) return;            // +1 impossible for a 1-qty piece
+    viable.push({ r, needed, q1, q2, total: q1 + q2 });
+  });
+
+  let html = `<div class="dg-c-card">` +
+    `<div class="dg-c-cardhead">` +
+      `<img class="dg-c-cardimg" src="${esc(spiritFile(spirit.name))}" alt="">` +
+      `<span class="dg-c-cardname">${esc(spirit.name)}</span>` +
+      `<span class="dg-c-rankbig">${esc(translate("dg-c-rank-out"))} ${esc(target)}` +
+        (isRisky ? ` <span class="dg-c-up">(+Risky)</span>` : "") + `</span>` +
+    `</div>` +
+    statsTable(spirit, target, level, forecast) +
+    `<details class="dg-c-more"><summary>${esc(translate("dg-c-more"))}</summary>` + forecastExtras(spirit, forecast) + `</details>` +
+    `</div>`;
+
+  if (!viable.length) {
+    html += `<p class="empty">${esc(format("dg-c-unreachable", target, spirit.name))}</p>`;
+  } else {
+    viable.sort((a, b) => a.total - b.total);
+    html += `<h3 class="grp-title">${esc(format("dg-c-recipes-for", viable.length, target))}</h3>`;
+    viable.forEach(v => {
+      const r = v.r;
+      const pct = r.pct != null ? (isRisky && r.pct < 100 ? Math.max(0, r.pct - 50) : r.pct) : null;
+      html += `<div class="dg-c-reciperow">` +
+        matChip(r.m1, r.t1, v.q1, r.q1) + ` <span class="dg-plus">+</span> ` + matChip(r.m2, r.t2, v.q2, r.q2) +
+        ` <span class="dg-c-total">${esc(format("dg-c-total", v.total, levelBonusForTotal(v.total)))}</span>` +
+        (v.needed > 0 ? ` <span class="dg-c-boostnote">${esc(format("dg-c-boost", r.rank, v.needed))}</span>` : ` <span class="dg-c-boostnote">${esc(translate("dg-c-asis"))}</span>`) +
+        (pct != null ? ` <span class="dg-c-pct${pct < 100 ? " low" : ""}">${pct}%</span>` : "") +
+        (r.rare && pct != null && pct < 100 ? ` <span class="dg-rare">${esc(format("dg-c-rare-out", r.rare, 100 - pct))}</span>` : "") +
+        `</div>`;
+    });
+  }
+  C.spiritOut.innerHTML = html;
+  wireResultNames(C.spiritOut);
+}
+
+function wireResultNames(container) {
+  container.querySelectorAll("[data-spirit]").forEach(b => b.addEventListener("click", () => openModal(b.getAttribute("data-spirit"))));
+}
+
+function renderCreation() { if (createMode === "materials") renderMaterialsMode(); else renderSpiritMode(); }
+
+function initCreation() {
+  fillCreateControls();
+  document.querySelectorAll(".dg-mode").forEach(btn => btn.addEventListener("click", () => {
+    createMode = btn.dataset.mode;
+    document.querySelectorAll(".dg-mode").forEach(b => b.classList.toggle("active", b === btn));
+    document.getElementById("dg-cmode-materials").style.display = createMode === "materials" ? "" : "none";
+    document.getElementById("dg-cmode-spirit").style.display = createMode === "spirit" ? "" : "none";
+    renderCreation();
+  }));
+  [C.forecast, C.m1mat, C.m1tier, C.m2mat, C.m2tier, C.spirit, C.rank].forEach(e => e.addEventListener("change", renderCreation));
+  [C.level, C.m1qty, C.m2qty].forEach(e => e.addEventListener("input", renderCreation));
+  renderCreation();
+}
+
+/* =====================================================================
+   TAB 3 — Abilities (search across every board, incl. permanent unlocks)
+   ===================================================================== */
+const abList = document.getElementById("dg-ab-list");
+const abFilter = document.getElementById("dg-ab-filter");
+const abCats = document.getElementById("dg-ab-cats");
+let abCat = "all";
+
+// name -> { type, perm, grants:[{spirit, cost, cond, grid}] }
+const ABILITY_INDEX = {};
+Object.keys(DG.boards || {}).forEach(spirit => {
+  DG.boards[spirit].forEach(node => {
+    if (node.t === "Quota") return;                       // quotas aren't abilities
+    const key = node.n;
+    const entry = ABILITY_INDEX[key] || (ABILITY_INDEX[key] = { type: node.t, perm: isPermanent(node), grants: [] });
+    if (isPermanent(node)) entry.perm = true;
+    entry.grants.push({ spirit, cost: node.c, cond: node.cond, grid: node.g, t: node.t });
+  });
+});
+function abCategoryOf(name) {
+  const e = ABILITY_INDEX[name];
+  if (e.perm) return "permanent";
+  if (/Command$/.test(e.type)) return "command";
+  if (e.type === "Secret") return "secret";
+  return "stat";
+}
+const AB_CATS = ["all", "permanent", "stat", "command", "secret"];
+
+function fillAbCats() {
+  abCats.innerHTML = AB_CATS.map(c =>
+    `<button class="dg-ab-cat${c === abCat ? " active" : ""}" data-cat="${c}">${esc(translate("dg-abcat-" + c))}</button>`).join("");
+  abCats.querySelectorAll(".dg-ab-cat").forEach(b => b.addEventListener("click", () => {
+    abCat = b.dataset.cat;
+    abCats.querySelectorAll(".dg-ab-cat").forEach(x => x.classList.toggle("active", x === b));
+    renderAbilities();
+  }));
+}
+function renderAbilities() {
+  const query = (abFilter.value || "").trim().toLowerCase();
+  const names = Object.keys(ABILITY_INDEX).filter(n => {
+    if (query && n.toLowerCase().indexOf(query) < 0) return false;
+    if (abCat !== "all" && abCategoryOf(n) !== abCat) return false;
+    return true;
+  }).sort((a, b) => a.localeCompare(b));
+
+  if (!names.length) { abList.innerHTML = `<p class="empty">${esc(translate("dg-empty"))}</p>`; return; }
+  let html = "";
+  names.forEach(name => {
+    const e = ABILITY_INDEX[name];
+    const icon = nodeIcon({ t: e.type, n: name, c: e.grants[0].cost });
+    html += `<div class="dg-ab"><div class="dg-ab-head">` +
+      `<img class="dg-ab-ic" src="${esc(BOARD_IMG + icon)}" alt="">` +
+      `<span class="dg-ab-name">${esc(name)}</span>` +
+      `<span class="dg-ab-type">${esc(e.type)}</span>` +
+      (e.perm ? `<span class="dg-perm-badge">${esc(translate("dg-permanent"))}</span>` : "") +
+      `<span class="dg-ab-count">${esc(format("dg-ab-from", e.grants.length))}</span></div>` +
+      `<div class="dg-ab-spirits">` +
+        e.grants.map(g => {
+          const tip = [g.spirit, g.grid + " · " + g.cost, g.cond].filter(Boolean).map(esc).join("<br>");
+          return `<button class="dg-ab-chip${g.cond ? " cond" : ""}" data-spirit="${esc(g.spirit)}" data-pop="${esc(tip)}" tabindex="0">` +
+            `<img src="${esc(spiritFile(g.spirit))}" alt="">${esc(g.spirit)}</button>`;
+        }).join("") +
+      `</div></div>`;
+  });
+  abList.innerHTML = html;
+  abList.querySelectorAll("[data-spirit]").forEach(b => b.addEventListener("click", () => openModal(b.getAttribute("data-spirit"))));
+  wirePop(abList);
+}
+
+/* =====================================================================
+   TAB 4 — Materials + drop locations
    ===================================================================== */
 const materialsList = document.getElementById("dg-materials-list");
 const materialsFilter = document.getElementById("dg-materials-filter");
-
-// Drops keyed by "<Material>|<Tier>" -> [ {src, e, r} ]
 const DROPS_BY_MT = {};
 DG.drops.forEach(d => { (DROPS_BY_MT[d.m + "|" + d.t] = DROPS_BY_MT[d.m + "|" + d.t] || []).push(d); });
-
-// Per-source-type hover label + which world list to read.
 function sourceMeta(src) {
   if (src === "Nightmares") return { key: "dg-src-nightmare", worlds: "nw" };
   if (src === "Rare Nightmares") return { key: "dg-src-rare", worlds: "rw" };
-  return { key: "dg-src-streetpass", worlds: null };   // StreetPass Portals
+  return { key: "dg-src-streetpass", worlds: null };
 }
-
 function enemyPop(enemy, src) {
   const meta = sourceMeta(src);
   const lines = [`<b>${esc(enemy)}</b>`, `<span class="dg-pop-src">${esc(translate(meta.key))}</span>`];
@@ -199,10 +616,8 @@ function enemyPop(enemy, src) {
   }
   return lines.join("");
 }
-
 function treasurePop(matTier) {
   const entries = TREASURE_BY_MAT[matTier] || [];
-  // group by character, in tracker char order
   const parts = [`<b>${esc(translate("dg-treasure"))}</b>`];
   CHARS.forEach(char => {
     const rows = entries.filter(e => e.char === char);
@@ -216,164 +631,101 @@ function treasurePop(matTier) {
   });
   return parts.join("");
 }
-
-// Extract the obtainment text for a given material + tier from the joined
-// "Rewards"/"Other methods" blobs (each tier introduced by "<Mat> <Tier> :").
 function obtainText(material, tier) {
-  const blob = (DG.obtain[material] || {});
-  const out = [];
+  const blob = (DG.obtain[material] || {}); const out = [];
   ["Rewards", "Other methods"].forEach(section => {
-    const text = blob[section];
-    if (!text) return;
-    const slice = sliceTier(text, material, tier);
-    if (slice) out.push({ section, text: slice });
+    const text = blob[section]; if (!text) return;
+    const slice = sliceTier(text, material, tier); if (slice) out.push({ section, text: slice });
   });
   return out;
 }
 function sliceTier(text, material, tier) {
-  const tiers = DG.tiers;
-  const start = text.indexOf(material + " " + tier);
-  if (start < 0) return "";
-  let from = text.indexOf(":", start);
-  from = from < 0 ? start + (material + " " + tier).length : from + 1;
-  // cut at the next tier header
+  const start = text.indexOf(material + " " + tier); if (start < 0) return "";
+  let from = text.indexOf(":", start); from = from < 0 ? start + (material + " " + tier).length : from + 1;
   let end = text.length;
-  tiers.forEach(t => {
-    if (t === tier) return;
-    const h = text.indexOf(material + " " + t, from);
-    if (h >= 0 && h < end) end = h;
-  });
+  DG.tiers.forEach(t => { if (t === tier) return; const h = text.indexOf(material + " " + t, from); if (h >= 0 && h < end) end = h; });
   return text.slice(from, end).trim();
 }
-
 function renderMaterials() {
   const query = (materialsFilter.value || "").trim().toLowerCase();
-  materialsList.innerHTML = "";
-  let shown = 0;
-
+  materialsList.innerHTML = ""; let shown = 0;
   DG.materials.forEach(material => {
-    // does this material (or any of its drop enemies) match the filter?
-    const block = el("div", "dg-mat");
-    const tiersHtml = [];
-
+    const block = el("div", "dg-mat"); const tiersHtml = [];
     DG.tiers.forEach(tier => {
       const matTier = material + " " + tier;
       const drops = DROPS_BY_MT[material + "|" + tier] || [];
       const treasures = TREASURE_BY_MAT[matTier] || [];
       const obtains = obtainText(material, tier);
       if (!drops.length && !treasures.length && !obtains.length) return;
-
       const chips = [];
-      // Treasure chip first (a known, fixed location), then drop enemies.
-      if (treasures.length) {
-        chips.push(`<span class="dg-chip dg-chip-treasure" tabindex="0" data-pop="${esc(treasurePop(matTier))}">` +
-          `${esc(translate("dg-treasure"))}</span>`);
-      }
+      if (treasures.length) chips.push(`<span class="dg-chip dg-chip-treasure" tabindex="0" data-pop="${esc(treasurePop(matTier))}">${esc(translate("dg-treasure"))}</span>`);
       drops.forEach(d => {
-        const isRare = d.src === "Rare Nightmares";
-        const isSp = d.src === "Streetpass Portals";
-        const cls = "dg-chip dg-chip-drop" + (isRare ? " rare" : "") + (isSp ? " sp" : "");
-        chips.push(`<span class="${cls}" tabindex="0" data-pop="${esc(enemyPop(d.e, d.src))}">` +
-          `${esc(d.e)} <b class="dg-rate">${d.r != null ? d.r + "%" : "?"}</b></span>`);
+        const cls = "dg-chip dg-chip-drop" + (d.src === "Rare Nightmares" ? " rare" : "") + (d.src === "Streetpass Portals" ? " sp" : "");
+        chips.push(`<span class="${cls}" tabindex="0" data-pop="${esc(enemyPop(d.e, d.src))}">${esc(d.e)} <b class="dg-rate">${d.r != null ? d.r + "%" : "?"}</b></span>`);
       });
-
-      const obtainHtml = obtains.map(o =>
-        `<div class="dg-obtain"><span class="dg-obtain-label">${esc(translate(o.section === "Rewards" ? "dg-rewards" : "dg-other"))}:</span> ${esc(o.text)}</div>`
-      ).join("");
-
-      tiersHtml.push(
-        `<div class="dg-tier" data-search="${esc((matTier + " " + drops.map(d => d.e).join(" ")).toLowerCase())}">` +
-        `<div class="dg-tier-name">${esc(matTier)}</div>` +
-        `<div class="dg-chips">${chips.join("")}</div>` +
-        obtainHtml +
-        `</div>`
-      );
+      const obtainHtml = obtains.map(o => `<div class="dg-obtain"><span class="dg-obtain-label">${esc(translate(o.section === "Rewards" ? "dg-rewards" : "dg-other"))}:</span> ${esc(o.text)}</div>`).join("");
+      tiersHtml.push(`<div class="dg-tier" data-search="${esc((matTier + " " + drops.map(d => d.e).join(" ")).toLowerCase())}">` +
+        `<div class="dg-tier-name">${esc(matTier)}</div><div class="dg-chips">${chips.join("")}</div>${obtainHtml}</div>`);
     });
-
     if (!tiersHtml.length) return;
     block.innerHTML = `<h3 class="grp-title dg-mat-title">${esc(material)}</h3>` + tiersHtml.join("");
-
-    // filter: keep tiers whose search text matches; hide the material if none
     if (query) {
       let any = false;
       block.querySelectorAll(".dg-tier").forEach(t => {
         const match = (t.getAttribute("data-search") || "").indexOf(query) >= 0 || material.toLowerCase().indexOf(query) >= 0;
-        t.style.display = match ? "" : "none";
-        if (match) any = true;
+        t.style.display = match ? "" : "none"; if (match) any = true;
       });
       if (!any) return;
     }
-    shown++;
-    materialsList.appendChild(block);
+    shown++; materialsList.appendChild(block);
   });
-
   if (!shown) materialsList.innerHTML = `<p class="empty">${esc(translate("dg-empty"))}</p>`;
   wirePop(materialsList);
 }
 
 /* =====================================================================
-   TAB 3 — Recipe-item checklist (shared with the DDD tracker)
+   TAB 5 — Recipe-item checklist (shared with the DDD tracker)
    ===================================================================== */
 const recipesList = document.getElementById("dg-recipes-list");
 const recipesFilter = document.getElementById("dg-recipes-filter");
 const recipesSummary = document.getElementById("dg-recipes-summary");
-
-// Spirit name -> the synthesis recipe shown on the checklist. Prefer the
-// one flagged as the official Recipe item; otherwise fall back to the
-// Spirit's first listed recipe (a few have no flagged official).
 const OFFICIAL = {};
 DG.recipes.forEach(r => { if (r.off && !OFFICIAL[r.sp]) OFFICIAL[r.sp] = r; });
 DG.recipes.forEach(r => { if (!OFFICIAL[r.sp]) OFFICIAL[r.sp] = r; });
-
 function recipeStore() { return dddSection("recipes"); }
-function recipeOwned(name) {
-  const i = RECIPE_INDEX.get(name);
-  return i != null && !!recipeStore()[i];
-}
+function recipeOwned(name) { const i = RECIPE_INDEX.get(name); return i != null && !!recipeStore()[i]; }
 function toggleRecipe(name) {
-  const i = RECIPE_INDEX.get(name);
-  if (i == null) return;
-  const store = recipeStore();
-  if (store[i]) delete store[i]; else store[i] = true;
+  const i = RECIPE_INDEX.get(name); if (i == null) return;
+  const store = recipeStore(); if (store[i]) delete store[i]; else store[i] = true;
   saveDDD(); renderRecipes();
 }
-
 function ingredientLine(recipe) {
   if (!recipe) return "";
-  const part = (m, t, q) => `<span class="dg-ing">${esc(m + " " + t)}${q ? ` <b>×${q}</b>` : ""}</span>`;
-  return part(recipe.m1, recipe.t1, recipe.q1) + ' <span class="dg-plus">+</span> ' + part(recipe.m2, recipe.t2, recipe.q2);
+  return matChip(recipe.m1, recipe.t1, recipe.q1) + ' <span class="dg-plus">+</span> ' + matChip(recipe.m2, recipe.t2, recipe.q2);
 }
-
 function renderRecipes() {
   const query = (recipesFilter.value || "").trim().toLowerCase();
-  // Iterate spirits in the tracker's recipe order.
   const names = RECIPE_ITEMS.map(it => it.name);
   const owned = names.filter(recipeOwned).length;
   recipesSummary.innerHTML = `<span>${format("dg-recipe-count", `<b>${owned}</b>`, names.length)}</span>`;
   recipesList.innerHTML = "";
-
   const table = el("table", "dg-recipe-table");
   table.innerHTML = `<thead><tr><th></th><th>${esc(translate("dg-th-spirit"))}</th><th>${esc(translate("dg-th-recipe"))}</th></tr></thead>`;
-  const tbody = el("tbody");
-  let shown = 0;
+  const tbody = el("tbody"); let shown = 0;
   names.forEach(name => {
     if (query && name.toLowerCase().indexOf(query) < 0) return;
     shown++;
-    const has = recipeOwned(name);
-    const recipe = OFFICIAL[name];
-    const file = name.replace(/ /g, "_") + ".png";
+    const has = recipeOwned(name), recipe = OFFICIAL[name];
     const tr = el("tr", has ? "dg-have" : "");
     tr.innerHTML =
       `<td class="dg-check-cell"><span class="dg-check${has ? " on" : ""}" role="checkbox" tabindex="0" aria-checked="${has}"></span></td>` +
-      `<td class="dg-recipe-spirit"><img src="${esc(SPIRIT_IMG + file)}" alt="" loading="lazy"><span class="dg-recipe-name${has ? " done" : ""}">${esc(name)}</span>` +
+      `<td class="dg-recipe-spirit"><img src="${esc(spiritFile(name))}" alt="" loading="lazy"><span class="dg-recipe-name${has ? " done" : ""}">${esc(name)}</span>` +
         (recipe && recipe.rank ? ` <span class="dg-rank">${esc(format("dg-rank", recipe.rank))}</span>` : "") + `</td>` +
       `<td class="dg-recipe-ing">${ingredientLine(recipe)}` +
         (recipe && recipe.pct != null && recipe.pct < 100 ? ` <span class="dg-pct-low">${recipe.pct}%</span>` : "") + `</td>`;
     const toggle = () => toggleRecipe(name);
     tr.querySelector(".dg-check").addEventListener("click", toggle);
-    tr.querySelector(".dg-check").addEventListener("keydown", e => {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
-    });
+    tr.querySelector(".dg-check").addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
     tbody.appendChild(tr);
   });
   table.appendChild(tbody);
@@ -382,189 +734,32 @@ function renderRecipes() {
 }
 
 /* =====================================================================
-   TAB 4 — Creation calculator
-
-   Implements the wiki's Spirit-creation stat formula:
-     Stat = base × (rank correction + random) × level correction ÷ 10
-            + Forecast bonus, capped at the per-stat maximum.
-   Plus per-Forecast initial-disposition odds, the breed's elemental
-   resistances, and an optional sacrificed Deck Command bonus.
-   ===================================================================== */
-const CREATE = DG.create;
-const C_EL = {
-  spirit: document.getElementById("dg-c-spirit"),
-  forecast: document.getElementById("dg-c-forecast"),
-  rank: document.getElementById("dg-c-rank"),
-  level: document.getElementById("dg-c-level"),
-  command: document.getElementById("dg-c-command"),
-  out: document.getElementById("dg-c-output"),
-};
-const RES_KEYS = [["fire", "Fire"], ["blz", "Blizzard"], ["thn", "Thunder"], ["wtr", "Water"], ["drk", "Dark"], ["lgt", "Light"]];
-
-function fillCreateControls() {
-  C_EL.spirit.innerHTML = DG.spirits.map((s, i) => `<option value="${i}">${esc(s.name)}</option>`).join("");
-  C_EL.forecast.innerHTML = CREATE.forecasts.map(f => `<option value="${esc(f)}">${esc(f)}</option>`).join("");
-  // ranks shown high → low for a natural dropdown
-  C_EL.rank.innerHTML = CREATE.ranks.slice().reverse().map(r => `<option value="${esc(r)}">${esc(r)}</option>`).join("");
-  // commands grouped by category; first option = none
-  const groups = {};
-  DG.commands.forEach((c, i) => { (groups[c.cat] = groups[c.cat] || []).push(`<option value="${i}">${esc(c.name)}</option>`); });
-  let cmdHtml = `<option value="">${esc(translate("dg-c-none"))}</option>`;
-  Object.keys(groups).forEach(cat => { cmdHtml += `<optgroup label="${esc(cat)}">${groups[cat].join("")}</optgroup>`; });
-  C_EL.command.innerHTML = cmdHtml;
-}
-
-function levelCorrection(level) { return level <= 50 ? 10 + level : 35 + level / 2; }
-
-// One stat's [floor(min), floor(max)] given base, rank, level, forecast
-// flat-bonus range [bMin,bMax] and the command flat bonus. Capped at the
-// stat's maximum (max-rank-correction formula).
-function statRange(base, rank, level, bonusRange, cmdFlat) {
-  if (typeof base !== "number") return null;        // "???" breed stat
-  const rc = CREATE.rankCorr[rank], mrc = CREATE.maxRankCorr[rank];
-  const lc = levelCorrection(level);
-  const lo = base * (rc + (rc - 1.1) / 10) * lc / 10 + bonusRange[0] + cmdFlat;
-  const hi = base * (rc + (rc - 0.9) / 10) * lc / 10 + bonusRange[1] + cmdFlat;
-  const cap = base * (mrc + (mrc - 0.9) / 10) * lc / 10 + cmdFlat;
-  return { lo: Math.floor(lo), hi: Math.min(Math.floor(hi), Math.floor(cap)), cap: Math.floor(cap), base: base };
-}
-
-function rangeText(r) {
-  if (!r) return "—";
-  return r.lo === r.hi ? `${r.lo}` : `${r.lo}–${r.hi}`;
-}
-
-function renderCreation() {
-  const spirit = DG.spirits[+C_EL.spirit.value] || DG.spirits[0];
-  const forecast = C_EL.forecast.value || CREATE.forecasts[0];
-  const baseRank = C_EL.rank.value || spirit.rank || "C";
-  const level = Math.min(99, Math.max(1, parseInt(C_EL.level.value, 10) || 1));
-  const cmd = C_EL.command.value === "" ? null : DG.commands[+C_EL.command.value];
-
-  // Risky Winds creates a Spirit one rank higher.
-  const ranks = CREATE.ranks;
-  const isRisky = forecast === "Risky Winds";
-  const effRank = isRisky ? ranks[Math.min(ranks.indexOf(baseRank) + 1, ranks.length - 1)] : baseRank;
-
-  const fb = CREATE.forecastBonus[forecast] || {};
-  const cmdFor = key => (cmd && cmd[key]) || 0;
-  const stats = [
-    { key: "hp", label: translate("dg-c-hp"), base: spirit.hp, bonus: fb.hp || [0, 0] },
-    { key: "str", label: translate("dg-c-str"), base: spirit.str, bonus: fb.str || [0, 0] },
-    { key: "mag", label: translate("dg-c-mag"), base: spirit.mag, bonus: fb.mag || [0, 0] },
-    { key: "def", label: translate("dg-c-def"), base: spirit.def, bonus: fb.def || [0, 0] },
-  ];
-
-  // ---- header / summary ----
-  let html = `<div class="dg-c-summary">` +
-    `<img class="dg-c-portrait" src="${esc(SPIRIT_IMG + spirit.name.replace(/ /g, "_") + ".png")}" alt="">` +
-    `<div><div class="dg-c-title">${esc(spirit.name)}</div>` +
-    `<div class="dg-c-meta">` +
-      `<span><b>${esc(translate("dg-c-attr"))}:</b> ${esc(spirit.attr || "—")}</span>` +
-      `<span><b>${esc(translate("dg-c-style"))}:</b> ${esc(spirit.style || "—")}</span>` +
-      `<span><b>${esc(translate("dg-c-dp"))}:</b> ${esc(spirit.dp || "—")}</span>` +
-      `<span><b>${esc(translate("dg-c-rank-out"))}:</b> ${esc(effRank)}${isRisky && effRank !== baseRank ? ` <span class="dg-c-up">(${esc(baseRank)}→${esc(effRank)})</span>` : ""}</span>` +
-      `<span><b>${esc(translate("dg-c-level-out"))}:</b> ${level}</span>` +
-    `</div></div></div>`;
-
-  // ---- stats table ----
-  html += `<table class="dg-c-stats"><thead><tr>` +
-    `<th>${esc(translate("dg-c-th-stat"))}</th><th>${esc(translate("dg-c-th-base"))}</th>` +
-    `<th>${esc(translate("dg-c-th-result"))}</th><th>${esc(translate("dg-c-th-cap"))}</th></tr></thead><tbody>`;
-  stats.forEach(s => {
-    const r = statRange(s.base, effRank, level, s.bonus, cmdFor(s.key));
-    const bonusNote = [];
-    if (r && (s.bonus[0] || s.bonus[1])) bonusNote.push(`${translate("dg-c-forecast")} +${s.bonus[0]}${s.bonus[1] !== s.bonus[0] ? "–" + s.bonus[1] : ""}`);
-    if (r && cmdFor(s.key)) bonusNote.push(`${esc(cmd.name)} +${cmdFor(s.key)}`);
-    html += `<tr><td class="dg-c-statname">${esc(s.label)}</td>` +
-      `<td>${typeof s.base === "number" ? s.base : esc(String(s.base))}</td>` +
-      `<td class="dg-c-result">${rangeText(r)}` +
-        (bonusNote.length ? ` <span class="dg-c-bonus">${esc(bonusNote.join(", "))}</span>` : "") + `</td>` +
-      `<td class="dg-c-cap">${r ? r.cap : "—"}</td></tr>`;
-  });
-  html += `</tbody></table>`;
-
-  // ---- resistances ----
-  html += `<h3 class="grp-title">${esc(translate("dg-c-resist"))}</h3><div class="dg-c-res">`;
-  RES_KEYS.forEach(([k, label]) => {
-    const mult = spirit.res ? spirit.res[k] : null;
-    const cmdBonus = cmdFor(k);
-    const weak = typeof mult === "number" && mult > 1;
-    const strong = typeof mult === "number" && mult < 1;
-    html += `<span class="dg-c-res-chip${weak ? " weak" : strong ? " strong" : ""}">` +
-      `<span class="dg-c-res-el">${esc(label)}</span>` +
-      `<b>${typeof mult === "number" ? "×" + mult : "—"}</b>` +
-      (cmdBonus ? `<span class="dg-c-res-add">+${cmdBonus}%</span>` : "") + `</span>`;
-  });
-  html += `</div>`;
-
-  // ---- disposition odds ----
-  const odds = CREATE.dispoOdds[forecast] || [0, 0, 0, 0];
-  html += `<h3 class="grp-title">${esc(translate("dg-c-dispo"))} <span class="dg-c-sub">— ${esc(forecast)}</span></h3>` +
-    `<div class="dg-c-dispos">`;
-  (spirit.disps || []).forEach((d, i) => {
-    const pct = odds[i] || 0;
-    html += `<div class="dg-c-dispo${pct ? "" : " off"}">` +
-      `<div class="dg-c-dispo-head"><span class="dg-c-dispo-no">${["I", "II", "III", "IV"][i]}</span>` +
-        `<span class="dg-c-dispo-name">${esc(d.n)}</span><span class="dg-c-dispo-pct">${pct}%</span></div>` +
-      `<div class="dg-c-dispo-bar"><i style="width:${pct}%"></i></div>` +
-      (d.b ? `<div class="dg-c-dispo-beh">${esc(d.b)}</div>` : "") + `</div>`;
-  });
-  html += `</div>`;
-
-  // ---- forecast effect note ----
-  const fi = (CREATE.forecastInfo || {})[forecast];
-  if (fi) {
-    html += `<div class="dg-c-forecast-note"><b>${esc(forecast)}.</b> ${esc(fi.desc || "")}` +
-      (fi.effect && fi.effect !== "—" ? ` <span class="dg-c-forecast-eff">${esc(fi.effect)}</span>` : "") + `</div>`;
-  }
-
-  C_EL.out.innerHTML = html;
-}
-
-function initCreation() {
-  fillCreateControls();
-  // default rank to the selected Spirit's recipe rank
-  const syncRankToSpirit = () => {
-    const s = DG.spirits[+C_EL.spirit.value];
-    if (s && s.rank) C_EL.rank.value = s.rank;
-  };
-  C_EL.spirit.addEventListener("change", () => { syncRankToSpirit(); renderCreation(); });
-  [C_EL.forecast, C_EL.rank, C_EL.command].forEach(el => el.addEventListener("change", renderCreation));
-  C_EL.level.addEventListener("input", renderCreation);
-  syncRankToSpirit();
-  renderCreation();
-}
-
-/* =====================================================================
    Tabs, filters, language + cross-tab sync
    ===================================================================== */
+const TAB_IDS = ["spirits", "creation", "abilities", "materials", "recipes"];
 document.querySelectorAll(".kh .tab").forEach(tab => {
   tab.onclick = () => {
-    document.querySelectorAll(".kh .tab").forEach(other => other.classList.remove("active"));
+    document.querySelectorAll(".kh .tab").forEach(o => o.classList.remove("active"));
     tab.classList.add("active");
-    ["spirits", "materials", "recipes", "creation"].forEach(id => {
-      document.getElementById("tab-" + id).style.display = (id === tab.dataset.tab) ? "block" : "none";
-    });
+    TAB_IDS.forEach(id => { document.getElementById("tab-" + id).style.display = (id === tab.dataset.tab) ? "block" : "none"; });
     hidePop();
   };
 });
 
 spiritsFilter.addEventListener("input", renderSpirits);
-document.getElementById("dg-spirits-reset").addEventListener("click", () => { spiritsFilter.value = ""; renderSpirits(); });
+spiritsOwnedOnly.addEventListener("change", renderSpirits);
+document.getElementById("dg-spirits-reset").addEventListener("click", () => { spiritsFilter.value = ""; spiritsOwnedOnly.checked = false; renderSpirits(); });
 materialsFilter.addEventListener("input", renderMaterials);
 recipesFilter.addEventListener("input", renderRecipes);
 document.getElementById("dg-recipes-reset").addEventListener("click", () => { recipesFilter.value = ""; renderRecipes(); });
+abFilter.addEventListener("input", renderAbilities);
 
-function renderAll() { renderSpirits(); renderMaterials(); renderRecipes(); renderCreation(); }
+function renderAll() { renderSpirits(); renderMaterials(); renderRecipes(); renderCreation(); fillAbCats(); renderAbilities(); }
+document.addEventListener("i18n:updated", () => { buildTreasureIndex(); fillCreateControls(); renderAll(); if (modalSpirit) renderModal(); });
 
-// Re-render dynamic content when the language changes.
-document.addEventListener("i18n:updated", () => { buildTreasureIndex(); renderAll(); });
-
-// Mirror changes made in the DDD tracker (or this tool) in another tab.
 window.addEventListener("storage", e => {
   if (e.key === DDD_STORE_KEY) { DDD = loadDDD(); renderMaterials(); renderRecipes(); }
-  else if (e.key === GUIDE_KEY) { GUIDE = loadGuide(); if (!GUIDE.owned) GUIDE.owned = {}; renderSpirits(); }
+  else if (e.key === GUIDE_KEY) { GUIDE = loadGuide(); if (!GUIDE.owned) GUIDE.owned = {}; renderSpirits(); if (modalSpirit) renderModal(); }
 });
 
 await fetchTrackerLang();
@@ -572,5 +767,7 @@ buildTreasureIndex();
 renderSpirits();
 renderMaterials();
 renderRecipes();
-initCreation();   // fills the creation controls, then renders the calculator
+initCreation();
+fillAbCats();
+renderAbilities();
 });

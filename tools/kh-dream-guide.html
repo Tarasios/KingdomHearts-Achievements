@@ -69,9 +69,10 @@
 
         <div class="tabs">
             <button class="tab active" data-tab="spirits" id="tabbtn-spirits"></button>
+            <button class="tab" data-tab="creation" id="tabbtn-creation"></button>
+            <button class="tab" data-tab="abilities" id="tabbtn-abilities"></button>
             <button class="tab" data-tab="materials" id="tabbtn-materials"></button>
             <button class="tab" data-tab="recipes" id="tabbtn-recipes"></button>
-            <button class="tab" data-tab="creation" id="tabbtn-creation"></button>
         </div>
 
         <main class="kh-main">
@@ -80,10 +81,74 @@
                 <div class="toolbar">
                     <span class="countbadge" id="dg-spirits-count"></span>
                     <input type="text" id="dg-spirits-filter">
+                    <label class="dg-owned-toggle"><input type="checkbox" id="dg-spirits-ownedonly"> <span id="dg-spirits-ownedonly-lbl"></span></label>
                     <button class="clearbtn" id="dg-spirits-reset"></button>
                 </div>
                 <p class="hint" style="margin-top:0" id="dg-spirits-hint"></p>
                 <div id="dg-spirits-grid" class="dg-grid"></div>
+            </section>
+
+            <!-- CREATION CALCULATOR -->
+            <section id="tab-creation" class="card" style="display:none">
+                <div class="dg-mode-bar">
+                    <div class="dg-modes">
+                        <button class="dg-mode active" data-mode="materials" id="dg-mode-materials"></button>
+                        <button class="dg-mode" data-mode="spirit" id="dg-mode-spirit"></button>
+                    </div>
+                    <div class="dg-ctx">
+                        <label class="dg-ctx-field"><span id="dg-c-forecast-lbl"></span>
+                            <select id="dg-c-forecast"></select></label>
+                        <label class="dg-ctx-field dg-ctx-narrow"><span id="dg-c-level-lbl"></span>
+                            <input type="number" id="dg-c-level" min="1" max="99" value="50"></label>
+                    </div>
+                </div>
+
+                <!-- BY MATERIALS (forward) -->
+                <div id="dg-cmode-materials" class="dg-cmode">
+                    <div class="dg-slots">
+                        <div class="dg-slot">
+                            <span class="dg-slot-h" id="dg-c-m1-lbl"></span>
+                            <div class="dg-slot-row">
+                                <select id="dg-c-m1-mat" class="dg-sel-mat"></select>
+                                <select id="dg-c-m1-tier" class="dg-sel-tier"></select>
+                                <input type="number" id="dg-c-m1-qty" class="dg-sel-qty" min="1" max="99" value="3">
+                            </div>
+                        </div>
+                        <div class="dg-slot-plus">+</div>
+                        <div class="dg-slot">
+                            <span class="dg-slot-h" id="dg-c-m2-lbl"></span>
+                            <div class="dg-slot-row">
+                                <select id="dg-c-m2-mat" class="dg-sel-mat"></select>
+                                <select id="dg-c-m2-tier" class="dg-sel-tier"></select>
+                                <input type="number" id="dg-c-m2-qty" class="dg-sel-qty" min="1" max="99" value="3">
+                            </div>
+                        </div>
+                    </div>
+                    <p class="hint" id="dg-c-materials-hint"></p>
+                    <div id="dg-c-materials-out" class="results"></div>
+                </div>
+
+                <!-- BY SPIRIT (backward) -->
+                <div id="dg-cmode-spirit" class="dg-cmode" style="display:none">
+                    <div class="dg-slots">
+                        <label class="dg-ctx-field"><span id="dg-c-spirit-lbl"></span>
+                            <select id="dg-c-spirit"></select></label>
+                        <label class="dg-ctx-field dg-ctx-narrow"><span id="dg-c-rank-lbl"></span>
+                            <select id="dg-c-rank"></select></label>
+                    </div>
+                    <p class="hint" id="dg-c-spirit-hint"></p>
+                    <div id="dg-c-spirit-out" class="results"></div>
+                </div>
+            </section>
+
+            <!-- ABILITIES (incl. permanent unlocks) -->
+            <section id="tab-abilities" class="card" style="display:none">
+                <div class="toolbar">
+                    <input type="text" id="dg-ab-filter">
+                    <div class="dg-ab-filters" id="dg-ab-cats"></div>
+                </div>
+                <p class="hint" style="margin-top:0" id="dg-ab-hint"></p>
+                <div id="dg-ab-list" class="results"></div>
             </section>
 
             <!-- MATERIALS + DROP LOCATIONS -->
@@ -105,39 +170,20 @@
                 <p class="hint" id="dg-recipes-hint"></p>
                 <div id="dg-recipes-list" class="results"></div>
             </section>
-
-            <!-- CREATION CALCULATOR -->
-            <section id="tab-creation" class="card" style="display:none">
-                <div class="dg-create-controls">
-                    <div class="slot">
-                        <label for="dg-c-spirit" id="dg-c-spirit-lbl"></label>
-                        <select id="dg-c-spirit"></select>
-                    </div>
-                    <div class="slot">
-                        <label for="dg-c-forecast" id="dg-c-forecast-lbl"></label>
-                        <select id="dg-c-forecast"></select>
-                    </div>
-                    <div class="slot dg-create-narrow">
-                        <label for="dg-c-rank" id="dg-c-rank-lbl"></label>
-                        <select id="dg-c-rank"></select>
-                    </div>
-                    <div class="slot dg-create-narrow">
-                        <label for="dg-c-level" id="dg-c-level-lbl"></label>
-                        <input type="number" id="dg-c-level" min="1" max="99" value="50">
-                    </div>
-                    <div class="slot">
-                        <label for="dg-c-command" id="dg-c-command-lbl"></label>
-                        <select id="dg-c-command"></select>
-                    </div>
-                </div>
-                <p class="hint" style="margin-top:10px" id="dg-c-hint"></p>
-                <div id="dg-c-output" class="dg-create-output"></div>
-            </section>
         </main>
     </div>
 
     <!-- Reusable hover popover (worlds / treasure locations) -->
     <div id="dg-pop" class="dg-pop" role="tooltip" aria-hidden="true"></div>
+
+    <!-- Spirit detail modal (stats, resistances, dispositions, ability board) -->
+    <div id="dg-modal" class="dg-modal" aria-hidden="true">
+        <div class="dg-modal-back" id="dg-modal-back"></div>
+        <div class="dg-modal-panel" role="dialog" aria-modal="true" aria-labelledby="dg-modal-title">
+            <button class="dg-modal-close" id="dg-modal-close" aria-label="Close">×</button>
+            <div id="dg-modal-body"></div>
+        </div>
+    </div>
 
     <script src="../js/i18n.js"></script>
     <script src="../js/kh-common.js"></script>
