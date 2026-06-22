@@ -4001,19 +4001,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Lionheart",
-          "b": "Employs a balanced set of attacks."
+          "b": "Employs a balanced set of attacks.",
+          "sw": "To Paragon: Rub its hind legs and tail ; To Clear Mind: Poke its head or front legs and body ; To Noble: Rub its head or front legs and body"
         },
         {
           "n": "Paragon",
-          "b": "Uses mostly normal aura attacks."
+          "b": "Uses mostly normal aura attacks.",
+          "sw": "To Lionheart: Poke its head ; To Clear Mind: Poke its front legs and body or hind legs and tail ; To Noble: Rub its front legs and body or hind legs and tail"
         },
         {
           "n": "Clear Mind",
-          "b": "Uses mostly magic attacks."
+          "b": "Uses mostly magic attacks.",
+          "sw": "To Lionheart: Poke its front legs and body ; To Paragon: Rub its front legs and body ; To Noble: Rub its head or hind legs and tail"
         },
         {
           "n": "Noble",
-          "b": "Uses mostly powerful aura attacks."
+          "b": "Uses mostly powerful aura attacks.",
+          "sw": "To Lionheart: Poke its front legs and body or hind legs and tail ; To Paragon: Rub its front legs and body or hind legs and tail ; To Clear Mind: Poke its head"
         }
       ],
       "rank": "D"
@@ -4041,19 +4045,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Passionate",
-          "b": ""
+          "b": "",
+          "sw": "To Reaper: Rub its wings ; To Psychic: Poke its body ; To Groovy: Rub its"
         },
         {
           "n": "Reaper",
-          "b": ""
+          "b": "",
+          "sw": "To Passionate: Poke its tail ; To Psychic: Poke its wings ; To Groovy: Rub its face"
         },
         {
           "n": "Psychic",
-          "b": ""
+          "b": "",
+          "sw": "To Passionate: Poke its tail ; To Reaper: Rub its legs ; To Groovy: Rub its wings"
         },
         {
           "n": "Groovy",
-          "b": ""
+          "b": "",
+          "sw": "To Passionate: Poke its ; To Reaper: Rub its legs ; To Psychic: Poke its tail"
         }
       ],
       "rank": "C"
@@ -4081,19 +4089,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Badger",
-          "b": ""
+          "b": "",
+          "sw": "To Civet: Rub its legs or rear and tail ; To Raccoon: Poke its head and body ; To Teakettle: Rub its head and body"
         },
         {
           "n": "Civet",
-          "b": ""
+          "b": "",
+          "sw": "To Badger: Poke its head and body or rear and tail ; To Raccoon: Poke its legs ; To Teakettle: Rub its legs"
         },
         {
           "n": "Raccoon",
-          "b": ""
+          "b": "",
+          "sw": "To Badger: Poke its head and body or legs ; To Civet: Rub its head and body or legs ; To Teakettle: Rub its rear and tail"
         },
         {
           "n": "Teakettle",
-          "b": ""
+          "b": "",
+          "sw": "To Badger: Poke its head and body ; To Civet: Rub its head and body ; To Raccoon: Poke its legs or rear and tail"
         }
       ],
       "rank": "D"
@@ -4121,19 +4133,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Demolisher",
-          "b": "Uses stronger moves."
+          "b": "Uses stronger moves.",
+          "sw": "To Buster: Rub its front legs and body ; To Drill Sarge: Poke its head and horns or hind legs and tail ; To Roll Meister: Rub its head and horns or hind legs and tail"
         },
         {
           "n": "Buster",
-          "b": "Uses weaker moves."
+          "b": "Uses weaker moves.",
+          "sw": "To Demolisher: Poke its head and horns ; To Drill Sarge: Poke its front legs and body or hind legs and tail ; To Roll Meister: Rub its front legs and body or hind legs and tail"
         },
         {
           "n": "Drill Sarge",
-          "b": "Does not go into Spike Mode."
+          "b": "Does not go into Spike Mode.",
+          "sw": "To Demolisher: Poke its hind legs and tail ; To Buster: Rub its hind legs and tail ; To Roll Meister: Rub its head and horns or front legs and body"
         },
         {
           "n": "Roll Meister",
-          "b": "Uses Spike Mode frequently."
+          "b": "Uses Spike Mode frequently.",
+          "sw": "To Demolisher: Poke its head and horns or hind legs and tail ; To Buster: Rub its head and horns or hind legs and tail ; To Drill Sarge: Poke its front legs and body"
         }
       ],
       "rank": "E"
@@ -4161,19 +4177,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Cuisiner",
-          "b": "Attacks with weapon and Fire; tries to shield allies."
+          "b": "Attacks with weapon and Fire; tries to shield allies.",
+          "sw": "To Commis: Rub its body or weapon and shield ; To Pâtissier: Poke its head and hat ; To Pyromanger: Rub its head and hat"
         },
         {
           "n": "Commis",
-          "b": "Fewer attacks but more defense."
+          "b": "Fewer attacks but more defense.",
+          "sw": "To Cuisiner: Poke its head and hat or weapon and shield ; To Pâtissier: Poke its body ; To Pyromanger: Rub its body"
         },
         {
           "n": "Pâtissier",
-          "b": "Mostly uses magic attacks."
+          "b": "Mostly uses magic attacks.",
+          "sw": "To Cuisiner: Poke its head and hat or body ; To Commis: Rub its head and hat or body ; To Pyromanger: Rub its weapon and shield"
         },
         {
           "n": "Pyromanger",
-          "b": "Uses only Fire attacks."
+          "b": "Uses only Fire attacks.",
+          "sw": "To Cuisiner: Poke its body ; To Commis: Rub its body ; To Pâtissier: Poke its head and hat or weapon and shield"
         }
       ],
       "rank": "F"
@@ -4201,19 +4221,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Blitzen",
-          "b": "Uses horns in close and Yoggy Laser from a distance"
+          "b": "Uses horns in close and Yoggy Laser from a distance",
+          "sw": "To Donner: Rub its head and horns or front legs and body ; To Comet: Poke its hind legs ; To Cupid: Rub its hind legs"
         },
         {
           "n": "Donner",
-          "b": "Same as Blitzen but different laser sweep"
+          "b": "Same as Blitzen but different laser sweep",
+          "sw": "To Blitzen: Poke its head and horns or hind legs ; To Comet: Poke its front legs and body ; To Cupid: Rub its front legs and body"
         },
         {
           "n": "Comet",
-          "b": "Mostly uses magic attacks"
+          "b": "Mostly uses magic attacks",
+          "sw": "To Blitzen: Poke its front legs and body or hind legs ; To Donner: Rub its front legs and body or hind legs ; To Cupid: Rub its head and horns"
         },
         {
           "n": "Cupid",
-          "b": "Uses only laser attacks"
+          "b": "Uses only laser attacks",
+          "sw": "To Blitzen: Poke its head and horns ; To Donner: Rub its head and horns ; To Comet: Poke its front legs and body or hind legs"
         }
       ],
       "rank": "F"
@@ -4241,19 +4265,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Firecracker",
-          "b": "Prefers rockets and firecrackers"
+          "b": "Prefers rockets and firecrackers",
+          "sw": "To Bombshell: Rub its head or belly and wings ; To Helper: Poke its back ; To Troublemaker: Rub its back"
         },
         {
           "n": "Bombshell",
-          "b": "Fights up close"
+          "b": "Fights up close",
+          "sw": "To Firecracker: Poke its head or back ; To Helper: Poke its belly and wings ; To Troublemaker: Rub its belly and wings"
         },
         {
           "n": "Helper",
-          "b": "Somewhat long-range fighter that supports the player"
+          "b": "Somewhat long-range fighter that supports the player",
+          "sw": "To Firecracker: Poke its belly and wings or back ; To Bombshell: Rub its belly and wings or back ; To Troublemaker: Rub its head"
         },
         {
           "n": "Troublemaker",
-          "b": "Shoots everywhere, using Pinwheel as its main attack"
+          "b": "Shoots everywhere, using Pinwheel as its main attack",
+          "sw": "To Firecracker: Poke its head ; To Bombshell: Rub its belly and wings ; To Helper: Poke its belly and wings or back"
         }
       ],
       "rank": "E"
@@ -4281,19 +4309,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Destroyer",
-          "b": "Uses stronger moves"
+          "b": "Uses stronger moves",
+          "sw": "To Bumper: Rub its head and horns or front legs and body ; To Drill Sarge: Poke its hind legs and tail ; To Roll Meister: Rub its hind legs and tail"
         },
         {
           "n": "Bumper",
-          "b": "Uses weaker moves"
+          "b": "Uses weaker moves",
+          "sw": "To Destroyer: Poke its front legs and body or hind legs and tail ; To Drill Sarge: Poke its head and horns ; To Roll Meister: Rub its head and horns"
         },
         {
           "n": "Drill Sarge",
-          "b": "Does not go into Spike Mode"
+          "b": "Does not go into Spike Mode",
+          "sw": "To Destroyer: Poke its head and horns or hind legs and tail ; To Bumper: Rub its head and horns or hind legs and tail ; To Roll Meister: Rub its front legs and body"
         },
         {
           "n": "Roll Meister",
-          "b": "Uses Spike Mode frequently"
+          "b": "Uses Spike Mode frequently",
+          "sw": "To Destroyer: Poke its head and horns ; To Bumper: Rub its head and horns ; To Drill Sarge: Poke its front legs and body or hind legs and tail"
         }
       ],
       "rank": "D"
@@ -4321,19 +4353,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Hard Worker",
-          "b": "Basic attacks"
+          "b": "Basic attacks",
+          "sw": "To Wild Card: Rub its belly and wings or back ; To Wingman: Poke its head ; To Gift-Giver: Rub its head"
         },
         {
           "n": "Wild Card",
-          "b": "Uses items in a different pattern"
+          "b": "Uses items in a different pattern",
+          "sw": "To Hard Worker: Poke its head and back ; To Wingman: Poke its belly and wings ; To Gift-Giver: Rub its belly and wings"
         },
         {
           "n": "Wingman",
-          "b": "Supports with magic"
+          "b": "Supports with magic",
+          "sw": "To Hard Worker: Poke its head or belly and wings ; To Wild Card: Rub its head or belly and wings ; To Gift-Giver: Rub its bacl"
         },
         {
           "n": "Gift-Giver",
-          "b": "Actively uses items"
+          "b": "Actively uses items",
+          "sw": "To Hard Worker: Poke its belly and wings ; To Wild Card: Rub its belly and wings ; To Wingman: Poke its head or back"
         }
       ],
       "rank": "E"
@@ -4361,19 +4397,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Ace",
-          "b": "Normal attacks"
+          "b": "Normal attacks",
+          "sw": "To Vulcan: Rub its body and tail or wings ; To Bomber: Poke its head and chest ; To Tracer: Rub its head and chest"
         },
         {
           "n": "Vulcan",
-          "b": "Favors its Vulcan Strafe attack"
+          "b": "Favors its Vulcan Strafe attack",
+          "sw": "To Ace: Poke its head and chest or wings ; To Bomber: Poke its body and tail ; To Tracer: Rub its body and tail"
         },
         {
           "n": "Bomber",
-          "b": "Only does Air Raid bomb runs"
+          "b": "Only does Air Raid bomb runs",
+          "sw": "To Ace: Poke its head and chest or body and tail ; To Vulcan: Rub its head and chest or body and tail ; To Tracer: Rub its wings"
         },
         {
           "n": "Tracer",
-          "b": "Only does Feather Missile attacks"
+          "b": "Only does Feather Missile attacks",
+          "sw": "To Ace: Poke its wings ; To Vulcan: Rub its wings ; To Bomber: Poke its head and chest or body and tail"
         }
       ],
       "rank": "E"
@@ -4401,19 +4441,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Shock Therapist",
-          "b": "Uses Thunder only as it adapts to the situation"
+          "b": "Uses Thunder only as it adapts to the situation",
+          "sw": "To Capacitor: Rub its head or front legs and body ; To Tempest: Poke its hind legs and tail ; To Lightning Bolt: Rub its hind legs and tail"
         },
         {
           "n": "Capacitor",
-          "b": "Charges up Thunder, then takes action"
+          "b": "Charges up Thunder, then takes action",
+          "sw": "To Shock Therapist: Poke its front legs and body or hind legs and tail ; To Tempest: Poke its head ; To Lightning Bolt: Rub its head"
         },
         {
           "n": "Tempest",
-          "b": "Mostly magic attacks"
+          "b": "Mostly magic attacks",
+          "sw": "To Shock Therapist: Poke its head or hind legs and tail ; To Capacitor: Rub its head or hind legs and tail ; To Lightning Bolt: Rub its front legs and body"
         },
         {
           "n": "Lightning Bolt",
-          "b": "Attacks quickly; doesn't bother charging up Thunder"
+          "b": "Attacks quickly; doesn't bother charging up Thunder",
+          "sw": "To Shock Therapist: Poke its hind legs and tail ; To Capacitor: Rub its hind legs and tail ; To Tempest: Poke its head or front legs and body"
         }
       ],
       "rank": "D"
@@ -4441,19 +4485,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Blindsider",
-          "b": "Keeps coming at enemies aggressively"
+          "b": "Keeps coming at enemies aggressively",
+          "sw": "To Snail Support: Rub its head and eyeballs ; To Conjurer: Poke its body or shell ; To Brick Wall: Rub its body or shell"
         },
         {
           "n": "Snail Support",
-          "b": "Attacks while supporting its allies"
+          "b": "Attacks while supporting its allies",
+          "sw": "To Blindsider: Poke its shell ; To Conjurer: Poke its head and eyeballs or body ; To Brick Wall: Rub its head and eyeballs or body"
         },
         {
           "n": "Conjurer",
-          "b": "Mostly uses magic attacks"
+          "b": "Mostly uses magic attacks",
+          "sw": "To Blindsider: Poke its body ; To Snail Support: Rub its body ; To Brick Wall: Rub its head and eyeballs or shell"
         },
         {
           "n": "Brick Wall",
-          "b": "Prides itself on its iron-clad defense"
+          "b": "Prides itself on its iron-clad defense",
+          "sw": "To Blindsider: Poke its body or shell ; To Snail Support: Rub its body or shell ; To Conjurer: Poke its head and eyeballs"
         }
       ],
       "rank": "E"
@@ -4481,19 +4529,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Grunt",
-          "b": "Aggressive with normal range of attacks"
+          "b": "Aggressive with normal range of attacks",
+          "sw": "To Charger: Rub its head ; To Water Slinger: Poke its body or tail fin ; To Diver: Rub its body or tail fin"
         },
         {
           "n": "Charger",
-          "b": "Often rushes in from mid-range"
+          "b": "Often rushes in from mid-range",
+          "sw": "To Grunt: Poke its body ; To Water Slinger: Poke its head or tail fin ; To Diver: Rub its head or tail fin"
         },
         {
           "n": "Water Slinger",
-          "b": "Mainly uses Power Spout from long range"
+          "b": "Mainly uses Power Spout from long range",
+          "sw": "To Grunt: Poke its tail fin ; To Charger: Rub its tail fin ; To Diver: Rub its head or body"
         },
         {
           "n": "Diver",
-          "b": "Repeatedly uses the Fishapult dive attack"
+          "b": "Repeatedly uses the Fishapult dive attack",
+          "sw": "To Grunt: Poke its body or tail fin ; To Charger: Rub its body or tail fin ; To Water Slinger: Poke its head"
         }
       ],
       "rank": "E"
@@ -4521,19 +4573,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Raider",
-          "b": "Uses normal range of attacks"
+          "b": "Uses normal range of attacks",
+          "sw": "To Anchor: Rub its body ; To Hitman: Poke its head or tail fin ; To Bonehead: Rub its head or tail fin"
         },
         {
           "n": "Anchor",
-          "b": "Favors Land Swimmer attack"
+          "b": "Favors Land Swimmer attack",
+          "sw": "To Raider: Poke its tail fin ; To Hitman: Poke its head or body ; To Bonehead: Rub its head or body"
         },
         {
           "n": "Hitman",
-          "b": "Favors Power Spout from long range"
+          "b": "Favors Power Spout from long range",
+          "sw": "To Raider: Poke its head ; To Anchor: Rub its head ; To Bonehead: Rub its body or tail fin"
         },
         {
           "n": "Bonehead",
-          "b": "Repeatedly uses Fishapult"
+          "b": "Repeatedly uses Fishapult",
+          "sw": "To Raider: Poke its head or tail fin ; To Anchor: Rub its head or tail fin ; To Hitman: Poke its body"
         }
       ],
       "rank": "E"
@@ -4561,19 +4617,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Fido",
-          "b": "Uses all attacks and actively attacks its enemies in a balanced manner"
+          "b": "Uses all attacks and actively attacks its enemies in a balanced manner",
+          "sw": "To Rover: Rub its legs or rear and tail ; To Whiskers: Poke its head and body ; To Mittens: Rub its head and body"
         },
         {
           "n": "Rover",
-          "b": "Reckless type that attacks with only Horn Bounce"
+          "b": "Reckless type that attacks with only Horn Bounce",
+          "sw": "To Fido: Poke its head and body or rear and tail ; To Whiskers: Poke its legs ; To Mittens: Rub its legs"
         },
         {
           "n": "Whiskers",
-          "b": "Mostly participates by doing magic attacks"
+          "b": "Mostly participates by doing magic attacks",
+          "sw": "To Fido: Poke its head and body or legs ; To Rover: Rub its head and body or legs ; To Mittens: Rub its rear and tail"
         },
         {
           "n": "Mittens",
-          "b": "Devotes itself more to replenishing allies' HP attacking"
+          "b": "Devotes itself more to replenishing allies' HP attacking",
+          "sw": "To Fido: Poke its head and body ; To Rover: Rub its head and body ; To Whiskers: Poke its legs or rear and tail"
         }
       ],
       "rank": "C"
@@ -4601,19 +4661,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Mixed Bag",
-          "b": "Uses basic set of attacks and recovery"
+          "b": "Uses basic set of attacks and recovery",
+          "sw": "To Pretty Kitty: Rub its head and chest ; To Catnipper: Poke its body and tail or legs ; To Sweetheart: Rub its body and tail or legs"
         },
         {
           "n": "Pretty Kitty",
-          "b": "Constantly spinning around"
+          "b": "Constantly spinning around",
+          "sw": "To Mixed Bag: Poke its legs ; To Catnipper: Poke its head and chest or body and tail ; To Sweetheart: Rub its head and chest or body and tail"
         },
         {
           "n": "Catnipper",
-          "b": "Launches attacks from long range; conjures Musical Storm when close"
+          "b": "Launches attacks from long range; conjures Musical Storm when close",
+          "sw": "To Mixed Bag: Poke its body and tail ; To Pretty Kitty: Rub its body and tail ; To Sweetheart: Rub its head and chest or legs"
         },
         {
           "n": "Sweetheart",
-          "b": "Uses only music magic"
+          "b": "Uses only music magic",
+          "sw": "To Mixed Bag: Poke its head and chest or body and tail ; To Pretty Kitty: Rub its head and chest or body and tail ; To Catnipper: Poke its legs"
         }
       ],
       "rank": "C"
@@ -4641,19 +4705,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Big Eater",
-          "b": "Lots of close-range, direct attacks"
+          "b": "Lots of close-range, direct attacks",
+          "sw": "To Phantom: Rub its hat or face and belly ; To Shaman: Poke its back ; To Split Personality: Rub its back"
         },
         {
           "n": "Phantom",
-          "b": "Balanced type with Icy Reflux as its go-to attack"
+          "b": "Balanced type with Icy Reflux as its go-to attack",
+          "sw": "To Big Eater: Poke its hat or back ; To Shaman: Poke its face and belly ; To Split Personality: Rub its face and belly"
         },
         {
           "n": "Shaman",
-          "b": "Only magic-type actions"
+          "b": "Only magic-type actions",
+          "sw": "To Big Eater: Poke its face and belly or back ; To Phantom: Rub its face and belly or back ; To Split Personality: Rub its hat"
         },
         {
           "n": "Split Personality",
-          "b": "Acts in a pattern that uses Go Go Ghostling"
+          "b": "Acts in a pattern that uses Go Go Ghostling",
+          "sw": "To Big Eater: Poke its hat ; To Phantom: Rub its hat ; To Shaman: Poke its face and belly or back"
         }
       ],
       "rank": "F"
@@ -4681,19 +4749,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Sky Master",
-          "b": "Uses normal attacks in a well-balanced fashion"
+          "b": "Uses normal attacks in a well-balanced fashion",
+          "sw": "To Harrier: Rub its head and chest ; To Assassin: Poke its body and tail or wings ; To Commander: Rub its body and tail or wings"
         },
         {
           "n": "Harrier",
-          "b": "Likes to attack with Vertical Dives"
+          "b": "Likes to attack with Vertical Dives",
+          "sw": "To Sky Master: Poke its body and tail ; To Assassin: Poke its head and chest or wings ; To Commander: Rub its head and chest or wings"
         },
         {
           "n": "Assassin",
-          "b": "Attacks specific targets from up in the air"
+          "b": "Attacks specific targets from up in the air",
+          "sw": "To Sky Master: Poke its wings ; To Harrier: Rub its wings ; To Commander: Rub its head and chest or body and tail"
         },
         {
           "n": "Commander",
-          "b": "Favors ranged attacks from long distance"
+          "b": "Favors ranged attacks from long distance",
+          "sw": "To Sky Master: Poke its head and chest or body and tail ; To Harrier: Rub its head and chest or body and tail ; To Assassin: Poke its wings"
         }
       ],
       "rank": "D"
@@ -4721,19 +4793,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Wheeler",
-          "b": "Mostly uses the Burning Rubber attack"
+          "b": "Mostly uses the Burning Rubber attack",
+          "sw": "To Salamander: Rub its head ; To Serpent: Poke its head or body and legs ; To Hydra: Rub its body and legs or tail"
         },
         {
           "n": "Salamander",
-          "b": "Uses only fire attacks and shoots fireballs"
+          "b": "Uses only fire attacks and shoots fireballs",
+          "sw": "To Wheeler: Poke its body and legs ; To Serpent: Poke its head or tail ; To Hydra: Rub its head or tail"
         },
         {
           "n": "Serpent",
-          "b": "Uses all attacks but doesn't lose its temper"
+          "b": "Uses all attacks but doesn't lose its temper",
+          "sw": "To Wheeler: Poke its head ; To Salamander: Rub its tail ; To Hydra: Rub its head or body and legs"
         },
         {
           "n": "Hydra",
-          "b": "Goes Hebby Berserk as soon as battle starts"
+          "b": "Goes Hebby Berserk as soon as battle starts",
+          "sw": "To Wheeler: Poke its head or tail ; To Salamander: Rub its head or tail ; To Serpent: Poke its body and legs"
         }
       ],
       "rank": "E"
@@ -4761,19 +4837,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Skater",
-          "b": "Aggressive; likes to slide toward enemies"
+          "b": "Aggressive; likes to slide toward enemies",
+          "sw": "To Wingman: Rub its back ; To Slider: Poke its head and neck or belly ; To Birdbrain: Rub its head and neck or belly"
         },
         {
           "n": "Wingman",
-          "b": "Mainly support role"
+          "b": "Mainly support role",
+          "sw": "To Skater: Poke its belly ; To Slider: Poke its head and neck or back ; To Birdbrain: Rub its head and neck or back"
         },
         {
           "n": "Slider",
-          "b": "Hurls ice from afar"
+          "b": "Hurls ice from afar",
+          "sw": "To Skater: Poke its head and neck ; To Wingman: Rub its head and neck ; To Birdbrain: Rub its belly or back"
         },
         {
           "n": "Birdbrain",
-          "b": "Bets it all on flying Ice Dive"
+          "b": "Bets it all on flying Ice Dive",
+          "sw": "To Skater: Poke its head and neck or belly ; To Wingman: Rub its head and neck or belly ; To Slider: Poke its back"
         }
       ],
       "rank": "E"
@@ -4801,19 +4881,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Picky Eater",
-          "b": "When at a distance it transforms into a prize, then attacks when enemies get close"
+          "b": "When at a distance it transforms into a prize, then attacks when enemies get close",
+          "sw": "To Flake: Rub its hat ; To Chicken: Poke its face and belly or back ; To Gourmand: Rub its face and belly or back"
         },
         {
           "n": "Flake",
-          "b": "Well balanced but only attacks at random"
+          "b": "Well balanced but only attacks at random",
+          "sw": "To Picky Eater: Poke its face and belly ; To Chicken: Poke its hat or back ; To Gourmand: Rub its hat or back"
         },
         {
           "n": "Chicken",
-          "b": "Keeps its distance and attacks"
+          "b": "Keeps its distance and attacks",
+          "sw": "To Picky Eater: Poke its back ; To Flake: Rub its back ; To Gourmand: Rub its hat or face and belly"
         },
         {
           "n": "Gourmand",
-          "b": "Frequently tries to chomp or slurp enemies"
+          "b": "Frequently tries to chomp or slurp enemies",
+          "sw": "To Picky Eater: Poke its face and belly or back ; To Flake: Rub its face and belly or back ; To Chicken: Poke its hat"
         }
       ],
       "rank": "E"
@@ -4841,19 +4925,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Acrobat",
-          "b": "Uses stronger moves"
+          "b": "Uses stronger moves",
+          "sw": "To Prestidigitator: Poke its back ; To Swindler: Rub its back"
         },
         {
           "n": "Half-Pint",
-          "b": "Uses weaker moves"
+          "b": "Uses weaker moves",
+          "sw": "To Acrobat: Poke its head or back ; To Prestidigitator: Poke its belly and arms ; To Swindler: Rub its belly and arms"
         },
         {
           "n": "Prestidigitator",
-          "b": "Uses all beach ball attacks"
+          "b": "Uses all beach ball attacks",
+          "sw": "To Acrobat: Poke its belly and arms or back ; To Half-Pint: Rub its belly and arms or back ; To Swindler: Rub its head"
         },
         {
           "n": "Swindler",
-          "b": "Uses all dice attacks"
+          "b": "Uses all dice attacks",
+          "sw": "To Acrobat: Poke its belly and arms ; To Half-Pint: Rub its belly and arms ; To Prestidigitator: Poke its head or back"
         }
       ],
       "rank": "D"
@@ -4881,19 +4969,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Tank",
-          "b": "Aims for its enemies with shot-type attacks like Tracer"
+          "b": "Aims for its enemies with shot-type attacks like Tracer",
+          "sw": "To Grenadier: Rub its belly and arms and legs or back ; To Bodyguard: Poke its head and horn ; To Launcher: Rub its head and horn"
         },
         {
           "n": "Grenadier",
-          "b": "Does exploding support attacks with Mortar"
+          "b": "Does exploding support attacks with Mortar",
+          "sw": "To Tank: Poke its head and horn or back ; To Bodyguard: Poke its belly and arms and legs ; To Launcher: Rub its belly and arms and legs"
         },
         {
           "n": "Bodyguard",
-          "b": "Tries to protect its allies with Support Shot"
+          "b": "Tries to protect its allies with Support Shot",
+          "sw": "To Tank: Poke its head and horn or belly and arms and legs ; To Grenadier: Rub its head and horn or belly and arms and legs ; To Launcher: Rub its back"
         },
         {
           "n": "Launcher",
-          "b": "Uses Magic Shot to inflict special damages"
+          "b": "Uses Magic Shot to inflict special damages",
+          "sw": "To Tank: Poke its belly and arms and legs ; To Grenadier: Rub its belly and arms and legs ; To Bodyguard: Poke its head and horn or back"
         }
       ],
       "rank": "E"
@@ -4921,19 +5013,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Striker",
-          "b": "Aims for its enemies with shot-type attacks"
+          "b": "Aims for its enemies with shot-type attacks",
+          "sw": "To Ack-Ack: Rub its back ; To Bodyguard: Poke its head and horn or belly and arms and legs ; To Launcher: Rub its head and horn or belly and arms and legs"
         },
         {
           "n": "Ack-Ack",
-          "b": "Does exploding support attacks with Mortar"
+          "b": "Does exploding support attacks with Mortar",
+          "sw": "To Striker: Poke its belly and arms and legs ; To Bodyguard: Poke its head and horn or back ; To Launcher: Rub its head and horn or back"
         },
         {
           "n": "Bodyguard",
-          "b": "Tries to protect its allies with Support Shot"
+          "b": "Tries to protect its allies with Support Shot",
+          "sw": "To Striker: Poke its head and horn ; To Ack-Ack: Rub its head and horn ; To Launcher: Rub its belly and arms and legs or back"
         },
         {
           "n": "Launcher",
-          "b": "Uses Magic Shot and inflicts special damage"
+          "b": "Uses Magic Shot and inflicts special damage",
+          "sw": "To Striker: Poke its belly and arms and legs or back ; To Ack-Ack: Rub its belly and arms and legs or back ; To Bodyguard: Poke its head and horn"
         }
       ],
       "rank": "C"
@@ -4961,19 +5057,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Conqueror",
-          "b": "Occasionally uses charged attacks"
+          "b": "Occasionally uses charged attacks",
+          "sw": "To Usurper: Rub its head or hind legs and tail ; To Cruel Mind: Poke its front legs and body ; To Force of Nature: Rub its front legs and body"
         },
         {
           "n": "Usurper",
-          "b": "Doesn't charge up before attacks"
+          "b": "Doesn't charge up before attacks",
+          "sw": "To Conqueror: Poke its front legs and body or hind legs and tail ; To Cruel Mind: Poke its head ; To Force of Nature: Rub its head"
         },
         {
           "n": "Cruel Mind",
-          "b": "Uses magic attacks"
+          "b": "Uses magic attacks",
+          "sw": "To Conqueror: Poke its head or front legs and body ; To Usurper: Rub its head or front legs and body ; To Force of Nature: Rub its hind legs and tail"
         },
         {
           "n": "Force of Nature",
-          "b": "Only charged attacks"
+          "b": "Only charged attacks",
+          "sw": "To Conqueror: Poke its hind legs and tail ; To Usurper: Rub its hind legs and tail ; To Cruel Mind: Poke its head or front legs and body"
         }
       ],
       "rank": "D"
@@ -5001,19 +5101,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Aggro",
-          "b": "Actively attacks, concentrating on direct strikes"
+          "b": "Actively attacks, concentrating on direct strikes",
+          "sw": "To Wingman: Rub its ears or wings ; To Rescuer: Poke its ears or head ; To Saboteur: Rub its head"
         },
         {
           "n": "Wingman",
-          "b": "Support attack type; uses indirect attacks from mid-range"
+          "b": "Support attack type; uses indirect attacks from mid-range",
+          "sw": "To Aggro: Poke its ears ; To Rescuer: Poke its wings or head ; To Saboteur: Rub its wings"
         },
         {
           "n": "Rescuer",
-          "b": "Mainly supports its allies with healing/recovery"
+          "b": "Mainly supports its allies with healing/recovery",
+          "sw": "To Aggro: Poke its head ; To Wingman: Rub its wings or head ; To Saboteur: Rub its ears"
         },
         {
           "n": "Saboteur",
-          "b": "Causes chaos by mainly inflicting status ailments"
+          "b": "Causes chaos by mainly inflicting status ailments",
+          "sw": "To Aggro: Poke its ears ; To Wingman: Rub its ears or wings ; To Rescuer: Poke its wings or head"
         }
       ],
       "rank": "E"
@@ -5041,19 +5145,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Boxer",
-          "b": "Mostly uses Panda Punch to engage"
+          "b": "Mostly uses Panda Punch to engage",
+          "sw": "To Wrestler: Rub its head ; To Bruiser: Poke its belly and arms or back and tail ; To Grappler: Rub its belly and arms or back and tail"
         },
         {
           "n": "Wrestler",
-          "b": "Mostly uses Kooma Tackle to engage"
+          "b": "Mostly uses Kooma Tackle to engage",
+          "sw": "To Boxer: Poke its belly and arms ; To Bruiser: Poke its head or back and tail ; To Grappler: Rub its head or back and tail"
         },
         {
           "n": "Bruiser",
-          "b": "Adds Tea Table attack to repertoire"
+          "b": "Adds Tea Table attack to repertoire",
+          "sw": "To Boxer: Poke its back and tail ; To Wrestler: Rub its back and tail ; To Grappler: Rub its head or belly and arms"
         },
         {
           "n": "Grappler",
-          "b": "Only does close-range attacks; never leaves its enemy alone"
+          "b": "Only does close-range attacks; never leaves its enemy alone",
+          "sw": "To Boxer: Poke its head or back and tail ; To Wrestler: Rub its head or back and tail ; To Bruiser: Poke its belly and arms"
         }
       ],
       "rank": "F"
@@ -5081,19 +5189,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Warmonger",
-          "b": "Actively attacks"
+          "b": "Actively attacks",
+          "sw": "To Populist: Rub its head and crown or weapon and shield ; To Empiricist: Poke its body ; To Selfless Ruler: Rub its body"
         },
         {
           "n": "Populist",
-          "b": "Balanced"
+          "b": "Balanced",
+          "sw": "To Warmonger: Poke its head and crown or body ; To Empiricist: Poke its weapon and shield ; To Selfless Ruler: Rub its weapon and shield"
         },
         {
           "n": "Empiricist",
-          "b": "Especially good with magic attacks/support"
+          "b": "Especially good with magic attacks/support",
+          "sw": "To Warmonger: Poke its body or weapon and shield ; To Populist: Rub its body or weapon and shield ; To Selfless Ruler: Rub its head and crown"
         },
         {
           "n": "Selfless Ruler",
-          "b": "Especially good at using its body to guard"
+          "b": "Especially good at using its body to guard",
+          "sw": "To Warmonger: Poke its weapon and shield ; To Populist: Rub its weapon and shield ; To Empiricist: Poke its head and crown or body"
         }
       ],
       "rank": "E"
@@ -5121,19 +5233,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Mage",
-          "b": "Combines magic and hand-to-hand combat"
+          "b": "Combines magic and hand-to-hand combat",
+          "sw": "To Spark Jockey: Rub its head ; To Accomplice: Poke its ears or body ; To Illusionist: Rub its ears or body"
         },
         {
           "n": "Spark Jockey",
-          "b": "Prefers Fire and Dark attacks"
+          "b": "Prefers Fire and Dark attacks",
+          "sw": "To Mage: Poke its body ; To Accomplice: Poke its ears or head ; To Illusionist: Rub its ears or head"
         },
         {
           "n": "Accomplice",
-          "b": "Generally supports your main character"
+          "b": "Generally supports your main character",
+          "sw": "To Mage: Poke its ears ; To Spark Jockey: Rub its ears ; To Illusionist: Rub its head or body"
         },
         {
           "n": "Illusionist",
-          "b": "Powerful magic commands and status ailments"
+          "b": "Powerful magic commands and status ailments",
+          "sw": "To Mage: Poke its head or body ; To Spark Jockey: Rub its head or body ; To Accomplice: Poke its ears"
         }
       ],
       "rank": "E"
@@ -5161,19 +5277,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Bruiser",
-          "b": "Likes to engage in bare-knuckled fights."
+          "b": "Likes to engage in bare-knuckled fights.",
+          "sw": "To Spinner: Rub its ears or body ; To Space Invader: Poke its head ; To Hopper: Rub its head"
         },
         {
           "n": "Spinner",
-          "b": "Repeats a pattern of hopping around and then resting."
+          "b": "Repeats a pattern of hopping around and then resting.",
+          "sw": "To Bruiser: Poke its ears or head ; To Space Invader: Poke its body ; To Hopper: Rub its body"
         },
         {
           "n": "Space Invader",
-          "b": "Dashes in with its Me Me Cross then hits with a combo."
+          "b": "Dashes in with its Me Me Cross then hits with a combo.",
+          "sw": "To Bruiser: Poke its ears or head ; To Spinner: Rub its ears or head ; To Hopper: Rub its body"
         },
         {
           "n": "Hopper",
-          "b": "Bounces around doing attacks that hit multiple targets."
+          "b": "Bounces around doing attacks that hit multiple targets.",
+          "sw": "To Bruiser: Poke its head ; To Spinner: Rub its head ; To Space Invader: Poke its ears o body"
         }
       ],
       "rank": "F"
@@ -5201,19 +5321,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Stray",
-          "b": "Aggressively uses all horn attacks"
+          "b": "Aggressively uses all horn attacks",
+          "sw": "To Rascal: Rub its head and body or rear and tail ; To Smart Cookie: Poke its legs or rear and tail ; To Sidekick: Rub its legs"
         },
         {
           "n": "Rascal",
-          "b": "Attacks recklessly with leaping Horn Dives"
+          "b": "Attacks recklessly with leaping Horn Dives",
+          "sw": "To Stray: Poke its legs ; To Smart Cookie: Poke its head and body or rear and tail ; To Sidekick: Rub its rear and tail"
         },
         {
           "n": "Smart Cookie",
-          "b": "Mostly participates by doing magic attacks"
+          "b": "Mostly participates by doing magic attacks",
+          "sw": "To Stray: Poke its rear and tail ; To Rascal: Rub its legs or rear and tail ; To Sidekick: Rub its head and body"
         },
         {
           "n": "Sidekick",
-          "b": "Devotes itself more to replenishing allies' HP"
+          "b": "Devotes itself more to replenishing allies' HP",
+          "sw": "To Stray: Poke its legs ; To Rascal: Rub its legs or rear and tail ; To Smart Cookie: Poke its head and body or rear and tail"
         }
       ],
       "rank": "E"
@@ -5241,19 +5365,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Wild Animal",
-          "b": "Actively pursues melee attacks with its horn"
+          "b": "Actively pursues melee attacks with its horn",
+          "sw": "To Pouncer: Rub its legs ; To Magician: Poke its head and body or rear and tail ; To Best Friend: Rub its head and body or rear and tail"
         },
         {
           "n": "Pouncer",
-          "b": "Prefers Horn Bounce"
+          "b": "Prefers Horn Bounce",
+          "sw": "To Wild Animal: Poke its head and body ; To Magician: Poke its legs or rear and tail ; To Best Friend: Rub its legs or rear and tail"
         },
         {
           "n": "Magician",
-          "b": "Adds magic attacks"
+          "b": "Adds magic attacks",
+          "sw": "To Wild Animal: Poke its rear and tail ; To Pouncer: Rub its rear and tail ; To Best Friend: Rub its head and body or legs"
         },
         {
           "n": "Best Friend",
-          "b": "Attacks regularly but replenishes allies' HP when low"
+          "b": "Attacks regularly but replenishes allies' HP when low",
+          "sw": "To Wild Animal: Poke its head and body or legs ; To Pouncer: Rub its head and body or legs ; To Magician: Poke its rear and tail"
         }
       ],
       "rank": "C"
@@ -5281,19 +5409,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Multi-Talent",
-          "b": "Normal actions"
+          "b": "Normal actions",
+          "sw": "To Dancer: Rub its body and tail or legs ; To Diva: Poke its head and chest ; To Artist: Rub its head and chest"
         },
         {
           "n": "Dancer",
-          "b": "Constantly spinning around"
+          "b": "Constantly spinning around",
+          "sw": "To Diva: Poke its legs ; To Artist: Rub its legs"
         },
         {
           "n": "Diva",
-          "b": "Launches attacks from long range; conjures Musical Storm when close"
+          "b": "Launches attacks from long range; conjures Musical Storm when close",
+          "sw": "To Dancer: Rub its head and chest or legs ; To Artist: Rub its body and tail"
         },
         {
           "n": "Artist",
-          "b": "Uses only music magic"
+          "b": "Uses only music magic",
+          "sw": "To Dancer: Rub its head and chest ; To Diva: Poke its body and tail or legs"
         }
       ],
       "rank": "E"
@@ -5321,19 +5453,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Watcher",
-          "b": "Scans for weaknesses, then attacks accordingly"
+          "b": "Scans for weaknesses, then attacks accordingly",
+          "sw": "To Sweeper: Rub its head or belly and wings ; To Scout: Poke its back ; To Patroller: Rub its back"
         },
         {
           "n": "Sweeper",
-          "b": "Doesn't use Scan; attacks with Feather Shuriken only"
+          "b": "Doesn't use Scan; attacks with Feather Shuriken only",
+          "sw": "To Watcher: Poke its back ; To Scout: Poke its belly and wings ; To Patroller: Rub its belly and wings"
         },
         {
           "n": "Scout",
-          "b": "Uses Scan and fights with magic"
+          "b": "Uses Scan and fights with magic",
+          "sw": "To Watcher: Poke its belly and wings or back ; To Sweeper: Rub its belly and wings or back ; To Patroller: Rub its head"
         },
         {
           "n": "Patroller",
-          "b": "Uses Scan and engages"
+          "b": "Uses Scan and engages",
+          "sw": "To Watcher: Poke its head ; To Sweeper: Rub its head ; To Scout: Poke its belly and wings or back"
         }
       ],
       "rank": "E"
@@ -5361,19 +5497,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Cyclone",
-          "b": "Uses Cyclone Charge as it adapts to the situation"
+          "b": "Uses Cyclone Charge as it adapts to the situation",
+          "sw": "To Typhoon: Rub its front legs and wings and body ; To Hurricane: Poke its head or hind legs and tail ; To Stormgoer: Rub its head or hind legs and tail"
         },
         {
           "n": "Typhoon",
-          "b": "Charges up weather attacks; also uses basic attacks"
+          "b": "Charges up weather attacks; also uses basic attacks",
+          "sw": "To Cyclone: Poke its head ; To Hurricane: Poke its front legs and wings and body or hind legs and tail ; To Stormgoer: Rub its front legs and wings and body or hind legs and tail"
         },
         {
           "n": "Hurricane",
-          "b": "Mostly magic-based actions"
+          "b": "Mostly magic-based actions",
+          "sw": "To Cyclone: Poke its hind legs and tail ; To Typhoon: Rub its hind legs and tail ; To Stormgoer: Rub its head or front legs and wings and body"
         },
         {
           "n": "Stormgoer",
-          "b": "Doesn't bother charging up weather attacks"
+          "b": "Doesn't bother charging up weather attacks",
+          "sw": "To Cyclone: Poke its front legs and wings and body or hind legs and tail ; To Typhoon: Rub its front legs and wings and body or hind legs and tail ; To Hurricane: Poke its head"
         }
       ],
       "rank": "E"
@@ -5401,19 +5541,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Volcano",
-          "b": "Quick to lose temper"
+          "b": "Quick to lose temper",
+          "sw": "To Scrapper: Rub its tail ; To Intellectual: Poke its face or body ; To Bouncer: Rub its face or body"
         },
         {
           "n": "Scrapper",
-          "b": "Only uses Prickle Spin; actively closes distance"
+          "b": "Only uses Prickle Spin; actively closes distance",
+          "sw": "To Volcano: Poke its face ; To Intellectual: Poke its body or tail ; To Bouncer: Rub its body or tail"
         },
         {
           "n": "Intellectual",
-          "b": "Has all attacks but never loses its temper"
+          "b": "Has all attacks but never loses its temper",
+          "sw": "To Volcano: Poke its face or tail ; To Scrapper: Rub its body ; To Bouncer: Rub its face or tail"
         },
         {
           "n": "Bouncer",
-          "b": "Uses jumping attack and fights in a hit-and-wait pattern"
+          "b": "Uses jumping attack and fights in a hit-and-wait pattern",
+          "sw": "To Volcano: Poke its face or body ; To Scrapper: Rub its face or body ; To Intellectual: Poke its tail"
         }
       ],
       "rank": "E"
@@ -5441,19 +5585,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Sea Lion",
-          "b": "Uses a balanced set of attacks: ball, dice, and melee"
+          "b": "Uses a balanced set of attacks: ball, dice, and melee",
+          "sw": "To Driftwood: Rub its head ; To Show-off: Poke its belly and arms or back ; To High Roller: Rub its belly and arms or back"
         },
         {
           "n": "Driftwood",
-          "b": "Dice attack is weaker"
+          "b": "Dice attack is weaker",
+          "sw": "To Sea Lion: Poke its belly and arms ; To Show-off: Poke its head or back ; To High Roller: Rub its head or back"
         },
         {
           "n": "Show-off",
-          "b": "Mainly employs all beach ball attacks"
+          "b": "Mainly employs all beach ball attacks",
+          "sw": "To Sea Lion: Poke its back ; To Driftwood: Rub its back ; To High Roller: Rub its head or belly and arms"
         },
         {
           "n": "High Roller",
-          "b": "Employs all dice attacks"
+          "b": "Employs all dice attacks",
+          "sw": "To Sea Lion: Poke its head or back ; To Driftwood: Rub its head or back ; To Show-off: Poke its belly and arms"
         }
       ],
       "rank": "C"
@@ -5481,19 +5629,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Fafnir",
-          "b": "Slashes foes on ground; rises to spit fireballs from air."
+          "b": "Slashes foes on ground; rises to spit fireballs from air.",
+          "sw": "To Wyvern: Rub its head and front legs ; To Tiamat: Poke its hind legs and body or tail ; To Bahamut: Rub its hind legs and body or tail"
         },
         {
           "n": "Wyvern",
-          "b": "Fewer fireballs but pursues foes using Dragon's Breath."
+          "b": "Fewer fireballs but pursues foes using Dragon's Breath.",
+          "sw": "To Fafnir: Poke its hind legs and body ; To Tiamat: Poke its head and front legs or tail ; To Bahamut: Rub its head and front legs or tail"
         },
         {
           "n": "Tiamat",
-          "b": "Mostly ground attacks."
+          "b": "Mostly ground attacks.",
+          "sw": "To Fafnir: Poke its tail ; To Wyvern: Rub its tail ; To Bahamut: Rub its head and front legs or hind legs and body"
         },
         {
           "n": "Bahamut",
-          "b": "Mostly aerial flame attacks."
+          "b": "Mostly aerial flame attacks.",
+          "sw": "To Fafnir: Poke its head and front legs or tail ; To Wyvern: Rub its head and front legs or tail ; To Tiamat: Poke its hind legs and body"
         }
       ],
       "rank": "E"
@@ -5521,19 +5673,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Warrior",
-          "b": "Actively attacks"
+          "b": "Actively attacks",
+          "sw": "To Knight: Rub its weapon and shield ; To Paladin: Poke its head and body or weapon and shield ; To Guardian: Rub its head and body or wings"
         },
         {
           "n": "Knight",
-          "b": "Balanced"
+          "b": "Balanced",
+          "sw": "To Warrior: Poke its head and body ; To Paladin: Poke its wings or weapon and shield ; To Guardian: Rub its wings or weapon and shield"
         },
         {
           "n": "Paladin",
-          "b": "Especially good with magic attacks/support"
+          "b": "Especially good with magic attacks/support",
+          "sw": "To Warrior: Poke its weapon and shield ; To Knight: Rub its wings ; To Guardian: Rub its head and body or weapon and shield"
         },
         {
           "n": "Guardian",
-          "b": "Especially good at using its shield to guard"
+          "b": "Especially good at using its shield to guard",
+          "sw": "To Warrior: Poke its wings or weapon and shield ; To Knight: Rub its wings or weapon and shield ; To Paladin: Poke its head and body"
         }
       ],
       "rank": "E"
@@ -5561,19 +5717,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Barbarian",
-          "b": "Attacks from any distance; head and body attack separately at times"
+          "b": "Attacks from any distance; head and body attack separately at times",
+          "sw": "To Bully: Rub its tail ; To Savage: Poke its head and body or hind legs ; To Fiend: Rub its head and body or hind legs"
         },
         {
           "n": "Bully",
-          "b": "Sticks to short-range attacks; head and body never separate"
+          "b": "Sticks to short-range attacks; head and body never separate",
+          "sw": "To Barbarian: Poke its head and body ; To Savage: Poke its hind legs or tail ; To Fiend: Rub its hind legs or tail"
         },
         {
           "n": "Savage",
-          "b": "Prefers Sonic Roar; no Blizzard attacks"
+          "b": "Prefers Sonic Roar; no Blizzard attacks",
+          "sw": "To Barbarian: Poke its hind legs ; To Bully: Rub its hind legs ; To Fiend: Rub its head and body or tail"
         },
         {
           "n": "Fiend",
-          "b": "Prefers its Blizzard attacks"
+          "b": "Prefers its Blizzard attacks",
+          "sw": "To Barbarian: Poke its head and body or hind legs ; To Bully: Rub its head and body or hind legs ; To Savage: Poke its tail"
         }
       ],
       "rank": "F"
@@ -5601,19 +5761,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Heavy Hitter",
-          "b": "Melee attacks and Lockdown Shot from the normal range"
+          "b": "Melee attacks and Lockdown Shot from the normal range",
+          "sw": "To Grenadier: Rub its back ; To Launcher: Poke its head and pincers or belly and arms and legs ; To Backup: Rub its head and pincers or belly and arms and legs"
         },
         {
           "n": "Grenadier",
-          "b": "Supporting attacks using Mortar"
+          "b": "Supporting attacks using Mortar",
+          "sw": "To Heavy Hitter: Poke its belly and arms and legs ; To Launcher: Poke its head and pincers or back ; To Backup: Rub its head and pincers or back"
         },
         {
           "n": "Launcher",
-          "b": "Favors attacks with Magic Shot"
+          "b": "Favors attacks with Magic Shot",
+          "sw": "To Heavy Hitter: Poke its head and pincers ; To Grenadier: Rub its head and pincers ; To Backup: Rub its belly and arms and legs or back"
         },
         {
           "n": "Backup",
-          "b": "Support style using Capture Shot and healing allies"
+          "b": "Support style using Capture Shot and healing allies",
+          "sw": "To Heavy Hitter: Poke its belly and arms and legs or back ; To Grenadier: Rub its belly and arms and legs or back ; To Launcher: Poke its head and pincers"
         }
       ],
       "rank": "E"
@@ -5641,19 +5805,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Twister",
-          "b": "Mostly uses Burning Rubber attack"
+          "b": "Mostly uses Burning Rubber attack",
+          "sw": "To Hothead: Rub its body and legs or tail ; To Cool Bean: Poke its head ; To Psycho: Rub its head"
         },
         {
           "n": "Hothead",
-          "b": "Uses only Fire attacks and shoots fireballs"
+          "b": "Uses only Fire attacks and shoots fireballs",
+          "sw": "To Twister: Poke its head and tail ; To Cool Bean: Poke its body and legs ; To Psycho: Rub its body and legs"
         },
         {
           "n": "Cool Bean",
-          "b": "Uses all attacks but doesn't lose its temper"
+          "b": "Uses all attacks but doesn't lose its temper",
+          "sw": "To Twister: Poke its head or body and legs ; To Hothead: Rub its head or body and legs ; To Psycho: Rub its tail"
         },
         {
           "n": "Psycho",
-          "b": "Goes Berserk as soon as the battle starts"
+          "b": "Goes Berserk as soon as the battle starts",
+          "sw": "To Twister: Poke its body and legs ; To Hothead: Rub its body and legs ; To Cool Bean: Poke its head or tail"
         }
       ],
       "rank": "C"
@@ -5681,19 +5849,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Picker-Upper",
-          "b": "Uses all attacks and actively attacks enemies in a balanced manner"
+          "b": "Uses all attacks and actively attacks enemies in a balanced manner",
+          "sw": "To Snooze Maker: Rub its horns or legs and tail ; To Mumbler: Poke its body ; To Pillow Fluffer: Rub its body"
         },
         {
           "n": "Snooze Maker",
-          "b": "Frequently uses its sleep attack"
+          "b": "Frequently uses its sleep attack",
+          "sw": "To Mumbler: Poke its legs and tail ; To Pillow Fluffer: Rub its legs and tail"
         },
         {
           "n": "Mumbler",
-          "b": "Mostly participates by doing magic attacks"
+          "b": "Mostly participates by doing magic attacks",
+          "sw": "To Snooze Maker: Rub its body or legs and tail ; To Pillow Fluffer: Rub its horns"
         },
         {
           "n": "Pillow Fluffer",
-          "b": "Sleeps consecutively"
+          "b": "Sleeps consecutively",
+          "sw": "To Snooze Maker: Rub its body ; To Mumbler: Poke its horns or legs and tail"
         }
       ],
       "rank": "E"
@@ -5721,19 +5893,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Go-getter",
-          "b": "Moves in close to attack"
+          "b": "Moves in close to attack",
+          "sw": "To Detonator: Rub its head and body or wings ; To Deadeye: Poke its tail ; To Two-face: Rub its tail"
         },
         {
           "n": "Detonator",
-          "b": "Favors Firebomb explosions"
+          "b": "Favors Firebomb explosions",
+          "sw": "To Deadeye: Poke its wings ; To Two-face: Rub its wings"
         },
         {
           "n": "Deadeye",
-          "b": "Prefers to aim and attack from long range"
+          "b": "Prefers to aim and attack from long range",
+          "sw": "To Detonator: Rub its wings or tail ; To Two-face: Rub its head and body"
         },
         {
           "n": "Two-face",
-          "b": "Floats placidly, but if enemies get close, it suddenly attacks"
+          "b": "Floats placidly, but if enemies get close, it suddenly attacks",
+          "sw": "To Detonator: Rub its head and body ; To Deadeye: Poke its wings or tail"
         }
       ],
       "rank": "F"
@@ -5761,19 +5937,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Scatterbrain",
-          "b": "Ranged attacks from mid-range"
+          "b": "Ranged attacks from mid-range",
+          "sw": "To Show-off: Rub its tail ; To Tactician: Poke its head and body or wings ; To Trap Jockey: Rub its head and body or wings"
         },
         {
           "n": "Show-off",
-          "b": "Likes flashy area-of-effect attacks that hit multiple targets"
+          "b": "Likes flashy area-of-effect attacks that hit multiple targets",
+          "sw": "To Scatterbrain: Poke its wings ; To Tactician: Poke its head and body or tail ; To Trap Jockey: Rub its head and body or tail"
         },
         {
           "n": "Tactician",
-          "b": "Sniper that attacks single targets from long range (Shell added as support)"
+          "b": "Sniper that attacks single targets from long range (Shell added as support)",
+          "sw": "To Scatterbrain: Poke its head and body ; To Show-off: Rub its head and body ; To Trap Jockey: Rub its wings or tail"
         },
         {
           "n": "Trap Jockey",
-          "b": "Likes mines"
+          "b": "Likes mines",
+          "sw": "To Scatterbrain: Poke its head and body or wings ; To Show-off: Rub its head and body or wings ; To Tactician: Poke its tail"
         }
       ],
       "rank": "E"
@@ -5801,19 +5981,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Live Wire",
-          "b": "Gallops around using long and close-range attacks"
+          "b": "Gallops around using long and close-range attacks",
+          "sw": "To Photon Don: Rub its head and neck or legs ; To Smasher: Poke its body and tail ; To Blue Streak: Rub its body and tail"
         },
         {
           "n": "Photon Don",
-          "b": "Frequently uses Refract Beam"
+          "b": "Frequently uses Refract Beam",
+          "sw": "To Live Wire: Poke its head and neck or body and tail ; To Smasher: Poke its legs ; To Blue Streak: Rub its legs"
         },
         {
           "n": "Smasher",
-          "b": "Supports allies while also using dash attacks from a distance"
+          "b": "Supports allies while also using dash attacks from a distance",
+          "sw": "To Live Wire: Poke its body and tail or legs ; To Photon Don: Rub its body and tail or legs ; To Blue Streak: Rub its head and neck"
         },
         {
           "n": "Blue Streak",
-          "b": "Moves around constantly"
+          "b": "Moves around constantly",
+          "sw": "To Live Wire: Poke its legs ; To Photon Don: Rub its legs ; To Smasher: Poke its head and neck or body and tail"
         }
       ],
       "rank": "F"
@@ -5841,19 +6025,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Hunter",
-          "b": "Does all attacks, close and far"
+          "b": "Does all attacks, close and far",
+          "sw": "To Loose Cannon: Rub its head or body ; To Basilisk: Poke its tail ; To Bane: Rub its tail"
         },
         {
           "n": "Loose Cannon",
-          "b": "Loves to spit fireballs"
+          "b": "Loves to spit fireballs",
+          "sw": "To Hunter: Poke its head or tail ; To Basilisk: Poke its body ; To Bane: Rub its body"
         },
         {
           "n": "Basilisk",
-          "b": "Uses Confuse and Poison to set up attacks"
+          "b": "Uses Confuse and Poison to set up attacks",
+          "sw": "To Hunter: Poke its body or tail ; To Loose Cannon: Rub its body or tail ; To Bane: Rub its head"
         },
         {
           "n": "Bane",
-          "b": "Poison attacks only"
+          "b": "Poison attacks only",
+          "sw": "To Hunter: Poke its body ; To Loose Cannon: Rub its body ; To Basilisk: Poke its head or tail"
         }
       ],
       "rank": "E"
@@ -5881,19 +6069,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Hot Springs",
-          "b": "Unknown"
+          "b": "Unknown",
+          "sw": "To Spa: Rub its back ; To Sauna: Poke its face ; To Whirlpool: Rub its"
         },
         {
           "n": "Spa",
-          "b": ""
+          "b": "",
+          "sw": "To Hot Springs: Poke its ; To Sauna: Poke its belly ; To Whirlpool: Rub its"
         },
         {
           "n": "Sauna",
-          "b": ""
+          "b": "",
+          "sw": "To Hot Springs: Poke its belly ; To Spa: Rub its belly ; To Whirlpool: Rub its feet"
         },
         {
           "n": "Whirlpool",
-          "b": ""
+          "b": "",
+          "sw": "To Hot Springs: Poke its belly ; To Spa: Rub its belly ; To Sauna: Poke its"
         }
       ],
       "rank": "E"
@@ -5921,19 +6113,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Tyrant",
-          "b": "Attacks from any distance"
+          "b": "Attacks from any distance",
+          "sw": "To Roadkiller: Rub its head and body or tail ; To Missile: Poke its hind legs ; To Flametongue: Rub its hind legs"
         },
         {
           "n": "Roadkiller",
-          "b": "Sticks to shorter range attacks"
+          "b": "Sticks to shorter range attacks",
+          "sw": "To Tyrant: Poke its hind legs or tail ; To Missile: Poke its head and body ; To Flametongue: Rub its head and body"
         },
         {
           "n": "Missile",
-          "b": "Prefers Sonic Roar; no flame attacks"
+          "b": "Prefers Sonic Roar; no flame attacks",
+          "sw": "To Tyrant: Poke its head and body or hind legs ; To Roadkiller: Rub its head and body or hind legs ; To Flametongue: Rub its tail"
         },
         {
           "n": "Flametongue",
-          "b": "Prefers Fire attacks"
+          "b": "Prefers Fire attacks",
+          "sw": "To Tyrant: Poke its head and body ; To Roadkiller: Rub its head and body ; To Missile: Poke its hind legs or tail"
         }
       ],
       "rank": "D"
@@ -5961,19 +6157,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Knucklehead",
-          "b": "Mostly uses Panda Punch to engage"
+          "b": "Mostly uses Panda Punch to engage",
+          "sw": "To Strongman: Rub its head or belly and arms ; To Heavyweight: Poke its back and tail ; To Hugger: Rub its back and tail"
         },
         {
           "n": "Strongman",
-          "b": "Mostly uses Kooma Tackle to engage"
+          "b": "Mostly uses Kooma Tackle to engage",
+          "sw": "To Knucklehead: Poke its head or back and tail ; To Heavyweight: Poke its belly and arms ; To Hugger: Rub its belly and arms"
         },
         {
           "n": "Heavyweight",
-          "b": "Adds Tea Table attack to repertoire"
+          "b": "Adds Tea Table attack to repertoire",
+          "sw": "To Knucklehead: Poke its belly and arms or back and tail ; To Strongman: Rub its belly and arms or back and tail ; To Hugger: Rub its head"
         },
         {
           "n": "Hugger",
-          "b": "Only does close-range attacks; never leaves its enemy alone"
+          "b": "Only does close-range attacks; never leaves its enemy alone",
+          "sw": "To Knucklehead: Poke its head ; To Strongman: Rub its head ; To Heavyweight: Poke its belly and arms or back and tail"
         }
       ],
       "rank": "C"
@@ -6001,19 +6201,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Keeper",
-          "b": "Attack-happy personality that protects its allies"
+          "b": "Attack-happy personality that protects its allies",
+          "sw": "To Multi-Tasker: Rub its leaves or bulb ; To Spell Slinger: Poke its head ; To Green Thumb: Rub its head"
         },
         {
           "n": "Multi-Tasker",
-          "b": "Balanced between attacking and recovery"
+          "b": "Balanced between attacking and recovery",
+          "sw": "To Keeper: Poke its head or bulb ; To Spell Slinger: Poke its leaves ; To Green Thumb: Rub its leaves"
         },
         {
           "n": "Spell Slinger",
-          "b": "Uses magic frequently"
+          "b": "Uses magic frequently",
+          "sw": "To Keeper: Poke its head or leaves ; To Multi-Tasker: Rub its head or leaves ; To Green Thumb: Rub its bulb"
         },
         {
           "n": "Green Thumb",
-          "b": "Uses only plant-summoning attacks"
+          "b": "Uses only plant-summoning attacks",
+          "sw": "To Keeper: Poke its bulb ; To Multi-Tasker: Rub its bulb ; To Spell Slinger: Poke its head or leaves"
         }
       ],
       "rank": "E"
@@ -6041,19 +6245,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Bag of Tricks",
-          "b": "Uses a variety of attack patterns; Toxic Doomdelion saps enemy HP"
+          "b": "Uses a variety of attack patterns; Toxic Doomdelion saps enemy HP",
+          "sw": "To Shrinking Violet: Rub its bulb ; To Meddler: Poke its head or leaves ; To Natural: Rub its head or leaves"
         },
         {
           "n": "Shrinking Violet",
-          "b": "Cautious with direct attacks; keeps distant and employs status ailments"
+          "b": "Cautious with direct attacks; keeps distant and employs status ailments",
+          "sw": "To Bag of Tricks: Poke its leaves ; To Meddler: Poke its head or bulb ; To Natural: Rub its head or bulb"
         },
         {
           "n": "Meddler",
-          "b": "Acts as a nuisance by inflicting status ailments"
+          "b": "Acts as a nuisance by inflicting status ailments",
+          "sw": "To Bag of Tricks: Poke its ; To Shrinking Violet: Rub its head ; To Natural: Rub its leaves or bulb"
         },
         {
           "n": "Natural",
-          "b": "Doesn't use status ailments; only employs direct attacks"
+          "b": "Doesn't use status ailments; only employs direct attacks",
+          "sw": "To Bag of Tricks: Poke its head or leaves ; To Shrinking Violet: Rub its head or leaves ; To Meddler: Poke its bulb"
         }
       ],
       "rank": "D"
@@ -6081,19 +6289,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Powerhouse",
-          "b": "Balances its attacks between long and close range; actively engaging enemies"
+          "b": "Balances its attacks between long and close range; actively engaging enemies",
+          "sw": "To Trailblazer: Rub its head and horns ; To Leader: Poke its front legs and body or hind legs ; To Jumper: Rub its front legs and body or hind legs"
         },
         {
           "n": "Trailblazer",
-          "b": "Prefers Fire attacks at closer range"
+          "b": "Prefers Fire attacks at closer range",
+          "sw": "To Powerhouse: Poke its front legs and body ; To Leader: Poke its head and horns or hind legs ; To Jumper: Rub its head and horns or hind legs"
         },
         {
           "n": "Leader",
-          "b": "Uses magic to aid allies and fires Yoggy Sonic bursts from afar"
+          "b": "Uses magic to aid allies and fires Yoggy Sonic bursts from afar",
+          "sw": "To Powerhouse: Poke its hind legs ; To Trailblazer: Rub its hind legs ; To Jumper: Rub its head and horns or front legs and body"
         },
         {
           "n": "Jumper",
-          "b": "Often uses jump attacks, setting up Hindquarters Kick"
+          "b": "Often uses jump attacks, setting up Hindquarters Kick",
+          "sw": "To Powerhouse: Poke its head and horns or hind legs ; To Trailblazer: Rub its head and horns or hind legs ; To Leader: Poke its front legs and body"
         }
       ],
       "rank": "E"
@@ -6121,19 +6333,23 @@ window.DREAM_GUIDE = {
       "disps": [
         {
           "n": "Fighter",
-          "b": "Moves around and likes melee trunk attacks; capable of Berserk mode"
+          "b": "Moves around and likes melee trunk attacks; capable of Berserk mode",
+          "sw": "To Nozzle-nose: Rub its legs ; To Mastermind: Poke its head and nose and ears or body ; To Mountain: Rub its head and nose and ears or body"
         },
         {
           "n": "Nozzle-nose",
-          "b": "Uses Torrent water attack; moves around as it pleases and attacks whatever is in range"
+          "b": "Uses Torrent water attack; moves around as it pleases and attacks whatever is in range",
+          "sw": "To Fighter: Poke its head and nose and ears ; To Mastermind: Poke its body or legs ; To Mountain: Rub its body or legs"
         },
         {
           "n": "Mastermind",
-          "b": "Doesn't go into Berserk Mode; takes actions calmly"
+          "b": "Doesn't go into Berserk Mode; takes actions calmly",
+          "sw": "To Fighter: Poke its body ; To Nozzle-nose: Rub its body ; To Mountain: Rub its head and nose and ears or legs"
         },
         {
           "n": "Mountain",
-          "b": "Doesn't move much unless in Berserk Mode"
+          "b": "Doesn't move much unless in Berserk Mode",
+          "sw": "To Fighter: Poke its head and nose and ears or legs ; To Nozzle-nose: Rub its head and nose and ears or legs ; To Mastermind: Poke its body"
         }
       ],
       "rank": "E"
@@ -7990,768 +8206,876 @@ window.DREAM_GUIDE = {
   "boards": {
     "Aura Lion": [
       {
-        "g": "A-4",
-        "t": "Support Ability",
-        "n": "Leaf Bracer",
-        "c": "300 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-3",
-        "t": "Stat Ability",
-        "n": "Attack Boost",
-        "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-4",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Link x1",
-        "cond": ""
-      },
-      {
-        "g": "B-5",
-        "t": "Stat Ability",
-        "n": "Light Screen",
-        "c": "40 LP",
-        "cond": "Becomes available when in Lionheart disposition."
-      },
-      {
-        "g": "B-6",
-        "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "100 LP",
-        "cond": "Becomes available when in Lionheart disposition."
-      },
-      {
         "g": "C-2",
         "t": "Magic Command",
         "n": "Curaga",
         "c": "10 LP",
-        "cond": ""
+        "cond": "Changes to Faith after Secret: Red at D-7 is unlocked.",
+        "frm": "C-1"
       },
       {
         "g": "C-2",
         "t": "Magic Command",
         "n": "Faith",
         "c": "10 LP",
-        "cond": "Changes to Faith after Secret: Red at D-7 is unlocked."
+        "cond": "Changes to Faith after Secret: Red at D-7 is unlocked.",
+        "frm": "C-1"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
+      },
+      {
+        "g": "B-3",
+        "t": "Stat Ability",
+        "n": "Attack Boost",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "C-4",
         "t": "Attack Command",
         "n": "Limit Storm",
         "c": "200 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-5",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
-        "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-6",
-        "t": "Stat Ability",
-        "n": "Light Screen",
-        "c": "20 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-7",
-        "t": "Secret",
-        "n": "Secret: Red",
-        "c": "250 LP",
-        "cond": "Becomes available after unlocking Secret: Green at E-6"
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Light Screen",
         "c": "60 LP",
-        "cond": "Becomes available when in Clear Mind disposition."
+        "cond": "Becomes available when in Clear Mind disposition.",
+        "frm": "C-3"
+      },
+      {
+        "g": "B-4",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Link x1",
+        "cond": "",
+        "frm": "B-3"
+      },
+      {
+        "g": "C-5",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "Cure Boost",
         "c": "50 LP",
-        "cond": "Becomes available when in Clear Mind disposition."
+        "cond": "Becomes available when in Clear Mind disposition.",
+        "frm": "C-4"
+      },
+      {
+        "g": "A-4",
+        "t": "Support Ability",
+        "n": "Leaf Bracer",
+        "c": "300 LP",
+        "cond": "",
+        "frm": "B-4"
+      },
+      {
+        "g": "B-5",
+        "t": "Stat Ability",
+        "n": "Light Screen",
+        "c": "40 LP",
+        "cond": "Becomes available when in Lionheart disposition.",
+        "frm": "B-4"
+      },
+      {
+        "g": "C-6",
+        "t": "Stat Ability",
+        "n": "Light Screen",
+        "c": "20 LP",
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "D-5",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-5"
+      },
+      {
+        "g": "B-6",
+        "t": "Stat Ability",
+        "n": "HP Boost",
+        "c": "100 LP",
+        "cond": "Becomes available when in Lionheart disposition.",
+        "frm": "B-5"
+      },
+      {
+        "g": "C-7",
+        "t": "Secret",
+        "n": "Secret: Red",
+        "c": "250 LP",
+        "cond": "Becomes available after unlocking Secret: Green at E-6",
+        "frm": "C-6"
       },
       {
         "g": "D-6",
         "t": "Attack Command",
         "n": "Sacrifice",
         "c": "200 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-7",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Level 30",
-        "cond": "Becomes available after unlocking Secret: Green at E-6"
+        "cond": "",
+        "frm": "C-6"
       },
       {
         "g": "E-5",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x3",
-        "cond": ""
+        "cond": "",
+        "frm": "D-5"
+      },
+      {
+        "g": "D-7",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Level 30",
+        "cond": "Becomes available after unlocking Secret: Green at E-6",
+        "frm": "C-7"
       },
       {
         "g": "E-6",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "E-7",
-        "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "30 LP",
-        "cond": "Becomes available after unlocking Secret: Green at E-6"
+        "cond": "",
+        "frm": "D-6"
       },
       {
         "g": "F-5",
         "t": "Support Ability",
         "n": "Second Chance",
         "c": "300 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-5"
+      },
+      {
+        "g": "E-7",
+        "t": "Stat Ability",
+        "n": "HP Boost",
+        "c": "30 LP",
+        "cond": "Becomes available after unlocking Secret: Green at E-6",
+        "frm": "D-7"
       }
     ],
     "Beatalike": [
       {
-        "g": "A-1",
-        "t": "Support Ability",
-        "n": "Combo Plus",
-        "c": "200 LP",
-        "cond": "Becomes available after Secret: Green at D-1 has been unlocked."
-      },
-      {
-        "g": "A-2",
+        "g": "C-5",
         "t": "Quota",
         "n": "Checkpoint",
-        "c": "Link x3",
-        "cond": "Becomes available after Secret: Green at D-1 has been unlocked."
+        "c": "Link x1",
+        "cond": "",
+        "frm": "D-5"
       },
       {
-        "g": "A-3",
+        "g": "D-4",
         "t": "Stat Ability",
-        "n": "Bind Block",
-        "c": "100 LP",
-        "cond": "Becomes available after Secret: Green at D-1 has been unlocked."
+        "n": "Attack Haste",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "D-5"
       },
       {
-        "g": "A-4",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-1",
-        "t": "Attack Command",
-        "n": "Limit Storm",
-        "c": "200 LP",
-        "cond": "Becomes available when in Psychic disposition."
-      },
-      {
-        "g": "B-4",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Level 20",
-        "cond": ""
-      },
-      {
-        "g": "C-1",
+        "g": "D-6",
         "t": "Stat Ability",
         "n": "Attack Boost",
-        "c": "200 LP",
-        "cond": "Becomes available when in Psychic disposition."
+        "c": "10 LP",
+        "cond": "",
+        "frm": "D-5"
+      },
+      {
+        "g": "E-5",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Link x1",
+        "cond": "",
+        "frm": "D-5"
       },
       {
         "g": "C-4",
         "t": "Stat Ability",
         "n": "Water Boost",
         "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-5",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Link x1",
-        "cond": ""
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "C-6",
         "t": "Stat Ability",
         "n": "Thunder Boost",
         "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-1",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-2",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Level 30",
-        "cond": ""
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "D-3",
         "t": "Attack Command",
         "n": "Confusing Strike",
         "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-4",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
-        "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-6",
-        "t": "Stat Ability",
-        "n": "Attack Boost",
-        "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "E-1",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
-        "c": "50 LP",
-        "cond": "Becomes available when in Groovy disposition."
+        "cond": "",
+        "frm": "D-4"
       },
       {
         "g": "E-4",
         "t": "Stat Ability",
         "n": "Blizzard Boost",
         "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "E-5",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Link x1",
-        "cond": ""
+        "cond": "",
+        "frm": "D-4"
       },
       {
         "g": "E-6",
         "t": "Stat Ability",
         "n": "Fire Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-6"
       },
       {
-        "g": "F-1",
-        "t": "Support Ability",
-        "n": "Air Combo Plus",
-        "c": "200 LP",
-        "cond": "Becomes available when in Groovy disposition."
+        "g": "B-4",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Level 20",
+        "cond": "",
+        "frm": "C-4"
+      },
+      {
+        "g": "D-2",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Level 30",
+        "cond": "",
+        "frm": "D-3"
       },
       {
         "g": "F-4",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 20",
-        "cond": ""
+        "cond": "",
+        "frm": "E-4"
       },
       {
-        "g": "G-1",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
-        "c": "100 LP",
-        "cond": "Becomes available after Secret: Green at A-4 has been unlocked."
+        "g": "A-4",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "",
+        "frm": "B-4"
       },
       {
-        "g": "G-2",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Link x3",
-        "cond": "Becomes available after Secret: Green at A-4 has been unlocked."
-      },
-      {
-        "g": "G-3",
-        "t": "Attack Command",
-        "n": "Ars Arcanum",
-        "c": "400 LP",
-        "cond": ""
+        "g": "D-1",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "",
+        "frm": "D-2"
       },
       {
         "g": "G-4",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "100 LP",
-        "cond": ""
-      }
-    ],
-    "Catanuki": [
-      {
-        "g": "A-1",
-        "t": "Magic Command",
-        "n": "Blackout",
-        "c": "150 LP",
-        "cond": "Becomes available when in Teakettle disposition."
+        "cond": "",
+        "frm": "F-4"
       },
       {
-        "g": "A-4",
-        "t": "Magic Command",
-        "n": "Vanish",
-        "c": "300 LP",
-        "cond": "Becomes available after Secret: Green at E-2 has been unlocked."
+        "g": "A-3",
+        "t": "Stat Ability",
+        "n": "Bind Block",
+        "c": "100 LP",
+        "cond": "Becomes available after Secret: Green at D-1 has been unlocked.",
+        "frm": "A-4"
       },
       {
-        "g": "A-5",
-        "t": "Support Ability",
-        "n": "Treasure Magnet",
+        "g": "C-1",
+        "t": "Stat Ability",
+        "n": "Attack Boost",
+        "c": "200 LP",
+        "cond": "Becomes available when in Psychic disposition.",
+        "frm": "D-1"
+      },
+      {
+        "g": "E-1",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
         "c": "50 LP",
-        "cond": "Becomes available after Secret: Green at E-2 has been unlocked."
+        "cond": "Becomes available when in Groovy disposition.",
+        "frm": "D-1"
       },
       {
-        "g": "A-6",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at C-1 has been unlocked."
+        "g": "G-3",
+        "t": "Attack Command",
+        "n": "Ars Arcanum",
+        "c": "400 LP",
+        "cond": "",
+        "frm": "G-4"
       },
       {
-        "g": "A-7",
+        "g": "A-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x3",
-        "cond": "Becomes available after Secret: Green at C-1 has been unlocked."
+        "cond": "Becomes available after Secret: Green at D-1 has been unlocked.",
+        "frm": "A-3"
       },
       {
         "g": "B-1",
-        "t": "Stat Ability",
-        "n": "Cure Boost",
-        "c": "50 LP",
-        "cond": "Becomes available when in Teakettle disposition."
+        "t": "Attack Command",
+        "n": "Limit Storm",
+        "c": "200 LP",
+        "cond": "Becomes available when in Psychic disposition.",
+        "frm": "C-1"
       },
+      {
+        "g": "F-1",
+        "t": "Support Ability",
+        "n": "Air Combo Plus",
+        "c": "200 LP",
+        "cond": "Becomes available when in Groovy disposition.",
+        "frm": "E-1"
+      },
+      {
+        "g": "G-2",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Link x3",
+        "cond": "Becomes available after Secret: Green at A-4 has been unlocked.",
+        "frm": "G-3"
+      },
+      {
+        "g": "A-1",
+        "t": "Support Ability",
+        "n": "Combo Plus",
+        "c": "200 LP",
+        "cond": "Becomes available after Secret: Green at D-1 has been unlocked.",
+        "frm": "A-2"
+      },
+      {
+        "g": "G-1",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
+        "c": "100 LP",
+        "cond": "Becomes available after Secret: Green at A-4 has been unlocked.",
+        "frm": "F-1"
+      }
+    ],
+    "Catanuki": [
       {
         "g": "B-4",
         "t": "Stat Ability",
         "n": "Confusion Block",
         "c": "30 LP",
-        "cond": "Becomes available after Secret: Green at E-2 has been unlocked."
-      },
-      {
-        "g": "B-7",
-        "t": "Stat Ability",
-        "n": "Blindness Block",
-        "c": "30 LP",
-        "cond": "Becomes available after Secret: Green at C-1 has been unlocked."
-      },
-      {
-        "g": "C-1",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-2",
-        "t": "Stat Ability",
-        "n": "Poison Block",
-        "c": "30 LP",
-        "cond": ""
+        "cond": "Becomes available after Secret: Green at E-2 has been unlocked.",
+        "frm": "C-4"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Mini Block",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "C-5",
         "t": "Stat Ability",
         "n": "Slow Block",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
+      },
+      {
+        "g": "D-4",
+        "t": "Stat Ability",
+        "n": "Defender",
+        "c": "150 LP",
+        "cond": "Becomes available after Secret: Green at A-6 has been unlocked.",
+        "frm": "C-4"
+      },
+      {
+        "g": "A-4",
+        "t": "Magic Command",
+        "n": "Vanish",
+        "c": "300 LP",
+        "cond": "Becomes available after Secret: Green at E-2 has been unlocked.",
+        "frm": "B-4"
+      },
+      {
+        "g": "C-2",
+        "t": "Stat Ability",
+        "n": "Poison Block",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "C-6",
         "t": "Stat Ability",
         "n": "Bind Block",
         "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-7",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-1",
-        "t": "Stat Ability",
-        "n": "Sleep Block",
-        "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at C-7 has been unlocked."
-      },
-      {
-        "g": "D-4",
-        "t": "Stat Ability",
-        "n": "Defender",
-        "c": "150 LP",
-        "cond": "Becomes available after Secret: Green at A-6 has been unlocked."
-      },
-      {
-        "g": "D-7",
-        "t": "Magic Command",
-        "n": "Sparkra",
-        "c": "150 LP",
-        "cond": "Becomes available when in Raccoon disposition."
-      },
-      {
-        "g": "E-1",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Link x3",
-        "cond": "Becomes available after Secret: Green at C-7 has been unlocked."
-      },
-      {
-        "g": "E-2",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at C-7 has been unlocked."
-      },
-      {
-        "g": "E-3",
-        "t": "Stat Ability",
-        "n": "Stop Block",
-        "c": "30 LP",
-        "cond": "Becomes available after Secret: Green at A-6 has been unlocked."
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "E-4",
         "t": "Attack Command",
         "n": "Spark Raid",
         "c": "300 LP",
-        "cond": "Becomes available after Secret: Green at A-6 has been unlocked."
+        "cond": "Becomes available after Secret: Green at A-6 has been unlocked.",
+        "frm": "D-4"
+      },
+      {
+        "g": "A-5",
+        "t": "Support Ability",
+        "n": "Treasure Magnet",
+        "c": "50 LP",
+        "cond": "Becomes available after Secret: Green at E-2 has been unlocked.",
+        "frm": "A-4"
+      },
+      {
+        "g": "C-1",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "",
+        "frm": "C-2"
+      },
+      {
+        "g": "C-7",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "",
+        "frm": "C-6"
+      },
+      {
+        "g": "E-3",
+        "t": "Stat Ability",
+        "n": "Stop Block",
+        "c": "30 LP",
+        "cond": "Becomes available after Secret: Green at A-6 has been unlocked.",
+        "frm": "E-4"
+      },
+      {
+        "g": "A-6",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "Becomes available after Secret: Green at C-1 has been unlocked.",
+        "frm": "A-5"
+      },
+      {
+        "g": "B-1",
+        "t": "Stat Ability",
+        "n": "Cure Boost",
+        "c": "50 LP",
+        "cond": "Becomes available when in Teakettle disposition.",
+        "frm": "C-1"
+      },
+      {
+        "g": "D-1",
+        "t": "Stat Ability",
+        "n": "Sleep Block",
+        "c": "10 LP",
+        "cond": "Becomes available after Secret: Green at C-7 has been unlocked.",
+        "frm": "C-1"
+      },
+      {
+        "g": "B-7",
+        "t": "Stat Ability",
+        "n": "Blindness Block",
+        "c": "30 LP",
+        "cond": "Becomes available after Secret: Green at C-1 has been unlocked.",
+        "frm": "C-7"
+      },
+      {
+        "g": "D-7",
+        "t": "Magic Command",
+        "n": "Sparkra",
+        "c": "150 LP",
+        "cond": "Becomes available when in Raccoon disposition.",
+        "frm": "C-7"
+      },
+      {
+        "g": "E-2",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "Becomes available after Secret: Green at C-7 has been unlocked.",
+        "frm": "E-3"
+      },
+      {
+        "g": "A-7",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Link x3",
+        "cond": "Becomes available after Secret: Green at C-1 has been unlocked.",
+        "frm": "A-6"
+      },
+      {
+        "g": "A-1",
+        "t": "Magic Command",
+        "n": "Blackout",
+        "c": "150 LP",
+        "cond": "Becomes available when in Teakettle disposition.",
+        "frm": "B-1"
+      },
+      {
+        "g": "E-1",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Link x3",
+        "cond": "Becomes available after Secret: Green at C-7 has been unlocked.",
+        "frm": "D-1"
       },
       {
         "g": "E-7",
         "t": "Spirits Ability",
         "n": "Support Boost",
         "c": "200 LP",
-        "cond": "Becomes available when in Raccoon disposition."
+        "cond": "Becomes available when in Raccoon disposition.",
+        "frm": "D-7"
       }
     ],
     "Cera Terror": [
-      {
-        "g": "A-4",
-        "t": "Stat Ability",
-        "n": "Attack Boost",
-        "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "A-5",
-        "t": "Stat Ability",
-        "n": "Sleep Block",
-        "c": "30 LP",
-        "cond": "Becomes available when in Demolisher disposition."
-      },
-      {
-        "g": "A-6",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Level 30",
-        "cond": "Becomes available when in Demolisher disposition."
-      },
-      {
-        "g": "A-7",
-        "t": "Attack Command",
-        "n": "Sonic Blade",
-        "c": "250 LP",
-        "cond": "Becomes available when in Demolisher disposition."
-      },
-      {
-        "g": "B-3",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
-        "c": "50 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-4",
-        "t": "Attack Command",
-        "n": "Dark Break",
-        "c": "200 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-5",
-        "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "50 LP",
-        "cond": ""
-      },
       {
         "g": "C-2",
         "t": "Reprisal Command",
         "n": "Steep Climb",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
+      },
+      {
+        "g": "B-3",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
+        "c": "50 LP",
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "C-4",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x5",
-        "cond": ""
-      },
-      {
-        "g": "C-5",
-        "t": "Stat Ability",
-        "n": "Defender",
-        "c": "150 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-6",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Link x3",
-        "cond": ""
-      },
-      {
-        "g": "C-7",
-        "t": "Support Ability",
-        "n": "EXP Boost",
-        "c": "300 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
+      },
+      {
+        "g": "B-4",
+        "t": "Attack Command",
+        "n": "Dark Break",
+        "c": "200 LP",
+        "cond": "",
+        "frm": "B-3"
+      },
+      {
+        "g": "C-5",
+        "t": "Stat Ability",
+        "n": "Defender",
+        "c": "150 LP",
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "Mini Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
+      },
+      {
+        "g": "A-4",
+        "t": "Stat Ability",
+        "n": "Attack Boost",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "B-4"
+      },
+      {
+        "g": "B-5",
+        "t": "Stat Ability",
+        "n": "HP Boost",
+        "c": "50 LP",
+        "cond": "",
+        "frm": "B-4"
+      },
+      {
+        "g": "C-6",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Link x3",
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "D-5",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "E-4",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 25",
-        "cond": ""
+        "cond": "",
+        "frm": "D-4"
+      },
+      {
+        "g": "A-5",
+        "t": "Stat Ability",
+        "n": "Sleep Block",
+        "c": "30 LP",
+        "cond": "Becomes available when in Demolisher disposition.",
+        "frm": "A-4"
+      },
+      {
+        "g": "C-7",
+        "t": "Support Ability",
+        "n": "EXP Boost",
+        "c": "300 LP",
+        "cond": "",
+        "frm": "C-6"
       },
       {
         "g": "E-5",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "100 LP",
-        "cond": "Becomes available when in Drill Sarge disposition."
-      },
-      {
-        "g": "E-6",
-        "t": "Stat Ability",
-        "n": "Defense Boost",
-        "c": "100 LP",
-        "cond": "Becomes available when in Drill Sarge disposition."
+        "cond": "Becomes available when in Drill Sarge disposition.",
+        "frm": "D-5"
       },
       {
         "g": "F-4",
         "t": "Attack Command",
         "n": "Zantetsuken",
         "c": "400 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-4"
+      },
+      {
+        "g": "A-6",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Level 30",
+        "cond": "Becomes available when in Demolisher disposition.",
+        "frm": "A-5"
+      },
+      {
+        "g": "E-6",
+        "t": "Stat Ability",
+        "n": "Defense Boost",
+        "c": "100 LP",
+        "cond": "Becomes available when in Drill Sarge disposition.",
+        "frm": "E-5"
+      },
+      {
+        "g": "A-7",
+        "t": "Attack Command",
+        "n": "Sonic Blade",
+        "c": "250 LP",
+        "cond": "Becomes available when in Demolisher disposition.",
+        "frm": "A-6"
       }
     ],
     "Chef Kyroo": [
       {
-        "g": "A-3",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "A-4",
+        "g": "C-2",
         "t": "Magic Command",
-        "n": "Fira",
-        "c": "100 LP",
-        "cond": "Becomes available after unlocking Secret: Green at A-3."
-      },
-      {
-        "g": "A-6",
-        "t": "Attack Command",
-        "n": "Blitz",
-        "c": "150 LP",
-        "cond": ""
+        "n": "Cura",
+        "c": "10 LP",
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "B-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x3",
-        "cond": ""
-      },
-      {
-        "g": "B-3",
-        "t": "Support Ability",
-        "n": "Air Combo Plus",
-        "c": "200 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-4",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Level 20",
-        "cond": "Becomes available after unlocking Secret: Green at A-3."
-      },
-      {
-        "g": "B-5",
-        "t": "Magic Command",
-        "n": "Firaga",
-        "c": "150 LP",
-        "cond": "Becomes available after unlocking Secret: Green at A-3."
-      },
-      {
-        "g": "B-6",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Level 20",
-        "cond": ""
-      },
-      {
-        "g": "C-2",
-        "t": "Magic Command",
-        "n": "Cura",
-        "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-5",
-        "t": "Stat Ability",
-        "n": "Defense Boost",
-        "c": "100 LP",
-        "cond": "Becomes available when in Patissier disposition."
-      },
-      {
-        "g": "C-6",
-        "t": "Stat Ability",
-        "n": "Fire Screen",
-        "c": "20 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-7",
-        "t": "Stat Ability",
-        "n": "Fire Boost",
-        "c": "50 LP",
-        "cond": "Becomes available when in Commis disposition."
-      },
-      {
-        "g": "C-8",
-        "t": "Stat Ability",
-        "n": "Item Boost",
-        "c": "100 LP",
-        "cond": "Becomes available when in Commis disposition."
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "D-2",
         "t": "Stat Ability",
         "n": "Fire Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
+      },
+      {
+        "g": "B-3",
+        "t": "Support Ability",
+        "n": "Air Combo Plus",
+        "c": "200 LP",
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "D-3",
         "t": "Attack Command",
         "n": "Aerial Slam",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
+      },
+      {
+        "g": "A-3",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "",
+        "frm": "B-3"
+      },
+      {
+        "g": "B-4",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Level 20",
+        "cond": "Becomes available after unlocking Secret: Green at A-3. | Becomes available when in Patissier disposition.",
+        "frm": "B-3"
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "Item Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
+      },
+      {
+        "g": "A-4",
+        "t": "Magic Command",
+        "n": "Fira",
+        "c": "100 LP",
+        "cond": "Becomes available after unlocking Secret: Green at A-3. | Becomes available when in Patissier disposition.",
+        "frm": "A-3"
+      },
+      {
+        "g": "B-5",
+        "t": "Magic Command",
+        "n": "Firaga",
+        "c": "150 LP",
+        "cond": "Becomes available after unlocking Secret: Green at A-3. | Becomes available when in Patissier disposition.",
+        "frm": "B-4"
       },
       {
         "g": "D-5",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-4"
+      },
+      {
+        "g": "B-6",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Level 20",
+        "cond": "",
+        "frm": "B-5"
+      },
+      {
+        "g": "C-5",
+        "t": "Stat Ability",
+        "n": "Defense Boost",
+        "c": "100 LP",
+        "cond": "Becomes available when in Patissier disposition. | Becomes available when in Commis disposition.",
+        "frm": "B-5"
       },
       {
         "g": "D-6",
         "t": "Stat Ability",
         "n": "Item Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-5"
       },
       {
         "g": "E-5",
         "t": "Stat Ability",
         "n": "Fire Screen",
         "c": "40 LP",
-        "cond": "Becomes available when in Patissier disposition."
+        "cond": "Becomes available when in Patissier disposition. | Becomes available when in Commis disposition.",
+        "frm": "D-5"
+      },
+      {
+        "g": "A-6",
+        "t": "Attack Command",
+        "n": "Blitz",
+        "c": "150 LP",
+        "cond": "",
+        "frm": "B-6"
+      },
+      {
+        "g": "C-6",
+        "t": "Stat Ability",
+        "n": "Fire Screen",
+        "c": "20 LP",
+        "cond": "",
+        "frm": "B-6"
       },
       {
         "g": "E-6",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-6"
+      },
+      {
+        "g": "C-7",
+        "t": "Stat Ability",
+        "n": "Fire Boost",
+        "c": "50 LP",
+        "cond": "Becomes available when in Commis disposition.",
+        "frm": "C-6"
+      },
+      {
+        "g": "C-8",
+        "t": "Stat Ability",
+        "n": "Item Boost",
+        "c": "100 LP",
+        "cond": "Becomes available when in Commis disposition.",
+        "frm": "C-7"
       }
     ],
     "Cyber Yog": [
@@ -8774,119 +9098,136 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Thunder Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "B-4",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x1",
-        "cond": ""
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "B-5",
         "t": "Support Ability",
         "n": "Treasure Magnet",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-4"
       },
       {
         "g": "C-2",
         "t": "Attack Command",
         "n": "Thunder Dash",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "D-1",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 10",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
       },
       {
         "g": "D-2",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Thunder Screen",
         "c": "40 LP",
-        "cond": "Becomes available when in Donner disposition."
+        "cond": "Becomes available when in Donner disposition.",
+        "s": 1
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "Thunder Boost",
         "c": "100 LP",
-        "cond": "Becomes available when in Donner disposition."
+        "cond": "Becomes available when in Donner disposition.",
+        "s": 1
       },
       {
         "g": "E-1",
         "t": "Magic Command",
         "n": "Thundara",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-1"
       },
       {
         "g": "E-2",
         "t": "Stat Ability",
         "n": "Confusion Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
       },
       {
         "g": "F-1",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-2"
       },
       {
         "g": "F-2",
         "t": "Stat Ability",
         "n": "Thunder Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-2"
       },
       {
         "g": "F-3",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "50 LP",
-        "cond": "Becomes available when in Comet disposition."
+        "cond": "Becomes available when in Comet disposition.",
+        "frm": "F-2"
       },
       {
         "g": "F-4",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "30 LP",
-        "cond": "Becomes available when in Comet disposition."
+        "cond": "Becomes available when in Comet disposition.",
+        "frm": "F-3"
       },
       {
         "g": "G-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 25",
-        "cond": ""
+        "cond": "",
+        "frm": "F-2"
       },
       {
         "g": "H-2",
         "t": "Magic Command",
         "n": "Thundaga",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "G-2"
       }
     ],
     "Drak Quack": [
@@ -8909,14 +9250,16 @@ window.DREAM_GUIDE = {
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Troubling Figment x2",
-        "cond": ""
+        "cond": "",
+        "frm": "A-3"
       },
       {
         "g": "A-5",
         "t": "Stat Ability",
         "n": "Reload Boost",
         "c": "75 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-4"
       },
       {
         "g": "A-6",
@@ -8937,182 +9280,208 @@ window.DREAM_GUIDE = {
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Wondrous Fancy x2",
-        "cond": ""
+        "cond": "",
+        "frm": "A-7"
       },
       {
         "g": "B-1",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Ice Dream Cone x1",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "B-8",
         "t": "Stat Ability",
         "n": "Fire Boost",
         "c": "15 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-8"
       },
       {
         "g": "C-1",
         "t": "Item Command",
         "n": "Mega-Potion",
         "c": "25 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-1"
       },
       {
         "g": "C-8",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Paint Gun: Yellow x10",
-        "cond": ""
+        "cond": "",
+        "frm": "B-8"
       },
       {
         "g": "D-1",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Vibrant Figment x2",
-        "cond": ""
+        "cond": "",
+        "frm": "E-1"
       },
       {
         "g": "D-6",
         "t": "Support Ability",
         "n": "Once More",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-6"
       },
       {
         "g": "D-8",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-8"
       },
       {
         "g": "E-1",
         "t": "Support Ability",
         "n": "Treasure Magnet",
         "c": "25 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-1"
       },
       {
         "g": "E-6",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Savage Fantasy x1",
-        "cond": ""
+        "cond": "",
+        "frm": "E-7"
       },
       {
         "g": "E-7",
         "t": "Stat Ability",
         "n": "Item Boost",
         "c": "25 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-6"
       },
       {
         "g": "E-8",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Dulcet Fantasy x1",
-        "cond": ""
+        "cond": "",
+        "frm": "D-8"
       },
       {
         "g": "F-1",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Shield Cookie x1",
-        "cond": ""
+        "cond": "",
+        "frm": "G-1"
       },
       {
         "g": "F-4",
         "t": "Item Command",
         "n": "Megalixir",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-5"
       },
       {
         "g": "F-5",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Wild Fantasy x1",
-        "cond": ""
+        "cond": "",
+        "frm": "G-5"
       },
       {
         "g": "F-7",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Paint Gun: Blue x10",
-        "cond": ""
+        "cond": "",
+        "frm": "F-8"
       },
       {
         "g": "F-8",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-8"
       },
       {
         "g": "G-1",
         "t": "Stat Ability",
         "n": "Item Boost",
         "c": "15 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-1"
       },
       {
         "g": "G-5",
         "t": "Stat Ability",
         "n": "Item Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-5"
       },
       {
         "g": "G-6",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Block-it Chocolate 2 x1",
-        "cond": ""
+        "cond": "",
+        "frm": "H-6"
       },
       {
         "g": "H-1",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Wondrous Fantasy x2",
-        "cond": ""
+        "cond": "",
+        "frm": "H-2"
       },
       {
         "g": "H-2",
         "t": "Stat Ability",
         "n": "Defender",
         "c": "75 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "H-1"
       },
       {
         "g": "H-3",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Water Barrel x1",
-        "cond": ""
+        "cond": "",
+        "frm": "H-4"
       },
       {
         "g": "H-4",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "25 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "H-3"
       },
       {
         "g": "H-5",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Noble Fantasy x1",
-        "cond": ""
+        "cond": "",
+        "s": 1
       },
       {
         "g": "H-6",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "G-6"
       }
     ],
     "Drill Sye": [
@@ -9135,7 +9504,8 @@ window.DREAM_GUIDE = {
         "t": "Support Ability",
         "n": "EXP Boost",
         "c": "300 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "C-1",
@@ -9163,91 +9533,104 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Poison Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "D-2",
         "t": "Stat Ability",
         "n": "Mini Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-2"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Stop Block",
         "c": "30 LP",
-        "cond": "Becomes available after unlocking Secret: Green at C-3."
+        "cond": "Becomes available after unlocking Secret: Green at C-3.",
+        "frm": "C-3"
       },
       {
         "g": "E-1",
         "t": "Attack Command",
         "n": "Blitz",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-1"
       },
       {
         "g": "E-2",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-1"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "50 LP",
-        "cond": "Becomes available after unlocking Secret: Green at C-3."
+        "cond": "Becomes available after unlocking Secret: Green at C-3.",
+        "frm": "D-3"
       },
       {
         "g": "E-4",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "30 LP",
-        "cond": "Becomes available when in Destroyer disposition."
+        "cond": "Becomes available when in Destroyer disposition.",
+        "frm": "E-3"
       },
       {
         "g": "F-1",
         "t": "Stat Ability",
         "n": "Slow Block",
         "c": "30 LP",
-        "cond": "Becomes available when in Drill Sarge disposition."
+        "cond": "Becomes available when in Drill Sarge disposition.",
+        "frm": "E-1"
       },
       {
         "g": "F-2",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-2"
       },
       {
         "g": "F-3",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 30",
-        "cond": "Becomes available after unlocking Secret: Green at C-3."
+        "cond": "Becomes available after unlocking Secret: Green at C-3.",
+        "frm": "E-3"
       },
       {
         "g": "F-4",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "50 LP",
-        "cond": "Becomes available when in Destroyer disposition."
+        "cond": "Becomes available when in Destroyer disposition.",
+        "frm": "E-4"
       },
       {
         "g": "G-1",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "200 LP",
-        "cond": "Becomes available when in Drill Sarge disposition."
+        "cond": "Becomes available when in Drill Sarge disposition.",
+        "frm": "F-1"
       },
       {
         "g": "G-3",
         "t": "Attack Command",
         "n": "Sonic Blade",
         "c": "250 LP",
-        "cond": "Becomes available after unlocking Secret: Green at C-3."
+        "cond": "Becomes available after unlocking Secret: Green at C-3.",
+        "frm": "F-3"
       }
     ],
     "Ducky Goose": [
@@ -9270,21 +9653,24 @@ window.DREAM_GUIDE = {
         "t": "Item Command",
         "n": "Drop-Me-Never",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "B-4",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Water Barrel x1",
-        "cond": ""
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "B-5",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "15 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-4"
       },
       {
         "g": "B-6",
@@ -9298,14 +9684,16 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "15 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-6"
       },
       {
         "g": "B-8",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Confetti Candy x1",
-        "cond": ""
+        "cond": "",
+        "frm": "B-7"
       },
       {
         "g": "C-1",
@@ -9319,21 +9707,24 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-8"
       },
       {
         "g": "D-1",
         "t": "Item Command",
         "n": "Mega-Potion",
         "c": "25 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "D-8",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Ice Dream Cone 2 x1",
-        "cond": ""
+        "cond": "",
+        "frm": "C-8"
       },
       {
         "g": "E-1",
@@ -9347,126 +9738,144 @@ window.DREAM_GUIDE = {
         "t": "Item Command",
         "n": "Elixir",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-5"
       },
       {
         "g": "E-5",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Treasure Goggles x2",
-        "cond": ""
+        "cond": "",
+        "frm": "F-5"
       },
       {
         "g": "E-6",
         "t": "Support Ability",
         "n": "Damage Syphon",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-5"
       },
       {
         "g": "E-8",
         "t": "Stat Ability",
         "n": "Blizzard Screen",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-8"
       },
       {
         "g": "F-1",
         "t": "Support Ability",
         "n": "Treasure Magnet",
         "c": "25 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-1"
       },
       {
         "g": "F-5",
         "t": "Stat Ability",
         "n": "Item Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-5"
       },
       {
         "g": "F-6",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Royal Cake x2",
-        "cond": ""
+        "cond": "",
+        "frm": "F-5"
       },
       {
         "g": "F-7",
         "t": "Stat Ability",
         "n": "Item Boost",
         "c": "25 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-6"
       },
       {
         "g": "F-8",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Confetti Candy 3 x1",
-        "cond": ""
+        "cond": "",
+        "frm": "E-8"
       },
       {
         "g": "G-1",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Paint Gun: Green x10",
-        "cond": ""
+        "cond": "",
+        "frm": "F-1"
       },
       {
         "g": "G-5",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Paint Gun: Black x10",
-        "cond": ""
+        "cond": "",
+        "frm": "G-6"
       },
       {
         "g": "G-6",
         "t": "Spirits Ability",
         "n": "Support Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-6"
       },
       {
         "g": "H-1",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "G-1"
       },
       {
         "g": "H-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Paint Gun: Purple x10",
-        "cond": ""
+        "cond": "",
+        "frm": "H-1"
       },
       {
         "g": "H-3",
         "t": "Stat Ability",
         "n": "Item Boost",
         "c": "15 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "H-2"
       },
       {
         "g": "H-4",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Paint Gun: Yellow x10",
-        "cond": ""
+        "cond": "",
+        "frm": "H-3"
       },
       {
         "g": "H-5",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "25 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "G-5"
       },
       {
         "g": "H-6",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Paint Gun: White x10",
-        "cond": ""
+        "cond": "",
+        "frm": "H-5"
       }
     ],
     "Eaglider": [
@@ -9489,112 +9898,128 @@ window.DREAM_GUIDE = {
         "t": "Magic Command",
         "n": "Firaga",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "s": 1
       },
       {
         "g": "C-1",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-1"
       },
       {
         "g": "C-2",
         "t": "Stat Ability",
         "n": "Slow Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "D-1",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "D-2",
         "t": "Attack Command",
         "n": "Aerial Slam",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Fire Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
       },
       {
         "g": "E-1",
         "t": "Stat Ability",
         "n": "Fire Screen",
         "c": "40 LP",
-        "cond": "Becomes available when in Ace disposition."
+        "cond": "Becomes available when in Ace disposition.",
+        "frm": "D-1"
       },
       {
         "g": "E-2",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "Bind Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
       },
       {
         "g": "E-4",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 30",
-        "cond": ""
+        "cond": "",
+        "frm": "E-3"
       },
       {
         "g": "E-5",
         "t": "Magic Command",
         "n": "Firaga Burst",
         "c": "300 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-4"
       },
       {
         "g": "F-1",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "150 LP",
-        "cond": "Becomes available when in Ace disposition."
+        "cond": "Becomes available when in Ace disposition.",
+        "frm": "E-1"
       },
       {
         "g": "F-2",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "50 LP",
-        "cond": "Becomes available when in Vulcan disposition."
+        "cond": "Becomes available when in Vulcan disposition.",
+        "s": 1
       },
       {
         "g": "F-3",
         "t": "Stat Ability",
         "n": "Fire Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-3"
       },
       {
         "g": "G-2",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "100 LP",
-        "cond": "Becomes available when in Vulcan disposition."
+        "cond": "Becomes available when in Vulcan disposition.",
+        "s": 1
       },
       {
         "g": "G-3",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-3"
       }
     ],
     "Electricorn": [
@@ -9617,70 +10042,80 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "E-2",
         "t": "Stat Ability",
         "n": "Confusion Block",
         "c": "30 LP",
-        "cond": "Becomes available after Secret: Green at E-3 has been unlocked."
+        "cond": "Becomes available after Secret: Green at E-3 has been unlocked.",
+        "frm": "E-3"
       },
       {
         "g": "E-3",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
       },
       {
         "g": "E-4",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "30 LP",
-        "cond": "Becomes available after Secret: Green at E-3 has been unlocked."
+        "cond": "Becomes available after Secret: Green at E-3 has been unlocked.",
+        "frm": "E-3"
       },
       {
         "g": "F-1",
         "t": "Magic Command",
         "n": "Triple Plasma",
         "c": "200 LP",
-        "cond": "Becomes available after Secret: Green at E-3 has been unlocked."
+        "cond": "Becomes available after Secret: Green at E-3 has been unlocked.",
+        "frm": "F-2"
       },
       {
         "g": "F-2",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "50 LP",
-        "cond": "Becomes available after Secret: Green at E-3 has been unlocked."
+        "cond": "Becomes available after Secret: Green at E-3 has been unlocked.",
+        "frm": "E-2"
       },
       {
         "g": "F-3",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x2",
-        "cond": ""
+        "cond": "",
+        "frm": "E-3"
       },
       {
         "g": "F-4",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "100 LP",
-        "cond": "Becomes available after Secret: Green at E-3 has been unlocked."
+        "cond": "Becomes available after Secret: Green at E-3 has been unlocked.",
+        "frm": "E-4"
       },
       {
         "g": "F-5",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "100 LP",
-        "cond": "Becomes available after Secret: Green at E-3 has been unlocked."
+        "cond": "Becomes available after Secret: Green at E-3 has been unlocked.",
+        "frm": "F-4"
       },
       {
         "g": "G-1",
         "t": "Spirits Ability",
         "n": "Support Boost",
         "c": "200 LP",
-        "cond": "Becomes available after Secret: Green at E-3 has been unlocked."
+        "cond": "Becomes available after Secret: Green at E-3 has been unlocked.",
+        "frm": "F-1"
       },
       {
         "g": "G-3",
@@ -9694,35 +10129,40 @@ window.DREAM_GUIDE = {
         "t": "Magic Command",
         "n": "Curaga",
         "c": "150 LP",
-        "cond": "Becomes available after Secret: Green at E-3 has been unlocked."
+        "cond": "Becomes available after Secret: Green at E-3 has been unlocked.",
+        "frm": "F-5"
       },
       {
         "g": "H-1",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "100 LP",
-        "cond": "Becomes available while in Shock Therapist disposition."
+        "cond": "Becomes available while in Shock Therapist disposition.",
+        "frm": "G-1"
       },
       {
         "g": "H-2",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "150 LP",
-        "cond": "Becomes available while in Shock Therapist disposition."
+        "cond": "Becomes available while in Shock Therapist disposition.",
+        "frm": "H-1"
       },
       {
         "g": "H-4",
         "t": "Stat Ability",
         "n": "Cure Boost",
         "c": "50 LP",
-        "cond": "Becomes available when in Capacitor disposition."
+        "cond": "Becomes available when in Capacitor disposition.",
+        "s": 1
       },
       {
         "g": "H-5",
         "t": "Support Ability",
         "n": "Leaf Bracer",
         "c": "300 LP",
-        "cond": "Becomes available when in Capacitor disposition."
+        "cond": "Becomes available when in Capacitor disposition.",
+        "s": 1
       }
     ],
     "Escarglow": [
@@ -9731,14 +10171,16 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Fire Screen",
         "c": "40 LP",
-        "cond": "Becomes available when in Blindsider disposition."
+        "cond": "Becomes available when in Blindsider disposition.",
+        "frm": "B-2"
       },
       {
         "g": "B-2",
         "t": "Stat Ability",
         "n": "Blizzard Screen",
         "c": "40 LP",
-        "cond": "Becomes available when in Blindsider disposition."
+        "cond": "Becomes available when in Blindsider disposition.",
+        "frm": "B-3"
       },
       {
         "g": "B-3",
@@ -9766,21 +10208,24 @@ window.DREAM_GUIDE = {
         "t": "Support Ability",
         "n": "Second Chance",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-5"
       },
       {
         "g": "C-2",
         "t": "Stat Ability",
         "n": "Thunder Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Water Screen",
         "c": "40 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "C-4",
@@ -9794,56 +10239,64 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Water Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-2"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "Fire Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "E-2",
         "t": "Stat Ability",
         "n": "Blizzard Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-3"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "Item Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-4"
       },
       {
         "g": "E-4",
         "t": "Stat Ability",
         "n": "Light Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-4"
       },
       {
         "g": "F-3",
         "t": "Stat Ability",
         "n": "Item Boost",
         "c": "50 LP",
-        "cond": "Becomes available when in Snail Support disposition."
+        "cond": "Becomes available when in Snail Support disposition.",
+        "s": 1
       },
       {
         "g": "F-4",
         "t": "Stat Ability",
         "n": "Dark Screen",
         "c": "20 LP",
-        "cond": "Becomes available when in Snail Support disposition."
+        "cond": "Becomes available when in Snail Support disposition.",
+        "s": 1
       }
     ],
     "Fin Fatale": [
@@ -9866,119 +10319,136 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Water Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-3"
       },
       {
         "g": "A-5",
         "t": "Attack Command",
         "n": "Gravity Strike",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-4"
       },
       {
         "g": "A-6",
         "t": "Stat Ability",
         "n": "Water Boost",
         "c": "100 LP",
-        "cond": "Becomes available when in Grunt disposition."
+        "cond": "Becomes available when in Grunt disposition.",
+        "frm": "A-5"
       },
       {
         "g": "A-7",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "100 LP",
-        "cond": "Becomes available when in Grunt disposition."
+        "cond": "Becomes available when in Grunt disposition.",
+        "frm": "A-6"
       },
       {
         "g": "B-3",
         "t": "Stat Ability",
         "n": "Water Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-3"
       },
       {
         "g": "B-4",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "B-5",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-4"
       },
       {
         "g": "B-6",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 20",
-        "cond": "Becomes available after unlocking Secret: Green at B-5."
+        "cond": "Becomes available after unlocking Secret: Green at B-5.",
+        "frm": "B-5"
       },
       {
         "g": "B-7",
         "t": "Magic Command",
         "n": "Zero Gravira",
         "c": "100 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-5."
+        "cond": "Becomes available after unlocking Secret: Green at B-5.",
+        "frm": "B-6"
       },
       {
         "g": "B-8",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 25",
-        "cond": "Becomes available after unlocking Secret: Green at B-5."
+        "cond": "Becomes available after unlocking Secret: Green at B-5.",
+        "frm": "B-7"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Sleep Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "C-4",
         "t": "Stat Ability",
         "n": "Water Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "C-5",
         "t": "Stat Ability",
         "n": "Slow Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "C-6",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "C-8",
         "t": "Magic Command",
         "n": "Zero Graviga",
         "c": "150 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-5."
+        "cond": "Becomes available after unlocking Secret: Green at B-5.",
+        "frm": "B-8"
       },
       {
         "g": "D-2",
         "t": "Spirits Ability",
         "n": "Support Boost",
         "c": "200 LP",
-        "cond": "Becomes available when in Diver disposition."
+        "cond": "Becomes available when in Diver disposition.",
+        "frm": "D-3"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "30 LP",
-        "cond": "Becomes available when in Diver disposition."
+        "cond": "Becomes available when in Diver disposition.",
+        "frm": "C-3"
       }
     ],
     "Fishboné": [
@@ -9994,14 +10464,16 @@ window.DREAM_GUIDE = {
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x2",
-        "cond": ""
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "A-4",
         "t": "Support Ability",
         "n": "Leaf Bracer",
         "c": "300 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-3"
       },
       {
         "g": "B-1",
@@ -10015,63 +10487,72 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "B-3",
         "t": "Stat Ability",
         "n": "Water Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "B-5",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "50 LP",
-        "cond": "Becomes available when in Hitman disposition."
+        "cond": "Becomes available when in Hitman disposition.",
+        "frm": "C-5"
       },
       {
         "g": "B-6",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "100 LP",
-        "cond": "Becomes available when in Hitman disposition."
+        "cond": "Becomes available when in Hitman disposition.",
+        "frm": "B-5"
       },
       {
         "g": "C-1",
         "t": "Stat Ability",
         "n": "Poison Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-1"
       },
       {
         "g": "C-2",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "C-4",
         "t": "Stat Ability",
         "n": "Dark Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "C-5",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "D-1",
@@ -10085,35 +10566,40 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Dark Screen",
         "c": "40 LP",
-        "cond": "Becomes available when in Anchor disposition."
+        "cond": "Becomes available when in Anchor disposition.",
+        "s": 1
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Water Boost",
         "c": "50 LP",
-        "cond": "Becomes available when in Anchor disposition."
+        "cond": "Becomes available when in Anchor disposition.",
+        "s": 1
       },
       {
         "g": "D-5",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 25",
-        "cond": ""
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "D-6",
         "t": "Magic Command",
         "n": "Zero Graviga",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-5"
       },
       {
         "g": "E-1",
         "t": "Attack Command",
         "n": "Dark Break",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-1"
       }
     ],
     "Flowbermeow": [
@@ -10122,49 +10608,56 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "100 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-2."
+        "cond": "Becomes available after unlocking Secret: Green at B-2.",
+        "frm": "B-2"
       },
       {
         "g": "A-3",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "150 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-2."
+        "cond": "Becomes available after unlocking Secret: Green at B-2.",
+        "frm": "B-3"
       },
       {
         "g": "B-1",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "150 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-2."
+        "cond": "Becomes available after unlocking Secret: Green at B-2.",
+        "frm": "B-2"
       },
       {
         "g": "B-2",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-1"
       },
       {
         "g": "B-3",
         "t": "Stat Ability",
         "n": "Light Screen",
         "c": "40 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "B-4",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x3",
-        "cond": "Becomes available after unlocking Secret: Green at B-2."
+        "cond": "Becomes available after unlocking Secret: Green at B-2.",
+        "frm": "C-4"
       },
       {
         "g": "B-5",
         "t": "Magic Command",
         "n": "Sparkga",
         "c": "150 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-2."
+        "cond": "Becomes available after unlocking Secret: Green at B-2.",
+        "frm": "B-4"
       },
       {
         "g": "B-6",
@@ -10178,35 +10671,40 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "50 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-2."
+        "cond": "Becomes available after unlocking Secret: Green at B-2.",
+        "frm": "B-1"
       },
       {
         "g": "C-2",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "C-4",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "C-5",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-6"
       },
       {
         "g": "C-6",
@@ -10220,35 +10718,40 @@ window.DREAM_GUIDE = {
         "t": "Support Ability",
         "n": "Once More",
         "c": "300 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-2."
+        "cond": "Becomes available after unlocking Secret: Green at B-2.",
+        "frm": "C-2"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Light Screen",
         "c": "60 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-2."
+        "cond": "Becomes available after unlocking Secret: Green at B-2.",
+        "frm": "C-3"
       },
       {
         "g": "D-6",
         "t": "Stat Ability",
         "n": "Reload Boost",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-6"
       },
       {
         "g": "E-6",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 25",
-        "cond": ""
+        "cond": "",
+        "frm": "D-6"
       },
       {
         "g": "F-6",
         "t": "Magic Command",
         "n": "Faith",
         "c": "300 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-6"
       }
     ],
     "Frootz Cat": [
@@ -10257,42 +10760,48 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "200 LP",
-        "cond": "Becomes available when in Pretty Kitty disposition."
+        "cond": "Becomes available when in Pretty Kitty disposition.",
+        "s": 1
       },
       {
         "g": "A-4",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-4"
       },
       {
         "g": "A-5",
         "t": "Spirits Ability",
         "n": "Support Boost",
         "c": "200 LP",
-        "cond": "Becomes available when in Sweetheart disposition."
+        "cond": "Becomes available when in Sweetheart disposition.",
+        "frm": "B-5"
       },
       {
         "g": "B-2",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "200 LP",
-        "cond": "Becomes available when in Pretty Kitty disposition."
+        "cond": "Becomes available when in Pretty Kitty disposition.",
+        "s": 1
       },
       {
         "g": "B-3",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "B-4",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-4"
       },
       {
         "g": "B-5",
@@ -10306,21 +10815,24 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Reload Boost",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "C-2",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Thunder Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "C-4",
@@ -10341,49 +10853,56 @@ window.DREAM_GUIDE = {
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 10",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-4"
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "E-2",
         "t": "Magic Command",
         "n": "Triple Plasma",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
       },
       {
         "g": "E-4",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-4"
       },
       {
         "g": "F-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 20",
-        "cond": ""
+        "cond": "",
+        "frm": "E-2"
       },
       {
         "g": "G-2",
         "t": "Attack Command",
         "n": "Salvation",
         "c": "250 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-2"
       }
     ],
     "Ghostabocky": [
@@ -10406,112 +10925,128 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Dark Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "C-4",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "C-5",
         "t": "Stat Ability",
         "n": "Dark Screen",
         "c": "100 LP",
-        "cond": "Becomes available when in Phantom disposition."
+        "cond": "Becomes available when in Phantom disposition.",
+        "s": 1
       },
       {
         "g": "D-1",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "D-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x1",
-        "cond": ""
+        "cond": "",
+        "frm": "D-1"
       },
       {
         "g": "D-3",
         "t": "Support Ability",
         "n": "Treasure Magnet",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "Blindness Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "D-5",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "100 LP",
-        "cond": "Becomes available when in Phantom disposition."
+        "cond": "Becomes available when in Phantom disposition.",
+        "s": 1
       },
       {
         "g": "E-1",
         "t": "Stat Ability",
         "n": "Dark Screen",
         "c": "40 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-1"
       },
       {
         "g": "E-2",
         "t": "Stat Ability",
         "n": "Slow Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-1"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "Dark Screen",
         "c": "60 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-2"
       },
       {
         "g": "E-4",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 20",
-        "cond": ""
+        "cond": "",
+        "frm": "E-3"
       },
       {
         "g": "E-5",
         "t": "Attack Command",
         "n": "Dark Aura",
         "c": "400 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-4"
       },
       {
         "g": "F-1",
         "t": "Stat Ability",
         "n": "Dark Screen",
         "c": "80 LP",
-        "cond": "Becomes available when in Split Personality disposition."
+        "cond": "Becomes available when in Split Personality disposition.",
+        "frm": "E-1"
       },
       {
         "g": "F-2",
         "t": "Magic Command",
         "n": "Vanish",
         "c": "300 LP",
-        "cond": "Becomes available when in Split Personality disposition."
+        "cond": "Becomes available when in Split Personality disposition.",
+        "frm": "F-1"
       }
     ],
     "Halbird": [
@@ -10520,49 +11055,56 @@ window.DREAM_GUIDE = {
         "t": "Magic Command",
         "n": "Tornado",
         "c": "400 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "B-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 25",
-        "cond": ""
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "B-3",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "C-2",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "150 LP",
-        "cond": "Becomes available when in Harrier disposition."
+        "cond": "Becomes available when in Harrier disposition.",
+        "s": 1
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "C-4",
         "t": "Stat Ability",
         "n": "Stop Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-4"
       },
       {
         "g": "D-1",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "150 LP",
-        "cond": "Becomes available when in Harrier disposition."
+        "cond": "Becomes available when in Harrier disposition.",
+        "s": 1
       },
       {
         "g": "D-3",
@@ -10590,42 +11132,48 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-5"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "50 LP",
-        "cond": "Available after unlocking Secret: Green at E-5."
+        "cond": "Available after unlocking Secret: Green at E-5.",
+        "frm": "E-4"
       },
       {
         "g": "E-4",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "100 LP",
-        "cond": "Available after unlocking Secret: Green at E-5."
+        "cond": "Available after unlocking Secret: Green at E-5.",
+        "frm": "E-5"
       },
       {
         "g": "E-5",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-5"
       },
       {
         "g": "E-6",
         "t": "Attack Command",
         "n": "Timestorm",
         "c": "100 LP",
-        "cond": "Becomes available when in Sky Master disposition."
+        "cond": "Becomes available when in Sky Master disposition.",
+        "frm": "D-6"
       },
       {
         "g": "E-7",
         "t": "Support Ability",
         "n": "Air Combo Plus",
         "c": "200 LP",
-        "cond": "Becomes available when in Sky Master disposition."
+        "cond": "Becomes available when in Sky Master disposition.",
+        "frm": "E-6"
       },
       {
         "g": "F-2",
@@ -10639,14 +11187,16 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "100 LP",
-        "cond": "Available after unlocking Secret: Green at E-5."
+        "cond": "Available after unlocking Secret: Green at E-5.",
+        "frm": "E-3"
       },
       {
         "g": "G-2",
         "t": "Attack Command",
         "n": "Break Time",
         "c": "200 LP",
-        "cond": "Available after unlocking Secret: Green at E-5."
+        "cond": "Available after unlocking Secret: Green at E-5.",
+        "frm": "F-2"
       }
     ],
     "Hebby Repp": [
@@ -10655,14 +11205,16 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Fire Screen",
         "c": "60 LP",
-        "cond": "Becomes available when in Wheeler disposition."
+        "cond": "Becomes available when in Wheeler disposition.",
+        "frm": "B-4"
       },
       {
         "g": "A-5",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "100 LP",
-        "cond": "Becomes available when in Wheeler disposition."
+        "cond": "Becomes available when in Wheeler disposition.",
+        "frm": "A-4"
       },
       {
         "g": "B-1",
@@ -10676,21 +11228,24 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Fire Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "B-4",
         "t": "Stat Ability",
         "n": "Fire Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-4"
       },
       {
         "g": "B-5",
         "t": "Stat Ability",
         "n": "Fire Screen",
         "c": "40 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-4"
       },
       {
         "g": "C-1",
@@ -10704,70 +11259,80 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
       },
       {
         "g": "C-5",
         "t": "Stat Ability",
         "n": "Fire Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-5"
       },
       {
         "g": "D-1",
         "t": "Stat Ability",
         "n": "Fire Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "D-2",
         "t": "Stat Ability",
         "n": "Slow Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-1"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
       },
       {
         "g": "D-4",
         "t": "Magic Command",
         "n": "Fira",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-5"
       },
       {
         "g": "D-5",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x3",
-        "cond": ""
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "D-6",
         "t": "Attack Command",
         "n": "Fire Windmill",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-5"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "50 LP",
-        "cond": "Becomes available when in Salamander disposition."
+        "cond": "Becomes available when in Salamander disposition.",
+        "s": 1
       },
       {
         "g": "F-3",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "50 LP",
-        "cond": "Becomes available when in Salamander disposition."
+        "cond": "Becomes available when in Salamander disposition.",
+        "s": 1
       }
     ],
     "Iceguin Ace": [
@@ -10783,7 +11348,8 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "50 LP",
-        "cond": "Becomes available when in Wingman disposition."
+        "cond": "Becomes available when in Wingman disposition.",
+        "s": 1
       },
       {
         "g": "C-1",
@@ -10797,98 +11363,112 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Blindness Block",
         "c": "30 LP",
-        "cond": "Becomes available when in Wingman disposition."
+        "cond": "Becomes available when in Wingman disposition.",
+        "s": 1
       },
       {
         "g": "D-1",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-1"
       },
       {
         "g": "D-2",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-1"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Stop Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "Blizzard Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
       },
       {
         "g": "D-5",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-4"
       },
       {
         "g": "E-1",
         "t": "Stat Ability",
         "n": "Blizzard Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-1"
       },
       {
         "g": "E-2",
         "t": "Stat Ability",
         "n": "Blizzard Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-1"
       },
       {
         "g": "E-3",
         "t": "Magic Command",
         "n": "Blizzaga",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-2"
       },
       {
         "g": "E-4",
         "t": "Stat Ability",
         "n": "Cure Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-3"
       },
       {
         "g": "E-5",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 30",
-        "cond": ""
+        "cond": "",
+        "frm": "E-4"
       },
       {
         "g": "F-2",
         "t": "Stat Ability",
         "n": "Blizzard Screen",
         "c": "40 LP",
-        "cond": "Becomes available when in Slider disposition."
+        "cond": "Becomes available when in Slider disposition.",
+        "frm": "E-2"
       },
       {
         "g": "F-5",
         "t": "Magic Command",
         "n": "Ice Barrage",
         "c": "300 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-5"
       },
       {
         "g": "G-2",
         "t": "Stat Ability",
         "n": "Blizzard Boost",
         "c": "100 LP",
-        "cond": "Becomes available when in Slider disposition."
+        "cond": "Becomes available when in Slider disposition.",
+        "frm": "F-2"
       }
     ],
     "Jestabocky": [
@@ -10911,35 +11491,40 @@ window.DREAM_GUIDE = {
         "t": "Magic Command",
         "n": "Spark",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-3"
       },
       {
         "g": "A-5",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 10",
-        "cond": ""
+        "cond": "",
+        "frm": "A-4"
       },
       {
         "g": "A-6",
         "t": "Magic Command",
         "n": "Bind",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-5"
       },
       {
         "g": "A-7",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 15",
-        "cond": ""
+        "cond": "",
+        "frm": "A-6"
       },
       {
         "g": "A-8",
         "t": "Magic Command",
         "n": "Balloonra",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-7"
       },
       {
         "g": "B-2",
@@ -10953,91 +11538,104 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Thunder Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-3"
       },
       {
         "g": "B-6",
         "t": "Stat Ability",
         "n": "Thunder Screen",
         "c": "40 LP",
-        "cond": "Becomes available when in Chicken disposition."
+        "cond": "Becomes available when in Chicken disposition.",
+        "frm": "C-6"
       },
       {
         "g": "B-7",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "50 LP",
-        "cond": "Becomes available when in Chicken disposition."
+        "cond": "Becomes available when in Chicken disposition.",
+        "frm": "B-6"
       },
       {
         "g": "C-2",
         "t": "Support Ability",
         "n": "Treasure Magnet",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "C-4",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "C-5",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "C-6",
         "t": "Stat Ability",
         "n": "Blindness Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "D-2",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "D-5",
         "t": "Stat Ability",
         "n": "Thunder Screen",
         "c": "60 LP",
-        "cond": "Becomes available when in Flake disposition."
+        "cond": "Becomes available when in Flake disposition.",
+        "s": 1
       },
       {
         "g": "D-6",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "50 LP",
-        "cond": "Becomes available when in Flake disposition."
+        "cond": "Becomes available when in Flake disposition.",
+        "s": 1
       },
       {
         "g": "E-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 20",
-        "cond": "Becomes available after unlocking Secret: Green at D-2."
+        "cond": "Becomes available after unlocking Secret: Green at D-2.",
+        "frm": "D-2"
       },
       {
         "g": "F-2",
         "t": "Attack Command",
         "n": "Collision Magnet",
         "c": "150 LP",
-        "cond": "Becomes available after unlocking Secret: Green at D-2."
+        "cond": "Becomes available after unlocking Secret: Green at D-2.",
+        "frm": "E-2"
       }
     ],
     "Juggle Pup": [
@@ -11046,359 +11644,410 @@ window.DREAM_GUIDE = {
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "A-3",
-        "t": "Magic Command",
-        "n": "Balloonra",
-        "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at A-2 has been unlocked."
-      },
-      {
-        "g": "A-4",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at A-2 has been unlocked."
+        "cond": "",
+        "frm": "A-1"
       },
       {
         "g": "B-1",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-1"
+      },
+      {
+        "g": "A-3",
+        "t": "Magic Command",
+        "n": "Balloonra",
+        "c": "10 LP",
+        "cond": "Becomes available after Secret: Green at A-2 has been unlocked.",
+        "frm": "A-2"
       },
       {
         "g": "B-2",
         "t": "Stat Ability",
         "n": "Blizzard Boost",
         "c": "30 LP",
-        "cond": "Becomes available after Secret: Green at A-2 has been unlocked."
-      },
-      {
-        "g": "B-3",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at A-2 has been unlocked."
-      },
-      {
-        "g": "B-4",
-        "t": "Magic Command",
-        "n": "Blizzaga",
-        "c": "150 LP",
-        "cond": "Becomes available after Secret: Green at C-2 has been unlocked."
-      },
-      {
-        "g": "B-5",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at C-2 has been unlocked."
+        "cond": "Becomes available after Secret: Green at A-2 has been unlocked.",
+        "frm": "A-2"
       },
       {
         "g": "C-1",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "100 LP",
-        "cond": "Becomes available after Secret: Green at A-2 has been unlocked."
+        "cond": "Becomes available after Secret: Green at A-2 has been unlocked.",
+        "frm": "B-1"
+      },
+      {
+        "g": "A-4",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "Becomes available after Secret: Green at A-2 has been unlocked.",
+        "frm": "A-3"
+      },
+      {
+        "g": "B-3",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "Becomes available after Secret: Green at A-2 has been unlocked.",
+        "frm": "A-3"
       },
       {
         "g": "C-2",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at A-2 has been unlocked."
-      },
-      {
-        "g": "C-3",
-        "t": "Stat Ability",
-        "n": "Blizzard Screen",
-        "c": "20 LP",
-        "cond": "Becomes available after Secret: Green at C-2 has been unlocked."
-      },
-      {
-        "g": "C-4",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at C-2 has been unlocked."
-      },
-      {
-        "g": "C-5",
-        "t": "Attack Command",
-        "n": "Slot Edge",
-        "c": "200 LP",
-        "cond": "Becomes available after Secret: Green at C-4 has been unlocked."
-      },
-      {
-        "g": "C-6",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at C-4 has been unlocked."
+        "cond": "Becomes available after Secret: Green at A-2 has been unlocked.",
+        "frm": "B-2"
       },
       {
         "g": "D-1",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at A-2 has been unlocked."
+        "cond": "Becomes available after Secret: Green at A-2 has been unlocked.",
+        "frm": "C-1"
+      },
+      {
+        "g": "B-4",
+        "t": "Magic Command",
+        "n": "Blizzaga",
+        "c": "150 LP",
+        "cond": "Becomes available after Secret: Green at C-2 has been unlocked.",
+        "frm": "A-4"
+      },
+      {
+        "g": "C-3",
+        "t": "Stat Ability",
+        "n": "Blizzard Screen",
+        "c": "20 LP",
+        "cond": "Becomes available after Secret: Green at C-2 has been unlocked.",
+        "frm": "B-3"
       },
       {
         "g": "D-2",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "30 LP",
-        "cond": "Becomes available after Secret: Green at C-2 has been unlocked."
+        "cond": "Becomes available after Secret: Green at C-2 has been unlocked.",
+        "frm": "C-2"
+      },
+      {
+        "g": "B-5",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "Becomes available after Secret: Green at C-2 has been unlocked.",
+        "frm": "B-4"
+      },
+      {
+        "g": "C-4",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "Becomes available after Secret: Green at C-2 has been unlocked.",
+        "frm": "B-4"
       },
       {
         "g": "D-3",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at C-2 has been unlocked."
-      },
-      {
-        "g": "D-4",
-        "t": "Stat Ability",
-        "n": "Blizzard Screen",
-        "c": "40 LP",
-        "cond": "Becomes available after Secret: Green at C-4 has been unlocked."
-      },
-      {
-        "g": "D-5",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at C-4 has been unlocked."
-      },
-      {
-        "g": "D-6",
-        "t": "Stat Ability",
-        "n": "Magic Haste",
-        "c": "30 LP",
-        "cond": "Becomes available after Secret: Green at E-4 has been unlocked."
-      },
-      {
-        "g": "D-7",
-        "t": "Stat Ability",
-        "n": "Magic Boost",
-        "c": "100 LP",
-        "cond": "Becomes available after Secret: Green at E-2 has been unlocked."
+        "cond": "Becomes available after Secret: Green at C-2 has been unlocked.",
+        "frm": "C-3"
       },
       {
         "g": "E-2",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at C-2 has been unlocked."
+        "cond": "Becomes available after Secret: Green at C-2 has been unlocked.",
+        "frm": "D-2"
+      },
+      {
+        "g": "C-5",
+        "t": "Attack Command",
+        "n": "Slot Edge",
+        "c": "200 LP",
+        "cond": "Becomes available after Secret: Green at C-4 has been unlocked.",
+        "frm": "B-5"
+      },
+      {
+        "g": "D-4",
+        "t": "Stat Ability",
+        "n": "Blizzard Screen",
+        "c": "40 LP",
+        "cond": "Becomes available after Secret: Green at C-4 has been unlocked.",
+        "frm": "C-4"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "Item Boost",
         "c": "30 LP",
-        "cond": "Becomes available after Secret: Green at C-4 has been unlocked."
+        "cond": "Becomes available after Secret: Green at C-4 has been unlocked.",
+        "frm": "D-3"
+      },
+      {
+        "g": "C-6",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "Becomes available after Secret: Green at C-4 has been unlocked.",
+        "frm": "C-5"
+      },
+      {
+        "g": "D-5",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "Becomes available after Secret: Green at C-4 has been unlocked.",
+        "frm": "C-5"
       },
       {
         "g": "E-4",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at C-4 has been unlocked."
-      },
-      {
-        "g": "E-5",
-        "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "30 LP",
-        "cond": "Becomes available after Secret: Green at E-4 has been unlocked."
-      },
-      {
-        "g": "E-6",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Level 20",
-        "cond": "Becomes available after Secret: Green at B-5 has been unlocked."
+        "cond": "Becomes available after Secret: Green at C-4 has been unlocked.",
+        "frm": "D-4"
       },
       {
         "g": "F-3",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at C-4 has been unlocked."
+        "cond": "Becomes available after Secret: Green at C-4 has been unlocked.",
+        "frm": "E-3"
+      },
+      {
+        "g": "D-6",
+        "t": "Stat Ability",
+        "n": "Magic Haste",
+        "c": "30 LP",
+        "cond": "Becomes available after Secret: Green at E-4 has been unlocked.",
+        "frm": "C-6"
+      },
+      {
+        "g": "E-5",
+        "t": "Stat Ability",
+        "n": "HP Boost",
+        "c": "30 LP",
+        "cond": "Becomes available after Secret: Green at E-4 has been unlocked.",
+        "frm": "D-5"
       },
       {
         "g": "F-4",
         "t": "Stat Ability",
         "n": "Item Boost",
         "c": "50 LP",
-        "cond": "Becomes available after Secret: Green at E-4 has been unlocked."
-      },
-      {
-        "g": "F-5",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at F-3 has been unlocked."
-      },
-      {
-        "g": "F-6",
-        "t": "Magic Command",
-        "n": "Balloonga",
-        "c": "150 LP",
-        "cond": "Becomes available after Secret: Green at B-5 has been unlocked."
+        "cond": "Becomes available after Secret: Green at E-4 has been unlocked.",
+        "frm": "E-4"
       },
       {
         "g": "G-3",
         "t": "Stat Ability",
         "n": "Blizzard Screen",
         "c": "60 LP",
-        "cond": "Becomes available after Secret: Green at E-4 has been unlocked."
+        "cond": "Becomes available after Secret: Green at E-4 has been unlocked.",
+        "frm": "F-3"
+      },
+      {
+        "g": "D-7",
+        "t": "Stat Ability",
+        "n": "Magic Boost",
+        "c": "100 LP",
+        "cond": "Becomes available after Secret: Green at E-2 has been unlocked.",
+        "frm": "D-6"
+      },
+      {
+        "g": "E-6",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Level 20",
+        "cond": "Becomes available after Secret: Green at B-5 has been unlocked.",
+        "frm": "D-6"
+      },
+      {
+        "g": "F-5",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "Becomes available after Secret: Green at F-3 has been unlocked.",
+        "frm": "E-5"
+      },
+      {
+        "g": "F-6",
+        "t": "Magic Command",
+        "n": "Balloonga",
+        "c": "150 LP",
+        "cond": "Becomes available after Secret: Green at B-5 has been unlocked.",
+        "frm": "E-6"
       },
       {
         "g": "G-5",
         "t": "Support Ability",
         "n": "Leaf Bracer",
         "c": "300 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-5"
       }
     ],
     "KO Kabuto": [
       {
-        "g": "A-2",
-        "t": "Stat Ability",
-        "n": "Reload Boost",
-        "c": "150 LP",
-        "cond": ""
-      },
-      {
-        "g": "A-3",
-        "t": "Secret",
-        "n": "Secret: Green",
+        "g": "C-2",
+        "t": "Defense Ability",
+        "n": "Link Block",
         "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "A-4",
-        "t": "Stat Ability",
-        "n": "Defense Boost",
-        "c": "200 LP",
-        "cond": "Becomes available when in Grenadier disposition."
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "B-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x3",
-        "cond": ""
-      },
-      {
-        "g": "B-3",
-        "t": "Stat Ability",
-        "n": "Thunder Screen",
-        "c": "20 LP",
-        "cond": "Becomes available after Secret: Green at A-3 is unlocked."
-      },
-      {
-        "g": "B-4",
-        "t": "Stat Ability",
-        "n": "Thunder Screen",
-        "c": "40 LP",
-        "cond": "Becomes available after Secret: Green at A-3 is unlocked."
-      },
-      {
-        "g": "B-5",
-        "t": "Stat Ability",
-        "n": "Thunder Screen",
-        "c": "60 LP",
-        "cond": "Becomes available after Secret: Green at A-3 is unlocked."
-      },
-      {
-        "g": "B-6",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Level 20",
-        "cond": "Becomes available after Secret: Green at A-3 is unlocked."
-      },
-      {
-        "g": "B-7",
-        "t": "Attack Command",
-        "n": "Icebreaker",
-        "c": "100 LP",
-        "cond": "Becomes available after Secret: Green at A-3 is unlocked."
-      },
-      {
-        "g": "C-2",
-        "t": "Defense Ability",
-        "n": "Link Block",
-        "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Fire Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
+      },
+      {
+        "g": "A-2",
+        "t": "Stat Ability",
+        "n": "Reload Boost",
+        "c": "150 LP",
+        "cond": "",
+        "frm": "B-2"
+      },
+      {
+        "g": "B-3",
+        "t": "Stat Ability",
+        "n": "Thunder Screen",
+        "c": "20 LP",
+        "cond": "Becomes available after Secret: Green at A-3 is unlocked.",
+        "frm": "B-2"
       },
       {
         "g": "C-4",
         "t": "Stat Ability",
         "n": "Fire Screen",
         "c": "40 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-5",
-        "t": "Stat Ability",
-        "n": "Defense Boost",
-        "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-6",
-        "t": "Attack Command",
-        "n": "Circle Raid",
-        "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "D-3",
         "t": "Magic Command",
         "n": "Fira",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
+      },
+      {
+        "g": "A-3",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "",
+        "frm": "A-2"
+      },
+      {
+        "g": "B-4",
+        "t": "Stat Ability",
+        "n": "Thunder Screen",
+        "c": "40 LP",
+        "cond": "Becomes available after Secret: Green at A-3 is unlocked.",
+        "frm": "B-3"
+      },
+      {
+        "g": "C-5",
+        "t": "Stat Ability",
+        "n": "Defense Boost",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "Blizzard Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
+      },
+      {
+        "g": "A-4",
+        "t": "Stat Ability",
+        "n": "Defense Boost",
+        "c": "200 LP",
+        "cond": "Becomes available when in Grenadier disposition.",
+        "frm": "A-3"
+      },
+      {
+        "g": "B-5",
+        "t": "Stat Ability",
+        "n": "Thunder Screen",
+        "c": "60 LP",
+        "cond": "Becomes available after Secret: Green at A-3 is unlocked.",
+        "frm": "B-4"
+      },
+      {
+        "g": "C-6",
+        "t": "Attack Command",
+        "n": "Circle Raid",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "D-5",
         "t": "Stat Ability",
         "n": "Blizzard Screen",
         "c": "40 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-6",
-        "t": "Stat Ability",
-        "n": "Blizzard Screen",
-        "c": "60 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "E-4",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "200 LP",
-        "cond": "Becomes available when in Bodyguard disposition."
+        "cond": "Becomes available when in Bodyguard disposition.",
+        "frm": "D-4"
+      },
+      {
+        "g": "B-6",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Level 20",
+        "cond": "Becomes available after Secret: Green at A-3 is unlocked.",
+        "frm": "B-5"
+      },
+      {
+        "g": "D-6",
+        "t": "Stat Ability",
+        "n": "Blizzard Screen",
+        "c": "60 LP",
+        "cond": "",
+        "frm": "C-6"
+      },
+      {
+        "g": "B-7",
+        "t": "Attack Command",
+        "n": "Icebreaker",
+        "c": "100 LP",
+        "cond": "Becomes available after Secret: Green at A-3 is unlocked.",
+        "frm": "B-6"
       }
     ],
     "Kab Kannon": [
@@ -11407,14 +12056,16 @@ window.DREAM_GUIDE = {
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 20",
-        "cond": "Becomes available after unlocking Secret: Green at D-4."
+        "cond": "Becomes available after unlocking Secret: Green at D-4.",
+        "frm": "A-2"
       },
       {
         "g": "A-2",
         "t": "Magic Command",
         "n": "Zero Graviga",
         "c": "150 LP",
-        "cond": "Becomes available after unlocking Secret: Green at D-4."
+        "cond": "Becomes available after unlocking Secret: Green at D-4.",
+        "frm": "A-1"
       },
       {
         "g": "A-3",
@@ -11428,7 +12079,8 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Reload Boost",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-3"
       },
       {
         "g": "A-5",
@@ -11442,56 +12094,64 @@ window.DREAM_GUIDE = {
         "t": "Attack Command",
         "n": "Salvation",
         "c": "250 LP",
-        "cond": "Becomes available after unlocking Secret: Green at D-4."
+        "cond": "Becomes available after unlocking Secret: Green at D-4.",
+        "frm": "A-1"
       },
       {
         "g": "B-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 10",
-        "cond": "Becomes available after unlocking Secret: Green at D-4."
+        "cond": "Becomes available after unlocking Secret: Green at D-4.",
+        "frm": "C-2"
       },
       {
         "g": "B-3",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "300 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-3"
       },
       {
         "g": "B-4",
         "t": "Stat Ability",
         "n": "Water Screen",
         "c": "40 LP",
-        "cond": "Becomes available when in Ack-Ack disposition."
+        "cond": "Becomes available when in Ack-Ack disposition.",
+        "s": 1
       },
       {
         "g": "B-5",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "C-1",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x1",
-        "cond": ""
+        "cond": "",
+        "frm": "D-1"
       },
       {
         "g": "C-2",
         "t": "Stat Ability",
         "n": "Water Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "C-4",
         "t": "Stat Ability",
         "n": "Blizzard Screen",
         "c": "40 LP",
-        "cond": "Becomes available when in Ack-Ack disposition."
+        "cond": "Becomes available when in Ack-Ack disposition.",
+        "s": 1
       },
       {
         "g": "C-5",
@@ -11505,28 +12165,32 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Defender",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "D-2",
         "t": "Stat Ability",
         "n": "Fire Screen",
         "c": "40 LP",
-        "cond": "Becomes available when in Bodyguard disposition."
+        "cond": "Becomes available when in Bodyguard disposition.",
+        "frm": "C-2"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Thunder Screen",
         "c": "40 LP",
-        "cond": "Becomes available when in Bodyguard disposition."
+        "cond": "Becomes available when in Bodyguard disposition.",
+        "frm": "D-2"
       },
       {
         "g": "D-4",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
       },
       {
         "g": "D-5",
@@ -11540,28 +12204,32 @@ window.DREAM_GUIDE = {
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x1",
-        "cond": ""
+        "cond": "",
+        "frm": "D-1"
       },
       {
         "g": "E-2",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-3"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "Blizzard Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-4"
       },
       {
         "g": "E-4",
         "t": "Magic Command",
         "n": "Dark Firaga",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "s": 1
       }
     ],
     "Keeba Tiger": [
@@ -11570,147 +12238,168 @@ window.DREAM_GUIDE = {
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x5",
-        "cond": ""
-      },
-      {
-        "g": "A-4",
-        "t": "Support Ability",
-        "n": "EXP Boost",
-        "c": "300 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-1",
-        "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-2"
       },
       {
         "g": "B-2",
         "t": "Attack Command",
         "n": "Sacrifice",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-2"
+      },
+      {
+        "g": "A-4",
+        "t": "Support Ability",
+        "n": "EXP Boost",
+        "c": "300 LP",
+        "cond": "",
+        "frm": "A-3"
       },
       {
         "g": "B-3",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-3"
       },
       {
-        "g": "C-1",
+        "g": "B-1",
         "t": "Stat Ability",
-        "n": "Attack Haste",
+        "n": "HP Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "C-2",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-3"
       },
       {
-        "g": "C-4",
-        "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "100 LP",
-        "cond": "Becomes available when in Usurper disposition."
-      },
-      {
-        "g": "C-5",
-        "t": "Stat Ability",
-        "n": "Attack Boost",
-        "c": "300 LP",
-        "cond": "Becomes available when in Usurper disposition."
-      },
-      {
-        "g": "D-1",
+        "g": "C-1",
         "t": "Stat Ability",
         "n": "Attack Haste",
-        "c": "100 LP",
-        "cond": ""
+        "c": "30 LP",
+        "cond": "",
+        "frm": "B-1"
       },
       {
         "g": "D-2",
         "t": "Stat Ability",
         "n": "Sleep Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
+      },
+      {
+        "g": "C-4",
+        "t": "Stat Ability",
+        "n": "HP Boost",
+        "c": "100 LP",
+        "cond": "Becomes available when in Usurper disposition.",
+        "frm": "C-3"
       },
       {
         "g": "D-3",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
+      },
+      {
+        "g": "D-1",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "E-2",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
+      },
+      {
+        "g": "C-5",
+        "t": "Stat Ability",
+        "n": "Attack Boost",
+        "c": "300 LP",
+        "cond": "Becomes available when in Usurper disposition.",
+        "frm": "C-4"
       },
       {
         "g": "E-3",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 30",
-        "cond": "Becomes available after unlocking Secret: Green at D-3."
-      },
-      {
-        "g": "E-4",
-        "t": "Attack Command",
-        "n": "Dark Aura",
-        "c": "400 LP",
-        "cond": "Becomes available after unlocking Secret: Green at D-3."
-      },
-      {
-        "g": "F-1",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Level 30",
-        "cond": "Becomes available when in Conqueror disposition."
+        "cond": "Becomes available after unlocking Secret: Green at D-3.",
+        "frm": "D-3"
       },
       {
         "g": "F-2",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-2"
+      },
+      {
+        "g": "E-4",
+        "t": "Attack Command",
+        "n": "Dark Aura",
+        "c": "400 LP",
+        "cond": "Becomes available after unlocking Secret: Green at D-3.",
+        "frm": "E-3"
       },
       {
         "g": "F-3",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x3",
-        "cond": ""
+        "cond": "",
+        "frm": "E-3"
       },
       {
-        "g": "G-1",
-        "t": "Magic Command",
-        "n": "Meteor",
-        "c": "400 LP",
-        "cond": "Becomes available when in Conqueror disposition."
+        "g": "F-1",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Level 30",
+        "cond": "Becomes available when in Conqueror disposition.",
+        "frm": "F-2"
       },
       {
         "g": "G-3",
         "t": "Attack Command",
         "n": "Dark Splicer",
         "c": "300 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-3"
+      },
+      {
+        "g": "G-1",
+        "t": "Magic Command",
+        "n": "Meteor",
+        "c": "400 LP",
+        "cond": "Becomes available when in Conqueror disposition.",
+        "frm": "F-1"
       }
     ],
     "Komory Bat": [
@@ -11719,545 +12408,622 @@ window.DREAM_GUIDE = {
         "t": "Spirits Ability",
         "n": "Waking Dream",
         "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-1",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Link x2",
-        "cond": ""
-      },
-      {
-        "g": "C-2",
-        "t": "Magic Command",
-        "n": "Zero Gravity",
-        "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-3"
       },
       {
         "g": "C-3",
         "t": "Magic Command",
         "n": "Confuse",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-3"
+      },
+      {
+        "g": "C-2",
+        "t": "Magic Command",
+        "n": "Zero Gravity",
+        "c": "50 LP",
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "C-4",
         "t": "Stat Ability",
         "n": "Dark Screen",
         "c": "20 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-5",
-        "t": "Stat Ability",
-        "n": "Magic Haste",
-        "c": "50 LP",
-        "cond": "Becomes available when in Rescuer disposition."
-      },
-      {
-        "g": "D-1",
-        "t": "Magic Command",
-        "n": "Zero Gravira",
-        "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-2",
-        "t": "Stat Ability",
-        "n": "Confusion Block",
-        "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "D-3",
         "t": "Attack Command",
         "n": "Drain Dive",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
+      },
+      {
+        "g": "C-1",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Link x2",
+        "cond": "",
+        "frm": "C-2"
+      },
+      {
+        "g": "D-2",
+        "t": "Stat Ability",
+        "n": "Confusion Block",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "C-2"
+      },
+      {
+        "g": "C-5",
+        "t": "Stat Ability",
+        "n": "Magic Haste",
+        "c": "50 LP",
+        "cond": "Becomes available when in Rescuer disposition.",
+        "frm": "C-4"
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-5",
-        "t": "Stat Ability",
-        "n": "Magic Haste",
-        "c": "100 LP",
-        "cond": "Becomes available when in Rescuer disposition."
-      },
-      {
-        "g": "E-2",
-        "t": "Stat Ability",
-        "n": "Attack Boost",
-        "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
+      },
+      {
+        "g": "D-1",
+        "t": "Magic Command",
+        "n": "Zero Gravira",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "C-1"
+      },
+      {
+        "g": "E-2",
+        "t": "Stat Ability",
+        "n": "Attack Boost",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "D-2"
+      },
+      {
+        "g": "D-5",
+        "t": "Stat Ability",
+        "n": "Magic Haste",
+        "c": "100 LP",
+        "cond": "Becomes available when in Rescuer disposition.",
+        "frm": "C-5"
       },
       {
         "g": "E-4",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "30 LP",
-        "cond": "Becomes available when in Aggro disposition."
+        "cond": "Becomes available when in Aggro disposition.",
+        "frm": "D-4"
       },
       {
         "g": "F-3",
         "t": "Stat Ability",
         "n": "Dark Screen",
         "c": "40 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-3"
       },
       {
         "g": "F-4",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "50 LP",
-        "cond": "Becomes available when in Aggro disposition."
+        "cond": "Becomes available when in Aggro disposition.",
+        "frm": "E-4"
       },
       {
         "g": "G-3",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x2",
-        "cond": ""
+        "cond": "",
+        "frm": "F-3"
       },
       {
         "g": "H-3",
         "t": "Attack Command",
         "n": "Confusing Strike",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "G-3"
       }
     ],
     "Kooma Panda": [
+      {
+        "g": "B-2",
+        "t": "Attack Command",
+        "n": "Circle Raid",
+        "c": "10 LP",
+        "cond": "",
+        "frm": "B-1"
+      },
       {
         "g": "A-2",
         "t": "Stat Ability",
         "n": "Bind Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
+      },
+      {
+        "g": "B-3",
+        "t": "Stat Ability",
+        "n": "Attack Boost",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "B-2"
+      },
+      {
+        "g": "C-2",
+        "t": "Stat Ability",
+        "n": "HP Boost",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "A-3",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x3",
-        "cond": ""
-      },
-      {
-        "g": "A-4",
-        "t": "Attack Command",
-        "n": "Aerial Slam",
-        "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "A-5",
-        "t": "Stat Ability",
-        "n": "Confusion Block",
-        "c": "30 LP",
-        "cond": "Becomes available when in Wrestler disposition."
-      },
-      {
-        "g": "A-6",
-        "t": "Stat Ability",
-        "n": "Defense Boost",
-        "c": "100 LP",
-        "cond": "Becomes available when in Bruiser disposition."
-      },
-      {
-        "g": "B-2",
-        "t": "Attack Command",
-        "n": "Circle Raid",
-        "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-3",
-        "t": "Stat Ability",
-        "n": "Attack Boost",
-        "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-2"
       },
       {
         "g": "B-4",
         "t": "Stat Ability",
         "n": "Blindness Block",
         "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-5",
-        "t": "Stat Ability",
-        "n": "Item Boost",
-        "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-6",
-        "t": "Stat Ability",
-        "n": "Mini Block",
-        "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-7",
-        "t": "Stat Ability",
-        "n": "Attack Boost",
-        "c": "200 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-2",
-        "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-5",
-        "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "50 LP",
-        "cond": "Becomes available when in Wrestler disposition."
-      },
-      {
-        "g": "C-6",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
-        "c": "30 LP",
-        "cond": "Becomes available when in Bruiser disposition."
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "D-2",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
+      },
+      {
+        "g": "A-4",
+        "t": "Attack Command",
+        "n": "Aerial Slam",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "A-3"
+      },
+      {
+        "g": "B-5",
+        "t": "Stat Ability",
+        "n": "Item Boost",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "B-4"
       },
       {
         "g": "E-2",
         "t": "Magic Command",
         "n": "Bind",
         "c": "50 LP",
-        "cond": "Becomes available after unlocking Secret: Green at D-2."
+        "cond": "Becomes available after unlocking Secret: Green at D-2.",
+        "frm": "D-2"
+      },
+      {
+        "g": "A-5",
+        "t": "Stat Ability",
+        "n": "Confusion Block",
+        "c": "30 LP",
+        "cond": "Becomes available when in Wrestler disposition.",
+        "frm": "A-4"
+      },
+      {
+        "g": "B-6",
+        "t": "Stat Ability",
+        "n": "Mini Block",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "B-5"
+      },
+      {
+        "g": "C-5",
+        "t": "Stat Ability",
+        "n": "HP Boost",
+        "c": "50 LP",
+        "cond": "Becomes available when in Wrestler disposition.",
+        "frm": "B-5"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "Item Boost",
         "c": "50 LP",
-        "cond": "Becomes available after unlocking Secret: Green at D-2."
+        "cond": "Becomes available after unlocking Secret: Green at D-2.",
+        "frm": "E-2"
+      },
+      {
+        "g": "A-6",
+        "t": "Stat Ability",
+        "n": "Defense Boost",
+        "c": "100 LP",
+        "cond": "Becomes available when in Bruiser disposition.",
+        "frm": "A-5"
+      },
+      {
+        "g": "B-7",
+        "t": "Stat Ability",
+        "n": "Attack Boost",
+        "c": "200 LP",
+        "cond": "",
+        "frm": "B-6"
+      },
+      {
+        "g": "C-6",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
+        "c": "30 LP",
+        "cond": "Becomes available when in Bruiser disposition.",
+        "frm": "B-6"
       },
       {
         "g": "E-4",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 20",
-        "cond": "Becomes available after unlocking Secret: Green at D-2."
+        "cond": "Becomes available after unlocking Secret: Green at D-2.",
+        "frm": "E-3"
       },
       {
         "g": "F-4",
         "t": "Support Ability",
         "n": "Combo Plus",
         "c": "200 LP",
-        "cond": "Becomes available after unlocking Secret: Green at D-2."
+        "cond": "Becomes available after unlocking Secret: Green at D-2.",
+        "frm": "E-4"
       }
     ],
     "Lord Kyroo": [
-      {
-        "g": "A-2",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
-        "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "A-3",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Link x5",
-        "cond": ""
-      },
-      {
-        "g": "A-4",
-        "t": "Support Ability",
-        "n": "Combo Master",
-        "c": "300 LP",
-        "cond": ""
-      },
       {
         "g": "B-2",
         "t": "Attack Command",
         "n": "Blitz",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-1"
       },
       {
         "g": "B-2",
         "t": "Attack Command",
         "n": "Ars Arcanum",
         "c": "10 LP",
-        "cond": "Becomes Ars Arcanum after Secret: Red at G-4 has been unlocked."
+        "cond": "Becomes Ars Arcanum after Secret: Red at G-4 has been unlocked.",
+        "frm": "B-1"
+      },
+      {
+        "g": "A-2",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "B-3",
         "t": "Stat Ability",
         "n": "Cure Boost",
         "c": "50 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-4",
-        "t": "Stat Ability",
-        "n": "Defender",
-        "c": "150 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-5",
-        "t": "Stat Ability",
-        "n": "Thunder Boost",
-        "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-6",
-        "t": "Stat Ability",
-        "n": "Magic Boost",
-        "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "C-2",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
+      },
+      {
+        "g": "A-3",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Link x5",
+        "cond": "",
+        "frm": "A-2"
+      },
+      {
+        "g": "B-4",
+        "t": "Stat Ability",
+        "n": "Defender",
+        "c": "150 LP",
+        "cond": "",
+        "frm": "B-3"
+      },
+      {
+        "g": "D-2",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Level 25",
+        "cond": "Becomes available after unlocking Secret: Green at D-3.",
+        "frm": "C-2"
+      },
+      {
+        "g": "A-4",
+        "t": "Support Ability",
+        "n": "Combo Master",
+        "c": "300 LP",
+        "cond": "",
+        "frm": "A-3"
+      },
+      {
+        "g": "B-5",
+        "t": "Stat Ability",
+        "n": "Thunder Boost",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "B-4"
       },
       {
         "g": "C-4",
         "t": "Magic Command",
         "n": "Triple Plasma",
         "c": "200 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-5",
-        "t": "Stat Ability",
-        "n": "Thunder Boost",
-        "c": "50 LP",
-        "cond": "Becomes available when in Warmonger disposition."
-      },
-      {
-        "g": "C-6",
-        "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "30 LP",
-        "cond": "Becomes available when in Warmonger disposition."
+        "cond": "",
+        "frm": "B-4"
       },
       {
         "g": "D-1",
         "t": "Attack Command",
         "n": "Zantetsuken",
         "c": "400 LP",
-        "cond": "Becomes available after unlocking Secret: Green at D-3."
-      },
-      {
-        "g": "D-2",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Level 25",
-        "cond": "Becomes available after unlocking Secret: Green at D-3."
+        "cond": "Becomes available after unlocking Secret: Green at D-3.",
+        "frm": "D-2"
       },
       {
         "g": "D-3",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
+      },
+      {
+        "g": "B-6",
+        "t": "Stat Ability",
+        "n": "Magic Boost",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "B-5"
+      },
+      {
+        "g": "C-5",
+        "t": "Stat Ability",
+        "n": "Thunder Boost",
+        "c": "50 LP",
+        "cond": "Becomes available when in Warmonger disposition.",
+        "frm": "B-5"
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
+      },
+      {
+        "g": "C-6",
+        "t": "Stat Ability",
+        "n": "HP Boost",
+        "c": "30 LP",
+        "cond": "Becomes available when in Warmonger disposition.",
+        "frm": "B-6"
       },
       {
         "g": "D-5",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "30 LP",
-        "cond": "Becomes available when in Selfless Ruler disposition."
-      },
-      {
-        "g": "D-6",
-        "t": "Stat Ability",
-        "n": "Cure Boost",
-        "c": "100 LP",
-        "cond": "Becomes available when in Selfless Ruler disposition."
+        "cond": "Becomes available when in Selfless Ruler disposition.",
+        "frm": "C-5"
       },
       {
         "g": "E-4",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-4"
+      },
+      {
+        "g": "D-6",
+        "t": "Stat Ability",
+        "n": "Cure Boost",
+        "c": "100 LP",
+        "cond": "Becomes available when in Selfless Ruler disposition.",
+        "frm": "C-6"
       },
       {
         "g": "F-4",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 30",
-        "cond": "Becomes available after unlocking Secret: Green at E-4."
+        "cond": "Becomes available after unlocking Secret: Green at E-4.",
+        "frm": "E-4"
       },
       {
         "g": "G-4",
         "t": "Secret",
         "n": "Secret: Red",
         "c": "350 LP",
-        "cond": "Becomes available after unlocking Secret: Green at E-4."
+        "cond": "Becomes available after unlocking Secret: Green at E-4.",
+        "frm": "F-4"
       }
     ],
     "Majik Lapin": [
-      {
-        "g": "A-3",
-        "t": "Stat Ability",
-        "n": "Magic Haste",
-        "c": "200 LP",
-        "cond": "Becomes available when in Accomplice disposition."
-      },
-      {
-        "g": "A-5",
-        "t": "Stat Ability",
-        "n": "Magic Boost",
-        "c": "200 LP",
-        "cond": ""
-      },
-      {
-        "g": "A-6",
-        "t": "Magic Command",
-        "n": "Firaga Burst",
-        "c": "300 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-3",
-        "t": "Stat Ability",
-        "n": "Magic Haste",
-        "c": "150 LP",
-        "cond": "Becomes available when in Accomplice disposition."
-      },
-      {
-        "g": "B-4",
-        "t": "Stat Ability",
-        "n": "Stop Block",
-        "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-5",
-        "t": "Stat Ability",
-        "n": "Magic Haste",
-        "c": "50 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-6",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Level 30",
-        "cond": ""
-      },
       {
         "g": "C-2",
         "t": "Defense Command",
         "n": "Dark Barrier",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-4",
-        "t": "Stat Ability",
-        "n": "Blizzard Screen",
-        "c": "20 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-5",
-        "t": "Stat Ability",
-        "n": "Blizzard Screen",
-        "c": "40 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "D-2",
         "t": "Stat Ability",
         "n": "Dark Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
+      },
+      {
+        "g": "B-3",
+        "t": "Stat Ability",
+        "n": "Magic Haste",
+        "c": "150 LP",
+        "cond": "Becomes available when in Accomplice disposition.",
+        "frm": "C-3"
+      },
+      {
+        "g": "C-4",
+        "t": "Stat Ability",
+        "n": "Blizzard Screen",
+        "c": "20 LP",
+        "cond": "",
+        "frm": "C-3"
+      },
+      {
+        "g": "A-3",
+        "t": "Stat Ability",
+        "n": "Magic Haste",
+        "c": "200 LP",
+        "cond": "Becomes available when in Accomplice disposition.",
+        "frm": "B-3"
+      },
+      {
+        "g": "B-4",
+        "t": "Stat Ability",
+        "n": "Stop Block",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "B-3"
+      },
+      {
+        "g": "C-5",
+        "t": "Stat Ability",
+        "n": "Blizzard Screen",
+        "c": "40 LP",
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "D-4",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 25",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
+      },
+      {
+        "g": "B-5",
+        "t": "Stat Ability",
+        "n": "Magic Haste",
+        "c": "50 LP",
+        "cond": "",
+        "frm": "B-4"
       },
       {
         "g": "D-5",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-6",
-        "t": "Magic Command",
-        "n": "Zero Graviza",
-        "c": "150 LP",
-        "cond": "Becomes available when in Illusionist disposition."
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "E-4",
         "t": "Magic Command",
         "n": "Deep Freeze",
         "c": "400 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-4"
+      },
+      {
+        "g": "A-5",
+        "t": "Stat Ability",
+        "n": "Magic Boost",
+        "c": "200 LP",
+        "cond": "",
+        "frm": "B-5"
+      },
+      {
+        "g": "B-6",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Level 30",
+        "cond": "",
+        "frm": "B-5"
+      },
+      {
+        "g": "D-6",
+        "t": "Magic Command",
+        "n": "Zero Graviza",
+        "c": "150 LP",
+        "cond": "Becomes available when in Illusionist disposition.",
+        "frm": "D-5"
       },
       {
         "g": "E-5",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-5"
+      },
+      {
+        "g": "A-6",
+        "t": "Magic Command",
+        "n": "Firaga Burst",
+        "c": "300 LP",
+        "cond": "",
+        "frm": "A-5"
       },
       {
         "g": "E-6",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "300 LP",
-        "cond": "Becomes available when in Illusionist disposition."
+        "cond": "Becomes available when in Illusionist disposition.",
+        "frm": "D-6"
       }
     ],
     "Me Me Bunny": [
@@ -12266,126 +13032,144 @@ window.DREAM_GUIDE = {
         "t": "Defense Command",
         "n": "Dark Barrier",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-1"
       },
       {
         "g": "B-2",
         "t": "Stat Ability",
         "n": "Dark Screen",
         "c": "20 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-3",
-        "t": "Stat Ability",
-        "n": "Defense Boost",
-        "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-4",
-        "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "50 LP",
-        "cond": "Becomes available when in Bruiser disposition."
-      },
-      {
-        "g": "B-5",
-        "t": "Support Ability",
-        "n": "Combo Plus",
-        "c": "200 LP",
-        "cond": "Becomes available when in Bruiser disposition."
+        "cond": "",
+        "frm": "B-1"
       },
       {
         "g": "C-1",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-1"
+      },
+      {
+        "g": "B-3",
+        "t": "Stat Ability",
+        "n": "Defense Boost",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "C-2",
         "t": "Stat Ability",
         "n": "Light Screen",
         "c": "20 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-3",
-        "t": "Attack Command",
-        "n": "Prism Windmill",
-        "c": "150 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-4",
-        "t": "Stat Ability",
-        "n": "Slow Block",
-        "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-5",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
-        "c": "50 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-6",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Link x2",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "D-1",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x3",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
+      },
+      {
+        "g": "B-4",
+        "t": "Stat Ability",
+        "n": "HP Boost",
+        "c": "50 LP",
+        "cond": "Becomes available when in Bruiser disposition.",
+        "frm": "B-3"
+      },
+      {
+        "g": "C-3",
+        "t": "Attack Command",
+        "n": "Prism Windmill",
+        "c": "150 LP",
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "D-2",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-3",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
-        "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-4",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
-        "c": "100 LP",
-        "cond": "Becomes available when in Space Invader disposition."
-      },
-      {
-        "g": "D-6",
-        "t": "Attack Command",
-        "n": "Break Time",
-        "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "E-1",
         "t": "Stat Ability",
         "n": "Defender",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-1"
+      },
+      {
+        "g": "B-5",
+        "t": "Support Ability",
+        "n": "Combo Plus",
+        "c": "200 LP",
+        "cond": "Becomes available when in Bruiser disposition.",
+        "frm": "B-4"
+      },
+      {
+        "g": "C-4",
+        "t": "Stat Ability",
+        "n": "Slow Block",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "B-4"
+      },
+      {
+        "g": "D-3",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "C-3"
+      },
+      {
+        "g": "C-5",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
+        "c": "50 LP",
+        "cond": "",
+        "frm": "B-5"
+      },
+      {
+        "g": "D-4",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
+        "c": "100 LP",
+        "cond": "Becomes available when in Space Invader disposition.",
+        "frm": "C-4"
+      },
+      {
+        "g": "C-6",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Link x2",
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "E-4",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "200 LP",
-        "cond": "Becomes available when in Space Invader disposition."
+        "cond": "Becomes available when in Space Invader disposition.",
+        "frm": "D-4"
+      },
+      {
+        "g": "D-6",
+        "t": "Attack Command",
+        "n": "Break Time",
+        "c": "200 LP",
+        "cond": "",
+        "frm": "C-6"
       }
     ],
     "Meow Wow": [
@@ -12401,7 +13185,8 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "C-2",
@@ -12415,105 +13200,120 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Item Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "D-1",
         "t": "Stat Ability",
         "n": "Light Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "D-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 10",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "D-3",
         "t": "Magic Command",
         "n": "Slow",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "E-1",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-1"
       },
       {
         "g": "E-2",
         "t": "Magic Command",
         "n": "Cura",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "Poison Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
       },
       {
         "g": "E-4",
         "t": "Magic Command",
         "n": "Spark",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-3"
       },
       {
         "g": "F-1",
         "t": "Stat Ability",
         "n": "Confusion Block",
         "c": "30 LP",
-        "cond": "Becomes available when in Stray disposition."
+        "cond": "Becomes available when in Stray disposition.",
+        "frm": "E-1"
       },
       {
         "g": "F-2",
         "t": "Support Ability",
         "n": "Leaf Bracer",
         "c": "300 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-2"
       },
       {
         "g": "F-3",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "30 LP",
-        "cond": "Becomes available when in Smart Cookie disposition."
+        "cond": "Becomes available when in Smart Cookie disposition.",
+        "frm": "E-3"
       },
       {
         "g": "G-1",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "30 LP",
-        "cond": "Becomes available when in Stray disposition."
+        "cond": "Becomes available when in Stray disposition.",
+        "frm": "F-1"
       },
       {
         "g": "G-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 25",
-        "cond": ""
+        "cond": "",
+        "frm": "F-2"
       },
       {
         "g": "G-3",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "100 LP",
-        "cond": "Becomes available when in Smart Cookie disposition."
+        "cond": "Becomes available when in Smart Cookie disposition.",
+        "frm": "F-3"
       },
       {
         "g": "H-2",
         "t": "Magic Command",
         "n": "Curaga",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "G-2"
       }
     ],
     "Meowjesty": [
@@ -12522,42 +13322,48 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-1"
       },
       {
         "g": "A-4",
         "t": "Magic Command",
         "n": "Sparkra",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-5"
       },
       {
         "g": "A-5",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 15",
-        "cond": ""
+        "cond": "",
+        "frm": "B-5"
       },
       {
         "g": "B-1",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "B-5",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "C-1",
         "t": "Stat Ability",
         "n": "Bind Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-1"
       },
       {
         "g": "C-2",
@@ -12585,14 +13391,16 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "D-1",
         "t": "Stat Ability",
         "n": "Dark Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "D-3",
@@ -12606,170 +13414,194 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "E-1",
         "t": "Attack Command",
         "n": "Thunder Dash",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-1"
       },
       {
         "g": "E-3",
         "t": "Magic Command",
         "n": "Cura",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
       },
       {
         "g": "E-5",
         "t": "Stat Ability",
         "n": "Light Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-5"
       },
       {
         "g": "F-3",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 25",
-        "cond": ""
+        "cond": "",
+        "frm": "E-3"
       },
       {
         "g": "G-3",
         "t": "Magic Command",
         "n": "Curaga",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-3"
       },
       {
         "g": "H-3",
         "t": "Support Ability",
         "n": "Second Chance",
         "c": "300 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "G-3"
       }
     ],
     "Necho Cat": [
       {
-        "g": "A-4",
-        "t": "Stat Ability",
-        "n": "Magic Boost",
-        "c": "200 LP",
-        "cond": "Becomes available when in Diva disposition."
-      },
-      {
-        "g": "B-1",
-        "t": "Spirits Ability",
-        "n": "Support Boost",
-        "c": "200 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-3",
-        "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-4",
-        "t": "Stat Ability",
-        "n": "Confusion Block",
-        "c": "30 LP",
-        "cond": "Becomes available when in Diva disposition."
-      },
-      {
-        "g": "B-5",
-        "t": "Stat Ability",
-        "n": "Thunder Boost",
-        "c": "50 LP",
-        "cond": ""
+        "g": "C-6",
+        "t": "Magic Command",
+        "n": "Thunder",
+        "c": "10 LP",
+        "cond": "",
+        "frm": "C-7"
       },
       {
         "g": "B-6",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-1",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Link x3",
-        "cond": ""
-      },
-      {
-        "g": "C-2",
-        "t": "Stat Ability",
-        "n": "Magic Boost",
-        "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-3",
-        "t": "Magic Command",
-        "n": "Sleepra",
-        "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-4",
-        "t": "Stat Ability",
-        "n": "Magic Haste",
-        "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-6"
       },
       {
         "g": "C-5",
         "t": "Stat Ability",
         "n": "Thunder Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-6"
       },
       {
-        "g": "C-6",
-        "t": "Magic Command",
-        "n": "Thunder",
-        "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-2",
+        "g": "B-5",
         "t": "Stat Ability",
         "n": "Thunder Boost",
-        "c": "100 LP",
-        "cond": "Becomes available when in Artist disposition."
+        "c": "50 LP",
+        "cond": "",
+        "frm": "B-6"
       },
       {
-        "g": "D-3",
+        "g": "C-4",
         "t": "Stat Ability",
         "n": "Magic Haste",
-        "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-4",
-        "t": "Magic Command",
-        "n": "Time Bomb",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "D-5",
         "t": "Stat Ability",
         "n": "Sleep Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-5"
+      },
+      {
+        "g": "B-4",
+        "t": "Stat Ability",
+        "n": "Confusion Block",
+        "c": "30 LP",
+        "cond": "Becomes available when in Diva disposition.",
+        "frm": "B-5"
+      },
+      {
+        "g": "C-3",
+        "t": "Magic Command",
+        "n": "Sleepra",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "C-4"
+      },
+      {
+        "g": "D-4",
+        "t": "Magic Command",
+        "n": "Time Bomb",
+        "c": "50 LP",
+        "cond": "",
+        "frm": "C-4"
+      },
+      {
+        "g": "A-4",
+        "t": "Stat Ability",
+        "n": "Magic Boost",
+        "c": "200 LP",
+        "cond": "Becomes available when in Diva disposition.",
+        "frm": "B-4"
+      },
+      {
+        "g": "B-3",
+        "t": "Stat Ability",
+        "n": "HP Boost",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "B-4"
+      },
+      {
+        "g": "C-2",
+        "t": "Stat Ability",
+        "n": "Magic Boost",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "C-3"
+      },
+      {
+        "g": "D-3",
+        "t": "Stat Ability",
+        "n": "Magic Haste",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "C-3"
+      },
+      {
+        "g": "C-1",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Link x3",
+        "cond": "",
+        "frm": "C-2"
+      },
+      {
+        "g": "D-2",
+        "t": "Stat Ability",
+        "n": "Thunder Boost",
+        "c": "100 LP",
+        "cond": "Becomes available when in Artist disposition.",
+        "frm": "C-2"
+      },
+      {
+        "g": "B-1",
+        "t": "Spirits Ability",
+        "n": "Support Boost",
+        "c": "200 LP",
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "E-2",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "150 LP",
-        "cond": "Becomes available when in Artist disposition."
+        "cond": "Becomes available when in Artist disposition.",
+        "frm": "D-2"
       }
     ],
     "Peepsta Hoo": [
@@ -12778,140 +13610,160 @@ window.DREAM_GUIDE = {
         "t": "Magic Command",
         "n": "Blackout",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-1"
       },
       {
         "g": "B-2",
         "t": "Stat Ability",
         "n": "Bind Block",
         "c": "30 LP",
-        "cond": "Becomes available when in Sweeper disposition."
+        "cond": "Becomes available when in Sweeper disposition.",
+        "frm": "B-1"
       },
       {
         "g": "C-1",
         "t": "Stat Ability",
         "n": "Fire Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-1"
       },
       {
         "g": "C-2",
         "t": "Stat Ability",
         "n": "Fire Boost",
         "c": "50 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-3",
-        "t": "Stat Ability",
-        "n": "Blindness Block",
-        "c": "30 LP",
-        "cond": "Becomes available when in Watcher disposition."
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "D-1",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Paint Gun: Red x10",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
+      },
+      {
+        "g": "C-3",
+        "t": "Stat Ability",
+        "n": "Blindness Block",
+        "c": "30 LP",
+        "cond": "Becomes available when in Watcher disposition.",
+        "frm": "C-2"
       },
       {
         "g": "D-2",
         "t": "Stat Ability",
         "n": "Blizzard Boost",
         "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-3",
-        "t": "Stat Ability",
-        "n": "Blizzard Boost",
-        "c": "50 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-4",
-        "t": "Stat Ability",
-        "n": "Poison Block",
-        "c": "30 LP",
-        "cond": "Becomes available when in Scout disposition."
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "E-1",
         "t": "Magic Command",
         "n": "Fira",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-1"
+      },
+      {
+        "g": "D-3",
+        "t": "Stat Ability",
+        "n": "Blizzard Boost",
+        "c": "50 LP",
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "E-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Paint Gun: Blue x20",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
+      },
+      {
+        "g": "D-4",
+        "t": "Stat Ability",
+        "n": "Poison Block",
+        "c": "30 LP",
+        "cond": "Becomes available when in Scout disposition.",
+        "frm": "D-3"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "Thunder Boost",
         "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "E-4",
-        "t": "Stat Ability",
-        "n": "Thunder Boost",
-        "c": "50 LP",
-        "cond": ""
-      },
-      {
-        "g": "E-5",
-        "t": "Stat Ability",
-        "n": "Confusion Block",
-        "c": "30 LP",
-        "cond": "Becomes available when in Patroller disposition."
+        "cond": "",
+        "frm": "D-3"
       },
       {
         "g": "F-2",
         "t": "Magic Command",
         "n": "Blizzara",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-2"
+      },
+      {
+        "g": "E-4",
+        "t": "Stat Ability",
+        "n": "Thunder Boost",
+        "c": "50 LP",
+        "cond": "",
+        "frm": "D-4"
       },
       {
         "g": "F-3",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Paint Gun: Yellow x30",
-        "cond": ""
+        "cond": "",
+        "frm": "E-3"
+      },
+      {
+        "g": "E-5",
+        "t": "Stat Ability",
+        "n": "Confusion Block",
+        "c": "30 LP",
+        "cond": "Becomes available when in Patroller disposition.",
+        "frm": "E-4"
       },
       {
         "g": "F-4",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "F-5",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Level 20",
-        "cond": ""
+        "cond": "",
+        "frm": "E-4"
       },
       {
         "g": "G-3",
         "t": "Magic Command",
         "n": "Thundara",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-3"
+      },
+      {
+        "g": "F-5",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Level 20",
+        "cond": "",
+        "frm": "E-5"
       },
       {
         "g": "G-5",
         "t": "Spirits Ability",
         "n": "Support Boost",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-5"
       }
     ],
     "Pegaslick": [
@@ -12920,261 +13772,298 @@ window.DREAM_GUIDE = {
         "t": "Attack Command",
         "n": "Prism Windmill",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-3"
       },
       {
         "g": "B-4",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-3"
+      },
+      {
+        "g": "C-3",
+        "t": "Stat Ability",
+        "n": "Light Screen",
+        "c": "20 LP",
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "B-5",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x3",
-        "cond": ""
-      },
-      {
-        "g": "B-6",
-        "t": "Support Ability",
-        "n": "Air Combo Plus",
-        "c": "200 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-2",
-        "t": "Stat Ability",
-        "n": "Light Screen",
-        "c": "60 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-3",
-        "t": "Stat Ability",
-        "n": "Light Screen",
-        "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-4"
       },
       {
         "g": "C-4",
         "t": "Stat Ability",
         "n": "Light Screen",
         "c": "40 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-4"
       },
       {
-        "g": "D-1",
+        "g": "C-2",
         "t": "Stat Ability",
         "n": "Light Screen",
-        "c": "80 LP",
-        "cond": "Becomes available when in Stormgoer disposition."
-      },
-      {
-        "g": "D-2",
-        "t": "Stat Ability",
-        "n": "Magic Haste",
-        "c": "30 LP",
-        "cond": ""
+        "c": "60 LP",
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
+      },
+      {
+        "g": "B-6",
+        "t": "Support Ability",
+        "n": "Air Combo Plus",
+        "c": "200 LP",
+        "cond": "",
+        "frm": "B-5"
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
       },
       {
-        "g": "D-5",
+        "g": "D-2",
         "t": "Stat Ability",
-        "n": "Light Screen",
-        "c": "100 LP",
-        "cond": "Becomes available when in Hurricane disposition."
-      },
-      {
-        "g": "E-1",
-        "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "50 LP",
-        "cond": "Becomes available when in Stormgoer disposition."
+        "n": "Magic Haste",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "E-3",
         "t": "Magic Command",
         "n": "Sparkra",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
       },
       {
-        "g": "E-5",
+        "g": "D-5",
         "t": "Stat Ability",
-        "n": "Magic Haste",
-        "c": "150 LP",
-        "cond": "Becomes available when in Hurricane disposition."
+        "n": "Light Screen",
+        "c": "100 LP",
+        "cond": "Becomes available when in Hurricane disposition.",
+        "frm": "D-4"
+      },
+      {
+        "g": "D-1",
+        "t": "Stat Ability",
+        "n": "Light Screen",
+        "c": "80 LP",
+        "cond": "Becomes available when in Stormgoer disposition.",
+        "frm": "D-2"
       },
       {
         "g": "F-3",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-3"
+      },
+      {
+        "g": "E-5",
+        "t": "Stat Ability",
+        "n": "Magic Haste",
+        "c": "150 LP",
+        "cond": "Becomes available when in Hurricane disposition.",
+        "frm": "D-5"
+      },
+      {
+        "g": "E-1",
+        "t": "Stat Ability",
+        "n": "HP Boost",
+        "c": "50 LP",
+        "cond": "Becomes available when in Stormgoer disposition.",
+        "frm": "D-1"
       },
       {
         "g": "G-3",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 30",
-        "cond": ""
+        "cond": "",
+        "frm": "F-3"
       },
       {
         "g": "H-3",
         "t": "Magic Command",
         "n": "Sparkga",
         "c": "250 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "G-3"
       }
     ],
     "Pricklemane": [
-      {
-        "g": "A-3",
-        "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "A-5",
-        "t": "Stat Ability",
-        "n": "Attack Boost",
-        "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "A-6",
-        "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "50 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-6."
-      },
       {
         "g": "B-2",
         "t": "Attack Command",
         "n": "Strike Raid",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-1"
       },
       {
         "g": "B-3",
         "t": "Stat Ability",
         "n": "Item Boost",
         "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-4",
-        "t": "Magic Command",
-        "n": "Time Bomb",
-        "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-5",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
-        "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-6",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-7",
-        "t": "Stat Ability",
-        "n": "Poison Block",
-        "c": "30 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-6."
-      },
-      {
-        "g": "B-8",
-        "t": "Attack Command",
-        "n": "Circle Raid",
-        "c": "100 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-6."
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "C-2",
         "t": "Stat Ability",
         "n": "Stop Block",
         "c": "30 LP",
-        "cond": "Becomes available when in Intellectual disposition."
+        "cond": "Becomes available when in Intellectual disposition.",
+        "frm": "B-2"
+      },
+      {
+        "g": "A-3",
+        "t": "Stat Ability",
+        "n": "HP Boost",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "B-3"
+      },
+      {
+        "g": "B-4",
+        "t": "Magic Command",
+        "n": "Time Bomb",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Sleep Block",
         "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-4",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Level 10",
-        "cond": ""
-      },
-      {
-        "g": "C-5",
-        "t": "Stat Ability",
-        "n": "Fire Screen",
-        "c": "20 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-6",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
-        "c": "50 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-6."
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "D-2",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "100 LP",
-        "cond": "Becomes available when in Intellectual disposition."
+        "cond": "Becomes available when in Intellectual disposition.",
+        "frm": "C-2"
+      },
+      {
+        "g": "B-5",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "B-4"
+      },
+      {
+        "g": "C-4",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Level 10",
+        "cond": "",
+        "frm": "B-4"
       },
       {
         "g": "D-3",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x5",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
+      },
+      {
+        "g": "A-5",
+        "t": "Stat Ability",
+        "n": "Attack Boost",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "B-5"
+      },
+      {
+        "g": "B-6",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "",
+        "frm": "B-5"
+      },
+      {
+        "g": "C-5",
+        "t": "Stat Ability",
+        "n": "Fire Screen",
+        "c": "20 LP",
+        "cond": "",
+        "frm": "B-5"
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "E-3",
         "t": "Support Ability",
         "n": "Combo Plus",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
+      },
+      {
+        "g": "A-6",
+        "t": "Stat Ability",
+        "n": "HP Boost",
+        "c": "50 LP",
+        "cond": "Becomes available after unlocking Secret: Green at B-6.",
+        "frm": "A-5"
+      },
+      {
+        "g": "B-7",
+        "t": "Stat Ability",
+        "n": "Poison Block",
+        "c": "30 LP",
+        "cond": "Becomes available after unlocking Secret: Green at B-6.",
+        "frm": "B-6"
+      },
+      {
+        "g": "C-6",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
+        "c": "50 LP",
+        "cond": "Becomes available after unlocking Secret: Green at B-6.",
+        "frm": "B-6"
+      },
+      {
+        "g": "B-8",
+        "t": "Attack Command",
+        "n": "Circle Raid",
+        "c": "100 LP",
+        "cond": "Becomes available after unlocking Secret: Green at B-6.",
+        "frm": "B-7"
       }
     ],
     "R & R Seal": [
@@ -13183,21 +14072,24 @@ window.DREAM_GUIDE = {
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-3"
       },
       {
         "g": "A-3",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "30 LP",
-        "cond": "Becomes available after Secret: Green at B-1 has been unlocked."
+        "cond": "Becomes available after Secret: Green at B-1 has been unlocked.",
+        "frm": "A-2"
       },
       {
         "g": "A-4",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at B-1 has been unlocked."
+        "cond": "Becomes available after Secret: Green at B-1 has been unlocked.",
+        "frm": "A-3"
       },
       {
         "g": "B-1",
@@ -13211,35 +14103,40 @@ window.DREAM_GUIDE = {
         "t": "Support Ability",
         "n": "Second Chance",
         "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at B-1 has been unlocked."
+        "cond": "Becomes available after Secret: Green at B-1 has been unlocked.",
+        "frm": "A-2"
       },
       {
         "g": "B-3",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at B-1 has been unlocked."
+        "cond": "Becomes available after Secret: Green at B-1 has been unlocked.",
+        "frm": "A-3"
       },
       {
         "g": "B-4",
         "t": "Attack Command",
         "n": "Shadowbreaker",
         "c": "100 LP",
-        "cond": "Becomes available after Secret: Green at D-1 has been unlocked."
+        "cond": "Becomes available after Secret: Green at D-1 has been unlocked.",
+        "frm": "A-4"
       },
       {
         "g": "B-5",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at D-1 has been unlocked."
+        "cond": "Becomes available after Secret: Green at D-1 has been unlocked.",
+        "frm": "C-5"
       },
       {
         "g": "C-1",
         "t": "Stat Ability",
         "n": "Confusion Block",
         "c": "30 LP",
-        "cond": "Becomes available after Secret: Green at B-1 has been unlocked."
+        "cond": "Becomes available after Secret: Green at B-1 has been unlocked.",
+        "frm": "B-1"
       },
       {
         "g": "C-2",
@@ -13253,28 +14150,32 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Poison Block",
         "c": "30 LP",
-        "cond": "Becomes available after Secret: Green at D-1 has been unlocked."
+        "cond": "Becomes available after Secret: Green at D-1 has been unlocked.",
+        "frm": "B-3"
       },
       {
         "g": "C-4",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at D-1 has been unlocked."
+        "cond": "Becomes available after Secret: Green at D-1 has been unlocked.",
+        "frm": "C-5"
       },
       {
         "g": "C-5",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "150 LP",
-        "cond": "Becomes available after Secret: Green at C-4 has been unlocked."
+        "cond": "Becomes available after Secret: Green at C-4 has been unlocked.",
+        "frm": "B-5"
       },
       {
         "g": "C-6",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at C-4 has been unlocked."
+        "cond": "Becomes available after Secret: Green at C-4 has been unlocked.",
+        "frm": "C-5"
       },
       {
         "g": "D-1",
@@ -13288,545 +14189,622 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Mini Block",
         "c": "30 LP",
-        "cond": "Becomes available after Secret: Green at D-1 has been unlocked."
+        "cond": "Becomes available after Secret: Green at D-1 has been unlocked.",
+        "frm": "C-2"
       },
       {
         "g": "D-3",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at D-1 has been unlocked."
+        "cond": "Becomes available after Secret: Green at D-1 has been unlocked.",
+        "frm": "D-4"
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "50 LP",
-        "cond": "Becomes available after Secret: Green at C-4 has been unlocked."
+        "cond": "Becomes available after Secret: Green at C-4 has been unlocked.",
+        "frm": "C-4"
       },
       {
         "g": "D-5",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at C-4 has been unlocked."
+        "cond": "Becomes available after Secret: Green at C-4 has been unlocked.",
+        "frm": "C-5"
       },
       {
         "g": "D-6",
         "t": "Stat Ability",
         "n": "Bind Block",
         "c": "30 LP",
-        "cond": "Becomes available after Secret: Green at C-6 has been unlocked."
+        "cond": "Becomes available after Secret: Green at C-6 has been unlocked.",
+        "frm": "C-6"
       },
       {
         "g": "D-7",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "100 LP",
-        "cond": "Becomes available after Secret: Green at A-4 has been unlocked."
+        "cond": "Becomes available after Secret: Green at A-4 has been unlocked.",
+        "frm": "D-6"
       },
       {
         "g": "E-2",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at D-1 has been unlocked."
+        "cond": "Becomes available after Secret: Green at D-1 has been unlocked.",
+        "frm": "E-3"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "100 LP",
-        "cond": "Becomes available after Secret: Green at C-4 has been unlocked."
+        "cond": "Becomes available after Secret: Green at C-4 has been unlocked.",
+        "frm": "D-3"
       },
       {
         "g": "E-4",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at C-4 has been unlocked."
+        "cond": "Becomes available after Secret: Green at C-4 has been unlocked.",
+        "frm": "D-4"
       },
       {
         "g": "E-5",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "200 LP",
-        "cond": "Becomes available after Secret: Green at C-6 has been unlocked."
+        "cond": "Becomes available after Secret: Green at C-6 has been unlocked.",
+        "frm": "F-5"
       },
       {
         "g": "E-6",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at E-2 has been unlocked."
+        "cond": "Becomes available after Secret: Green at E-2 has been unlocked.",
+        "frm": "E-5"
       },
       {
         "g": "F-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 10",
-        "cond": "Becomes available after Secret: Green at C-4 has been unlocked."
+        "cond": "Becomes available after Secret: Green at C-4 has been unlocked.",
+        "frm": "E-2"
       },
       {
         "g": "F-3",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": "Becomes available after Secret: Green at C-4 has been unlocked."
+        "cond": "Becomes available after Secret: Green at C-4 has been unlocked.",
+        "frm": "E-3"
       },
       {
         "g": "F-4",
         "t": "Stat Ability",
         "n": "Slow Block",
         "c": "30 LP",
-        "cond": "Becomes available after Secret: Green at C-6 has been unlocked."
+        "cond": "Becomes available after Secret: Green at C-6 has been unlocked.",
+        "frm": "F-5"
       },
       {
         "g": "F-5",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "100 LP",
-        "cond": "Becomes available after Secret: Green at A-4 has been unlocked."
+        "cond": "Becomes available after Secret: Green at A-4 has been unlocked.",
+        "s": 1
       },
       {
         "g": "F-6",
         "t": "Item Command",
         "n": "Megalixir",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-6"
       },
       {
         "g": "G-2",
         "t": "Magic Command",
         "n": "Balloonga",
         "c": "150 LP",
-        "cond": "Becomes available after Secret: Green at A-4 has been unlocked."
+        "cond": "Becomes available after Secret: Green at A-4 has been unlocked.",
+        "frm": "F-2"
       }
     ],
     "Ryu Dragon": [
-      {
-        "g": "A-1",
-        "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "A-2",
-        "t": "Stat Ability",
-        "n": "Attack Boost",
-        "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "A-4",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Level 30",
-        "cond": "Becomes available after unlocking Secret: Green at B-4."
-      },
-      {
-        "g": "A-5",
-        "t": "Magic Command",
-        "n": "Firaga Burst",
-        "c": "300 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-4."
-      },
       {
         "g": "B-1",
         "t": "Movement Command",
         "n": "Superglide",
         "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-2",
-        "t": "Stat Ability",
-        "n": "Fire Boost",
-        "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-3",
-        "t": "Attack Command",
-        "n": "Meteor Crash",
-        "c": "400 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-4",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "C-2",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-3",
-        "t": "Stat Ability",
-        "n": "Defense Boost",
-        "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-4",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "D-1",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x1",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
+      },
+      {
+        "g": "A-1",
+        "t": "Stat Ability",
+        "n": "HP Boost",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "B-1"
+      },
+      {
+        "g": "B-2",
+        "t": "Stat Ability",
+        "n": "Fire Boost",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "B-1"
+      },
+      {
+        "g": "C-3",
+        "t": "Stat Ability",
+        "n": "Defense Boost",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "C-2"
+      },
+      {
+        "g": "E-1",
+        "t": "Support Ability",
+        "n": "Combo Plus",
+        "c": "200 LP",
+        "cond": "",
+        "frm": "D-1"
+      },
+      {
+        "g": "A-2",
+        "t": "Stat Ability",
+        "n": "Attack Boost",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "A-1"
+      },
+      {
+        "g": "B-3",
+        "t": "Attack Command",
+        "n": "Meteor Crash",
+        "c": "400 LP",
+        "cond": "",
+        "frm": "B-2"
+      },
+      {
+        "g": "C-4",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Fire Boost",
         "c": "50 LP",
-        "cond": "Becomes available when in Wyvern disposition."
+        "cond": "Becomes available when in Wyvern disposition.",
+        "frm": "C-3"
+      },
+      {
+        "g": "B-4",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "200 LP",
-        "cond": "Becomes available after unlocking Secret: Green at C-4."
+        "cond": "Becomes available after unlocking Secret: Green at C-4.",
+        "frm": "C-4"
+      },
+      {
+        "g": "E-3",
+        "t": "Stat Ability",
+        "n": "Magic Boost",
+        "c": "200 LP",
+        "cond": "Becomes available when in Wyvern disposition.",
+        "frm": "D-3"
+      },
+      {
+        "g": "A-4",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Level 30",
+        "cond": "Becomes available after unlocking Secret: Green at B-4.",
+        "frm": "B-4"
       },
       {
         "g": "D-5",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "200 LP",
-        "cond": "Becomes available when in Bahamut disposition."
-      },
-      {
-        "g": "E-1",
-        "t": "Support Ability",
-        "n": "Combo Plus",
-        "c": "200 LP",
-        "cond": ""
-      },
-      {
-        "g": "E-3",
-        "t": "Stat Ability",
-        "n": "Magic Boost",
-        "c": "200 LP",
-        "cond": "Becomes available when in Wyvern disposition."
+        "cond": "Becomes available when in Bahamut disposition.",
+        "frm": "D-4"
       },
       {
         "g": "E-4",
         "t": "Stat Ability",
         "n": "Reload Boost",
         "c": "150 LP",
-        "cond": "Becomes available after unlocking Secret: Green at C-4."
+        "cond": "Becomes available after unlocking Secret: Green at C-4.",
+        "frm": "D-4"
+      },
+      {
+        "g": "A-5",
+        "t": "Magic Command",
+        "n": "Firaga Burst",
+        "c": "300 LP",
+        "cond": "Becomes available after unlocking Secret: Green at B-4.",
+        "frm": "A-4"
       },
       {
         "g": "E-5",
         "t": "Support Ability",
         "n": "Combo Master",
         "c": "300 LP",
-        "cond": "Becomes available when in Bahamut disposition."
+        "cond": "Becomes available when in Bahamut disposition.",
+        "frm": "D-5"
       },
       {
         "g": "F-4",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x5",
-        "cond": "Becomes available after unlocking Secret: Green at C-4."
+        "cond": "Becomes available after unlocking Secret: Green at C-4.",
+        "frm": "E-4"
       },
       {
         "g": "G-4",
         "t": "Magic Command",
         "n": "Mega Flare",
         "c": "400 LP",
-        "cond": "Becomes available after unlocking Secret: Green at C-4."
+        "cond": "Becomes available after unlocking Secret: Green at C-4.",
+        "frm": "F-4"
       }
     ],
     "Sir Kyroo": [
-      {
-        "g": "A-6",
-        "t": "Stat Ability",
-        "n": "Water Screen",
-        "c": "60 LP",
-        "cond": "Becomes available when in Warrior disposition."
-      },
       {
         "g": "B-2",
         "t": "Attack Command",
         "n": "Strike Raid",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-2"
       },
       {
         "g": "B-3",
         "t": "Stat Ability",
         "n": "Cure Boost",
         "c": "50 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-4",
-        "t": "Stat Ability",
-        "n": "Water Boost",
-        "c": "50 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-5",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
-        "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-6",
-        "t": "Stat Ability",
-        "n": "Water Screen",
-        "c": "40 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-7",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Level 20",
-        "cond": ""
-      },
-      {
-        "g": "B-8",
-        "t": "Attack Command",
-        "n": "Blitz",
-        "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "C-2",
         "t": "Stat Ability",
         "n": "Water Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
       },
       {
-        "g": "C-6",
+        "g": "B-4",
         "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "30 LP",
-        "cond": "Becomes available when in Warrior disposition."
+        "n": "Water Boost",
+        "c": "50 LP",
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "D-2",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
+      },
+      {
+        "g": "B-5",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "B-4"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Stop Block",
         "c": "30 LP",
-        "cond": "Becomes available when in Paladin disposition."
-      },
-      {
-        "g": "D-4",
-        "t": "Stat Ability",
-        "n": "Cure Boost",
-        "c": "100 LP",
-        "cond": "Becomes available when in Paladin disposition."
-      },
-      {
-        "g": "E-1",
-        "t": "Stat Ability",
-        "n": "Magic Boost",
-        "c": "100 LP",
-        "cond": ""
+        "cond": "Becomes available when in Paladin disposition.",
+        "frm": "D-2"
       },
       {
         "g": "E-2",
         "t": "Stat Ability",
         "n": "Water Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
+      },
+      {
+        "g": "B-6",
+        "t": "Stat Ability",
+        "n": "Water Screen",
+        "c": "40 LP",
+        "cond": "",
+        "frm": "B-5"
+      },
+      {
+        "g": "D-4",
+        "t": "Stat Ability",
+        "n": "Cure Boost",
+        "c": "100 LP",
+        "cond": "Becomes available when in Paladin disposition.",
+        "frm": "D-3"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "Cure Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
+      },
+      {
+        "g": "E-1",
+        "t": "Stat Ability",
+        "n": "Magic Boost",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "E-2"
       },
       {
         "g": "F-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x3",
-        "cond": ""
+        "cond": "",
+        "frm": "E-2"
+      },
+      {
+        "g": "A-6",
+        "t": "Stat Ability",
+        "n": "Water Screen",
+        "c": "60 LP",
+        "cond": "Becomes available when in Warrior disposition.",
+        "frm": "B-6"
+      },
+      {
+        "g": "B-7",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Level 20",
+        "cond": "",
+        "frm": "B-6"
+      },
+      {
+        "g": "C-6",
+        "t": "Stat Ability",
+        "n": "HP Boost",
+        "c": "30 LP",
+        "cond": "Becomes available when in Warrior disposition.",
+        "frm": "B-6"
       },
       {
         "g": "G-2",
         "t": "Support Ability",
         "n": "Combo Plus",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-2"
+      },
+      {
+        "g": "B-8",
+        "t": "Attack Command",
+        "n": "Blitz",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "B-7"
       }
     ],
     "Skelterwild": [
-      {
-        "g": "A-5",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-4."
-      },
-      {
-        "g": "A-6",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Link x3",
-        "cond": "Becomes available after unlocking Secret: Green at A-5."
-      },
-      {
-        "g": "A-7",
-        "t": "Attack Command",
-        "n": "Ars Arcanum",
-        "c": "400 LP",
-        "cond": "Becomes available after unlocking Secret: Green at A-5."
-      },
-      {
-        "g": "B-3",
-        "t": "Stat Ability",
-        "n": "Defense Boost",
-        "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-4",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-5",
-        "t": "Stat Ability",
-        "n": "Defense Boost",
-        "c": "200 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-4."
-      },
-      {
-        "g": "B-6",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Level 30",
-        "cond": "Becomes available after unlocking Secret: Green at B-4."
-      },
-      {
-        "g": "B-7",
-        "t": "Magic Command",
-        "n": "Ice Barrage",
-        "c": "300 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-4."
-      },
       {
         "g": "C-2",
         "t": "Attack Command",
         "n": "Limit Storm",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Blizzard Boost",
         "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-4",
-        "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "100 LP",
-        "cond": "Becomes available when in Savage disposition."
-      },
-      {
-        "g": "C-5",
-        "t": "Stat Ability",
-        "n": "Blizzard Boost",
-        "c": "100 LP",
-        "cond": "Becomes available when in Savage disposition."
-      },
-      {
-        "g": "C-6",
-        "t": "Stat Ability",
-        "n": "Defense Boost",
-        "c": "300 LP",
-        "cond": "Becomes available when in Fiend disposition."
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "D-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x5",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
+      },
+      {
+        "g": "B-3",
+        "t": "Stat Ability",
+        "n": "Defense Boost",
+        "c": "100 LP",
+        "cond": "",
+        "frm": "C-3"
+      },
+      {
+        "g": "C-4",
+        "t": "Stat Ability",
+        "n": "HP Boost",
+        "c": "100 LP",
+        "cond": "Becomes available when in Savage disposition.",
+        "frm": "C-3"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Blizzard Boost",
         "c": "50 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-6",
-        "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "50 LP",
-        "cond": "Becomes available when in Fiend disposition."
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "E-2",
         "t": "Support Ability",
         "n": "EXP Walker",
         "c": "400 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
+      },
+      {
+        "g": "B-4",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "",
+        "frm": "B-3"
+      },
+      {
+        "g": "C-5",
+        "t": "Stat Ability",
+        "n": "Blizzard Boost",
+        "c": "100 LP",
+        "cond": "Becomes available when in Savage disposition.",
+        "frm": "C-4"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
+      },
+      {
+        "g": "B-5",
+        "t": "Stat Ability",
+        "n": "Defense Boost",
+        "c": "200 LP",
+        "cond": "Becomes available after unlocking Secret: Green at B-4.",
+        "frm": "B-4"
+      },
+      {
+        "g": "C-6",
+        "t": "Stat Ability",
+        "n": "Defense Boost",
+        "c": "300 LP",
+        "cond": "Becomes available when in Fiend disposition.",
+        "frm": "C-5"
       },
       {
         "g": "E-4",
         "t": "Stat Ability",
         "n": "Poison Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-3"
+      },
+      {
+        "g": "A-5",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "Becomes available after unlocking Secret: Green at B-4.",
+        "frm": "B-5"
+      },
+      {
+        "g": "B-6",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Level 30",
+        "cond": "Becomes available after unlocking Secret: Green at B-4.",
+        "frm": "B-5"
+      },
+      {
+        "g": "D-6",
+        "t": "Stat Ability",
+        "n": "HP Boost",
+        "c": "50 LP",
+        "cond": "Becomes available when in Fiend disposition.",
+        "frm": "C-6"
       },
       {
         "g": "E-5",
         "t": "Stat Ability",
         "n": "Reload Boost",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-4"
+      },
+      {
+        "g": "A-6",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Link x3",
+        "cond": "Becomes available after unlocking Secret: Green at A-5.",
+        "frm": "A-5"
+      },
+      {
+        "g": "B-7",
+        "t": "Magic Command",
+        "n": "Ice Barrage",
+        "c": "300 LP",
+        "cond": "Becomes available after unlocking Secret: Green at B-4.",
+        "frm": "B-6"
       },
       {
         "g": "E-6",
         "t": "Magic Command",
         "n": "Deep Freeze",
         "c": "400 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-6"
+      },
+      {
+        "g": "A-7",
+        "t": "Attack Command",
+        "n": "Ars Arcanum",
+        "c": "400 LP",
+        "cond": "Becomes available after unlocking Secret: Green at A-5.",
+        "frm": "A-6"
       }
     ],
     "Staggerceps": [
@@ -13835,140 +14813,160 @@ window.DREAM_GUIDE = {
         "t": "Defense Command",
         "n": "Link Block",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-2"
       },
       {
         "g": "B-3",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-4",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Link x2",
-        "cond": ""
-      },
-      {
-        "g": "B-5",
-        "t": "Stat Ability",
-        "n": "Defender",
-        "c": "150 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-1",
-        "t": "Stat Ability",
-        "n": "Combo Plus",
-        "c": "200 LP",
-        "cond": "Becomes available when in Heavy Hitter disposition."
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "C-2",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
+      },
+      {
+        "g": "B-4",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Link x2",
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Light Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-3"
       },
       {
-        "g": "D-1",
+        "g": "C-1",
         "t": "Stat Ability",
-        "n": "Dark Screen",
-        "c": "60 LP",
-        "cond": "Becomes available when in Heavy Hitter disposition."
+        "n": "Combo Plus",
+        "c": "200 LP",
+        "cond": "Becomes available when in Heavy Hitter disposition.",
+        "frm": "C-2"
       },
       {
         "g": "D-2",
         "t": "Attack Command",
         "n": "Collision Magnet",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
+      },
+      {
+        "g": "B-5",
+        "t": "Stat Ability",
+        "n": "Defender",
+        "c": "150 LP",
+        "cond": "",
+        "frm": "B-4"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Dark Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
+      },
+      {
+        "g": "D-1",
+        "t": "Stat Ability",
+        "n": "Dark Screen",
+        "c": "60 LP",
+        "cond": "Becomes available when in Heavy Hitter disposition.",
+        "frm": "C-1"
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "Dark Screen",
         "c": "40 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-5",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-6",
-        "t": "Stat Ability",
-        "n": "Light Screen",
-        "c": "60 LP",
-        "cond": "Becomes available after unlocking Secret: Green at D-5."
+        "cond": "",
+        "frm": "D-3"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "Light Screen",
         "c": "40 LP",
-        "cond": "Becomes available after unlocking Secret: Green at E-4."
+        "cond": "Becomes available after unlocking Secret: Green at E-4.",
+        "frm": "D-3"
+      },
+      {
+        "g": "D-5",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "",
+        "frm": "D-4"
       },
       {
         "g": "E-4",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "E-5",
-        "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "50 LP",
-        "cond": "Becomes available after unlocking Secret: Green at E-4."
-      },
-      {
-        "g": "E-6",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Level 25",
-        "cond": "Becomes available after unlocking Secret: Green at D-5."
+        "cond": "",
+        "frm": "D-4"
       },
       {
         "g": "F-3",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "100 LP",
-        "cond": "Becomes available after unlocking Secret: Green at E-4."
+        "cond": "Becomes available after unlocking Secret: Green at E-4.",
+        "frm": "E-3"
+      },
+      {
+        "g": "D-6",
+        "t": "Stat Ability",
+        "n": "Light Screen",
+        "c": "60 LP",
+        "cond": "Becomes available after unlocking Secret: Green at D-5.",
+        "frm": "D-5"
+      },
+      {
+        "g": "E-5",
+        "t": "Stat Ability",
+        "n": "HP Boost",
+        "c": "50 LP",
+        "cond": "Becomes available after unlocking Secret: Green at E-4.",
+        "frm": "D-5"
+      },
+      {
+        "g": "E-6",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Level 25",
+        "cond": "Becomes available after unlocking Secret: Green at D-5.",
+        "frm": "D-6"
       },
       {
         "g": "F-5",
         "t": "Magic Command",
         "n": "Blizzara",
         "c": "100 LP",
-        "cond": "Becomes available after unlocking Secret: Green at E-4."
+        "cond": "Becomes available after unlocking Secret: Green at E-4.",
+        "frm": "E-5"
       },
       {
         "g": "F-6",
         "t": "Attack Command",
         "n": "Zantetsuken",
         "c": "400 LP",
-        "cond": "Becomes available after unlocking Secret: Green at D-5."
+        "cond": "Becomes available after unlocking Secret: Green at D-5.",
+        "frm": "E-6"
       }
     ],
     "Sudo Neku": [
@@ -13998,98 +14996,112 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Fire Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-1"
       },
       {
         "g": "C-2",
         "t": "Stat Ability",
         "n": "Blizzard Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "D-1",
         "t": "Stat Ability",
         "n": "Thunder Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
       },
       {
         "g": "D-2",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "E-1",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-1"
       },
       {
         "g": "E-2",
         "t": "Stat Ability",
         "n": "Slow Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-1"
       },
       {
         "g": "E-3",
         "t": "Attack Command",
         "n": "Circle Raid",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-2"
       },
       {
         "g": "F-1",
         "t": "Stat Ability",
         "n": "Thunder Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-2"
       },
       {
         "g": "F-2",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-3"
       },
       {
         "g": "F-3",
         "t": "Stat Ability",
         "n": "Reload Boost",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-3"
       },
       {
         "g": "G-1",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "300 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-1"
       },
       {
         "g": "G-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 20",
-        "cond": ""
+        "cond": "",
+        "frm": "G-1"
       },
       {
         "g": "G-3",
         "t": "Attack Command",
         "n": "Slot Edge",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "G-2"
       }
     ],
     "Tama Sheep": [
@@ -14098,275 +15110,314 @@ window.DREAM_GUIDE = {
         "t": "Magic Command",
         "n": "Sleep",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-1"
       },
       {
         "g": "A-3",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "A-4",
-        "t": "Stats Ability",
-        "n": "Sleep Block",
-        "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-2"
       },
       {
         "g": "B-2",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-2"
+      },
+      {
+        "g": "A-4",
+        "t": "Stats Ability",
+        "n": "Sleep Block",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "A-3"
+      },
+      {
+        "g": "C-2",
+        "t": "Stat Ability",
+        "n": "Water Screen",
+        "c": "20 LP",
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "B-4",
         "t": "Stats Ability",
         "n": "Defense Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-4"
       },
       {
-        "g": "C-2",
-        "t": "Stat Ability",
-        "n": "Water Screen",
-        "c": "20 LP",
-        "cond": ""
+        "g": "D-2",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "C-4",
         "t": "Stats Ability",
         "n": "Slow Block",
         "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-2",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-4"
       },
       {
         "g": "D-3",
         "t": "Magic Command",
         "n": "Balloon",
         "c": "50 LP",
-        "cond": "Available after Secret: Green at D-2 has been unlocked."
-      },
-      {
-        "g": "D-4",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Link x1",
-        "cond": ""
+        "cond": "Available after Secret: Green at D-2 has been unlocked.",
+        "frm": "D-2"
       },
       {
         "g": "E-2",
         "t": "Stat Ability",
         "n": "Stop Block",
         "c": "30 LP",
-        "cond": "Available after Secret: Green at D-2 has been unlocked."
+        "cond": "Available after Secret: Green at D-2 has been unlocked.",
+        "frm": "D-2"
+      },
+      {
+        "g": "D-4",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Link x1",
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "30 LP",
-        "cond": "Available after Secret: Green at D-2 has been unlocked."
+        "cond": "Available after Secret: Green at D-2 has been unlocked.",
+        "frm": "D-3"
+      },
+      {
+        "g": "F-2",
+        "t": "Stat Ability",
+        "n": "Magic Haste",
+        "c": "50 LP",
+        "cond": "Available after Secret: Green at D-2 has been unlocked.",
+        "frm": "E-2"
       },
       {
         "g": "E-4",
         "t": "Magic Command",
         "n": "Sleepra",
         "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "F-2",
-        "t": "Stat Ability",
-        "n": "Magic Haste",
-        "c": "50 LP",
-        "cond": "Available after Secret: Green at D-2 has been unlocked."
+        "cond": "",
+        "frm": "D-4"
       },
       {
         "g": "F-3",
         "t": "Stat Ability",
         "n": "Water Screen",
         "c": "40 LP",
-        "cond": "Becomes available when in Mumbler disposition."
+        "cond": "Becomes available when in Mumbler disposition.",
+        "frm": "E-3"
+      },
+      {
+        "g": "G-2",
+        "t": "Stat Ability",
+        "n": "Magic Haste",
+        "c": "100 LP",
+        "cond": "Available after Secret: Green at D-2 has been unlocked.",
+        "frm": "F-2"
       },
       {
         "g": "F-4",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x2",
-        "cond": ""
-      },
-      {
-        "g": "G-2",
-        "t": "Stat Ability",
-        "n": "Magic Haste",
-        "c": "100 LP",
-        "cond": "Available after Secret: Green at D-2 has been unlocked."
+        "cond": "",
+        "frm": "E-4"
       },
       {
         "g": "G-3",
         "t": "Spirits Ability",
         "n": "Support Boost",
         "c": "200 LP",
-        "cond": "Becomes available when in Mumbler disposition."
+        "cond": "Becomes available when in Mumbler disposition.",
+        "frm": "F-3"
       },
       {
         "g": "G-4",
         "t": "Magic Command",
         "n": "Sleepga",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-4"
       }
     ],
     "Tatsu Blaze": [
-      {
-        "g": "A-6",
-        "t": "Spirits Ability",
-        "n": "Support Boost",
-        "c": "200 LP",
-        "cond": "Becomes available when in Two-face disposition."
-      },
-      {
-        "g": "B-4",
-        "t": "Stat Ability",
-        "n": "Fire Screen",
-        "c": "40 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-5",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
-        "c": "30 LP",
-        "cond": "Becomes available after unlocking Secret: Green at C-5."
-      },
-      {
-        "g": "B-6",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
-        "c": "50 LP",
-        "cond": "Becomes available when in Two-face disposition."
-      },
       {
         "g": "C-2",
         "t": "Magic Command",
         "n": "Fira",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-4",
-        "t": "Stat Ability",
-        "n": "Attack Boost",
-        "c": "100 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-5",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-6",
-        "t": "Stat Ability",
-        "n": "Bind Block",
-        "c": "30 LP",
-        "cond": "Becomes available after unlocking Secret: Green at C-5."
-      },
-      {
-        "g": "C-7",
-        "t": "Stat Ability",
-        "n": "Magic Haste",
-        "c": "50 LP",
-        "cond": "Becomes available after unlocking Secret: Green at C-5."
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "D-2",
         "t": "Stat Ability",
         "n": "Fire Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
-        "g": "D-4",
+        "g": "C-4",
         "t": "Stat Ability",
-        "n": "Fire Screen",
-        "c": "20 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-5",
-        "t": "Stat Ability",
-        "n": "Fire Boost",
-        "c": "50 LP",
-        "cond": "Becomes available after unlocking Secret: Green at C-5."
-      },
-      {
-        "g": "D-6",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
+        "n": "Attack Boost",
         "c": "100 LP",
-        "cond": "Becomes available when in Deadeye disposition."
-      },
-      {
-        "g": "D-7",
-        "t": "Stat Ability",
-        "n": "Magic Haste",
-        "c": "100 LP",
-        "cond": "Becomes available when in Deadeye disposition."
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "E-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 20",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
+      },
+      {
+        "g": "B-4",
+        "t": "Stat Ability",
+        "n": "Fire Screen",
+        "c": "40 LP",
+        "cond": "",
+        "frm": "C-4"
+      },
+      {
+        "g": "C-5",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "",
+        "frm": "C-4"
+      },
+      {
+        "g": "D-4",
+        "t": "Stat Ability",
+        "n": "Fire Screen",
+        "c": "20 LP",
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "F-2",
         "t": "Magic Command",
         "n": "Firaga",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-2"
       },
       {
         "g": "F-2",
         "t": "Attack Command",
         "n": "Meteor Crash",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-2"
+      },
+      {
+        "g": "B-5",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
+        "c": "30 LP",
+        "cond": "Becomes available after unlocking Secret: Green at C-5.",
+        "frm": "B-4"
+      },
+      {
+        "g": "C-6",
+        "t": "Stat Ability",
+        "n": "Bind Block",
+        "c": "30 LP",
+        "cond": "Becomes available after unlocking Secret: Green at C-5.",
+        "frm": "C-5"
+      },
+      {
+        "g": "D-5",
+        "t": "Stat Ability",
+        "n": "Fire Boost",
+        "c": "50 LP",
+        "cond": "Becomes available after unlocking Secret: Green at C-5.",
+        "frm": "C-5"
       },
       {
         "g": "G-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 30",
-        "cond": ""
+        "cond": "",
+        "frm": "F-2"
+      },
+      {
+        "g": "B-6",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
+        "c": "50 LP",
+        "cond": "Becomes available when in Two-face disposition.",
+        "frm": "B-5"
+      },
+      {
+        "g": "C-7",
+        "t": "Stat Ability",
+        "n": "Magic Haste",
+        "c": "50 LP",
+        "cond": "Becomes available after unlocking Secret: Green at C-5.",
+        "frm": "C-6"
+      },
+      {
+        "g": "D-6",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
+        "c": "100 LP",
+        "cond": "Becomes available when in Deadeye disposition.",
+        "frm": "C-6"
       },
       {
         "g": "G-3",
         "t": "Secret",
         "n": "Secret: Red",
         "c": "250 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "G-2"
+      },
+      {
+        "g": "A-6",
+        "t": "Spirits Ability",
+        "n": "Support Boost",
+        "c": "200 LP",
+        "cond": "Becomes available when in Two-face disposition.",
+        "frm": "B-6"
+      },
+      {
+        "g": "D-7",
+        "t": "Stat Ability",
+        "n": "Magic Haste",
+        "c": "100 LP",
+        "cond": "Becomes available when in Deadeye disposition.",
+        "frm": "C-7"
       }
     ],
     "Tatsu Steed": [
@@ -14389,14 +15440,16 @@ window.DREAM_GUIDE = {
         "t": "Magic Command",
         "n": "Mini",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-3"
       },
       {
         "g": "A-6",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "100 LP",
-        "cond": "Becomes available when in Tactician disposition."
+        "cond": "Becomes available when in Tactician disposition.",
+        "frm": "B-6"
       },
       {
         "g": "B-2",
@@ -14410,545 +15463,622 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Blizzard Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-4"
       },
       {
         "g": "B-5",
         "t": "Stat Ability",
         "n": "Confusion Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "B-6",
         "t": "Stat Ability",
         "n": "Blizzard Screen",
         "c": "60 LP",
-        "cond": "Becomes available when in Tactician disposition."
+        "cond": "Becomes available when in Tactician disposition.",
+        "frm": "B-5"
       },
       {
         "g": "C-2",
         "t": "Stat Ability",
         "n": "Blizzard Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "C-4",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-4"
       },
       {
         "g": "C-5",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "C-6",
         "t": "Stat Ability",
         "n": "Blizzard Screen",
         "c": "40 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "C-7",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 25",
-        "cond": ""
+        "cond": "",
+        "frm": "C-6"
       },
       {
         "g": "C-8",
         "t": "Magic Command",
         "n": "Blizzaga",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-7"
       },
       {
         "g": "D-2",
         "t": "Magic Command",
         "n": "Blizzara",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "D-5",
         "t": "Stat Ability",
         "n": "Bind Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "D-6",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "50 LP",
-        "cond": "Becomes available when in Trap Jockey disposition."
+        "cond": "Becomes available when in Trap Jockey disposition.",
+        "frm": "D-5"
       },
       {
         "g": "E-6",
         "t": "Stat Ability",
         "n": "Blizzard Boost",
         "c": "50 LP",
-        "cond": "Becomes available when in Trap Jockey disposition."
+        "cond": "Becomes available when in Trap Jockey disposition.",
+        "frm": "D-6"
       }
     ],
     "Thunderaffe": [
-      {
-        "g": "B-1",
-        "t": "Stat Ability",
-        "n": "Thunder Screen",
-        "c": "20 LP",
-        "cond": ""
-      },
       {
         "g": "B-2",
         "t": "Magic Command",
         "n": "Thundara",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-2"
+      },
+      {
+        "g": "B-1",
+        "t": "Stat Ability",
+        "n": "Thunder Screen",
+        "c": "20 LP",
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "B-3",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x3",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
+      },
+      {
+        "g": "C-2",
+        "t": "Stat Ability",
+        "n": "Thunder Boost",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "B-2"
+      },
+      {
+        "g": "C-1",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "B-1"
       },
       {
         "g": "B-4",
         "t": "Support Ability",
         "n": "Damage Syphon",
         "c": "300 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-1",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
-        "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-2",
-        "t": "Stat Ability",
-        "n": "Thunder Boost",
-        "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Thunder Screen",
         "c": "60 LP",
-        "cond": "Becomes available when in Photon Don disposition."
-      },
-      {
-        "g": "D-1",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Link x3",
-        "cond": ""
+        "cond": "Becomes available when in Photon Don disposition.",
+        "frm": "B-3"
       },
       {
         "g": "D-2",
         "t": "Magic Command",
         "n": "Thundaga",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "D-2",
         "t": "Magic Command",
         "n": "Triple Plasma",
         "c": "150 LP",
-        "cond": "Changes to Triple Plasma after Secret: Red at E-1 has been unlocked."
+        "cond": "Changes to Triple Plasma after Secret: Red at E-1 has been unlocked.",
+        "frm": "C-2"
+      },
+      {
+        "g": "D-1",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Link x3",
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Thunder Boost",
         "c": "100 LP",
-        "cond": "Becomes available when in Photon Don disposition."
+        "cond": "Becomes available when in Photon Don disposition.",
+        "frm": "C-3"
+      },
+      {
+        "g": "E-2",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
+        "c": "50 LP",
+        "cond": "",
+        "frm": "D-2"
       },
       {
         "g": "E-1",
         "t": "Secret",
         "n": "Secret: Red",
         "c": "50 LP",
-        "cond": ""
-      },
-      {
-        "g": "E-2",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
-        "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-1"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "Slow Block",
         "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "F-1",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
-        "c": "150 LP",
-        "cond": "Becomes available when in Blue Streak disposition."
+        "cond": "",
+        "frm": "D-3"
       },
       {
         "g": "F-2",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-2"
+      },
+      {
+        "g": "F-1",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
+        "c": "150 LP",
+        "cond": "Becomes available when in Blue Streak disposition.",
+        "frm": "E-1"
       },
       {
         "g": "F-3",
         "t": "Stat Ability",
         "n": "Thunder Boost",
         "c": "50 LP",
-        "cond": ""
-      },
-      {
-        "g": "G-1",
-        "t": "Stat Ability",
-        "n": "Attack Haste",
-        "c": "200 LP",
-        "cond": "Becomes available when in Blue Streak disposition."
+        "cond": "",
+        "frm": "E-3"
       },
       {
         "g": "G-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 25",
-        "cond": ""
+        "cond": "",
+        "frm": "F-2"
+      },
+      {
+        "g": "G-1",
+        "t": "Stat Ability",
+        "n": "Attack Haste",
+        "c": "200 LP",
+        "cond": "Becomes available when in Blue Streak disposition.",
+        "frm": "F-1"
       },
       {
         "g": "H-2",
         "t": "Attack Command",
         "n": "Zantetsuken",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "G-2"
       }
     ],
     "Toximander": [
-      {
-        "g": "B-2",
-        "t": "Stat Ability",
-        "n": "Bind Block",
-        "c": "30 LP",
-        "cond": ""
-      },
       {
         "g": "B-3",
         "t": "Magic Command",
         "n": "Poison",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "A-3"
+      },
+      {
+        "g": "B-2",
+        "t": "Stat Ability",
+        "n": "Bind Block",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "B-4",
         "t": "Stat Ability",
         "n": "Confusion Block",
         "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-1",
-        "t": "Support Ability",
-        "n": "Treasure Magnet",
-        "c": "50 LP",
-        "cond": ""
-      },
-      {
-        "g": "C-2",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Link x2",
-        "cond": ""
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Blindness Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-3"
+      },
+      {
+        "g": "C-2",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Link x2",
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "C-4",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "30 LP",
-        "cond": "Becomes available when in Hunter disposition."
-      },
-      {
-        "g": "C-5",
-        "t": "Stat Ability",
-        "n": "Attack Boost",
-        "c": "100 LP",
-        "cond": "Becomes available when in Hunter disposition."
-      },
-      {
-        "g": "D-2",
-        "t": "Stat Ability",
-        "n": "HP Boost",
-        "c": "30 LP",
-        "cond": ""
+        "cond": "Becomes available when in Hunter disposition.",
+        "frm": "B-4"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Poison Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
+      },
+      {
+        "g": "C-1",
+        "t": "Support Ability",
+        "n": "Treasure Magnet",
+        "c": "50 LP",
+        "cond": "",
+        "frm": "C-2"
+      },
+      {
+        "g": "D-2",
+        "t": "Stat Ability",
+        "n": "HP Boost",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "C-2"
+      },
+      {
+        "g": "C-5",
+        "t": "Stat Ability",
+        "n": "Attack Boost",
+        "c": "100 LP",
+        "cond": "Becomes available when in Hunter disposition.",
+        "frm": "C-4"
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "Dark Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "E-2",
         "t": "Stat Ability",
         "n": "Dark Screen",
         "c": "40 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
       },
       {
         "g": "E-4",
         "t": "Attack Command",
         "n": "Gravity Strike",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-4"
       },
       {
         "g": "F-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 15",
-        "cond": ""
+        "cond": "",
+        "frm": "E-2"
       },
       {
         "g": "F-4",
         "t": "Stat Ability",
         "n": "Mini Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-4"
       },
       {
         "g": "G-2",
         "t": "Attack Command",
         "n": "Poison Dive",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-2"
       },
       {
         "g": "G-4",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "30 LP",
-        "cond": "Becomes available when in Basilisk disposition."
+        "cond": "Becomes available when in Basilisk disposition.",
+        "frm": "F-4"
       },
       {
         "g": "H-4",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "50 LP",
-        "cond": "Becomes available when in Basilisk disposition."
+        "cond": "Becomes available when in Basilisk disposition.",
+        "frm": "G-4"
       }
     ],
     "Tubguin Ace": [
-      {
-        "g": "A-4",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Level 15",
-        "cond": ""
-      },
-      {
-        "g": "A-5",
-        "t": "Stat Ability",
-        "n": "Fire Screen",
-        "c": "40 LP",
-        "cond": ""
-      },
-      {
-        "g": "A-6",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Link x1",
-        "cond": ""
-      },
-      {
-        "g": "B-1",
-        "t": "Attack Command",
-        "n": "Fire Windmill",
-        "c": "150 LP",
-        "cond": "Becomes available when in Sauna disposition."
-      },
-      {
-        "g": "B-2",
-        "t": "Stat Ability",
-        "n": "Fire Boost",
-        "c": "100 LP",
-        "cond": "Becomes available when in Sauna disposition."
-      },
-      {
-        "g": "B-3",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Link x2",
-        "cond": ""
-      },
-      {
-        "g": "B-4",
-        "t": "Stat Ability",
-        "n": "Fire Boost",
-        "c": "50 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-6",
-        "t": "Stat Ability",
-        "n": "Fire Boost",
-        "c": "30 LP",
-        "cond": ""
-      },
-      {
-        "g": "B-7",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Link x1",
-        "cond": ""
-      },
-      {
-        "g": "C-3",
-        "t": "Stat Ability",
-        "n": "Fire Screen",
-        "c": "60 LP",
-        "cond": ""
-      },
       {
         "g": "C-7",
         "t": "Stat Ability",
         "n": "Fire Screen",
         "c": "10 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-1",
-        "t": "Magic Command",
-        "n": "Dark Firaga",
-        "c": "400 LP",
-        "cond": "Becomes available after Secret: Green at F-1 has been unlocked."
-      },
-      {
-        "g": "D-2",
-        "t": "Quota",
-        "n": "Checkpoint",
-        "c": "Link x3",
-        "cond": "Becomes available after Secret: Green at F-1 has been unlocked."
-      },
-      {
-        "g": "D-3",
-        "t": "Support Ability",
-        "n": "Combo Plus",
-        "c": "200 LP",
-        "cond": ""
-      },
-      {
-        "g": "D-4",
-        "t": "Magic Command",
-        "n": "Balloonra",
-        "c": "150 LP",
-        "cond": "Becomes available after Secret: Green at F-1 has been unlocked."
-      },
-      {
-        "g": "E-3",
-        "t": "Stat Ability",
-        "n": "Water Screen",
-        "c": "60 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-7"
       },
       {
         "g": "E-7",
         "t": "Stat Ability",
         "n": "Water Screen",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-7"
       },
       {
-        "g": "F-1",
-        "t": "Secret",
-        "n": "Secret: Green",
-        "c": "10 LP",
-        "cond": "Becomes available when in Whirlpool disposition."
-      },
-      {
-        "g": "F-2",
-        "t": "Stat Ability",
-        "n": "Water Boost",
-        "c": "100 LP",
-        "cond": "Becomes available when in Whirlpool disposition."
-      },
-      {
-        "g": "F-3",
+        "g": "B-7",
         "t": "Quota",
         "n": "Checkpoint",
-        "c": "Link x2",
-        "cond": ""
-      },
-      {
-        "g": "F-4",
-        "t": "Stat Ability",
-        "n": "Water Boost",
-        "c": "50 LP",
-        "cond": ""
-      },
-      {
-        "g": "F-6",
-        "t": "Stat Ability",
-        "n": "Water Boost",
-        "c": "30 LP",
-        "cond": ""
+        "c": "Link x1",
+        "cond": "",
+        "frm": "C-7"
       },
       {
         "g": "F-7",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x1",
-        "cond": ""
+        "cond": "",
+        "frm": "E-7"
       },
       {
-        "g": "G-4",
+        "g": "B-6",
+        "t": "Stat Ability",
+        "n": "Fire Boost",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "B-7"
+      },
+      {
+        "g": "F-6",
+        "t": "Stat Ability",
+        "n": "Water Boost",
+        "c": "30 LP",
+        "cond": "",
+        "frm": "F-7"
+      },
+      {
+        "g": "A-6",
         "t": "Quota",
         "n": "Checkpoint",
-        "c": "Link x2",
-        "cond": ""
-      },
-      {
-        "g": "G-5",
-        "t": "Stat Ability",
-        "n": "Water Screen",
-        "c": "40 LP",
-        "cond": ""
+        "c": "Link x1",
+        "cond": "",
+        "frm": "B-6"
       },
       {
         "g": "G-6",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 10",
-        "cond": ""
+        "cond": "",
+        "frm": "F-6"
+      },
+      {
+        "g": "A-5",
+        "t": "Stat Ability",
+        "n": "Fire Screen",
+        "c": "40 LP",
+        "cond": "",
+        "frm": "A-6"
+      },
+      {
+        "g": "G-5",
+        "t": "Stat Ability",
+        "n": "Water Screen",
+        "c": "40 LP",
+        "cond": "",
+        "frm": "G-6"
+      },
+      {
+        "g": "A-4",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Level 15",
+        "cond": "",
+        "frm": "A-5"
+      },
+      {
+        "g": "G-4",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Link x2",
+        "cond": "",
+        "frm": "G-5"
+      },
+      {
+        "g": "B-4",
+        "t": "Stat Ability",
+        "n": "Fire Boost",
+        "c": "50 LP",
+        "cond": "",
+        "frm": "A-4"
+      },
+      {
+        "g": "F-4",
+        "t": "Stat Ability",
+        "n": "Water Boost",
+        "c": "50 LP",
+        "cond": "",
+        "frm": "G-4"
+      },
+      {
+        "g": "B-3",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Link x2",
+        "cond": "",
+        "frm": "B-4"
+      },
+      {
+        "g": "F-3",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Link x2",
+        "cond": "",
+        "frm": "F-4"
+      },
+      {
+        "g": "B-2",
+        "t": "Stat Ability",
+        "n": "Fire Boost",
+        "c": "100 LP",
+        "cond": "Becomes available when in Sauna disposition.",
+        "frm": "B-3"
+      },
+      {
+        "g": "C-3",
+        "t": "Stat Ability",
+        "n": "Fire Screen",
+        "c": "60 LP",
+        "cond": "",
+        "frm": "B-3"
+      },
+      {
+        "g": "E-3",
+        "t": "Stat Ability",
+        "n": "Water Screen",
+        "c": "60 LP",
+        "cond": "",
+        "frm": "F-3"
+      },
+      {
+        "g": "F-2",
+        "t": "Stat Ability",
+        "n": "Water Boost",
+        "c": "100 LP",
+        "cond": "Becomes available when in Whirlpool disposition.",
+        "frm": "F-3"
+      },
+      {
+        "g": "B-1",
+        "t": "Attack Command",
+        "n": "Fire Windmill",
+        "c": "150 LP",
+        "cond": "Becomes available when in Sauna disposition.",
+        "frm": "B-2"
+      },
+      {
+        "g": "D-3",
+        "t": "Support Ability",
+        "n": "Combo Plus",
+        "c": "200 LP",
+        "cond": "",
+        "frm": "C-3"
+      },
+      {
+        "g": "F-1",
+        "t": "Secret",
+        "n": "Secret: Green",
+        "c": "10 LP",
+        "cond": "Becomes available when in Whirlpool disposition.",
+        "frm": "F-2"
+      },
+      {
+        "g": "D-2",
+        "t": "Quota",
+        "n": "Checkpoint",
+        "c": "Link x3",
+        "cond": "Becomes available after Secret: Green at F-1 has been unlocked.",
+        "frm": "D-3"
+      },
+      {
+        "g": "D-4",
+        "t": "Magic Command",
+        "n": "Balloonra",
+        "c": "150 LP",
+        "cond": "Becomes available after Secret: Green at F-1 has been unlocked.",
+        "frm": "D-3"
+      },
+      {
+        "g": "D-1",
+        "t": "Magic Command",
+        "n": "Dark Firaga",
+        "c": "400 LP",
+        "cond": "Becomes available after Secret: Green at F-1 has been unlocked.",
+        "frm": "D-2"
       }
     ],
     "Tyranto Rex": [
@@ -14971,7 +16101,8 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "C-1",
@@ -14985,119 +16116,136 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Fire Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "D-1",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "D-3",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 25",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "Fire Boost",
         "c": "50 LP",
-        "cond": "Becomes available when in Flametongue disposition."
+        "cond": "Becomes available when in Flametongue disposition.",
+        "frm": "D-3"
       },
       {
         "g": "D-5",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "300 LP",
-        "cond": "Becomes available when in Flametongue disposition."
+        "cond": "Becomes available when in Flametongue disposition.",
+        "frm": "D-4"
       },
       {
         "g": "E-1",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-1"
       },
       {
         "g": "E-3",
         "t": "Magic Command",
         "n": "Firaga Burst",
         "c": "300 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
       },
       {
         "g": "F-1",
         "t": "Stat Ability",
         "n": "Fire Screen",
         "c": "40 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-1"
       },
       {
         "g": "F-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x5",
-        "cond": ""
+        "cond": "",
+        "frm": "F-1"
       },
       {
         "g": "F-3",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-4"
       },
       {
         "g": "F-4",
         "t": "Attack Command",
         "n": "Meteor Crash",
         "c": "400 LP",
-        "cond": "Becomes available after unlocking Secret: Green at F-3."
+        "cond": "Becomes available after unlocking Secret: Green at F-3.",
+        "frm": "F-3"
       },
       {
         "g": "G-1",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "100 LP",
-        "cond": "Becomes available when in Tyrant disposition."
+        "cond": "Becomes available when in Tyrant disposition.",
+        "frm": "F-1"
       },
       {
         "g": "G-2",
         "t": "Support Ability",
         "n": "Once More",
         "c": "300 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-2"
       },
       {
         "g": "G-4",
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": "Becomes available after unlocking Secret: Green at F-3."
+        "cond": "Becomes available after unlocking Secret: Green at F-3.",
+        "frm": "F-4"
       },
       {
         "g": "G-5",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 30",
-        "cond": "Becomes available after unlocking Sercet: Green at G-4."
+        "cond": "Becomes available after unlocking Sercet: Green at G-4.",
+        "frm": "G-4"
       },
       {
         "g": "G-6",
         "t": "Magic Command",
         "n": "Mega Flare",
         "c": "400 LP",
-        "cond": "Becomes available after unlocking Sercet: Green at G-4."
+        "cond": "Becomes available after unlocking Sercet: Green at G-4.",
+        "frm": "G-5"
       },
       {
         "g": "H-1",
         "t": "Stat Ability",
         "n": "Fire Boost",
         "c": "100 LP",
-        "cond": "Becomes available when in Tyrant disposition."
+        "cond": "Becomes available when in Tyrant disposition.",
+        "frm": "G-1"
       }
     ],
     "Ursa Circus": [
@@ -15120,119 +16268,136 @@ window.DREAM_GUIDE = {
         "t": "Secret",
         "n": "Secret: Green",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "B-4",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "100 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-3."
+        "cond": "Becomes available after unlocking Secret: Green at B-3.",
+        "frm": "B-3"
       },
       {
         "g": "B-5",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "150 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-3."
+        "cond": "Becomes available after unlocking Secret: Green at B-3.",
+        "frm": "B-4"
       },
       {
         "g": "C-2",
         "t": "Attack Command",
         "n": "Aerial Slam",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "s": 1
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "C-4",
         "t": "Stat Ability",
         "n": "Blindness Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "C-5",
         "t": "Stat Ability",
         "n": "Defender",
         "c": "150 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-3."
+        "cond": "Becomes available after unlocking Secret: Green at B-3.",
+        "frm": "B-5"
       },
       {
         "g": "D-2",
         "t": "Stat Ability",
         "n": "Item Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-2"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Sleep Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
       },
       {
         "g": "D-5",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "200 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-3."
+        "cond": "Becomes available after unlocking Secret: Green at B-3.",
+        "frm": "C-5"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
       },
       {
         "g": "E-4",
         "t": "Stat Ability",
         "n": "Item Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-4"
       },
       {
         "g": "E-5",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "300 LP",
-        "cond": "Becomes available after unlocking Secret: Green at B-3."
+        "cond": "Becomes available after unlocking Secret: Green at B-3.",
+        "frm": "D-5"
       },
       {
         "g": "F-3",
         "t": "Stat Ability",
         "n": "Attack Boost",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-3"
       },
       {
         "g": "F-4",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 20",
-        "cond": ""
+        "cond": "",
+        "frm": "E-4"
       },
       {
         "g": "F-5",
         "t": "Attack Command",
         "n": "Blitz",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-4"
       }
     ],
     "Wheeflower": [
@@ -15241,42 +16406,48 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "50 LP",
-        "cond": "Becomes available when in Multi-tasker disposition."
+        "cond": "Becomes available when in Multi-tasker disposition.",
+        "s": 1
       },
       {
         "g": "B-3",
         "t": "Stat Ability",
         "n": "Water Screen",
         "c": "60 LP",
-        "cond": "Becomes available when in Multi-tasker disposition."
+        "cond": "Becomes available when in Multi-tasker disposition.",
+        "s": 1
       },
       {
         "g": "B-5",
         "t": "Magic Command",
         "n": "Blizzara",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-5"
       },
       {
         "g": "C-3",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
       },
       {
         "g": "C-5",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 10",
-        "cond": ""
+        "cond": "",
+        "frm": "D-5"
       },
       {
         "g": "C-7",
         "t": "Stat Ability",
         "n": "Cure Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-7"
       },
       {
         "g": "D-2",
@@ -15297,70 +16468,80 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Water Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
       },
       {
         "g": "D-5",
         "t": "Magic Command",
         "n": "Esuna",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-4"
       },
       {
         "g": "D-6",
         "t": "Stat Ability",
         "n": "Sleep Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-5"
       },
       {
         "g": "D-7",
         "t": "Stat Ability",
         "n": "Water Screen",
         "c": "40 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-6"
       },
       {
         "g": "E-4",
         "t": "Stat Ability",
         "n": "Bind Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-4"
       },
       {
         "g": "E-6",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 20",
-        "cond": ""
+        "cond": "",
+        "frm": "D-6"
       },
       {
         "g": "E-7",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-7"
       },
       {
         "g": "F-4",
         "t": "Stat Ability",
         "n": "Cure Boost",
         "c": "100 LP",
-        "cond": "Becomes available when in Spell Slinger disposition."
+        "cond": "Becomes available when in Spell Slinger disposition.",
+        "frm": "E-4"
       },
       {
         "g": "F-6",
         "t": "Magic Command",
         "n": "Blizzaga",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-6"
       },
       {
         "g": "G-4",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "200 LP",
-        "cond": "Becomes available when in Spell Slinger disposition."
+        "cond": "Becomes available when in Spell Slinger disposition.",
+        "frm": "F-4"
       }
     ],
     "Woeflower": [
@@ -15369,7 +16550,8 @@ window.DREAM_GUIDE = {
         "t": "Magic Command",
         "n": "Sleepra",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "B-2",
@@ -15397,14 +16579,16 @@ window.DREAM_GUIDE = {
         "t": "Support Ability",
         "n": "Treasure Magnet",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-4"
       },
       {
         "g": "C-1",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 20",
-        "cond": ""
+        "cond": "",
+        "frm": "B-1"
       },
       {
         "g": "C-3",
@@ -15418,77 +16602,88 @@ window.DREAM_GUIDE = {
         "t": "Magic Command",
         "n": "Sleepga",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-1"
       },
       {
         "g": "D-3",
         "t": "Attack Command",
         "n": "Drain Dive",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "E-2",
         "t": "Stat Ability",
         "n": "Magic Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-3"
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
       },
       {
         "g": "E-4",
         "t": "Stat Ability",
         "n": "Dark Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-3"
       },
       {
         "g": "F-2",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "100 LP",
-        "cond": "Becomes available when in Natural disposition."
+        "cond": "Becomes available when in Natural disposition.",
+        "frm": "E-2"
       },
       {
         "g": "F-3",
         "t": "Stat Ability",
         "n": "Magic Haste",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-3"
       },
       {
         "g": "F-4",
         "t": "Stat Ability",
         "n": "Attack Haste",
         "c": "100 LP",
-        "cond": "Becomes available when in Bag of Tricks disposition."
+        "cond": "Becomes available when in Bag of Tricks disposition.",
+        "frm": "E-4"
       },
       {
         "g": "G-2",
         "t": "Stat Ability",
         "n": "Dark Screen",
         "c": "40 LP",
-        "cond": "Becomes available when in Natural disposition."
+        "cond": "Becomes available when in Natural disposition.",
+        "frm": "F-2"
       },
       {
         "g": "G-3",
         "t": "Attack Command",
         "n": "Poison Dive",
         "c": "200 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-3"
       },
       {
         "g": "G-4",
         "t": "Stat Ability",
         "n": "Blindness Block",
         "c": "30 LP",
-        "cond": "Becomes available when in Bag of Tricks disposition."
+        "cond": "Becomes available when in Bag of Tricks disposition.",
+        "frm": "F-4"
       }
     ],
     "Yoggy Ram": [
@@ -15497,56 +16692,64 @@ window.DREAM_GUIDE = {
         "t": "Stat Ability",
         "n": "Fire Screen",
         "c": "80 LP",
-        "cond": "Becomes available when in Trailblazer disposition."
+        "cond": "Becomes available when in Trailblazer disposition.",
+        "s": 1
       },
       {
         "g": "A-4",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "200 LP",
-        "cond": "Becomes available when in Trailblazer disposition."
+        "cond": "Becomes available when in Trailblazer disposition.",
+        "s": 1
       },
       {
         "g": "B-3",
         "t": "Magic Command",
         "n": "Esuna",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "B-4",
         "t": "Stats Ability",
         "n": "Fire Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "B-5",
         "t": "Stat Ability",
         "n": "Bind Block",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-4"
       },
       {
         "g": "B-6",
         "t": "Stat Ability",
         "n": "Fire Screen",
         "c": "40 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-5"
       },
       {
         "g": "B-7",
         "t": "Stat Ability",
         "n": "Fire Screen",
         "c": "60 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-6"
       },
       {
         "g": "B-8",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-7"
       },
       {
         "g": "C-1",
@@ -15574,14 +16777,16 @@ window.DREAM_GUIDE = {
         "t": "Support Ability",
         "n": "Treasure Magnet",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "D-1",
         "t": "Stat Ability",
         "n": "Fire Screen",
         "c": "100 LP",
-        "cond": "Becomes available when in Powerhouse disposition."
+        "cond": "Becomes available when in Powerhouse disposition.",
+        "frm": "C-1"
       },
       {
         "g": "D-2",
@@ -15595,35 +16800,40 @@ window.DREAM_GUIDE = {
         "t": "Attack Command",
         "n": "Fire Windmill",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-3"
       },
       {
         "g": "E-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 10",
-        "cond": ""
+        "cond": "",
+        "frm": "D-2"
       },
       {
         "g": "F-2",
         "t": "Magic Command",
         "n": "Fira",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-2"
       },
       {
         "g": "G-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 20",
-        "cond": ""
+        "cond": "",
+        "frm": "F-2"
       },
       {
         "g": "H-2",
         "t": "Magic Command",
         "n": "Firaga",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "G-2"
       }
     ],
     "Zolephant": [
@@ -15632,134 +16842,233 @@ window.DREAM_GUIDE = {
         "t": "Support Ability",
         "n": "Second Chance",
         "c": "300 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-2"
       },
       {
         "g": "B-2",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Link x3",
-        "cond": ""
+        "cond": "",
+        "frm": "B-3"
       },
       {
         "g": "B-3",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-4"
       },
       {
         "g": "B-4",
         "t": "Attack Command",
         "n": "Collision Magnet",
         "c": "10 LP",
-        "cond": ""
+        "cond": "",
+        "s": 1
       },
       {
         "g": "B-4",
         "t": "Attack Command",
         "n": "Magnet Spiral",
         "c": "10 LP",
-        "cond": "Becomes Magnet Spiral after Secret: Red at G-4 has been unlocked."
+        "cond": "Becomes Magnet Spiral after Secret: Red at G-4 has been unlocked.",
+        "s": 1
       },
       {
         "g": "C-4",
         "t": "Stat Ability",
         "n": "Water Screen",
         "c": "20 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "B-4"
       },
       {
         "g": "C-5",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "150 LP",
-        "cond": "Becomes available when in Fighter disposition."
+        "cond": "Becomes available when in Fighter disposition.",
+        "frm": "C-4"
       },
       {
         "g": "C-6",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "200 LP",
-        "cond": "Becomes available when in Fighter disposition."
+        "cond": "Becomes available when in Fighter disposition.",
+        "frm": "C-5"
       },
       {
         "g": "D-3",
         "t": "Stat Ability",
         "n": "Water Boost",
         "c": "30 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-4"
       },
       {
         "g": "D-4",
         "t": "Stat Ability",
         "n": "Water Screen",
         "c": "40 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "C-4"
       },
       {
         "g": "D-5",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-4"
       },
       {
         "g": "E-1",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "200 LP",
-        "cond": "Becomes available when in Nozzle-Nose disposition."
+        "cond": "Becomes available when in Nozzle-Nose disposition.",
+        "s": 1
       },
       {
         "g": "E-2",
         "t": "Stat Ability",
         "n": "Water Boost",
         "c": "50 LP",
-        "cond": "Becomes available when in Nozzle-Nose disposition."
+        "cond": "Becomes available when in Nozzle-Nose disposition.",
+        "s": 1
       },
       {
         "g": "E-3",
         "t": "Stat Ability",
         "n": "HP Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-3"
       },
       {
         "g": "E-4",
         "t": "Stat Ability",
         "n": "Defense Boost",
         "c": "100 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-4"
       },
       {
         "g": "E-5",
         "t": "Stat Ability",
         "n": "Water Screen",
         "c": "60 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "D-5"
       },
       {
         "g": "E-6",
         "t": "Stat Ability",
         "n": "Cure Boost",
         "c": "50 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "E-5"
       },
       {
         "g": "F-4",
         "t": "Quota",
         "n": "Checkpoint",
         "c": "Level 20",
-        "cond": ""
+        "cond": "",
+        "frm": "E-4"
       },
       {
         "g": "G-4",
         "t": "Secret",
         "n": "Secret: Red",
         "c": "150 LP",
-        "cond": ""
+        "cond": "",
+        "frm": "F-4"
       }
+    ]
+  },
+  "boardStarts": {
+    "Aura Lion": [
+      "C-1"
+    ],
+    "Beatalike": [
+      "D-5"
+    ],
+    "Catanuki": [
+      "C-4"
+    ],
+    "Cera Terror": [
+      "C-1"
+    ],
+    "Chef Kyroo": [
+      "C-1"
+    ],
+    "Juggle Pup": [
+      "A-1"
+    ],
+    "KO Kabuto": [
+      "C-1"
+    ],
+    "Keeba Tiger": [
+      "A-2"
+    ],
+    "Komory Bat": [
+      "A-3"
+    ],
+    "Kooma Panda": [
+      "B-1"
+    ],
+    "Lord Kyroo": [
+      "B-1"
+    ],
+    "Majik Lapin": [
+      "C-1"
+    ],
+    "Me Me Bunny": [
+      "A-1"
+    ],
+    "Necho Cat": [
+      "C-7"
+    ],
+    "Peepsta Hoo": [
+      "A-1"
+    ],
+    "Pegaslick": [
+      "A-3"
+    ],
+    "Pricklemane": [
+      "B-1"
+    ],
+    "Ryu Dragon": [
+      "C-1"
+    ],
+    "Sir Kyroo": [
+      "A-2"
+    ],
+    "Skelterwild": [
+      "C-1"
+    ],
+    "Staggerceps": [
+      "A-2"
+    ],
+    "Tama Sheep": [
+      "A-1"
+    ],
+    "Tatsu Blaze": [
+      "C-1"
+    ],
+    "Thunderaffe": [
+      "A-2"
+    ],
+    "Toximander": [
+      "A-3"
+    ],
+    "Tubguin Ace": [
+      "D-7"
     ]
   }
 };

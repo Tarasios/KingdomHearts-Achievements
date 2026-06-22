@@ -564,3 +564,31 @@ table.dg-board { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .dg-board-legend-tip { font-style: italic; }
 .dg-pop .dg-pop-cond { display: block; margin-top: 2px; color: var(--dim); }
 .dg-pop .dg-pop-hr { display: block; border-top: 1px solid var(--line); margin: 6px 0; }
+
+/* ---- Spirit modal: rank/level controls, dispositions, ability checklist ---- */
+.dg-m-controls { display: flex; gap: 14px; align-items: flex-end; flex-wrap: wrap; margin: 14px 0 4px; }
+.dg-m-controls-note { font-size: 11.5px; color: var(--dim); font-style: italic; padding-bottom: 8px; }
+.kh .dg-m-dispo { display: block; }
+.dg-m-dispo-top { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.dg-m-switch-wrap summary { cursor: pointer; font-size: 11.5px; color: var(--accent); margin-top: 6px; }
+.dg-m-switch { margin-top: 6px; font-size: 11.5px; color: var(--dim); display: flex; flex-direction: column; gap: 3px; }
+.dg-sw-to { color: var(--accent2); font-weight: 600; }
+.kh .dg-ab.have { border-color: #2c5b3c; background: rgba(111, 227, 154, .06); }
+.kh .dg-ab-head { gap: 9px; }
+
+/* ---- Ability board: blue trails, owned nodes, start spots ---- */
+.dg-gcell { position: relative; overflow: visible; }
+.dg-gcell.filled { cursor: pointer; }
+.dg-gcell img { position: relative; z-index: 2; }
+.dg-trail { position: absolute; background: #3f7bdd; z-index: 1; }
+.dg-trail.up { width: 4px; left: calc(50% - 2px); bottom: 50%; height: calc(50% + 3px); }
+.dg-trail.down { width: 4px; left: calc(50% - 2px); top: 50%; height: calc(50% + 3px); }
+.dg-trail.left { height: 4px; top: calc(50% - 2px); right: 50%; width: calc(50% + 3px); }
+.dg-trail.right { height: 4px; top: calc(50% - 2px); left: 50%; width: calc(50% + 3px); }
+.dg-gcell.owned { border-color: #2c5b3c; box-shadow: inset 0 0 0 1px #2c5b3c; }
+.dg-gcheck { position: absolute; top: -4px; right: -4px; width: 15px; height: 15px; border-radius: 50%;
+    background: #2c5b3c; color: #dfffe9; font-size: 10px; line-height: 15px; text-align: center; display: none; z-index: 3; }
+.dg-gcell.owned .dg-gcheck { display: block; }
+.dg-gcell.startnode { box-shadow: inset 0 0 0 2px #e0c66a; }
+.dg-gcell.start { background: #0c1326; border-color: #3a2f12; }
+.dg-gcell.start img { width: 80%; height: 80%; object-fit: contain; opacity: .9; }

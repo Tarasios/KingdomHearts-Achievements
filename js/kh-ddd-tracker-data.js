@@ -1394,14 +1394,10 @@ var TRACKER_GAME = {
           "items": [
             {
               "name": "Combo Plus",
-              "g": "Support",
-              "max": 3
-            },
+              "g": "Support"},
             {
               "name": "Air Combo Plus",
-              "g": "Support",
-              "max": 3
-            },
+              "g": "Support"},
             {
               "name": "Combo Master",
               "g": "Support",
@@ -1449,9 +1445,7 @@ var TRACKER_GAME = {
             },
             {
               "name": "Treasure Magnet",
-              "g": "Support",
-              "max": 5
-            },
+              "g": "Support"},
             {
               "name": "Link Critical",
               "g": "Spirit",
@@ -1459,9 +1453,7 @@ var TRACKER_GAME = {
             },
             {
               "name": "Support Boost",
-              "g": "Spirit",
-              "max": 3
-            },
+              "g": "Spirit"},
             {
               "name": "Waking Dream",
               "g": "Spirit",

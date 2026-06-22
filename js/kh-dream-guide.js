@@ -64,20 +64,65 @@ RECIPE_ITEMS.forEach((item, i) => { if (!RECIPE_INDEX.has(item.name)) RECIPE_IND
 const SPIRIT_BY_NAME = {};
 DG.spirits.forEach(s => { SPIRIT_BY_NAME[s.name] = s; });
 
-/* ---------- stores ---------- */
+/* ---------- stores ----------
+   Spirit ownership is the DDD tracker's own "Dream Eaters" checklist, so the
+   two stay in sync automatically (check a Spirit there → owned here, and back).
+   The Dream Guide's own store (khddd_guide_v1) holds the things the tracker
+   doesn't: a per-Spirit custom rank and which Ability Link board nodes /
+   abilities you've unlocked. */
 function loadDDD() { try { return JSON.parse(localStorage.getItem(DDD_STORE_KEY)) || {}; } catch (e) { return {}; } }
 let DDD = loadDDD();
 function saveDDD() { try { localStorage.setItem(DDD_STORE_KEY, JSON.stringify(DDD)); } catch (e) { /* private */ } }
 function dddSection(id) { if (!DDD[id]) DDD[id] = {}; return DDD[id]; }
 
+// Spirit name -> index in the tracker's Dream Eaters list (ownership store).
+const DE_INDEX = new Map();
+DREAMEATERS.forEach((it, i) => { if (!DE_INDEX.has(it.name)) DE_INDEX.set(it.name, i); });
+function spiritOwned(name) { const i = DE_INDEX.get(name); return i != null && !!dddSection("dreameaters")[i]; }
+function toggleSpirit(name) {
+  const i = DE_INDEX.get(name); if (i == null) return;
+  const store = dddSection("dreameaters");
+  if (store[i]) delete store[i]; else store[i] = true;
+  saveDDD(); renderSpirits(); if (modalSpirit === name) renderModal();
+}
+
+// Ability-checklist index in the tracker (Support / Spirit abilities only).
+const ABIL_SEC = findSec("abilities");
+const ABIL_TRACK_INDEX = new Map();
+((ABIL_SEC && ABIL_SEC.items) || []).forEach((it, i) => { if (!ABIL_TRACK_INDEX.has(it.name)) ABIL_TRACK_INDEX.set(it.name, i); });
+
 function loadGuide() { try { return JSON.parse(localStorage.getItem(GUIDE_KEY)) || {}; } catch (e) { return {}; } }
 let GUIDE = loadGuide();
-if (!GUIDE.owned) GUIDE.owned = {};
+GUIDE.rank = GUIDE.rank || {};      // spirit -> custom rank
+GUIDE.nodes = GUIDE.nodes || {};    // spirit -> { grid: true } unlocked board nodes
+GUIDE.abilities = GUIDE.abilities || {};   // ability name -> true (unlocked at least once)
 function saveGuide() { try { localStorage.setItem(GUIDE_KEY, JSON.stringify(GUIDE)); } catch (e) { /* private */ } }
-function spiritOwned(name) { return !!GUIDE.owned[name]; }
-function toggleSpirit(name) {
-  if (GUIDE.owned[name]) delete GUIDE.owned[name]; else GUIDE.owned[name] = true;
-  saveGuide(); renderSpirits(); if (modalSpirit === name) renderModal();
+
+function spiritRank(name) { return GUIDE.rank[name] || (SPIRIT_BY_NAME[name] && SPIRIT_BY_NAME[name].rank) || "C"; }
+function setSpiritRank(name, rank) { GUIDE.rank[name] = rank; saveGuide(); }
+
+// An ability is "unlocked" if marked here, or already checked on the tracker.
+function abilityOwned(name) {
+  if (GUIDE.abilities[name]) return true;
+  const i = ABIL_TRACK_INDEX.get(name);
+  return i != null && !!dddSection("abilities")[i];
+}
+function setAbilityOwned(name, on) {
+  if (on) GUIDE.abilities[name] = true; else delete GUIDE.abilities[name];
+  const i = ABIL_TRACK_INDEX.get(name);          // mirror onto the main checklist
+  if (i != null) { const s = dddSection("abilities"); if (on) s[i] = true; else delete s[i]; saveDDD(); }
+  saveGuide();
+}
+function nodeOwned(spirit, grid) { const m = GUIDE.nodes[spirit]; return !!(m && m[grid]); }
+function toggleNode(spirit, node) {
+  const m = GUIDE.nodes[spirit] || (GUIDE.nodes[spirit] = {});
+  const on = !m[node.g];
+  if (on) m[node.g] = true; else delete m[node.g];
+  // Marking a board node also flags its ability as unlocked (set-only: other
+  // Spirits may grant the same one, so un-marking a node never clears it).
+  if (on && node.t !== "Quota" && node.t !== "Secret") setAbilityOwned(node.n, true);
+  saveGuide();
+  if (modalSpirit === spirit) renderModal();
 }
 
 /* ---------- treasure index (tracker lang gives the chest "area" text) ---------- */
@@ -262,75 +307,115 @@ function parseCoord(g) {
   return { col, row: parseInt(m[2], 10) };
 }
 function colLabel(n) { let s = ""; while (n > 0) { s = String.fromCharCode(65 + (n - 1) % 26) + s; n = Math.floor((n - 1) / 26); } return s; }
-function buildBoardGrid(board) {
+function coordStr(col, row) { return colLabel(col) + "-" + row; }
+function buildBoardGrid(spirit, board) {
   const cells = {}; let maxCol = 1, maxRow = 1;
   board.forEach(node => {
     const c = parseCoord(node.g); if (!c) return;
     maxCol = Math.max(maxCol, c.col); maxRow = Math.max(maxRow, c.row);
     (cells[c.col + "," + c.row] = cells[c.col + "," + c.row] || []).push(node);
   });
-  let html = `<div class="dg-grid-board" style="grid-template-columns:26px repeat(${maxCol}, minmax(34px, 1fr))">`;
+  const starts = new Set((DG.boardStarts || {})[spirit] || []);
+  starts.forEach(s => { const c = parseCoord(s); if (c) { maxCol = Math.max(maxCol, c.col); maxRow = Math.max(maxRow, c.row); } });
+  // Each predecessor→node link draws as two half-lines (one on each cell,
+  // meeting in the gap), so trails never overflow into a neighbour's cell.
+  const OPP = { up: "down", down: "up", left: "right", right: "left" };
+  const linkDirs = {};
+  const addDir = (k, d) => { (linkDirs[k] = linkDirs[k] || new Set()).add(d); };
+  board.forEach(n => {
+    if (!n.frm) return;
+    const me = parseCoord(n.g), p = parseCoord(n.frm); if (!me || !p) return;
+    const dc = p.col - me.col, dr = p.row - me.row;
+    const dir = dc === 1 ? "right" : dc === -1 ? "left" : dr === 1 ? "down" : dr === -1 ? "up" : null;
+    if (!dir) return;
+    addDir(me.col + "," + me.row, dir); addDir(p.col + "," + p.row, OPP[dir]);
+  });
+  const trailsFor = key => [...(linkDirs[key] || [])].map(d => `<i class="dg-trail ${d}"></i>`).join("");
+  let html = `<div class="dg-grid-board" style="grid-template-columns:22px repeat(${maxCol}, minmax(30px, 1fr))">`;
   html += `<div class="dg-gcorner"></div>`;
   for (let col = 1; col <= maxCol; col++) html += `<div class="dg-gcol-h">${esc(colLabel(col))}</div>`;
   for (let row = 1; row <= maxRow; row++) {
     html += `<div class="dg-grow-h">${row}</div>`;
     for (let col = 1; col <= maxCol; col++) {
-      const nodes = cells[col + "," + row];
-      if (!nodes) { html += `<div class="dg-gcell"></div>`; continue; }
-      const primary = nodes[0];
+      const key = col + "," + row, nodes = cells[key];
+      if (!nodes) {
+        html += starts.has(coordStr(col, row))
+          ? `<div class="dg-gcell start">${trailsFor(key)}<img src="${esc(BOARD_IMG)}Start_Icon.png" alt="Start"></div>`
+          : `<div class="dg-gcell">${trailsFor(key)}</div>`;
+        continue;
+      }
+      const primary = nodes[0], owned = nodeOwned(spirit, primary.g);
+      const trails = trailsFor(key);
       const tip = nodes.map(n => {
         const perm = isPermanent(n) ? " (" + translate("dg-permanent") + ")" : "";
         return `<b>${esc(n.n)}</b>${perm}<span class="dg-pop-src">${esc(n.t)}${n.c ? " · " + esc(n.c) : ""}</span>` + (n.cond ? `<span class="dg-pop-cond">${esc(n.cond)}</span>` : "");
       }).join('<span class="dg-pop-hr"></span>');
-      html += `<div class="dg-gcell filled" tabindex="0" data-pop="${esc(tip)}">` +
-        `<img src="${esc(BOARD_IMG + nodeIcon(primary))}" alt="${esc(primary.n)}">` +
-        (nodes.length > 1 ? `<span class="dg-gmore">${nodes.length}</span>` : "") + `</div>`;
+      html += `<div class="dg-gcell filled${owned ? " owned" : ""}${primary.s ? " startnode" : ""}" tabindex="0" role="button" data-pop="${esc(tip)}" data-node="${esc(primary.g)}" aria-pressed="${owned}">` +
+        trails + `<img src="${esc(BOARD_IMG + nodeIcon(primary))}" alt="${esc(primary.n)}">` +
+        (nodes.length > 1 ? `<span class="dg-gmore">${nodes.length}</span>` : "") +
+        `<span class="dg-gcheck" aria-hidden="true">✓</span></div>`;
     }
   }
   return html + `</div>`;
 }
 function boardLegend() {
-  const items = [["Ability_Icon.png", "dg-leg-stat"], ["Perm_Ability_Icon.png", "dg-permanent"],
+  const items = [["Start_Icon.png", "dg-leg-start"], ["Ability_Icon.png", "dg-leg-stat"], ["Perm_Ability_Icon.png", "dg-permanent"],
     ["Attack_Icon.png", "dg-leg-cmd"], ["Link_Door.png", "dg-leg-gate"], ["Green_Secret.png", "dg-leg-secret"]];
   return `<div class="dg-board-legend">` + items.map(([ic, k]) =>
     `<span><img src="${esc(BOARD_IMG + ic)}" alt="">${esc(translate(k))}</span>`).join("") +
-    `<span class="dg-board-legend-tip">${esc(translate("dg-board-tip"))}</span></div>`;
+    `<span class="dg-board-legend-tip">${esc(translate("dg-board-click"))}</span></div>`;
 }
 
 /* ---------- modal ---------- */
 const modal = document.getElementById("dg-modal");
 const modalBody = document.getElementById("dg-modal-body");
-let modalSpirit = null;
-function openModal(name) { modalSpirit = name; renderModal(); modal.classList.add("open"); modal.setAttribute("aria-hidden", "false"); }
+let modalSpirit = null, modalRank = null, modalLevel = 50;
+function openModal(name) { modalSpirit = name; modalRank = null; modalLevel = 50; renderModal(); modal.classList.add("open"); modal.setAttribute("aria-hidden", "false"); }
 function closeModal() { modal.classList.remove("open"); modal.setAttribute("aria-hidden", "true"); modalSpirit = null; }
 document.getElementById("dg-modal-close").addEventListener("click", closeModal);
 document.getElementById("dg-modal-back").addEventListener("click", closeModal);
 document.addEventListener("keydown", e => { if (e.key === "Escape" && modal.classList.contains("open")) closeModal(); });
 
+function dispoSwitch(sw) {
+  const parts = (sw || "").split(";").map(s => s.trim()).filter(Boolean);
+  return `<div class="dg-m-switch">` + parts.map(p => {
+    const m = /^To\s+([^:]+):\s*(.+)$/.exec(p);
+    return m ? `<div><span class="dg-sw-to">${esc(m[1].trim())}</span> ${esc(m[2].trim())}</div>` : `<div>${esc(p)}</div>`;
+  }).join("") + `</div>`;
+}
+function updateModalStats(spirit) {
+  const host = document.getElementById("dg-m-stats");
+  if (host) host.innerHTML = statsTable(spirit, modalRank || spiritRank(spirit.name), modalLevel, "");
+}
 function renderModal() {
   const spirit = SPIRIT_BY_NAME[modalSpirit];
   if (!spirit) return;
   const has = spiritOwned(spirit.name);
+  const rank = modalRank || spiritRank(spirit.name);
+
+  // --- header ---
   let html = `<div class="dg-m-head">` +
     `<img class="dg-m-portrait" src="${esc(spiritFile(spirit.name))}" alt="">` +
     `<div class="dg-m-headinfo">` +
       `<div class="dg-m-title" id="dg-modal-title">${esc(spirit.name)}</div>` +
       `<div class="dg-m-meta">` +
-        `<span><b>${esc(translate("dg-c-attr"))}:</b> ${esc(spirit.attr || "—")}</span>` +
-        `<span><b>${esc(translate("dg-c-style"))}:</b> ${esc(spirit.style || "—")}</span>` +
-        `<span><b>${esc(translate("dg-c-dp"))}:</b> ${esc(spirit.dp || "—")}</span>` +
-        (spirit.rank ? `<span><b>${esc(translate("dg-c-rank-out"))}:</b> ${esc(spirit.rank)}</span>` : "") +
+        `<span><b>${esc(translate("dg-c-attr"))}</b> ${esc(spirit.attr || "—")}</span>` +
+        `<span><b>${esc(translate("dg-c-style"))}</b> ${esc(spirit.style || "—")}</span>` +
+        `<span><b>${esc(translate("dg-c-dp"))}</b> ${esc(spirit.dp || "—")}</span>` +
+        `<span><b>${esc(translate("dg-c-exp"))}</b> ${typeof spirit.exp === "number" ? spirit.exp : esc(String(spirit.exp))}</span>` +
       `</div>` +
       `<button class="dg-m-own${has ? " on" : ""}" id="dg-m-own">★ ${esc(translate(has ? "dg-owned" : "dg-mark-owned"))}</button>` +
     `</div></div>`;
 
-  // base stats
-  html += `<div class="dg-m-statline">` +
-    [["dg-c-hp", spirit.hp], ["dg-c-str", spirit.str], ["dg-c-mag", spirit.mag], ["dg-c-def", spirit.def], ["dg-c-exp", spirit.exp]]
-      .map(([k, v]) => `<span><b>${esc(translate(k))}</b> ${typeof v === "number" ? v : esc(String(v))}</span>`).join("") +
-    `</div>`;
+  // --- rank / level controls + computed stats ---
+  const rankOpts = RANKS.slice().reverse().map(r => `<option value="${esc(r)}"${r === rank ? " selected" : ""}>${esc(r)}</option>`).join("");
+  html += `<div class="dg-m-controls">` +
+    `<label class="dg-ctx-field"><span>${esc(translate("dg-c-rank-out"))}</span><select id="dg-m-rank">${rankOpts}</select></label>` +
+    `<label class="dg-ctx-field dg-ctx-narrow"><span>${esc(translate("dg-c-level-out"))}</span><input type="number" id="dg-m-level" min="1" max="99" value="${modalLevel}"></label>` +
+    `<span class="dg-m-controls-note">${esc(translate(has ? "dg-your-spirit" : "dg-preview"))}</span></div>`;
+  html += `<div id="dg-m-stats">${statsTable(spirit, rank, modalLevel, "")}</div>`;
 
-  // resistances
+  // --- resistances ---
   html += `<h3 class="grp-title">${esc(translate("dg-c-resist"))}</h3><div class="dg-c-res">`;
   [["fire", "Fire"], ["blz", "Blizzard"], ["thn", "Thunder"], ["wtr", "Water"], ["drk", "Dark"], ["lgt", "Light"]].forEach(([k, label]) => {
     const mult = spirit.res ? spirit.res[k] : null;
@@ -339,24 +424,28 @@ function renderModal() {
   });
   html += `</div>`;
 
-  // dispositions
+  // --- dispositions (with how-to-switch) ---
   if (spirit.disps && spirit.disps.length) {
     html += `<h3 class="grp-title">${esc(translate("dg-c-dispo-list"))}</h3><div class="dg-m-dispos">`;
     spirit.disps.forEach((d, i) => {
-      html += `<div class="dg-m-dispo"><span class="dg-c-dispo-no">${["I", "II", "III", "IV"][i]}</span>` +
-        `<div><div class="dg-c-dispo-name">${esc(d.n)}</div>${d.b ? `<div class="dg-c-dispo-beh">${esc(d.b)}</div>` : ""}</div></div>`;
+      html += `<div class="dg-m-dispo"><div class="dg-m-dispo-top"><span class="dg-c-dispo-no">${["I", "II", "III", "IV"][i]}</span>` +
+        `<span class="dg-c-dispo-name">${esc(d.n)}</span></div>` +
+        (d.b ? `<div class="dg-c-dispo-beh">${esc(d.b)}</div>` : "") +
+        (d.sw ? `<details class="dg-m-switch-wrap"><summary>${esc(translate("dg-dispo-switch"))}</summary>${dispoSwitch(d.sw)}</details>` : "") +
+        `</div>`;
     });
     html += `</div>`;
   }
 
-  // ability link board (rendered as the in-game grid)
+  // --- ability link board ---
   const board = (DG.boards || {})[spirit.name] || [];
   if (board.length) {
-    html += `<h3 class="grp-title">${esc(translate("dg-board"))} <span class="dg-c-sub">— ${board.length} ${esc(translate("dg-board-nodes"))}</span></h3>`;
-    html += buildBoardGrid(board) + boardLegend();
+    const ownedNodes = board.filter(n => nodeOwned(spirit.name, n.g)).length;
+    html += `<h3 class="grp-title">${esc(translate("dg-board"))} <span class="dg-c-sub">— ${KH.chip(ownedNodes, board.length)}</span></h3>`;
+    html += buildBoardGrid(spirit.name, board) + boardLegend();
   }
 
-  // recipes to create it
+  // --- recipes to create it ---
   const recs = DG.recipes.filter(r => r.sp === spirit.name);
   if (recs.length) {
     html += `<h3 class="grp-title">${esc(translate("dg-m-recipes"))}</h3><div class="dg-m-recipes">`;
@@ -371,8 +460,19 @@ function renderModal() {
   }
 
   modalBody.innerHTML = html;
+  // wire controls
   const ownBtn = document.getElementById("dg-m-own");
   if (ownBtn) ownBtn.addEventListener("click", () => toggleSpirit(spirit.name));
+  const rankSel = document.getElementById("dg-m-rank");
+  rankSel.addEventListener("change", () => { modalRank = rankSel.value; if (spiritOwned(spirit.name)) setSpiritRank(spirit.name, modalRank); updateModalStats(spirit); });
+  const levelIn = document.getElementById("dg-m-level");
+  levelIn.addEventListener("input", () => { modalLevel = Math.min(99, Math.max(1, parseInt(levelIn.value, 10) || 1)); updateModalStats(spirit); });
+  modalBody.querySelectorAll(".dg-gcell.filled").forEach(cell => {
+    const node = board.find(n => n.g === cell.getAttribute("data-node"));
+    if (!node) return;
+    cell.addEventListener("click", () => toggleNode(spirit.name, node));
+    cell.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); toggleNode(spirit.name, node); } });
+  });
   wirePop(modalBody);
 }
 
@@ -607,11 +707,14 @@ function renderAbilities() {
   }).sort((a, b) => a.localeCompare(b));
 
   if (!names.length) { abList.innerHTML = `<p class="empty">${esc(translate("dg-empty"))}</p>`; return; }
-  let html = "";
+  const ownedCount = Object.keys(ABILITY_INDEX).filter(abilityOwned).length;
+  let html = `<div class="trk-summary" style="margin-bottom:10px"><span>${format("dg-ab-owned", `<b>${ownedCount}</b>`, Object.keys(ABILITY_INDEX).length)}</span></div>`;
   names.forEach(name => {
     const e = ABILITY_INDEX[name];
     const icon = nodeIcon({ t: e.type, n: name, c: e.grants[0].cost });
-    html += `<div class="dg-ab"><div class="dg-ab-head">` +
+    const have = abilityOwned(name);
+    html += `<div class="dg-ab${have ? " have" : ""}"><div class="dg-ab-head">` +
+      `<span class="dg-check${have ? " on" : ""}" role="checkbox" tabindex="0" aria-checked="${have}" data-ab="${esc(name)}"></span>` +
       `<img class="dg-ab-ic" src="${esc(BOARD_IMG + icon)}" alt="">` +
       `<span class="dg-ab-name">${esc(name)}</span>` +
       `<span class="dg-ab-type">${esc(e.type)}</span>` +
@@ -627,6 +730,11 @@ function renderAbilities() {
   });
   abList.innerHTML = html;
   abList.querySelectorAll("[data-spirit]").forEach(b => b.addEventListener("click", () => openModal(b.getAttribute("data-spirit"))));
+  abList.querySelectorAll(".dg-check[data-ab]").forEach(box => {
+    const toggle = () => { const n = box.getAttribute("data-ab"); setAbilityOwned(n, !abilityOwned(n)); renderAbilities(); };
+    box.addEventListener("click", toggle);
+    box.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+  });
   wirePop(abList);
 }
 
@@ -805,8 +913,12 @@ function renderAll() { renderSpirits(); renderMaterials(); renderRecipes(); rend
 document.addEventListener("i18n:updated", () => { buildTreasureIndex(); fillCreateControls(); renderAll(); if (modalSpirit) renderModal(); });
 
 window.addEventListener("storage", e => {
-  if (e.key === DDD_STORE_KEY) { DDD = loadDDD(); renderMaterials(); renderRecipes(); }
-  else if (e.key === GUIDE_KEY) { GUIDE = loadGuide(); if (!GUIDE.owned) GUIDE.owned = {}; renderSpirits(); if (modalSpirit) renderModal(); }
+  if (e.key === DDD_STORE_KEY) {            // tracker changed in another tab (ownership / abilities / treasures)
+    DDD = loadDDD(); renderSpirits(); renderMaterials(); renderRecipes(); renderAbilities(); if (modalSpirit) renderModal();
+  } else if (e.key === GUIDE_KEY) {
+    GUIDE = loadGuide(); GUIDE.rank = GUIDE.rank || {}; GUIDE.nodes = GUIDE.nodes || {}; GUIDE.abilities = GUIDE.abilities || {};
+    renderSpirits(); renderAbilities(); if (modalSpirit) renderModal();
+  }
 });
 
 await fetchTrackerLang();

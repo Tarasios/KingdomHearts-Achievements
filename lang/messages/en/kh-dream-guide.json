@@ -99,5 +99,11 @@
   "dg-leg-gate": "Gate",
   "dg-leg-secret": "Secret",
   "dg-board-tip": "Hover a node for its ability, cost and unlock condition.",
+  "dg-your-spirit": "Your Spirit — rank saved",
+  "dg-preview": "Preview (mark owned to save a rank)",
+  "dg-dispo-switch": "How to switch to others",
+  "dg-board-click": "Click a node to mark it unlocked.",
+  "dg-leg-start": "Start",
+  "dg-ab-owned": "Unlocked: %1 / %2",
   "dg-empty": "Nothing matches your filter."
 }

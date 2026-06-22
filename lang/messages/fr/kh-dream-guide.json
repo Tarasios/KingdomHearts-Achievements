@@ -99,5 +99,11 @@
   "dg-leg-gate": "Barrière",
   "dg-leg-secret": "Secret",
   "dg-board-tip": "Survolez un nœud pour sa capacité, son coût et sa condition de déblocage.",
+  "dg-your-spirit": "Votre Esprit — rang enregistré",
+  "dg-preview": "Aperçu (marquez comme obtenu pour enregistrer un rang)",
+  "dg-dispo-switch": "Comment passer aux autres",
+  "dg-board-click": "Cliquez sur un nœud pour le marquer débloqué.",
+  "dg-leg-start": "Départ",
+  "dg-ab-owned": "Débloquées : %1 / %2",
   "dg-empty": "Rien ne correspond à votre filtre."
 }
