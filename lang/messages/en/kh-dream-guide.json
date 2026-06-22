@@ -1,0 +1,41 @@
+{
+  "page-title": "Dream Drop Distance — Dream Guide",
+  "logo-name": "KH Completionist",
+  "lang-toggle-aria": "Switch language to French",
+  "nav-tools": "Tools",
+  "theme-to-day": "Day",
+  "theme-to-night": "Night",
+  "theme-toggle-aria": "Toggle bright theme",
+
+  "kh-title": "Dream Drop Distance — Dream Guide",
+  "kh-subtitle": "Browse every Spirit, see where each crafting material drops, and check off the Recipes you own. Spirit ownership saves in your browser; Treasure cross-offs and Recipe items stay in sync with the Achievement Tracker.",
+  "kh-tracker-link": "← Back to the Dream Drop Distance Achievement Tracker",
+
+  "tabbtn-spirits": "Spirits",
+  "tabbtn-materials": "Materials",
+  "tabbtn-recipes": "Recipes",
+
+  "dg-spirits-hint": "Click a Spirit to mark it owned. Greyed-out Spirits have not been obtained yet.",
+  "dg-spirits-filter": "filter Spirits…",
+  "dg-spirits-reset": "Reset",
+  "dg-owned-count": "Owned: %1 / %2",
+
+  "dg-materials-hint": "Each material's drop sources. Hover a Dream Eater to see the worlds it appears in, or a Treasure to see its chest locations — chests already crossed off in the tracker are struck through.",
+  "dg-materials-filter": "filter materials or Dream Eaters…",
+  "dg-treasure": "Treasure",
+  "dg-src-nightmare": "Appears in",
+  "dg-src-rare": "Rare Nightmare in",
+  "dg-src-streetpass": "StreetPass Portals",
+  "dg-rewards": "Portal rewards",
+  "dg-other": "Other ways",
+
+  "dg-recipes-hint": "A checklist of every Spirit's Recipe item. This shares its data with the Achievement Tracker, so checking one here checks it there too.",
+  "dg-recipes-filter": "filter Spirits…",
+  "dg-recipes-reset": "Reset",
+  "dg-recipe-count": "Recipe items: %1 / %2",
+  "dg-th-spirit": "Spirit",
+  "dg-th-recipe": "Official recipe",
+  "dg-rank": "Rank %1",
+
+  "dg-empty": "Nothing matches your filter."
+}

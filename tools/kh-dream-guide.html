@@ -4,12 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self'">
-    <title>Re:Chain of Memories — Achievement Tracker</title>
+    <title>Dream Drop Distance — Dream Guide</title>
     <script src="../js/theme.js"></script>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/kh.css">
 </head>
-<body data-page="kh-com-tracker" data-root="../">
+<!--
+    Dream Guide — a Dream Drop Distance sub-tool (sibling of the BBS Melding
+    Calculator). Three tabs: a Spirits gallery (own/greyed), a Materials
+    drop-location reference, and a Recipe-item checklist. All Dream Eater,
+    treasure and recipe-item data is reused from the DDD tracker
+    (js/kh-ddd-tracker-data.js + its khddd_progress_v1 store); only the
+    material drops / synthesis recipes come from js/kh-dream-guide-data.js.
+    Visible text lives in lang/messages/<lang>/kh-dream-guide.json.
+-->
+<body data-page="kh-dream-guide" data-root="../">
     <nav>
         <div class="container">
             <div class="nav-content">
@@ -52,28 +61,60 @@
 
     <div class="container kh">
         <header class="kh-header">
-            <figure class="banner kh-logo"><img class="banner-img" id="kh-logo" src="../images/logos/KHCOM.png" alt=""></figure>
+            <figure class="banner kh-logo"><img class="banner-img" id="kh-logo" src="../images/logos/KH3DS.png" alt=""></figure>
             <h1 id="kh-title"></h1>
             <p class="sub" id="kh-subtitle"></p>
+            <p class="sub"><a href="../tools/kh-ddd-tracker.html" id="kh-tracker-link"></a></p>
         </header>
 
-        <div class="charbar" id="charbar" style="margin-top:12px">
-            <span class="countbadge" style="margin:0" id="playing-as"></span>
-            <span class="countbadge" id="overallNote"></span>
+        <div class="tabs">
+            <button class="tab active" data-tab="spirits" id="tabbtn-spirits"></button>
+            <button class="tab" data-tab="materials" id="tabbtn-materials"></button>
+            <button class="tab" data-tab="recipes" id="tabbtn-recipes"></button>
         </div>
 
-        <div class="tabs" id="tabs"></div>
+        <main class="kh-main">
+            <!-- SPIRITS GALLERY (primary) -->
+            <section id="tab-spirits" class="card">
+                <div class="toolbar">
+                    <span class="countbadge" id="dg-spirits-count"></span>
+                    <input type="text" id="dg-spirits-filter">
+                    <button class="clearbtn" id="dg-spirits-reset"></button>
+                </div>
+                <p class="hint" style="margin-top:0" id="dg-spirits-hint"></p>
+                <div id="dg-spirits-grid" class="dg-grid"></div>
+            </section>
 
-        <!-- Tabs and panel contents are built by js/kh-tracker.js from the
-             TRACKER_GAME config in the game data module. -->
-        <main class="kh-main" id="panels"></main>
+            <!-- MATERIALS + DROP LOCATIONS -->
+            <section id="tab-materials" class="card" style="display:none">
+                <div class="toolbar">
+                    <input type="text" id="dg-materials-filter">
+                </div>
+                <p class="hint" style="margin-top:0" id="dg-materials-hint"></p>
+                <div id="dg-materials-list" class="results"></div>
+            </section>
+
+            <!-- RECIPE-ITEM CHECKLIST -->
+            <section id="tab-recipes" class="card" style="display:none">
+                <div class="trk-summary" id="dg-recipes-summary"></div>
+                <div class="toolbar" style="margin:10px 0 0">
+                    <input type="text" id="dg-recipes-filter">
+                    <button class="clearbtn" id="dg-recipes-reset"></button>
+                </div>
+                <p class="hint" id="dg-recipes-hint"></p>
+                <div id="dg-recipes-list" class="results"></div>
+            </section>
+        </main>
     </div>
+
+    <!-- Reusable hover popover (worlds / treasure locations) -->
+    <div id="dg-pop" class="dg-pop" role="tooltip" aria-hidden="true"></div>
 
     <script src="../js/i18n.js"></script>
     <script src="../js/kh-common.js"></script>
-    <script src="../js/kh-com-tracker-data.js"></script>
-    <script src="../js/kh-tracker.js"></script>
-    <script src="../js/kh-progress.js"></script>
+    <script src="../js/kh-ddd-tracker-data.js"></script>
+    <script src="../js/kh-dream-guide-data.js"></script>
+    <script src="../js/kh-dream-guide.js"></script>
     <script src="../js/banners.js"></script>
     <script src="../js/nav.js"></script>
 </body>
