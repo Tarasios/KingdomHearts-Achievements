@@ -398,7 +398,7 @@ function buildBoardGrid(spirit, board) {
     addDir(me.col + "," + me.row, dir, gated); addDir(p.col + "," + p.row, OPP[dir], gated);
   });
   const trailsFor = key => Object.entries(linkDirs[key] || {}).map(([d, g]) => `<i class="dg-trail ${d}${g ? " gated" : ""}"></i>`).join("");
-  let html = `<div class="dg-board-scroll"><div class="dg-grid-board" style="grid-template-columns:20px repeat(${maxCol}, 40px)">`;
+  let html = `<div class="dg-board-scroll"><div class="dg-grid-board" style="grid-template-columns:var(--dg-rh) repeat(${maxCol}, var(--dg-cell))">`;
   html += `<div class="dg-gcorner"></div>`;
   for (let col = 1; col <= maxCol; col++) html += `<div class="dg-gcol-h">${esc(colLabel(col))}</div>`;
   for (let row = 1; row <= maxRow; row++) {

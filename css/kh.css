@@ -364,7 +364,7 @@
 .kh .dg-pct-low { color: #ff8e8e; font-weight: 600; margin-left: 4px; }
 
 /* ---- Shared hover popover ---- */
-.dg-pop { position: fixed; z-index: 80; max-width: 320px; display: none;
+.dg-pop { position: fixed; z-index: 200; max-width: 320px; display: none;
     background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, .45); font-size: 12.5px; color: var(--ink); line-height: 1.5; }
 .dg-pop.open { display: block; }
@@ -557,13 +557,17 @@ table.dg-board { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .kh .dg-rw-items { flex: 1; color: var(--dim); min-width: 200px; }
 @media (max-width: 620px) { .kh .dg-rw-world { flex-basis: 100%; } }
 
-/* ---- Ability Link board grid (uniform 40px cells for every board) ---- */
-.dg-board-scroll { overflow-x: auto; padding-bottom: 4px; }
+/* ---- Ability Link board grid (one uniform cell size for every board, so
+   the smallest and largest boards share the same scale; bigger on desktop,
+   smaller on mobile) ---- */
+.dg-board-scroll { overflow-x: auto; padding-bottom: 4px; --dg-cell: 54px; --dg-rh: 22px; }
+@media (max-width: 600px) { .dg-board-scroll { --dg-cell: 40px; --dg-rh: 18px; } }
 .dg-grid-board { display: grid; gap: 3px; margin: 4px 0 10px; width: max-content; }
 .dg-gcorner { background: transparent; }
+.dg-gcol-h { width: var(--dg-cell); }
 .dg-gcol-h, .dg-grow-h { display: flex; align-items: center; justify-content: center; color: var(--dim);
-    font-size: 11px; font-weight: 700; height: 40px; }
-.dg-gcell { width: 40px; height: 40px; background: #05070d; border: 1px solid #161d33; border-radius: 4px;
+    font-size: 11px; font-weight: 700; height: var(--dg-cell); }
+.dg-gcell { width: var(--dg-cell); height: var(--dg-cell); background: #05070d; border: 1px solid #161d33; border-radius: 4px;
     display: flex; align-items: center; justify-content: center; position: relative; box-sizing: border-box; }
 .dg-gcell.filled { background: #0c1326; border-color: #283457; cursor: pointer; }
 .dg-gcell.filled.locked { opacity: .3; cursor: default; }
