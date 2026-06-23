@@ -619,3 +619,10 @@ table.dg-board { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .kh .dg-c-cmdline { font-size: 12px; color: var(--dim); margin: 8px 0 2px; padding: 7px 10px;
     background: rgba(224, 198, 106, .08); border: 1px solid #3a2f12; border-radius: 8px; }
 .kh .dg-c-cmdline b { color: var(--accent2); }
+
+/* Two-stage (changes-after-Red-Secret) board cells */
+.dg-gtwostage { position: absolute; top: -4px; left: -4px; width: 14px; height: 14px; border-radius: 50%;
+    background: #7a2c2c; color: #ffd9d9; font-size: 9px; font-weight: 700; line-height: 14px; text-align: center; z-index: 3; }
+.dg-gcell.twostage { border-color: #5b2c2c; }
+.dg-pop .dg-pop-active { color: #6fe39a; }
+.dg-pop .dg-pop-change { display: block; margin-top: 6px; color: #e0976a; font-size: 11px; }

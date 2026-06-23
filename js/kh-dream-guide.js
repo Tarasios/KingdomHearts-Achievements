@@ -83,7 +83,7 @@ function toggleSpirit(name) {
   const i = DE_INDEX.get(name); if (i == null) return;
   const store = dddSection("dreameaters");
   if (store[i]) delete store[i]; else store[i] = true;
-  saveDDD(); renderSpirits(); if (modalSpirit === name) renderModal();
+  saveDDD(); renderSpirits(); renderAbilities(); if (modalSpirit === name) renderModal();
 }
 
 // Ability-checklist index in the tracker (Support / Spirit abilities only).
@@ -119,15 +119,33 @@ const BOARD_INFO = {};
 function boardInfo(spirit) {
   if (BOARD_INFO[spirit]) return BOARD_INFO[spirit];
   const board = (DG.boards || {})[spirit] || [];
-  const nodeByCoord = {}, childrenOf = {};
-  board.forEach(n => { if (!nodeByCoord[n.g]) nodeByCoord[n.g] = n; });
+  const nodeByCoord = {}, nodesAt = {}, childrenOf = {};
+  board.forEach(n => { if (!nodeByCoord[n.g]) nodeByCoord[n.g] = n; (nodesAt[n.g] = nodesAt[n.g] || []).push(n); });
+  // A cell with two stacked nodes is a "changes after a Red Secret" cell:
+  // node[0] is the first ability, node[1] the one it becomes once the Secret
+  // (named in the condition, e.g. "…after Secret: Red at D-7") is unlocked.
   board.forEach(n => { if (n.frm) (childrenOf[n.frm] = childrenOf[n.frm] || []).push(n.g); });
   const keyholes = new Set((DG.boardStarts || {})[spirit] || []);
-  // Entry cells = keyholes, plus the tree roots (no predecessor) / flagged
-  // starts — guarantees every board has a start the chain can begin from.
   const entryCoords = new Set(keyholes);
   board.forEach(n => { if (!n.frm || n.s) entryCoords.add(n.g); });
-  return (BOARD_INFO[spirit] = { board, nodeByCoord, childrenOf, keyholes, entryCoords });
+  return (BOARD_INFO[spirit] = { board, nodeByCoord, nodesAt, childrenOf, keyholes, entryCoords });
+}
+// Has the Red Secret that flips this two-stage cell been unlocked? The board's
+// "Secret: Red" node is the real trigger (some condition strings name the wrong
+// coord), so look that up first, then fall back to the coord in the condition.
+function secretUnlockedForCell(spirit, variants) {
+  const red = ((DG.boards || {})[spirit] || []).find(n => n.t === "Secret" && /red/i.test(n.n));
+  if (red) return nodeOwned(spirit, red.g);
+  for (const v of variants) { const m = /at ([A-Z]+-\d+)/.exec(v.cond || ""); if (m) return nodeOwned(spirit, m[1]); }
+  return true;
+}
+// The ability currently active in a cell (stage 1 = first node, 2 = second).
+function activeAbilityAt(spirit, grid) {
+  const variants = boardInfo(spirit).nodesAt[grid] || [];
+  if (!variants.length) return null;
+  const val = (GUIDE.nodes[spirit] || {})[grid];
+  if (!val) return null;
+  return variants[(variants.length > 1 && val === 2) ? 1 : 0].n;
 }
 function coordUnlocked(spirit, coord) {
   const info = boardInfo(spirit);
@@ -140,20 +158,30 @@ function nodeUnlockable(spirit, node) {
   if (info.entryCoords.has(node.g) || !node.frm) return true; // a start node is always available
   return coordUnlocked(spirit, node.frm);                     // else its predecessor must be unlocked
 }
+function markNodeAbility(node) { if (node && node.t !== "Quota" && node.t !== "Secret") setAbilityOwned(node.n, true); }
 function toggleNode(spirit, node) {
+  const info = boardInfo(spirit);
+  const grid = node.g;
+  const variants = info.nodesAt[grid] || [node];
+  const twoStage = variants.length > 1;
   const m = GUIDE.nodes[spirit] || (GUIDE.nodes[spirit] = {});
-  if (m[node.g]) {
-    // un-mark this node and cascade-lock everything downstream of it
-    const { childrenOf } = boardInfo(spirit);
-    const stack = [node.g];
-    while (stack.length) { const g = stack.pop(); delete m[g]; (childrenOf[g] || []).forEach(c => { if (m[c]) stack.push(c); }); }
+  const cur = m[grid];
+  if (!cur) {
+    // first click → unlock the first ability (needs the path unlocked)
+    if (!nodeUnlockable(spirit, variants[0])) return;
+    m[grid] = 1; markNodeAbility(variants[0]);
+  } else if (twoStage && cur !== 2 && secretUnlockedForCell(spirit, variants)) {
+    // second click, once the Red Secret is unlocked → switch to the second ability
+    m[grid] = 2; markNodeAbility(variants[1]);
   } else {
-    if (!nodeUnlockable(spirit, node)) return;                // path not unlocked yet
-    m[node.g] = true;
-    if (node.t !== "Quota" && node.t !== "Secret") setAbilityOwned(node.n, true);
+    // un-mark this cell and cascade-lock everything downstream of it
+    const { childrenOf } = info;
+    const stack = [grid];
+    while (stack.length) { const g = stack.pop(); delete m[g]; (childrenOf[g] || []).forEach(c => { if (m[c]) stack.push(c); }); }
   }
   saveGuide();
   if (modalSpirit === spirit) renderModal();
+  renderAbilities();   // Abilities-tab chip colours depend on which nodes are unlocked
 }
 
 /* ---------- treasure index (tracker lang gives the chest "area" text) ---------- */
@@ -412,12 +440,16 @@ function buildBoardGrid(spirit, board) {
         continue;
       }
       const primary = nodes[0], owned = nodeOwned(spirit, primary.g);
+      const twoStage = nodes.length > 1;
+      const stage = (GUIDE.nodes[spirit] || {})[primary.g];
+      const display = twoStage && stage === 2 ? nodes[1] : primary;   // show the active variant
       const isEntry = info.entryCoords.has(primary.g);
       const state = owned ? "owned" : (nodeUnlockable(spirit, primary) ? "open" : "locked");
-      const tip = nodes.map(nodeTipOne).join('<span class="dg-pop-hr"></span>');
-      html += `<div class="dg-gcell filled ${state}${isEntry ? " startnode" : ""}" tabindex="0" role="button" data-pop="${esc(tip)}" data-node="${esc(primary.g)}" aria-pressed="${owned}">` +
-        trailsFor(key) + `<img src="${esc(BOARD_IMG + nodeIcon(primary))}" alt="${esc(primary.n)}">` +
-        (nodes.length > 1 ? `<span class="dg-gmore">${nodes.length}</span>` : "") +
+      const tip = nodes.map((n, i) => (twoStage && stage && ((stage === 2) === (i === 1)) ? '<span class="dg-pop-active">●</span> ' : "") + nodeTipOne(n)).join('<span class="dg-pop-hr"></span>') +
+        (twoStage ? `<span class="dg-pop-change">${esc(translate("dg-secret-change"))}</span>` : "");
+      html += `<div class="dg-gcell filled ${state}${isEntry ? " startnode" : ""}${twoStage ? " twostage" : ""}" tabindex="0" role="button" data-pop="${esc(tip)}" data-node="${esc(primary.g)}" aria-pressed="${owned}">` +
+        trailsFor(key) + `<img src="${esc(BOARD_IMG + nodeIcon(display))}" alt="${esc(display.n)}">` +
+        (twoStage ? `<span class="dg-gtwostage" aria-hidden="true">2</span>` : "") +
         `<span class="dg-gcheck" aria-hidden="true">✓</span></div>`;
     }
   }
@@ -506,8 +538,9 @@ function renderModal() {
   // --- ability link board ---
   const board = (DG.boards || {})[spirit.name] || [];
   if (board.length) {
-    const ownedNodes = board.filter(n => nodeOwned(spirit.name, n.g)).length;
-    html += `<h3 class="grp-title">${esc(translate("dg-board"))} <span class="dg-c-sub">— ${KH.chip(ownedNodes, board.length)}</span></h3>`;
+    const coords = [...new Set(board.map(n => n.g))];   // two-stage cells share a coord
+    const ownedNodes = coords.filter(g => nodeOwned(spirit.name, g)).length;
+    html += `<h3 class="grp-title">${esc(translate("dg-board"))} <span class="dg-c-sub">— ${KH.chip(ownedNodes, coords.length)}</span></h3>`;
     html += buildBoardGrid(spirit.name, board) + boardLegend();
   }
 
@@ -804,7 +837,7 @@ function renderAbilities() {
       `<span class="dg-ab-count">${esc(format("dg-ab-from", e.grants.length))}</span></div>` +
       `<div class="dg-ab-spirits">` +
         e.grants.map(g => {
-          const ownedSp = spiritOwned(g.spirit), unlocked = ownedSp && nodeOwned(g.spirit, g.grid);
+          const ownedSp = spiritOwned(g.spirit), unlocked = ownedSp && activeAbilityAt(g.spirit, g.grid) === name;
           const cls = "dg-ab-chip" + (g.cond ? " cond" : "") + (unlocked ? " unlocked" : ownedSp ? " owned" : "");
           const tip = [g.spirit, g.grid + " · " + g.cost, g.cond].filter(Boolean).map(esc).join("<br>");
           return `<button class="${cls}" data-spirit="${esc(g.spirit)}" data-pop="${esc(tip)}" tabindex="0">` +
