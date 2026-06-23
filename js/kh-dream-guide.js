@@ -37,6 +37,9 @@ const translate = (key) => i18n.getMessage(key);
 const format = (key, ...args) => i18n.format(key, ...args);
 
 const DG = window.DREAM_GUIDE;
+// Board layouts live in their own easily-edited file (js/kh-dream-guide-boards.js).
+DG.boards = (window.DG_BOARDS && window.DG_BOARDS.boards) || DG.boards || {};
+DG.boardStarts = (window.DG_BOARDS && window.DG_BOARDS.starts) || DG.boardStarts || {};
 const CREATE = DG.create;
 const GAME = window.TRACKER_GAME;
 const DDD_STORE_KEY = GAME.storeKey;
@@ -370,10 +373,12 @@ function nodeIcon(node) {
   if (t === "Item Command") return "Item_Icon.png";
   if (/Command$/.test(t)) return "Ability_Icon.png";
   if (t === "Support Ability" || t === "Spirits Ability" || t === "Defense Ability") return "Perm_Ability_Icon.png";
-  if (/HP Boost/i.test(n)) return "Health_Stat_Icon.png";
-  if (/Attack (Boost|Haste)/i.test(n)) return "Attack_Stat_Icon.png";
-  if (/Magic (Boost|Haste)/i.test(n)) return "Magic_Stat_Icon.png";
-  if (/Defense Boost|Defender/i.test(n)) return "Defense_Stat_Icon.png";
+  // Only the four "<stat> Boost" abilities use a dedicated stat icon; the
+  // Hastes / Screens / Blocks etc. use the generic stat-ability icon.
+  if (/^HP Boost$/i.test(n)) return "Health_Stat_Icon.png";
+  if (/^Attack Boost$/i.test(n)) return "Attack_Stat_Icon.png";
+  if (/^Magic Boost$/i.test(n)) return "Magic_Stat_Icon.png";
+  if (/^Defense Boost$/i.test(n)) return "Defense_Stat_Icon.png";
   return "Ability_Icon.png";
 }
 function isPermanent(node) { return node.t === "Support Ability"; }
