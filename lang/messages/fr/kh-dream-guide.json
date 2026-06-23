@@ -105,5 +105,12 @@
   "dg-board-click": "Cliquez sur un nœud pour le marquer débloqué.",
   "dg-leg-start": "Départ",
   "dg-ab-owned": "Débloquées : %1 / %2",
+  "dg-tip-gate": "Barrière",
+  "dg-tip-requires": "Requiert",
+  "dg-tip-secret": "Secret — ne fait que modifier le plateau",
+  "dg-tip-needs-dispo": "Nécessite le tempérament %1",
+  "dg-leg-dispo": "Chemin de tempérament",
+  "dg-c-cmd-applied": "Commande",
+  "dg-c-affinity": "Affinité max",
   "dg-empty": "Rien ne correspond à votre filtre."
 }

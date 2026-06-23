@@ -546,14 +546,16 @@ table.dg-board { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .kh .dg-rw-items { flex: 1; color: var(--dim); min-width: 200px; }
 @media (max-width: 620px) { .kh .dg-rw-world { flex-basis: 100%; } }
 
-/* ---- Ability Link board grid ---- */
-.dg-grid-board { display: grid; gap: 2px; margin: 4px 0 10px; }
+/* ---- Ability Link board grid (uniform 40px cells for every board) ---- */
+.dg-board-scroll { overflow-x: auto; padding-bottom: 4px; }
+.dg-grid-board { display: grid; gap: 3px; margin: 4px 0 10px; width: max-content; }
 .dg-gcorner { background: transparent; }
 .dg-gcol-h, .dg-grow-h { display: flex; align-items: center; justify-content: center; color: var(--dim);
-    font-size: 11px; font-weight: 700; }
-.dg-gcell { aspect-ratio: 1; background: #05070d; border: 1px solid #161d33; border-radius: 4px;
-    display: flex; align-items: center; justify-content: center; position: relative; }
-.dg-gcell.filled { background: #0c1326; border-color: #283457; cursor: help; }
+    font-size: 11px; font-weight: 700; height: 40px; }
+.dg-gcell { width: 40px; height: 40px; background: #05070d; border: 1px solid #161d33; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center; position: relative; box-sizing: border-box; }
+.dg-gcell.filled { background: #0c1326; border-color: #283457; cursor: pointer; }
+.dg-gcell.filled.locked { opacity: .3; cursor: default; }
 .dg-gcell.filled:hover, .dg-gcell.filled:focus { border-color: var(--accent); outline: none; }
 .dg-gcell img { width: 78%; height: 78%; object-fit: contain; }
 .dg-gmore { position: absolute; bottom: -2px; right: -2px; background: var(--accent); color: #06203b;
@@ -563,7 +565,11 @@ table.dg-board { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .dg-board-legend img { width: 18px; height: 18px; object-fit: contain; }
 .dg-board-legend-tip { font-style: italic; }
 .dg-pop .dg-pop-cond { display: block; margin-top: 2px; color: var(--dim); }
+.dg-pop .dg-pop-gate { display: block; margin-top: 3px; color: #c77fe0; font-weight: 600; }
+.dg-pop .dg-pop-perm { color: #e0c66a; font-size: 10px; text-transform: uppercase; letter-spacing: .4px; }
 .dg-pop .dg-pop-hr { display: block; border-top: 1px solid var(--line); margin: 6px 0; }
+.dg-leg-line { display: inline-block; width: 16px; height: 4px; border-radius: 2px; background: #3f7bdd; }
+.dg-leg-line.gated { background: #c77fe0; }
 
 /* ---- Spirit modal: rank/level controls, dispositions, ability checklist ---- */
 .dg-m-controls { display: flex; gap: 14px; align-items: flex-end; flex-wrap: wrap; margin: 14px 0 4px; }
@@ -581,6 +587,7 @@ table.dg-board { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .dg-gcell.filled { cursor: pointer; }
 .dg-gcell img { position: relative; z-index: 2; }
 .dg-trail { position: absolute; background: #3f7bdd; z-index: 1; }
+.dg-trail.gated { background: #c77fe0; }
 .dg-trail.up { width: 4px; left: calc(50% - 2px); bottom: 50%; height: calc(50% + 3px); }
 .dg-trail.down { width: 4px; left: calc(50% - 2px); top: 50%; height: calc(50% + 3px); }
 .dg-trail.left { height: 4px; top: calc(50% - 2px); right: 50%; width: calc(50% + 3px); }
@@ -592,3 +599,8 @@ table.dg-board { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .dg-gcell.startnode { box-shadow: inset 0 0 0 2px #e0c66a; }
 .dg-gcell.start { background: #0c1326; border-color: #3a2f12; }
 .dg-gcell.start img { width: 80%; height: 80%; object-fit: contain; opacity: .9; }
+
+/* Deck command bonus summary in the creation calculator */
+.kh .dg-c-cmdline { font-size: 12px; color: var(--dim); margin: 8px 0 2px; padding: 7px 10px;
+    background: rgba(224, 198, 106, .08); border: 1px solid #3a2f12; border-radius: 8px; }
+.kh .dg-c-cmdline b { color: var(--accent2); }

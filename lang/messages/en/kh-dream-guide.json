@@ -105,5 +105,12 @@
   "dg-board-click": "Click a node to mark it unlocked.",
   "dg-leg-start": "Start",
   "dg-ab-owned": "Unlocked: %1 / %2",
+  "dg-tip-gate": "Gate",
+  "dg-tip-requires": "Requires",
+  "dg-tip-secret": "Secret — only reshapes the board",
+  "dg-tip-needs-dispo": "Needs %1 disposition",
+  "dg-leg-dispo": "Disposition path",
+  "dg-c-cmd-applied": "Deck Command",
+  "dg-c-affinity": "Max Affinity",
   "dg-empty": "Nothing matches your filter."
 }

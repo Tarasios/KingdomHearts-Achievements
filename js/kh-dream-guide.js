@@ -114,13 +114,44 @@ function setAbilityOwned(name, on) {
   saveGuide();
 }
 function nodeOwned(spirit, grid) { const m = GUIDE.nodes[spirit]; return !!(m && m[grid]); }
+// Per-board topology (cached): node lookup, child links, keyhole + entry cells.
+const BOARD_INFO = {};
+function boardInfo(spirit) {
+  if (BOARD_INFO[spirit]) return BOARD_INFO[spirit];
+  const board = (DG.boards || {})[spirit] || [];
+  const nodeByCoord = {}, childrenOf = {};
+  board.forEach(n => { if (!nodeByCoord[n.g]) nodeByCoord[n.g] = n; });
+  board.forEach(n => { if (n.frm) (childrenOf[n.frm] = childrenOf[n.frm] || []).push(n.g); });
+  const keyholes = new Set((DG.boardStarts || {})[spirit] || []);
+  // Entry cells = keyholes, plus the tree roots (no predecessor) / flagged
+  // starts — guarantees every board has a start the chain can begin from.
+  const entryCoords = new Set(keyholes);
+  board.forEach(n => { if (!n.frm || n.s) entryCoords.add(n.g); });
+  return (BOARD_INFO[spirit] = { board, nodeByCoord, childrenOf, keyholes, entryCoords });
+}
+function coordUnlocked(spirit, coord) {
+  const info = boardInfo(spirit);
+  if (info.keyholes.has(coord)) return true;                 // keyhole: free/unlocked
+  if (info.entryCoords.has(coord) && !info.nodeByCoord[coord]) return true;
+  return nodeOwned(spirit, coord);                            // an ability node must be purchased
+}
+function nodeUnlockable(spirit, node) {
+  const info = boardInfo(spirit);
+  if (info.entryCoords.has(node.g) || !node.frm) return true; // a start node is always available
+  return coordUnlocked(spirit, node.frm);                     // else its predecessor must be unlocked
+}
 function toggleNode(spirit, node) {
   const m = GUIDE.nodes[spirit] || (GUIDE.nodes[spirit] = {});
-  const on = !m[node.g];
-  if (on) m[node.g] = true; else delete m[node.g];
-  // Marking a board node also flags its ability as unlocked (set-only: other
-  // Spirits may grant the same one, so un-marking a node never clears it).
-  if (on && node.t !== "Quota" && node.t !== "Secret") setAbilityOwned(node.n, true);
+  if (m[node.g]) {
+    // un-mark this node and cascade-lock everything downstream of it
+    const { childrenOf } = boardInfo(spirit);
+    const stack = [node.g];
+    while (stack.length) { const g = stack.pop(); delete m[g]; (childrenOf[g] || []).forEach(c => { if (m[c]) stack.push(c); }); }
+  } else {
+    if (!nodeUnlockable(spirit, node)) return;                // path not unlocked yet
+    m[node.g] = true;
+    if (node.t !== "Quota" && node.t !== "Secret") setAbilityOwned(node.n, true);
+  }
   saveGuide();
   if (modalSpirit === spirit) renderModal();
 }
@@ -213,17 +244,22 @@ function statRange(base, rank, level, bonusRange) {
 function rangeText(r) { return !r ? "—" : r.lo === r.hi ? `${r.lo}` : `${r.lo}–${r.hi}`; }
 
 // Build the four-stat block for a Spirit at a rank/level/forecast.
-function statsTable(spirit, rank, level, forecast) {
+function statsTable(spirit, rank, level, forecast, cmd) {
   const fb = CREATE.forecastBonus[forecast] || {};
   const defs = [
-    { label: translate("dg-c-hp"), base: spirit.hp, bonus: fb.hp || [0, 0] },
-    { label: translate("dg-c-str"), base: spirit.str, bonus: fb.str || [0, 0] },
-    { label: translate("dg-c-mag"), base: spirit.mag, bonus: fb.mag || [0, 0] },
-    { label: translate("dg-c-def"), base: spirit.def, bonus: fb.def || [0, 0] },
+    { key: "hp", label: translate("dg-c-hp"), base: spirit.hp, bonus: fb.hp || [0, 0] },
+    { key: "str", label: translate("dg-c-str"), base: spirit.str, bonus: fb.str || [0, 0] },
+    { key: "mag", label: translate("dg-c-mag"), base: spirit.mag, bonus: fb.mag || [0, 0] },
+    { key: "def", label: translate("dg-c-def"), base: spirit.def, bonus: fb.def || [0, 0] },
   ];
   let rows = defs.map(d => {
-    const r = statRange(d.base, rank, level, d.bonus);
-    const note = r && (d.bonus[0] || d.bonus[1]) ? ` <span class="dg-c-bonus">+${d.bonus[0]}${d.bonus[1] !== d.bonus[0] ? "–" + d.bonus[1] : ""}</span>` : "";
+    const cf = (cmd && cmd[d.key]) || 0;                       // sacrificed-command flat bonus
+    const bonus = [d.bonus[0] + cf, d.bonus[1] + cf];
+    const r = statRange(d.base, rank, level, bonus);
+    const parts = [];
+    if (d.bonus[0] || d.bonus[1]) parts.push(`+${d.bonus[0]}${d.bonus[1] !== d.bonus[0] ? "–" + d.bonus[1] : ""}`);
+    if (cf) parts.push(`${esc(cmd.name)} +${cf}`);
+    const note = r && parts.length ? ` <span class="dg-c-bonus">${parts.join(", ")}</span>` : "";
     return `<tr><td class="dg-c-statname">${esc(d.label)}</td>` +
       `<td>${typeof d.base === "number" ? d.base : esc(String(d.base))}</td>` +
       `<td class="dg-c-result">${rangeText(r)}${note}</td>` +
@@ -308,30 +344,46 @@ function parseCoord(g) {
 }
 function colLabel(n) { let s = ""; while (n > 0) { s = String.fromCharCode(65 + (n - 1) % 26) + s; n = Math.floor((n - 1) / 26); } return s; }
 function coordStr(col, row) { return colLabel(col) + "-" + row; }
+// A node's condition may gate it behind a disposition ("…when in X disposition").
+function dispoGate(cond) { const m = /when in (?:the )?([A-Za-z' -]+?) disposition/i.exec(cond || ""); return m ? m[1].trim() : null; }
+// Hover text for one node: what it gives + cost, or a gate's requirement.
+function nodeTipOne(n) {
+  const gate = dispoGate(n.cond);
+  if (n.t === "Quota")
+    return `<b>${esc(translate("dg-tip-gate"))}</b><span class="dg-pop-src">${esc(translate("dg-tip-requires"))}: ${esc(n.c || "")}</span>` + (n.cond ? `<span class="dg-pop-cond">${esc(n.cond)}</span>` : "");
+  if (n.t === "Secret")
+    return `<b>${esc(n.n)}</b><span class="dg-pop-src">${esc(translate("dg-tip-secret"))}</span>` + (n.cond ? `<span class="dg-pop-cond">${esc(n.cond)}</span>` : "");
+  const perm = isPermanent(n) ? ` <span class="dg-pop-perm">${esc(translate("dg-permanent"))}</span>` : "";
+  let h = `<b>${esc(n.n)}</b>${perm}<span class="dg-pop-src">${esc(n.t)}${n.c ? " · " + esc(n.c) : ""}</span>`;
+  if (gate) h += `<span class="dg-pop-gate">${esc(format("dg-tip-needs-dispo", gate))}</span>`;
+  else if (n.cond) h += `<span class="dg-pop-cond">${esc(n.cond)}</span>`;
+  return h;
+}
 function buildBoardGrid(spirit, board) {
+  const info = boardInfo(spirit);
   const cells = {}; let maxCol = 1, maxRow = 1;
   board.forEach(node => {
     const c = parseCoord(node.g); if (!c) return;
     maxCol = Math.max(maxCol, c.col); maxRow = Math.max(maxRow, c.row);
     (cells[c.col + "," + c.row] = cells[c.col + "," + c.row] || []).push(node);
   });
-  const starts = new Set((DG.boardStarts || {})[spirit] || []);
-  starts.forEach(s => { const c = parseCoord(s); if (c) { maxCol = Math.max(maxCol, c.col); maxRow = Math.max(maxRow, c.row); } });
-  // Each predecessor→node link draws as two half-lines (one on each cell,
-  // meeting in the gap), so trails never overflow into a neighbour's cell.
+  info.keyholes.forEach(s => { const c = parseCoord(s); if (c) { maxCol = Math.max(maxCol, c.col); maxRow = Math.max(maxRow, c.row); } });
+  // Each predecessor→node link draws as two half-lines (one per cell, meeting
+  // in the gap). A disposition-gated link is drawn in a different colour.
   const OPP = { up: "down", down: "up", left: "right", right: "left" };
   const linkDirs = {};
-  const addDir = (k, d) => { (linkDirs[k] = linkDirs[k] || new Set()).add(d); };
+  const addDir = (k, d, g) => { const mm = linkDirs[k] = linkDirs[k] || {}; if (!mm[d]) mm[d] = g; };
   board.forEach(n => {
     if (!n.frm) return;
     const me = parseCoord(n.g), p = parseCoord(n.frm); if (!me || !p) return;
     const dc = p.col - me.col, dr = p.row - me.row;
     const dir = dc === 1 ? "right" : dc === -1 ? "left" : dr === 1 ? "down" : dr === -1 ? "up" : null;
     if (!dir) return;
-    addDir(me.col + "," + me.row, dir); addDir(p.col + "," + p.row, OPP[dir]);
+    const gated = !!dispoGate(n.cond);
+    addDir(me.col + "," + me.row, dir, gated); addDir(p.col + "," + p.row, OPP[dir], gated);
   });
-  const trailsFor = key => [...(linkDirs[key] || [])].map(d => `<i class="dg-trail ${d}"></i>`).join("");
-  let html = `<div class="dg-grid-board" style="grid-template-columns:22px repeat(${maxCol}, minmax(30px, 1fr))">`;
+  const trailsFor = key => Object.entries(linkDirs[key] || {}).map(([d, g]) => `<i class="dg-trail ${d}${g ? " gated" : ""}"></i>`).join("");
+  let html = `<div class="dg-board-scroll"><div class="dg-grid-board" style="grid-template-columns:20px repeat(${maxCol}, 40px)">`;
   html += `<div class="dg-gcorner"></div>`;
   for (let col = 1; col <= maxCol; col++) html += `<div class="dg-gcol-h">${esc(colLabel(col))}</div>`;
   for (let row = 1; row <= maxRow; row++) {
@@ -339,30 +391,29 @@ function buildBoardGrid(spirit, board) {
     for (let col = 1; col <= maxCol; col++) {
       const key = col + "," + row, nodes = cells[key];
       if (!nodes) {
-        html += starts.has(coordStr(col, row))
+        html += info.keyholes.has(coordStr(col, row))
           ? `<div class="dg-gcell start">${trailsFor(key)}<img src="${esc(BOARD_IMG)}Start_Icon.png" alt="Start"></div>`
           : `<div class="dg-gcell">${trailsFor(key)}</div>`;
         continue;
       }
       const primary = nodes[0], owned = nodeOwned(spirit, primary.g);
-      const trails = trailsFor(key);
-      const tip = nodes.map(n => {
-        const perm = isPermanent(n) ? " (" + translate("dg-permanent") + ")" : "";
-        return `<b>${esc(n.n)}</b>${perm}<span class="dg-pop-src">${esc(n.t)}${n.c ? " · " + esc(n.c) : ""}</span>` + (n.cond ? `<span class="dg-pop-cond">${esc(n.cond)}</span>` : "");
-      }).join('<span class="dg-pop-hr"></span>');
-      html += `<div class="dg-gcell filled${owned ? " owned" : ""}${primary.s ? " startnode" : ""}" tabindex="0" role="button" data-pop="${esc(tip)}" data-node="${esc(primary.g)}" aria-pressed="${owned}">` +
-        trails + `<img src="${esc(BOARD_IMG + nodeIcon(primary))}" alt="${esc(primary.n)}">` +
+      const isEntry = info.entryCoords.has(primary.g);
+      const state = owned ? "owned" : (nodeUnlockable(spirit, primary) ? "open" : "locked");
+      const tip = nodes.map(nodeTipOne).join('<span class="dg-pop-hr"></span>');
+      html += `<div class="dg-gcell filled ${state}${isEntry ? " startnode" : ""}" tabindex="0" role="button" data-pop="${esc(tip)}" data-node="${esc(primary.g)}" aria-pressed="${owned}">` +
+        trailsFor(key) + `<img src="${esc(BOARD_IMG + nodeIcon(primary))}" alt="${esc(primary.n)}">` +
         (nodes.length > 1 ? `<span class="dg-gmore">${nodes.length}</span>` : "") +
         `<span class="dg-gcheck" aria-hidden="true">✓</span></div>`;
     }
   }
-  return html + `</div>`;
+  return html + `</div></div>`;
 }
 function boardLegend() {
   const items = [["Start_Icon.png", "dg-leg-start"], ["Ability_Icon.png", "dg-leg-stat"], ["Perm_Ability_Icon.png", "dg-permanent"],
     ["Attack_Icon.png", "dg-leg-cmd"], ["Link_Door.png", "dg-leg-gate"], ["Green_Secret.png", "dg-leg-secret"]];
   return `<div class="dg-board-legend">` + items.map(([ic, k]) =>
     `<span><img src="${esc(BOARD_IMG + ic)}" alt="">${esc(translate(k))}</span>`).join("") +
+    `<span><i class="dg-leg-line gated"></i>${esc(translate("dg-leg-dispo"))}</span>` +
     `<span class="dg-board-legend-tip">${esc(translate("dg-board-click"))}</span></div>`;
 }
 
@@ -487,11 +538,28 @@ const C = {
   matOut: document.getElementById("dg-c-materials-out"),
   spirit: document.getElementById("dg-c-spirit"), rank: document.getElementById("dg-c-rank"),
   spiritOut: document.getElementById("dg-c-spirit-out"),
+  command: document.getElementById("dg-c-command"),
 };
 let createMode = "materials";
+function curCommand() { return C.command.value === "" ? null : DG.commands[+C.command.value]; }
+
+// Short summary of a sacrificed command's bonus (stats + resistances + affinity).
+function commandBonusLine(cmd) {
+  if (!cmd) return "";
+  const parts = [];
+  [["hp", "HP"], ["str", translate("dg-c-str")], ["mag", translate("dg-c-mag")], ["def", translate("dg-c-def")]].forEach(([k, l]) => { if (cmd[k]) parts.push(`${esc(l)} +${cmd[k]}`); });
+  [["fire", "Fire"], ["blz", "Blizzard"], ["thn", "Thunder"], ["wtr", "Water"], ["drk", "Dark"], ["lgt", "Light"]].forEach(([k, l]) => { if (cmd[k]) parts.push(`${esc(l)} res +${cmd[k]}%`); });
+  if (cmd.aff) parts.push(`${esc(translate("dg-c-affinity"))} +${cmd.aff}`);
+  return `<div class="dg-c-cmdline"><b>${esc(translate("dg-c-cmd-applied"))}: ${esc(cmd.name)}</b> — ${parts.join(", ") || "—"}</div>`;
+}
 
 function fillCreateControls() {
   C.forecast.innerHTML = CREATE.forecasts.map(f => `<option value="${esc(f)}">${esc(f)}</option>`).join("");
+  // Deck Command picker (grouped by category), "none" first.
+  const groups = {};
+  DG.commands.forEach((c, i) => { (groups[c.cat] = groups[c.cat] || []).push(`<option value="${i}">${esc(c.name)}</option>`); });
+  C.command.innerHTML = `<option value="">${esc(translate("dg-c-none"))}</option>` +
+    Object.keys(groups).map(cat => `<optgroup label="${esc(cat)}">${groups[cat].join("")}</optgroup>`).join("");
   const anyMat = `<option value="">${esc(translate("dg-any"))}</option>`;
   const matOpts = anyMat + DG.materials.map(m => `<option value="${esc(m)}">${esc(m)}</option>`).join("");
   const anyTier = `<option value="">${esc(translate("dg-any"))}</option>`;
@@ -537,7 +605,7 @@ function recipeMatchSlots(r, s1, s2) {
 function renderMaterialsMode() {
   const s1 = { mat: C.m1mat.value, tier: C.m1tier.value }, s2 = { mat: C.m2mat.value, tier: C.m2tier.value };
   const q1 = Math.max(1, parseInt(C.m1qty.value, 10) || 1), q2 = Math.max(1, parseInt(C.m2qty.value, 10) || 1);
-  const forecast = curForecast(), level = curLevel(), isRisky = forecast === "Risky Winds";
+  const forecast = curForecast(), level = curLevel(), isRisky = forecast === "Risky Winds", cmd = curCommand();
 
   if (!s1.mat && !s2.mat) { C.matOut.innerHTML = `<p class="empty">${esc(translate("dg-c-pick-mat"))}</p>`; return; }
 
@@ -580,7 +648,7 @@ function renderMaterialsMode() {
         ` <span class="dg-c-total">${esc(format("dg-c-total", res.total, levelBonusForTotal(res.total)))}</span>` +
         (r.rare ? ` <span class="dg-rare">${esc(format("dg-c-rare-out", r.rare, pct != null ? 100 - pct : 0))}</span>` : "") +
       `</div>` +
-      statsTable(spirit, res.finalRank, level, forecast) +
+      statsTable(spirit, res.finalRank, level, forecast, cmd) + commandBonusLine(cmd) +
       `<details class="dg-c-more"><summary>${esc(translate("dg-c-more"))}</summary>` +
         forecastExtras(spirit, forecast) + `</details>` +
       `</div>`;
@@ -593,7 +661,7 @@ function renderMaterialsMode() {
 function renderSpiritMode() {
   const spirit = DG.spirits[+C.spirit.value] || DG.spirits[0];
   const target = C.rank.value || "S";
-  const forecast = curForecast(), level = curLevel(), isRisky = forecast === "Risky Winds";
+  const forecast = curForecast(), level = curLevel(), isRisky = forecast === "Risky Winds", cmd = curCommand();
   const targetI = rankIdx(target);
   const recs = DG.recipes.filter(r => r.sp === spirit.name);
 
@@ -615,7 +683,7 @@ function renderSpiritMode() {
       `<span class="dg-c-rankbig">${esc(translate("dg-c-rank-out"))} ${esc(target)}` +
         (isRisky ? ` <span class="dg-c-up">(+Risky)</span>` : "") + `</span>` +
     `</div>` +
-    statsTable(spirit, target, level, forecast) +
+    statsTable(spirit, target, level, forecast, cmd) + commandBonusLine(cmd) +
     `<details class="dg-c-more"><summary>${esc(translate("dg-c-more"))}</summary>` + forecastExtras(spirit, forecast) + `</details>` +
     `</div>`;
 
@@ -655,7 +723,7 @@ function initCreation() {
     document.getElementById("dg-cmode-spirit").style.display = createMode === "spirit" ? "" : "none";
     renderCreation();
   }));
-  [C.forecast, C.m1mat, C.m1tier, C.m2mat, C.m2tier, C.spirit, C.rank].forEach(e => e.addEventListener("change", renderCreation));
+  [C.forecast, C.command, C.m1mat, C.m1tier, C.m2mat, C.m2tier, C.spirit, C.rank].forEach(e => e.addEventListener("change", renderCreation));
   [C.level, C.m1qty, C.m2qty].forEach(e => e.addEventListener("input", renderCreation));
   renderCreation();
 }
