@@ -303,9 +303,15 @@ function statsTable(spirit, rank, level, forecast, cmd) {
 
 function rankPill(rank) { return `<span class="dg-rank-pill">${esc(rank)}</span>`; }
 function matChip(mat, tier, qty, baseQty) {
+  if (!mat) return "";
+  // The "Recipe" Dream Piece (a Spirit's own recipe item) has no tier/quantity.
+  if (mat === "Recipe") return `<span class="dg-ing dg-ing-recipe">${esc(translate("dg-recipe-piece"))}</span>`;
   const boosted = qty != null && baseQty != null && qty > baseQty;
-  return `<span class="dg-ing">${esc(mat + " " + tier)}` +
+  return `<span class="dg-ing">${esc(mat + (tier ? " " + tier : ""))}` +
     (qty != null ? ` <b class="${boosted ? "dg-ing-up" : ""}">×${qty}</b>` : "") + `</span>`;
+}
+function recipeTotal(r, q1, q2) {   // Dream Pieces used (the Recipe item counts as 1)
+  return (q1 != null ? q1 : (r.q1 || 0)) + (r.m2 === "Recipe" ? 1 : (q2 != null ? q2 : (r.q2 || 0)));
 }
 
 /* =====================================================================
@@ -586,8 +592,8 @@ function renderModal() {
 const C = {
   forecast: document.getElementById("dg-c-forecast"),
   level: document.getElementById("dg-c-level"),
-  m1mat: document.getElementById("dg-c-m1-mat"), m1tier: document.getElementById("dg-c-m1-tier"), m1qty: document.getElementById("dg-c-m1-qty"),
-  m2mat: document.getElementById("dg-c-m2-mat"), m2tier: document.getElementById("dg-c-m2-tier"), m2qty: document.getElementById("dg-c-m2-qty"),
+  m1mat: document.getElementById("dg-c-m1-mat"), m1tier: document.getElementById("dg-c-m1-tier"),
+  m2mat: document.getElementById("dg-c-m2-mat"), m2tier: document.getElementById("dg-c-m2-tier"),
   matOut: document.getElementById("dg-c-materials-out"),
   spirit: document.getElementById("dg-c-spirit"), rank: document.getElementById("dg-c-rank"),
   spiritOut: document.getElementById("dg-c-spirit-out"),
@@ -620,10 +626,11 @@ function fillCreateControls() {
   C.m1mat.innerHTML = matOpts; C.m2mat.innerHTML = matOpts;
   C.m1tier.innerHTML = tierOpts; C.m2tier.innerHTML = tierOpts;
   C.spirit.innerHTML = DG.spirits.map((s, i) => `<option value="${i}">${esc(s.name)}</option>`).join("");
-  C.rank.innerHTML = RANKS.slice().reverse().map(r => `<option value="${esc(r)}">${esc(r)}</option>`).join("");
-  // sensible defaults: Rampant Figment + Vibrant Figment → Meow Wow
-  C.m1mat.value = "Rampant"; C.m1tier.value = "Figment"; C.m1qty.value = 3;
-  C.m2mat.value = "Vibrant"; C.m2tier.value = "Figment"; C.m2qty.value = 2;
+  C.rank.innerHTML = `<option value="">${esc(translate("dg-any"))}</option>` +
+    RANKS.slice().reverse().map(r => `<option value="${esc(r)}">${esc(r)}</option>`).join("");
+  // default: one material in slot 1, "any" in slot 2 (the usual "what can X make?")
+  C.m1mat.value = "Rampant"; C.m1tier.value = "Figment";
+  C.m2mat.value = ""; C.m2tier.value = "";
 }
 
 function curLevel() { return Math.min(99, Math.max(1, parseInt(C.level.value, 10) || 1)); }
@@ -655,53 +662,44 @@ function recipeMatchSlots(r, s1, s2) {
   if (slotMatch(s1, b.mat, b.tier) && slotMatch(s2, a.mat, a.tier)) return [b, a];
   return null;
 }
+function recipeMaxRank(r, isRisky) {
+  const boost = r.m2 === "Recipe" ? 0 : 4;   // the Recipe item can't be boosted
+  return RANKS[Math.min(rankIdx(r.rank) + boost + (isRisky ? 1 : 0), RANKS.length - 1)];
+}
 function renderMaterialsMode() {
   const s1 = { mat: C.m1mat.value, tier: C.m1tier.value }, s2 = { mat: C.m2mat.value, tier: C.m2tier.value };
-  const q1 = Math.max(1, parseInt(C.m1qty.value, 10) || 1), q2 = Math.max(1, parseInt(C.m2qty.value, 10) || 1);
   const forecast = curForecast(), level = curLevel(), isRisky = forecast === "Risky Winds", cmd = curCommand();
 
   if (!s1.mat && !s2.mat) { C.matOut.innerHTML = `<p class="empty">${esc(translate("dg-c-pick-mat"))}</p>`; return; }
 
-  // match every recipe; align the two entered quantities to the recipe's two materials.
-  // A slot with a chosen material uses the entered amount (and must meet the recipe's
-  // minimum); an "any" slot just uses that recipe's base amount (discovery, no boost).
-  const results = [];
-  DG.recipes.forEach(r => {
-    const aligned = recipeMatchSlots(r, s1, s2);
-    if (!aligned) return;
-    const [first, second] = aligned;       // first ← slot1, second ← slot2
-    const used1 = s1.mat ? q1 : first.q, used2 = s2.mat ? q2 : second.q;
-    if (s1.mat && used1 < first.q) return;
-    if (s2.mat && used2 < second.q) return;
-    const boost = Math.min(boostFor(first.q, used1), boostFor(second.q, used2));
-    const baseI = rankIdx(r.rank);
-    const finalRank = RANKS[Math.min(baseI + boost + (isRisky ? 1 : 0), RANKS.length - 1)];
-    const total = used1 + used2;
-    results.push({ r, first, second, used1, used2, boost, finalRank, total, baseRank: r.rank });
-  });
-
+  // Every recipe that uses the chosen Dream Piece(s), shown at its listed (base)
+  // rank. Quantities/boosting live in "By Spirit"; this view is for discovery.
+  const results = DG.recipes.filter(r => !!recipeMatchSlots(r, s1, s2));
   if (!results.length) { C.matOut.innerHTML = `<p class="empty">${esc(translate("dg-c-no-recipe"))}</p>`; return; }
-  // sort by resulting rank desc, then success desc
-  results.sort((a, b) => rankIdx(b.finalRank) - rankIdx(a.finalRank) || (b.r.pct || 0) - (a.r.pct || 0));
+  results.sort((a, b) => rankIdx(b.rank) - rankIdx(a.rank) || a.sp.localeCompare(b.sp));
 
-  let html = "";
-  results.forEach(res => {
-    const r = res.r, spirit = SPIRIT_BY_NAME[r.sp];
+  let html = `<p class="hint" style="margin:0 0 6px">${esc(format("dg-c-found", results.length))}</p>`;
+  results.forEach(r => {
+    const spirit = SPIRIT_BY_NAME[r.sp];
+    const finalRank = isRisky ? RANKS[Math.min(rankIdx(r.rank) + 1, RANKS.length - 1)] : r.rank;
     const pct = r.pct != null ? (isRisky && r.pct < 100 ? Math.max(0, r.pct - 50) : r.pct) : null;
+    const total = recipeTotal(r);
     html += `<div class="dg-c-card">` +
       `<div class="dg-c-cardhead">` +
         `<img class="dg-c-cardimg" src="${esc(spiritFile(r.sp))}" alt="" loading="lazy">` +
         `<button class="dg-c-cardname" data-spirit="${esc(r.sp)}">${esc(r.sp)}</button>` +
-        `<span class="dg-c-rankbig">${esc(translate("dg-c-rank-out"))} ${esc(res.finalRank)}` +
-          (res.boost || (isRisky && res.finalRank !== res.baseRank) ? ` <span class="dg-c-up">(${esc(res.baseRank)}${res.boost ? " +" + res.boost : ""}${isRisky ? " +Risky" : ""})</span>` : "") + `</span>` +
+        `<span class="dg-c-rankbig">${esc(translate("dg-c-rank-out"))} ${esc(finalRank)}` +
+          (isRisky && finalRank !== r.rank ? ` <span class="dg-c-up">(${esc(r.rank)} +Risky)</span>` : "") +
+          (r.m2 !== "Recipe" && rankIdx(recipeMaxRank(r, isRisky)) > rankIdx(finalRank) ? ` <span class="dg-c-boostnote">${esc(format("dg-c-upto", recipeMaxRank(r, isRisky)))}</span>` : "") + `</span>` +
         (pct != null ? `<span class="dg-c-pct${pct < 100 ? " low" : ""}">${pct}%</span>` : "") +
       `</div>` +
-      `<div class="dg-c-cardrecipe">` + matChip(res.first.mat, res.first.tier, res.used1, res.first.q) +
-        ` <span class="dg-plus">+</span> ` + matChip(res.second.mat, res.second.tier, res.used2, res.second.q) +
-        ` <span class="dg-c-total">${esc(format("dg-c-total", res.total, levelBonusForTotal(res.total)))}</span>` +
+      `<div class="dg-c-cardrecipe">` + matChip(r.m1, r.t1, r.q1) +
+        ` <span class="dg-plus">+</span> ` + matChip(r.m2, r.t2, r.q2) +
+        ` <span class="dg-c-total">${esc(format("dg-c-total", total, levelBonusForTotal(total)))}</span>` +
+        (r.off ? ` <span class="dg-off-badge">${esc(translate("dg-official"))}</span>` : "") +
         (r.rare ? ` <span class="dg-rare">${esc(format("dg-c-rare-out", r.rare, pct != null ? 100 - pct : 0))}</span>` : "") +
       `</div>` +
-      statsTable(spirit, res.finalRank, level, forecast, cmd) + commandBonusLine(cmd) +
+      statsTable(spirit, finalRank, level, forecast, cmd) + commandBonusLine(cmd) +
       `<details class="dg-c-more"><summary>${esc(translate("dg-c-more"))}</summary>` +
         forecastExtras(spirit, forecast) + `</details>` +
       `</div>`;
@@ -711,51 +709,73 @@ function renderMaterialsMode() {
 }
 
 /* ----- By Spirit (backward) ----- */
+function spiritCardHead(spirit, rankHtml) {
+  return `<div class="dg-c-cardhead">` +
+    `<img class="dg-c-cardimg" src="${esc(spiritFile(spirit.name))}" alt="">` +
+    `<span class="dg-c-cardname">${esc(spirit.name)}</span>` + (rankHtml || "") + `</div>`;
+}
+function recipeRow(r, q1, q2, needed, isRisky) {
+  const pct = r.pct != null ? (isRisky && r.pct < 100 ? Math.max(0, r.pct - 50) : r.pct) : null;
+  const total = recipeTotal(r, q1, q2);
+  const note = r.m2 === "Recipe" ? `<span class="dg-c-boostnote">${esc(translate("dg-c-recipe-fixed"))}</span>`
+    : needed > 0 ? `<span class="dg-c-boostnote">${esc(format("dg-c-boost", r.rank, needed))}</span>`
+    : `<span class="dg-c-boostnote">${esc(translate("dg-c-asis"))}</span>`;
+  return `<div class="dg-c-reciperow">` +
+    matChip(r.m1, r.t1, q1, r.q1) + ` <span class="dg-plus">+</span> ` + matChip(r.m2, r.t2, q2, r.q2) +
+    ` <span class="dg-c-total">${esc(format("dg-c-total", total, levelBonusForTotal(total)))}</span>` + note +
+    (pct != null ? ` <span class="dg-c-pct${pct < 100 ? " low" : ""}">${pct}%</span>` : "") +
+    (r.rare && pct != null && pct < 100 ? ` <span class="dg-rare">${esc(format("dg-c-rare-out", r.rare, 100 - pct))}</span>` : "") +
+    `</div>`;
+}
 function renderSpiritMode() {
   const spirit = DG.spirits[+C.spirit.value] || DG.spirits[0];
-  const target = C.rank.value || "S";
+  const rankVal = C.rank.value;                       // "" = any
   const forecast = curForecast(), level = curLevel(), isRisky = forecast === "Risky Winds", cmd = curCommand();
-  const targetI = rankIdx(target);
   const recs = DG.recipes.filter(r => r.sp === spirit.name);
 
-  // which recipes can hit exactly the target rank?
+  // ----- "any rank": list every recipe at its base rank, with how far it boosts -----
+  if (!rankVal) {
+    let html = `<div class="dg-c-card">` + spiritCardHead(spirit, "") + `</div>`;
+    html += `<h3 class="grp-title">${esc(format("dg-c-all-recipes", recs.length, spirit.name))}</h3>`;
+    recs.slice().sort((a, b) => rankIdx(a.rank) - rankIdx(b.rank)).forEach(r => {
+      const maxR = recipeMaxRank(r, false);
+      html += `<div class="dg-c-reciperow">` + rankPill(r.rank) + " " +
+        matChip(r.m1, r.t1, r.q1) + ` <span class="dg-plus">+</span> ` + matChip(r.m2, r.t2, r.q2) +
+        (r.off ? ` <span class="dg-off-badge">${esc(translate("dg-official"))}</span>` : "") +
+        (r.pct != null && r.pct < 100 ? ` <span class="dg-c-pct low">${r.pct}%</span>` : "") +
+        (r.rare ? ` <span class="dg-rare">→ ${esc(r.rare)}</span>` : "") +
+        (rankIdx(maxR) > rankIdx(r.rank) ? ` <span class="dg-c-boostnote">${esc(format("dg-c-upto", maxR))}</span>` : "") +
+        `</div>`;
+    });
+    C.spiritOut.innerHTML = html;
+    wireResultNames(C.spiritOut);
+    return;
+  }
+
+  // ----- specific rank: which recipes reach it, and with what amounts -----
+  const target = rankVal, targetI = rankIdx(target);
   const viable = [];
   recs.forEach(r => {
-    const baseI = rankIdx(r.rank);
-    const needed = targetI - baseI - (isRisky ? 1 : 0);   // boost required
-    if (needed < 0 || needed > 4) return;                  // unreachable at this forecast
+    const needed = targetI - rankIdx(r.rank) - (isRisky ? 1 : 0);   // boost required
+    if (needed < 0) return;
+    if (r.m2 === "Recipe") { if (needed === 0) viable.push({ r, needed: 0, q1: r.q1, q2: r.q2 }); return; }  // can't boost
+    if (needed > 4) return;
     const q1 = qtyForBoost(r.q1, needed), q2 = qtyForBoost(r.q2, needed);
-    if (!isFinite(q1) || !isFinite(q2)) return;            // +1 impossible for a 1-qty piece
-    viable.push({ r, needed, q1, q2, total: q1 + q2 });
+    if (!isFinite(q1) || !isFinite(q2)) return;        // +1 impossible for a 1-qty piece
+    viable.push({ r, needed, q1, q2 });
   });
 
   let html = `<div class="dg-c-card">` +
-    `<div class="dg-c-cardhead">` +
-      `<img class="dg-c-cardimg" src="${esc(spiritFile(spirit.name))}" alt="">` +
-      `<span class="dg-c-cardname">${esc(spirit.name)}</span>` +
-      `<span class="dg-c-rankbig">${esc(translate("dg-c-rank-out"))} ${esc(target)}` +
-        (isRisky ? ` <span class="dg-c-up">(+Risky)</span>` : "") + `</span>` +
-    `</div>` +
+    spiritCardHead(spirit, `<span class="dg-c-rankbig">${esc(translate("dg-c-rank-out"))} ${esc(target)}` + (isRisky ? ` <span class="dg-c-up">(+Risky)</span>` : "") + `</span>`) +
     statsTable(spirit, target, level, forecast, cmd) + commandBonusLine(cmd) +
     `<details class="dg-c-more"><summary>${esc(translate("dg-c-more"))}</summary>` + forecastExtras(spirit, forecast) + `</details>` +
     `</div>`;
-
   if (!viable.length) {
     html += `<p class="empty">${esc(format("dg-c-unreachable", target, spirit.name))}</p>`;
   } else {
-    viable.sort((a, b) => a.total - b.total);
+    viable.sort((a, b) => recipeTotal(a.r, a.q1, a.q2) - recipeTotal(b.r, b.q1, b.q2));
     html += `<h3 class="grp-title">${esc(format("dg-c-recipes-for", viable.length, target))}</h3>`;
-    viable.forEach(v => {
-      const r = v.r;
-      const pct = r.pct != null ? (isRisky && r.pct < 100 ? Math.max(0, r.pct - 50) : r.pct) : null;
-      html += `<div class="dg-c-reciperow">` +
-        matChip(r.m1, r.t1, v.q1, r.q1) + ` <span class="dg-plus">+</span> ` + matChip(r.m2, r.t2, v.q2, r.q2) +
-        ` <span class="dg-c-total">${esc(format("dg-c-total", v.total, levelBonusForTotal(v.total)))}</span>` +
-        (v.needed > 0 ? ` <span class="dg-c-boostnote">${esc(format("dg-c-boost", r.rank, v.needed))}</span>` : ` <span class="dg-c-boostnote">${esc(translate("dg-c-asis"))}</span>`) +
-        (pct != null ? ` <span class="dg-c-pct${pct < 100 ? " low" : ""}">${pct}%</span>` : "") +
-        (r.rare && pct != null && pct < 100 ? ` <span class="dg-rare">${esc(format("dg-c-rare-out", r.rare, 100 - pct))}</span>` : "") +
-        `</div>`;
-    });
+    viable.forEach(v => { html += recipeRow(v.r, v.q1, v.q2, v.needed, isRisky); });
   }
   C.spiritOut.innerHTML = html;
   wireResultNames(C.spiritOut);
@@ -777,7 +797,7 @@ function initCreation() {
     renderCreation();
   }));
   [C.forecast, C.command, C.m1mat, C.m1tier, C.m2mat, C.m2tier, C.spirit, C.rank].forEach(e => e.addEventListener("change", renderCreation));
-  [C.level, C.m1qty, C.m2qty].forEach(e => e.addEventListener("input", renderCreation));
+  C.level.addEventListener("input", renderCreation);
   renderCreation();
 }
 
