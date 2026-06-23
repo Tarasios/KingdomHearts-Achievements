@@ -87,7 +87,7 @@
   "dg-c-materials-hint": "Choisissez les deux Pièces de rêve et la quantité de chaque. En utiliser plus que la recette demande augmente le rang — le plus petit des deux bonus s'applique.",
   "dg-c-spirit-hint": "Choisissez un Esprit et le rang voulu ; chaque recette qui l'atteint est listée avec les quantités exactes.",
   "dg-ab-filter": "rechercher des capacités…",
-  "dg-ab-hint": "Toutes les capacités de tous les plateaux de Lien. Les capacités permanentes (Soutien) restent avec Sora et Riku une fois débloquées sur n'importe quel Esprit. Cliquez sur un Esprit pour ouvrir son plateau ; survolez pour le coût et la condition.",
+  "dg-ab-hint": "Trouvez quels Esprits offrent une capacité et où sur leur plateau. Les capacités permanentes (Soutien) restent avec Sora et Riku une fois débloquées. Une vignette d'Esprit s'illumine si vous le possédez, et devient verte une fois ce nœud débloqué. Survolez pour le coût/la condition, cliquez pour ouvrir son plateau.",
   "dg-abcat-all": "Toutes",
   "dg-abcat-permanent": "Permanentes",
   "dg-abcat-stat": "Stat",
@@ -112,5 +112,9 @@
   "dg-leg-dispo": "Chemin de tempérament",
   "dg-c-cmd-applied": "Commande",
   "dg-c-affinity": "Affinité max",
+  "dg-spirits-normal": "Esprits",
+  "dg-spirits-rare": "Esprits rares",
+  "dg-ab-legend-owned": "Esprit obtenu",
+  "dg-ab-legend-unlocked": "Nœud débloqué",
   "dg-empty": "Rien ne correspond à votre filtre."
 }

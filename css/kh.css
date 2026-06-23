@@ -306,7 +306,9 @@
    ===================================================================== */
 
 /* ---- Spirits gallery ---- */
-.kh .dg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(116px, 1fr)); gap: 12px; margin-top: 14px; }
+.kh .dg-grid { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 12px; margin: 10px 0 14px; }
+@media (max-width: 900px) { .kh .dg-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .kh .dg-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .kh .dg-spirit { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center;
     background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 8px 10px;
     color: var(--ink); cursor: pointer; font: inherit; transition: border-color .15s, transform .1s, background .15s; }
@@ -401,7 +403,8 @@
 .kh .dg-c-res-chip.strong b { color: #6fe39a; }
 .kh .dg-c-res-add { color: var(--accent2); font-size: 11px; }
 .kh .dg-c-sub { color: var(--dim); font-weight: 400; text-transform: none; letter-spacing: 0; }
-.kh .dg-c-dispos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.kh .dg-c-dispos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+@media (max-width: 520px) { .kh .dg-c-dispos { grid-template-columns: 1fr; } }
 .kh .dg-c-dispo { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
 .kh .dg-c-dispo.off { opacity: .45; }
 .kh .dg-c-dispo-head { display: flex; align-items: center; gap: 8px; }
@@ -498,7 +501,8 @@ button.dg-c-cardname:hover { color: var(--accent); text-decoration: underline; }
 .dg-m-own.on { background: #3a2f12; border-color: #6b5a2c; color: #e0c66a; }
 .dg-m-statline { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 14px 0 2px; font-size: 13px; color: var(--dim); }
 .dg-m-statline b { color: var(--ink); }
-.dg-m-dispos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 8px; }
+.dg-m-dispos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+@media (max-width: 560px) { .dg-m-dispos { grid-template-columns: 1fr; } }
 .dg-m-dispo { display: flex; gap: 8px; background: var(--panel); border: 1px solid var(--line); border-radius: 9px; padding: 8px 10px; }
 table.dg-board { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .dg-board th, .dg-board td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
@@ -530,6 +534,13 @@ table.dg-board { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .kh .dg-ab-chip img { width: 20px; height: 20px; object-fit: contain; }
 .kh .dg-ab-chip:hover { border-color: var(--accent); }
 .kh .dg-ab-chip.cond { border-style: dashed; }
+.kh .dg-ab-chip.owned { background: rgba(95, 179, 255, .16); border-color: var(--accent); color: var(--ink); }
+.kh .dg-ab-chip.unlocked { background: #15351f; border-color: #2c5b3c; color: #9fe6b8; }
+.kh .dg-ab-legend { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.kh .dg-ab-legend .dg-ab-chip { cursor: default; padding: 3px 10px; }
+.kh .dg-ab-legend .dg-ab-chip i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.kh .dg-ab-legend .dg-ab-chip.owned i { background: var(--accent); }
+.kh .dg-ab-legend .dg-ab-chip.unlocked i { background: #6fe39a; }
 
 /* ---- Collapsible material headers + structured portal rewards ---- */
 .kh .dg-mat-title { display: flex; align-items: center; gap: 8px; width: 100%; background: none; border: none;

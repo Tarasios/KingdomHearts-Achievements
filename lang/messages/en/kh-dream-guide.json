@@ -87,7 +87,7 @@
   "dg-c-materials-hint": "Pick the two Dream Pieces and how many of each you'll use. Using more than a recipe calls for raises the rank — the smaller of the two boosts is applied.",
   "dg-c-spirit-hint": "Pick a Spirit and the rank you want; every recipe that can reach it is listed with the exact amounts to use.",
   "dg-ab-filter": "search abilities…",
-  "dg-ab-hint": "Every ability across all Ability Link boards. Permanent (Support) abilities stay with Sora and Riku once unlocked on any Spirit. Click a Spirit to open its board; hover for the cost and unlock condition.",
+  "dg-ab-hint": "Find which Spirits grant an ability and where on their board. Permanent (Support) abilities stay with Sora and Riku once unlocked on any Spirit. A Spirit chip lights up if you own it, and turns green once you've unlocked that node. Hover for the cost/condition, click to open its board.",
   "dg-abcat-all": "All",
   "dg-abcat-permanent": "Permanent",
   "dg-abcat-stat": "Stat",
@@ -112,5 +112,9 @@
   "dg-leg-dispo": "Disposition path",
   "dg-c-cmd-applied": "Deck Command",
   "dg-c-affinity": "Max Affinity",
+  "dg-spirits-normal": "Spirits",
+  "dg-spirits-rare": "Rare Spirits",
+  "dg-ab-legend-owned": "Spirit owned",
+  "dg-ab-legend-unlocked": "Node unlocked",
   "dg-empty": "Nothing matches your filter."
 }

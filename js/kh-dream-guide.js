@@ -285,32 +285,47 @@ const spiritsCount = document.getElementById("dg-spirits-count");
 const spiritsFilter = document.getElementById("dg-spirits-filter");
 const spiritsOwnedOnly = document.getElementById("dg-spirits-ownedonly");
 
+// The nine Rare Spirits get their own row/section.
+const RARE_SPIRITS = new Set(["Meowjesty", "Sudo Neku", "Frootz Cat", "Ursa Circus", "Kab Kannon", "R & R Seal", "Catanuki", "Beatalike", "Tubguin Ace"]);
+
+function spiritCard(spirit) {
+  const has = spiritOwned(spirit.name);
+  const card = el("div", "dg-spirit" + (has ? " owned" : ""));
+  card.setAttribute("role", "button"); card.tabIndex = 0;
+  card.innerHTML =
+    `<button class="dg-star${has ? " on" : ""}" title="${esc(translate("dg-own-toggle"))}" aria-pressed="${has}">★</button>` +
+    `<span class="dg-spirit-img"><img src="${esc(spiritFile(spirit.name))}" alt="" loading="lazy"></span>` +
+    `<span class="dg-spirit-name">${esc(spirit.name)}</span>` +
+    (spirit.attr ? `<span class="dg-spirit-attr">${esc(spirit.attr)}</span>` : "");
+  card.querySelector(".dg-star").addEventListener("click", e => { e.stopPropagation(); toggleSpirit(spirit.name); });
+  const open = () => openModal(spirit.name);
+  card.addEventListener("click", open);
+  card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
+  return card;
+}
+
 function renderSpirits() {
   const query = (spiritsFilter.value || "").trim().toLowerCase();
   const ownedOnly = spiritsOwnedOnly.checked;
   const owned = DG.spirits.filter(s => spiritOwned(s.name)).length;
   spiritsCount.innerHTML = format("dg-owned-count", owned, DG.spirits.length);
   spiritsGrid.innerHTML = "";
-  let shown = 0;
-  DG.spirits.forEach(spirit => {
-    if (query && spirit.name.toLowerCase().indexOf(query) < 0) return;
-    const has = spiritOwned(spirit.name);
-    if (ownedOnly && !has) return;
-    shown++;
-    const card = el("div", "dg-spirit" + (has ? " owned" : ""));
-    card.setAttribute("role", "button"); card.tabIndex = 0;
-    card.innerHTML =
-      `<button class="dg-star${has ? " on" : ""}" title="${esc(translate("dg-own-toggle"))}" aria-pressed="${has}">★</button>` +
-      `<span class="dg-spirit-img"><img src="${esc(spiritFile(spirit.name))}" alt="" loading="lazy"></span>` +
-      `<span class="dg-spirit-name">${esc(spirit.name)}</span>` +
-      (spirit.rank ? `<span class="dg-spirit-attr">${esc(translate("dg-c-attr"))}: ${esc(spirit.attr || "—")}</span>` : "");
-    card.querySelector(".dg-star").addEventListener("click", e => { e.stopPropagation(); toggleSpirit(spirit.name); });
-    const open = () => openModal(spirit.name);
-    card.addEventListener("click", open);
-    card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
-    spiritsGrid.appendChild(card);
-  });
-  if (!shown) spiritsGrid.innerHTML = `<p class="empty">${esc(translate("dg-empty"))}</p>`;
+
+  const pass = s => (!query || s.name.toLowerCase().indexOf(query) >= 0) && (!ownedOnly || spiritOwned(s.name));
+  const normal = DG.spirits.filter(s => !RARE_SPIRITS.has(s.name) && pass(s));
+  const rare = DG.spirits.filter(s => RARE_SPIRITS.has(s.name) && pass(s));
+
+  function section(titleKey, list) {
+    if (!list.length) return;
+    const head = el("h3", "grp-title"); head.textContent = translate(titleKey);
+    spiritsGrid.appendChild(head);
+    const grid = el("div", "dg-grid");
+    list.forEach(s => grid.appendChild(spiritCard(s)));
+    spiritsGrid.appendChild(grid);
+  }
+  section("dg-spirits-normal", normal);
+  section("dg-spirits-rare", rare);
+  if (!normal.length && !rare.length) spiritsGrid.innerHTML = `<p class="empty">${esc(translate("dg-empty"))}</p>`;
 }
 
 /* ---------- Ability Link board icon mapping ---------- */
@@ -775,14 +790,13 @@ function renderAbilities() {
   }).sort((a, b) => a.localeCompare(b));
 
   if (!names.length) { abList.innerHTML = `<p class="empty">${esc(translate("dg-empty"))}</p>`; return; }
-  const ownedCount = Object.keys(ABILITY_INDEX).filter(abilityOwned).length;
-  let html = `<div class="trk-summary" style="margin-bottom:10px"><span>${format("dg-ab-owned", `<b>${ownedCount}</b>`, Object.keys(ABILITY_INDEX).length)}</span></div>`;
+  // Colour key: which Spirits you own, and where you've unlocked the node.
+  let html = `<div class="dg-ab-legend"><span class="dg-ab-chip owned"><i></i>${esc(translate("dg-ab-legend-owned"))}</span>` +
+    `<span class="dg-ab-chip unlocked"><i></i>${esc(translate("dg-ab-legend-unlocked"))}</span></div>`;
   names.forEach(name => {
     const e = ABILITY_INDEX[name];
     const icon = nodeIcon({ t: e.type, n: name, c: e.grants[0].cost });
-    const have = abilityOwned(name);
-    html += `<div class="dg-ab${have ? " have" : ""}"><div class="dg-ab-head">` +
-      `<span class="dg-check${have ? " on" : ""}" role="checkbox" tabindex="0" aria-checked="${have}" data-ab="${esc(name)}"></span>` +
+    html += `<div class="dg-ab"><div class="dg-ab-head">` +
       `<img class="dg-ab-ic" src="${esc(BOARD_IMG + icon)}" alt="">` +
       `<span class="dg-ab-name">${esc(name)}</span>` +
       `<span class="dg-ab-type">${esc(e.type)}</span>` +
@@ -790,19 +804,16 @@ function renderAbilities() {
       `<span class="dg-ab-count">${esc(format("dg-ab-from", e.grants.length))}</span></div>` +
       `<div class="dg-ab-spirits">` +
         e.grants.map(g => {
+          const ownedSp = spiritOwned(g.spirit), unlocked = ownedSp && nodeOwned(g.spirit, g.grid);
+          const cls = "dg-ab-chip" + (g.cond ? " cond" : "") + (unlocked ? " unlocked" : ownedSp ? " owned" : "");
           const tip = [g.spirit, g.grid + " · " + g.cost, g.cond].filter(Boolean).map(esc).join("<br>");
-          return `<button class="dg-ab-chip${g.cond ? " cond" : ""}" data-spirit="${esc(g.spirit)}" data-pop="${esc(tip)}" tabindex="0">` +
+          return `<button class="${cls}" data-spirit="${esc(g.spirit)}" data-pop="${esc(tip)}" tabindex="0">` +
             `<img src="${esc(spiritFile(g.spirit))}" alt="">${esc(g.spirit)}</button>`;
         }).join("") +
       `</div></div>`;
   });
   abList.innerHTML = html;
   abList.querySelectorAll("[data-spirit]").forEach(b => b.addEventListener("click", () => openModal(b.getAttribute("data-spirit"))));
-  abList.querySelectorAll(".dg-check[data-ab]").forEach(box => {
-    const toggle = () => { const n = box.getAttribute("data-ab"); setAbilityOwned(n, !abilityOwned(n)); renderAbilities(); };
-    box.addEventListener("click", toggle);
-    box.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
-  });
   wirePop(abList);
 }
 
