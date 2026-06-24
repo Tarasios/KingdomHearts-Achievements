@@ -40,6 +40,7 @@ const DG = window.DREAM_GUIDE;
 // Board layouts live in their own easily-edited file (js/kh-dream-guide-boards.js).
 DG.boards = (window.DG_BOARDS && window.DG_BOARDS.boards) || DG.boards || {};
 DG.boardStarts = (window.DG_BOARDS && window.DG_BOARDS.starts) || DG.boardStarts || {};
+DG.boardLinks = (window.DG_BOARDS && window.DG_BOARDS.links) || DG.boardLinks || {};
 const CREATE = DG.create;
 const GAME = window.TRACKER_GAME;
 const DDD_STORE_KEY = GAME.storeKey;
@@ -119,19 +120,43 @@ function setAbilityOwned(name, on) {
 function nodeOwned(spirit, grid) { const m = GUIDE.nodes[spirit]; return !!(m && m[grid]); }
 // Per-board topology (cached): node lookup, child links, keyhole + entry cells.
 const BOARD_INFO = {};
+const LINK_VEC = { N: [0, -1], S: [0, 1], E: [1, 0], W: [-1, 0] };
 function boardInfo(spirit) {
   if (BOARD_INFO[spirit]) return BOARD_INFO[spirit];
   const board = (DG.boards || {})[spirit] || [];
-  const nodeByCoord = {}, nodesAt = {}, childrenOf = {};
+  const links = (DG.boardLinks || {})[spirit] || {};
+  const keyholes = new Set((DG.boardStarts || {})[spirit] || []);
+  const nodeByCoord = {}, nodesAt = {};
   board.forEach(n => { if (!nodeByCoord[n.g]) nodeByCoord[n.g] = n; (nodesAt[n.g] = nodesAt[n.g] || []).push(n); });
   // A cell with two stacked nodes is a "changes after a Red Secret" cell:
   // node[0] is the first ability, node[1] the one it becomes once the Secret
   // (named in the condition, e.g. "…after Secret: Red at D-7") is unlocked.
-  board.forEach(n => { if (n.frm) (childrenOf[n.frm] = childrenOf[n.frm] || []).push(n.g); });
-  const keyholes = new Set((DG.boardStarts || {})[spirit] || []);
+  const isReal = c => !!nodeByCoord[c] || keyholes.has(c);
+  // The pathing map (links) is undirected: build an adjacency set, taking a
+  // link if either tile declares it, between two real cells (tiles/keyhole).
+  const adj = {};
+  const addAdj = (a, b) => { if (a !== b) { (adj[a] = adj[a] || new Set()).add(b); (adj[b] = adj[b] || new Set()).add(a); } };
+  Object.entries(links).forEach(([coord, dirs]) => {
+    const c = parseCoord(coord); if (!c) return;
+    for (const d of (dirs || "")) { const v = LINK_VEC[d]; if (!v) continue; const nc = coordStr(c.col + v[0], c.row + v[1]); if (isReal(coord) && isReal(nc)) addAdj(coord, nc); }
+  });
+  // Distance from the single start drives progression (you grow outward).
+  const start = [...keyholes][0];
+  const distOf = {};
+  if (start != null) { distOf[start] = 0; const q = [start]; while (q.length) { const u = q.shift(); for (const v of (adj[u] || [])) if (distOf[v] === undefined) { distOf[v] = distOf[u] + 1; q.push(v); } } }
+  // Each tile's primary predecessor = its adjacent neighbour nearest the start.
+  const childrenOf = {};
+  board.forEach(n => {
+    let best = null, bd = Infinity;
+    for (const m of (adj[n.g] || [])) { const dd = distOf[m]; if (dd !== undefined && dd < bd) { bd = dd; best = m; } }
+    n.frm = (distOf[n.g] > 0) ? best : null;
+    if (n.frm) (childrenOf[n.frm] = childrenOf[n.frm] || []).push(n.g);
+  });
+  // Every undirected link, for drawing trails (includes board loops).
+  const edges = [], seenE = new Set();
+  for (const a of Object.keys(adj)) for (const b of adj[a]) { const k = a < b ? a + "|" + b : b + "|" + a; if (!seenE.has(k)) { seenE.add(k); edges.push([a, b]); } }
   const entryCoords = new Set(keyholes);
-  board.forEach(n => { if (!n.frm || n.s) entryCoords.add(n.g); });
-  return (BOARD_INFO[spirit] = { board, nodeByCoord, nodesAt, childrenOf, keyholes, entryCoords });
+  return (BOARD_INFO[spirit] = { board, nodeByCoord, nodesAt, childrenOf, keyholes, entryCoords, adj, distOf, edges });
 }
 // Has the Red Secret that flips this two-stage cell been unlocked? The board's
 // "Secret: Red" node is the real trigger (some condition strings name the wrong
@@ -158,8 +183,11 @@ function coordUnlocked(spirit, coord) {
 }
 function nodeUnlockable(spirit, node) {
   const info = boardInfo(spirit);
-  if (info.entryCoords.has(node.g) || !node.frm) return true; // a start node is always available
-  return coordUnlocked(spirit, node.frm);                     // else its predecessor must be unlocked
+  if (info.entryCoords.has(node.g) || !node.frm) return true;  // a start node is always available
+  // Reachable once ANY neighbour nearer the start is unlocked (handles loops).
+  const myd = info.distOf[node.g];
+  for (const m of (info.adj[node.g] || [])) { if (info.distOf[m] !== undefined && info.distOf[m] < myd && coordUnlocked(spirit, m)) return true; }
+  return false;
 }
 function markNodeAbility(node) { if (node && node.t !== "Quota" && node.t !== "Secret") setAbilityOwned(node.n, true); }
 function toggleNode(spirit, node) {
@@ -420,19 +448,20 @@ function buildBoardGrid(spirit, board) {
     (cells[c.col + "," + c.row] = cells[c.col + "," + c.row] || []).push(node);
   });
   info.keyholes.forEach(s => { const c = parseCoord(s); if (c) { maxCol = Math.max(maxCol, c.col); maxRow = Math.max(maxRow, c.row); } });
-  // Each predecessor→node link draws as two half-lines (one per cell, meeting
-  // in the gap). A disposition-gated link is drawn in a different colour.
+  // Every link draws as two half-lines (one per cell, meeting in the gap). A
+  // link is gated (drawn in a different colour) when its outer tile — the one
+  // further from the start — sits behind a disposition gate.
   const OPP = { up: "down", down: "up", left: "right", right: "left" };
   const linkDirs = {};
   const addDir = (k, d, g) => { const mm = linkDirs[k] = linkDirs[k] || {}; if (!mm[d]) mm[d] = g; };
-  board.forEach(n => {
-    if (!n.frm) return;
-    const me = parseCoord(n.g), p = parseCoord(n.frm); if (!me || !p) return;
-    const dc = p.col - me.col, dr = p.row - me.row;
+  info.edges.forEach(([a, b]) => {
+    const ca = parseCoord(a), cb = parseCoord(b); if (!ca || !cb) return;
+    const dc = cb.col - ca.col, dr = cb.row - ca.row;
     const dir = dc === 1 ? "right" : dc === -1 ? "left" : dr === 1 ? "down" : dr === -1 ? "up" : null;
     if (!dir) return;
-    const gated = !!dispoGate(n.cond);
-    addDir(me.col + "," + me.row, dir, gated); addDir(p.col + "," + p.row, OPP[dir], gated);
+    const outer = (info.distOf[a] >= info.distOf[b]) ? a : b;   // tile further from start
+    const gated = !!dispoGate((info.nodeByCoord[outer] || {}).cond);
+    addDir(ca.col + "," + ca.row, dir, gated); addDir(cb.col + "," + cb.row, OPP[dir], gated);
   });
   const trailsFor = key => Object.entries(linkDirs[key] || {}).map(([d, g]) => `<i class="dg-trail ${d}${g ? " gated" : ""}"></i>`).join("");
   let html = `<div class="dg-board-scroll"><div class="dg-grid-board" style="grid-template-columns:var(--dg-rh) repeat(${maxCol}, var(--dg-cell))">`;
