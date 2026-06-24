@@ -626,5 +626,3 @@ table.dg-board { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .dg-gcell.twostage { border-color: #5b2c2c; }
 .dg-pop .dg-pop-active { color: #6fe39a; }
 .dg-pop .dg-pop-change { display: block; margin-top: 6px; color: #e0976a; font-size: 11px; }
-
-.kh .dg-ing-recipe { color: var(--accent2); font-weight: 600; }

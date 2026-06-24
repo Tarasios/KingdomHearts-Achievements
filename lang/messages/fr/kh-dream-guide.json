@@ -117,10 +117,8 @@
   "dg-ab-legend-owned": "Esprit obtenu",
   "dg-ab-legend-unlocked": "Nœud débloqué",
   "dg-secret-change": "Change après le Secret Rouge — cliquez à nouveau (une fois ce Secret débloqué) pour passer à la seconde capacité.",
-  "dg-recipe-piece": "Recette",
   "dg-c-found": "%1 recette(s) l'utilisent :",
   "dg-c-upto": "→ jusqu'au Rang %1",
   "dg-c-all-recipes": "Les %1 recette(s) de %2",
-  "dg-c-recipe-fixed": "Objet Recette — rang fixe",
   "dg-empty": "Rien ne correspond à votre filtre."
 }

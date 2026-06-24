@@ -304,14 +304,12 @@ function statsTable(spirit, rank, level, forecast, cmd) {
 function rankPill(rank) { return `<span class="dg-rank-pill">${esc(rank)}</span>`; }
 function matChip(mat, tier, qty, baseQty) {
   if (!mat) return "";
-  // The "Recipe" Dream Piece (a Spirit's own recipe item) has no tier/quantity.
-  if (mat === "Recipe") return `<span class="dg-ing dg-ing-recipe">${esc(translate("dg-recipe-piece"))}</span>`;
   const boosted = qty != null && baseQty != null && qty > baseQty;
   return `<span class="dg-ing">${esc(mat + (tier ? " " + tier : ""))}` +
     (qty != null ? ` <b class="${boosted ? "dg-ing-up" : ""}">×${qty}</b>` : "") + `</span>`;
 }
-function recipeTotal(r, q1, q2) {   // Dream Pieces used (the Recipe item counts as 1)
-  return (q1 != null ? q1 : (r.q1 || 0)) + (r.m2 === "Recipe" ? 1 : (q2 != null ? q2 : (r.q2 || 0)));
+function recipeTotal(r, q1, q2) {   // total Dream Pieces used across both materials
+  return (q1 != null ? q1 : (r.q1 || 0)) + (q2 != null ? q2 : (r.q2 || 0));
 }
 
 /* =====================================================================
@@ -663,7 +661,7 @@ function recipeMatchSlots(r, s1, s2) {
   return null;
 }
 function recipeMaxRank(r, isRisky) {
-  const boost = r.m2 === "Recipe" ? 0 : 4;   // the Recipe item can't be boosted
+  const boost = 4;   // max rank-boost from over-stuffing materials
   return RANKS[Math.min(rankIdx(r.rank) + boost + (isRisky ? 1 : 0), RANKS.length - 1)];
 }
 function renderMaterialsMode() {
@@ -690,7 +688,7 @@ function renderMaterialsMode() {
         `<button class="dg-c-cardname" data-spirit="${esc(r.sp)}">${esc(r.sp)}</button>` +
         `<span class="dg-c-rankbig">${esc(translate("dg-c-rank-out"))} ${esc(finalRank)}` +
           (isRisky && finalRank !== r.rank ? ` <span class="dg-c-up">(${esc(r.rank)} +Risky)</span>` : "") +
-          (r.m2 !== "Recipe" && rankIdx(recipeMaxRank(r, isRisky)) > rankIdx(finalRank) ? ` <span class="dg-c-boostnote">${esc(format("dg-c-upto", recipeMaxRank(r, isRisky)))}</span>` : "") + `</span>` +
+          (rankIdx(recipeMaxRank(r, isRisky)) > rankIdx(finalRank) ? ` <span class="dg-c-boostnote">${esc(format("dg-c-upto", recipeMaxRank(r, isRisky)))}</span>` : "") + `</span>` +
         (pct != null ? `<span class="dg-c-pct${pct < 100 ? " low" : ""}">${pct}%</span>` : "") +
       `</div>` +
       `<div class="dg-c-cardrecipe">` + matChip(r.m1, r.t1, r.q1) +
@@ -717,8 +715,7 @@ function spiritCardHead(spirit, rankHtml) {
 function recipeRow(r, q1, q2, needed, isRisky) {
   const pct = r.pct != null ? (isRisky && r.pct < 100 ? Math.max(0, r.pct - 50) : r.pct) : null;
   const total = recipeTotal(r, q1, q2);
-  const note = r.m2 === "Recipe" ? `<span class="dg-c-boostnote">${esc(translate("dg-c-recipe-fixed"))}</span>`
-    : needed > 0 ? `<span class="dg-c-boostnote">${esc(format("dg-c-boost", r.rank, needed))}</span>`
+  const note = needed > 0 ? `<span class="dg-c-boostnote">${esc(format("dg-c-boost", r.rank, needed))}</span>`
     : `<span class="dg-c-boostnote">${esc(translate("dg-c-asis"))}</span>`;
   return `<div class="dg-c-reciperow">` +
     matChip(r.m1, r.t1, q1, r.q1) + ` <span class="dg-plus">+</span> ` + matChip(r.m2, r.t2, q2, r.q2) +
@@ -758,7 +755,6 @@ function renderSpiritMode() {
   recs.forEach(r => {
     const needed = targetI - rankIdx(r.rank) - (isRisky ? 1 : 0);   // boost required
     if (needed < 0) return;
-    if (r.m2 === "Recipe") { if (needed === 0) viable.push({ r, needed: 0, q1: r.q1, q2: r.q2 }); return; }  // can't boost
     if (needed > 4) return;
     const q1 = qtyForBoost(r.q1, needed), q2 = qtyForBoost(r.q2, needed);
     if (!isFinite(q1) || !isFinite(q2)) return;        // +1 impossible for a 1-qty piece
