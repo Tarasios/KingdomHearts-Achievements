@@ -397,7 +397,6 @@ function journalGrid(container, section, view, panelState) {
       tile.dataset.pop = tip;
       tile.setAttribute("aria-pressed", owned ? "true" : "false");
       tile.setAttribute("aria-label", reward);
-      if (!owned) tile.textContent = "?";
       if (auto && !store[index]) { tile.disabled = true; tile.title = format('gt-auto-tip', auto); tile.classList.add("auto"); }
       else if (item.gives) tile.onclick = () => toggleWithGives(store, index, item);
       else tile.onclick = () => toggleCheck(store, index);

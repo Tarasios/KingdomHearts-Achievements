@@ -663,11 +663,10 @@ table.dg-board { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .kh .jrnl-grid { display: grid; grid-template-columns: repeat(var(--jrnl-cols, 8), 1fr); gap: 4px; max-width: 540px; }
 .kh .jrnl-tile { aspect-ratio: 1 / 1; border: 0; border-radius: 4px; padding: 0; cursor: pointer;
   display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; transition: filter .1s; }
-.kh .jrnl-tile.unowned { background: #1d5e20; color: #5dc12f; }
-.kh .jrnl-tile.unowned:hover { background: #246e27; }
-.kh .jrnl-tile.owned { background: #bcd98a; background-image: url(../images/icons/treasure-chest.svg);
-  background-size: 84%; background-position: center; background-repeat: no-repeat; }
-.kh .jrnl-tile.owned:hover { filter: brightness(1.06); }
+.kh .jrnl-tile { background-size: cover; background-position: center; background-repeat: no-repeat; }
+.kh .jrnl-tile.unowned { background-image: url(../images/icons/Treasure_missing.png); }
+.kh .jrnl-tile.owned { background-image: url(../images/icons/Treasure_owned.png); }
+.kh .jrnl-tile:hover { filter: brightness(1.08); }
 .kh .jrnl-tile.dim { opacity: .22; }
 .kh .jrnl-tile.auto { cursor: default; }
 .kh .jrnl-tile:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
