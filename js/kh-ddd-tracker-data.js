@@ -1394,10 +1394,14 @@ var TRACKER_GAME = {
           "items": [
             {
               "name": "Combo Plus",
-              "g": "Support"},
+              "g": "Support",
+              "max": 3
+            },
             {
               "name": "Air Combo Plus",
-              "g": "Support"},
+              "g": "Support",
+              "max": 3
+            },
             {
               "name": "Combo Master",
               "g": "Support",
@@ -1445,7 +1449,9 @@ var TRACKER_GAME = {
             },
             {
               "name": "Treasure Magnet",
-              "g": "Support"},
+              "g": "Support",
+              "max": 5
+            },
             {
               "name": "Link Critical",
               "g": "Spirit",
@@ -1453,7 +1459,9 @@ var TRACKER_GAME = {
             },
             {
               "name": "Support Boost",
-              "g": "Spirit"},
+              "g": "Spirit",
+              "max": 3
+            },
             {
               "name": "Waking Dream",
               "g": "Spirit",
@@ -5892,21 +5900,15 @@ var TRACKER_GAME = {
 /* ---------------------------------------------------------------------------
    Post-build wiring (kept here so the big data literal above stays declarative)
 
-   1. Spirit Recipe items are a collectible, so the same Recipes section also
-      appears under the Collection tab (one object, shared checkboxes).
-   2. A treasure chest whose reward IS a Dream Piece marks that piece collected
-      in the Collection tab when the chest is checked — a smart cross-off that
-      still stays editable, since pieces also drop from enemies.
+   A treasure chest whose reward IS a Dream Piece marks that piece collected
+   in the Collection tab when the chest is checked — a smart cross-off that
+   still stays editable, since pieces also drop from enemies.
+   (Spirit Recipes live under the Dream Eaters tab, not duplicated here.)
 --------------------------------------------------------------------------- */
 (function () {
   var byId = function (list, id) { return list.find(function (x) { return x.id === id; }); };
   var tabs = TRACKER_GAME.tabs;
   var collection = byId(tabs, "collection");
-  var recipes = byId(byId(tabs, "dreameaters").sections, "recipes");
-  if (collection && recipes && collection.sections.indexOf(recipes) === -1) {
-    collection.sections.push(recipes);
-  }
-
   var dreampieces = byId(collection.sections, "dreampieces");
   var pieceNames = {};
   (dreampieces.items || []).forEach(function (p) { pieceNames[p.name] = true; });
