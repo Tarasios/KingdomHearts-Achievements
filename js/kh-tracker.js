@@ -346,6 +346,26 @@ function checklist(container, section, view, panelState) {
   let shownCount = 0;
   const query = panelState.q.toLowerCase();
   let lastGroup = null;
+  // Opt-in: render each item.g group as its own collapsible block (e.g. DDD
+  // Treasures by world, Commands by category) so a long section can be folded
+  // a group at a time instead of all-or-nothing. Rows are tagged with the
+  // group key and shown/hidden in place; state lives in panelState.open.
+  const collapse = !!section.groupCollapse;
+  const filtering = !!query;
+  const openState = panelState.open || (panelState.open = {});
+  const grpKey = name => "grp:" + view.storeId + ":" + name;
+  const grpIsOpen = key => filtering ? true : (key in openState ? openState[key] : true);
+  const rowDone = (item, index) => section.counter ? counterValue(store, index, item) >= itemMax(item)
+        : checks ? checks.every((check, ci) => !checkApplies(item, check) || store[checkKey(index, check.k, ci)])
+        : (!!store[index] || !!autoSource(section, item));
+  const groupStats = {};
+  if (collapse) view.items.forEach((item, index) => {
+    if (!itemVisible(item, activeChar)) return;
+    const gname = item.g || item.name;
+    const st = groupStats[gname] || (groupStats[gname] = { done: 0, total: 0 });
+    st.total++; if (rowDone(item, index)) st.done++;
+  });
+  let curGrpKey = null, curGrpOpen = true;
   view.items.forEach((item, index) => {
     if (!itemVisible(item, activeChar)) return;
     const auto = (checks || section.counter) ? null : autoSource(section, item);
@@ -360,13 +380,32 @@ function checklist(container, section, view, panelState) {
       lastGroup = item.g;
       const groupName = item.g;
       const groupRow = el("tr");
-      const groupCell = el("td", "grp-title");
+      const groupCell = el("td", collapse ? "grp-title grp-collapsible" : "grp-title");
       groupCell.colSpan = cols.length + leadCount + 1;
       groupCell.style.borderBottom = "1px solid var(--line)";
+      let caret = null;
+      if (collapse) {
+        curGrpKey = grpKey(groupName); curGrpOpen = grpIsOpen(curGrpKey);
+        caret = el("span", "grp-caret", curGrpOpen ? "▾" : "▸");
+        groupCell.appendChild(caret);
+      }
       groupCell.appendChild(el("span", null, fmtText(groupName)));
+      if (collapse) {
+        const st = groupStats[groupName] || { done: 0, total: 0 };
+        groupCell.appendChild(el("span", "grp-count", `${st.done} / ${st.total}`));
+      }
       const toggleAllBtn = el("button", "grpbtn", translate('gt-toggle-all'));
-      toggleAllBtn.onclick = () => toggleGroup(view.items, store, groupName, section);
+      toggleAllBtn.onclick = (ev) => { ev.stopPropagation(); toggleGroup(view.items, store, groupName, section); };
       groupCell.appendChild(toggleAllBtn);
+      if (collapse) {
+        const key = curGrpKey;
+        groupCell.addEventListener("click", () => {
+          const open = !(key in openState ? openState[key] : true);
+          openState[key] = open;
+          if (caret) caret.textContent = open ? "▾" : "▸";
+          Array.from(tbody.children).forEach(r => { if (r.dataset.grp === key) r.style.display = open ? "" : "none"; });
+        });
+      }
       groupRow.appendChild(groupCell);
       tbody.appendChild(groupRow);
       const note = groupNote(view.storeId, section.id, groupName);
@@ -376,6 +415,7 @@ function checklist(container, section, view, panelState) {
         noteCell.style.borderBottom = "1px solid var(--line)";
         noteCell.innerHTML = fmtText(note);
         noteRow.appendChild(noteCell);
+        if (collapse) { noteRow.dataset.grp = curGrpKey; if (!curGrpOpen) noteRow.style.display = "none"; }
         tbody.appendChild(noteRow);
       }
     }
@@ -436,6 +476,7 @@ function checklist(container, section, view, panelState) {
       if (ref) { const progress = trophyProgress(ref); if (progress) html = chip(progress[0], progress[1]); }
       row.appendChild(el("td", null, html));
     }
+    if (collapse && item.g) { row.dataset.grp = curGrpKey; if (!curGrpOpen) row.style.display = "none"; }
     tbody.appendChild(row);
     shownCount++;
   });
