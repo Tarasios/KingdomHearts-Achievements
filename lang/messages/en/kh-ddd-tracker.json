@@ -2150,1757 +2150,2195 @@
     "treasures-sora": [
       {
         "name": "Ice Cream Cone",
-        "area": "First District"
+        "area": "First District",
+        "loc": "NW, roof of building"
       },
       {
         "name": "Potion",
-        "area": "First District"
+        "area": "First District",
+        "loc": "W, alley"
       },
       {
         "name": "Confetti Candy",
-        "area": "Second District"
+        "area": "Second District",
+        "loc": "NE, side of building near #5"
       },
       {
         "name": "Balloon",
-        "area": "Second District"
+        "area": "Second District",
+        "loc": "NE, roof of building"
       },
       {
         "name": "Hi-Potion",
-        "area": "Second District"
+        "area": "Second District",
+        "loc": "N, left side roof of building"
       },
       {
         "name": "Vibrant Fantasy",
-        "area": "Third District"
+        "area": "Third District",
+        "loc": "NW, roof of building"
       },
       {
         "name": "Block-It Chocolate",
-        "area": "Third District"
+        "area": "Third District",
+        "loc": "E, alley"
       },
       {
         "name": "Shield Cookie",
-        "area": "Fourth District"
+        "area": "Fourth District",
+        "loc": "S, lower level between buildings"
       },
       {
         "name": "Water Barrel",
-        "area": "Fourth District"
+        "area": "Fourth District",
+        "loc": "W, roof of building"
       },
       {
         "name": "Hi-Potion",
-        "area": "Fourth District"
+        "area": "Fourth District",
+        "loc": "N center, roof of building"
       },
       {
         "name": "Ice Dream Cone",
-        "area": "Fourth District"
+        "area": "Fourth District",
+        "loc": "center, lower platform"
       },
       {
         "name": "Balloon",
-        "area": "Fourth District"
+        "area": "Fourth District",
+        "loc": "center, top of tower"
       },
       {
         "name": "Potion",
-        "area": "Fourth District"
+        "area": "Fourth District",
+        "loc": "SE, ground level"
       },
       {
         "name": "Block-It Chocolate",
-        "area": "Fourth District"
+        "area": "Fourth District",
+        "loc": "NE, ground level"
       },
       {
         "name": "Potion",
-        "area": "Fourth District"
+        "area": "Fourth District",
+        "loc": "W, courtyard"
       },
       {
         "name": "Shield Cookie",
-        "area": "Fifth District"
+        "area": "Fifth District",
+        "loc": "NW, roof of building"
       },
       {
         "name": "Potion",
-        "area": "Fifth District"
+        "area": "Fifth District",
+        "loc": "E, alley"
       },
       {
         "name": "Block-It Chocolate",
-        "area": "Fifth District"
+        "area": "Fifth District",
+        "loc": "N, roof of building"
       },
       {
         "name": "Royal Cake",
-        "area": "Garden"
+        "area": "Garden",
+        "loc": "S, entrance"
       },
       {
         "name": "Confetti Candy",
-        "area": "Garden"
+        "area": "Garden",
+        "loc": "center, ground level"
       },
       {
         "name": "Rampant Figment",
-        "area": "Garden"
+        "area": "Garden",
+        "loc": "E, upper ledge"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Garden"
+        "area": "Garden",
+        "loc": "N, ground level"
       },
       {
         "name": "Rampant Fantasy",
-        "area": "Post Office"
+        "area": "Post Office",
+        "loc": "NE, use Reality Shift in corner"
       },
       {
         "name": "Vibrant Fantasy",
-        "area": "Post Office"
+        "area": "Post Office",
+        "loc": "S center, upper ledge, use Reality Shift"
       },
       {
         "name": "Troubling Fantasy",
-        "area": "Post Office"
+        "area": "Post Office",
+        "loc": "W, small room"
       },
       {
         "name": "Spark",
-        "area": "Post Office"
+        "area": "Post Office",
+        "loc": "W, top of red tower"
       },
       {
         "name": "Paint Gun: Red",
-        "area": "Post Office"
+        "area": "Post Office",
+        "loc": "NE, upper ledge"
       },
       {
         "name": "Potion",
-        "area": "Post Office"
+        "area": "Post Office",
+        "loc": "center, ground level"
       },
       {
         "name": "Ice Dream Cone",
-        "area": "Post Office"
+        "area": "Post Office",
+        "loc": "SW, upper ledge by purple track"
       },
       {
         "name": "Balloon",
-        "area": "Fountain Plaza"
+        "area": "Fountain Plaza",
+        "loc": "SE, dead end"
       },
       {
         "name": "Intrepid Figment",
-        "area": "Fountain Plaza"
+        "area": "Fountain Plaza",
+        "loc": "SW, use Reality Shift"
       },
       {
         "name": "Ice Dream Cone",
-        "area": "Fountain Plaza"
+        "area": "Fountain Plaza",
+        "loc": "W center, upper ledge"
       },
       {
         "name": "Rampant Fantasy",
-        "area": "Fountain Plaza"
+        "area": "Fountain Plaza",
+        "loc": "SE, dead end on upper ledge"
       },
       {
         "name": "Strike Raid",
-        "area": "Fountain Plaza"
+        "area": "Fountain Plaza",
+        "loc": "N, top of fountain"
       },
       {
         "name": "Block-It Chocolate",
-        "area": "Square"
+        "area": "Square",
+        "loc": "NE, ground level"
       },
       {
         "name": "Balloon",
-        "area": "Square"
+        "area": "Square",
+        "loc": "SE, next to stage"
       },
       {
         "name": "Ice Dream Cone",
-        "area": "Square"
+        "area": "Square",
+        "loc": "SW, behind tents"
       },
       {
         "name": "Potion",
-        "area": "Square"
+        "area": "Square",
+        "loc": "W, ground level"
       },
       {
         "name": "Water Barrel",
-        "area": "Nave"
+        "area": "Nave",
+        "loc": "SE, upper level"
       },
       {
         "name": "Royal Cake",
-        "area": "Nave"
+        "area": "Nave",
+        "loc": "N, upper level"
       },
       {
         "name": "Block-It Chocolate",
-        "area": "Nave"
+        "area": "Nave",
+        "loc": "NW, ground level in side room"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Nave"
+        "area": "Nave",
+        "loc": "N, ground level"
       },
       {
         "name": "Potion",
-        "area": "Nave"
+        "area": "Nave",
+        "loc": "E, ground level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Nave"
+        "area": "Nave",
+        "loc": "SW, upper level at north end"
       },
       {
         "name": "Dulcet Figment",
-        "area": "Bell Tower"
+        "area": "Bell Tower",
+        "loc": "SE, top level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Bell Tower"
+        "area": "Bell Tower",
+        "loc": "NE, top level"
       },
       {
         "name": "Balloon",
-        "area": "Bell Tower"
+        "area": "Bell Tower",
+        "loc": "NE, middle level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Bell Tower"
+        "area": "Bell Tower",
+        "loc": "N, lower level"
       },
       {
         "name": "Sparkra",
-        "area": "Town"
+        "area": "Town",
+        "loc": "SW, roof of building"
       },
       {
         "name": "Candy Goggles",
-        "area": "Town"
+        "area": "Town",
+        "loc": "S center, high ledge atop tall building"
       },
       {
         "name": "Lofty Figment",
-        "area": "Town"
+        "area": "Town",
+        "loc": "SE, roof of building"
       },
       {
         "name": "Ice Dream Cone",
-        "area": "Town"
+        "area": "Town",
+        "loc": "NW, roof of building"
       },
       {
         "name": "Wheeflower Recipe",
-        "area": "Town"
+        "area": "Town",
+        "loc": "S center, ground level"
       },
       {
         "name": "Confetti Candy",
-        "area": "Town"
+        "area": "Town",
+        "loc": "N center, top of stairs"
       },
       {
         "name": "Troubling Fancy",
-        "area": "Town"
+        "area": "Town",
+        "loc": "SW, ledge near tall building"
       },
       {
         "name": "Shield Cookie",
-        "area": "Bridge"
+        "area": "Bridge",
+        "loc": "S, in southern arch"
       },
       {
         "name": "Paint Gun: Red",
-        "area": "Bridge"
+        "area": "Bridge",
+        "loc": "N, behind fallen cart"
       },
       {
         "name": "Block-It Chocolate",
-        "area": "Bridge"
+        "area": "Bridge",
+        "loc": "S, next to tent"
       },
       {
         "name": "Potion",
-        "area": "Bridge"
+        "area": "Bridge",
+        "loc": "N, in northern arch"
       },
       {
         "name": "Confetti Candy",
-        "area": "Outskirts"
+        "area": "Outskirts",
+        "loc": "SE, ground level"
       },
       {
         "name": "Noble Figment",
-        "area": "Outskirts"
+        "area": "Outskirts",
+        "loc": "SE, ground level"
       },
       {
         "name": "Balloon",
-        "area": "Outskirts"
+        "area": "Outskirts",
+        "loc": "E, ground level"
       },
       {
         "name": "Potion",
-        "area": "Outskirts"
+        "area": "Outskirts",
+        "loc": "center, ground level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Outskirts"
+        "area": "Outskirts",
+        "loc": "N center, ground level"
       },
       {
         "name": "Ice Dream Cone",
-        "area": "Graveyard Gate"
+        "area": "Graveyard Gate",
+        "loc": "NE, ground level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Graveyard Gate"
+        "area": "Graveyard Gate",
+        "loc": "SE, ground level"
       },
       {
         "name": "Potion",
-        "area": "Graveyard Gate"
+        "area": "Graveyard Gate",
+        "loc": "NW, ground level"
       },
       {
         "name": "Sleepra",
-        "area": "Tunnels"
+        "area": "Tunnels",
+        "loc": "SE, hidden room, attack weak wall"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Tunnels"
+        "area": "Tunnels",
+        "loc": "NW, large room, upper level"
       },
       {
         "name": "Catanuki Recipe",
-        "area": "Tunnels"
+        "area": "Tunnels",
+        "loc": "NE, large room, upper level"
       },
       {
         "name": "Paint Gun: Purple",
-        "area": "Tunnels"
+        "area": "Tunnels",
+        "loc": "NE, large room, lower level"
       },
       {
         "name": "Ice Dream Cone 2",
-        "area": "Tunnels"
+        "area": "Tunnels",
+        "loc": "S center, small dead end room"
       },
       {
         "name": "Noble Fantasy",
-        "area": "Tunnels"
+        "area": "Tunnels",
+        "loc": "N center, small room, lower level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Old Graveyard"
+        "area": "Old Graveyard",
+        "loc": "NE, ground level"
       },
       {
         "name": "Water Barrel",
-        "area": "Catacombs"
+        "area": "Catacombs",
+        "loc": "SW, upper ledge"
       },
       {
         "name": "Fire Windmill",
-        "area": "Catacombs"
+        "area": "Catacombs",
+        "loc": "SW, ground level"
       },
       {
         "name": "Toximander Recipe",
-        "area": "Catacombs"
+        "area": "Catacombs",
+        "loc": "SE, hidden room, ground level"
       },
       {
         "name": "Royal Cake",
-        "area": "Catacombs"
+        "area": "Catacombs",
+        "loc": "E, tunnel, upper ledge"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Catacombs"
+        "area": "Catacombs",
+        "loc": "S center, upper ledge"
       },
       {
         "name": "Shield Cookie",
-        "area": "Catacombs"
+        "area": "Catacombs",
+        "loc": "SE, upper ledge"
       },
       {
         "name": "Thunder Dash",
-        "area": "Court of Miracles"
+        "area": "Court of Miracles",
+        "loc": "NE, upper ledge"
       },
       {
         "name": "Hi-Potion",
-        "area": "Court of Miracles"
+        "area": "Court of Miracles",
+        "loc": "W, upper ledge"
       },
       {
         "name": "Block-It Chocolate",
-        "area": "Court of Miracles"
+        "area": "Court of Miracles",
+        "loc": "NW, ground level"
       },
       {
         "name": "Blizzara",
-        "area": "Amusement Park"
+        "area": "Amusement Park",
+        "loc": "SW, top of tower"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Amusement Park"
+        "area": "Amusement Park",
+        "loc": "NE, next to carousel"
       },
       {
         "name": "Balloon",
-        "area": "Amusement Park"
+        "area": "Amusement Park",
+        "loc": "SW, base of tower"
       },
       {
         "name": "Shield Cookie 2",
-        "area": "Amusement Park"
+        "area": "Amusement Park",
+        "loc": "NW, ground level"
       },
       {
         "name": "Malleable Fantasy",
-        "area": "Amusement Park"
+        "area": "Amusement Park",
+        "loc": "W, on Ferris wheel car"
       },
       {
         "name": "Paint Gun: Yellow",
-        "area": "Amusement Park"
+        "area": "Amusement Park",
+        "loc": "W, under Ferris wheel"
       },
       {
         "name": "Ice Dream Cone 2",
-        "area": "Amusement Park"
+        "area": "Amusement Park",
+        "loc": "E, ground level"
       },
       {
         "name": "Block-It Chocolate 2",
-        "area": "Amusement Park"
+        "area": "Amusement Park",
+        "loc": "center, next to tube slide"
       },
       {
         "name": "Hi-Potion",
-        "area": "Amusement Park"
+        "area": "Amusement Park",
+        "loc": "SE, ground level"
       },
       {
         "name": "Candy Goggles",
-        "area": "Amusement Park"
+        "area": "Amusement Park",
+        "loc": "W, on Ferris wheel car"
       },
       {
         "name": "Hi-Potion",
-        "area": "Promontory"
+        "area": "Promontory",
+        "loc": "SW, ground level"
       },
       {
         "name": "Water Barrel",
-        "area": "Promontory"
+        "area": "Promontory",
+        "loc": "NE, upper ledge"
       },
       {
         "name": "Ice Dream Cone 2",
-        "area": "Promontory"
+        "area": "Promontory",
+        "loc": "NE, lower level"
       },
       {
         "name": "Block-It Chocolate 2",
-        "area": "Windup Way"
+        "area": "Windup Way",
+        "loc": "SW, at entrance, ground level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Windup Way"
+        "area": "Windup Way",
+        "loc": "center, middle of path, ground level"
       },
       {
         "name": "Aerial Slam",
-        "area": "Windup Way"
+        "area": "Windup Way",
+        "loc": "center, round room, northeast ledge"
       },
       {
         "name": "Royal Cake",
-        "area": "Windup Way"
+        "area": "Windup Way",
+        "loc": "center, round room, top ledge"
       },
       {
         "name": "Hi-Potion",
-        "area": "Windup Way"
+        "area": "Windup Way",
+        "loc": "NE, ground level"
       },
       {
         "name": "Balloon",
-        "area": "Circus"
+        "area": "Circus",
+        "loc": "NE, ground level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Circus"
+        "area": "Circus",
+        "loc": "NW, ground level"
       },
       {
         "name": "Confetti Candy 2",
-        "area": "Circus"
+        "area": "Circus",
+        "loc": "S, ground level"
       },
       {
         "name": "Rampant Fancy",
-        "area": "Circus"
+        "area": "Circus",
+        "loc": "NE, upper ledge, above green trampoline"
       },
       {
         "name": "Panacea",
-        "area": "Ocean Floor"
+        "area": "Ocean Floor",
+        "loc": "N, ground level, hidden room"
       },
       {
         "name": "Lofty Fantasy",
-        "area": "Ocean Floor"
+        "area": "Ocean Floor",
+        "loc": "W center, upper ledge"
       },
       {
         "name": "Paint Gun: Sky Blue",
-        "area": "Ocean Floor"
+        "area": "Ocean Floor",
+        "loc": "NE, atop pillar"
       },
       {
         "name": "Zero Gravira",
-        "area": "Ocean Floor"
+        "area": "Ocean Floor",
+        "loc": "SW, upper ledge"
       },
       {
         "name": "Rampant Fancy",
-        "area": "Ocean Depths"
+        "area": "Ocean Depths",
+        "loc": "W, ground level, next to vortex"
       },
       {
         "name": "Candy Goggles",
-        "area": "Ocean Depths"
+        "area": "Ocean Depths",
+        "loc": "NW, upper ledge"
       },
       {
         "name": "Royal Cake",
-        "area": "Ocean Depths"
+        "area": "Ocean Depths",
+        "loc": "NE, ledge on middle level"
       },
       {
         "name": "Tatsu Steed Recipe",
-        "area": "Ocean Depths"
+        "area": "Ocean Depths",
+        "loc": "S, ground level, behind water spout"
       },
       {
         "name": "Shield Cookie 2",
-        "area": "Ocean Depths"
+        "area": "Ocean Depths",
+        "loc": "E center, large room, upper ledge"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "City"
+        "area": "City",
+        "loc": "W, by Docks exit, ground level"
       },
       {
         "name": "Troubling Fancy",
-        "area": "City"
+        "area": "City",
+        "loc": "S center, upper ledge"
       },
       {
         "name": "Potion",
-        "area": "City"
+        "area": "City",
+        "loc": "W, ground level"
       },
       {
         "name": "Water Barrel",
-        "area": "City"
+        "area": "City",
+        "loc": "NE, along west speed hill on ledge"
       },
       {
         "name": "Block-It Chocolate 2",
-        "area": "City"
+        "area": "City",
+        "loc": "NE, along east speed hill on ledge"
       },
       {
         "name": "Eaglider Recipe",
-        "area": "Docks"
+        "area": "Docks",
+        "loc": "Upper — W tunnel, upper ledge"
       },
       {
         "name": "Candy Goggles",
-        "area": "Docks"
+        "area": "Docks",
+        "loc": "Upper — W tunnel, ground level"
       },
       {
         "name": "Paint Gun: Black",
-        "area": "Docks"
+        "area": "Docks",
+        "loc": "Upper — N, room by elevator, use Reality Shift"
       },
       {
         "name": "Panacea",
-        "area": "Docks"
+        "area": "Docks",
+        "loc": "Lower — SW, ground level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Docks"
+        "area": "Docks",
+        "loc": "Lower — center, ground level"
       },
       {
         "name": "Balloon",
-        "area": "Docks"
+        "area": "Docks",
+        "loc": "Lower — W, ground level"
       },
       {
         "name": "Fleeting Figment",
-        "area": "Throughput"
+        "area": "Throughput",
+        "loc": "NW, larger platform, upper ledge"
       },
       {
         "name": "Circle Raid",
-        "area": "Throughput"
+        "area": "Throughput",
+        "loc": "SW, upper ledge"
       },
       {
         "name": "Dulcet Figment",
-        "area": "Throughput"
+        "area": "Throughput",
+        "loc": "E center, upper ledge"
       },
       {
         "name": "Royal Cake",
-        "area": "Throughput"
+        "area": "Throughput",
+        "loc": "NW, small platform, upper ledge"
       },
       {
         "name": "Confetti Candy",
-        "area": "Throughput"
+        "area": "Throughput",
+        "loc": "SE, upper ledge"
       },
       {
         "name": "Potion",
-        "area": "Throughput"
+        "area": "Throughput",
+        "loc": "N center, ground level"
       },
       {
         "name": "Block-It Chocolate",
-        "area": "Bridge"
+        "area": "Bridge",
+        "loc": "W, ground level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Bridge"
+        "area": "Bridge",
+        "loc": "E, ground level"
       },
       {
         "name": "Confetti Candy 2",
-        "area": "Solar Sailer"
+        "area": "Solar Sailer",
+        "loc": "NE, lower level"
       },
       {
         "name": "Wondrous Figment",
-        "area": "Solar Sailer"
+        "area": "Solar Sailer",
+        "loc": "SW, lower level"
       },
       {
         "name": "Fleeting Figment",
-        "area": "Solar Sailer"
+        "area": "Solar Sailer",
+        "loc": "NW, middle level"
       },
       {
         "name": "Balloon",
-        "area": "Solar Sailer"
+        "area": "Solar Sailer",
+        "loc": "E center, middle level"
       },
       {
         "name": "Hi-Potion",
-        "area": "Solar Sailer"
+        "area": "Solar Sailer",
+        "loc": "center, east side, middle level"
       },
       {
         "name": "Panacea",
-        "area": "Solar Sailer"
+        "area": "Solar Sailer",
+        "loc": "NW, middle level"
       },
       {
         "name": "Candy Goggles",
-        "area": "Solar Sailer"
+        "area": "Solar Sailer",
+        "loc": "NW, top level"
       },
       {
         "name": "Balloonra",
-        "area": "Solar Sailer"
+        "area": "Solar Sailer",
+        "loc": "NW, middle level"
       },
       {
         "name": "Water Barrel",
-        "area": "Solar Sailer"
+        "area": "Solar Sailer",
+        "loc": "NW, middle level"
       },
       {
         "name": "Ice Dream Cone 2",
-        "area": "Rectifier 1F"
+        "area": "Rectifier 1F",
+        "loc": "N, ground level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Rectifier 1F"
+        "area": "Rectifier 1F",
+        "loc": "NE, ground level"
       },
       {
         "name": "Potion",
-        "area": "Rectifier 1F"
+        "area": "Rectifier 1F",
+        "loc": "center, upper ledge"
       },
       {
         "name": "Panacea",
-        "area": "Rectifier 1F"
+        "area": "Rectifier 1F",
+        "loc": "SW, ground level"
       },
       {
         "name": "Shield Cookie",
-        "area": "Rectifier 1F"
+        "area": "Rectifier 1F",
+        "loc": "SW, ground level"
       },
       {
         "name": "Hi-Potion",
-        "area": "Rectifier 1F"
+        "area": "Rectifier 1F",
+        "loc": "SE, hallway to 2F, upper ledge"
       },
       {
         "name": "Lofty Fantasy",
-        "area": "Rectifier 1F"
+        "area": "Rectifier 1F",
+        "loc": "S center, atop moving container"
       },
       {
         "name": "Ice Dream Cone",
-        "area": "Rectifier 1F"
+        "area": "Rectifier 1F",
+        "loc": "S, ground level"
       },
       {
         "name": "Cyber Yog Recipe",
-        "area": "Rectifier 2F"
+        "area": "Rectifier 2F",
+        "loc": "NW, hidden hexagon, use Reality Shift at north end of first hexagon"
       },
       {
         "name": "Shield Cookie 2",
-        "area": "Rectifier 2F"
+        "area": "Rectifier 2F",
+        "loc": "NW, hidden hexagon, use Reality Shift at north end of first hexagon"
       },
       {
         "name": "Ice Dream Cone",
-        "area": "Rectifier 2F"
+        "area": "Rectifier 2F",
+        "loc": "SE, lower level"
       },
       {
         "name": "Potion",
-        "area": "Rectifier 2F"
+        "area": "Rectifier 2F",
+        "loc": "SE, upper level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Rectifier 2F"
+        "area": "Rectifier 2F",
+        "loc": "W, north end of hexagon"
       },
       {
         "name": "Paint Gun: Green",
-        "area": "Rectifier 2F"
+        "area": "Rectifier 2F",
+        "loc": "SE, lower level"
       },
       {
         "name": "Mega-Potion",
-        "area": "Grand Lobby"
+        "area": "Grand Lobby",
+        "loc": "S, top level"
       },
       {
         "name": "Confetti Candy 2",
-        "area": "Grand Lobby"
+        "area": "Grand Lobby",
+        "loc": "SW, ground level"
       },
       {
         "name": "Ice Dream Cone 3",
-        "area": "Grand Lobby"
+        "area": "Grand Lobby",
+        "loc": "NE, balcony, middle level"
       },
       {
         "name": "Hi-Potion",
-        "area": "Grand Lobby"
+        "area": "Grand Lobby",
+        "loc": "center, ground level"
       },
       {
         "name": "Block-It Chocolate 2",
-        "area": "Grand Lobby"
+        "area": "Grand Lobby",
+        "loc": "N, top level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "The Opéra"
+        "area": "The Opéra",
+        "loc": "NE, behind statue, ground level"
       },
       {
         "name": "Hi-Potion",
-        "area": "The Opéra"
+        "area": "The Opéra",
+        "loc": "SW, ground level"
       },
       {
         "name": "Block-It Chocolate 2",
-        "area": "The Opéra"
+        "area": "The Opéra",
+        "loc": "SE, ground level"
       },
       {
         "name": "Mega-Potion",
-        "area": "Training Yard"
+        "area": "Training Yard",
+        "loc": "SE, ground level"
       },
       {
         "name": "Ice Dream Cone 2",
-        "area": "Training Yard"
+        "area": "Training Yard",
+        "loc": "SW, upper level"
       },
       {
         "name": "Paint Gun: Sky Blue",
-        "area": "Training Yard"
+        "area": "Training Yard",
+        "loc": "NW, behind pillar, ground level"
       },
       {
         "name": "Firaga",
-        "area": "Town Road"
+        "area": "Town Road",
+        "loc": "center, upper ledge"
       },
       {
         "name": "Dream Candy",
-        "area": "Town Road"
+        "area": "Town Road",
+        "loc": "S center, below bridge, ground level"
       },
       {
         "name": "Shield Cookie 2",
-        "area": "Town Road"
+        "area": "Town Road",
+        "loc": "E center, upper level"
       },
       {
         "name": "Candy Goggles",
-        "area": "Tower"
+        "area": "Tower",
+        "loc": "W, inside cage, third level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Tower"
+        "area": "Tower",
+        "loc": "E, behind crates, third level"
       },
       {
         "name": "Ice Dream Cone 2",
-        "area": "Tower"
+        "area": "Tower",
+        "loc": "N, top of round stairs, fifth level"
       },
       {
         "name": "Paint Gun: Blue",
-        "area": "Shore"
+        "area": "Shore",
+        "loc": "S center, inside cave, ground level"
       },
       {
         "name": "Dream Candy",
-        "area": "Shore"
+        "area": "Shore",
+        "loc": "NW, north alcove, ground level"
       },
       {
         "name": "Confetti Candy 3",
-        "area": "Theatre"
+        "area": "Theatre",
+        "loc": "NE, behind curtain, ground level"
       },
       {
         "name": "Dulcet Fancy",
-        "area": "Theatre"
+        "area": "Theatre",
+        "loc": "SW, lower level"
       },
       {
         "name": "Fleeting Fantasy",
-        "area": "Mont Saint-Michel"
+        "area": "Mont Saint-Michel",
+        "loc": "SW, behind buildings, upper ledge"
       },
       {
         "name": "Sparkga",
-        "area": "Mont Saint-Michel"
+        "area": "Mont Saint-Michel",
+        "loc": "SW, courtyard between buildings, ground level"
       },
       {
         "name": "Hi-Potion",
-        "area": "Mont Saint-Michel"
+        "area": "Mont Saint-Michel",
+        "loc": "NW, south of save point, ground level"
       },
       {
         "name": "Royal Cake",
-        "area": "Mont Saint-Michel"
+        "area": "Mont Saint-Michel",
+        "loc": "NW, ground level"
       },
       {
         "name": "Block-It Chocolate 3",
-        "area": "Dungeon"
+        "area": "Dungeon",
+        "loc": "SE, inside southeast cell, ground level"
       },
       {
         "name": "Sonic Blade",
-        "area": "Dungeon"
+        "area": "Dungeon",
+        "loc": "center, south of watery room, upper ledge"
       },
       {
         "name": "Fleeting Fancy",
-        "area": "Dungeon"
+        "area": "Dungeon",
+        "loc": "SW, walkway, upper ledge (access via breaking crates in east room)"
       },
       {
         "name": "Chef Kyroo Recipe",
-        "area": "Dungeon"
+        "area": "Dungeon",
+        "loc": "N, hidden room, lower level (break crates to access)"
       },
       {
         "name": "Water Barrel",
-        "area": "Dungeon"
+        "area": "Dungeon",
+        "loc": "SW, walkway, lower level"
       },
       {
         "name": "Royal Cake",
-        "area": "Dungeon"
+        "area": "Dungeon",
+        "loc": "SW, walkway, upper ledge (access via breaking crates in east room)"
       },
       {
         "name": "Tornado Strike",
-        "area": "Cell"
+        "area": "Cell",
+        "loc": "center, ground level (access after completing world)"
       },
       {
         "name": "Dream Candy",
-        "area": "Tower Entrance"
+        "area": "Tower Entrance",
+        "loc": "NE, ground level"
       },
       {
         "name": "Block-It Chocolate 3",
-        "area": "Tower"
+        "area": "Tower",
+        "loc": "SW, ground level"
       },
       {
         "name": "Elixir",
-        "area": "Tower"
+        "area": "Tower",
+        "loc": "NE, ground level"
       },
       {
         "name": "Glide",
-        "area": "Cloudwalk"
+        "area": "Cloudwalk",
+        "loc": "S center, atop high cloud"
       },
       {
         "name": "Intrepid Fantasy",
-        "area": "Cloudwalk"
+        "area": "Cloudwalk",
+        "loc": "NW, atop high cloud"
       },
       {
         "name": "Ice Dream Cone 3",
-        "area": "Cloudwalk"
+        "area": "Cloudwalk",
+        "loc": "SW, upper ledge"
       },
       {
         "name": "Mega-Potion",
-        "area": "Cloudwalk"
+        "area": "Cloudwalk",
+        "loc": "NE, southeast alcove, upper ledge"
       },
       {
         "name": "Prism Windmill",
-        "area": "Cloudwalk"
+        "area": "Cloudwalk",
+        "loc": "NE, atop high cloud"
       },
       {
         "name": "Paint Gun: White",
-        "area": "Cloudwalk"
+        "area": "Cloudwalk",
+        "loc": "NE, southeast alcove, atop high cloud"
       },
       {
         "name": "Elixir",
-        "area": "Cloudwalk"
+        "area": "Cloudwalk",
+        "loc": "NE, southeast alcove, atop high cloud"
       },
       {
         "name": "Candy Goggles",
-        "area": "Cloudwalk"
+        "area": "Cloudwalk",
+        "loc": "SW, upper ledge"
       },
       {
         "name": "Tornado",
-        "area": "Glen"
+        "area": "Glen",
+        "loc": "SE, atop high ledge"
       },
       {
         "name": "Royal Cake",
-        "area": "Glen"
+        "area": "Glen",
+        "loc": "N center, upper ledge"
       },
       {
         "name": "Intrepid Fantasy",
-        "area": "Glen"
+        "area": "Glen",
+        "loc": "N, upper ledge"
       },
       {
         "name": "Ice Dream Cone 3",
-        "area": "Glen"
+        "area": "Glen",
+        "loc": "SW, ground level (after stopping wind)"
       },
       {
         "name": "Mega-Potion",
-        "area": "Glen"
+        "area": "Glen",
+        "loc": "S, upper ledge (after stopping wind)"
       },
       {
         "name": "Block-It Chocolate 3",
-        "area": "Fields"
+        "area": "Fields",
+        "loc": "SW center, ground level"
       },
       {
         "name": "Epic Fantasy",
-        "area": "Fields"
+        "area": "Fields",
+        "loc": "SE, dead end path, ground level (after stopping storm)"
       },
       {
         "name": "Electricorn Recipe",
-        "area": "Fields"
+        "area": "Fields",
+        "loc": "SE, upper ledge"
       },
       {
         "name": "Triple Plasma",
-        "area": "Fields"
+        "area": "Fields",
+        "loc": "W, dead end path, ground level (after stopping storm)"
       },
       {
         "name": "Panacea",
-        "area": "Fields"
+        "area": "Fields",
+        "loc": "NE, below Reality Shift device, upper ledge"
       },
       {
         "name": "Mega-Potion",
-        "area": "Fields"
+        "area": "Fields",
+        "loc": "E center, ground level"
       },
       {
         "name": "Shield Cookie 3",
-        "area": "Avenue to Dreams"
+        "area": "Avenue to Dreams",
+        "loc": "E, roof of medium building"
       },
       {
         "name": "Dulcet Fantasy",
-        "area": "Avenue to Dreams"
+        "area": "Avenue to Dreams",
+        "loc": "SE, roof of shorter building"
       },
       {
         "name": "Savage Fantasy",
-        "area": "Avenue to Dreams"
+        "area": "Avenue to Dreams",
+        "loc": "SW center, roof of tall building"
       },
       {
         "name": "Salvation",
-        "area": "Avenue to Dreams"
+        "area": "Avenue to Dreams",
+        "loc": "S center, roof of tall building"
       },
       {
         "name": "Elixir",
-        "area": "Avenue to Dreams"
+        "area": "Avenue to Dreams",
+        "loc": "NW center, west of glowing building, ground level"
       },
       {
         "name": "Dream Candy",
-        "area": "Avenue to Dreams"
+        "area": "Avenue to Dreams",
+        "loc": "W, ground level"
       },
       {
         "name": "Water Barrel",
-        "area": "Avenue to Dreams"
+        "area": "Avenue to Dreams",
+        "loc": "E center, ground level, ledge atop stairs"
       },
       {
         "name": "Drak Quack Recipe",
-        "area": "Avenue to Dreams"
+        "area": "Avenue to Dreams",
+        "loc": "N center, ground level"
       },
       {
         "name": "Elixir",
-        "area": "Contorted City"
+        "area": "Contorted City",
+        "loc": "center, lower level"
       },
       {
         "name": "Block-It Chocolate 3",
-        "area": "Contorted City"
+        "area": "Contorted City",
+        "loc": "W, ground level"
       },
       {
         "name": "Shield Cookie 3",
-        "area": "Contorted City"
+        "area": "Contorted City",
+        "loc": "center, below overpass, ground level (after using second Reality Shift)"
       },
       {
         "name": "Confetti Candy 3",
-        "area": "Contorted City"
+        "area": "Contorted City",
+        "loc": "SE, ground level"
       },
       {
         "name": "Wondrous Fantasy",
-        "area": "Contorted City"
+        "area": "Contorted City",
+        "loc": "NE, lower level, ground level"
       },
       {
         "name": "Ice Dream Cone 3",
-        "area": "Contorted City"
+        "area": "Contorted City",
+        "loc": "N center, upper path, ground level"
       },
       {
         "name": "Ars Arcanum",
-        "area": "Contorted City"
+        "area": "Contorted City",
+        "loc": "W center, upper ledge (after using first Reality Shift)"
       }
     ],
     "treasures-riku": [
       {
         "name": "Rampant Fantasy",
-        "area": "First District"
+        "area": "First District",
+        "loc": "NW, roof of building"
       },
       {
         "name": "Potion",
-        "area": "First District"
+        "area": "First District",
+        "loc": "W, alley"
       },
       {
         "name": "Block-It Chocolate",
-        "area": "Second District"
+        "area": "Second District",
+        "loc": "NE, side of building near #5"
       },
       {
         "name": "Balloon",
-        "area": "Second District"
+        "area": "Second District",
+        "loc": "SE, roof of building"
       },
       {
         "name": "Yoggy Ram Recipe",
-        "area": "Second District"
+        "area": "Second District",
+        "loc": "N, left side roof of building"
       },
       {
         "name": "Ice Dream Cone",
-        "area": "Third District"
+        "area": "Third District",
+        "loc": "NW, roof of building"
       },
       {
         "name": "Confetti Candy",
-        "area": "Third District"
+        "area": "Third District",
+        "loc": "E, alley"
       },
       {
         "name": "Potion",
-        "area": "Fourth District"
+        "area": "Fourth District",
+        "loc": "S, lower level between buildings"
       },
       {
         "name": "Intrepid Figment",
-        "area": "Fourth District"
+        "area": "Fourth District",
+        "loc": "W, roof of building"
       },
       {
         "name": "Balloon",
-        "area": "Fourth District"
+        "area": "Fourth District",
+        "loc": "N center, roof of building"
       },
       {
         "name": "Confetti Candy",
-        "area": "Fourth District"
+        "area": "Fourth District",
+        "loc": "center, lower platform"
       },
       {
         "name": "Candy Goggles",
-        "area": "Fourth District"
+        "area": "Fourth District",
+        "loc": "center, top of tower"
       },
       {
         "name": "Potion",
-        "area": "Fourth District"
+        "area": "Fourth District",
+        "loc": "SE, ground level"
       },
       {
         "name": "Shield Cookie",
-        "area": "Fourth District"
+        "area": "Fourth District",
+        "loc": "NE, ground level"
       },
       {
         "name": "Confetti Candy",
-        "area": "Fourth District"
+        "area": "Fourth District",
+        "loc": "W, courtyard"
       },
       {
         "name": "Troubling Fantasy",
-        "area": "Fifth District"
+        "area": "Fifth District",
+        "loc": "NW, roof of building"
       },
       {
         "name": "Hi-Potion",
-        "area": "Fifth District"
+        "area": "Fifth District",
+        "loc": "E, alley"
       },
       {
         "name": "Block-It Chocolate",
-        "area": "Fifth District"
+        "area": "Fifth District",
+        "loc": "N, roof of building"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Garden"
+        "area": "Garden",
+        "loc": "S, entrance"
       },
       {
         "name": "Paint Gun: Green",
-        "area": "Garden"
+        "area": "Garden",
+        "loc": "center, ground level"
       },
       {
         "name": "Royal Cake",
-        "area": "Garden"
+        "area": "Garden",
+        "loc": "E, upper ledge"
       },
       {
         "name": "Hi-Potion",
-        "area": "Garden"
+        "area": "Garden",
+        "loc": "N, ground level"
       },
       {
         "name": "Troubling Fantasy",
-        "area": "Back Streets"
+        "area": "Back Streets",
+        "loc": "SE south, alley"
       },
       {
         "name": "Thunder",
-        "area": "Back Streets"
+        "area": "Back Streets",
+        "loc": "SE center, alley"
       },
       {
         "name": "Potion",
-        "area": "Back Streets"
+        "area": "Back Streets",
+        "loc": "center, waterway room"
       },
       {
         "name": "Shield Cookie",
-        "area": "Back Streets"
+        "area": "Back Streets",
+        "loc": "W, along waterway"
       },
       {
         "name": "Intrepid Fragment",
-        "area": "Back Streets"
+        "area": "Back Streets",
+        "loc": "NW, roof of building"
       },
       {
         "name": "Paint Gun: Sky Blue",
-        "area": "Back Streets"
+        "area": "Back Streets",
+        "loc": "SW, alley"
       },
       {
         "name": "Potion",
-        "area": "Back Streets"
+        "area": "Back Streets",
+        "loc": "N center, alley"
       },
       {
         "name": "Vibrant Fantasy",
-        "area": "Fountain Plaza"
+        "area": "Fountain Plaza",
+        "loc": "SW, use Reality Shift"
       },
       {
         "name": "Ice Dream Cone",
-        "area": "Fountain Plaza"
+        "area": "Fountain Plaza",
+        "loc": "W center, upper ledge"
       },
       {
         "name": "Blizzard Edge",
-        "area": "Fountain Plaza"
+        "area": "Fountain Plaza",
+        "loc": "N, top of fountain"
       },
       {
         "name": "Balloon",
-        "area": "Square"
+        "area": "Square",
+        "loc": "NE, ground level"
       },
       {
         "name": "Shield Cookie",
-        "area": "Square"
+        "area": "Square",
+        "loc": "SE, next to stage"
       },
       {
         "name": "Confetti Candy",
-        "area": "Square"
+        "area": "Square",
+        "loc": "SW, behind tents"
       },
       {
         "name": "Potion",
-        "area": "Square"
+        "area": "Square",
+        "loc": "W, ground level"
       },
       {
         "name": "Shield Cookie 2",
-        "area": "Nave"
+        "area": "Nave",
+        "loc": "SE, upper level"
       },
       {
         "name": "Fira",
-        "area": "Nave"
+        "area": "Nave",
+        "loc": "N, upper level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Nave"
+        "area": "Nave",
+        "loc": "NW, ground level in side room"
       },
       {
         "name": "Rampant Figment",
-        "area": "Nave"
+        "area": "Nave",
+        "loc": "N, ground level"
       },
       {
         "name": "Paint Gun: Yellow",
-        "area": "Nave"
+        "area": "Nave",
+        "loc": "E, ground level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Nave"
+        "area": "Nave",
+        "loc": "SW, upper level at north end"
       },
       {
         "name": "Royal Cake",
-        "area": "Bell Tower"
+        "area": "Bell Tower",
+        "loc": "SE, top level"
       },
       {
         "name": "Dulcet Figment",
-        "area": "Bell Tower"
+        "area": "Bell Tower",
+        "loc": "NE, top level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Bell Tower"
+        "area": "Bell Tower",
+        "loc": "NE, middle level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Bell Tower"
+        "area": "Bell Tower",
+        "loc": "N, lower level"
       },
       {
         "name": "Block-It Chocolate",
-        "area": "Town"
+        "area": "Town",
+        "loc": "SW, roof of building"
       },
       {
         "name": "Candy Goggles",
-        "area": "Town"
+        "area": "Town",
+        "loc": "S center, high ledge atop tall building"
       },
       {
         "name": "Water Barrel",
-        "area": "Town"
+        "area": "Town",
+        "loc": "SE, roof of building"
       },
       {
         "name": "Noble Fantasy",
-        "area": "Town"
+        "area": "Town",
+        "loc": "NW, roof of building"
       },
       {
         "name": "Potion",
-        "area": "Town"
+        "area": "Town",
+        "loc": "SW, ledge near tall building"
       },
       {
         "name": "Ice Dream Cone",
-        "area": "Town"
+        "area": "Town",
+        "loc": "N center, top of stairs"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Town"
+        "area": "Town",
+        "loc": "SW, W of tall building, ground level"
       },
       {
         "name": "Balloon",
-        "area": "Bridge"
+        "area": "Bridge",
+        "loc": "S, in southern arch"
       },
       {
         "name": "Confetti Candy 2",
-        "area": "Bridge"
+        "area": "Bridge",
+        "loc": "N, behind fallen cart"
       },
       {
         "name": "Confetti Candy",
-        "area": "Bridge"
+        "area": "Bridge",
+        "loc": "S, next to tent"
       },
       {
         "name": "Potion",
-        "area": "Bridge"
+        "area": "Bridge",
+        "loc": "N, in northern arch"
       },
       {
         "name": "Shield Cookie",
-        "area": "Outskirts"
+        "area": "Outskirts",
+        "loc": "SE, ground level"
       },
       {
         "name": "Potion",
-        "area": "Outskirts"
+        "area": "Outskirts",
+        "loc": "SE, ground level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Outskirts"
+        "area": "Outskirts",
+        "loc": "E, ground level"
       },
       {
         "name": "Paint Gun: Purple",
-        "area": "Outskirts"
+        "area": "Outskirts",
+        "loc": "center, ground level"
       },
       {
         "name": "Confetti Candy",
-        "area": "Outskirts"
+        "area": "Outskirts",
+        "loc": "N center, ground level"
       },
       {
         "name": "Block-It Chocolate",
-        "area": "Windmill"
+        "area": "Windmill",
+        "loc": "NW, ground level"
       },
       {
         "name": "Sliding Crescent",
-        "area": "Windmill"
+        "area": "Windmill",
+        "loc": "SW, upper ledge"
       },
       {
         "name": "Water Barrel",
-        "area": "Windmill"
+        "area": "Windmill",
+        "loc": "N center, ground level"
       },
       {
         "name": "Shield Cookie",
-        "area": "Windmill"
+        "area": "Windmill",
+        "loc": "S, ground level"
       },
       {
         "name": "Ice Dream Cone 2",
-        "area": "Monstro: Mouth"
+        "area": "Monstro: Mouth",
+        "loc": "SW, upper ledge"
       },
       {
         "name": "Paint Gun: Blue",
-        "area": "Monstro: Mouth"
+        "area": "Monstro: Mouth",
+        "loc": "SE, upper ledge"
       },
       {
         "name": "Balloon",
-        "area": "Monstro: Mouth"
+        "area": "Monstro: Mouth",
+        "loc": "NE, upper ledge"
       },
       {
         "name": "Panacea",
-        "area": "Monstro: Mouth"
+        "area": "Monstro: Mouth",
+        "loc": "NW, roof of building"
       },
       {
         "name": "Hi-Potion",
-        "area": "Monstro: Mouth"
+        "area": "Monstro: Mouth",
+        "loc": "SW, ground level"
       },
       {
         "name": "Shield Cookie 2",
-        "area": "Monstro: Gullet"
+        "area": "Monstro: Gullet",
+        "loc": "W, upper ledge"
       },
       {
         "name": "Sir Kyroo Recipe",
-        "area": "Monstro: Gullet"
+        "area": "Monstro: Gullet",
+        "loc": "N, upper ledge"
       },
       {
         "name": "Charming Fantasy",
-        "area": "Monstro: Gullet"
+        "area": "Monstro: Gullet",
+        "loc": "SE, upper ledge"
       },
       {
         "name": "Mini",
-        "area": "Monstro: Gullet"
+        "area": "Monstro: Gullet",
+        "loc": "E, upper ledge"
       },
       {
         "name": "Hi-Potion",
-        "area": "Monstro: Gullet"
+        "area": "Monstro: Gullet",
+        "loc": "center, east wall, ground level"
       },
       {
         "name": "Shield Cookie 2",
-        "area": "Monstro: Gullet"
+        "area": "Monstro: Gullet",
+        "loc": "NE, ground level"
       },
       {
         "name": "Candy Goggles",
-        "area": "Monstro: Gullet"
+        "area": "Monstro: Gullet",
+        "loc": "N center, ground level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Monstro: Belly"
+        "area": "Monstro: Belly",
+        "loc": "W, small room, ground level"
       },
       {
         "name": "Confetti Candy 2",
-        "area": "Monstro: Belly"
+        "area": "Monstro: Belly",
+        "loc": "N, acid room (inverted)"
       },
       {
         "name": "Block-It Chocolate 2",
-        "area": "Monstro: Belly"
+        "area": "Monstro: Belly",
+        "loc": "S, lower ledge"
       },
       {
         "name": "Hi-Potion",
-        "area": "Monstro: Belly"
+        "area": "Monstro: Belly",
+        "loc": "SE, ground level"
       },
       {
         "name": "Collision Magnet",
-        "area": "Monstro: Belly"
+        "area": "Monstro: Belly",
+        "loc": "N, upper ledge (inverted)"
       },
       {
         "name": "Confetti Candy 2",
-        "area": "Monstro: Cavity"
+        "area": "Monstro: Cavity",
+        "loc": "SE, upper ledge"
       },
       {
         "name": "Royal Cake",
-        "area": "Monstro: Cavity"
+        "area": "Monstro: Cavity",
+        "loc": "center, ground level (inverted)"
       },
       {
         "name": "Water Barrel",
-        "area": "Monstro: Cavity"
+        "area": "Monstro: Cavity",
+        "loc": "NW, dead end path, ground level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Monstro: Cavity"
+        "area": "Monstro: Cavity",
+        "loc": "N, by save point, ground level"
       },
       {
         "name": "Panacea",
-        "area": "Monstro: Cavity"
+        "area": "Monstro: Cavity",
+        "loc": "W, upper ledge"
       },
       {
         "name": "Confetti Candy",
-        "area": "City"
+        "area": "City",
+        "loc": "W, by Docks exit, ground level"
       },
       {
         "name": "Thundara",
-        "area": "City"
+        "area": "City",
+        "loc": "S center, upper ledge"
       },
       {
         "name": "Potion",
-        "area": "City"
+        "area": "City",
+        "loc": "W, ground level"
       },
       {
         "name": "Fleeting Figment",
-        "area": "City"
+        "area": "City",
+        "loc": "NE, along west speed hill on ledge"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "City"
+        "area": "City",
+        "loc": "NE, along east speed hill on ledge"
       },
       {
         "name": "Confetti Candy 2",
-        "area": "Docks"
+        "area": "Docks",
+        "loc": "Upper — W tunnel, upper ledge"
       },
       {
         "name": "Counter Aura",
-        "area": "Docks"
+        "area": "Docks",
+        "loc": "Upper — W tunnel, ground level"
       },
       {
         "name": "Shield Cookie",
-        "area": "Docks"
+        "area": "Docks",
+        "loc": "Upper — N, room SW of elevator"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Docks"
+        "area": "Docks",
+        "loc": "Lower — SE, ground level"
       },
       {
         "name": "Potion",
-        "area": "Docks"
+        "area": "Docks",
+        "loc": "Lower — center, ground level"
       },
       {
         "name": "Balloon",
-        "area": "Docks"
+        "area": "Docks",
+        "loc": "Lower — W, ground level"
       },
       {
         "name": "Royal Cake",
-        "area": "Throughput"
+        "area": "Throughput",
+        "loc": "NW, larger platform, upper ledge"
       },
       {
         "name": "Wondrous Figment",
-        "area": "Throughput"
+        "area": "Throughput",
+        "loc": "SW, upper ledge"
       },
       {
         "name": "Noble Fantasy",
-        "area": "Throughput"
+        "area": "Throughput",
+        "loc": "E center, upper ledge"
       },
       {
         "name": "Ice Dream Cone 2",
-        "area": "Throughput"
+        "area": "Throughput",
+        "loc": "NW, small platform, upper ledge"
       },
       {
         "name": "Shield Cookie",
-        "area": "Throughput"
+        "area": "Throughput",
+        "loc": "SE, upper ledge"
       },
       {
         "name": "Potion",
-        "area": "Throughput"
+        "area": "Throughput",
+        "loc": "N center, ground level"
       },
       {
         "name": "Panacea",
-        "area": "Bridge"
+        "area": "Bridge",
+        "loc": "W, ground level"
       },
       {
         "name": "Water Barrel",
-        "area": "Bridge"
+        "area": "Bridge",
+        "loc": "E, ground level"
       },
       {
         "name": "Panacea",
-        "area": "Solar Sailer"
+        "area": "Solar Sailer",
+        "loc": "NE, lower level"
       },
       {
         "name": "Troubling Fancy",
-        "area": "Solar Sailer"
+        "area": "Solar Sailer",
+        "loc": "SW, lower level"
       },
       {
         "name": "Wondrous Figment",
-        "area": "Solar Sailer"
+        "area": "Solar Sailer",
+        "loc": "NW, middle level"
       },
       {
         "name": "Paint Gun: White",
-        "area": "Solar Sailer"
+        "area": "Solar Sailer",
+        "loc": "E center, middle level"
       },
       {
         "name": "Hi-Potion",
-        "area": "Solar Sailer"
+        "area": "Solar Sailer",
+        "loc": "center, east side, middle level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Solar Sailer"
+        "area": "Solar Sailer",
+        "loc": "NW, middle level"
       },
       {
         "name": "Candy Goggles",
-        "area": "Solar Sailer"
+        "area": "Solar Sailer",
+        "loc": "NW, top level"
       },
       {
         "name": "Shield Cookie 2",
-        "area": "Solar Sailer"
+        "area": "Solar Sailer",
+        "loc": "NW, middle level"
       },
       {
         "name": "Royal Cake",
-        "area": "Solar Sailer"
+        "area": "Solar Sailer",
+        "loc": "NW, middle level"
       },
       {
         "name": "Balloon",
-        "area": "Rectifier 1F"
+        "area": "Rectifier 1F",
+        "loc": "N, ground level"
       },
       {
         "name": "Hi-Potion",
-        "area": "Rectifier 1F"
+        "area": "Rectifier 1F",
+        "loc": "NE, ground level"
       },
       {
         "name": "Block-It Chocolate",
-        "area": "Rectifier 1F"
+        "area": "Rectifier 1F",
+        "loc": "center, upper ledge"
       },
       {
         "name": "Shield Cookie 2",
-        "area": "Rectifier 1F"
+        "area": "Rectifier 1F",
+        "loc": "SW, ground level"
       },
       {
         "name": "Panacea",
-        "area": "Rectifier 1F"
+        "area": "Rectifier 1F",
+        "loc": "SW, ground level"
       },
       {
         "name": "Potion",
-        "area": "Rectifier 1F"
+        "area": "Rectifier 1F",
+        "loc": "SE, hallway to 2F, upper ledge"
       },
       {
         "name": "Fleeting Figment",
-        "area": "Rectifier 1F"
+        "area": "Rectifier 1F",
+        "loc": "S center, atop moving container"
       },
       {
         "name": "Peepsta Hoo Recipe",
-        "area": "Rectifier 1F"
+        "area": "Rectifier 1F",
+        "loc": "S, ground level"
       },
       {
         "name": "Gravity Strike",
-        "area": "Rectifier 2F"
+        "area": "Rectifier 2F",
+        "loc": "NW, hidden hexagon, use Reality Shift at north end of first hexagon"
       },
       {
         "name": "Block-It Chocolate 2",
-        "area": "Rectifier 2F"
+        "area": "Rectifier 2F",
+        "loc": "NW, hidden hexagon, use Reality Shift at north end of first hexagon"
       },
       {
         "name": "Noble Figment",
-        "area": "Rectifier 2F"
+        "area": "Rectifier 2F",
+        "loc": "SE, lower level"
       },
       {
         "name": "Potion",
-        "area": "Rectifier 2F"
+        "area": "Rectifier 2F",
+        "loc": "SE, upper level"
       },
       {
         "name": "Confetti Candy 2",
-        "area": "Rectifier 2F"
+        "area": "Rectifier 2F",
+        "loc": "W, north end of hexagon"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Rectifier 2F"
+        "area": "Rectifier 2F",
+        "loc": "SE, lower level"
       },
       {
         "name": "Paint Gun: Black",
-        "area": "Portal Stairs"
+        "area": "Portal Stairs",
+        "loc": "N, ground level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Portal Stairs"
+        "area": "Portal Stairs",
+        "loc": "center, ground level"
       },
       {
         "name": "Hi-Potion",
-        "area": "Portal Stairs"
+        "area": "Portal Stairs",
+        "loc": "S, ground level"
       },
       {
         "name": "Water Barrel",
-        "area": "Grand Lobby"
+        "area": "Grand Lobby",
+        "loc": "S, top level"
       },
       {
         "name": "Confetti Candy 2",
-        "area": "Grand Lobby"
+        "area": "Grand Lobby",
+        "loc": "SW, ground level"
       },
       {
         "name": "Royal Cake",
-        "area": "Grand Lobby"
+        "area": "Grand Lobby",
+        "loc": "NE, balcony, middle level"
       },
       {
         "name": "Shadowbreaker",
-        "area": "Grand Lobby"
+        "area": "Grand Lobby",
+        "loc": "NE, lower level (access via west exit from Machine Room)"
       },
       {
         "name": "Mega-Potion",
-        "area": "Grand Lobby"
+        "area": "Grand Lobby",
+        "loc": "N, top level"
       },
       {
         "name": "Hi-Potion",
-        "area": "The Opéra"
+        "area": "The Opéra",
+        "loc": "NW, next to statue, ground level"
       },
       {
         "name": "Shield Cookie 2",
-        "area": "The Opéra"
+        "area": "The Opéra",
+        "loc": "NE, grass, ground level"
       },
       {
         "name": "Panacea",
-        "area": "The Opéra"
+        "area": "The Opéra",
+        "loc": "SE, ground level"
       },
       {
         "name": "Dream Candy",
-        "area": "The Opéra"
+        "area": "The Opéra",
+        "loc": "NE, behind statue, ground level"
       },
       {
         "name": "Candy Goggles",
-        "area": "Green Room"
+        "area": "Green Room",
+        "loc": "W, hidden room (break door in west hallway)"
       },
       {
         "name": "Prickly Fantasy",
-        "area": "Green Room"
+        "area": "Green Room",
+        "loc": "W, inside closet, south hallway (attack clothes to access)"
       },
       {
         "name": "Fleeting Fantasy",
-        "area": "Green Room"
+        "area": "Green Room",
+        "loc": "W, inside closet, ground level"
       },
       {
         "name": "Shield Cookie 3",
-        "area": "Green Room"
+        "area": "Green Room",
+        "loc": "S, balcony, upper level"
       },
       {
         "name": "Hi-Potion",
-        "area": "Green Room"
+        "area": "Green Room",
+        "loc": "S, south room, ground level"
       },
       {
         "name": "Stop",
-        "area": "Green Room"
+        "area": "Green Room",
+        "loc": "N, hidden room (access via breaking wall east of save point)"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Green Room"
+        "area": "Green Room",
+        "loc": "N, hidden room (access via breaking wall east of save point)"
       },
       {
         "name": "Confetti Candy 3",
-        "area": "Green Room"
+        "area": "Green Room",
+        "loc": "N, hidden room (access via breaking wall east of save point)"
       },
       {
         "name": "Blizzaga",
-        "area": "Machine Room"
+        "area": "Machine Room",
+        "loc": "SE, hidden room, lower level"
       },
       {
         "name": "Ducky Goose Recipe",
-        "area": "Machine Room"
+        "area": "Machine Room",
+        "loc": "N, north half, upper level"
       },
       {
         "name": "Ice Dream Cone 2",
-        "area": "Machine Room"
+        "area": "Machine Room",
+        "loc": "center, south half, upper level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Machine Room"
+        "area": "Machine Room",
+        "loc": "NE, ground level"
       },
       {
         "name": "Hi-Potion",
-        "area": "Machine Room"
+        "area": "Machine Room",
+        "loc": "NW, ground level"
       },
       {
         "name": "Mega-Potion",
-        "area": "Machine Room"
+        "area": "Machine Room",
+        "loc": "S, south side, upper level"
       },
       {
         "name": "Royal Cake",
-        "area": "Backstage"
+        "area": "Backstage",
+        "loc": "N center, atop tower"
       },
       {
         "name": "Fleeting Fantasy",
-        "area": "Backstage"
+        "area": "Backstage",
+        "loc": "S center, upper ledge"
       },
       {
         "name": "Dream Candy",
-        "area": "Backstage"
+        "area": "Backstage",
+        "loc": "center, ground level"
       },
       {
         "name": "Staggerceps Recipe",
-        "area": "Backstage"
+        "area": "Backstage",
+        "loc": "E, upper ledge"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Backstage"
+        "area": "Backstage",
+        "loc": "SW, ground level"
       },
       {
         "name": "Mega-Potion",
-        "area": "Backstage"
+        "area": "Backstage",
+        "loc": "SE, ground level"
       },
       {
         "name": "Confetti Candy 2",
-        "area": "Theatre"
+        "area": "Theatre",
+        "loc": "NE, behind curtain, ground level"
       },
       {
         "name": "Balloon",
-        "area": "Theatre"
+        "area": "Theatre",
+        "loc": "SW, lower level"
       },
       {
         "name": "Water Barrel",
-        "area": "Tower Entrance"
+        "area": "Tower Entrance",
+        "loc": "NE, ground level"
       },
       {
         "name": "Royal Cake",
-        "area": "Tower"
+        "area": "Tower",
+        "loc": "SW, ground level"
       },
       {
         "name": "Dream Candy",
-        "area": "Tower"
+        "area": "Tower",
+        "loc": "NE, ground level"
       },
       {
         "name": "Zero Graviza",
-        "area": "Moonlight Wood"
+        "area": "Moonlight Wood",
+        "loc": "NE, corner above Reality Shift device, upper ledge"
       },
       {
         "name": "Confetti Candy 3",
-        "area": "Moonlight Wood"
+        "area": "Moonlight Wood",
+        "loc": "E, ground level"
       },
       {
         "name": "Shield Cookie 3",
-        "area": "Moonlight Wood"
+        "area": "Moonlight Wood",
+        "loc": "N center, ground level"
       },
       {
         "name": "Paint Gun: Green",
-        "area": "Moonlight Wood"
+        "area": "Moonlight Wood",
+        "loc": "SE, upper ledge"
       },
       {
         "name": "Mega-Potion",
-        "area": "Moonlight Wood"
+        "area": "Moonlight Wood",
+        "loc": "N center, ground level"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Moonlight Wood"
+        "area": "Moonlight Wood",
+        "loc": "W center, ground level"
       },
       {
         "name": "Intrepid Fancy",
-        "area": "Moonlight Wood"
+        "area": "Moonlight Wood",
+        "loc": "E, upper ledge"
       },
       {
         "name": "Elixir",
-        "area": "Golden Wood"
+        "area": "Golden Wood",
+        "loc": "W center, atop large tree root"
       },
       {
         "name": "Intrepid Fantasy",
-        "area": "Golden Wood"
+        "area": "Golden Wood",
+        "loc": "NE, atop giant leaves (access after using Reality Shift device)"
       },
       {
         "name": "Mega-Potion",
-        "area": "Golden Wood"
+        "area": "Golden Wood",
+        "loc": "SE, upper ledge"
       },
       {
         "name": "Paint Gun: Red",
-        "area": "Golden Wood"
+        "area": "Golden Wood",
+        "loc": "E center, ground level"
       },
       {
         "name": "Ryu Dragon Recipe",
-        "area": "Golden Wood"
+        "area": "Golden Wood",
+        "loc": "NW, atop giant leaves (access after using Reality Shift device)"
       },
       {
         "name": "Ice Barrage",
-        "area": "Snowgleam Wood"
+        "area": "Snowgleam Wood",
+        "loc": "S, high ledge"
       },
       {
         "name": "Candy Goggles",
-        "area": "Snowgleam Wood"
+        "area": "Snowgleam Wood",
+        "loc": "S, north end of lake, upper ledge"
       },
       {
         "name": "Block-It Chocolate 3",
-        "area": "Snowgleam Wood"
+        "area": "Snowgleam Wood",
+        "loc": "NE, ground level (access after using Reality Shift device)"
       },
       {
         "name": "Ice Dream Cone 3",
-        "area": "Snowgleam Wood"
+        "area": "Snowgleam Wood",
+        "loc": "E center, ground level"
       },
       {
         "name": "Dulcet Fancy",
-        "area": "Snowgleam Wood"
+        "area": "Snowgleam Wood",
+        "loc": "center, upper ledge"
       },
       {
         "name": "Confetti Candy 3",
-        "area": "Snowgleam Wood"
+        "area": "Snowgleam Wood",
+        "loc": "SE, ground level"
       },
       {
         "name": "Dream Candy",
-        "area": "Delusive Beginning"
+        "area": "Delusive Beginning",
+        "loc": "S, upper ledge"
       },
       {
         "name": "Curaga",
-        "area": "Delusive Beginning"
+        "area": "Delusive Beginning",
+        "loc": "center, inside central column (access by using Reality Shift in west room)"
       },
       {
         "name": "Doubleflight",
-        "area": "Delusive Beginning"
+        "area": "Delusive Beginning",
+        "loc": "N center, ground level"
       },
       {
         "name": "Elixir",
-        "area": "Delusive Beginning"
+        "area": "Delusive Beginning",
+        "loc": "E, ledge within right side of wall"
       },
       {
         "name": "Elixir",
-        "area": "Delusive Beginning"
+        "area": "Delusive Beginning",
+        "loc": "NW, ground level"
       },
       {
         "name": "Confetti Candy 3",
-        "area": "Delusive Beginning"
+        "area": "Delusive Beginning",
+        "loc": "W center, upper ledge"
       },
       {
         "name": "Dulcet Fantasy",
-        "area": "Delusive Beginning"
+        "area": "Delusive Beginning",
+        "loc": "E, ledge within left side of wall"
       },
       {
         "name": "Dark Splicer",
-        "area": "Delusive Beginning"
+        "area": "Delusive Beginning",
+        "loc": "E, ledge at top of wall"
       },
       {
         "name": "Dream Candy",
-        "area": "Delusive Beginning"
+        "area": "Delusive Beginning",
+        "loc": "N, upper ledge"
       },
       {
         "name": "Elixir",
-        "area": "Delusive Beginning"
+        "area": "Delusive Beginning",
+        "loc": "NW, northeast ledge, upper level"
       },
       {
         "name": "Keeba Tiger Recipe",
-        "area": "Delusive Beginning"
+        "area": "Delusive Beginning",
+        "loc": "NW, northeast ledge, upper level"
       },
       {
         "name": "Ice Dream Cone 3",
-        "area": "Walk of Delusions"
+        "area": "Walk of Delusions",
+        "loc": "E, ground level (after using Reality Shift)"
       },
       {
         "name": "Drop-Me-Not",
-        "area": "Walk of Delusions"
+        "area": "Walk of Delusions",
+        "loc": "W, ground level"
       },
       {
         "name": "Lofty Fantasy",
-        "area": "Walk of Delusions"
+        "area": "Walk of Delusions",
+        "loc": "center, ground level"
       },
       {
         "name": "Spark Raid",
-        "area": "Fact within Fiction"
+        "area": "Fact within Fiction",
+        "loc": "S center, upper ledge"
       },
       {
         "name": "Intrepid Fancy",
-        "area": "Fact within Fiction"
+        "area": "Fact within Fiction",
+        "loc": "center, south end of west path, ground level"
       },
       {
         "name": "Royal Cake",
-        "area": "Fact within Fiction"
+        "area": "Fact within Fiction",
+        "loc": "center, north end of right path, upper ledge"
       },
       {
         "name": "Block-It Chocolate 3",
-        "area": "Fact within Fiction"
+        "area": "Fact within Fiction",
+        "loc": "NW, upper ledge"
       },
       {
         "name": "Mega-Potion",
-        "area": "Fact within Fiction"
+        "area": "Fact within Fiction",
+        "loc": "NE, ground level"
       },
       {
         "name": "Balloon",
-        "area": "Fact within Fiction"
+        "area": "Fact within Fiction",
+        "loc": "S center, ground level"
       },
       {
         "name": "Elixir",
-        "area": "Fact within Fiction"
+        "area": "Fact within Fiction",
+        "loc": "S center, ground level"
       },
       {
         "name": "Elixir",
-        "area": "Verge of Chaos"
+        "area": "Verge of Chaos",
+        "loc": "NE, ground level"
       },
       {
         "name": "Skelterwild Recipe",
-        "area": "Verge of Chaos"
+        "area": "Verge of Chaos",
+        "loc": "S center, fifth ledge while riding speed track along wall"
       },
       {
         "name": "Candy Goggles",
-        "area": "Verge of Chaos"
+        "area": "Verge of Chaos",
+        "loc": "S center, second ledge while riding speed track along wall"
       },
       {
         "name": "Wondrous Fantasy",
-        "area": "Verge of Chaos"
+        "area": "Verge of Chaos",
+        "loc": "S center, fourth ledge while riding speed track along wall"
       },
       {
         "name": "Paint Gun: Black",
-        "area": "Verge of Chaos"
+        "area": "Verge of Chaos",
+        "loc": "SW, ground level"
       },
       {
         "name": "Shield Cookie 3",
-        "area": "Verge of Chaos"
+        "area": "Verge of Chaos",
+        "loc": "SE center, ground level"
       },
       {
         "name": "Elixir",
-        "area": "Verge of Chaos"
+        "area": "Verge of Chaos",
+        "loc": "SE center, ground level"
       }
     ],
     "portals-sora": [
