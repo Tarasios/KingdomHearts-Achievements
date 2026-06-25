@@ -54,6 +54,34 @@ let STORE = loadStore();
 function saveStore() { try { localStorage.setItem(game.storeKey, JSON.stringify(STORE)); } catch (e) { /* private browsing */ } }
 function sectionStore(storeId) { if (!STORE[storeId]) STORE[storeId] = {}; return STORE[storeId]; }
 function toggleCheck(store, key) { if (store[key]) delete store[key]; else store[key] = true; saveStore(); render(); }
+
+/* ---------- view mode (checklist vs journal), persisted per tab ---------- */
+function loadView() { try { return JSON.parse(localStorage.getItem(game.storeKey + ":view")) || {}; } catch (e) { return {}; } }
+let VIEW = loadView();
+function saveView() { try { localStorage.setItem(game.storeKey + ":view", JSON.stringify(VIEW)); } catch (e) { /* ignore */ } }
+function tabJournalOn(tabId) { return VIEW[tabId] === "journal"; }
+function setTabJournal(tabId, on) { if (on) VIEW[tabId] = "journal"; else delete VIEW[tabId]; saveView(); }
+
+/* ---------- shared hover popover (journal tiles) ---------- */
+let _pop = null;
+function popEl() { if (!_pop) { _pop = el("div", "kh-pop"); _pop.setAttribute("aria-hidden", "true"); document.body.appendChild(_pop); } return _pop; }
+function showPop(node) {
+  const p = popEl(); p.innerHTML = node.dataset.pop || ""; p.classList.add("open"); p.setAttribute("aria-hidden", "false");
+  const r = node.getBoundingClientRect(), pw = p.offsetWidth, ph = p.offsetHeight, m = 8;
+  p.style.left = Math.max(m, Math.min(r.left + r.width / 2 - pw / 2, window.innerWidth - pw - m)) + "px";
+  let top = r.top - ph - 8; if (top < m) top = r.bottom + 8;
+  p.style.top = top + "px";
+}
+function hidePop() { if (_pop) { _pop.classList.remove("open"); _pop.setAttribute("aria-hidden", "true"); } }
+function wirePop(container) {
+  container.querySelectorAll("[data-pop]").forEach(node => {
+    node.addEventListener("mouseenter", () => showPop(node));
+    node.addEventListener("mouseleave", hidePop);
+    node.addEventListener("focus", () => showPop(node));
+    node.addEventListener("blur", hidePop);
+  });
+}
+window.addEventListener("scroll", hidePop, true);
 /* Counter sections store a number per item (0..max); 0 is removed so the
    store stays sparse. */
 function setItemCount(store, index, value, max) {
@@ -333,6 +361,61 @@ function toggleGroup(items, store, groupName, section) {
   saveStore();
   render();
 }
+/* In-game "journal" view: an ordered grid of treasure tiles (perRow wide),
+   grouped by world. Owned tiles show a chest, unowned a "?"; hovering either
+   shows the reward + where to find it. Clicking toggles owned. The grid keeps
+   the data order so a tile's position matches the in-game journal. */
+function journalGrid(container, section, view, panelState) {
+  const store = sectionStore(view.storeId);
+  const perRow = (section.journal && section.journal.perRow) || 8;
+  const q = (panelState.q || "").toLowerCase();
+  const nameCol = section.cols.find(col => col.name) || section.cols[0];
+  const groups = []; let cur = null;
+  view.items.forEach((item, index) => {
+    if (!itemVisible(item, activeChar)) return;
+    const g = item.g || "";
+    if (!cur || cur.g !== g) { cur = { g, rows: [] }; groups.push(cur); }
+    cur.rows.push({ item, index });
+  });
+  const wrap = el("div", "jrnl");
+  wrap.style.setProperty("--jrnl-cols", perRow);
+  groups.forEach(group => {
+    let done = 0;
+    const grid = el("div", "jrnl-grid");
+    group.rows.forEach(({ item, index }) => {
+      const auto = autoSource(section, item);
+      const owned = !!store[index] || !!auto;
+      if (owned) done++;
+      const reward = cellText(view.storeId, index, nameCol.k, item) || item.name;
+      const area = cellText(view.storeId, index, "area", item) || "";
+      const where = cellText(view.storeId, index, "loc", item) || "";
+      const tip = `<b>${esc(reward)}</b>` +
+        (area ? `<span class="kh-pop-area">${esc(area)}</span>` : "") +
+        (where ? `<span class="kh-pop-where">${esc(where)}</span>` : "");
+      const tile = el("button", "jrnl-tile " + (owned ? "owned" : "unowned"));
+      tile.type = "button";
+      tile.dataset.pop = tip;
+      tile.setAttribute("aria-pressed", owned ? "true" : "false");
+      tile.setAttribute("aria-label", reward);
+      if (!owned) tile.textContent = "?";
+      if (auto && !store[index]) { tile.disabled = true; tile.title = format('gt-auto-tip', auto); tile.classList.add("auto"); }
+      else if (item.gives) tile.onclick = () => toggleWithGives(store, index, item);
+      else tile.onclick = () => toggleCheck(store, index);
+      if (q && !(reward + " " + area + " " + where).toLowerCase().includes(q)) tile.classList.add("dim");
+      grid.appendChild(tile);
+    });
+    if (group.g) {
+      const head = el("div", "jrnl-whead");
+      head.appendChild(el("span", "jrnl-wname", fmtText(group.g)));
+      head.appendChild(el("span", "jrnl-wcount", `${done} / ${group.rows.length}`));
+      wrap.appendChild(head);
+    }
+    wrap.appendChild(grid);
+  });
+  container.appendChild(wrap);
+  wirePop(wrap);
+}
+
 function checklist(container, section, view, panelState) {
   const store = sectionStore(view.storeId);
   const cols = section.cols;
@@ -572,6 +655,17 @@ function buildPage() {
         if (confirm(translate('gt-reset-confirm'))) { STORE = {}; saveStore(); render(); }
       };
       toolbar.appendChild(resetBtn);
+    }
+    // View toggle (Checklist | Journal) for tabs with a journal-capable section.
+    if (tab.sections.some(section => section.journal)) {
+      const seg = el("div", "viewseg");
+      const cBtn = el("button", "viewbtn", translate('gt-view-checklist'));
+      const jBtn = el("button", "viewbtn", translate('gt-view-journal'));
+      (tabJournalOn(tab.id) ? jBtn : cBtn).classList.add("on");
+      cBtn.onclick = () => { setTabJournal(tab.id, false); cBtn.classList.add("on"); jBtn.classList.remove("on"); render(); };
+      jBtn.onclick = () => { setTabJournal(tab.id, true); jBtn.classList.add("on"); cBtn.classList.remove("on"); render(); };
+      seg.appendChild(cBtn); seg.appendChild(jBtn);
+      toolbar.appendChild(seg);
     }
     panel.appendChild(toolbar);
     const results = el("div", "results");
@@ -833,7 +927,8 @@ function render() {
       note.split("\n").forEach((line, lineIndex) => { if (lineIndex) noteEl.appendChild(el("br")); noteEl.appendChild(document.createTextNode(line)); });
       details.appendChild(noteEl);
     }
-    checklist(details, section, view, panel.state);
+    if (section.journal && tabJournalOn(tab.id)) journalGrid(details, section, view, panel.state);
+    else checklist(details, section, view, panel.state);
     panel.results.appendChild(details);
   });
   setCount(panel, panelDone, panelTotal);

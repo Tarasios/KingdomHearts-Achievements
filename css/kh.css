@@ -648,3 +648,35 @@ table.dg-board { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .kh .dg-cmd-name { font-weight: 600; color: var(--ink); }
 .kh .dg-cmd-catcell { color: var(--dim); }
 .kh .dg-cmd-table tbody tr:hover { background: rgba(255,255,255,0.03); }
+
+/* Checklist / Journal view toggle */
+.kh .viewseg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin-left: auto; }
+.kh .viewbtn { background: var(--panel); border: 0; color: var(--dim); padding: 7px 13px; cursor: pointer; font-size: 12px; }
+.kh .viewbtn + .viewbtn { border-left: 1px solid var(--line); }
+.kh .viewbtn:not(.on):hover { color: var(--accent); }
+.kh .viewbtn.on { background: var(--accent); color: var(--bg); font-weight: 600; }
+
+/* Journal grid — in-game treasure-chest layout */
+.kh .jrnl-whead { display: flex; align-items: baseline; gap: 10px; margin: 16px 0 7px; }
+.kh .jrnl-wname { font-size: 13px; color: var(--accent2); text-transform: uppercase; letter-spacing: .7px; }
+.kh .jrnl-wcount { color: var(--dim); font-size: 12px; }
+.kh .jrnl-grid { display: grid; grid-template-columns: repeat(var(--jrnl-cols, 8), 1fr); gap: 4px; max-width: 540px; }
+.kh .jrnl-tile { aspect-ratio: 1 / 1; border: 0; border-radius: 4px; padding: 0; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; transition: filter .1s; }
+.kh .jrnl-tile.unowned { background: #1d5e20; color: #5dc12f; }
+.kh .jrnl-tile.unowned:hover { background: #246e27; }
+.kh .jrnl-tile.owned { background: #bcd98a; background-image: url(../images/icons/treasure-chest.svg);
+  background-size: 84%; background-position: center; background-repeat: no-repeat; }
+.kh .jrnl-tile.owned:hover { filter: brightness(1.06); }
+.kh .jrnl-tile.dim { opacity: .22; }
+.kh .jrnl-tile.auto { cursor: default; }
+.kh .jrnl-tile:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* Shared hover popover (journal tiles) */
+.kh-pop { position: fixed; z-index: 200; max-width: 260px; background: var(--panel2); border: 1px solid var(--line);
+  border-radius: 8px; padding: 8px 10px; font-size: 12px; color: var(--ink); box-shadow: 0 8px 24px rgba(0,0,0,.4);
+  pointer-events: none; opacity: 0; transform: translateY(4px); transition: opacity .1s, transform .1s; }
+.kh-pop.open { opacity: 1; transform: none; }
+.kh-pop b { display: block; color: var(--accent); margin-bottom: 3px; }
+.kh-pop .kh-pop-area { display: block; color: var(--accent2); font-size: 11px; }
+.kh-pop .kh-pop-where { display: block; color: var(--dim); margin-top: 2px; }

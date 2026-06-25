@@ -2406,6 +2406,7 @@ var TRACKER_GAME = {
         {
           "id": "treasures",
           "groupCollapse": true,
+          "journal": { "perRow": 8 },
           "cols": [
             {
               "k": "name",

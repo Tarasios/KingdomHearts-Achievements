@@ -5,6 +5,8 @@
   "playing-as": "Personnage :",
   "gt-filter": "filtrer…",
   "gt-hide-done": "masquer les éléments terminés",
+  "gt-view-checklist": "Liste",
+  "gt-view-journal": "Journal",
   "gt-count": "%1 / %2 faits",
   "gt-overall": "Total : %1 / %2 (%3 %)",
   "gt-nothing": "Rien ne correspond au filtre actuel.",
