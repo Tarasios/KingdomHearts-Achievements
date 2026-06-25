@@ -665,7 +665,7 @@ table.dg-board { width: 100%; border-collapse: collapse; font-size: 12.5px; }
   display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; transition: filter .1s; }
 .kh .jrnl-tile { background-size: cover; background-position: center; background-repeat: no-repeat; }
 .kh .jrnl-tile.unowned { background-image: url(../images/icons/Treasure_missing.png); }
-.kh .jrnl-tile.owned { background-image: url(../images/icons/Treasure_owned.png); }
+.kh .jrnl-tile.owned { background-color: #4ca75a; background-image: url(../images/icons/Treasure_owned.png); background-size: 80%; }
 .kh .jrnl-tile:hover { filter: brightness(1.08); }
 .kh .jrnl-tile.dim { opacity: .22; }
 .kh .jrnl-tile.auto { cursor: default; }
