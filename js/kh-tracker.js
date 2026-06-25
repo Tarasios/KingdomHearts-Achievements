@@ -350,7 +350,15 @@ function checklist(container, section, view, panelState) {
   // Treasures by world, Commands by category) so a long section can be folded
   // a group at a time instead of all-or-nothing. Rows are tagged with the
   // group key and shown/hidden in place; state lives in panelState.open.
-  const collapse = !!section.groupCollapse;
+  // Render each item.g group as its own collapsible block (caret + count) so a
+  // long section folds a world/category at a time instead of all-or-nothing.
+  // Automatic whenever a section has 2+ groups; force with groupCollapse:true
+  // or disable with groupCollapse:false. Groups start expanded, so nothing is
+  // hidden by default — this only adds the ability to fold each one.
+  const distinctGroups = new Set();
+  view.items.forEach(it => { if (it.g && itemVisible(it, activeChar)) distinctGroups.add(it.g); });
+  const collapse = section.groupCollapse === false ? false
+                 : (section.groupCollapse === true || distinctGroups.size >= 2);
   const filtering = !!query;
   const openState = panelState.open || (panelState.open = {});
   const grpKey = name => "grp:" + view.storeId + ":" + name;

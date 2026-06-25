@@ -1614,8 +1614,7 @@ var TRACKER_GAME = {
               "g": "Stats",
               "max": 1
             }
-          ],
-          "counter": true
+          ]
         }
       ]
     },
