@@ -2405,6 +2405,7 @@ var TRACKER_GAME = {
       "sections": [
         {
           "id": "treasures",
+          "collapsible": false,
           "groupCollapse": true,
           "journal": { "perRow": 8 },
           "cols": [

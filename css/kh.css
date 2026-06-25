@@ -239,6 +239,11 @@
   content: "\25B8"; color: var(--dim); transition: transform .15s; }
 .kh details[open] > summary.secsum::before { transform: rotate(90deg); }
 .kh summary.secsum .prgchip { text-transform: none; letter-spacing: 0; }
+/* Static (non-collapsible) section header — same look as .secsum, no fold caret. */
+.kh .sechead { display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--accent); text-transform: uppercase; letter-spacing: .7px; margin: 18px 0 8px; }
+.kh .sechead.sechead-main { color: var(--accent2); margin-top: 6px; }
+.kh .sechead .prgchip { text-transform: none; letter-spacing: 0; }
 /* A check column that doesn't apply to a row (e.g. a Spirit-only Dream Eater
    has no Nightmare/Rare form). */
 .kh td.chkcell.na { color: var(--dim); }

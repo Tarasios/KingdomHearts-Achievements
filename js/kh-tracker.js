@@ -18,6 +18,15 @@
    Items in a shared section may carry c: "sora"/"riku" — they share the
    section's progress store but only show for that character.
 
+   Collapsing (two independent, easy-to-flip knobs on a Section):
+     collapsible: false   — drop the whole-section fold (the big header).
+                            Use it where folding the section just folds the
+                            whole tab; its inner groups still collapse. Default
+                            true.
+     groupCollapse: true  — force each item.g group (world/category) to fold;
+                  | false — never fold groups. Omit it for the default, which
+                            auto-enables folding when a section has 2+ groups.
+
    UI text comes from the page's lang JSON: tabbtn-<tab>, sec-<section>,
    th-<section>-<col>, plus the shared gt-* keys. Item display text lives
    under the lang "items" map (see langRow/cellText below).
@@ -909,26 +918,36 @@ function render() {
     const [secDone, secTotal] = entryCount({ section, storeId: view.storeId, items: view.items, charId: activeChar });
     panelDone += secDone; panelTotal += secTotal;
 
+    // A section folds as a whole by default. Set `collapsible: false` to drop
+    // that outer fold (e.g. a tab with one section, where folding it just folds
+    // the whole tab) — its inner world/category groups still collapse on their
+    // own. See groupCollapse for the inner level.
     const sectionKey = "sec:" + section.id;
-    const details = el("details", "secgroup");
-    details.open = filtering ? true : ((sectionKey in openState) ? openState[sectionKey] : true);   // expanded by default
-    const summary = el("summary", sectionIndex === 0 ? "secsum secsum-main" : "secsum",
-      `<span class="secsum-title">${fmtText(title)}</span> ${chip(secDone, secTotal)}`);
-    // Record collapse state synchronously on click (the toggle event is async,
-    // which would let a re-render's programmatic open clobber a fresh collapse).
-    summary.addEventListener("click", () => { if (!filtering) openState[sectionKey] = !((sectionKey in openState) ? openState[sectionKey] : true); });
-    details.appendChild(summary);
+    const headHtml = `<span class="secsum-title">${fmtText(title)}</span> ${chip(secDone, secTotal)}`;
+    let box;
+    if (section.collapsible === false) {
+      box = el("div", "secblock");
+      box.appendChild(el("div", sectionIndex === 0 ? "sechead sechead-main" : "sechead", headHtml));
+    } else {
+      box = el("details", "secgroup");
+      box.open = filtering ? true : ((sectionKey in openState) ? openState[sectionKey] : true);   // expanded by default
+      const summary = el("summary", sectionIndex === 0 ? "secsum secsum-main" : "secsum", headHtml);
+      // Record collapse state synchronously on click (the toggle event is async,
+      // which would let a re-render's programmatic open clobber a fresh collapse).
+      summary.addEventListener("click", () => { if (!filtering) openState[sectionKey] = !((sectionKey in openState) ? openState[sectionKey] : true); });
+      box.appendChild(summary);
+    }
     // Optional explanatory note under a section title (lang key note-<id>);
     // newlines become separate lines.
     const note = translate('note-' + section.id);
     if (note && note !== 'note-' + section.id) {
       const noteEl = el("p", "hint");
       note.split("\n").forEach((line, lineIndex) => { if (lineIndex) noteEl.appendChild(el("br")); noteEl.appendChild(document.createTextNode(line)); });
-      details.appendChild(noteEl);
+      box.appendChild(noteEl);
     }
-    if (section.journal && tabJournalOn(tab.id)) journalGrid(details, section, view, panel.state);
-    else checklist(details, section, view, panel.state);
-    panel.results.appendChild(details);
+    if (section.journal && tabJournalOn(tab.id)) journalGrid(box, section, view, panel.state);
+    else checklist(box, section, view, panel.state);
+    panel.results.appendChild(box);
   });
   setCount(panel, panelDone, panelTotal);
 
