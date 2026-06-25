@@ -639,6 +639,81 @@ function commandBonusLine(cmd) {
   return `<div class="dg-c-cmdline"><b>${esc(translate("dg-c-cmd-applied"))}: ${esc(cmd.name)}</b> — ${parts.join(", ") || "—"}</div>`;
 }
 
+/* =====================================================================
+   TAB — Command sacrifice table (sortable / filterable)
+
+   Every Deck Command that can be sacrificed when creating a Spirit, with
+   the flat stat (+HP/Str/Mag/Def) and elemental-resistance (+%) bonuses it
+   passes on, plus its max-affinity gain. Click a header to sort; filter by
+   text or command type.
+   ===================================================================== */
+const cmdFilter = document.getElementById("dg-cmd-filter");
+const cmdCatSel = document.getElementById("dg-cmd-cat");
+const cmdTableHost = document.getElementById("dg-commands-table");
+const cmdShown = document.getElementById("dg-cmd-shown");
+let cmdSort = { k: "name", dir: 1 };
+
+function cmdColumns() {
+  return [
+    { k: "name", lbl: translate("dg-cmd-th-name"), tip: translate("dg-cmd-th-name") },
+    { k: "cat",  lbl: translate("dg-cmd-th-cat"),  tip: translate("dg-cmd-th-cat") },
+    { k: "aff",  lbl: translate("dg-cmd-th-aff"),  tip: translate("dg-c-affinity"), num: true },
+    { k: "hp",   lbl: "HP",  tip: translate("dg-c-hp"),  num: true },
+    { k: "str",  lbl: "Str", tip: translate("dg-c-str"), num: true },
+    { k: "mag",  lbl: "Mag", tip: translate("dg-c-mag"), num: true },
+    { k: "def",  lbl: "Def", tip: translate("dg-c-def"), num: true },
+    { k: "fire", lbl: "Fire", tip: "Fire",     num: true, pct: true },
+    { k: "blz",  lbl: "Blz",  tip: "Blizzard", num: true, pct: true },
+    { k: "thn",  lbl: "Thn",  tip: "Thunder",  num: true, pct: true },
+    { k: "wtr",  lbl: "Wtr",  tip: "Water",    num: true, pct: true },
+    { k: "drk",  lbl: "Drk",  tip: "Dark",     num: true, pct: true },
+    { k: "lgt",  lbl: "Lgt",  tip: "Light",    num: true, pct: true }
+  ];
+}
+function fillCmdCats() {
+  const cats = [...new Set(DG.commands.map(c => c.cat))];
+  const cur = cmdCatSel.value;
+  cmdCatSel.innerHTML = `<option value="">${esc(translate("dg-cmd-cat-all"))}</option>` +
+    cats.map(c => `<option value="${esc(c)}"${c === cur ? " selected" : ""}>${esc(c)}</option>`).join("");
+}
+function renderCommands() {
+  const cols = cmdColumns();
+  const q = (cmdFilter.value || "").toLowerCase().trim();
+  const cat = cmdCatSel.value;
+  const isNum = k => k !== "name" && k !== "cat";
+  const rows = DG.commands
+    .filter(c => (!cat || c.cat === cat) && (!q || (c.name + " " + c.cat).toLowerCase().includes(q)))
+    .slice()
+    .sort((a, b) => {
+      const k = cmdSort.k;
+      const d = isNum(k) ? (a[k] - b[k]) * cmdSort.dir : String(a[k]).localeCompare(String(b[k])) * cmdSort.dir;
+      return d || a.name.localeCompare(b.name);
+    });
+  const head = cols.map(col => {
+    const active = col.k === cmdSort.k, arrow = active ? (cmdSort.dir > 0 ? "▲" : "▼") : "";
+    return `<th class="dg-cmd-th${col.num ? " num" : ""}${active ? " sorted" : ""}" data-k="${esc(col.k)}" data-pop="${esc(col.tip)}" tabindex="0" role="button" aria-label="${esc(col.tip)}">${esc(col.lbl)} <span class="dg-cmd-arrow">${arrow}</span></th>`;
+  }).join("");
+  const body = rows.map(c => "<tr>" + cols.map(col => {
+    if (!col.num) return `<td class="${col.k === "name" ? "dg-cmd-name" : "dg-cmd-catcell"}">${esc(c[col.k])}</td>`;
+    const v = c[col.k];
+    return `<td class="num ${v ? "has" : "zero"}">${v ? "+" + v + (col.pct ? "%" : "") : "·"}</td>`;
+  }).join("") + "</tr>").join("");
+  cmdTableHost.innerHTML = rows.length
+    ? `<table class="dg-cmd-table"><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>`
+    : `<p class="empty">${esc(translate("dg-empty"))}</p>`;
+  cmdShown.textContent = format("dg-cmd-count", rows.length, DG.commands.length);
+  cmdTableHost.querySelectorAll(".dg-cmd-th").forEach(th => {
+    const act = () => {
+      const nk = th.dataset.k;
+      if (cmdSort.k === nk) cmdSort.dir *= -1; else cmdSort = { k: nk, dir: isNum(nk) ? -1 : 1 };
+      renderCommands();
+    };
+    th.addEventListener("click", act);
+    th.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); act(); } });
+  });
+  wirePop(cmdTableHost);
+}
+
 function fillCreateControls() {
   C.forecast.innerHTML = CREATE.forecasts.map(f => `<option value="${esc(f)}">${esc(f)}</option>`).join("");
   // Deck Command picker (grouped by category), "none" first.
@@ -1053,7 +1128,7 @@ function renderRecipes() {
 /* =====================================================================
    Tabs, filters, language + cross-tab sync
    ===================================================================== */
-const TAB_IDS = ["spirits", "creation", "abilities", "materials", "recipes"];
+const TAB_IDS = ["spirits", "creation", "abilities", "materials", "commands", "recipes"];
 document.querySelectorAll(".kh .tab").forEach(tab => {
   tab.onclick = () => {
     document.querySelectorAll(".kh .tab").forEach(o => o.classList.remove("active"));
@@ -1070,8 +1145,10 @@ materialsFilter.addEventListener("input", renderMaterials);
 recipesFilter.addEventListener("input", renderRecipes);
 document.getElementById("dg-recipes-reset").addEventListener("click", () => { recipesFilter.value = ""; renderRecipes(); });
 abFilter.addEventListener("input", renderAbilities);
+cmdFilter.addEventListener("input", renderCommands);
+cmdCatSel.addEventListener("change", renderCommands);
 
-function renderAll() { renderSpirits(); renderMaterials(); renderRecipes(); renderCreation(); fillAbCats(); renderAbilities(); }
+function renderAll() { renderSpirits(); renderMaterials(); renderRecipes(); renderCreation(); fillAbCats(); renderAbilities(); fillCmdCats(); renderCommands(); }
 document.addEventListener("i18n:updated", () => { buildTreasureIndex(); fillCreateControls(); renderAll(); if (modalSpirit) renderModal(); });
 
 window.addEventListener("storage", e => {
@@ -1091,4 +1168,6 @@ renderRecipes();
 initCreation();
 fillAbCats();
 renderAbilities();
+fillCmdCats();
+renderCommands();
 });

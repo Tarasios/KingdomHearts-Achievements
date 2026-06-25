@@ -72,6 +72,7 @@
             <button class="tab" data-tab="creation" id="tabbtn-creation"></button>
             <button class="tab" data-tab="abilities" id="tabbtn-abilities"></button>
             <button class="tab" data-tab="materials" id="tabbtn-materials"></button>
+            <button class="tab" data-tab="commands" id="tabbtn-commands"></button>
             <button class="tab" data-tab="recipes" id="tabbtn-recipes"></button>
         </div>
 
@@ -158,6 +159,17 @@
                 </div>
                 <p class="hint" style="margin-top:0" id="dg-materials-hint"></p>
                 <div id="dg-materials-list" class="results"></div>
+            </section>
+
+            <!-- COMMAND SACRIFICE TABLE -->
+            <section id="tab-commands" class="card" style="display:none">
+                <div class="toolbar">
+                    <input type="text" id="dg-cmd-filter">
+                    <select id="dg-cmd-cat" class="dg-cmd-cat"></select>
+                    <span class="dg-cmd-shown" id="dg-cmd-shown"></span>
+                </div>
+                <p class="hint" style="margin-top:0" id="dg-cmd-hint"></p>
+                <div id="dg-commands-table" class="dg-cmd-wrap"></div>
             </section>
 
             <!-- RECIPE-ITEM CHECKLIST -->

@@ -120,5 +120,13 @@
   "dg-c-found": "%1 recette(s) l'utilisent :",
   "dg-c-upto": "→ jusqu'au Rang %1",
   "dg-c-all-recipes": "Les %1 recette(s) de %2",
-  "dg-empty": "Rien ne correspond à votre filtre."
+  "dg-empty": "Rien ne correspond à votre filtre.",
+  "tabbtn-commands": "Sacrifices",
+  "dg-cmd-hint": "Chaque Commande de deck que vous pouvez sacrifier en créant un Esprit, et les bonus qu'elle transmet : gains de stats, résistances élémentaires (%) et affinité max. Cliquez sur une colonne pour trier ; filtrez par nom ou type.",
+  "dg-cmd-filter": "filtrer les commandes…",
+  "dg-cmd-cat-all": "— tous les types —",
+  "dg-cmd-count": "%1 / %2 commandes",
+  "dg-cmd-th-name": "Commande",
+  "dg-cmd-th-cat": "Type",
+  "dg-cmd-th-aff": "Aff."
 }

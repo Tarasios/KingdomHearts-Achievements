@@ -629,3 +629,22 @@ table.dg-board { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .dg-gcell.twostage { border-color: #5b2c2c; }
 .dg-pop .dg-pop-active { color: #6fe39a; }
 .dg-pop .dg-pop-change { display: block; margin-top: 6px; color: #e0976a; font-size: 11px; }
+
+/* Command sacrifice table (sortable / filterable) */
+.kh #dg-cmd-filter { width: auto; flex: 1 1 220px; }
+.kh .dg-cmd-cat { width: auto; flex: 0 0 auto; }
+.kh .dg-cmd-shown { margin-left: auto; color: var(--dim); font-size: 12px; }
+.kh .dg-cmd-wrap { overflow-x: auto; }
+.kh .dg-cmd-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.kh .dg-cmd-table th, .kh .dg-cmd-table td { padding: 5px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.kh .dg-cmd-th { position: sticky; top: 0; z-index: 1; background: var(--panel2); text-align: left;
+  cursor: pointer; user-select: none; color: var(--accent2); text-transform: uppercase; font-size: 11px; letter-spacing: .5px; }
+.kh .dg-cmd-th.num { text-align: right; }
+.kh .dg-cmd-th:hover, .kh .dg-cmd-th.sorted { color: var(--accent); }
+.kh .dg-cmd-arrow { font-size: 9px; }
+.kh .dg-cmd-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.kh .dg-cmd-table td.zero { color: var(--line); }
+.kh .dg-cmd-table td.has { color: var(--accent); font-weight: 600; }
+.kh .dg-cmd-name { font-weight: 600; color: var(--ink); }
+.kh .dg-cmd-catcell { color: var(--dim); }
+.kh .dg-cmd-table tbody tr:hover { background: rgba(255,255,255,0.03); }

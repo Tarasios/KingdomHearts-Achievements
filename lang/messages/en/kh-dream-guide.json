@@ -120,5 +120,13 @@
   "dg-c-found": "%1 recipe(s) use this:",
   "dg-c-upto": "→ up to Rank %1",
   "dg-c-all-recipes": "All %1 recipe(s) for %2",
-  "dg-empty": "Nothing matches your filter."
+  "dg-empty": "Nothing matches your filter.",
+  "tabbtn-commands": "Sacrifices",
+  "dg-cmd-hint": "Every Deck Command you can sacrifice when creating a Spirit, and the bonuses it passes on: flat stat gains, elemental resistances (%) and max affinity. Click a column to sort; filter by name or type.",
+  "dg-cmd-filter": "filter commands…",
+  "dg-cmd-cat-all": "— all types —",
+  "dg-cmd-count": "%1 / %2 commands",
+  "dg-cmd-th-name": "Command",
+  "dg-cmd-th-cat": "Type",
+  "dg-cmd-th-aff": "Aff."
 }
