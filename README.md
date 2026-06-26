@@ -55,6 +55,20 @@ All progress lives in your browser's `localStorage`. No accounts, no analytics,
 no server. The in-app reset (or clearing your browser data) wipes it, and an
 export file is the only copy that ever leaves your device.
 
+### Also lives at tarasios.ca, with progress sync
+
+The same app is mirrored as a self-contained section of
+[tarasios.ca](https://tarasios.ca/games/kingdom-hearts/). Because
+`localStorage` is per-origin, the GitHub Pages copy and the tarasios.ca copy
+keep separate saves. Each tool page has a **Sync** button (next to
+Export/Import) that merges progress **both ways** with the other origin: it
+opens the partner site's `bridge.html` in a pop-up (a first-party context, so
+its storage is always readable), and the two windows exchange and union their
+saves over `postMessage` — a check on either side wins, nothing is lost. The
+partner origins are configured at the top of `js/kh-sync.js`; on any other
+origin (e.g. `localhost`) the button simply doesn't appear. Manual JSON
+Export/Import remains the always-works fallback.
+
 ## Running it locally
 
 It's a plain static site with no build step. Clone it and serve the folder over
@@ -91,8 +105,11 @@ js/landing.js               Builds the landing page from those totals
 js/kh-tracker.js            Generic tracker engine (TRACKER_GAME data modules)
 js/kh-bbs-tracker.js        Birth by Sleep tracker engine
 js/kh-melding.js            Birth by Sleep melding calculator
+js/kh-progress.js           Export / Import bar (backs up all KH localStorage keys)
+js/kh-sync.js               Cross-origin progress Sync button + bridge logic
 js/*-tracker-data.js        Per-game data modules
 sw.js                       Service worker (caches the heavy data modules + images)
+bridge.html                 Sync pop-up, opened by the partner site (see kh-sync.js)
 lang/messages/en|fr/        All visible text, one JSON file per page
 images/                     backgrounds, banners, heroes, logos, command icons
 ```
