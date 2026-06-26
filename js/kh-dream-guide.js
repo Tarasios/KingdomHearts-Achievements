@@ -92,9 +92,18 @@ function toggleSpirit(name) {
 }
 
 // Ability-checklist index in the tracker (Support / Spirit abilities only).
-const ABIL_SEC = findSec("abilities");
-const ABIL_TRACK_INDEX = new Map();
-((ABIL_SEC && ABIL_SEC.items) || []).forEach((it, i) => { if (!ABIL_TRACK_INDEX.has(it.name)) ABIL_TRACK_INDEX.set(it.name, i); });
+// Map every ability a board can grant to its row in the tracker's ability
+// checklists (Support/Spirit counters + single Stat abilities), so unlocking
+// or locking a node mirrors onto the checklist. Commands are deliberately not
+// here: they also come from portals/melding/treasures, so a board can't be
+// their sole source of truth.
+const ABIL_TRACK = new Map();
+["abilities", "abstats"].forEach(secId => {
+  const sec = findSec(secId);
+  ((sec && sec.items) || []).forEach((it, i) => {
+    if (!ABIL_TRACK.has(it.name)) ABIL_TRACK.set(it.name, { sec: secId, index: i, counter: !!sec.counter, max: (+it.max > 0 ? +it.max : 1) });
+  });
+});
 
 function loadGuide() { try { return JSON.parse(localStorage.getItem(GUIDE_KEY)) || {}; } catch (e) { return {}; } }
 let GUIDE = loadGuide();
@@ -106,17 +115,27 @@ function saveGuide() { try { localStorage.setItem(GUIDE_KEY, JSON.stringify(GUID
 function spiritRank(name) { return GUIDE.rank[name] || (SPIRIT_BY_NAME[name] && SPIRIT_BY_NAME[name].rank) || "C"; }
 function setSpiritRank(name, rank) { GUIDE.rank[name] = rank; saveGuide(); }
 
-// An ability is "unlocked" if marked here, or already checked on the tracker.
-function abilityOwned(name) {
-  if (GUIDE.abilities[name]) return true;
-  const i = ABIL_TRACK_INDEX.get(name);
-  return i != null && !!dddSection("abilities")[i];
+// How many unlocked board cells (across every Spirit) currently grant this
+// ability — i.e. how many copies you hold.
+function boardAbilityCount(name) {
+  let n = 0;
+  for (const spirit in GUIDE.nodes) {
+    const nodes = GUIDE.nodes[spirit];
+    for (const grid in nodes) if (activeAbilityAt(spirit, grid) === name) n++;
+  }
+  return n;
 }
-function setAbilityOwned(name, on) {
-  if (on) GUIDE.abilities[name] = true; else delete GUIDE.abilities[name];
-  const i = ABIL_TRACK_INDEX.get(name);          // mirror onto the main checklist
-  if (i != null) { const s = dddSection("abilities"); if (on) s[i] = true; else delete s[i]; saveDDD(); }
-  saveGuide();
+// Mirror a board-granted ability onto the tracker checklist: counter abilities
+// store the copy count (capped at their max), single Stat abilities are ticked
+// while at least one board grants them. Recomputed from the board so locking a
+// node correctly decrements / unticks.
+function syncBoardAbility(name) {
+  const t = ABIL_TRACK.get(name);
+  if (!t) return;
+  const count = boardAbilityCount(name), store = dddSection(t.sec);
+  if (t.counter) { if (count <= 0) delete store[t.index]; else store[t.index] = Math.min(count, t.max); }
+  else if (count > 0) store[t.index] = true; else delete store[t.index];
+  saveDDD();
 }
 function nodeOwned(spirit, grid) { const m = GUIDE.nodes[spirit]; return !!(m && m[grid]); }
 // A Spirit's Ability Link board is "complete" once every node on it is unlocked.
@@ -197,7 +216,7 @@ function nodeUnlockable(spirit, node) {
   for (const m of (info.adj[node.g] || [])) { if (info.distOf[m] !== undefined && info.distOf[m] < myd && coordUnlocked(spirit, m)) return true; }
   return false;
 }
-function markNodeAbility(node) { if (node && node.t !== "Quota" && node.t !== "Secret") setAbilityOwned(node.n, true); }
+function abilityNameOf(node) { return (node && node.t !== "Quota" && node.t !== "Secret") ? node.n : null; }
 function toggleNode(spirit, node) {
   const info = boardInfo(spirit);
   const grid = node.g;
@@ -205,19 +224,27 @@ function toggleNode(spirit, node) {
   const twoStage = variants.length > 1;
   const m = GUIDE.nodes[spirit] || (GUIDE.nodes[spirit] = {});
   const cur = m[grid];
+  const touched = new Set();   // abilities whose tracker count must be recomputed
+  const touch = nd => { const a = abilityNameOf(nd); if (a) touched.add(a); };
   if (!cur) {
     // first click → unlock the first ability (needs the path unlocked)
     if (!nodeUnlockable(spirit, variants[0])) return;
-    m[grid] = 1; markNodeAbility(variants[0]);
+    m[grid] = 1; touch(variants[0]);
   } else if (twoStage && cur !== 2 && secretUnlockedForCell(spirit, variants)) {
     // second click, once the Red Secret is unlocked → switch to the second ability
-    m[grid] = 2; markNodeAbility(variants[1]);
+    m[grid] = 2; touch(variants[0]); touch(variants[1]);   // stage 1 dropped, stage 2 gained
   } else {
     // un-mark this cell and cascade-lock everything downstream of it
     const { childrenOf } = info;
     const stack = [grid];
-    while (stack.length) { const g = stack.pop(); delete m[g]; (childrenOf[g] || []).forEach(c => { if (m[c]) stack.push(c); }); }
+    while (stack.length) {
+      const g = stack.pop();
+      const a = activeAbilityAt(spirit, g); if (a) touched.add(a);   // record what it granted before locking
+      delete m[g];
+      (childrenOf[g] || []).forEach(c => { if (m[c]) stack.push(c); });
+    }
   }
+  touched.forEach(syncBoardAbility);
   saveGuide();
   if (modalSpirit === spirit) renderModal();
   renderSpirits();     // a board may have just completed → refresh the gallery sheen
