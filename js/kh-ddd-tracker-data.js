@@ -37,6 +37,13 @@ var TRACKER_GAME = {
     "Ability Ace": "abilities",
     "Seekers of Secrets": { "section": "portals", "nameStartsWith": "Secret Portal" },
     "Portal Champ": { "section": "portals", "nameStartsWith": "Special Portal" },
+    "Champions of All Districts": { "section": "portals", "nameStartsWith": "Special Portal", "itemHas": { "g": "Traverse Town" } },
+    "Champions of the Cathedral": { "section": "portals", "nameStartsWith": "Special Portal", "itemHas": { "g": "La Cité des Cloches" } },
+    "Champions of the Digital World": { "section": "portals", "nameStartsWith": "Special Portal", "itemHas": { "g": "The Grid" } },
+    "Champions of the Endless Ocean": { "section": "portals", "nameStartsWith": "Special Portal", "itemHas": { "g": "Prankster's Paradise" } },
+    "Champions of the Opéra House": { "section": "portals", "nameStartsWith": "Special Portal", "itemHas": { "g": "Country of the Musketeers" } },
+    "Champions of the Harmonic Score": { "section": "portals", "nameStartsWith": "Special Portal", "itemHas": { "g": "Symphony of Sorcery" } },
+    "Champions of the Dark City": { "section": "portals", "nameStartsWith": "Special Portal", "itemHas": { "g": "The World That Never Was" } },
     "Treasure Seeker": { "section": "treasures" },
     "Spirit Guide": { "section": "dreameaters", "itemNot": { "spirit": false } },
     "Keyblade Conqueror": { "section": "keyblades" }
