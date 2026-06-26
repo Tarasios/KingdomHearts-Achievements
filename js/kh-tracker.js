@@ -335,9 +335,13 @@ function trophyProgress(ref) {
   const store = STORE[ref.section] || {};
   const checkIndex = (ref.check !== undefined && section.checks) ? section.checks.findIndex(c => c.k === ref.check) : -1;
   const checkObj = checkIndex >= 0 ? section.checks[checkIndex] : null;
-  const nameOk = item =>
-    (!ref.nameStartsWith || String(item.name).startsWith(ref.nameStartsWith)) &&
-    (!ref.nameEndsWith || String(item.name).endsWith(ref.nameEndsWith));
+  const nameOk = item => {
+    if (ref.nameStartsWith && !String(item.name).startsWith(ref.nameStartsWith)) return false;
+    if (ref.nameEndsWith && !String(item.name).endsWith(ref.nameEndsWith)) return false;
+    if (ref.itemHas) for (const k in ref.itemHas) if (item[k] !== ref.itemHas[k]) return false;   // include only matching items
+    if (ref.itemNot) for (const k in ref.itemNot) if (item[k] === ref.itemNot[k]) return false;   // drop matching items (e.g. Nightmares: spirit:false)
+    return true;
+  };
   if (section.variants) {   // sum across every character variant (e.g. Secret Portals as both Sora and Riku)
     let done = 0, total = 0;
     for (const charId of Object.keys(section.variants)) {

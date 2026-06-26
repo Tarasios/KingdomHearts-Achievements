@@ -35,7 +35,11 @@ var TRACKER_GAME = {
     "Dream Piece Collector": "dreampieces",
     "Flick Rush Fever": "flickrush",
     "Ability Ace": "abilities",
-    "Seekers of Secrets": { "section": "portals", "nameStartsWith": "Secret Portal" }
+    "Seekers of Secrets": { "section": "portals", "nameStartsWith": "Secret Portal" },
+    "Portal Champ": { "section": "portals", "nameStartsWith": "Special Portal" },
+    "Treasure Seeker": { "section": "treasures" },
+    "Spirit Guide": { "section": "dreameaters", "itemNot": { "spirit": false } },
+    "Keyblade Conqueror": { "section": "keyblades" }
   },
   "tabs": [
     {
@@ -224,6 +228,7 @@ var TRACKER_GAME = {
         },
         {
           "id": "shelf",
+          "trophies": true,
           "cols": [
             {
               "k": "name",
