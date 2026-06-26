@@ -33,7 +33,9 @@ var TRACKER_GAME = {
     "Command Collector": "commands",
     "Recipe Collector": "recipes",
     "Dream Piece Collector": "dreampieces",
-    "Flick Rush Fever": "flickrush"
+    "Flick Rush Fever": "flickrush",
+    "Ability Ace": "abilities",
+    "Seekers of Secrets": { "section": "portals", "nameStartsWith": "Secret Portal" }
   },
   "tabs": [
     {

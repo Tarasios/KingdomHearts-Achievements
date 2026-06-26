@@ -335,6 +335,24 @@ function trophyProgress(ref) {
   const store = STORE[ref.section] || {};
   const checkIndex = (ref.check !== undefined && section.checks) ? section.checks.findIndex(c => c.k === ref.check) : -1;
   const checkObj = checkIndex >= 0 ? section.checks[checkIndex] : null;
+  const nameOk = item =>
+    (!ref.nameStartsWith || String(item.name).startsWith(ref.nameStartsWith)) &&
+    (!ref.nameEndsWith || String(item.name).endsWith(ref.nameEndsWith));
+  if (section.variants) {   // sum across every character variant (e.g. Secret Portals as both Sora and Riku)
+    let done = 0, total = 0;
+    for (const charId of Object.keys(section.variants)) {
+      const sid = ref.section + "-" + charId, vstore = STORE[sid] || {};
+      (section.variants[charId] || []).forEach((item, index) => {
+        if (!nameOk(item)) return;
+        if (ref.match && String(cellText(sid, index, ref.match.field, item) || "").indexOf(ref.match.value) < 0) return;
+        if (ref.check !== undefined && (checkIndex < 0 || (checkObj && !checkApplies(item, checkObj)))) return;
+        total++;
+        const isDone = ref.check !== undefined ? !!vstore[checkKey(index, ref.check, checkIndex)] : (!!vstore[index] || autoDone(section, item));
+        if (isDone) done++;
+      });
+    }
+    return [done, total];
+  }
   const itemDone = (item, index) => {
     if (ref.check !== undefined) return checkIndex >= 0 && checkApplies(item, checkObj) && !!store[checkKey(index, ref.check, checkIndex)];
     return !!store[index] || autoDone(section, item);
@@ -351,7 +369,7 @@ function trophyProgress(ref) {
   }
   let done = 0, total = 0;
   section.items.forEach((item, index) => {
-    if (ref.nameEndsWith && !String(item.name).endsWith(ref.nameEndsWith)) return;
+    if (!nameOk(item)) return;
     if (ref.match && String(cellText(ref.section, index, ref.match.field, item) || "").indexOf(ref.match.value) < 0) return;
     if (ref.check !== undefined && checkIndex < 0) return;
     if (ref.check !== undefined && checkObj && !checkApplies(item, checkObj)) return;   // skip items that lack this form
