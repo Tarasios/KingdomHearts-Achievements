@@ -49,6 +49,7 @@ const CHARS = (GAME.chars || []).map(c => c.id);
 const CHAR_LABEL = {}; (GAME.chars || []).forEach(c => CHAR_LABEL[c.id] = c.label);
 const SPIRIT_IMG = "../images/dreamdrop/spirits/";
 const BOARD_IMG = "../images/dreamdrop/spiritboard/";
+const RANK_IMG = "../images/dreamdrop/ranks/";
 const RANKS = CREATE.ranks;                       // F,E,D,C,B,A,S (low→high)
 
 /* ---------- reused tracker sections ---------- */
@@ -91,9 +92,18 @@ function toggleSpirit(name) {
 }
 
 // Ability-checklist index in the tracker (Support / Spirit abilities only).
-const ABIL_SEC = findSec("abilities");
-const ABIL_TRACK_INDEX = new Map();
-((ABIL_SEC && ABIL_SEC.items) || []).forEach((it, i) => { if (!ABIL_TRACK_INDEX.has(it.name)) ABIL_TRACK_INDEX.set(it.name, i); });
+// Map every ability a board can grant to its row in the tracker's ability
+// checklists (Support/Spirit counters + single Stat abilities), so unlocking
+// or locking a node mirrors onto the checklist. Commands are deliberately not
+// here: they also come from portals/melding/treasures, so a board can't be
+// their sole source of truth.
+const ABIL_TRACK = new Map();
+["abilities", "abstats"].forEach(secId => {
+  const sec = findSec(secId);
+  ((sec && sec.items) || []).forEach((it, i) => {
+    if (!ABIL_TRACK.has(it.name)) ABIL_TRACK.set(it.name, { sec: secId, index: i, counter: !!sec.counter, max: (+it.max > 0 ? +it.max : 1) });
+  });
+});
 
 function loadGuide() { try { return JSON.parse(localStorage.getItem(GUIDE_KEY)) || {}; } catch (e) { return {}; } }
 let GUIDE = loadGuide();
@@ -105,19 +115,36 @@ function saveGuide() { try { localStorage.setItem(GUIDE_KEY, JSON.stringify(GUID
 function spiritRank(name) { return GUIDE.rank[name] || (SPIRIT_BY_NAME[name] && SPIRIT_BY_NAME[name].rank) || "C"; }
 function setSpiritRank(name, rank) { GUIDE.rank[name] = rank; saveGuide(); }
 
-// An ability is "unlocked" if marked here, or already checked on the tracker.
-function abilityOwned(name) {
-  if (GUIDE.abilities[name]) return true;
-  const i = ABIL_TRACK_INDEX.get(name);
-  return i != null && !!dddSection("abilities")[i];
+// How many unlocked board cells (across every Spirit) currently grant this
+// ability — i.e. how many copies you hold.
+function boardAbilityCount(name) {
+  let n = 0;
+  for (const spirit in GUIDE.nodes) {
+    const nodes = GUIDE.nodes[spirit];
+    for (const grid in nodes) if (activeAbilityAt(spirit, grid) === name) n++;
+  }
+  return n;
 }
-function setAbilityOwned(name, on) {
-  if (on) GUIDE.abilities[name] = true; else delete GUIDE.abilities[name];
-  const i = ABIL_TRACK_INDEX.get(name);          // mirror onto the main checklist
-  if (i != null) { const s = dddSection("abilities"); if (on) s[i] = true; else delete s[i]; saveDDD(); }
-  saveGuide();
+// Mirror a board-granted ability onto the tracker checklist: counter abilities
+// store the copy count (capped at their max), single Stat abilities are ticked
+// while at least one board grants them. Recomputed from the board so locking a
+// node correctly decrements / unticks.
+function syncBoardAbility(name) {
+  const t = ABIL_TRACK.get(name);
+  if (!t) return;
+  const count = boardAbilityCount(name), store = dddSection(t.sec);
+  if (t.counter) { if (count <= 0) delete store[t.index]; else store[t.index] = Math.min(count, t.max); }
+  else if (count > 0) store[t.index] = true; else delete store[t.index];
+  saveDDD();
 }
 function nodeOwned(spirit, grid) { const m = GUIDE.nodes[spirit]; return !!(m && m[grid]); }
+// A Spirit's Ability Link board is "complete" once every node on it is unlocked.
+function boardComplete(spirit) {
+  const board = (DG.boards || {})[spirit] || [];
+  if (!board.length) return false;
+  for (const g of new Set(board.map(n => n.g))) if (!nodeOwned(spirit, g)) return false;
+  return true;
+}
 // Per-board topology (cached): node lookup, child links, keyhole + entry cells.
 const BOARD_INFO = {};
 const LINK_VEC = { N: [0, -1], S: [0, 1], E: [1, 0], W: [-1, 0] };
@@ -189,7 +216,7 @@ function nodeUnlockable(spirit, node) {
   for (const m of (info.adj[node.g] || [])) { if (info.distOf[m] !== undefined && info.distOf[m] < myd && coordUnlocked(spirit, m)) return true; }
   return false;
 }
-function markNodeAbility(node) { if (node && node.t !== "Quota" && node.t !== "Secret") setAbilityOwned(node.n, true); }
+function abilityNameOf(node) { return (node && node.t !== "Quota" && node.t !== "Secret") ? node.n : null; }
 function toggleNode(spirit, node) {
   const info = boardInfo(spirit);
   const grid = node.g;
@@ -197,21 +224,30 @@ function toggleNode(spirit, node) {
   const twoStage = variants.length > 1;
   const m = GUIDE.nodes[spirit] || (GUIDE.nodes[spirit] = {});
   const cur = m[grid];
+  const touched = new Set();   // abilities whose tracker count must be recomputed
+  const touch = nd => { const a = abilityNameOf(nd); if (a) touched.add(a); };
   if (!cur) {
     // first click → unlock the first ability (needs the path unlocked)
     if (!nodeUnlockable(spirit, variants[0])) return;
-    m[grid] = 1; markNodeAbility(variants[0]);
+    m[grid] = 1; touch(variants[0]);
   } else if (twoStage && cur !== 2 && secretUnlockedForCell(spirit, variants)) {
     // second click, once the Red Secret is unlocked → switch to the second ability
-    m[grid] = 2; markNodeAbility(variants[1]);
+    m[grid] = 2; touch(variants[0]); touch(variants[1]);   // stage 1 dropped, stage 2 gained
   } else {
     // un-mark this cell and cascade-lock everything downstream of it
     const { childrenOf } = info;
     const stack = [grid];
-    while (stack.length) { const g = stack.pop(); delete m[g]; (childrenOf[g] || []).forEach(c => { if (m[c]) stack.push(c); }); }
+    while (stack.length) {
+      const g = stack.pop();
+      const a = activeAbilityAt(spirit, g); if (a) touched.add(a);   // record what it granted before locking
+      delete m[g];
+      (childrenOf[g] || []).forEach(c => { if (m[c]) stack.push(c); });
+    }
   }
+  touched.forEach(syncBoardAbility);
   saveGuide();
   if (modalSpirit === spirit) renderModal();
+  renderSpirits();     // a board may have just completed → refresh the gallery sheen
   renderAbilities();   // Abilities-tab chip colours depend on which nodes are unlocked
 }
 
@@ -265,6 +301,10 @@ window.addEventListener("scroll", hidePop, true);
 
 /* ---------- shared rendering helpers ---------- */
 function spiritFile(name) { return SPIRIT_IMG + name.replace(/ /g, "_") + ".png"; }
+function rankIcon(rank, cls) {
+  if (!rank) return "";
+  return `<img class="${cls || "dg-rank-ico"}" src="${esc(RANK_IMG + "Spirit_Rank_Icon_" + rank + ".png")}" alt="${esc(rank)}" title="${esc(format("dg-rank", rank))}">`;
+}
 
 /* =====================================================================
    Creation formula + rank boosting (from the KH Wiki Spirit article)
@@ -353,10 +393,14 @@ const RARE_SPIRITS = new Set(["Meowjesty", "Sudo Neku", "Frootz Cat", "Ursa Circ
 
 function spiritCard(spirit) {
   const has = spiritOwned(spirit.name);
-  const card = el("div", "dg-spirit" + (has ? " owned" : ""));
+  const done = boardComplete(spirit.name);
+  const rank = has ? spiritRank(spirit.name) : null;
+  const card = el("div", "dg-spirit" + (has ? " owned" : "") + (done ? " complete" : ""));
   card.setAttribute("role", "button"); card.tabIndex = 0;
+  if (done) card.title = translate("dg-board-done");
   card.innerHTML =
     `<button class="dg-star${has ? " on" : ""}" title="${esc(translate("dg-own-toggle"))}" aria-pressed="${has}">★</button>` +
+    rankIcon(rank, "dg-spirit-rank") +
     `<span class="dg-spirit-img"><img src="${esc(spiritFile(spirit.name))}" alt="" loading="lazy"></span>` +
     `<span class="dg-spirit-name">${esc(spirit.name)}</span>` +
     (spirit.attr ? `<span class="dg-spirit-attr">${esc(spirit.attr)}</span>` : "");
@@ -398,11 +442,17 @@ function nodeIcon(node) {
   if (t === "Quota") {
     if (req.startsWith("link")) return "Link_Door.png";
     if (req.startsWith("level")) return "Level_Door.png";
-    return "Premium_Icon.png";
+    return "Item_Door.png";   // a gate that requires Treats / items
   }
+  // Premium commands have their own gold icons.
+  if (/^Salvation$/i.test(n)) return "Premium_Icon.png";
+  if (/^Faith$/i.test(n)) return "Premium_Magic_Icon.png";
   if (t === "Magic Command") return "Magic_Icon.png";
   if (t === "Attack Command") return "Attack_Icon.png";
   if (t === "Item Command") return "Item_Icon.png";
+  if (t === "Reprisal Command") return "Reprisal_Icon.png";
+  if (t === "Defense Command") return "Defense_Icon.png";
+  if (t === "Movement Command") return "Movement_Icon.png";
   if (/Command$/.test(t)) return "Ability_Icon.png";
   if (t === "Support Ability" || t === "Spirits Ability" || t === "Defense Ability") return "Perm_Ability_Icon.png";
   // Only the four "<stat> Boost" abilities use a dedicated stat icon; the
@@ -803,7 +853,7 @@ function renderMaterialsMode() {
       `<div class="dg-c-cardhead">` +
         `<img class="dg-c-cardimg" src="${esc(spiritFile(r.sp))}" alt="" loading="lazy">` +
         `<button class="dg-c-cardname" data-spirit="${esc(r.sp)}">${esc(r.sp)}</button>` +
-        `<span class="dg-c-rankbig">${esc(translate("dg-c-rank-out"))} ${esc(finalRank)}` +
+        `<span class="dg-c-rankbig">${rankIcon(finalRank, "dg-c-rankico")}${esc(translate("dg-c-rank-out"))} ${esc(finalRank)}` +
           (isRisky && finalRank !== r.rank ? ` <span class="dg-c-up">(${esc(r.rank)} +Risky)</span>` : "") +
           (rankIdx(recipeMaxRank(r, isRisky)) > rankIdx(finalRank) ? ` <span class="dg-c-boostnote">${esc(format("dg-c-upto", recipeMaxRank(r, isRisky)))}</span>` : "") + `</span>` +
         (pct != null ? `<span class="dg-c-pct${pct < 100 ? " low" : ""}">${pct}%</span>` : "") +
@@ -880,7 +930,7 @@ function renderSpiritMode() {
   });
 
   let html = `<div class="dg-c-card">` +
-    spiritCardHead(spirit, `<span class="dg-c-rankbig">${esc(translate("dg-c-rank-out"))} ${esc(target)}` + (isRisky ? ` <span class="dg-c-up">(+Risky)</span>` : "") + `</span>`) +
+    spiritCardHead(spirit, `<span class="dg-c-rankbig">${rankIcon(target, "dg-c-rankico")}${esc(translate("dg-c-rank-out"))} ${esc(target)}` + (isRisky ? ` <span class="dg-c-up">(+Risky)</span>` : "") + `</span>`) +
     statsTable(spirit, target, level, forecast, cmd) + commandBonusLine(cmd) +
     `<details class="dg-c-more"><summary>${esc(translate("dg-c-more"))}</summary>` + forecastExtras(spirit, forecast) + `</details>` +
     `</div>`;

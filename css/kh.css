@@ -317,9 +317,22 @@
 .kh .dg-grid { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 12px; margin: 10px 0 14px; }
 @media (max-width: 900px) { .kh .dg-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .kh .dg-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.kh .dg-spirit { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center;
+.kh .dg-spirit { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center;
     background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 8px 10px;
     color: var(--ink); cursor: pointer; font: inherit; transition: border-color .15s, transform .1s, background .15s; }
+/* Owned-Spirit rank badge (top-left; star is top-right). */
+.kh .dg-spirit-rank { position: absolute; top: 5px; left: 6px; width: 24px; height: 24px; object-fit: contain; pointer-events: none; }
+/* Completed Ability Link board: gold edge + a slow light sheen sweep. */
+.kh .dg-spirit.complete { border-color: #c9a13b; box-shadow: 0 0 0 1px rgba(201,161,59,.45), 0 0 16px rgba(201,161,59,.22); }
+.kh .dg-spirit.complete .dg-spirit-img { position: relative; overflow: hidden; border-radius: 8px; }
+.kh .dg-spirit.complete .dg-spirit-img::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.5) 50%, transparent 65%);
+    transform: translateX(-130%); animation: dg-sheen 3.4s ease-in-out infinite; }
+@keyframes dg-sheen { 0%, 55% { transform: translateX(-130%); } 78%, 100% { transform: translateX(130%); } }
+@media (prefers-reduced-motion: reduce) { .kh .dg-spirit.complete .dg-spirit-img::after { animation: none; opacity: .25; transform: none; } }
+/* Rank icons in the creation calculator. */
+.kh .dg-c-rankico { width: 20px; height: 20px; vertical-align: -4px; margin-right: 5px; }
+.kh .dg-rank-ico { width: 18px; height: 18px; vertical-align: -3px; }
 .kh .dg-spirit:hover { border-color: var(--accent); transform: translateY(-2px); }
 .kh .dg-spirit:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .kh .dg-spirit-img { width: 84px; height: 84px; display: flex; align-items: center; justify-content: center; }
