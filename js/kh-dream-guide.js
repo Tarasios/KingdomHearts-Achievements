@@ -764,12 +764,19 @@ function recipeMatchSlots(r, s1, s2) {
   if (slotMatch(s1, b.mat, b.tier) && slotMatch(s2, a.mat, a.tier)) return [b, a];
   return null;
 }
-function recipeMaxRank(r) {
-  const boost = 4;   // max rank-boost from over-stuffing materials; Risky Winds
-  return RANKS[Math.min(rankIdx(r.rank) + boost, RANKS.length - 1)];   // does NOT raise rank
+// The highest rank a recipe can reach: base + up to 4 from over-stuffing
+// materials + 1 from Risky Winds. A few recipes cap lower in-game (a per-recipe
+// quirk), given by r.cap.
+function recipeMaxRank(r, isRisky) {
+  let idx = rankIdx(r.rank) + 4 + (isRisky ? 1 : 0);
+  idx = Math.min(idx, RANKS.length - 1);
+  if (r.cap) idx = Math.min(idx, rankIdx(r.cap));
+  return RANKS[idx];
 }
+// Apply a recipe's rank cap (if any) to a computed rank index.
+function capRankIdx(r, idx) { return r.cap ? Math.min(idx, rankIdx(r.cap)) : idx; }
 // Under Risky Winds the rarer (lower-odds) Spirit is +50% likely and the
-// ordinary one -50%; the rank is unchanged. Returns the listed Spirit's odds.
+// ordinary one -50%. Returns the listed Spirit's adjusted odds.
 function riskyOdds(pct) {
   if (pct == null || pct >= 100) return pct;
   return pct < 50 ? pct + 50 : pct > 50 ? pct - 50 : pct;
@@ -789,7 +796,7 @@ function renderMaterialsMode() {
   let html = `<p class="hint" style="margin:0 0 6px">${esc(format("dg-c-found", results.length))}</p>`;
   results.forEach(r => {
     const spirit = SPIRIT_BY_NAME[r.sp];
-    const finalRank = r.rank;   // Risky Winds changes the odds, not the rank
+    const finalRank = RANKS[capRankIdx(r, rankIdx(r.rank) + (isRisky ? 1 : 0))];   // base, +1 under Risky
     const pct = r.pct != null ? (isRisky ? riskyOdds(r.pct) : r.pct) : null;
     const total = recipeTotal(r);
     html += `<div class="dg-c-card">` +
@@ -797,7 +804,8 @@ function renderMaterialsMode() {
         `<img class="dg-c-cardimg" src="${esc(spiritFile(r.sp))}" alt="" loading="lazy">` +
         `<button class="dg-c-cardname" data-spirit="${esc(r.sp)}">${esc(r.sp)}</button>` +
         `<span class="dg-c-rankbig">${esc(translate("dg-c-rank-out"))} ${esc(finalRank)}` +
-          (rankIdx(recipeMaxRank(r)) > rankIdx(finalRank) ? ` <span class="dg-c-boostnote">${esc(format("dg-c-upto", recipeMaxRank(r)))}</span>` : "") + `</span>` +
+          (isRisky && finalRank !== r.rank ? ` <span class="dg-c-up">(${esc(r.rank)} +Risky)</span>` : "") +
+          (rankIdx(recipeMaxRank(r, isRisky)) > rankIdx(finalRank) ? ` <span class="dg-c-boostnote">${esc(format("dg-c-upto", recipeMaxRank(r, isRisky)))}</span>` : "") + `</span>` +
         (pct != null ? `<span class="dg-c-pct${pct < 100 ? " low" : ""}">${pct}%</span>` : "") +
       `</div>` +
       `<div class="dg-c-cardrecipe">` + matChip(r.m1, r.t1, r.q1) +
@@ -844,7 +852,7 @@ function renderSpiritMode() {
     let html = `<div class="dg-c-card">` + spiritCardHead(spirit, "") + `</div>`;
     html += `<h3 class="grp-title">${esc(format("dg-c-all-recipes", recs.length, spirit.name))}</h3>`;
     recs.slice().sort((a, b) => rankIdx(a.rank) - rankIdx(b.rank)).forEach(r => {
-      const maxR = recipeMaxRank(r);
+      const maxR = recipeMaxRank(r, false);
       html += `<div class="dg-c-reciperow">` + rankPill(r.rank) + " " +
         matChip(r.m1, r.t1, r.q1) + ` <span class="dg-plus">+</span> ` + matChip(r.m2, r.t2, r.q2) +
         (r.off ? ` <span class="dg-off-badge">${esc(translate("dg-official"))}</span>` : "") +
@@ -862,7 +870,8 @@ function renderSpiritMode() {
   const target = rankVal, targetI = rankIdx(target);
   const viable = [];
   recs.forEach(r => {
-    const needed = targetI - rankIdx(r.rank);   // boost required (Risky Winds does not raise rank)
+    if (r.cap && targetI > rankIdx(r.cap)) return;     // this recipe caps below the target rank
+    const needed = targetI - rankIdx(r.rank) - (isRisky ? 1 : 0);   // boost required
     if (needed < 0) return;
     if (needed > 4) return;
     const q1 = qtyForBoost(r.q1, needed), q2 = qtyForBoost(r.q2, needed);
@@ -871,7 +880,7 @@ function renderSpiritMode() {
   });
 
   let html = `<div class="dg-c-card">` +
-    spiritCardHead(spirit, `<span class="dg-c-rankbig">${esc(translate("dg-c-rank-out"))} ${esc(target)}</span>`) +
+    spiritCardHead(spirit, `<span class="dg-c-rankbig">${esc(translate("dg-c-rank-out"))} ${esc(target)}` + (isRisky ? ` <span class="dg-c-up">(+Risky)</span>` : "") + `</span>`) +
     statsTable(spirit, target, level, forecast, cmd) + commandBonusLine(cmd) +
     `<details class="dg-c-more"><summary>${esc(translate("dg-c-more"))}</summary>` + forecastExtras(spirit, forecast) + `</details>` +
     `</div>`;

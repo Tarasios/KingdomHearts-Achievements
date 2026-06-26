@@ -2258,7 +2258,8 @@ window.DREAM_GUIDE = {
       "t2": "Fancy",
       "q2": 6,
       "pct": 40,
-      "rare": "Sir Kyroo"
+      "rare": "Sir Kyroo",
+      "cap": "A"
     },
     {
       "sp": "Chef Kyroo",
