@@ -24,6 +24,9 @@
 .kh .hint { color: var(--dim); font-size: 12px; margin: 10px 0 0; }
 .kh .results { margin-top: 18px; }
 .kh .grp-title { font-size: 13px; color: var(--accent2); text-transform: uppercase; letter-spacing: .7px; margin: 18px 0 8px; }
+.kh .grp-collapsible { cursor: pointer; user-select: none; }
+.kh .grp-caret { display: inline-block; width: 1em; color: var(--dim); font-size: 11px; }
+.kh .grp-count { margin-left: 8px; color: var(--dim); font-weight: 600; letter-spacing: 0; text-transform: none; }
 .kh table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
 .kh th, .kh td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
 .kh th { color: var(--dim); font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: .5px; }
@@ -236,6 +239,11 @@
   content: "\25B8"; color: var(--dim); transition: transform .15s; }
 .kh details[open] > summary.secsum::before { transform: rotate(90deg); }
 .kh summary.secsum .prgchip { text-transform: none; letter-spacing: 0; }
+/* Static (non-collapsible) section header — same look as .secsum, no fold caret. */
+.kh .sechead { display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--accent); text-transform: uppercase; letter-spacing: .7px; margin: 18px 0 8px; }
+.kh .sechead.sechead-main { color: var(--accent2); margin-top: 6px; }
+.kh .sechead .prgchip { text-transform: none; letter-spacing: 0; }
 /* A check column that doesn't apply to a row (e.g. a Spirit-only Dream Eater
    has no Nightmare/Rare form). */
 .kh td.chkcell.na { color: var(--dim); }
@@ -298,3 +306,381 @@
 /* Dashboard section labels link to their tab. */
 .kh a.dashlink { color: var(--ink); text-decoration: none; border-bottom: 1px dotted var(--line); cursor: pointer; }
 .kh a.dashlink:hover, .kh a.dashlink:focus { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* =====================================================================
+   Dream Guide (tools/kh-dream-guide.html) — Spirits gallery, materials
+   drop-location reference, recipe-item checklist, and the shared hover
+   popover. Scoped under .kh like the rest of this file.
+   ===================================================================== */
+
+/* ---- Spirits gallery ---- */
+.kh .dg-grid { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 12px; margin: 10px 0 14px; }
+@media (max-width: 900px) { .kh .dg-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .kh .dg-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.kh .dg-spirit { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 8px 10px;
+    color: var(--ink); cursor: pointer; font: inherit; transition: border-color .15s, transform .1s, background .15s; }
+.kh .dg-spirit:hover { border-color: var(--accent); transform: translateY(-2px); }
+.kh .dg-spirit:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.kh .dg-spirit-img { width: 84px; height: 84px; display: flex; align-items: center; justify-content: center; }
+.kh .dg-spirit-img img { max-width: 100%; max-height: 100%; object-fit: contain;
+    filter: grayscale(1) brightness(.55); opacity: .5; transition: filter .15s, opacity .15s; }
+.kh .dg-spirit.owned { background: var(--panel2); border-color: #2c5b3c; }
+.kh .dg-spirit.owned .dg-spirit-img img { filter: none; opacity: 1; }
+.kh .dg-spirit-name { font-size: 12.5px; font-weight: 600; line-height: 1.2; color: var(--dim); }
+.kh .dg-spirit.owned .dg-spirit-name { color: var(--ink); }
+.kh .dg-spirit-attr { font-size: 10.5px; text-transform: uppercase; letter-spacing: .5px; color: var(--dim); }
+.kh .dg-spirit.owned .dg-spirit-attr { color: var(--accent2); }
+
+/* ---- Materials + drop sources ---- */
+.kh .dg-mat { margin-bottom: 10px; }
+.kh .dg-mat-title { margin: 18px 0 4px; }
+.kh .dg-tier { padding: 8px 0 10px; border-bottom: 1px solid var(--line); }
+.kh .dg-tier-name { font-size: 12.5px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.kh .dg-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.kh .dg-chip { display: inline-flex; align-items: center; gap: 5px; border-radius: 999px; padding: 3px 11px;
+    font-size: 12.5px; cursor: default; border: 1px solid var(--line); background: var(--chip); color: var(--ink); }
+.kh .dg-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.kh .dg-chip-drop { cursor: help; }
+.kh .dg-chip-drop.rare { border-color: #7a5bb0; background: #2a2148; }
+.kh .dg-chip-drop.sp { border-style: dashed; color: var(--dim); }
+.kh .dg-chip .dg-rate { color: var(--accent); font-weight: 700; }
+.kh .dg-chip-treasure { cursor: help; background: #2c3a14; border-color: #5b6b2c; color: #d7e36f; font-weight: 600; }
+.kh .dg-obtain { font-size: 12px; color: var(--dim); margin-top: 6px; line-height: 1.5; }
+.kh .dg-obtain-label { color: var(--accent2); font-weight: 600; }
+
+/* ---- Recipe-item checklist ---- */
+.kh .dg-recipe-table { width: 100%; }
+.kh .dg-recipe-table th:first-child, .kh .dg-check-cell { width: 34px; text-align: center; }
+.kh .dg-check { display: inline-block; width: 20px; height: 20px; border-radius: 6px; border: 1px solid var(--line);
+    background: var(--panel); cursor: pointer; vertical-align: middle; position: relative; }
+.kh .dg-check:hover { border-color: var(--accent); }
+.kh .dg-check:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.kh .dg-check.on { background: #15351f; border-color: #2c5b3c; }
+.kh .dg-check.on::after { content: "✓"; position: absolute; inset: 0; display: flex; align-items: center;
+    justify-content: center; color: #6fe39a; font-size: 13px; font-weight: 700; }
+.kh .dg-recipe-spirit { display: flex; align-items: center; gap: 9px; }
+.kh .dg-recipe-spirit img { width: 30px; height: 30px; object-fit: contain; }
+.kh .dg-recipe-name { font-weight: 600; }
+.kh .dg-recipe-name.done { color: #6fe39a; }
+.kh .dg-rank { font-size: 11px; color: var(--dim); border: 1px solid var(--line); border-radius: 5px; padding: 0 5px; }
+.kh tr.dg-have { background: rgba(111, 227, 154, .08); }
+.kh .dg-recipe-ing { color: var(--dim); }
+.kh .dg-ing { color: var(--ink); }
+.kh .dg-ing b { color: var(--accent); }
+.kh .dg-plus { color: var(--dim); }
+.kh .dg-pct-low { color: #ff8e8e; font-weight: 600; margin-left: 4px; }
+
+/* ---- Shared hover popover ---- */
+.dg-pop { position: fixed; z-index: 200; max-width: 320px; display: none;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .45); font-size: 12.5px; color: var(--ink); line-height: 1.5; }
+.dg-pop.open { display: block; }
+.dg-pop b { display: block; margin-bottom: 3px; }
+.dg-pop .dg-pop-src { color: var(--accent2); font-size: 11px; text-transform: uppercase; letter-spacing: .5px; }
+.dg-pop .dg-pop-worlds { display: block; margin-top: 2px; color: var(--ink); }
+.dg-pop .dg-pop-char { display: block; margin-top: 6px; color: var(--accent); font-weight: 700; font-size: 11.5px; }
+.dg-pop .dg-pop-treas { display: block; padding-left: 8px; color: var(--dim); }
+.dg-pop .dg-pop-treas.crossed { text-decoration: line-through; opacity: .65; }
+
+/* ---- Creation calculator ---- */
+.kh .dg-create-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.kh .dg-create-narrow { min-width: 100px; }
+.kh input[type=number] { width: 100%; background: var(--panel); border: 1px solid var(--line); color: var(--ink);
+    border-radius: 8px; padding: 9px 11px; font-size: 14px; }
+.kh input[type=number]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.kh .dg-create-output { margin-top: 16px; }
+.kh .dg-c-summary { display: flex; align-items: center; gap: 14px; padding-bottom: 4px; }
+.kh .dg-c-portrait { width: 76px; height: 76px; object-fit: contain; }
+.kh .dg-c-title { font-size: 18px; font-weight: 700; }
+.kh .dg-c-meta { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 4px; font-size: 12.5px; color: var(--dim); }
+.kh .dg-c-meta b { color: var(--ink); font-weight: 600; }
+.kh .dg-c-up { color: var(--accent2); }
+.kh table.dg-c-stats { width: 100%; margin-top: 14px; }
+.kh .dg-c-statname { font-weight: 600; color: var(--ink); }
+.kh .dg-c-result { font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+.kh .dg-c-bonus { font-weight: 400; font-size: 11px; color: var(--accent2); margin-left: 4px; }
+.kh .dg-c-cap { color: var(--dim); font-variant-numeric: tabular-nums; }
+.kh .dg-c-res { display: flex; flex-wrap: wrap; gap: 8px; }
+.kh .dg-c-res-chip { display: inline-flex; align-items: center; gap: 7px; background: var(--panel); border: 1px solid var(--line);
+    border-radius: 999px; padding: 4px 12px; font-size: 12.5px; }
+.kh .dg-c-res-chip.weak { border-color: #7a2c2c; }
+.kh .dg-c-res-chip.strong { border-color: #2c5b3c; }
+.kh .dg-c-res-el { color: var(--dim); }
+.kh .dg-c-res-chip.weak b { color: #ff8e8e; }
+.kh .dg-c-res-chip.strong b { color: #6fe39a; }
+.kh .dg-c-res-add { color: var(--accent2); font-size: 11px; }
+.kh .dg-c-sub { color: var(--dim); font-weight: 400; text-transform: none; letter-spacing: 0; }
+.kh .dg-c-dispos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+@media (max-width: 520px) { .kh .dg-c-dispos { grid-template-columns: 1fr; } }
+.kh .dg-c-dispo { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+.kh .dg-c-dispo.off { opacity: .45; }
+.kh .dg-c-dispo-head { display: flex; align-items: center; gap: 8px; }
+.kh .dg-c-dispo-no { font-size: 11px; font-weight: 700; color: #06203b; background: var(--accent); border-radius: 5px; padding: 0 6px; }
+.kh .dg-c-dispo-name { font-weight: 600; flex: 1; }
+.kh .dg-c-dispo-pct { font-variant-numeric: tabular-nums; color: var(--accent); font-weight: 700; }
+.kh .dg-c-dispo.off .dg-c-dispo-pct { color: var(--dim); }
+.kh .dg-c-dispo-bar { height: 6px; border-radius: 4px; background: var(--chip); overflow: hidden; margin: 7px 0 6px; }
+.kh .dg-c-dispo-bar > i { display: block; height: 100%; background: var(--accent); }
+.kh .dg-c-dispo-beh { font-size: 11.5px; color: var(--dim); line-height: 1.4; }
+.kh .dg-c-forecast-note { margin-top: 16px; padding: 11px 13px; background: var(--panel); border: 1px solid var(--line);
+    border-radius: 10px; font-size: 12.5px; color: var(--dim); line-height: 1.5; }
+.kh .dg-c-forecast-note b { color: var(--ink); }
+.kh .dg-c-forecast-eff { display: block; margin-top: 3px; }
+
+/* =====================================================================
+   Dream Guide — Creation calculator redesign, Abilities, spirit modal
+   ===================================================================== */
+
+/* Spirit card: owned star + click-to-open */
+.kh .dg-spirit { position: relative; }
+.kh .dg-star { position: absolute; top: 5px; right: 6px; background: none; border: none; cursor: pointer;
+    font-size: 16px; line-height: 1; color: var(--line); padding: 2px; z-index: 2; }
+.kh .dg-star:hover { color: var(--accent2); }
+.kh .dg-star.on { color: var(--accent2); }
+.kh .dg-owned-toggle { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--dim); cursor: pointer; }
+.kh .dg-owned-toggle input { width: auto; }
+
+/* Mode bar */
+.kh .dg-mode-bar { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-end; justify-content: space-between; }
+.kh .dg-modes { display: inline-flex; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 3px; }
+.kh .dg-mode { background: none; border: none; color: var(--dim); padding: 8px 16px; border-radius: 7px; cursor: pointer; font-size: 13px; font-weight: 600; }
+.kh .dg-mode.active { background: var(--accent); color: #06203b; }
+.kh .dg-ctx { display: flex; gap: 12px; flex-wrap: wrap; }
+.kh .dg-ctx-field { display: flex; flex-direction: column; gap: 4px; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--dim); }
+.kh .dg-ctx-narrow select, .kh .dg-ctx-narrow input { min-width: 90px; }
+.kh .dg-cmode { margin-top: 16px; }
+
+/* Material slots */
+.kh .dg-slots { display: flex; gap: 14px; align-items: flex-end; flex-wrap: wrap; }
+.kh .dg-slot { flex: 1; min-width: 240px; }
+.kh .dg-slot-h { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .6px; color: var(--dim); margin-bottom: 6px; }
+.kh .dg-slot-row { display: flex; gap: 6px; }
+.kh .dg-slot-row > select, .kh .dg-slot-row > input { width: 100%; min-width: 0; }
+.kh .dg-sel-mat { flex: 2 1 0; }
+.kh .dg-sel-tier { flex: 1.3 1 0; }
+.kh .dg-sel-qty { flex: 0 0 70px; text-align: center; }
+.kh .dg-slot-plus { font-size: 20px; color: var(--dim); padding-bottom: 8px; }
+
+/* Result cards (forward mode) */
+.kh .dg-c-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; }
+.kh .dg-c-cardhead { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.kh .dg-c-cardimg { width: 46px; height: 46px; object-fit: contain; }
+.kh .dg-c-cardname { background: none; border: none; color: var(--ink); font-size: 17px; font-weight: 700; cursor: pointer; padding: 0; text-align: left; }
+button.dg-c-cardname:hover { color: var(--accent); text-decoration: underline; }
+.kh .dg-c-rankbig { font-size: 13px; font-weight: 700; color: var(--accent2); margin-left: auto; }
+.kh .dg-c-up { color: var(--accent); font-weight: 600; font-size: 11.5px; }
+.kh .dg-c-pct { font-weight: 700; color: #6fe39a; font-variant-numeric: tabular-nums; }
+.kh .dg-c-pct.low { color: #ff8e8e; }
+.kh .dg-c-cardrecipe { margin: 10px 0 4px; font-size: 13.5px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.kh .dg-c-total { font-size: 11.5px; color: var(--dim); }
+.kh .dg-rare { font-size: 11.5px; color: var(--accent2); }
+.kh .dg-c-more { margin-top: 8px; }
+.kh .dg-c-more summary { cursor: pointer; font-size: 12px; color: var(--accent); }
+.kh .dg-c-more[open] summary { margin-bottom: 10px; }
+
+/* Recipe rows (backward mode) */
+.kh .dg-c-reciperow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 9px 4px; border-bottom: 1px solid var(--line); font-size: 13.5px; }
+.kh .dg-c-boostnote { font-size: 11px; color: var(--accent); background: rgba(95,179,255,.1); border-radius: 5px; padding: 1px 7px; }
+.kh .dg-c-asis, .kh .dg-c-boostnote { white-space: nowrap; }
+
+/* Shared bits */
+.kh .dg-rank-pill { display: inline-block; min-width: 20px; text-align: center; background: var(--chip); border: 1px solid var(--line); border-radius: 6px; padding: 0 7px; font-weight: 700; font-size: 12px; }
+.kh .dg-ing { color: var(--ink); }
+.kh .dg-ing b { color: var(--accent); }
+.kh .dg-ing b.dg-ing-up { color: var(--accent2); }
+.kh .dg-perm-badge { font-size: 10px; text-transform: uppercase; letter-spacing: .4px; background: #3a2f12; border: 1px solid #6b5a2c; color: #e0c66a; border-radius: 5px; padding: 1px 6px; }
+.kh .dg-off-badge { font-size: 10px; text-transform: uppercase; background: #15351f; border: 1px solid #2c5b3c; color: #6fe39a; border-radius: 5px; padding: 1px 6px; }
+
+/* Spirit detail modal */
+.dg-modal { position: fixed; inset: 0; z-index: 120; display: none; }
+.dg-modal.open { display: block; }
+.dg-modal-back { position: absolute; inset: 0; background: rgba(4,8,18,.72); }
+.dg-modal-panel { position: relative; max-width: 880px; margin: 4vh auto; max-height: 92vh; overflow-y: auto;
+    background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 22px; box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+.dg-modal-close { position: absolute; top: 12px; right: 14px; background: none; border: none; color: var(--dim); font-size: 26px; line-height: 1; cursor: pointer; }
+.dg-modal-close:hover { color: var(--ink); }
+.dg-m-head { display: flex; gap: 16px; align-items: center; }
+.dg-m-portrait { width: 92px; height: 92px; object-fit: contain; }
+.dg-m-title { font-size: 22px; font-weight: 700; color: var(--ink); }
+.dg-m-meta { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 6px 0 8px; font-size: 12.5px; color: var(--dim); }
+.dg-m-meta b { color: var(--ink); font-weight: 600; }
+.dg-m-own { background: var(--panel); border: 1px solid var(--line); color: var(--dim); border-radius: 8px; padding: 6px 12px; font-size: 12.5px; cursor: pointer; }
+.dg-m-own.on { background: #3a2f12; border-color: #6b5a2c; color: #e0c66a; }
+.dg-m-statline { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 14px 0 2px; font-size: 13px; color: var(--dim); }
+.dg-m-statline b { color: var(--ink); }
+.dg-m-dispos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+@media (max-width: 560px) { .dg-m-dispos { grid-template-columns: 1fr; } }
+.dg-m-dispo { display: flex; gap: 8px; background: var(--panel); border: 1px solid var(--line); border-radius: 9px; padding: 8px 10px; }
+table.dg-board { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.dg-board th, .dg-board td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.dg-board th { color: var(--dim); font-size: 11px; text-transform: uppercase; letter-spacing: .5px; }
+.dg-board-ic { width: 30px; }
+.dg-board-ic img { width: 24px; height: 24px; object-fit: contain; }
+.dg-board-grid { color: var(--dim); font-variant-numeric: tabular-nums; font-size: 11px; border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; }
+.dg-board-name { font-weight: 600; color: var(--ink); }
+.dg-board-cost { white-space: nowrap; color: var(--accent); }
+.dg-board-cond { color: var(--dim); font-size: 11.5px; }
+.dg-m-recipes { display: flex; flex-direction: column; gap: 6px; }
+.dg-m-recipe { font-size: 13px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.dg-m-pct { color: #6fe39a; font-weight: 700; }
+.dg-m-pct.low { color: #ff8e8e; }
+
+/* Abilities tab */
+.kh .dg-ab-filters { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+.kh .dg-ab-cat { background: var(--panel); border: 1px solid var(--line); color: var(--dim); border-radius: 999px; padding: 5px 12px; font-size: 12px; cursor: pointer; }
+.kh .dg-ab-cat.active { background: var(--accent); color: #06203b; border-color: var(--accent); font-weight: 700; }
+.kh .dg-ab { background: var(--panel); border: 1px solid var(--line); border-radius: 11px; padding: 11px 14px; margin-bottom: 10px; }
+.kh .dg-ab-head { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+.kh .dg-ab-ic { width: 26px; height: 26px; object-fit: contain; }
+.kh .dg-ab-name { font-weight: 700; font-size: 14.5px; }
+.kh .dg-ab-type { font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: .4px; }
+.kh .dg-ab-count { margin-left: auto; font-size: 11.5px; color: var(--dim); }
+.kh .dg-ab-spirits { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+.kh .dg-ab-chip { display: inline-flex; align-items: center; gap: 5px; background: var(--chip); border: 1px solid var(--line); color: var(--ink);
+    border-radius: 999px; padding: 3px 10px 3px 4px; font-size: 12px; cursor: pointer; }
+.kh .dg-ab-chip img { width: 20px; height: 20px; object-fit: contain; }
+.kh .dg-ab-chip:hover { border-color: var(--accent); }
+.kh .dg-ab-chip.cond { border-style: dashed; }
+.kh .dg-ab-chip.owned { background: rgba(95, 179, 255, .16); border-color: var(--accent); color: var(--ink); }
+.kh .dg-ab-chip.unlocked { background: #15351f; border-color: #2c5b3c; color: #9fe6b8; }
+.kh .dg-ab-legend { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.kh .dg-ab-legend .dg-ab-chip { cursor: default; padding: 3px 10px; }
+.kh .dg-ab-legend .dg-ab-chip i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.kh .dg-ab-legend .dg-ab-chip.owned i { background: var(--accent); }
+.kh .dg-ab-legend .dg-ab-chip.unlocked i { background: #6fe39a; }
+
+/* ---- Collapsible material headers + structured portal rewards ---- */
+.kh .dg-mat-title { display: flex; align-items: center; gap: 8px; width: 100%; background: none; border: none;
+    cursor: pointer; text-align: left; padding: 6px 0; }
+.kh .dg-mat-caret { transition: transform .15s; display: inline-block; color: var(--accent2); }
+.kh .dg-mat.collapsed .dg-mat-caret { transform: rotate(-90deg); }
+.kh .dg-mat.collapsed .dg-mat-body { display: none; }
+.kh .dg-rewards { margin-top: 7px; font-size: 12.5px; }
+.kh .dg-reward-char { display: flex; gap: 8px; margin-top: 4px; }
+.kh .dg-rw-char { flex: 0 0 42px; font-weight: 700; color: var(--accent); }
+.kh .dg-rw-worlds { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+.kh .dg-rw-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.kh .dg-rw-world { flex: 0 0 200px; color: var(--accent2); font-weight: 600; }
+.kh .dg-rw-items { flex: 1; color: var(--dim); min-width: 200px; }
+@media (max-width: 620px) { .kh .dg-rw-world { flex-basis: 100%; } }
+
+/* ---- Ability Link board grid (one uniform cell size for every board, so
+   the smallest and largest boards share the same scale; bigger on desktop,
+   smaller on mobile) ---- */
+.dg-board-scroll { overflow-x: auto; padding-bottom: 4px; --dg-cell: 54px; --dg-rh: 22px; }
+@media (max-width: 600px) { .dg-board-scroll { --dg-cell: 40px; --dg-rh: 18px; } }
+.dg-grid-board { display: grid; gap: 3px; margin: 4px 0 10px; width: max-content; }
+.dg-gcorner { background: transparent; }
+.dg-gcol-h { width: var(--dg-cell); }
+.dg-gcol-h, .dg-grow-h { display: flex; align-items: center; justify-content: center; color: var(--dim);
+    font-size: 11px; font-weight: 700; height: var(--dg-cell); }
+.dg-gcell { width: var(--dg-cell); height: var(--dg-cell); background: #05070d; border: 1px solid #161d33; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center; position: relative; box-sizing: border-box; }
+.dg-gcell.filled { background: #0c1326; border-color: #283457; cursor: pointer; }
+.dg-gcell.filled.locked { opacity: .3; cursor: default; }
+.dg-gcell.filled:hover, .dg-gcell.filled:focus { border-color: var(--accent); outline: none; }
+.dg-gcell img { width: 78%; height: 78%; object-fit: contain; }
+.dg-gmore { position: absolute; bottom: -2px; right: -2px; background: var(--accent); color: #06203b;
+    font-size: 9px; font-weight: 700; border-radius: 999px; padding: 0 4px; }
+.dg-board-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; font-size: 11.5px; color: var(--dim); margin-bottom: 4px; }
+.dg-board-legend span { display: inline-flex; align-items: center; gap: 4px; }
+.dg-board-legend img { width: 18px; height: 18px; object-fit: contain; }
+.dg-board-legend-tip { font-style: italic; }
+.dg-pop .dg-pop-cond { display: block; margin-top: 2px; color: var(--dim); }
+.dg-pop .dg-pop-gate { display: block; margin-top: 3px; color: #c77fe0; font-weight: 600; }
+.dg-pop .dg-pop-perm { color: #e0c66a; font-size: 10px; text-transform: uppercase; letter-spacing: .4px; }
+.dg-pop .dg-pop-hr { display: block; border-top: 1px solid var(--line); margin: 6px 0; }
+.dg-leg-line { display: inline-block; width: 16px; height: 4px; border-radius: 2px; background: #3f7bdd; }
+.dg-leg-line.gated { background: #c77fe0; }
+
+/* ---- Spirit modal: rank/level controls, dispositions, ability checklist ---- */
+.dg-m-controls { display: flex; gap: 14px; align-items: flex-end; flex-wrap: wrap; margin: 14px 0 4px; }
+.dg-m-controls-note { font-size: 11.5px; color: var(--dim); font-style: italic; padding-bottom: 8px; }
+.kh .dg-m-dispo { display: block; }
+.dg-m-dispo-top { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.dg-m-switch-wrap summary { cursor: pointer; font-size: 11.5px; color: var(--accent); margin-top: 6px; }
+.dg-m-switch { margin-top: 6px; font-size: 11.5px; color: var(--dim); display: flex; flex-direction: column; gap: 3px; }
+.dg-sw-to { color: var(--accent2); font-weight: 600; }
+.kh .dg-ab.have { border-color: #2c5b3c; background: rgba(111, 227, 154, .06); }
+.kh .dg-ab-head { gap: 9px; }
+
+/* ---- Ability board: blue trails, owned nodes, start spots ---- */
+.dg-gcell { position: relative; overflow: visible; }
+.dg-gcell.filled { cursor: pointer; }
+.dg-gcell img { position: relative; z-index: 2; }
+.dg-trail { position: absolute; background: #3f7bdd; z-index: 1; }
+.dg-trail.gated { background: #c77fe0; }
+.dg-trail.up { width: 4px; left: calc(50% - 2px); bottom: 50%; height: calc(50% + 3px); }
+.dg-trail.down { width: 4px; left: calc(50% - 2px); top: 50%; height: calc(50% + 3px); }
+.dg-trail.left { height: 4px; top: calc(50% - 2px); right: 50%; width: calc(50% + 3px); }
+.dg-trail.right { height: 4px; top: calc(50% - 2px); left: 50%; width: calc(50% + 3px); }
+.dg-gcell.owned { border-color: #2c5b3c; box-shadow: inset 0 0 0 1px #2c5b3c; }
+.dg-gcheck { position: absolute; top: -4px; right: -4px; width: 15px; height: 15px; border-radius: 50%;
+    background: #2c5b3c; color: #dfffe9; font-size: 10px; line-height: 15px; text-align: center; display: none; z-index: 3; }
+.dg-gcell.owned .dg-gcheck { display: block; }
+.dg-gcell.startnode { box-shadow: inset 0 0 0 2px #e0c66a; }
+.dg-gcell.start { background: #0c1326; border-color: #3a2f12; }
+.dg-gcell.start img { width: 80%; height: 80%; object-fit: contain; opacity: .9; }
+
+/* Deck command bonus summary in the creation calculator */
+.kh .dg-c-cmdline { font-size: 12px; color: var(--dim); margin: 8px 0 2px; padding: 7px 10px;
+    background: rgba(224, 198, 106, .08); border: 1px solid #3a2f12; border-radius: 8px; }
+.kh .dg-c-cmdline b { color: var(--accent2); }
+
+/* Two-stage (changes-after-Red-Secret) board cells */
+.dg-gtwostage { position: absolute; top: -4px; left: -4px; width: 14px; height: 14px; border-radius: 50%;
+    background: #7a2c2c; color: #ffd9d9; font-size: 9px; font-weight: 700; line-height: 14px; text-align: center; z-index: 3; }
+.dg-gcell.twostage { border-color: #5b2c2c; }
+.dg-pop .dg-pop-active { color: #6fe39a; }
+.dg-pop .dg-pop-change { display: block; margin-top: 6px; color: #e0976a; font-size: 11px; }
+
+/* Command sacrifice table (sortable / filterable) */
+.kh #dg-cmd-filter { width: auto; flex: 1 1 220px; }
+.kh .dg-cmd-cat { width: auto; flex: 0 0 auto; }
+.kh .dg-cmd-shown { margin-left: auto; color: var(--dim); font-size: 12px; }
+.kh .dg-cmd-wrap { overflow-x: auto; }
+.kh .dg-cmd-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.kh .dg-cmd-table th, .kh .dg-cmd-table td { padding: 5px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.kh .dg-cmd-th { position: sticky; top: 0; z-index: 1; background: var(--panel2); text-align: left;
+  cursor: pointer; user-select: none; color: var(--accent2); text-transform: uppercase; font-size: 11px; letter-spacing: .5px; }
+.kh .dg-cmd-th.num { text-align: right; }
+.kh .dg-cmd-th:hover, .kh .dg-cmd-th.sorted { color: var(--accent); }
+.kh .dg-cmd-arrow { font-size: 9px; }
+.kh .dg-cmd-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.kh .dg-cmd-table td.zero { color: var(--line); }
+.kh .dg-cmd-table td.has { color: var(--accent); font-weight: 600; }
+.kh .dg-cmd-name { font-weight: 600; color: var(--ink); }
+.kh .dg-cmd-catcell { color: var(--dim); }
+.kh .dg-cmd-table tbody tr:hover { background: rgba(255,255,255,0.03); }
+
+/* Checklist / Journal view toggle */
+.kh .viewseg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin-left: auto; }
+.kh .viewbtn { background: var(--panel); border: 0; color: var(--dim); padding: 7px 13px; cursor: pointer; font-size: 12px; }
+.kh .viewbtn + .viewbtn { border-left: 1px solid var(--line); }
+.kh .viewbtn:not(.on):hover { color: var(--accent); }
+.kh .viewbtn.on { background: var(--accent); color: var(--bg); font-weight: 600; }
+
+/* Journal grid — in-game treasure-chest layout */
+.kh .jrnl-whead { display: flex; align-items: baseline; gap: 10px; margin: 16px 0 7px; }
+.kh .jrnl-wname { font-size: 13px; color: var(--accent2); text-transform: uppercase; letter-spacing: .7px; }
+.kh .jrnl-wcount { color: var(--dim); font-size: 12px; }
+.kh .jrnl-grid { display: grid; grid-template-columns: repeat(var(--jrnl-cols, 8), 1fr); gap: 4px; max-width: 540px; }
+.kh .jrnl-tile { aspect-ratio: 1 / 1; border: 0; border-radius: 4px; padding: 0; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; transition: filter .1s; }
+.kh .jrnl-tile { background-size: cover; background-position: center; background-repeat: no-repeat; }
+.kh .jrnl-tile.unowned { background-image: url(../images/icons/Treasure_missing.png); }
+.kh .jrnl-tile.owned { background-color: #4ca75a; background-image: url(../images/icons/Treasure_owned.png); background-size: 80%; }
+.kh .jrnl-tile:hover { filter: brightness(1.08); }
+.kh .jrnl-tile.dim { opacity: .22; }
+.kh .jrnl-tile.auto { cursor: default; }
+.kh .jrnl-tile:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* Shared hover popover (journal tiles) */
+.kh-pop { position: fixed; z-index: 200; max-width: 260px; background: var(--panel2); border: 1px solid var(--line);
+  border-radius: 8px; padding: 8px 10px; font-size: 12px; color: var(--ink); box-shadow: 0 8px 24px rgba(0,0,0,.4);
+  pointer-events: none; opacity: 0; transform: translateY(4px); transition: opacity .1s, transform .1s; }
+.kh-pop.open { opacity: 1; transform: none; }
+.kh-pop b { display: block; color: var(--accent); margin-bottom: 3px; }
+.kh-pop .kh-pop-area { display: block; color: var(--accent2); font-size: 11px; }
+.kh-pop .kh-pop-where { display: block; color: var(--dim); margin-top: 2px; }

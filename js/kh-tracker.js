@@ -18,6 +18,15 @@
    Items in a shared section may carry c: "sora"/"riku" — they share the
    section's progress store but only show for that character.
 
+   Collapsing (two independent, easy-to-flip knobs on a Section):
+     collapsible: false   — drop the whole-section fold (the big header).
+                            Use it where folding the section just folds the
+                            whole tab; its inner groups still collapse. Default
+                            true.
+     groupCollapse: true  — force each item.g group (world/category) to fold;
+                  | false — never fold groups. Omit it for the default, which
+                            auto-enables folding when a section has 2+ groups.
+
    UI text comes from the page's lang JSON: tabbtn-<tab>, sec-<section>,
    th-<section>-<col>, plus the shared gt-* keys. Item display text lives
    under the lang "items" map (see langRow/cellText below).
@@ -54,6 +63,34 @@ let STORE = loadStore();
 function saveStore() { try { localStorage.setItem(game.storeKey, JSON.stringify(STORE)); } catch (e) { /* private browsing */ } }
 function sectionStore(storeId) { if (!STORE[storeId]) STORE[storeId] = {}; return STORE[storeId]; }
 function toggleCheck(store, key) { if (store[key]) delete store[key]; else store[key] = true; saveStore(); render(); }
+
+/* ---------- view mode (checklist vs journal), persisted per tab ---------- */
+function loadView() { try { return JSON.parse(localStorage.getItem(game.storeKey + ":view")) || {}; } catch (e) { return {}; } }
+let VIEW = loadView();
+function saveView() { try { localStorage.setItem(game.storeKey + ":view", JSON.stringify(VIEW)); } catch (e) { /* ignore */ } }
+function tabJournalOn(tabId) { return VIEW[tabId] === "journal"; }
+function setTabJournal(tabId, on) { if (on) VIEW[tabId] = "journal"; else delete VIEW[tabId]; saveView(); }
+
+/* ---------- shared hover popover (journal tiles) ---------- */
+let _pop = null;
+function popEl() { if (!_pop) { _pop = el("div", "kh-pop"); _pop.setAttribute("aria-hidden", "true"); document.body.appendChild(_pop); } return _pop; }
+function showPop(node) {
+  const p = popEl(); p.innerHTML = node.dataset.pop || ""; p.classList.add("open"); p.setAttribute("aria-hidden", "false");
+  const r = node.getBoundingClientRect(), pw = p.offsetWidth, ph = p.offsetHeight, m = 8;
+  p.style.left = Math.max(m, Math.min(r.left + r.width / 2 - pw / 2, window.innerWidth - pw - m)) + "px";
+  let top = r.top - ph - 8; if (top < m) top = r.bottom + 8;
+  p.style.top = top + "px";
+}
+function hidePop() { if (_pop) { _pop.classList.remove("open"); _pop.setAttribute("aria-hidden", "true"); } }
+function wirePop(container) {
+  container.querySelectorAll("[data-pop]").forEach(node => {
+    node.addEventListener("mouseenter", () => showPop(node));
+    node.addEventListener("mouseleave", hidePop);
+    node.addEventListener("focus", () => showPop(node));
+    node.addEventListener("blur", hidePop);
+  });
+}
+window.addEventListener("scroll", hidePop, true);
 /* Counter sections store a number per item (0..max); 0 is removed so the
    store stays sparse. */
 function setItemCount(store, index, value, max) {
@@ -333,6 +370,60 @@ function toggleGroup(items, store, groupName, section) {
   saveStore();
   render();
 }
+/* In-game "journal" view: an ordered grid of treasure tiles (perRow wide),
+   grouped by world. Owned tiles show a chest, unowned a "?"; hovering either
+   shows the reward + where to find it. Clicking toggles owned. The grid keeps
+   the data order so a tile's position matches the in-game journal. */
+function journalGrid(container, section, view, panelState) {
+  const store = sectionStore(view.storeId);
+  const perRow = (section.journal && section.journal.perRow) || 8;
+  const q = (panelState.q || "").toLowerCase();
+  const nameCol = section.cols.find(col => col.name) || section.cols[0];
+  const groups = []; let cur = null;
+  view.items.forEach((item, index) => {
+    if (!itemVisible(item, activeChar)) return;
+    const g = item.g || "";
+    if (!cur || cur.g !== g) { cur = { g, rows: [] }; groups.push(cur); }
+    cur.rows.push({ item, index });
+  });
+  const wrap = el("div", "jrnl");
+  wrap.style.setProperty("--jrnl-cols", perRow);
+  groups.forEach(group => {
+    let done = 0;
+    const grid = el("div", "jrnl-grid");
+    group.rows.forEach(({ item, index }) => {
+      const auto = autoSource(section, item);
+      const owned = !!store[index] || !!auto;
+      if (owned) done++;
+      const reward = cellText(view.storeId, index, nameCol.k, item) || item.name;
+      const area = cellText(view.storeId, index, "area", item) || "";
+      const where = cellText(view.storeId, index, "loc", item) || "";
+      const tip = `<b>${esc(reward)}</b>` +
+        (area ? `<span class="kh-pop-area">${esc(area)}</span>` : "") +
+        (where ? `<span class="kh-pop-where">${esc(where)}</span>` : "");
+      const tile = el("button", "jrnl-tile " + (owned ? "owned" : "unowned"));
+      tile.type = "button";
+      tile.dataset.pop = tip;
+      tile.setAttribute("aria-pressed", owned ? "true" : "false");
+      tile.setAttribute("aria-label", reward);
+      if (auto && !store[index]) { tile.disabled = true; tile.title = format('gt-auto-tip', auto); tile.classList.add("auto"); }
+      else if (item.gives) tile.onclick = () => toggleWithGives(store, index, item);
+      else tile.onclick = () => toggleCheck(store, index);
+      if (q && !(reward + " " + area + " " + where).toLowerCase().includes(q)) tile.classList.add("dim");
+      grid.appendChild(tile);
+    });
+    if (group.g) {
+      const head = el("div", "jrnl-whead");
+      head.appendChild(el("span", "jrnl-wname", fmtText(group.g)));
+      head.appendChild(el("span", "jrnl-wcount", `${done} / ${group.rows.length}`));
+      wrap.appendChild(head);
+    }
+    wrap.appendChild(grid);
+  });
+  container.appendChild(wrap);
+  wirePop(wrap);
+}
+
 function checklist(container, section, view, panelState) {
   const store = sectionStore(view.storeId);
   const cols = section.cols;
@@ -346,6 +437,34 @@ function checklist(container, section, view, panelState) {
   let shownCount = 0;
   const query = panelState.q.toLowerCase();
   let lastGroup = null;
+  // Opt-in: render each item.g group as its own collapsible block (e.g. DDD
+  // Treasures by world, Commands by category) so a long section can be folded
+  // a group at a time instead of all-or-nothing. Rows are tagged with the
+  // group key and shown/hidden in place; state lives in panelState.open.
+  // Render each item.g group as its own collapsible block (caret + count) so a
+  // long section folds a world/category at a time instead of all-or-nothing.
+  // Automatic whenever a section has 2+ groups; force with groupCollapse:true
+  // or disable with groupCollapse:false. Groups start expanded, so nothing is
+  // hidden by default — this only adds the ability to fold each one.
+  const distinctGroups = new Set();
+  view.items.forEach(it => { if (it.g && itemVisible(it, activeChar)) distinctGroups.add(it.g); });
+  const collapse = section.groupCollapse === false ? false
+                 : (section.groupCollapse === true || distinctGroups.size >= 2);
+  const filtering = !!query;
+  const openState = panelState.open || (panelState.open = {});
+  const grpKey = name => "grp:" + view.storeId + ":" + name;
+  const grpIsOpen = key => filtering ? true : (key in openState ? openState[key] : true);
+  const rowDone = (item, index) => section.counter ? counterValue(store, index, item) >= itemMax(item)
+        : checks ? checks.every((check, ci) => !checkApplies(item, check) || store[checkKey(index, check.k, ci)])
+        : (!!store[index] || !!autoSource(section, item));
+  const groupStats = {};
+  if (collapse) view.items.forEach((item, index) => {
+    if (!itemVisible(item, activeChar)) return;
+    const gname = item.g || item.name;
+    const st = groupStats[gname] || (groupStats[gname] = { done: 0, total: 0 });
+    st.total++; if (rowDone(item, index)) st.done++;
+  });
+  let curGrpKey = null, curGrpOpen = true;
   view.items.forEach((item, index) => {
     if (!itemVisible(item, activeChar)) return;
     const auto = (checks || section.counter) ? null : autoSource(section, item);
@@ -360,13 +479,32 @@ function checklist(container, section, view, panelState) {
       lastGroup = item.g;
       const groupName = item.g;
       const groupRow = el("tr");
-      const groupCell = el("td", "grp-title");
+      const groupCell = el("td", collapse ? "grp-title grp-collapsible" : "grp-title");
       groupCell.colSpan = cols.length + leadCount + 1;
       groupCell.style.borderBottom = "1px solid var(--line)";
+      let caret = null;
+      if (collapse) {
+        curGrpKey = grpKey(groupName); curGrpOpen = grpIsOpen(curGrpKey);
+        caret = el("span", "grp-caret", curGrpOpen ? "▾" : "▸");
+        groupCell.appendChild(caret);
+      }
       groupCell.appendChild(el("span", null, fmtText(groupName)));
+      if (collapse) {
+        const st = groupStats[groupName] || { done: 0, total: 0 };
+        groupCell.appendChild(el("span", "grp-count", `${st.done} / ${st.total}`));
+      }
       const toggleAllBtn = el("button", "grpbtn", translate('gt-toggle-all'));
-      toggleAllBtn.onclick = () => toggleGroup(view.items, store, groupName, section);
+      toggleAllBtn.onclick = (ev) => { ev.stopPropagation(); toggleGroup(view.items, store, groupName, section); };
       groupCell.appendChild(toggleAllBtn);
+      if (collapse) {
+        const key = curGrpKey;
+        groupCell.addEventListener("click", () => {
+          const open = !(key in openState ? openState[key] : true);
+          openState[key] = open;
+          if (caret) caret.textContent = open ? "▾" : "▸";
+          Array.from(tbody.children).forEach(r => { if (r.dataset.grp === key) r.style.display = open ? "" : "none"; });
+        });
+      }
       groupRow.appendChild(groupCell);
       tbody.appendChild(groupRow);
       const note = groupNote(view.storeId, section.id, groupName);
@@ -376,6 +514,7 @@ function checklist(container, section, view, panelState) {
         noteCell.style.borderBottom = "1px solid var(--line)";
         noteCell.innerHTML = fmtText(note);
         noteRow.appendChild(noteCell);
+        if (collapse) { noteRow.dataset.grp = curGrpKey; if (!curGrpOpen) noteRow.style.display = "none"; }
         tbody.appendChild(noteRow);
       }
     }
@@ -436,6 +575,7 @@ function checklist(container, section, view, panelState) {
       if (ref) { const progress = trophyProgress(ref); if (progress) html = chip(progress[0], progress[1]); }
       row.appendChild(el("td", null, html));
     }
+    if (collapse && item.g) { row.dataset.grp = curGrpKey; if (!curGrpOpen) row.style.display = "none"; }
     tbody.appendChild(row);
     shownCount++;
   });
@@ -523,6 +663,17 @@ function buildPage() {
         if (confirm(translate('gt-reset-confirm'))) { STORE = {}; saveStore(); render(); }
       };
       toolbar.appendChild(resetBtn);
+    }
+    // View toggle (Checklist | Journal) for tabs with a journal-capable section.
+    if (tab.sections.some(section => section.journal)) {
+      const seg = el("div", "viewseg");
+      const cBtn = el("button", "viewbtn", translate('gt-view-checklist'));
+      const jBtn = el("button", "viewbtn", translate('gt-view-journal'));
+      (tabJournalOn(tab.id) ? jBtn : cBtn).classList.add("on");
+      cBtn.onclick = () => { setTabJournal(tab.id, false); cBtn.classList.add("on"); jBtn.classList.remove("on"); render(); };
+      jBtn.onclick = () => { setTabJournal(tab.id, true); jBtn.classList.add("on"); cBtn.classList.remove("on"); render(); };
+      seg.appendChild(cBtn); seg.appendChild(jBtn);
+      toolbar.appendChild(seg);
     }
     panel.appendChild(toolbar);
     const results = el("div", "results");
@@ -767,25 +918,36 @@ function render() {
     const [secDone, secTotal] = entryCount({ section, storeId: view.storeId, items: view.items, charId: activeChar });
     panelDone += secDone; panelTotal += secTotal;
 
+    // A section folds as a whole by default. Set `collapsible: false` to drop
+    // that outer fold (e.g. a tab with one section, where folding it just folds
+    // the whole tab) — its inner world/category groups still collapse on their
+    // own. See groupCollapse for the inner level.
     const sectionKey = "sec:" + section.id;
-    const details = el("details", "secgroup");
-    details.open = filtering ? true : ((sectionKey in openState) ? openState[sectionKey] : true);   // expanded by default
-    const summary = el("summary", sectionIndex === 0 ? "secsum secsum-main" : "secsum",
-      `<span class="secsum-title">${fmtText(title)}</span> ${chip(secDone, secTotal)}`);
-    // Record collapse state synchronously on click (the toggle event is async,
-    // which would let a re-render's programmatic open clobber a fresh collapse).
-    summary.addEventListener("click", () => { if (!filtering) openState[sectionKey] = !((sectionKey in openState) ? openState[sectionKey] : true); });
-    details.appendChild(summary);
+    const headHtml = `<span class="secsum-title">${fmtText(title)}</span> ${chip(secDone, secTotal)}`;
+    let box;
+    if (section.collapsible === false) {
+      box = el("div", "secblock");
+      box.appendChild(el("div", sectionIndex === 0 ? "sechead sechead-main" : "sechead", headHtml));
+    } else {
+      box = el("details", "secgroup");
+      box.open = filtering ? true : ((sectionKey in openState) ? openState[sectionKey] : true);   // expanded by default
+      const summary = el("summary", sectionIndex === 0 ? "secsum secsum-main" : "secsum", headHtml);
+      // Record collapse state synchronously on click (the toggle event is async,
+      // which would let a re-render's programmatic open clobber a fresh collapse).
+      summary.addEventListener("click", () => { if (!filtering) openState[sectionKey] = !((sectionKey in openState) ? openState[sectionKey] : true); });
+      box.appendChild(summary);
+    }
     // Optional explanatory note under a section title (lang key note-<id>);
     // newlines become separate lines.
     const note = translate('note-' + section.id);
     if (note && note !== 'note-' + section.id) {
       const noteEl = el("p", "hint");
       note.split("\n").forEach((line, lineIndex) => { if (lineIndex) noteEl.appendChild(el("br")); noteEl.appendChild(document.createTextNode(line)); });
-      details.appendChild(noteEl);
+      box.appendChild(noteEl);
     }
-    checklist(details, section, view, panel.state);
-    panel.results.appendChild(details);
+    if (section.journal && tabJournalOn(tab.id)) journalGrid(box, section, view, panel.state);
+    else checklist(box, section, view, panel.state);
+    panel.results.appendChild(box);
   });
   setCount(panel, panelDone, panelTotal);
 

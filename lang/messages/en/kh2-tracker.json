@@ -5,6 +5,8 @@
   "playing-as": "Playing as:",
   "gt-filter": "filter…",
   "gt-hide-done": "hide completed",
+  "gt-view-checklist": "Checklist",
+  "gt-view-journal": "Journal",
   "gt-count": "%1 / %2 done",
   "gt-overall": "Total: %1 / %2 (%3%)",
   "gt-nothing": "Nothing matches the current filter.",

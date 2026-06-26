@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <title>Dream Drop Distance — Dream Guide</title>
+    <script src="../js/theme.js"></script>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/kh.css">
+</head>
+<!--
+    Dream Guide — a Dream Drop Distance sub-tool (sibling of the BBS Melding
+    Calculator). Three tabs: a Spirits gallery (own/greyed), a Materials
+    drop-location reference, and a Recipe-item checklist. All Dream Eater,
+    treasure and recipe-item data is reused from the DDD tracker
+    (js/kh-ddd-tracker-data.js + its khddd_progress_v1 store); only the
+    material drops / synthesis recipes come from js/kh-dream-guide-data.js.
+    Visible text lives in lang/messages/<lang>/kh-dream-guide.json.
+-->
+<body data-page="kh-dream-guide" data-root="../">
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="../" class="logo" id="logo-name"></a>
+                <div class="nav-right">
+                    <ul class="nav-links">
+                    <li class="has-menu">
+                        <button class="nav-menu-btn" id="games-menu-btn" type="button" aria-haspopup="true" aria-expanded="false">Games <span class="caret" aria-hidden="true">&#9662;</span></button>
+                        <ul class="nav-menu" id="games-menu">
+                        <li><a href="../tools/kh1-tracker.html">Kingdom Hearts Final Mix</a></li>
+                        <li><a href="../tools/kh-com-tracker.html">Re:Chain of Memories</a></li>
+                        <li><a href="../tools/kh2-tracker.html">Kingdom Hearts II</a></li>
+                        <li class="has-submenu">
+                            <a href="../tools/kh-bbs-tracker.html">Birth by Sleep <span class="caret" aria-hidden="true">&#9656;</span></a>
+                            <ul class="nav-submenu">
+                                <li><a href="../tools/kh-melding.html">Melding Calculator</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="../tools/kh-ddd-tracker.html">Dream Drop Distance <span class="caret" aria-hidden="true">&#9656;</span></a>
+                            <ul class="nav-submenu">
+                                <li><a href="../tools/kh-dream-guide.html">Dream Guide</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../tools/kh02-tracker.html">Kingdom Hearts 0.2</a></li>
+                        <li><a href="../tools/kh3-tracker.html">Kingdom Hearts III</a></li>
+                        </ul>
+                    </li>
+                    </ul>
+                    <div class="theme-toggle">
+                        <button id="themeToggle" class="theme-btn" type="button">
+                            <span class="theme-icon" id="theme-icon" aria-hidden="true"></span>
+                            <span class="theme-text" id="theme-text"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container kh">
+        <header class="kh-header">
+            <figure class="banner kh-logo"><img class="banner-img" id="kh-logo" src="../images/logos/KH3DS.png" alt=""></figure>
+            <h1 id="kh-title"></h1>
+            <p class="sub" id="kh-subtitle"></p>
+            <p class="sub"><a href="../tools/kh-ddd-tracker.html" id="kh-tracker-link"></a></p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab active" data-tab="spirits" id="tabbtn-spirits"></button>
+            <button class="tab" data-tab="creation" id="tabbtn-creation"></button>
+            <button class="tab" data-tab="abilities" id="tabbtn-abilities"></button>
+            <button class="tab" data-tab="materials" id="tabbtn-materials"></button>
+            <button class="tab" data-tab="commands" id="tabbtn-commands"></button>
+            <button class="tab" data-tab="recipes" id="tabbtn-recipes"></button>
+        </div>
+
+        <main class="kh-main">
+            <!-- SPIRITS GALLERY (primary) -->
+            <section id="tab-spirits" class="card">
+                <div class="toolbar">
+                    <span class="countbadge" id="dg-spirits-count"></span>
+                    <input type="text" id="dg-spirits-filter">
+                    <label class="dg-owned-toggle"><input type="checkbox" id="dg-spirits-ownedonly"> <span id="dg-spirits-ownedonly-lbl"></span></label>
+                    <button class="clearbtn" id="dg-spirits-reset"></button>
+                </div>
+                <p class="hint" style="margin-top:0" id="dg-spirits-hint"></p>
+                <div id="dg-spirits-grid"></div>
+            </section>
+
+            <!-- CREATION CALCULATOR -->
+            <section id="tab-creation" class="card" style="display:none">
+                <div class="dg-mode-bar">
+                    <div class="dg-modes">
+                        <button class="dg-mode active" data-mode="materials" id="dg-mode-materials"></button>
+                        <button class="dg-mode" data-mode="spirit" id="dg-mode-spirit"></button>
+                    </div>
+                    <div class="dg-ctx">
+                        <label class="dg-ctx-field"><span id="dg-c-forecast-lbl"></span>
+                            <select id="dg-c-forecast"></select></label>
+                        <label class="dg-ctx-field dg-ctx-narrow"><span id="dg-c-level-lbl"></span>
+                            <input type="number" id="dg-c-level" min="1" max="99" value="50"></label>
+                        <label class="dg-ctx-field"><span id="dg-c-command-lbl"></span>
+                            <select id="dg-c-command"></select></label>
+                    </div>
+                </div>
+
+                <!-- BY MATERIALS (forward) -->
+                <div id="dg-cmode-materials" class="dg-cmode">
+                    <div class="dg-slots">
+                        <div class="dg-slot">
+                            <span class="dg-slot-h" id="dg-c-m1-lbl"></span>
+                            <div class="dg-slot-row">
+                                <select id="dg-c-m1-mat" class="dg-sel-mat"></select>
+                                <select id="dg-c-m1-tier" class="dg-sel-tier"></select>
+                            </div>
+                        </div>
+                        <div class="dg-slot-plus">+</div>
+                        <div class="dg-slot">
+                            <span class="dg-slot-h" id="dg-c-m2-lbl"></span>
+                            <div class="dg-slot-row">
+                                <select id="dg-c-m2-mat" class="dg-sel-mat"></select>
+                                <select id="dg-c-m2-tier" class="dg-sel-tier"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="hint" id="dg-c-materials-hint"></p>
+                    <div id="dg-c-materials-out" class="results"></div>
+                </div>
+
+                <!-- BY SPIRIT (backward) -->
+                <div id="dg-cmode-spirit" class="dg-cmode" style="display:none">
+                    <div class="dg-slots">
+                        <label class="dg-ctx-field"><span id="dg-c-spirit-lbl"></span>
+                            <select id="dg-c-spirit"></select></label>
+                        <label class="dg-ctx-field dg-ctx-narrow"><span id="dg-c-rank-lbl"></span>
+                            <select id="dg-c-rank"></select></label>
+                    </div>
+                    <p class="hint" id="dg-c-spirit-hint"></p>
+                    <div id="dg-c-spirit-out" class="results"></div>
+                </div>
+            </section>
+
+            <!-- ABILITIES (incl. permanent unlocks) -->
+            <section id="tab-abilities" class="card" style="display:none">
+                <div class="toolbar">
+                    <input type="text" id="dg-ab-filter">
+                    <div class="dg-ab-filters" id="dg-ab-cats"></div>
+                </div>
+                <p class="hint" style="margin-top:0" id="dg-ab-hint"></p>
+                <div id="dg-ab-list" class="results"></div>
+            </section>
+
+            <!-- MATERIALS + DROP LOCATIONS -->
+            <section id="tab-materials" class="card" style="display:none">
+                <div class="toolbar">
+                    <input type="text" id="dg-materials-filter">
+                </div>
+                <p class="hint" style="margin-top:0" id="dg-materials-hint"></p>
+                <div id="dg-materials-list" class="results"></div>
+            </section>
+
+            <!-- COMMAND SACRIFICE TABLE -->
+            <section id="tab-commands" class="card" style="display:none">
+                <div class="toolbar">
+                    <input type="text" id="dg-cmd-filter">
+                    <select id="dg-cmd-cat" class="dg-cmd-cat"></select>
+                    <span class="dg-cmd-shown" id="dg-cmd-shown"></span>
+                </div>
+                <p class="hint" style="margin-top:0" id="dg-cmd-hint"></p>
+                <div id="dg-commands-table" class="dg-cmd-wrap"></div>
+            </section>
+
+            <!-- RECIPE-ITEM CHECKLIST -->
+            <section id="tab-recipes" class="card" style="display:none">
+                <div class="trk-summary" id="dg-recipes-summary"></div>
+                <div class="toolbar" style="margin:10px 0 0">
+                    <input type="text" id="dg-recipes-filter">
+                    <button class="clearbtn" id="dg-recipes-reset"></button>
+                </div>
+                <p class="hint" id="dg-recipes-hint"></p>
+                <div id="dg-recipes-list" class="results"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Reusable hover popover (worlds / treasure locations) -->
+    <div id="dg-pop" class="dg-pop" role="tooltip" aria-hidden="true"></div>
+
+    <!-- Spirit detail modal (stats, resistances, dispositions, ability board) -->
+    <div id="dg-modal" class="dg-modal" aria-hidden="true">
+        <div class="dg-modal-back" id="dg-modal-back"></div>
+        <div class="dg-modal-panel kh" role="dialog" aria-modal="true" aria-labelledby="dg-modal-title">
+            <button class="dg-modal-close" id="dg-modal-close" aria-label="Close">×</button>
+            <div id="dg-modal-body"></div>
+        </div>
+    </div>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/kh-common.js"></script>
+    <script src="../js/kh-ddd-tracker-data.js"></script>
+    <script src="../js/kh-dream-guide-data.js"></script>
+    <script src="../js/kh-dream-guide-boards.js"></script>
+    <script src="../js/kh-dream-guide.js"></script>
+    <script src="../js/banners.js"></script>
+    <script src="../js/nav.js"></script>
+</body>
+</html>

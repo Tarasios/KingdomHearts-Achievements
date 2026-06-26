@@ -859,7 +859,8 @@ body[data-page="kh-bbs-tracker"],
 body[data-page="kh-ddd-tracker"],
 body[data-page="kh02-tracker"],
 body[data-page="kh3-tracker"],
-body[data-page="kh-melding"] {
+body[data-page="kh-melding"],
+body[data-page="kh-dream-guide"] {
     /* Transparent so the fixed ::before wallpaper shows through; the dark
        html background is the fallback. (A solid body background here would
        paint over the negative-z ::before and hide it.) */
@@ -875,7 +876,8 @@ body[data-page="kh-bbs-tracker"]::before,
 body[data-page="kh-ddd-tracker"]::before,
 body[data-page="kh02-tracker"]::before,
 body[data-page="kh3-tracker"]::before,
-body[data-page="kh-melding"]::before {
+body[data-page="kh-melding"]::before,
+body[data-page="kh-dream-guide"]::before {
     content: "";
     position: fixed;
     inset: 0;
@@ -894,6 +896,7 @@ body[data-page="kh-melding"]::before {
 [data-theme="night"] body[data-page="kh02-tracker"]   { --bg-img: url("../images/backgrounds/Background_KH02.png"); }
 [data-theme="night"] body[data-page="kh3-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH3.png"); }
 [data-theme="night"] body[data-page="kh-melding"]     { --bg-img: url("../images/backgrounds/Background_BBS.png"); }
+[data-theme="night"] body[data-page="kh-dream-guide"] { --bg-img: url("../images/backgrounds/Background_3DS.png"); }
 
 [data-theme="day"] body[data-page="kh1-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH1_light.png"); }
 [data-theme="day"] body[data-page="kh-com-tracker"] { --bg-img: url("../images/backgrounds/Background_COM_light.png"); }
@@ -903,6 +906,7 @@ body[data-page="kh-melding"]::before {
 [data-theme="day"] body[data-page="kh02-tracker"]   { --bg-img: url("../images/backgrounds/Background_KH02_light.png"); }
 [data-theme="day"] body[data-page="kh3-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH3_light.png"); }
 [data-theme="day"] body[data-page="kh-melding"]     { --bg-img: url("../images/backgrounds/Background_BBS_light.png"); }
+[data-theme="day"] body[data-page="kh-dream-guide"] { --bg-img: url("../images/backgrounds/Background_3DS_light.png"); }
 
 /* ============================================================
    Games dropdown (header). Opens on hover/focus (desktop + keyboard)

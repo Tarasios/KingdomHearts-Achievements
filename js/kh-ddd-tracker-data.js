@@ -1622,8 +1622,7 @@ var TRACKER_GAME = {
               "g": "Stats",
               "max": 1
             }
-          ],
-          "counter": true
+          ]
         }
       ]
     },
@@ -1632,6 +1631,7 @@ var TRACKER_GAME = {
       "sections": [
         {
           "id": "commands",
+          "groupCollapse": true,
           "cols": [
             {
               "k": "name",
@@ -2405,6 +2405,9 @@ var TRACKER_GAME = {
       "sections": [
         {
           "id": "treasures",
+          "collapsible": false,
+          "groupCollapse": true,
+          "journal": { "perRow": 8 },
           "cols": [
             {
               "k": "name",
@@ -5895,5 +5898,28 @@ var TRACKER_GAME = {
     ]
   }
 };
+
+/* ---------------------------------------------------------------------------
+   Post-build wiring (kept here so the big data literal above stays declarative)
+
+   A treasure chest whose reward IS a Dream Piece marks that piece collected
+   in the Collection tab when the chest is checked — a smart cross-off that
+   still stays editable, since pieces also drop from enemies.
+   (Spirit Recipes live under the Dream Eaters tab, not duplicated here.)
+--------------------------------------------------------------------------- */
+(function () {
+  var byId = function (list, id) { return list.find(function (x) { return x.id === id; }); };
+  var tabs = TRACKER_GAME.tabs;
+  var collection = byId(tabs, "collection");
+  var dreampieces = byId(collection.sections, "dreampieces");
+  var pieceNames = {};
+  (dreampieces.items || []).forEach(function (p) { pieceNames[p.name] = true; });
+  var treasures = byId(byId(tabs, "treasures").sections, "treasures");
+  ["sora", "riku"].forEach(function (ch) {
+    (treasures.variants[ch] || []).forEach(function (it) {
+      if (pieceNames[it.name]) it.gives = [{ sec: "dreampieces", name: it.name }];
+    });
+  });
+})();
 
 (window.KH_GAMES = window.KH_GAMES || {})[TRACKER_GAME.id] = TRACKER_GAME;
