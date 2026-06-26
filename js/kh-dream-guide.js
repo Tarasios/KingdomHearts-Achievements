@@ -49,6 +49,7 @@ const CHARS = (GAME.chars || []).map(c => c.id);
 const CHAR_LABEL = {}; (GAME.chars || []).forEach(c => CHAR_LABEL[c.id] = c.label);
 const SPIRIT_IMG = "../images/dreamdrop/spirits/";
 const BOARD_IMG = "../images/dreamdrop/spiritboard/";
+const RANK_IMG = "../images/dreamdrop/ranks/";
 const RANKS = CREATE.ranks;                       // F,E,D,C,B,A,S (low→high)
 
 /* ---------- reused tracker sections ---------- */
@@ -118,6 +119,13 @@ function setAbilityOwned(name, on) {
   saveGuide();
 }
 function nodeOwned(spirit, grid) { const m = GUIDE.nodes[spirit]; return !!(m && m[grid]); }
+// A Spirit's Ability Link board is "complete" once every node on it is unlocked.
+function boardComplete(spirit) {
+  const board = (DG.boards || {})[spirit] || [];
+  if (!board.length) return false;
+  for (const g of new Set(board.map(n => n.g))) if (!nodeOwned(spirit, g)) return false;
+  return true;
+}
 // Per-board topology (cached): node lookup, child links, keyhole + entry cells.
 const BOARD_INFO = {};
 const LINK_VEC = { N: [0, -1], S: [0, 1], E: [1, 0], W: [-1, 0] };
@@ -212,6 +220,7 @@ function toggleNode(spirit, node) {
   }
   saveGuide();
   if (modalSpirit === spirit) renderModal();
+  renderSpirits();     // a board may have just completed → refresh the gallery sheen
   renderAbilities();   // Abilities-tab chip colours depend on which nodes are unlocked
 }
 
@@ -265,6 +274,10 @@ window.addEventListener("scroll", hidePop, true);
 
 /* ---------- shared rendering helpers ---------- */
 function spiritFile(name) { return SPIRIT_IMG + name.replace(/ /g, "_") + ".png"; }
+function rankIcon(rank, cls) {
+  if (!rank) return "";
+  return `<img class="${cls || "dg-rank-ico"}" src="${esc(RANK_IMG + "Spirit_Rank_Icon_" + rank + ".png")}" alt="${esc(rank)}" title="${esc(format("dg-rank", rank))}">`;
+}
 
 /* =====================================================================
    Creation formula + rank boosting (from the KH Wiki Spirit article)
@@ -353,10 +366,14 @@ const RARE_SPIRITS = new Set(["Meowjesty", "Sudo Neku", "Frootz Cat", "Ursa Circ
 
 function spiritCard(spirit) {
   const has = spiritOwned(spirit.name);
-  const card = el("div", "dg-spirit" + (has ? " owned" : ""));
+  const done = boardComplete(spirit.name);
+  const rank = has ? spiritRank(spirit.name) : null;
+  const card = el("div", "dg-spirit" + (has ? " owned" : "") + (done ? " complete" : ""));
   card.setAttribute("role", "button"); card.tabIndex = 0;
+  if (done) card.title = translate("dg-board-done");
   card.innerHTML =
     `<button class="dg-star${has ? " on" : ""}" title="${esc(translate("dg-own-toggle"))}" aria-pressed="${has}">★</button>` +
+    rankIcon(rank, "dg-spirit-rank") +
     `<span class="dg-spirit-img"><img src="${esc(spiritFile(spirit.name))}" alt="" loading="lazy"></span>` +
     `<span class="dg-spirit-name">${esc(spirit.name)}</span>` +
     (spirit.attr ? `<span class="dg-spirit-attr">${esc(spirit.attr)}</span>` : "");
@@ -398,11 +415,17 @@ function nodeIcon(node) {
   if (t === "Quota") {
     if (req.startsWith("link")) return "Link_Door.png";
     if (req.startsWith("level")) return "Level_Door.png";
-    return "Premium_Icon.png";
+    return "Item_Door.png";   // a gate that requires Treats / items
   }
+  // Premium commands have their own gold icons.
+  if (/^Salvation$/i.test(n)) return "Premium_Icon.png";
+  if (/^Faith$/i.test(n)) return "Premium_Magic_Icon.png";
   if (t === "Magic Command") return "Magic_Icon.png";
   if (t === "Attack Command") return "Attack_Icon.png";
   if (t === "Item Command") return "Item_Icon.png";
+  if (t === "Reprisal Command") return "Reprisal_Icon.png";
+  if (t === "Defense Command") return "Defense_Icon.png";
+  if (t === "Movement Command") return "Movement_Icon.png";
   if (/Command$/.test(t)) return "Ability_Icon.png";
   if (t === "Support Ability" || t === "Spirits Ability" || t === "Defense Ability") return "Perm_Ability_Icon.png";
   // Only the four "<stat> Boost" abilities use a dedicated stat icon; the
@@ -803,7 +826,7 @@ function renderMaterialsMode() {
       `<div class="dg-c-cardhead">` +
         `<img class="dg-c-cardimg" src="${esc(spiritFile(r.sp))}" alt="" loading="lazy">` +
         `<button class="dg-c-cardname" data-spirit="${esc(r.sp)}">${esc(r.sp)}</button>` +
-        `<span class="dg-c-rankbig">${esc(translate("dg-c-rank-out"))} ${esc(finalRank)}` +
+        `<span class="dg-c-rankbig">${rankIcon(finalRank, "dg-c-rankico")}${esc(translate("dg-c-rank-out"))} ${esc(finalRank)}` +
           (isRisky && finalRank !== r.rank ? ` <span class="dg-c-up">(${esc(r.rank)} +Risky)</span>` : "") +
           (rankIdx(recipeMaxRank(r, isRisky)) > rankIdx(finalRank) ? ` <span class="dg-c-boostnote">${esc(format("dg-c-upto", recipeMaxRank(r, isRisky)))}</span>` : "") + `</span>` +
         (pct != null ? `<span class="dg-c-pct${pct < 100 ? " low" : ""}">${pct}%</span>` : "") +
@@ -880,7 +903,7 @@ function renderSpiritMode() {
   });
 
   let html = `<div class="dg-c-card">` +
-    spiritCardHead(spirit, `<span class="dg-c-rankbig">${esc(translate("dg-c-rank-out"))} ${esc(target)}` + (isRisky ? ` <span class="dg-c-up">(+Risky)</span>` : "") + `</span>`) +
+    spiritCardHead(spirit, `<span class="dg-c-rankbig">${rankIcon(target, "dg-c-rankico")}${esc(translate("dg-c-rank-out"))} ${esc(target)}` + (isRisky ? ` <span class="dg-c-up">(+Risky)</span>` : "") + `</span>`) +
     statsTable(spirit, target, level, forecast, cmd) + commandBonusLine(cmd) +
     `<details class="dg-c-more"><summary>${esc(translate("dg-c-more"))}</summary>` + forecastExtras(spirit, forecast) + `</details>` +
     `</div>`;

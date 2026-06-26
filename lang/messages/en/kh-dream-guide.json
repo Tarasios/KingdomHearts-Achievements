@@ -103,6 +103,7 @@
   "dg-preview": "Preview (mark owned to save a rank)",
   "dg-dispo-switch": "How to switch to others",
   "dg-board-click": "Click a node to mark it unlocked.",
+  "dg-board-done": "Ability Link board complete",
   "dg-leg-start": "Start",
   "dg-ab-owned": "Unlocked: %1 / %2",
   "dg-tip-gate": "Gate",
