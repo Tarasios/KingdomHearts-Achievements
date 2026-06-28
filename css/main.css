@@ -1048,3 +1048,37 @@ body[data-page="kh-dream-guide"]::before {
 .kh-xlink a:hover {
     text-decoration: underline;
 }
+
+/* ---------- Site footer (Credits link, injected by js/nav.js) ---------- */
+.site-footer {
+    border-top: 1px solid var(--line);
+    margin-top: 2.5rem;
+    padding: 1.4rem 0;
+    background: var(--nav-bg);
+}
+
+.site-footer .container {
+    display: flex;
+    justify-content: center;
+}
+
+.footer-credits-link {
+    color: var(--dim);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.footer-credits-link:hover {
+    color: var(--accent);
+}
+
+/* ---------- Credits page ---------- */
+.credits-intro {
+    color: var(--dim);
+    max-width: 70ch;
+    font-size: 0.95rem;
+    margin-bottom: 1.2rem;
+}

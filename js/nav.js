@@ -43,6 +43,44 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAll(); });
 });
 
+/* =====================================================================
+   Site footer — injected on every page so the Credits link lives in one
+   place instead of being copied into each HTML file. The link points at
+   credits.html (resolved via data-root so it works from subfolders and
+   under a GitHub Pages subpath) and its label follows the active
+   language, updating when i18n switches it.
+   ===================================================================== */
+(function () {
+  var LABELS = { en: "Credits", fr: "Crédits" };
+  function storedLang() {
+    try { return localStorage.getItem("preferred-language") === "fr" ? "fr" : "en"; }
+    catch (e) { return "en"; }
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    if (document.querySelector("footer.site-footer")) return;
+    var root = (document.body && document.body.getAttribute("data-root")) || "./";
+
+    var link = document.createElement("a");
+    link.className = "footer-credits-link";
+    link.href = root + "credits.html";
+    link.textContent = LABELS[storedLang()];
+
+    var inner = document.createElement("div");
+    inner.className = "container";
+    inner.appendChild(link);
+
+    var footer = document.createElement("footer");
+    footer.className = "site-footer";
+    footer.appendChild(inner);
+    document.body.appendChild(footer);
+
+    document.addEventListener("i18n:updated", function (e) {
+      var lang = (e.detail && e.detail.lang) || storedLang();
+      link.textContent = LABELS[lang] || LABELS.en;
+    });
+  });
+})();
+
 /* Register the caching service worker (see /sw.js). Resolved relative to the
    site root via data-root so it works under a subpath (e.g. GitHub Pages). */
 if ("serviceWorker" in navigator) {

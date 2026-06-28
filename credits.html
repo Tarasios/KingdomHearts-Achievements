@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <title>Credits • KH Completionist</title>
+    <script src="js/theme.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<!--
+    Credits page. Lists the community guides and resources the trackers
+    were built from. External links open in a new tab. All visible text
+    lives in lang/messages/<lang>/credits.json; the link URLs are the only
+    hardcoded part (i18n only ever sets text, never href).
+-->
+<body data-page="credits" data-root="./">
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="./" class="logo" id="logo-name"></a>
+                <div class="nav-right">
+                    <ul class="nav-links">
+                    <li class="has-menu">
+                        <button class="nav-menu-btn" id="games-menu-btn" type="button" aria-haspopup="true" aria-expanded="false">Games <span class="caret" aria-hidden="true">&#9662;</span></button>
+                        <ul class="nav-menu" id="games-menu">
+                        <li><a href="tools/kh1-tracker.html">Kingdom Hearts Final Mix</a></li>
+                        <li><a href="tools/kh-com-tracker.html">Re:Chain of Memories</a></li>
+                        <li><a href="tools/kh2-tracker.html">Kingdom Hearts II</a></li>
+                        <li class="has-submenu">
+                            <a href="tools/kh-bbs-tracker.html">Birth by Sleep <span class="caret" aria-hidden="true">&#9656;</span></a>
+                            <ul class="nav-submenu">
+                                <li><a href="tools/kh-melding.html">Melding Calculator</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="tools/kh-ddd-tracker.html">Dream Drop Distance <span class="caret" aria-hidden="true">&#9656;</span></a>
+                            <ul class="nav-submenu">
+                                <li><a href="tools/kh-dream-guide.html">Dream Guide</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="tools/kh02-tracker.html">Kingdom Hearts 0.2</a></li>
+                        <li><a href="tools/kh3-tracker.html">Kingdom Hearts III</a></li>
+                        </ul>
+                    </li>
+                    </ul>
+                    <div class="theme-toggle">
+                        <button id="themeToggle" class="theme-btn" type="button">
+                            <span class="theme-icon" id="theme-icon" aria-hidden="true"></span>
+                            <span class="theme-text" id="theme-text"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="project-hero">
+            <h1 id="credits-title"></h1>
+            <p id="credits-subtitle"></p>
+        </section>
+
+        <main class="main-content">
+            <section class="section">
+                <h2 id="credits-resources-label"></h2>
+                <p class="credits-intro" id="credits-intro"></p>
+
+                <div class="project-grid">
+                    <a class="project-card" href="https://www.khwiki.com/" target="_blank" rel="noopener noreferrer">
+                        <h3 id="credit-khwiki-name"></h3>
+                        <p id="credit-khwiki-desc"></p>
+                        <div class="project-meta">
+                            <span class="tech-tag">khwiki.com</span>
+                        </div>
+                    </a>
+
+                    <a class="project-card" href="https://gamefaqs.gamespot.com/3ds/997779-kingdom-hearts-3d-dream-drop-distance/faqs/64749" target="_blank" rel="noopener noreferrer">
+                        <h3 id="credit-ddd-gamefaqs-name"></h3>
+                        <p id="credit-ddd-gamefaqs-desc"></p>
+                        <div class="project-meta">
+                            <span class="tech-tag">gamefaqs.gamespot.com</span>
+                        </div>
+                    </a>
+
+                    <a class="project-card" href="https://xenodusk.carrd.co/" target="_blank" rel="noopener noreferrer">
+                        <h3 id="credit-xenodusk-name"></h3>
+                        <p id="credit-xenodusk-desc"></p>
+                        <div class="project-meta">
+                            <span class="tech-tag">xenodusk.carrd.co</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/credits.js"></script>
+    <script src="js/nav.js"></script>
+</body>
+</html>
