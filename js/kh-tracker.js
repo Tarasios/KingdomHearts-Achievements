@@ -398,9 +398,15 @@ function toggleGroup(items, store, groupName, section) {
    the data order so a tile's position matches the in-game journal. */
 function journalGrid(container, section, view, panelState) {
   const store = sectionStore(view.storeId);
-  const perRow = (section.journal && section.journal.perRow) || 8;
+  const cfg = section.journal || {};
+  const perRow = cfg.perRow || 8;
+  // Owned-icon mode (e.g. KH2 Puzzles): owned tiles show a single fixed image
+  // (cfg.icon = { dir, file, fill }); unowned tiles fall back to the default
+  // "missing" treasure tile. Without it, both states use the chest tiles.
+  const ic = cfg.icon || null;
   const q = (panelState.q || "").toLowerCase();
   const nameCol = section.cols.find(col => col.name) || section.cols[0];
+  const secCols = section.cols.filter(col => !col.name);   // shown in the hover popover
   const groups = []; let cur = null;
   view.items.forEach((item, index) => {
     if (!itemVisible(item, activeChar)) return;
@@ -418,20 +424,27 @@ function journalGrid(container, section, view, panelState) {
       const owned = !!store[index] || !!auto;
       if (owned) done++;
       const reward = cellText(view.storeId, index, nameCol.k, item) || item.name;
-      const area = cellText(view.storeId, index, "area", item) || "";
-      const where = cellText(view.storeId, index, "loc", item) || "";
-      const tip = `<b>${esc(reward)}</b>` +
-        (area ? `<span class="kh-pop-area">${esc(area)}</span>` : "") +
-        (where ? `<span class="kh-pop-where">${esc(where)}</span>` : "");
-      const tile = el("button", "jrnl-tile " + (owned ? "owned" : "unowned"));
+      let tip = `<b>${esc(reward)}</b>`, hay = reward;
+      secCols.forEach((col, ci) => {
+        const txt = cellText(view.storeId, index, col.k, item) || "";
+        if (!txt) return;
+        hay += " " + txt;
+        tip += `<span class="${ci === 0 ? "kh-pop-area" : "kh-pop-where"}">${esc(txt)}</span>`;
+      });
+      const tile = el("button", "jrnl-tile " + (owned ? "owned" : "unowned") + (ic && owned ? " jt-icon" : ""));
       tile.type = "button";
       tile.dataset.pop = tip;
       tile.setAttribute("aria-pressed", owned ? "true" : "false");
       tile.setAttribute("aria-label", reward);
+      if (ic && owned) {
+        const img = el("img", "jrnl-ic" + (ic.fill ? " fill" : ""));
+        img.src = "../images/" + ic.dir + "/" + ic.file + ".png"; img.alt = "";
+        tile.appendChild(img);
+      }
       if (auto && !store[index]) { tile.disabled = true; tile.title = format('gt-auto-tip', auto); tile.classList.add("auto"); }
       else if (item.gives) tile.onclick = () => toggleWithGives(store, index, item);
       else tile.onclick = () => toggleCheck(store, index);
-      if (q && !(reward + " " + area + " " + where).toLowerCase().includes(q)) tile.classList.add("dim");
+      if (q && !hay.toLowerCase().includes(q)) tile.classList.add("dim");
       grid.appendChild(tile);
     });
     if (group.g) {

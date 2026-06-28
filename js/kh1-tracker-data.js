@@ -2003,6 +2003,7 @@ var TRACKER_GAME = {
       "sections": [
         {
           "id": "treasures",
+          "journal": { "perRow": 8 },
           "cols": [
             {
               "k": "name",
