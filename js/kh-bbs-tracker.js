@@ -77,6 +77,34 @@ let activeChar = (function () {
 })();
 function setActiveChar(char) { activeChar = char; try { localStorage.setItem(CHAR_KEY, char); } catch (e) { /* ignore */ } }
 
+/* ---------- view mode (checklist vs journal), persisted per tab ---------- */
+const VIEW_KEY = "bbs_view_v1";
+let VIEW = (function () { try { return JSON.parse(localStorage.getItem(VIEW_KEY)) || {}; } catch (e) { return {}; } })();
+function saveView() { try { localStorage.setItem(VIEW_KEY, JSON.stringify(VIEW)); } catch (e) { /* private browsing */ } }
+function tabJournalOn(tabId) { return VIEW[tabId] === "journal"; }
+function setTabJournal(tabId, on) { if (on) VIEW[tabId] = "journal"; else delete VIEW[tabId]; saveView(); }
+
+/* ---------- shared hover popover (journal tiles) ---------- */
+let _pop = null;
+function popEl() { if (!_pop) { _pop = el("div", "kh-pop"); _pop.setAttribute("aria-hidden", "true"); document.body.appendChild(_pop); } return _pop; }
+function showPop(node) {
+  const p = popEl(); p.innerHTML = node.dataset.pop || ""; p.classList.add("open"); p.setAttribute("aria-hidden", "false");
+  const r = node.getBoundingClientRect(), pw = p.offsetWidth, ph = p.offsetHeight, m = 8;
+  p.style.left = Math.max(m, Math.min(r.left + r.width / 2 - pw / 2, window.innerWidth - pw - m)) + "px";
+  let top = r.top - ph - 8; if (top < m) top = r.bottom + 8;
+  p.style.top = top + "px";
+}
+function hidePop() { if (_pop) { _pop.classList.remove("open"); _pop.setAttribute("aria-hidden", "true"); } }
+function wirePop(container) {
+  container.querySelectorAll("[data-pop]").forEach(node => {
+    node.addEventListener("mouseenter", () => showPop(node));
+    node.addEventListener("mouseleave", hidePop);
+    node.addEventListener("focus", () => showPop(node));
+    node.addEventListener("blur", hidePop);
+  });
+}
+window.addEventListener("scroll", hidePop, true);
+
 function toggleCheck(store, key) { if (store[key]) delete store[key]; else store[key] = true; saveStore(); render(); }
 
 /* Commands owned in the melding calculator (per character). */
@@ -413,6 +441,12 @@ function toggleGroup(items, store, groupName, opts) {
   saveStore();
   render();
 }
+/* Is this item done (checked, linked-elsewhere, or auto-unlocked)? */
+function rowDone(item, index, store, opts) {
+  const link = opts.link ? opts.link(item) : null;
+  if (link) return !!link.store[link.key];
+  return !!store[index] || !!(opts.auto && opts.auto(item));
+}
 function checklist(container, items, store, cols, panelState, opts) {
   opts = opts || {};
   const table = el("table");
@@ -420,7 +454,23 @@ function checklist(container, items, store, cols, panelState, opts) {
   const tbody = el("tbody");
   let shownCount = 0;
   const query = panelState.q.toLowerCase();
+  const filtering = !!query;
   let lastGroup = null;
+  // Opt-in: render each item.g group as its own collapsible block (caret +
+  // count) so a long section folds a sub-category/world at a time. State lives
+  // in panelState.open; groups start expanded so nothing is hidden by default.
+  const collapse = !!opts.collapse && !opts.groupFilter;
+  const openState = panelState.open || (panelState.open = {});
+  const grpKey = name => "grp:" + name;
+  const grpIsOpen = key => filtering ? true : (key in openState ? openState[key] : true);
+  const groupStats = {};
+  if (collapse) items.forEach((item, index) => {
+    if (opts.itemFilter && !opts.itemFilter(item)) return;
+    const gname = item.g || item.name;
+    const st = groupStats[gname] || (groupStats[gname] = { done: 0, total: 0 });
+    st.total++; if (rowDone(item, index, store, opts)) st.done++;
+  });
+  let curGrpKey = null, curGrpOpen = true;
   items.forEach((item, index) => {
     if (opts.groupFilter && item.g !== opts.groupFilter) return;
     if (opts.itemFilter && !opts.itemFilter(item)) return;
@@ -435,17 +485,30 @@ function checklist(container, items, store, cols, panelState, opts) {
       lastGroup = item.g;
       const groupName = item.g;
       const groupRow = el("tr");
-      const groupCell = el("td", "grp-title");
+      const groupCell = el("td", collapse ? "grp-title grp-collapsible" : "grp-title");
       groupCell.colSpan = cols.length + 1;
       groupCell.style.borderBottom = "1px solid var(--line)";
+      let caret = null;
+      if (collapse) { curGrpKey = grpKey(groupName); curGrpOpen = grpIsOpen(curGrpKey); caret = el("span", "grp-caret", curGrpOpen ? "▾" : "▸"); groupCell.appendChild(caret); }
       groupCell.appendChild(el("span", null, (opts.groupIcons ? groupIconImg(groupName) : "") + fmtText(groupName)));
+      if (collapse) { const st = groupStats[groupName] || { done: 0, total: 0 }; groupCell.appendChild(el("span", "grp-count", `${st.done} / ${st.total}`)); }
       const toggleAllBtn = el("button", "grpbtn", translate('bt-toggle-all'));
-      toggleAllBtn.onclick = () => toggleGroup(items, store, groupName, opts);
+      toggleAllBtn.onclick = (ev) => { ev.stopPropagation(); toggleGroup(items, store, groupName, opts); };
       groupCell.appendChild(toggleAllBtn);
+      if (collapse) {
+        const key = curGrpKey;
+        groupCell.addEventListener("click", () => {
+          const open = !(key in openState ? openState[key] : true);
+          openState[key] = open;
+          if (caret) caret.textContent = open ? "▾" : "▸";
+          Array.from(tbody.children).forEach(r => { if (r.dataset.grp === key) r.style.display = open ? "" : "none"; });
+        });
+      }
       groupRow.appendChild(groupCell);
       tbody.appendChild(groupRow);
     }
     const row = el("tr", done ? "donerow" : null);
+    if (collapse && curGrpKey) { row.dataset.grp = curGrpKey; if (!curGrpOpen) row.style.display = "none"; }
     const checkCell = el("td", "chkcell");
     const checkbox = el("input", "chk");
     checkbox.type = "checkbox";
@@ -474,6 +537,106 @@ function checklist(container, items, store, cols, panelState, opts) {
   table.appendChild(tbody);
   if (shownCount) container.appendChild(table);
   else container.appendChild(el("div", "empty", translate('bt-nothing')));
+}
+
+/* ---------- journal (in-game grid) view ----------
+   An ordered grid of square tiles (perRow wide), grouped like the checklist
+   (Treasures by world, Commands by category). Owned tiles show the item's
+   icon over its category gradient; unowned tiles all show cmd-incomplete /
+   the "missing chest". Hovering shows what the item is + where to find it;
+   clicking toggles owned. Tile order matches the data so positions line up
+   with the in-game collection. */
+
+/* Command-journal tile per category: icon file (images/commands/cmd-<icon>.png)
+   + the CSS class carrying its owned gradient. `fill` icons are full-bleed
+   tiles (their art already includes a background); the rest are centred. */
+const CMD_TILE = {
+  "Battle Commands - Attacks": { icon: "attack", cls: "attack" },
+  "Battle Commands - Magic": { icon: "magic", cls: "magic" },
+  "Battle Commands - Items": { icon: "item", cls: "item" },
+  "Battle Commands - Friendship": { icon: "friend", cls: "friend" },
+  "Action Commands - Movement": { icon: "movement", cls: "movement" },
+  "Action Commands - Defense": { icon: "defense", cls: "defense" },
+  "Action Commands - Reprisals": { icon: "reprisal", cls: "reprisal" },
+  "Shotlock Commands": { icon: "shotlock", cls: "shotlock" },
+  "Miscellaneous - Dimension Links": { icon: "dlink", cls: "dlink" },
+  "Miscellaneous - Abilities": { icon: "abilities", cls: "abilities", fill: true }
+};
+/* Finish Commands share one group but split by how they're earned:
+   "See Finish Commands" → a single star (cmd-finish1) on black; Frozen Fortune
+   → cmd-frozen; a Level-2 style (activated "while a Level-1 command style is
+   active") → cmd-finish3; every other command style → cmd-finish2. */
+function finishTile(item) {
+  const how = String(item.how || "");
+  if (item.name === "Frozen Fortune") return { icon: "frozen", cls: "frozen" };
+  if (/See Finish Commands/i.test(how)) return { icon: "finish1", cls: "finish-black" };
+  if (/while a Level-1 command style is active/i.test(how)) return { icon: "finish3", cls: "finish-black", fill: true };
+  return { icon: "finish2", cls: "finish-black", fill: true };
+}
+function commandTile(item) {
+  if (item.g === "Miscellaneous - Finish Commands") return finishTile(item);
+  return CMD_TILE[item.g] || { icon: null, cls: "" };
+}
+
+/* Shared grid renderer. spec:
+   { items, store, perRow, groupOf(item), owned(item,index),
+     toggle(item,index), tip(item) -> html, tileClass(owned),
+     ownedTile(item) -> {icon,cls,fill} | null }  */
+function journalGrid(container, spec) {
+  const perRow = spec.perRow || 9;
+  const query = (spec.query || "").toLowerCase();
+  const groups = []; let cur = null;
+  spec.items.forEach((item, index) => {
+    if (spec.skip && spec.skip(item)) return;
+    const g = spec.groupOf(item) || "";
+    if (!cur || cur.g !== g) { cur = { g, rows: [] }; groups.push(cur); }
+    cur.rows.push({ item, index });
+  });
+  const wrap = el("div", "jrnl");
+  wrap.style.setProperty("--jrnl-cols", perRow);
+  groups.forEach(group => {
+    let done = 0;
+    const grid = el("div", "jrnl-grid");
+    group.rows.forEach(({ item, index }) => {
+      const owned = spec.owned(item, index);
+      if (owned) done++;
+      const tile = el("button", "jrnl-tile " + (owned ? "owned" : "unowned") + (spec.tileExtra ? " " + spec.tileExtra : ""));
+      tile.type = "button";
+      tile.dataset.pop = spec.tip(item, owned);
+      tile.setAttribute("aria-pressed", owned ? "true" : "false");
+      tile.setAttribute("aria-label", item.name);
+      if (spec.ownedTile && owned) {
+        const t = spec.ownedTile(item);
+        if (t && t.cls) tile.classList.add("cat-" + t.cls);
+        if (t && t.icon) { const img = el("img", "jrnl-ic" + (t.fill ? " fill" : "")); img.src = "../images/commands/cmd-" + t.icon + ".png"; img.alt = ""; tile.appendChild(img); }
+      }
+      const ro = spec.readonly && spec.readonly(item, index);
+      if (ro) { tile.disabled = true; tile.classList.add("auto"); tile.title = ro; }
+      else tile.onclick = () => spec.toggle(item, index);
+      if (query && !(spec.haystack(item)).toLowerCase().includes(query)) tile.classList.add("dim");
+      grid.appendChild(tile);
+    });
+    if (group.g) {
+      const head = el("div", "jrnl-whead");
+      head.appendChild(el("span", "jrnl-wname", fmtText(group.g)));
+      head.appendChild(el("span", "jrnl-wcount", `${done} / ${group.rows.length}`));
+      wrap.appendChild(head);
+    }
+    wrap.appendChild(grid);
+  });
+  container.appendChild(wrap);
+  wirePop(wrap);
+}
+
+/* The Checklist | Journal segmented control for a journal-capable tab. */
+function viewToggle(container, tabId) {
+  const seg = el("div", "viewseg");
+  const cBtn = el("button", "viewbtn" + (tabJournalOn(tabId) ? "" : " on"), translate('bt-view-checklist'));
+  const jBtn = el("button", "viewbtn" + (tabJournalOn(tabId) ? " on" : ""), translate('bt-view-journal'));
+  cBtn.onclick = () => { setTabJournal(tabId, false); render(); };
+  jBtn.onclick = () => { setTabJournal(tabId, true); render(); };
+  seg.appendChild(cBtn); seg.appendChild(jBtn);
+  container.appendChild(seg);
 }
 
 /* ---------- panel skeletons ---------- */
@@ -617,11 +780,28 @@ function renderCommands(panel) {
   const container = panel.results;
   const items = viewItems(activeChar + "-commands", BBS_DATA.perChar[activeChar].commands);
   const auto = commandAuto(activeChar);
-  container.appendChild(el("div", "grp-title", fmtText(format('bt-commands-for', CHAR_LABEL[activeChar]))));
-  checklist(container, items, STORE[activeChar].commands, [
-    { th: translate('bt-th-command'), get: item => item.name, name: true },
-    { th: translate('bt-th-obtain'), get: item => item.how || "" }
-  ], panel.state, { auto: item => auto.get(item.name) || null, groupIcons: true });
+  const titleRow = el("div", "grp-title");
+  titleRow.appendChild(el("span", null, fmtText(format('bt-commands-for', CHAR_LABEL[activeChar]))));
+  viewToggle(titleRow, "commands");
+  container.appendChild(titleRow);
+  const store = STORE[activeChar].commands;
+  if (tabJournalOn("commands")) {
+    journalGrid(container, {
+      items, store, perRow: 9, query: panel.state.q, tileExtra: "cmd",
+      groupOf: item => item.g,
+      owned: (item, index) => !!store[index] || !!auto.get(item.name),
+      readonly: (item, index) => (!store[index] && auto.get(item.name)) ? autoBadge(auto.get(item.name)).tip : null,
+      toggle: (item, index) => toggleCheck(store, index),
+      ownedTile: commandTile,
+      haystack: item => item.name + " " + (item.how || "") + " " + (item.g || ""),
+      tip: (item) => `<b>${esc(item.name)}</b>` + (item.g ? `<span class="kh-pop-area">${esc(item.g)}</span>` : "") + (item.how ? `<span class="kh-pop-where">${esc(item.how)}</span>` : "")
+    });
+  } else {
+    checklist(container, items, store, [
+      { th: translate('bt-th-command'), get: item => item.name, name: true },
+      { th: translate('bt-th-obtain'), get: item => item.how || "" }
+    ], panel.state, { auto: item => auto.get(item.name) || null, groupIcons: true, collapse: true });
+  }
   container.appendChild(el("p", "legend", translate('bt-legend-commands')));
   const [done, total] = charCount(activeChar, "commands");
   setCount(panel, done, total);
@@ -703,12 +883,28 @@ const renderCharacters = perCharListRenderer("characters", 'bt-characters-for', 
 function renderTreasures(panel) {
   const container = panel.results;
   const label = CHAR_LABEL[activeChar];
-  container.appendChild(el("div", "grp-title", fmtText(format('bt-treasures-for', label))));
-  checklist(container, viewItems(activeChar + "-treasures", BBS_DATA.perChar[activeChar].treasures), STORE[activeChar].treasures, [
-    { th: translate('bt-th-reward'), get: item => item.name, name: true },
-    { th: translate('bt-th-area'), get: item => item.area || "" },
-    { th: translate('bt-th-where'), get: item => item.how || "" }
-  ], panel.state);
+  const treasures = viewItems(activeChar + "-treasures", BBS_DATA.perChar[activeChar].treasures);
+  const tStore = STORE[activeChar].treasures;
+  const titleRow = el("div", "grp-title");
+  titleRow.appendChild(el("span", null, fmtText(format('bt-treasures-for', label))));
+  viewToggle(titleRow, "treasures");
+  container.appendChild(titleRow);
+  if (tabJournalOn("treasures")) {
+    journalGrid(container, {
+      items: treasures, store: tStore, perRow: 9, query: panel.state.q,
+      groupOf: item => item.g,
+      owned: (item, index) => !!tStore[index],
+      toggle: (item, index) => toggleCheck(tStore, index),
+      haystack: item => item.name + " " + (item.area || "") + " " + (item.how || "") + " " + (item.g || ""),
+      tip: (item) => `<b>${esc(item.name)}</b>` + (item.area ? `<span class="kh-pop-area">${esc(item.area)}</span>` : "") + (item.how ? `<span class="kh-pop-where">${esc(item.how)}</span>` : "")
+    });
+  } else {
+    checklist(container, treasures, tStore, [
+      { th: translate('bt-th-reward'), get: item => item.name, name: true },
+      { th: translate('bt-th-area'), get: item => item.area || "" },
+      { th: translate('bt-th-where'), get: item => item.how || "" }
+    ], panel.state, { collapse: true });
+  }
   container.appendChild(el("p", "legend", translate('bt-legend-treasures')));
 
   container.appendChild(el("div", "sub-title", fmtText(format('bt-stickers-for', label))));

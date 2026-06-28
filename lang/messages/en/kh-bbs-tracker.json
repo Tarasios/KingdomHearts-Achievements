@@ -93,6 +93,8 @@
   "bt-badge-recipe-tip": "Obtained for an ice cream recipe you've made",
   "bt-th-needed": "Needed",
   "bt-toggle-all": "toggle all",
+  "bt-view-checklist": "Checklist",
+  "bt-view-journal": "Journal",
   "bt-legend-treasures": "Checking a chest whose reward is a command marks that command as unlocked on the Commands tab.",
   "kp-export": "Export progress",
   "kp-import": "Import progress",
