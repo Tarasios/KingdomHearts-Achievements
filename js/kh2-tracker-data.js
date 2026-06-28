@@ -2968,20 +2968,7 @@ var TRACKER_GAME = {
           "id": "puzzles",
           "journal": {
             "perRow": 8,
-            "icons": {
-              "dir": "puzzles",
-              "prefix": "puzzle-",
-              "by": "name",
-              "fill": true,
-              "map": {
-                "Awakening": "awakening",
-                "Heart": "heart",
-                "Duality": "duality",
-                "Frontier": "frontier",
-                "Daylight": "daylight",
-                "Sunset": "sunset"
-              }
-            }
+            "icon": { "dir": "kh2", "file": "puzzle-collected", "fill": true }
           },
           "cols": [
             {

@@ -709,17 +709,10 @@ table.dg-board { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .kh .jrnl-tile.cmd.cat-frozen    { background: linear-gradient(155deg, #69dbec, #1b7d95); }
 .kh .jrnl-tile.cmd.cat-finish-black { background: #000; }
 
-/* Generic icon-journal tiles (KH2 Puzzles): a per-item icon over a gradient
-   when owned, the shared cmd-incomplete "?" when not. The gradients stand in
-   until the puzzle art is dropped into images/puzzles/ (puzzle-<name>.png). */
-.kh .jrnl-tile.jt-icon { background-color: #14202b; }
-.kh .jrnl-tile.jt-icon.unowned { background: #14202b url(../images/commands/cmd-incomplete.png) center/cover no-repeat; }
-.kh .jrnl-tile.jt-icon.cat-awakening { background: linear-gradient(155deg, #3f86d6, #15407a); }
-.kh .jrnl-tile.jt-icon.cat-heart     { background: linear-gradient(155deg, #e0538a, #7a1540); }
-.kh .jrnl-tile.jt-icon.cat-duality   { background: linear-gradient(155deg, #35b5a0, #13585c); }
-.kh .jrnl-tile.jt-icon.cat-frontier  { background: linear-gradient(155deg, #5cb85c, #1f6b2e); }
-.kh .jrnl-tile.jt-icon.cat-daylight  { background: linear-gradient(155deg, #f2c14e, #9c6b15); }
-.kh .jrnl-tile.jt-icon.cat-sunset    { background: linear-gradient(155deg, #e8743b, #7a2350); }
+/* Owned-icon journal tiles (KH2 Puzzles): owned pieces show a single fixed
+   image (the collected-puzzle icon) instead of the chest; unowned tiles use
+   the default "missing" treasure tile. */
+.kh .jrnl-tile.owned.jt-icon { background: #14202b; }
 
 /* Shared hover popover (journal tiles) */
 .kh-pop { position: fixed; z-index: 200; max-width: 260px; background: var(--panel2); border: 1px solid var(--line);

@@ -400,11 +400,10 @@ function journalGrid(container, section, view, panelState) {
   const store = sectionStore(view.storeId);
   const cfg = section.journal || {};
   const perRow = cfg.perRow || 8;
-  // Icon mode (e.g. KH2 Puzzles): owned tiles show a per-item icon over a
-  // gradient; unowned tiles share one "incomplete" image. Without it, owned /
-  // unowned use the default treasure-chest tiles (background images from CSS).
-  const ic = cfg.icons || null;
-  const iconBy = (ic && ic.by) || "name";
+  // Owned-icon mode (e.g. KH2 Puzzles): owned tiles show a single fixed image
+  // (cfg.icon = { dir, file, fill }); unowned tiles fall back to the default
+  // "missing" treasure tile. Without it, both states use the chest tiles.
+  const ic = cfg.icon || null;
   const q = (panelState.q || "").toLowerCase();
   const nameCol = section.cols.find(col => col.name) || section.cols[0];
   const secCols = section.cols.filter(col => !col.name);   // shown in the hover popover
@@ -432,20 +431,15 @@ function journalGrid(container, section, view, panelState) {
         hay += " " + txt;
         tip += `<span class="${ci === 0 ? "kh-pop-area" : "kh-pop-where"}">${esc(txt)}</span>`;
       });
-      const tile = el("button", "jrnl-tile " + (owned ? "owned" : "unowned") + (ic ? " jt-icon" : ""));
+      const tile = el("button", "jrnl-tile " + (owned ? "owned" : "unowned") + (ic && owned ? " jt-icon" : ""));
       tile.type = "button";
       tile.dataset.pop = tip;
       tile.setAttribute("aria-pressed", owned ? "true" : "false");
       tile.setAttribute("aria-label", reward);
       if (ic && owned) {
-        const key = ic.map ? ic.map[item[iconBy]] : item[iconBy];
-        if (key) {
-          tile.classList.add("cat-" + key);
-          const img = el("img", "jrnl-ic" + (ic.fill ? " fill" : ""));
-          img.src = "../images/" + ic.dir + "/" + (ic.prefix || "") + key + ".png"; img.alt = "";
-          img.onerror = function () { this.remove(); };   // gradient stands in until the icon art is added
-          tile.appendChild(img);
-        }
+        const img = el("img", "jrnl-ic" + (ic.fill ? " fill" : ""));
+        img.src = "../images/" + ic.dir + "/" + ic.file + ".png"; img.alt = "";
+        tile.appendChild(img);
       }
       if (auto && !store[index]) { tile.disabled = true; tile.title = format('gt-auto-tip', auto); tile.classList.add("auto"); }
       else if (item.gives) tile.onclick = () => toggleWithGives(store, index, item);
