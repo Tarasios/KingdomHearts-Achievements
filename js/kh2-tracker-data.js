@@ -1598,6 +1598,139 @@ var TRACKER_GAME = {
               "g": "Nobodies"
             }
           ]
+        },
+        {
+          "id": "searcher",
+          "cols": [
+            {
+              "k": "name",
+              "name": true
+            },
+            {
+              "k": "how"
+            }
+          ],
+          "items": [
+            {
+              "name": "Secret Ansem Report 1"
+            },
+            {
+              "name": "Secret Ansem Report 2"
+            },
+            {
+              "name": "Secret Ansem Report 3"
+            },
+            {
+              "name": "Secret Ansem Report 4"
+            },
+            {
+              "name": "Secret Ansem Report 5"
+            },
+            {
+              "name": "Secret Ansem Report 6"
+            },
+            {
+              "name": "Secret Ansem Report 7"
+            },
+            {
+              "name": "Secret Ansem Report 8"
+            },
+            {
+              "name": "Secret Ansem Report 9"
+            },
+            {
+              "name": "Secret Ansem Report 10"
+            },
+            {
+              "name": "Secret Ansem Report 11"
+            },
+            {
+              "name": "Secret Ansem Report 12"
+            },
+            {
+              "name": "Secret Ansem Report 13"
+            }
+          ]
+        },
+        {
+          "id": "limits",
+          "cols": [
+            {
+              "k": "name",
+              "name": true
+            },
+            {
+              "k": "limit"
+            },
+            {
+              "k": "cond"
+            }
+          ],
+          "items": [
+            {
+              "name": "Donald"
+            },
+            {
+              "name": "Donald"
+            },
+            {
+              "name": "Goofy"
+            },
+            {
+              "name": "Goofy"
+            },
+            {
+              "name": "Beast"
+            },
+            {
+              "name": "Auron"
+            },
+            {
+              "name": "Mulan"
+            },
+            {
+              "name": "Aladdin"
+            },
+            {
+              "name": "Jack"
+            },
+            {
+              "name": "Jack Sparrow"
+            },
+            {
+              "name": "Simba"
+            },
+            {
+              "name": "Tron"
+            },
+            {
+              "name": "Riku"
+            },
+            {
+              "name": "Sora"
+            },
+            {
+              "name": "Peter Pan"
+            },
+            {
+              "name": "Chicken Little"
+            },
+            {
+              "name": "Stitch"
+            },
+            {
+              "name": "\"Valor\" Genie"
+            },
+            {
+              "name": "\"Wisdom\" Genie"
+            },
+            {
+              "name": "\"Master\" Genie"
+            },
+            {
+              "name": "\"Final\" Genie"
+            }
+          ]
         }
       ]
     },
@@ -1606,6 +1739,7 @@ var TRACKER_GAME = {
       "sections": [
         {
           "id": "treasures",
+          "journal": { "perRow": 8 },
           "cols": [
             {
               "k": "name",
@@ -2832,6 +2966,23 @@ var TRACKER_GAME = {
       "sections": [
         {
           "id": "puzzles",
+          "journal": {
+            "perRow": 8,
+            "icons": {
+              "dir": "puzzles",
+              "prefix": "puzzle-",
+              "by": "name",
+              "fill": true,
+              "map": {
+                "Awakening": "awakening",
+                "Heart": "heart",
+                "Duality": "duality",
+                "Frontier": "frontier",
+                "Daylight": "daylight",
+                "Sunset": "sunset"
+              }
+            }
+          },
           "cols": [
             {
               "k": "name",
@@ -5051,144 +5202,6 @@ var TRACKER_GAME = {
             },
             {
               "name": "Secret Model"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "misc",
-      "sections": [
-        {
-          "id": "searcher",
-          "cols": [
-            {
-              "k": "name",
-              "name": true
-            },
-            {
-              "k": "how"
-            }
-          ],
-          "items": [
-            {
-              "name": "Secret Ansem Report 1"
-            },
-            {
-              "name": "Secret Ansem Report 2"
-            },
-            {
-              "name": "Secret Ansem Report 3"
-            },
-            {
-              "name": "Secret Ansem Report 4"
-            },
-            {
-              "name": "Secret Ansem Report 5"
-            },
-            {
-              "name": "Secret Ansem Report 6"
-            },
-            {
-              "name": "Secret Ansem Report 7"
-            },
-            {
-              "name": "Secret Ansem Report 8"
-            },
-            {
-              "name": "Secret Ansem Report 9"
-            },
-            {
-              "name": "Secret Ansem Report 10"
-            },
-            {
-              "name": "Secret Ansem Report 11"
-            },
-            {
-              "name": "Secret Ansem Report 12"
-            },
-            {
-              "name": "Secret Ansem Report 13"
-            }
-          ]
-        },
-        {
-          "id": "limits",
-          "cols": [
-            {
-              "k": "name",
-              "name": true
-            },
-            {
-              "k": "limit"
-            },
-            {
-              "k": "cond"
-            }
-          ],
-          "items": [
-            {
-              "name": "Donald"
-            },
-            {
-              "name": "Donald"
-            },
-            {
-              "name": "Goofy"
-            },
-            {
-              "name": "Goofy"
-            },
-            {
-              "name": "Beast"
-            },
-            {
-              "name": "Auron"
-            },
-            {
-              "name": "Mulan"
-            },
-            {
-              "name": "Aladdin"
-            },
-            {
-              "name": "Jack"
-            },
-            {
-              "name": "Jack Sparrow"
-            },
-            {
-              "name": "Simba"
-            },
-            {
-              "name": "Tron"
-            },
-            {
-              "name": "Riku"
-            },
-            {
-              "name": "Sora"
-            },
-            {
-              "name": "Peter Pan"
-            },
-            {
-              "name": "Chicken Little"
-            },
-            {
-              "name": "Stitch"
-            },
-            {
-              "name": "\"Valor\" Genie"
-            },
-            {
-              "name": "\"Wisdom\" Genie"
-            },
-            {
-              "name": "\"Master\" Genie"
-            },
-            {
-              "name": "\"Final\" Genie"
             }
           ]
         }
