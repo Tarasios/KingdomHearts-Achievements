@@ -55,26 +55,9 @@ const VIEW = new KH.ViewStore(KH.KEYS.BBS_VIEW);
 function tabJournalOn(tabId) { return VIEW.journalOn(tabId); }
 function setTabJournal(tabId, on) { VIEW.setJournal(tabId, on); }
 
-/* ---------- shared hover popover (journal tiles) ---------- */
-let _pop = null;
-function popEl() { if (!_pop) { _pop = el("div", "kh-pop"); _pop.setAttribute("aria-hidden", "true"); document.body.appendChild(_pop); } return _pop; }
-function showPop(node) {
-  const p = popEl(); p.innerHTML = node.dataset.pop || ""; p.classList.add("open"); p.setAttribute("aria-hidden", "false");
-  const r = node.getBoundingClientRect(), pw = p.offsetWidth, ph = p.offsetHeight, m = 8;
-  p.style.left = Math.max(m, Math.min(r.left + r.width / 2 - pw / 2, window.innerWidth - pw - m)) + "px";
-  let top = r.top - ph - 8; if (top < m) top = r.bottom + 8;
-  p.style.top = top + "px";
-}
-function hidePop() { if (_pop) { _pop.classList.remove("open"); _pop.setAttribute("aria-hidden", "true"); } }
-function wirePop(container) {
-  container.querySelectorAll("[data-pop]").forEach(node => {
-    node.addEventListener("mouseenter", () => showPop(node));
-    node.addEventListener("mouseleave", hidePop);
-    node.addEventListener("focus", () => showPop(node));
-    node.addEventListener("blur", hidePop);
-  });
-}
-window.addEventListener("scroll", hidePop, true);
+/* ---------- shared hover popover (KH.Popover, js/kh-widgets.js) ---------- */
+const popover = new KH.Popover();
+const wirePop = container => popover.wire(container);
 
 function toggleCheck(store, key) { if (store[key]) delete store[key]; else store[key] = true; saveStore(); render(); }
 
@@ -393,13 +376,11 @@ function journalGrid(container, spec) {
 
 /* The Checklist | Journal segmented control for a journal-capable tab. */
 function viewToggle(container, tabId) {
-  const seg = el("div", "viewseg");
-  const cBtn = el("button", "viewbtn" + (tabJournalOn(tabId) ? "" : " on"), translate('bt-view-checklist'));
-  const jBtn = el("button", "viewbtn" + (tabJournalOn(tabId) ? " on" : ""), translate('bt-view-journal'));
-  cBtn.onclick = () => { setTabJournal(tabId, false); render(); };
-  jBtn.onclick = () => { setTabJournal(tabId, true); render(); };
-  seg.appendChild(cBtn); seg.appendChild(jBtn);
-  container.appendChild(seg);
+  container.appendChild(KH.widgets.viewToggle({
+    on: tabJournalOn(tabId),
+    labels: { checklist: translate('bt-view-checklist'), journal: translate('bt-view-journal') },
+    onChange: on => { setTabJournal(tabId, on); render(); }
+  }));
 }
 
 /* ---------- panel skeletons ---------- */
@@ -407,9 +388,7 @@ const TAB_IDS = ["trophies", "worlds", "commands", "unversed", "records", "chara
 const PANEL = {};   // id -> {state:{q,hide}, results, count, bar, dash}
 
 function setCount(panel, done, total) {
-  panel.count.textContent = format('bt-count', done, total);
-  panel.bar.className = "dashbar" + (done >= total && total > 0 ? " full" : "");
-  panel.bar.firstChild.style.width = (total ? Math.round(100 * done / total) : 0) + "%";
+  KH.widgets.setCount(panel, done, total, format('bt-count', done, total));
 }
 
 function buildPanels() {
@@ -417,33 +396,22 @@ function buildPanels() {
     const panel = document.getElementById("tab-" + id);
     panel.innerHTML = "";
     const panelState = (PANEL[id] && PANEL[id].state) || { q: "", hide: false };
-    const toolbar = el("div", "toolbar");
-    const filterInput = el("input");
-    filterInput.type = "text"; filterInput.placeholder = translate('bt-filter'); filterInput.style.maxWidth = "240px"; filterInput.value = panelState.q;
-    filterInput.addEventListener("input", () => { panelState.q = filterInput.value.trim(); render(); });
-    const hideLabel = el("label", "hidelbl");
-    const hideToggle = el("input", "chk");
-    hideToggle.type = "checkbox"; hideToggle.checked = panelState.hide;
-    hideToggle.addEventListener("change", () => { panelState.hide = hideToggle.checked; render(); });
-    hideLabel.appendChild(hideToggle);
-    hideLabel.appendChild(document.createTextNode(" " + translate('bt-hide-done')));
-    const countBadge = el("span", "countbadge");
-    const progressBar = el("span", "dashbar");
-    progressBar.appendChild(el("i"));
-    toolbar.appendChild(filterInput); toolbar.appendChild(hideLabel); toolbar.appendChild(countBadge); toolbar.appendChild(progressBar);
-    if (id === "trophies") {
-      const resetBtn = el("button", "clearbtn", translate('bt-reset'));
-      resetBtn.onclick = () => {
-        if (confirm(translate('bt-reset-confirm'))) { PROGRESS.reset(); STORE = PROGRESS.data; render(); }
-      };
-      toolbar.appendChild(resetBtn);
-    }
+    const tools = KH.widgets.toolbar({
+      state: panelState,
+      labels: { filter: translate('bt-filter'), hideDone: translate('bt-hide-done') },
+      onChange: render,
+      reset: id === "trophies" ? {
+        label: translate('bt-reset'),
+        confirm: translate('bt-reset-confirm'),
+        onReset: () => { PROGRESS.reset(); STORE = PROGRESS.data; render(); }
+      } : null
+    });
     const dash = id === "trophies" ? el("div", "dash") : null;
     if (dash) panel.appendChild(dash);
-    panel.appendChild(toolbar);
+    panel.appendChild(tools.toolbar);
     const results = el("div", "results");
     panel.appendChild(results);
-    PANEL[id] = { state: panelState, results, count: countBadge, bar: progressBar, dash };
+    PANEL[id] = { state: panelState, results, count: tools.count, bar: tools.bar, dash };
   });
 }
 
@@ -894,25 +862,15 @@ function worldEntries(world, char) {
   return entries;
 }
 
-function entryTable(entries) {
-  const table = el("table", "wtable");
-  const tbody = el("tbody");
-  entries.forEach(entry => {
-    const row = el("tr", entry.done ? "donerow" : null);
-    const checkCell = el("td", "chkcell");
-    const checkbox = el("input", "chk");
-    checkbox.type = "checkbox"; checkbox.checked = entry.done;
-    if (entry.auto) { checkbox.disabled = true; checkbox.title = autoBadge(entry.auto).tip; }
-    else checkbox.addEventListener("change", entry.toggle);
-    checkCell.appendChild(checkbox); row.appendChild(checkCell);
-    let nameHtml = `<span class="itemname">${fmtText(entry.name)}</span>`;
-    if (entry.auto) { const badge = autoBadge(entry.auto); nameHtml += ` <span class="srcbadge" title="${badge.tip}">${badge.label}</span>`; }
-    row.appendChild(el("td", null, nameHtml));
-    row.appendChild(el("td", null, fmtText(entry.where)));
-    tbody.appendChild(row);
-  });
-  table.appendChild(tbody);
-  return table;
+/* Adapt a worldEntries() row to the shared KH.widgets.entryTable shape
+   (auto source tag → resolved badge text; toggle → onToggle). */
+function worldEntryRow(entry) {
+  const badge = entry.auto ? autoBadge(entry.auto) : null;
+  return {
+    done: entry.done, name: entry.name, where: entry.where,
+    auto: badge ? { tip: badge.tip, label: badge.label } : null,
+    onToggle: entry.toggle
+  };
 }
 function renderWorlds(panel) {
   const container = panel.results;
@@ -958,7 +916,7 @@ function renderWorlds(panel) {
       const typeSummary = el("summary", "tsum", esc(type) + ` <span class="wcount">${typeDone} / ${typeEntries.length}</span>`);
       typeSummary.addEventListener("click", () => { if (!filtering) openState[typeKey] = !((typeKey in openState) ? openState[typeKey] : true); });
       typeDetails.appendChild(typeSummary);
-      typeDetails.appendChild(entryTable(typeEntries));
+      typeDetails.appendChild(KH.widgets.entryTable(typeEntries.map(worldEntryRow)));
       worldDetails.appendChild(typeDetails);
     });
     container.appendChild(worldDetails);
@@ -989,20 +947,17 @@ document.querySelectorAll(".kh .tab").forEach(tab => {
   };
 });
 
-function syncCharButtons() {
-  document.querySelectorAll(".charbtn").forEach(btn => btn.classList.toggle("on", btn.dataset.c === activeChar));
-  // Drive the per-character accent scheme (Terra red, Ventus green, Aqua blue).
-  document.documentElement.setAttribute("data-char", activeChar);
-}
+/* Per-character accent + active char button state (shared widget). */
+function syncCharButtons() { KH.widgets.syncCharButtons(activeChar); }
 document.querySelectorAll(".charbtn").forEach(btn => {
   btn.onclick = () => { setActiveChar(btn.dataset.c); syncCharButtons(); render(); };
 });
 
-/* ---------- completion toasts ---------- */
-let prevMilestones = null;
+/* ---------- completion toasts (KH.MilestoneToaster diffs between renders,
+   seeding silently on the first render so nothing fires on load) ---------- */
 /* The set of "complete" milestones across every character: trophies whose
    tracked requirements are all met, each fully-finished tab, and each
-   character's overall total. Compared between renders to toast new ones. */
+   character's overall total. */
 function computeMilestones() {
   const milestones = new Set();
   Object.keys(TROPHY_AUTO).forEach(name => { const [done, total] = TROPHY_AUTO[name](); if (total > 0 && done >= total) milestones.add("trophy::" + name); });
@@ -1022,18 +977,19 @@ function computeMilestones() {
   });
   return milestones;
 }
-function milestoneToast(key) {
+function milestoneMessage(key) {
   const parts = key.split("::");
-  if (parts[0] === "trophy") return toast(format('bt-toast-trophy', parts[1]), "🏆");
-  if (parts[0] === "overall") return toast(format('bt-toast-overall', CHAR_LABEL[parts[1]]), "🎉");
+  if (parts[0] === "trophy") return { text: format('bt-toast-trophy', parts[1]), icon: "🏆" };
+  if (parts[0] === "overall") return { text: format('bt-toast-overall', CHAR_LABEL[parts[1]]), icon: "🎉" };
   const label = translate('tabbtn-' + parts[1]);
-  return toast(parts[2] ? format('bt-toast-tab-char', label, CHAR_LABEL[parts[2]]) : format('bt-toast-tab', label), "✅");
+  return { text: parts[2] ? format('bt-toast-tab-char', label, CHAR_LABEL[parts[2]]) : format('bt-toast-tab', label), icon: "✅" };
 }
-function checkMilestones() {
-  const current = computeMilestones();
-  if (prevMilestones) current.forEach(key => { if (!prevMilestones.has(key)) milestoneToast(key); });
-  prevMilestones = current;   // first run seeds without toasting
-}
+const toaster = new KH.MilestoneToaster(() => {
+  const milestones = new Map();
+  computeMilestones().forEach(key => milestones.set(key, milestoneMessage(key)));
+  return milestones;
+});
+function checkMilestones() { toaster.check(); }
 
 /* Cache the full 100% total (counter.fullTotals() — every character's
    sections including the auto-cross-offs, plus the shared sections and

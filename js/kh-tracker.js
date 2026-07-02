@@ -68,26 +68,9 @@ const VIEW = new KH.ViewStore(KH.KEYS.view(game.storeKey));
 function tabJournalOn(tabId) { return VIEW.journalOn(tabId); }
 function setTabJournal(tabId, on) { VIEW.setJournal(tabId, on); }
 
-/* ---------- shared hover popover (journal tiles) ---------- */
-let _pop = null;
-function popEl() { if (!_pop) { _pop = el("div", "kh-pop"); _pop.setAttribute("aria-hidden", "true"); document.body.appendChild(_pop); } return _pop; }
-function showPop(node) {
-  const p = popEl(); p.innerHTML = node.dataset.pop || ""; p.classList.add("open"); p.setAttribute("aria-hidden", "false");
-  const r = node.getBoundingClientRect(), pw = p.offsetWidth, ph = p.offsetHeight, m = 8;
-  p.style.left = Math.max(m, Math.min(r.left + r.width / 2 - pw / 2, window.innerWidth - pw - m)) + "px";
-  let top = r.top - ph - 8; if (top < m) top = r.bottom + 8;
-  p.style.top = top + "px";
-}
-function hidePop() { if (_pop) { _pop.classList.remove("open"); _pop.setAttribute("aria-hidden", "true"); } }
-function wirePop(container) {
-  container.querySelectorAll("[data-pop]").forEach(node => {
-    node.addEventListener("mouseenter", () => showPop(node));
-    node.addEventListener("mouseleave", hidePop);
-    node.addEventListener("focus", () => showPop(node));
-    node.addEventListener("blur", hidePop);
-  });
-}
-window.addEventListener("scroll", hidePop, true);
+/* ---------- shared hover popover (KH.Popover, js/kh-widgets.js) ---------- */
+const popover = new KH.Popover();
+const wirePop = container => popover.wire(container);
 /* Counter sections store a number per item (0..max); 0 is removed so the
    store stays sparse (see KH.TrackerStore.setCount). */
 function setItemCount(store, index, value, max) {
@@ -526,64 +509,42 @@ function buildPage() {
     const hasTrophies = tab.sections.some(section => section.trophies);
     const dash = hasTrophies ? el("div", "dash") : null;
     if (dash) panel.appendChild(dash);
-    const toolbar = el("div", "toolbar");
-    const filterInput = el("input");
-    filterInput.type = "text"; filterInput.placeholder = translate('gt-filter'); filterInput.style.maxWidth = "240px"; filterInput.value = panelState.q;
-    filterInput.addEventListener("input", () => { panelState.q = filterInput.value.trim(); render(); });
-    const hideLabel = el("label", "hidelbl");
-    const hideToggle = el("input", "chk");
-    hideToggle.type = "checkbox"; hideToggle.checked = panelState.hide;
-    hideToggle.addEventListener("change", () => { panelState.hide = hideToggle.checked; render(); });
-    hideLabel.appendChild(hideToggle);
-    hideLabel.appendChild(document.createTextNode(" " + translate('gt-hide-done')));
-    const countBadge = el("span", "countbadge");
-    const progressBar = el("span", "dashbar");
-    progressBar.appendChild(el("i"));
-    toolbar.appendChild(filterInput); toolbar.appendChild(hideLabel); toolbar.appendChild(countBadge); toolbar.appendChild(progressBar);
-    if (hasTrophies) {
-      const resetBtn = el("button", "clearbtn", translate('gt-reset'));
-      resetBtn.onclick = () => {
-        if (confirm(translate('gt-reset-confirm'))) { PROGRESS.reset(); STORE = PROGRESS.data; render(); }
-      };
-      toolbar.appendChild(resetBtn);
-    }
+    const tools = KH.widgets.toolbar({
+      state: panelState,
+      labels: { filter: translate('gt-filter'), hideDone: translate('gt-hide-done') },
+      onChange: render,
+      reset: hasTrophies ? {
+        label: translate('gt-reset'),
+        confirm: translate('gt-reset-confirm'),
+        onReset: () => { PROGRESS.reset(); STORE = PROGRESS.data; render(); }
+      } : null
+    });
     // View toggle (Checklist | Journal) for tabs with a journal-capable section.
     if (tab.sections.some(section => section.journal)) {
-      const seg = el("div", "viewseg");
-      const cBtn = el("button", "viewbtn", translate('gt-view-checklist'));
-      const jBtn = el("button", "viewbtn", translate('gt-view-journal'));
-      (tabJournalOn(tab.id) ? jBtn : cBtn).classList.add("on");
-      cBtn.onclick = () => { setTabJournal(tab.id, false); cBtn.classList.add("on"); jBtn.classList.remove("on"); render(); };
-      jBtn.onclick = () => { setTabJournal(tab.id, true); jBtn.classList.add("on"); cBtn.classList.remove("on"); render(); };
-      seg.appendChild(cBtn); seg.appendChild(jBtn);
-      toolbar.appendChild(seg);
+      tools.toolbar.appendChild(KH.widgets.viewToggle({
+        on: tabJournalOn(tab.id),
+        labels: { checklist: translate('gt-view-checklist'), journal: translate('gt-view-journal') },
+        onChange: on => { setTabJournal(tab.id, on); render(); }
+      }));
     }
-    panel.appendChild(toolbar);
+    panel.appendChild(tools.toolbar);
     const results = el("div", "results");
     panel.appendChild(results);
     main.appendChild(panel);
-    PANEL[tab.id] = { state: panelState, results, count: countBadge, bar: progressBar, dash };
+    PANEL[tab.id] = { state: panelState, results, count: tools.count, bar: tools.bar, dash };
   });
 }
 
-function syncCharButtons() {
-  document.querySelectorAll(".charbtn").forEach(btn => btn.classList.toggle("on", btn.dataset.c === activeChar));
-  // Drive the per-character accent scheme (e.g. Sora blue, Riku purple).
-  if (activeChar) document.documentElement.setAttribute("data-char", activeChar);
-  else document.documentElement.removeAttribute("data-char");
-}
+/* Per-character accent + active char button state (shared widget). */
+function syncCharButtons() { KH.widgets.syncCharButtons(activeChar); }
 function setCount(panel, done, total) {
-  panel.count.textContent = format('gt-count', done, total);
-  panel.bar.className = "dashbar" + (done >= total && total > 0 ? " full" : "");
-  panel.bar.firstChild.style.width = (total ? Math.round(100 * done / total) : 0) + "%";
+  KH.widgets.setCount(panel, done, total, format('gt-count', done, total));
 }
 
-/* ---------- completion toasts ---------- */
-let prevMilestones = null;
+/* ---------- completion toasts (KH.MilestoneToaster diffs between renders,
+   seeding silently on the first render so nothing fires on load) ---------- */
 /* Completed milestones (key -> toast): each auto-trophy whose tracked
-   requirements are met, each fully-finished list, and the site total.
-   Compared between renders so only newly-completed ones toast; seeded on
-   first render so nothing fires on load or when navigating. */
+   requirements are met, each fully-finished list, and the site total. */
 function currentMilestones() {
   const milestones = new Map();
   if (game.trophyAuto) Object.keys(game.trophyAuto).forEach(name => {
@@ -598,11 +559,8 @@ function currentMilestones() {
   if (overallTotal > 0 && overallDone >= overallTotal) milestones.set("overall", { text: translate('gt-toast-overall'), icon: "🎉" });
   return milestones;
 }
-function checkMilestones() {
-  const current = currentMilestones();
-  if (prevMilestones) current.forEach((milestone, key) => { if (!prevMilestones.has(key)) toast(milestone.text, milestone.icon); });
-  prevMilestones = new Set(current.keys());
-}
+const toaster = new KH.MilestoneToaster(currentMilestones);
+function checkMilestones() { toaster.check(); }
 
 /* ---------- Worlds summary (opt-in via game.worldSummary) ----------
    A reusable, data-driven "collectibles by world" view: for the active
@@ -631,27 +589,6 @@ function worldOf(sectionCfg, view, item, index) {
   // Optional: world is the part before a delimiter (e.g. "World - area").
   if (sectionCfg.split && world.indexOf(sectionCfg.split) >= 0) world = world.slice(0, world.indexOf(sectionCfg.split));
   return aliasWorld(world);
-}
-function worldEntryTable(entries) {
-  const table = el("table", "wtable"), tbody = el("tbody");
-  entries.forEach(entry => {
-    const row = el("tr", entry.done ? "donerow" : null);
-    const cell = el("td", "chkcell"), checkbox = el("input", "chk");
-    checkbox.type = "checkbox"; checkbox.checked = entry.done;
-    if (entry.auto) { checkbox.disabled = true; checkbox.title = format('gt-auto-tip', entry.auto); }
-    else if (entry.gives) checkbox.addEventListener("change", () => toggleWithGives(entry.store, entry.key, entry.gives));
-    else checkbox.addEventListener("change", () => toggleCheck(entry.store, entry.key));
-    cell.appendChild(checkbox); row.appendChild(cell);
-    let nameHtml = "";
-    if (entry.swatch) nameHtml += `<span class="wswatch" style="background:${entry.swatch.c}"${entry.swatch.t ? ` title="${esc(entry.swatch.t)}" tabindex="0"` : ""}></span>`;
-    nameHtml += `<span class="itemname">${fmtText(entry.name)}</span>`;
-    if (entry.auto) nameHtml += ` <span class="srcbadge" title="${format('gt-auto-tip', entry.auto)}">${translate('gt-auto-badge')}</span>`;
-    row.appendChild(el("td", null, nameHtml));
-    row.appendChild(el("td", null, fmtText(entry.where)));
-    tbody.appendChild(row);
-  });
-  table.appendChild(tbody);
-  return table;
 }
 function renderWorlds(panel) {
   const cfg = game.worldSummary, container = panel.results;
@@ -707,8 +644,13 @@ function renderWorlds(panel) {
       worlds.forEach(world => {
         if (!world) return;
         if (!byWorld.has(world)) byWorld.set(world, []);
-        byWorld.get(world).push({ store, key, done, auto, gives, name,
-          where: whereKeys.map(cell).filter(Boolean).join(" · "), swatch: swatchOf(sectionCfg, cell) });
+        byWorld.get(world).push({
+          done, name,
+          where: whereKeys.map(cell).filter(Boolean).join(" · "),
+          swatch: swatchOf(sectionCfg, cell),
+          auto: auto ? { tip: format('gt-auto-tip', auto), label: translate('gt-auto-badge') } : null,
+          onToggle: gives ? () => toggleWithGives(store, key, gives) : () => toggleCheck(store, key)
+        });
       });
     });
     return { title, byWorld };
@@ -744,7 +686,7 @@ function renderWorlds(panel) {
       const typeSummary = el("summary", "tsum", esc(group.title) + ` <span class="wcount">${groupDone} / ${group.entries.length}</span>`);
       typeSummary.addEventListener("click", () => { if (!filtering) openState[typeKey] = !((typeKey in openState) ? openState[typeKey] : true); });
       typeDetails.appendChild(typeSummary);
-      typeDetails.appendChild(worldEntryTable(group.entries));
+      typeDetails.appendChild(KH.widgets.entryTable(group.entries));
       worldDetails.appendChild(typeDetails);
     });
     container.appendChild(worldDetails);
