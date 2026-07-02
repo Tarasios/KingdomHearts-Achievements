@@ -11,29 +11,14 @@
    wires #themeToggle and i18n fills #logo-name on/after DOMContentLoaded,
    so both find the injected elements.
 
-   To add a game to the menu, edit GAMES_MENU below — one place, every
-   page. Game titles are proper nouns (kept in English by site policy);
-   all other visible text still comes from the lang JSONs by element id.
+   The menu is built from KH.SITE.games (js/kh-common.js) — add a game
+   there and it appears in the nav AND on the landing page. Game titles
+   are proper nouns (kept in English by site policy); all other visible
+   text still comes from the lang JSONs by element id.
    ===================================================================== */
 
-/* ---------- header nav (from the GAMES_MENU definition) ---------- */
+/* ---------- header nav (from the shared KH.SITE game list) ---------- */
 (function () {
-  var GAMES_MENU = [
-    { label: "Kingdom Hearts Final Mix", page: "tools/kh1-tracker.html" },
-    { label: "Re:Chain of Memories", page: "tools/kh-com-tracker.html" },
-    { label: "Kingdom Hearts II", page: "tools/kh2-tracker.html" },
-    {
-      label: "Birth by Sleep", page: "tools/kh-bbs-tracker.html",
-      sub: [{ label: "Melding Calculator", page: "tools/kh-melding.html" }]
-    },
-    {
-      label: "Dream Drop Distance", page: "tools/kh-ddd-tracker.html",
-      sub: [{ label: "Dream Guide", page: "tools/kh-dream-guide.html" }]
-    },
-    { label: "Kingdom Hearts 0.2", page: "tools/kh02-tracker.html" },
-    { label: "Kingdom Hearts III", page: "tools/kh3-tracker.html" }
-  ];
-
   var host = document.getElementById("site-nav");
   if (!host || host.children.length) return;
   var root = (document.body && document.body.getAttribute("data-root")) || "./";
@@ -50,9 +35,9 @@
     return span;
   }
   function gameLink(item) {
-    var anchor = el("a", null, item.label + (item.sub ? " " : ""));
+    var anchor = el("a", null, item.title + (item.tools ? " " : ""));
     anchor.href = root + item.page;
-    if (item.sub) anchor.appendChild(caret("▸"));
+    if (item.tools) anchor.appendChild(caret("▸"));
     return anchor;
   }
 
@@ -69,14 +54,14 @@
 
   var menu = el("ul", "nav-menu");
   menu.id = "games-menu";
-  GAMES_MENU.forEach(function (item) {
-    var row = el("li", item.sub ? "has-submenu" : null);
+  KH.SITE.games.forEach(function (item) {
+    var row = el("li", item.tools ? "has-submenu" : null);
     row.appendChild(gameLink(item));
-    if (item.sub) {
+    if (item.tools) {
       var subList = el("ul", "nav-submenu");
-      item.sub.forEach(function (subItem) {
+      item.tools.forEach(function (tool) {
         var subRow = el("li");
-        subRow.appendChild(gameLink(subItem));
+        subRow.appendChild(gameLink(tool));
         subList.appendChild(subRow);
       });
       row.appendChild(subList);

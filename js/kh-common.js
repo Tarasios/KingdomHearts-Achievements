@@ -94,6 +94,37 @@ window.KH = (function () {
   const BBS_CHARS = ["terra", "ventus", "aqua"];
   const BBS_CHAR_LABEL = { terra: "Terra", ventus: "Ventus", aqua: "Aqua" };
 
+  /* ---------- the site's games, in series order ----------
+     ONE list feeding both the header nav (js/nav.js) and the landing page
+     (js/landing.js) — add a game here and it appears in both. Titles are
+     proper nouns kept in English by site policy (the landing card titles
+     still come from the lang JSON via the game id). `tools` are the
+     game's extra pages (shown as a nav submenu); `bbs` marks the game
+     that runs on the bespoke Birth by Sleep engine. */
+  const SITE = {
+    games: [
+      { id: "kh1", title: "Kingdom Hearts Final Mix", page: "tools/kh1-tracker.html", banner: "kh1.jpg" },
+      { id: "khcom", title: "Re:Chain of Memories", page: "tools/kh-com-tracker.html", banner: "khcom.jpg" },
+      { id: "kh2", title: "Kingdom Hearts II", page: "tools/kh2-tracker.html", banner: "kh2.jpg" },
+      {
+        id: "bbs", title: "Birth by Sleep", page: "tools/kh-bbs-tracker.html", banner: "bbs.jpg", bbs: true,
+        tools: [{ title: "Melding Calculator", page: "tools/kh-melding.html" }]
+      },
+      {
+        id: "khddd", title: "Dream Drop Distance", page: "tools/kh-ddd-tracker.html", banner: "khddd.jpg",
+        tools: [{ title: "Dream Guide", page: "tools/kh-dream-guide.html" }]
+      },
+      { id: "kh02", title: "Kingdom Hearts 0.2", page: "tools/kh02-tracker.html", banner: "kh02.jpg" },
+      { id: "kh3", title: "Kingdom Hearts III", page: "tools/kh3-tracker.html", banner: "kh3.jpg" }
+    ],
+    // HD collections, in release order. `hero` is a file in images/heroes/.
+    collections: [
+      { id: "hd1525", hero: "kh1525.png", games: ["kh1", "khcom", "kh2", "bbs"] },
+      { id: "hd28", hero: "kh28.jpg", games: ["khddd", "kh02"] },
+      { id: "kh3", hero: "kh3.jpg", games: ["kh3"] }
+    ]
+  };
+
   /* ---------- localStorage keys shared across files ----------
      RE matches every progress key the export/import bar and the
      cross-origin sync move between browsers — extend it when a new game
@@ -112,5 +143,5 @@ window.KH = (function () {
     view: storeKey => storeKey + ":view" // per-tab checklist/journal mode
   };
 
-  return { el, esc, ICON_BASE, fmtText, chip, bar, toast, BBS_CHARS, BBS_CHAR_LABEL, KEYS };
+  return { el, esc, ICON_BASE, fmtText, chip, bar, toast, BBS_CHARS, BBS_CHAR_LABEL, KEYS, SITE };
 })();

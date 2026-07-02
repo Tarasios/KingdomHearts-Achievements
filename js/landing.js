@@ -10,24 +10,12 @@
    js/kh-summary.js, the per-game data modules and js/i18n.js.
    ===================================================================== */
 
-// Per-game tracker page + banner file (note the mixed .png/.jpg).
-// `bbs` uses the bespoke engine; everything else is generic.
-const LANDING_GAMES = {
-  kh1:   { page: "tools/kh1-tracker.html",    banner: "kh1.jpg" },
-  khcom: { page: "tools/kh-com-tracker.html", banner: "khcom.jpg" },
-  kh2:   { page: "tools/kh2-tracker.html",    banner: "kh2.jpg" },
-  bbs:   { page: "tools/kh-bbs-tracker.html", banner: "bbs.jpg", bbs: true },
-  khddd: { page: "tools/kh-ddd-tracker.html", banner: "khddd.jpg" },
-  kh02:  { page: "tools/kh02-tracker.html",   banner: "kh02.jpg" },
-  kh3:   { page: "tools/kh3-tracker.html",    banner: "kh3.jpg" }
-};
-
-// HD collections, in release order. `hero` is a file in images/heroes/.
-const LANDING_COLLECTIONS = [
-  { id: "hd1525", hero: "kh1525.png", games: ["kh1", "khcom", "kh2", "bbs"] },
-  { id: "hd28",   hero: "kh28.jpg",   games: ["khddd", "kh02"] },
-  { id: "kh3",    hero: "kh3.jpg",    games: ["kh3"] }
-];
+// The games and HD collections come from the shared KH.SITE list
+// (js/kh-common.js) — the same source the header nav is built from, so a
+// new game added there appears in both places.
+const LANDING_GAMES = {};
+KH.SITE.games.forEach(game => { LANDING_GAMES[game.id] = game; });
+const LANDING_COLLECTIONS = KH.SITE.collections;
 
 KH.Page.boot(class extends KH.Page {
   main() { this.render(); }

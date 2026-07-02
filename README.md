@@ -186,8 +186,8 @@ escaped — no raw HTML):
 2. Copy `tools/kh2-tracker.html`, change its 4 page-specific lines (title,
    `data-page`, logo image, data-module script tag).
 3. Add `lang/messages/en/khX-tracker.json` (and `fr/` when translated).
-4. Add the game to `GAMES_MENU` in `js/nav.js` (one place — every page's menu)
-   and to the `LANDING_GAMES`/`LANDING_COLLECTIONS` lists in `js/landing.js`.
+4. Add the game to `KH.SITE` in `js/kh-common.js` (one place — it feeds both
+   every page's nav menu and the landing-page cards/collections).
 
 Images go in `images/` by fixed path; any image that fails to load is simply
 hidden. If the data module's filename doesn't end in `-tracker-data.js`, also
