@@ -23,8 +23,9 @@
 (function () {
   "use strict";
 
-  // Same key set the Export/Import bar uses (js/kh-progress.js).
-  var KEY_RE = /^(bbs_|khcom_|kh1_|kh2_|khddd_|kh02_|kh3_)/;
+  // Same key set the Export/Import bar uses — single-sourced in KH.KEYS
+  // (js/kh-common.js), which bridge.html also loads for this reason.
+  var KEY_RE = KH.KEYS.RE;
 
   // Each origin's partner copy of the app (trailing slash required).
   var PARTNERS = {

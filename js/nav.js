@@ -51,19 +51,18 @@ document.addEventListener("DOMContentLoaded", function () {
    language, updating when i18n switches it.
    ===================================================================== */
 (function () {
-  var LABELS = { en: "Credits", fr: "Crédits" };
-  function storedLang() {
-    try { return localStorage.getItem("preferred-language") === "fr" ? "fr" : "en"; }
-    catch (e) { return "en"; }
-  }
   document.addEventListener("DOMContentLoaded", function () {
     if (document.querySelector("footer.site-footer")) return;
     var root = (document.body && document.body.getAttribute("data-root")) || "./";
 
     var link = document.createElement("a");
     link.className = "footer-credits-link";
+    // i18n fills the label from the page JSON's "footer-credits" key (and
+    // re-fills it on language switch); the default only shows if a page's
+    // JSON is missing the key.
+    link.id = "footer-credits";
     link.href = root + "credits.html";
-    link.textContent = LABELS[storedLang()];
+    link.textContent = "Credits";
 
     var inner = document.createElement("div");
     inner.className = "container";
@@ -73,11 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
     footer.className = "site-footer";
     footer.appendChild(inner);
     document.body.appendChild(footer);
-
-    document.addEventListener("i18n:updated", function (e) {
-      var lang = (e.detail && e.detail.lang) || storedLang();
-      link.textContent = LABELS[lang] || LABELS.en;
-    });
   });
 })();
 
