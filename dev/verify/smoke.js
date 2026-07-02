@@ -63,6 +63,38 @@ async function pageLoads(browser, base, withFixture) {
   await context.close();
 }
 
+async function navBehavior(browser, base) {
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  const errors = watchErrors(page);
+  await page.goto(`${base}/index.html`, { waitUntil: "load" });
+  await page.waitForFunction(() => {
+    const logo = document.getElementById("logo-name");
+    return logo && logo.textContent.trim().length > 0;
+  });
+  // Hover opens (hover-intent); Escape closes; a click with the pointer
+  // already on the button then re-opens (the touch/click toggle path).
+  await page.hover("#games-menu-btn");
+  check(await page.$eval(".has-menu", m => m.classList.contains("open")), "nav: hover did not open menu");
+  const gameCount = await page.$$eval("#games-menu > li", items => items.length);
+  check(gameCount === 7, `nav: expected 7 games in menu, got ${gameCount}`);
+  const subCount = await page.$$eval(".nav-submenu a", links => links.length);
+  check(subCount === 2, `nav: expected 2 submenu links, got ${subCount}`);
+  await page.keyboard.press("Escape");
+  check(await page.$eval(".has-menu", m => !m.classList.contains("open")), "nav: Escape did not close menu");
+  await page.click("#games-menu-btn");
+  check(await page.$eval(".has-menu", m => m.classList.contains("open")), "nav: click toggle did not reopen menu");
+  await page.keyboard.press("Escape");
+  const themeBefore = await page.evaluate(() => document.documentElement.getAttribute("data-theme"));
+  await page.click("#themeToggle");
+  const themeAfter = await page.evaluate(() => document.documentElement.getAttribute("data-theme"));
+  check(themeBefore !== themeAfter, "nav: theme toggle did not switch theme");
+  const firstHref = await page.$eval("#games-menu a", link => link.getAttribute("href"));
+  check(firstHref === "./tools/kh1-tracker.html", `nav: unexpected first game link ${firstHref}`);
+  check(errors.length === 0, `nav behavior: ${errors.join(" | ")}`);
+  await context.close();
+}
+
 async function persistence(browser, base) {
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -127,6 +159,8 @@ async function subpath(browser) {
   try {
     await pageLoads(browser, base, true);
     console.log("pages: done");
+    await navBehavior(browser, base);
+    console.log("nav: done");
     await persistence(browser, base);
     console.log("persistence: done");
     await french(browser, base);
