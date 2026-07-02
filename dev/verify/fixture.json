@@ -2644,7 +2644,8 @@
    "abilities": {}
   },
   "bbs_view_v1": {
-   "unversed": "journal"
+   "commands": "journal",
+   "treasures": "journal"
   },
   "kh1_progress_v1:view": {
    "treasures": "journal"

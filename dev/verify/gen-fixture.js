@@ -103,7 +103,8 @@ function buildInBrowser() {
   common.khcom_char = "riku";
   common.khddd_char = "riku";
   common.khddd_guide_v1 = { rank: {}, nodes: {}, abilities: {} };
-  common.bbs_view_v1 = { unversed: "journal" };
+  // Journal-capable BBS tabs (commands/treasures) render as tile grids.
+  common.bbs_view_v1 = { commands: "journal", treasures: "journal" };
 
   // Journal view for the first journal-capable KH1 tab (exercises tile grid).
   const kh1 = window.KH_GAMES.kh1;
