@@ -205,5 +205,285 @@
     }
   }
 
+  /* ===================================================================
+     KH.BbsCounter — Birth by Sleep counting and auto-unlock derivations
+     (BBS's data model doesn't fit the TRACKER_GAME schema, so it gets
+     its own counter with the same bind-to-a-store-source design):
+
+       new KH.BbsCounter(BBS_DATA, () => store, { mergeItems })
+
+     `store` is the nested BbsStore-shaped progress object; the engine
+     passes its live handle, the landing summary a migrated snapshot
+     (new KH.BbsStore(key).data). The optional `mergeItems(storeId,
+     items)` hook overlays lang text onto items before the auto-unlock
+     functions match on their fields (the engine's viewItems); the
+     default uses the raw data. Reads the melding calculator's owned
+     commands (KH.KEYS.MELD) for the command auto-unlocks.
+     =================================================================== */
+  class BbsCounter {
+    constructor(data, getStore, hooks) {
+      this.data = data;
+      this.store = getStore;
+      this.mergeItems = (hooks && hooks.mergeItems) || ((storeId, items) => items);
+      /* name → index probes for the cross-off cascades */
+      this.ARENA_IDX = {}; data.arena.forEach((stage, index) => { this.ARENA_IDX[stage.name] = index; });
+      this.MISSION_IDX = {}; data.missions.forEach((mission, index) => { this.MISSION_IDX[mission.name] = index; });
+    }
+
+    /* ---------- data probes ---------- */
+    /* Mission reward command for a character (reward is one name for all
+       three characters, or an object keyed by character). */
+    missionRewardFor(mission, char) {
+      if (!mission.reward) return null;
+      return typeof mission.reward === "string" ? mission.reward : (mission.reward[char] || null);
+    }
+    /* Unversed missions that count once fought — every other mission needs
+       its max rank (high score) to count as complete. */
+    missionNeedsRank(mission) { return !BbsCounter.MISSION_NO_RANK.has(mission.name); }
+    /* Aqua's Realm of Darkness chests need a special save and aren't
+       required for any achievement — excluded from every completion total
+       and from auto-unlocking commands. */
+    isRealmOfDarkness(groupName) { return String(groupName || "").indexOf("Realm of Darkness") === 0; }
+    /* Commands owned in the melding calculator (per character). */
+    meldOwned(char) {
+      try {
+        const raw = localStorage.getItem(KH.KEYS.MELD);
+        if (!raw) return new Set();
+        const saved = JSON.parse(raw);
+        return new Set((saved[char] && saved[char].owned) || []);
+      } catch (e) { return new Set(); }
+    }
+    arenaDone(stage, char) { const index = this.ARENA_IDX[stage]; return index != null && !!this.store()[char].arena[index]; }
+    missionDoneByName(name, char) { const index = this.MISSION_IDX[name]; return index != null && !!this.store().missions.done[index + "-" + char]; }
+    recordDoneBy(char, predicate) {
+      const records = this.mergeItems(char + "-records", this.data.perChar[char].records);
+      for (let index = 0; index < records.length; index++) if (predicate(records[index]) && this.store()[char].records[index]) return true;
+      return false;
+    }
+
+    /* ---------- auto-unlocks and linked rows ---------- */
+    /* Auto-unlocked commands for a character: melded in the calculator,
+       rewarded by an Unversed mission at max rank, dropped by a checked-off
+       treasure chest, made as an ice-cream recipe, or earned as a Finish
+       command (both share the command's name). Map: name → source tag. */
+    commandAuto(char) {
+      const store = this.store(), data = this.data;
+      const unlocked = new Map();
+      const label = KH.BBS_CHAR_LABEL[char];
+      this.meldOwned(char).forEach(name => unlocked.set(name, "meld"));
+      data.missions.forEach((mission, index) => {
+        const reward = this.missionRewardFor(mission, char);
+        if (reward && store.missions.rank[index + "-" + char] && !unlocked.has(reward)) unlocked.set(reward, "mission");
+      });
+      const cmdNames = new Set(data.perChar[char].commands.map(cmd => cmd.name));
+      data.perChar[char].treasures.forEach((treasure, index) => {
+        if (this.isRealmOfDarkness(treasure.g)) return;
+        if (store[char].treasures[index] && cmdNames.has(treasure.name) && !unlocked.has(treasure.name)) unlocked.set(treasure.name, "treasure");
+      });
+      data.patissier.forEach((recipe, index) => {
+        if (recipe.g === label && store.shared.patissier[index] && cmdNames.has(recipe.name) && !unlocked.has(recipe.name)) unlocked.set(recipe.name, "icecream");
+      });
+      data.warrior.forEach((finish, index) => {
+        if (finish.g === label && store.shared.warrior[index] && cmdNames.has(finish.name) && !unlocked.has(finish.name)) unlocked.set(finish.name, "finish");
+      });
+      return unlocked;
+    }
+    commandAutoFn(char) { const unlocked = this.commandAuto(char); return item => unlocked.get(item.name) || null; }
+    /* Unversed journal: filled by clearing its Unversed mission (done is
+       enough — max rank isn't needed) or any of its Mirage Arena stages. */
+    unversedAutoFn(char) {
+      return item => {
+        if (this.missionDoneByName(item.name, char)) return "uvmission";
+        const location = item.loc || "";
+        if (location.indexOf("Mirage Arena") >= 0) {
+          const stages = (location.match(/"([^"]+)"/g) || []).map(s => s.slice(1, -1));
+          if (stages.some(stage => this.arenaDone(stage, char))) return "arena";
+        }
+        return null;
+      };
+    }
+    /* Records: the per-Unversed mission records cross off with their mission
+       (done); the Arena Mode records cross off with their arena stage. */
+    recordsAutoFn(char) {
+      return item => {
+        if (item.g === "Unversed Missions" && this.missionDoneByName(item.cat, char)) return "uvmission";
+        if (item.cat === "Arena Mode") {
+          for (let index = 0; index < this.data.arena.length; index++) {
+            const stageName = this.data.arena[index].name;
+            if ((item.entry || "").indexOf(stageName) >= 0 && this.arenaDone(stageName, char)) return "arena";
+          }
+        }
+        return null;
+      };
+    }
+    /* Character journal: the Hundred Acre Wood trio fills when the Hunny Pot
+       command board is done; Monstro fills when "Monster of the Sea" is cleared. */
+    charactersAutoFn(char) {
+      return item => {
+        if (BbsCounter.HAW_CHARS.has(item.name) && this.recordDoneBy(char, record => record.entry === "Hunny Pot Board")) return "board";
+        if (item.name === "Monstro" && this.arenaDone("Monster of the Sea", char)) return "arena";
+        return null;
+      };
+    }
+    /* Records that mirror another tab's single checkbox are *linked* (two-way)
+       rather than read-only auto: ticking the record ticks its arena stage /
+       Unversed mission, and vice-versa. */
+    recordsLinkFn(char) {
+      return item => {
+        if (item.g === "Unversed Missions") {
+          const missionIndex = this.MISSION_IDX[item.cat];
+          if (missionIndex != null) return { store: this.store().missions.done, key: missionIndex + "-" + char, src: "uvmission" };
+        }
+        if (item.cat === "Arena Mode") {
+          for (let index = 0; index < this.data.arena.length; index++) {
+            const stageName = this.data.arena[index].name;
+            if ((item.entry || "").indexOf(stageName) >= 0) return { store: this.store()[char].arena, key: this.ARENA_IDX[stageName], src: "arena" };
+          }
+        }
+        return null;
+      };
+    }
+    /* Sections whose completion is auto-credited (read-only) from other
+       tabs, and sections whose rows are two-way linked to another store. */
+    autoFnFor(section, char) {
+      if (section === "commands") return this.commandAutoFn(char);
+      if (section === "characters") return this.charactersAutoFn(char);
+      if (section === "unversed") return this.unversedAutoFn(char);
+      return null;
+    }
+    linkFnFor(section, char) { return section === "records" ? this.recordsLinkFn(char) : null; }
+
+    /* Ice-cream recipe ingredients. Each recipe slot (i1..i4) carries a
+       baked-in quantity, e.g. "Crystal Sugar x3". Returns a map of
+       ingredient name → the recipes that use it [{ pIdx, qty, char }]. */
+    recipeIngredients() {
+      const ingredients = {};
+      this.data.patissier.forEach((recipe, recipeIndex) => {
+        ["i1", "i2", "i3", "i4"].forEach(slot => {
+          const text = recipe[slot];
+          if (!text) return;
+          const match = String(text).match(/^(.*?)\s*x\s*(\d+)\s*$/i);
+          const name = (match ? match[1] : text).trim();
+          const qty = match ? parseInt(match[2], 10) : 1;
+          (ingredients[name] = ingredients[name] || []).push({ pIdx: recipeIndex, qty, char: recipe.g });
+        });
+      });
+      return ingredients;
+    }
+
+    /* ---------- progress math ---------- */
+    countMap(map, length) { let done = 0; for (let index = 0; index < length; index++) if (map[index]) done++; return done; }
+    sharedCount(section) { return [this.countMap(this.store().shared[section], this.data[section].length), this.data[section].length]; }
+    charCount(char, section) {
+      const store = this.store(), items = this.data.perChar[char][section];
+      if (section === "treasures") {   // exclude Aqua's Realm of Darkness chests
+        let done = 0, total = 0;
+        items.forEach((item, index) => { if (this.isRealmOfDarkness(item.g)) return; total++; if (store[char].treasures[index]) done++; });
+        return [done, total];
+      }
+      const autoFn = this.autoFnFor(section, char);
+      const linkFn = this.linkFnFor(section, char);
+      if (!autoFn && !linkFn) return [this.countMap(store[char][section], items.length), items.length];
+      const merged = this.mergeItems(char + "-" + section, items);
+      let done = 0;
+      merged.forEach((item, index) => {
+        const link = linkFn && linkFn(item);
+        if (link) { if (link.store[link.key]) done++; }
+        else if (store[char][section][index] || (autoFn && autoFn(item))) done++;
+      });
+      return [done, items.length];
+    }
+    groupCount(section, label) {
+      const store = this.store();
+      let done = 0, total = 0;
+      this.data[section].forEach((item, index) => { if (item.g === label) { total++; if (store.shared[section][index]) done++; } });
+      return [done, total];
+    }
+    missionsCount(char, map) {
+      let done = 0;
+      this.data.missions.forEach((mission, index) => { if (map[index + "-" + char]) done++; });
+      return [done, this.data.missions.length];
+    }
+    /* Savage Slayer needs ONE character to max-rank every Unversed mission,
+       so progress is the best single character's max-ranked count. */
+    bestCharMissionsRank() {
+      const store = this.store();
+      let best = 0;
+      KH.BBS_CHARS.forEach(char => {
+        let done = 0;
+        this.data.missions.forEach((mission, index) => { if (store.missions.rank[index + "-" + char]) done++; });
+        if (done > best) best = done;
+      });
+      return [best, this.data.missions.length];
+    }
+    /* Best single character's progress through a per-character group (e.g.
+       Pâtissier needs one character to make all of their ice-cream recipes). */
+    bestCharGroup(section) {
+      let best = null;
+      KH.BBS_CHARS.forEach(char => {
+        const count = this.groupCount(section, KH.BBS_CHAR_LABEL[char]);
+        if (!best || count[0] > best[0]) best = count;
+      });
+      return best || [0, 0];
+    }
+    /* Arena stages cleared by a character (the store is per-character). */
+    arenaCount(char) { return [this.countMap(this.store()[char].arena, this.data.arena.length), this.data.arena.length]; }
+    /* Arena trophies are global — a stage counts once any character clears it. */
+    arenaByStars(starsNeeded) {
+      const store = this.store();
+      const starCount = rank => (String(rank).match(/★/g) || []).length;
+      let done = 0, total = 0;
+      this.data.arena.forEach((stage, index) => {
+        if (starCount(stage.rank) === starsNeeded) { total++; if (KH.BBS_CHARS.some(char => store[char].arena[index])) done++; }
+      });
+      return [done, total];
+    }
+    /* Ingredients a character actually needs (used by one of *their*
+       recipes), done when collected or auto-credited by one of that
+       character's completed recipes. */
+    flavorsEligible(char) {
+      const store = this.store();
+      const label = KH.BBS_CHAR_LABEL[char];
+      const ingredients = this.recipeIngredients();
+      const flavorStore = store[char].flavors;
+      let done = 0, total = 0;
+      this.data.flavors.forEach((flavor, index) => {
+        const recipes = (ingredients[flavor.name] || []).filter(use => use.char === label);
+        if (!recipes.length) return;
+        total++;
+        if (flavorStore[index] || recipes.some(use => store.shared.patissier[use.pIdx])) done++;
+      });
+      return [done, total];
+    }
+    /* One character's full completion (their sections + their share of the
+       shared lists + ingredients + arena + mission clears). */
+    overallChar(char) {
+      let done = 0, total = 0;
+      KH.BbsStore.PER_CHAR_SECTIONS.forEach(section => { const [secDone, secTotal] = this.charCount(char, section); done += secDone; total += secTotal; });
+      ["warrior", "patissier", "stickers"].forEach(section => {
+        const [groupDone, groupTotal] = this.groupCount(section, KH.BBS_CHAR_LABEL[char]); done += groupDone; total += groupTotal;
+      });
+      const [flavorDone, flavorTotal] = this.flavorsEligible(char); done += flavorDone; total += flavorTotal;
+      const [arenaDoneCount, arenaTotal] = this.arenaCount(char); done += arenaDoneCount; total += arenaTotal;
+      const [missionDone] = this.missionsCount(char, this.store().missions.done); done += missionDone; total += this.data.missions.length;
+      return [done, total];
+    }
+    /* The full 100% total (every character's sections — including the
+       auto-cross-offs — plus the shared sections and Savage Slayer). The
+       BBS tracker caches this under bbs_totals_v1 for the landing page. */
+    fullTotals() {
+      let done = 0, total = 0;
+      KH.BBS_CHARS.forEach(char => { const [charDone, charTotal] = this.overallChar(char); done += charDone; total += charTotal; });
+      ["trophies", "ingame", "reports"].forEach(section => { const [secDone, secTotal] = this.sharedCount(section); done += secDone; total += secTotal; });
+      const [savageDone, savageTotal] = this.bestCharMissionsRank(); done += savageDone; total += savageTotal;
+      return [done, total];
+    }
+    /* Achievement (platform-trophy) progress: the shared trophies list. */
+    achievementsCount() { return this.sharedCount("trophies"); }
+  }
+  BbsCounter.MISSION_NO_RANK = new Set(["Flame Box", "Jellyshade", "Gluttonous Goo", "Element Cluster"]);
+  BbsCounter.HAW_CHARS = new Set(["Winnie the Pooh", "Tigger", "Rabbit"]);
+
   KH.GameCounter = GameCounter;
+  KH.BbsCounter = BbsCounter;
 })();

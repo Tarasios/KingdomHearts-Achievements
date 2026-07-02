@@ -13,10 +13,7 @@
 
    Where to look (top → bottom):
      persistent state ......... PROGRESS / VIEW / charPref (js/kh-store.js)
-     command auto-unlocks ..... commandAuto (meld / mission / treasure / …)
-     other cross-off cascades . unversedAutoFn / recordsAutoFn / charactersAutoFn
-                                + recordsLinkFn (two-way linked rows)
-     progress math ............ countMap / charCount / groupCount / *Count
+     counting + cascades ...... KH.BbsCounter (js/kh-counting.js) + aliases
      checklist table .......... checklist / toggleGroup
      per-tab renderers ........ render<Tab> + RENDERERS map
      Worlds summary ........... worldEntries / renderWorlds
@@ -81,25 +78,33 @@ window.addEventListener("scroll", hidePop, true);
 
 function toggleCheck(store, key) { if (store[key]) delete store[key]; else store[key] = true; saveStore(); render(); }
 
-/* Commands owned in the melding calculator (per character). */
-function meldOwned(char) {
-  try {
-    const raw = localStorage.getItem(MELD_KEY);
-    if (!raw) return new Set();
-    const saved = JSON.parse(raw);
-    return new Set((saved[char] && saved[char].owned) || []);
-  } catch (e) { return new Set(); }
-}
-/* Mission reward command for a character (reward is one name for all
-   three characters, or an object keyed by character). */
-function missionRewardFor(mission, char) {
-  if (!mission.reward) return null;
-  return typeof mission.reward === "string" ? mission.reward : (mission.reward[char] || null);
-}
-/* Unversed missions that count once fought — every other mission needs its
-   max rank (high score) to count as complete. */
-const MISSION_NO_RANK = new Set(["Flame Box", "Jellyshade", "Gluttonous Goo", "Element Cluster"]);
-function missionNeedsRank(mission) { return !MISSION_NO_RANK.has(mission.name); }
+/* ---------- counting + cross-off cascades (single source: KH.BbsCounter,
+   js/kh-counting.js) ----------
+   The counter reads the live STORE through a closure (reset/reload
+   re-point automatically) and overlays lang text via viewItems before the
+   auto-unlock functions match on item fields. The thin aliases keep the
+   renderers below reading naturally; the landing page binds the same
+   class to a migrated snapshot instead (js/kh-summary.js). */
+const counter = new KH.BbsCounter(BBS_DATA, () => STORE, { mergeItems: (storeId, items) => viewItems(storeId, items) });
+const missionRewardFor = (mission, char) => counter.missionRewardFor(mission, char);
+const missionNeedsRank = mission => counter.missionNeedsRank(mission);
+const isRealmOfDarkness = groupName => counter.isRealmOfDarkness(groupName);
+const commandAuto = char => counter.commandAuto(char);
+const unversedAutoFn = char => counter.unversedAutoFn(char);
+const recordsAutoFn = char => counter.recordsAutoFn(char);
+const charactersAutoFn = char => counter.charactersAutoFn(char);
+const recipeIngredients = () => counter.recipeIngredients();
+const sharedCount = section => counter.sharedCount(section);
+const charCount = (char, section) => counter.charCount(char, section);
+const groupCount = (section, label) => counter.groupCount(section, label);
+const missionsCount = (char, map) => counter.missionsCount(char, map);
+const bestCharMissionsRank = () => counter.bestCharMissionsRank();
+const bestCharGroup = section => counter.bestCharGroup(section);
+const arenaCount = char => counter.arenaCount(char);
+const arenaByStars = starsNeeded => counter.arenaByStars(starsNeeded);
+const flavorsEligible = char => counter.flavorsEligible(char);
+const overallChar = char => counter.overallChar(char);
+
 /* A mission's location for one character. Some areas are stored as a single
    string covering all three (e.g. "Ballroom (T/A) Wardrobe Room (V)"); pick
    the segment whose initials include this character's. */
@@ -113,114 +118,6 @@ function missionArea(mission, char) {
   }
   return areas;
 }
-/* Aqua's Realm of Darkness chests need a special save and aren't required
-   for any achievement — kept on the Treasures tab but excluded from every
-   completion total and from auto-unlocking commands (e.g. Transcendence). */
-function isRealmOfDarkness(groupName) { return String(groupName || "").indexOf("Realm of Darkness") === 0; }
-
-/* Auto-unlocked commands for a character: melded in the calculator,
-   rewarded by an Unversed mission at max rank, dropped by a checked-off
-   treasure chest, made as an ice-cream recipe, or earned as a Finish
-   command (both share the command's name). */
-function commandAuto(char) {
-  const unlocked = new Map();
-  const label = CHAR_LABEL[char];
-  meldOwned(char).forEach(name => unlocked.set(name, "meld"));
-  BBS_DATA.missions.forEach((mission, index) => {
-    const reward = missionRewardFor(mission, char);
-    if (reward && STORE.missions.rank[index + "-" + char] && !unlocked.has(reward)) unlocked.set(reward, "mission");
-  });
-  const cmdNames = new Set(BBS_DATA.perChar[char].commands.map(cmd => cmd.name));
-  BBS_DATA.perChar[char].treasures.forEach((treasure, index) => {
-    if (isRealmOfDarkness(treasure.g)) return;
-    if (STORE[char].treasures[index] && cmdNames.has(treasure.name) && !unlocked.has(treasure.name)) unlocked.set(treasure.name, "treasure");
-  });
-  BBS_DATA.patissier.forEach((recipe, index) => {
-    if (recipe.g === label && STORE.shared.patissier[index] && cmdNames.has(recipe.name) && !unlocked.has(recipe.name)) unlocked.set(recipe.name, "icecream");
-  });
-  BBS_DATA.warrior.forEach((finish, index) => {
-    if (finish.g === label && STORE.shared.warrior[index] && cmdNames.has(finish.name) && !unlocked.has(finish.name)) unlocked.set(finish.name, "finish");
-  });
-  return unlocked;
-}
-
-/* ---------- other cross-off cascades (all keyed by item name) ----------
-   Indexes + state probes shared by the auto functions below. */
-const ARENA_IDX = {}; BBS_DATA.arena.forEach((stage, index) => { ARENA_IDX[stage.name] = index; });
-const MISSION_IDX = {}; BBS_DATA.missions.forEach((mission, index) => { MISSION_IDX[mission.name] = index; });
-const HAW_CHARS = new Set(["Winnie the Pooh", "Tigger", "Rabbit"]);
-function arenaDone(stage, char) { const index = ARENA_IDX[stage]; return index != null && !!STORE[char].arena[index]; }
-function missionDoneByName(name, char) { const index = MISSION_IDX[name]; return index != null && !!STORE.missions.done[index + "-" + char]; }
-function recordDoneBy(char, predicate) {
-  const records = viewItems(char + "-records", BBS_DATA.perChar[char].records);
-  for (let index = 0; index < records.length; index++) if (predicate(records[index]) && STORE[char].records[index]) return true;
-  return false;
-}
-
-/* Unversed journal: filled by clearing its Unversed mission (done is
-   enough — max rank isn't needed) or any of its Mirage Arena stages. */
-function unversedAutoFn(char) {
-  return item => {
-    if (missionDoneByName(item.name, char)) return "uvmission";
-    const location = item.loc || "";
-    if (location.indexOf("Mirage Arena") >= 0) {
-      const stages = (location.match(/"([^"]+)"/g) || []).map(s => s.slice(1, -1));
-      if (stages.some(stage => arenaDone(stage, char))) return "arena";
-    }
-    return null;
-  };
-}
-/* Records: the per-Unversed mission records cross off with their mission
-   (done); the Arena Mode records cross off with their arena stage. */
-function recordsAutoFn(char) {
-  return item => {
-    if (item.g === "Unversed Missions" && missionDoneByName(item.cat, char)) return "uvmission";
-    if (item.cat === "Arena Mode") {
-      for (let index = 0; index < BBS_DATA.arena.length; index++) {
-        const stageName = BBS_DATA.arena[index].name;
-        if ((item.entry || "").indexOf(stageName) >= 0 && arenaDone(stageName, char)) return "arena";
-      }
-    }
-    return null;
-  };
-}
-/* Character journal: the Hundred Acre Wood trio fills when the Hunny Pot
-   command board is done; Monstro fills when "Monster of the Sea" is cleared. */
-function charactersAutoFn(char) {
-  return item => {
-    if (HAW_CHARS.has(item.name) && recordDoneBy(char, record => record.entry === "Hunny Pot Board")) return "board";
-    if (item.name === "Monstro" && arenaDone("Monster of the Sea", char)) return "arena";
-    return null;
-  };
-}
-function commandAutoFn(char) { const unlocked = commandAuto(char); return item => unlocked.get(item.name) || null; }
-
-/* Records that mirror another tab's single checkbox are *linked* (two-way)
-   rather than read-only auto: ticking the record ticks its arena stage /
-   Unversed mission, and vice-versa. */
-function recordsLinkFn(char) {
-  return item => {
-    if (item.g === "Unversed Missions") {
-      const missionIndex = MISSION_IDX[item.cat];
-      if (missionIndex != null) return { store: STORE.missions.done, key: missionIndex + "-" + char, src: "uvmission" };
-    }
-    if (item.cat === "Arena Mode") {
-      for (let index = 0; index < BBS_DATA.arena.length; index++) {
-        const stageName = BBS_DATA.arena[index].name;
-        if ((item.entry || "").indexOf(stageName) >= 0) return { store: STORE[char].arena, key: ARENA_IDX[stageName], src: "arena" };
-      }
-    }
-    return null;
-  };
-}
-
-/* Sections whose completion is auto-credited (read-only) from other tabs… */
-const SECTION_AUTO = {
-  commands: commandAutoFn, characters: charactersAutoFn, unversed: unversedAutoFn
-};
-/* …and sections whose rows are two-way linked to another tab's store. */
-const SECTION_LINK = { records: recordsLinkFn };
-
 function autoBadge(source) {
   return {
     meld: { label: translate('bt-badge-meld'), tip: translate('bt-badge-meld-tip') },
@@ -235,29 +132,8 @@ function autoBadge(source) {
   }[source];
 }
 
-/* Ice-cream recipe ingredients. Each recipe slot (i1..i4) carries a
-   baked-in quantity, e.g. "Crystal Sugar x3". Returns a map of ingredient
-   name -> the recipes that use it [{ pIdx, qty, char }] across all three
-   characters; obtaining an ingredient is shared, so any character's
-   completed recipe counts it as obtained. */
-function recipeIngredients() {
-  const ingredients = {};
-  BBS_DATA.patissier.forEach((recipe, recipeIndex) => {
-    ["i1", "i2", "i3", "i4"].forEach(slot => {
-      const text = recipe[slot];
-      if (!text) return;
-      const match = String(text).match(/^(.*?)\s*x\s*(\d+)\s*$/i);
-      const name = (match ? match[1] : text).trim();
-      const qty = match ? parseInt(match[2], 10) : 1;
-      (ingredients[name] = ingredients[name] || []).push({ pIdx: recipeIndex, qty, char: recipe.g });
-    });
-  });
-  return ingredients;
-}
-
 /* ---------- helpers ---------- */
 function stars(rank) { return `<span class="stars">${esc(rank)}</span>`; }
-function starCount(rank) { return (rank.match(/★/g) || []).length; }
 
 /* Item display text lives in the lang file under "items": { "<storeId>":
    [ { … } ] } (shared sections keyed by name, per-character sections by
@@ -272,95 +148,8 @@ function viewItems(storeId, items) {
   return rows ? items.map((item, index) => Object.assign({}, item, rows[index] || {})) : items;
 }
 
-/* ---------- progress math ---------- */
-function countMap(map, length) { let done = 0; for (let index = 0; index < length; index++) if (map[index]) done++; return done; }
-function sharedCount(section) { return [countMap(STORE.shared[section], BBS_DATA[section].length), BBS_DATA[section].length]; }
-function charCount(char, section) {
-  const items = BBS_DATA.perChar[char][section];
-  if (section === "treasures") {   // exclude Aqua's Realm of Darkness chests
-    let done = 0, total = 0;
-    items.forEach((item, index) => { if (isRealmOfDarkness(item.g)) return; total++; if (STORE[char].treasures[index]) done++; });
-    return [done, total];
-  }
-  const autoFn = SECTION_AUTO[section] ? SECTION_AUTO[section](char) : null;
-  const linkFn = SECTION_LINK[section] ? SECTION_LINK[section](char) : null;
-  if (!autoFn && !linkFn) return [countMap(STORE[char][section], items.length), items.length];
-  const merged = viewItems(char + "-" + section, items);
-  let done = 0;
-  merged.forEach((item, index) => {
-    const link = linkFn && linkFn(item);
-    if (link) { if (link.store[link.key]) done++; }
-    else if (STORE[char][section][index] || (autoFn && autoFn(item))) done++;
-  });
-  return [done, items.length];
-}
-function groupCount(section, label) {
-  let done = 0, total = 0;
-  BBS_DATA[section].forEach((item, index) => { if (item.g === label) { total++; if (STORE.shared[section][index]) done++; } });
-  return [done, total];
-}
-function missionsCount(char, map) {
-  let done = 0;
-  BBS_DATA.missions.forEach((mission, index) => { if (map[index + "-" + char]) done++; });
-  return [done, BBS_DATA.missions.length];
-}
-/* Savage Slayer needs ONE character to max-rank every Unversed mission, so
-   progress is the best single character's max-ranked count (not any-character
-   per mission). */
-function bestCharMissionsRank() {
-  let best = 0;
-  CHARS.forEach(char => {
-    let done = 0;
-    BBS_DATA.missions.forEach((mission, index) => { if (STORE.missions.rank[index + "-" + char]) done++; });
-    if (done > best) best = done;
-  });
-  return [best, BBS_DATA.missions.length];
-}
-/* Best single character's progress through a per-character group (e.g.
-   Pâtissier needs one character to make all of their ice-cream recipes). */
-function bestCharGroup(section) {
-  let best = null;
-  CHARS.forEach(char => {
-    const count = groupCount(section, CHAR_LABEL[char]);
-    if (!best || count[0] > best[0]) best = count;
-  });
-  return best || [0, 0];
-}
-/* Arena stages cleared by a character (the store is per-character now). */
-function arenaCount(char) { return [countMap(STORE[char].arena, BBS_DATA.arena.length), BBS_DATA.arena.length]; }
-/* Arena trophies are global — a stage counts once any character clears it. */
-function arenaByStars(starsNeeded) {
-  let done = 0, total = 0;
-  BBS_DATA.arena.forEach((stage, index) => { if (starCount(stage.rank) === starsNeeded) { total++; if (CHARS.some(char => STORE[char].arena[index])) done++; } });
-  return [done, total];
-}
-/* Ingredients a character actually needs (used by one of *their* recipes —
-   not merely collectible in their playthrough), done when collected or
-   auto-credited by one of that character's completed recipes. */
-function flavorsEligible(char) {
-  const label = CHAR_LABEL[char];
-  const ingredients = recipeIngredients();
-  const store = STORE[char].flavors;
-  let done = 0, total = 0;
-  BBS_DATA.flavors.forEach((flavor, index) => {
-    const recipes = (ingredients[flavor.name] || []).filter(use => use.char === label);
-    if (!recipes.length) return;
-    total++;
-    if (store[index] || recipes.some(use => STORE.shared.patissier[use.pIdx])) done++;
-  });
-  return [done, total];
-}
-function overallChar(char) {
-  let done = 0, total = 0;
-  PER_CHAR_SECTIONS.forEach(section => { const [secDone, secTotal] = charCount(char, section); done += secDone; total += secTotal; });
-  ["warrior", "patissier", "stickers"].forEach(section => {
-    const [groupDone, groupTotal] = groupCount(section, CHAR_LABEL[char]); done += groupDone; total += groupTotal;
-  });
-  const [flavorDone, flavorTotal] = flavorsEligible(char); done += flavorDone; total += flavorTotal;
-  const [arenaDoneCount, arenaTotal] = arenaCount(char); done += arenaDoneCount; total += arenaTotal;
-  const [missionDone] = missionsCount(char, STORE.missions.done); done += missionDone; total += BBS_DATA.missions.length;
-  return [done, total];
-}
+/* Progress math lives in KH.BbsCounter — see js/kh-counting.js and the
+   aliases near the top of this closure. */
 
 /* Trophies whose progress can be computed from tracked sections. */
 const TROPHY_AUTO = {
@@ -834,8 +623,10 @@ function perCharListRenderer(section, titleKey, cols) {
     const container = panel.results;
     container.appendChild(el("div", "grp-title", fmtText(format(titleKey, CHAR_LABEL[activeChar]))));
     const opts = {};
-    if (SECTION_AUTO[section]) opts.auto = SECTION_AUTO[section](activeChar);
-    if (SECTION_LINK[section]) opts.link = SECTION_LINK[section](activeChar);
+    const autoFn = counter.autoFnFor(section, activeChar);
+    const linkFn = counter.linkFnFor(section, activeChar);
+    if (autoFn) opts.auto = autoFn;
+    if (linkFn) opts.link = linkFn;
     checklist(container, viewItems(activeChar + "-" + section, BBS_DATA.perChar[activeChar][section]), STORE[activeChar][section], cols(), panel.state, opts);
     if (section === "records") container.appendChild(el("p", "legend", translate('bt-legend-records')));
     const [done, total] = charCount(activeChar, section);
@@ -1244,18 +1035,15 @@ function checkMilestones() {
   prevMilestones = current;   // first run seeds without toasting
 }
 
-/* Cache the full 100% total (every character's sections — which already
-   include the auto-cross-offs — plus the shared sections and Savage Slayer)
-   so the landing page can show an accurate number without re-deriving all
-   the auto logic. Only writes when the value changes. */
+/* Cache the full 100% total (counter.fullTotals() — every character's
+   sections including the auto-cross-offs, plus the shared sections and
+   Savage Slayer) so the landing page can show an accurate number without
+   re-deriving the lang-aware auto logic. Only writes when it changes. */
 function cacheBbsTotal() {
-  let done = 0, total = 0;
-  CHARS.forEach(char => { const [charDone, charTotal] = overallChar(char); done += charDone; total += charTotal; });
-  ["trophies", "ingame", "reports"].forEach(section => { const [secDone, secTotal] = sharedCount(section); done += secDone; total += secTotal; });
-  const [savageDone, savageTotal] = bestCharMissionsRank(); done += savageDone; total += savageTotal;
+  const [done, total] = counter.fullTotals();
   try {
     const value = JSON.stringify([done, total]);
-    if (localStorage.getItem("bbs_totals_v1") !== value) localStorage.setItem("bbs_totals_v1", value);
+    if (localStorage.getItem(KH.KEYS.BBS_TOTALS) !== value) localStorage.setItem(KH.KEYS.BBS_TOTALS, value);
   } catch (e) { /* private browsing */ }
 }
 
