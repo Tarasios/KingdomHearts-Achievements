@@ -93,34 +93,72 @@ same from a domain root, a GitHub project subpath, or `localhost`.
 
 ```
 index.html                  Landing page — series total + per-game progress
+credits.html                Credits page (guides + wiki the trackers were built from)
 tools/index.html            Tools listing (Games › series › game › tool cards)
 tools/kh1-tracker.html …    One tracker page per game
 tools/kh-melding.html       Birth by Sleep — Command Melding Calculator
+tools/kh-dream-guide.html   Dream Drop Distance — Dream Eater guide
 css/main.css                Shared theme (night + day palettes, landing, banners)
 css/kh.css                  Game-tool styles (tables, checklists, world view, melding)
-js/i18n.js                  Language system (loads one JSON per page)
+js/i18n.js                  Language system (class I18n; loads one JSON per page)
 js/theme.js                 Night/Day theme toggle (night is the default)
-js/kh-summary.js            DOM-free completion totals (used by the landing page)
-js/landing.js               Builds the landing page from those totals
-js/kh-tracker.js            Generic tracker engine (TRACKER_GAME data modules)
-js/kh-bbs-tracker.js        Birth by Sleep tracker engine
+js/nav.js                   Site chrome: header nav (built from ONE menu
+                            definition), Games dropdown, Credits footer, SW registration
+js/kh-common.js             KH namespace: DOM/text helpers + KH.KEYS (every
+                            cross-file localStorage key in one place)
+js/kh-page.js               KH.Page — shared page lifecycle (i18n init,
+                            translate/format, language/storage re-render hooks)
+js/kh-store.js              Persistence classes: JsonStore, TrackerStore,
+                            BbsStore (incl. the arena migration), ViewStore, CharPref
+js/kh-counting.js           KH.GameCounter + KH.BbsCounter — the single, DOM-free
+                            source of all completion math and auto-unlock cascades
+js/kh-widgets.js            Shared tracker UI: Popover, MilestoneToaster,
+                            toolbar / view toggle / world entry table / char buttons
+js/kh-summary.js            Thin façade binding the counters to localStorage
+                            snapshots (used by the landing page)
+js/landing.js               LandingPage (a KH.Page) — builds the landing page
+js/kh-tracker.js            GenericTrackerPage — engine for TRACKER_GAME modules
+js/kh-bbs-tracker.js        BbsTrackerPage — bespoke Birth by Sleep engine
 js/kh-melding.js            Birth by Sleep melding calculator
 js/kh-progress.js           Export / Import bar (backs up all KH localStorage keys)
 js/kh-sync.js               Cross-origin progress Sync button + bridge logic
-js/*-tracker-data.js        Per-game data modules
+js/*-tracker-data.js        Per-game data modules (plain data, no logic)
 sw.js                       Service worker (caches the heavy data modules + images)
 bridge.html                 Sync pop-up, opened by the partner site (see kh-sync.js)
 lang/messages/en|fr/        All visible text, one JSON file per page
 images/                     backgrounds, banners, heroes, logos, command icons
+dev/verify/                 Dev-only Playwright checks: golden.js (golden-master
+                            diff of every page's rendered numbers under a committed
+                            localStorage fixture) + smoke.js (behavior suite)
 ```
 
 ### How the trackers work
 
-Most games run on the generic engine (`js/kh-tracker.js`), which renders any
-game described by a `TRACKER_GAME` config (tabs › sections, optional per-character
-variants, an opt-in `worldSummary`). Birth by Sleep has its own engine
+Most games run on the generic engine (`js/kh-tracker.js`), whose
+`GenericTrackerPage` class renders any game described by a `TRACKER_GAME`
+config (tabs › sections, optional per-character variants, an opt-in
+`worldSummary`). Birth by Sleep has its own `BbsTrackerPage`
 (`js/kh-bbs-tracker.js`) and shares `localStorage` with the melding calculator.
-Progress is keyed by item index, so keep item order stable in the data modules.
+
+Both engines are `KH.Page` subclasses composed from the same shared parts:
+stores from `js/kh-store.js` own persistence and the save-file shapes;
+`KH.GameCounter` / `KH.BbsCounter` (`js/kh-counting.js`) own every counting
+rule and auto-unlock cascade — the SAME instances of that math also power the
+landing page through `js/kh-summary.js`, so a rule changed there changes
+everywhere; and `js/kh-widgets.js` provides the toolbar, popover, toast and
+world-table UI. Progress is keyed by item index, so keep item order stable in
+the data modules.
+
+Before shipping a change, run the verification suite (needs Node + Playwright
+with Chromium, site served locally):
+
+```bash
+node dev/verify/golden.js     # rendered numbers match the committed baseline
+node dev/verify/smoke.js      # pages load clean, ticks persist, nav/i18n behave
+```
+
+If a change intentionally alters counted output, re-baseline with
+`node dev/verify/golden.js --baseline` and say why in the commit.
 
 ### Editing text
 
@@ -142,6 +180,15 @@ escaped — no raw HTML):
 
 ### Adding a game
 
-One data module + a page copied from `tools/kh2-tracker.html` + two lang JSON
-files, then add it to the `GAME`/collection lists in `js/landing.js`. Images go
-in `images/` by fixed path; any image that fails to load is simply hidden.
+1. Write a data module (`js/khX-tracker-data.js`) following the `TRACKER_GAME`
+   shape in `js/kh-com-tracker-data.js`, and give it a fresh `storeKey` prefix
+   (add that prefix to `KH.KEYS.RE` in `js/kh-common.js` so Export/Sync move it).
+2. Copy `tools/kh2-tracker.html`, change its 4 page-specific lines (title,
+   `data-page`, logo image, data-module script tag).
+3. Add `lang/messages/en/khX-tracker.json` (and `fr/` when translated).
+4. Add the game to `KH.SITE` in `js/kh-common.js` (one place — it feeds both
+   every page's nav menu and the landing-page cards/collections).
+
+Images go in `images/` by fixed path; any image that fails to load is simply
+hidden. If the data module's filename doesn't end in `-tracker-data.js`, also
+extend the `HEAVY` regex in `sw.js` so it gets cached.

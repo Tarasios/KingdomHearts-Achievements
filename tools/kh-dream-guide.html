@@ -19,45 +19,8 @@
     Visible text lives in lang/messages/<lang>/kh-dream-guide.json.
 -->
 <body data-page="kh-dream-guide" data-root="../">
-    <nav>
-        <div class="container">
-            <div class="nav-content">
-                <a href="../" class="logo" id="logo-name"></a>
-                <div class="nav-right">
-                    <ul class="nav-links">
-                    <li class="has-menu">
-                        <button class="nav-menu-btn" id="games-menu-btn" type="button" aria-haspopup="true" aria-expanded="false">Games <span class="caret" aria-hidden="true">&#9662;</span></button>
-                        <ul class="nav-menu" id="games-menu">
-                        <li><a href="../tools/kh1-tracker.html">Kingdom Hearts Final Mix</a></li>
-                        <li><a href="../tools/kh-com-tracker.html">Re:Chain of Memories</a></li>
-                        <li><a href="../tools/kh2-tracker.html">Kingdom Hearts II</a></li>
-                        <li class="has-submenu">
-                            <a href="../tools/kh-bbs-tracker.html">Birth by Sleep <span class="caret" aria-hidden="true">&#9656;</span></a>
-                            <ul class="nav-submenu">
-                                <li><a href="../tools/kh-melding.html">Melding Calculator</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-submenu">
-                            <a href="../tools/kh-ddd-tracker.html">Dream Drop Distance <span class="caret" aria-hidden="true">&#9656;</span></a>
-                            <ul class="nav-submenu">
-                                <li><a href="../tools/kh-dream-guide.html">Dream Guide</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="../tools/kh02-tracker.html">Kingdom Hearts 0.2</a></li>
-                        <li><a href="../tools/kh3-tracker.html">Kingdom Hearts III</a></li>
-                        </ul>
-                    </li>
-                    </ul>
-                    <div class="theme-toggle">
-                        <button id="themeToggle" class="theme-btn" type="button">
-                            <span class="theme-icon" id="theme-icon" aria-hidden="true"></span>
-                            <span class="theme-text" id="theme-text"></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <!-- Header nav is built by js/nav.js: one shared menu definition for every page. -->
+    <nav id="site-nav"></nav>
 
     <div class="container kh">
         <header class="kh-header">
@@ -199,6 +162,7 @@
 
     <script src="../js/i18n.js"></script>
     <script src="../js/kh-common.js"></script>
+    <script src="../js/kh-page.js"></script>
     <script src="../js/kh-ddd-tracker-data.js"></script>
     <script src="../js/kh-dream-guide-data.js"></script>
     <script src="../js/kh-dream-guide-boards.js"></script>

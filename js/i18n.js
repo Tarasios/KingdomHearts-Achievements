@@ -1,7 +1,7 @@
 // Internationalization System
 // Each page declares itself on the <body> tag:
 //   <body data-page="index" data-root="./">           (root-level pages)
-//   <body data-page="safety-scanner" data-root="../">  (pages in subfolders)
+//   <body data-page="kh1-tracker" data-root="../">     (pages in subfolders)
 // data-page = name of the page's JSON file in lang/messages/<lang>/
 // data-root = relative path back to the public/ root
 class I18n {

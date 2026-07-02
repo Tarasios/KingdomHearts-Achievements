@@ -9,8 +9,8 @@
    ===================================================================== */
 
 (function () {
-  // every KH tool storage key starts with one of these
-  const KEY_RE = /^(bbs_|khcom_|kh1_|kh2_|khddd_|kh02_|kh3_)/;
+  // every KH tool storage key starts with one of these (see KH.KEYS)
+  const KEY_RE = KH.KEYS.RE;
   const FORMAT = "kh-tools-progress";
 
   function collect() {

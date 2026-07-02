@@ -29,8 +29,10 @@
            khddd_guide_v1 (this tool's owned-Spirit set).
    Game terms stay English in every language; only UI chrome is translated.
    ===================================================================== */
-document.addEventListener('DOMContentLoaded', async function () {
-await i18n.init();
+/* One closure holds the whole guide; KH.Page runs it after i18n is ready.
+   Language/storage re-renders are wired internally (renderAll near the
+   bottom), so no onLanguageChange/onStorage hooks are passed here. */
+KH.Page.boot({ async main() {
 
 const { el, esc } = KH;
 const translate = (key) => i18n.getMessage(key);
@@ -44,7 +46,7 @@ DG.boardLinks = (window.DG_BOARDS && window.DG_BOARDS.links) || DG.boardLinks ||
 const CREATE = DG.create;
 const GAME = window.TRACKER_GAME;
 const DDD_STORE_KEY = GAME.storeKey;
-const GUIDE_KEY = "khddd_guide_v1";
+const GUIDE_KEY = KH.KEYS.DDD_GUIDE;
 const CHARS = (GAME.chars || []).map(c => c.id);
 const CHAR_LABEL = {}; (GAME.chars || []).forEach(c => CHAR_LABEL[c.id] = c.label);
 const SPIRIT_IMG = "../images/dreamdrop/spirits/";
@@ -1234,4 +1236,4 @@ fillAbCats();
 renderAbilities();
 fillCmdCats();
 renderCommands();
-});
+} });
