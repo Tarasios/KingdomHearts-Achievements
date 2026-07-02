@@ -229,70 +229,56 @@ class GenericTrackerPage extends KH.Page {
     this.render();
   }
   /* In-game "journal" view: an ordered grid of treasure tiles (perRow wide),
-     grouped by world. Owned tiles show a chest, unowned a "?"; hovering either
-     shows the reward + where to find it. Clicking toggles owned. The grid keeps
-     the data order so a tile's position matches the in-game journal. */
+     grouped by world, rendered by the shared KH.widgets.journalGrid.
+     Owned tiles show a chest, unowned a "?"; hovering either shows the
+     reward + where to find it (from the lang-aware section columns).
+     Clicking toggles owned. The grid keeps the data order so a tile's
+     position matches the in-game journal. */
   journalGrid(container, section, view, panelState) {
     const store = this.sectionStore(view.storeId);
     const cfg = section.journal || {};
-    const perRow = cfg.perRow || 8;
     // Owned-icon mode (e.g. KH2 Puzzles): owned tiles show a single fixed image
     // (cfg.icon = { dir, file, fill }); unowned tiles fall back to the default
     // "missing" treasure tile. Without it, both states use the chest tiles.
     const ic = cfg.icon || null;
-    const q = (panelState.q || "").toLowerCase();
     const nameCol = section.cols.find(col => col.name) || section.cols[0];
     const secCols = section.cols.filter(col => !col.name);   // shown in the hover popover
-    const groups = []; let cur = null;
-    view.items.forEach((item, index) => {
-      if (!this.itemVisible(item, this.activeChar)) return;
-      const g = item.g || "";
-      if (!cur || cur.g !== g) { cur = { g, rows: [] }; groups.push(cur); }
-      cur.rows.push({ item, index });
-    });
-    const wrap = el("div", "jrnl");
-    wrap.style.setProperty("--jrnl-cols", perRow);
-    groups.forEach(group => {
-      let done = 0;
-      const grid = el("div", "jrnl-grid");
-      group.rows.forEach(({ item, index }) => {
+    const rewardOf = (item, index) => this.cellText(view.storeId, index, nameCol.k, item) || item.name;
+    KH.widgets.journalGrid(container, {
+      items: view.items,
+      perRow: cfg.perRow || 8,
+      query: panelState.q || "",
+      skip: item => !this.itemVisible(item, this.activeChar),
+      groupOf: item => item.g || "",
+      owned: (item, index) => !!store[index] || !!this.autoSource(section, item),
+      readonly: (item, index) => {
         const auto = this.autoSource(section, item);
-        const owned = !!store[index] || !!auto;
-        if (owned) done++;
-        const reward = this.cellText(view.storeId, index, nameCol.k, item) || item.name;
-        let tip = `<b>${esc(reward)}</b>`, hay = reward;
+        return (auto && !store[index]) ? this.format('gt-auto-tip', auto) : null;
+      },
+      toggle: (item, index) => {
+        if (item.gives) this.toggleWithGives(store, index, item);
+        else this.toggleCheck(store, index);
+      },
+      ownedTile: ic ? (() => ({ src: "../images/" + ic.dir + "/" + ic.file + ".png", classes: ["jt-icon"], fill: ic.fill })) : null,
+      ariaLabel: (item, index) => rewardOf(item, index),
+      tip: (item, owned, index) => {
+        let tip = `<b>${esc(rewardOf(item, index))}</b>`;
         secCols.forEach((col, ci) => {
           const txt = this.cellText(view.storeId, index, col.k, item) || "";
           if (!txt) return;
-          hay += " " + txt;
           tip += `<span class="${ci === 0 ? "kh-pop-area" : "kh-pop-where"}">${esc(txt)}</span>`;
         });
-        const tile = el("button", "jrnl-tile " + (owned ? "owned" : "unowned") + (ic && owned ? " jt-icon" : ""));
-        tile.type = "button";
-        tile.dataset.pop = tip;
-        tile.setAttribute("aria-pressed", owned ? "true" : "false");
-        tile.setAttribute("aria-label", reward);
-        if (ic && owned) {
-          const img = el("img", "jrnl-ic" + (ic.fill ? " fill" : ""));
-          img.src = "../images/" + ic.dir + "/" + ic.file + ".png"; img.alt = "";
-          tile.appendChild(img);
-        }
-        if (auto && !store[index]) { tile.disabled = true; tile.title = this.format('gt-auto-tip', auto); tile.classList.add("auto"); }
-        else if (item.gives) tile.onclick = () => this.toggleWithGives(store, index, item);
-        else tile.onclick = () => this.toggleCheck(store, index);
-        if (q && !hay.toLowerCase().includes(q)) tile.classList.add("dim");
-        grid.appendChild(tile);
-      });
-      if (group.g) {
-        const head = el("div", "jrnl-whead");
-        head.appendChild(el("span", "jrnl-wname", fmtText(group.g)));
-        head.appendChild(el("span", "jrnl-wcount", `${done} / ${group.rows.length}`));
-        wrap.appendChild(head);
+        return tip;
+      },
+      haystack: (item, index) => {
+        let hay = rewardOf(item, index);
+        secCols.forEach(col => {
+          const txt = this.cellText(view.storeId, index, col.k, item) || "";
+          if (txt) hay += " " + txt;
+        });
+        return hay;
       }
-      wrap.appendChild(grid);
-    });
-    container.appendChild(wrap);
-    this.popover.wire(wrap);
+    }, this.popover);
   }
 
   checklist(container, section, view, panelState) {

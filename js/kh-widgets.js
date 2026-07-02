@@ -150,6 +150,72 @@
       else document.documentElement.removeAttribute("data-char");
     },
 
+    /* Journal (in-game grid) view: an ordered grid of square tiles
+       (perRow wide) grouped like the checklist, with group headers
+       carrying a done-count. Owned tiles can show an icon; unowned tiles
+       show the default "missing" tile. Hovering shows the popover;
+       clicking toggles owned. Tile order matches the data so positions
+       line up with the in-game collection. spec:
+         items, perRow, query, tileExtra?          — list + layout
+         skip?(item)                               — hide ineligible items
+         groupOf(item)                             — group header text
+         owned(item, index) / toggle(item, index)  — state + click
+         readonly?(item, index) -> tip | null      — auto rows lock
+         ownedTile?(item) -> { src?, classes?, fill? } | null
+         tip(item, owned, index) -> popover html
+         ariaLabel?(item, index)                   — defaults to item.name
+         haystack(item, index)                     — filter text
+       `popover` is the page's KH.Popover (wired onto the grid). */
+    journalGrid(container, spec, popover) {
+      const perRow = spec.perRow || 9;
+      const query = (spec.query || "").toLowerCase();
+      const groups = []; let cur = null;
+      spec.items.forEach((item, index) => {
+        if (spec.skip && spec.skip(item)) return;
+        const g = spec.groupOf(item) || "";
+        if (!cur || cur.g !== g) { cur = { g, rows: [] }; groups.push(cur); }
+        cur.rows.push({ item, index });
+      });
+      const wrap = el("div", "jrnl");
+      wrap.style.setProperty("--jrnl-cols", perRow);
+      groups.forEach(group => {
+        let done = 0;
+        const grid = el("div", "jrnl-grid");
+        group.rows.forEach(({ item, index }) => {
+          const owned = spec.owned(item, index);
+          if (owned) done++;
+          const tile = el("button", "jrnl-tile " + (owned ? "owned" : "unowned") + (spec.tileExtra ? " " + spec.tileExtra : ""));
+          tile.type = "button";
+          tile.dataset.pop = spec.tip(item, owned, index);
+          tile.setAttribute("aria-pressed", owned ? "true" : "false");
+          tile.setAttribute("aria-label", spec.ariaLabel ? spec.ariaLabel(item, index) : item.name);
+          if (spec.ownedTile && owned) {
+            const t = spec.ownedTile(item);
+            if (t && t.classes) t.classes.forEach(cls => tile.classList.add(cls));
+            if (t && t.src) {
+              const img = el("img", "jrnl-ic" + (t.fill ? " fill" : ""));
+              img.src = t.src; img.alt = "";
+              tile.appendChild(img);
+            }
+          }
+          const readonlyTip = spec.readonly && spec.readonly(item, index);
+          if (readonlyTip) { tile.disabled = true; tile.classList.add("auto"); tile.title = readonlyTip; }
+          else tile.onclick = () => spec.toggle(item, index);
+          if (query && !spec.haystack(item, index).toLowerCase().includes(query)) tile.classList.add("dim");
+          grid.appendChild(tile);
+        });
+        if (group.g) {
+          const head = el("div", "jrnl-whead");
+          head.appendChild(el("span", "jrnl-wname", fmtText(group.g)));
+          head.appendChild(el("span", "jrnl-wcount", `${done} / ${group.rows.length}`));
+          wrap.appendChild(head);
+        }
+        wrap.appendChild(grid);
+      });
+      container.appendChild(wrap);
+      popover.wire(wrap);
+    },
+
     /* Worlds-summary entry table: one checkbox row per collectible. Each
        entry: { done, name, where, onToggle?, swatch?: {c, t},
                 auto?: {tip, label?} } — auto rows are read-only. */

@@ -382,60 +382,25 @@ class BbsTrackerPage extends KH.Page {
     else container.appendChild(el("div", "empty", this.translate('bt-nothing')));
   }
 
-  /* ---------- journal (in-game grid) view ----------
-     An ordered grid of square tiles (perRow wide), grouped like the checklist
-     (Treasures by world, Commands by category). Owned tiles show the item's
-     icon over its category gradient; unowned tiles all show cmd-incomplete /
-     the "missing chest". Hovering shows what the item is + where to find it;
-     clicking toggles owned. Tile order matches the data so positions line up
-     with the in-game collection. spec:
-     { items, store, perRow, groupOf(item), owned(item,index),
-       toggle(item,index), tip(item) -> html, readonly?(item,index),
-       ownedTile(item) -> {icon,cls,fill} | null } */
+  /* Journal (in-game grid) view — the shared KH.widgets.journalGrid,
+     with this engine's { icon, cls, fill } tile shape (see CMD_TILE /
+     commandTile above) adapted to the widget's { src, classes, fill }. */
   journalGrid(container, spec) {
-    const perRow = spec.perRow || 9;
-    const query = (spec.query || "").toLowerCase();
-    const groups = []; let cur = null;
-    spec.items.forEach((item, index) => {
-      if (spec.skip && spec.skip(item)) return;
-      const g = spec.groupOf(item) || "";
-      if (!cur || cur.g !== g) { cur = { g, rows: [] }; groups.push(cur); }
-      cur.rows.push({ item, index });
-    });
-    const wrap = el("div", "jrnl");
-    wrap.style.setProperty("--jrnl-cols", perRow);
-    groups.forEach(group => {
-      let done = 0;
-      const grid = el("div", "jrnl-grid");
-      group.rows.forEach(({ item, index }) => {
-        const owned = spec.owned(item, index);
-        if (owned) done++;
-        const tile = el("button", "jrnl-tile " + (owned ? "owned" : "unowned") + (spec.tileExtra ? " " + spec.tileExtra : ""));
-        tile.type = "button";
-        tile.dataset.pop = spec.tip(item, owned);
-        tile.setAttribute("aria-pressed", owned ? "true" : "false");
-        tile.setAttribute("aria-label", item.name);
-        if (spec.ownedTile && owned) {
-          const t = spec.ownedTile(item);
-          if (t && t.cls) tile.classList.add("cat-" + t.cls);
-          if (t && t.icon) { const img = el("img", "jrnl-ic" + (t.fill ? " fill" : "")); img.src = "../images/commands/cmd-" + t.icon + ".png"; img.alt = ""; tile.appendChild(img); }
+    if (spec.ownedTile) {
+      const toTile = spec.ownedTile;
+      spec = Object.assign({}, spec, {
+        ownedTile: item => {
+          const t = toTile(item);
+          if (!t) return null;
+          return {
+            src: t.icon ? "../images/commands/cmd-" + t.icon + ".png" : null,
+            classes: t.cls ? ["cat-" + t.cls] : [],
+            fill: t.fill
+          };
         }
-        const ro = spec.readonly && spec.readonly(item, index);
-        if (ro) { tile.disabled = true; tile.classList.add("auto"); tile.title = ro; }
-        else tile.onclick = () => spec.toggle(item, index);
-        if (query && !(spec.haystack(item)).toLowerCase().includes(query)) tile.classList.add("dim");
-        grid.appendChild(tile);
       });
-      if (group.g) {
-        const head = el("div", "jrnl-whead");
-        head.appendChild(el("span", "jrnl-wname", fmtText(group.g)));
-        head.appendChild(el("span", "jrnl-wcount", `${done} / ${group.rows.length}`));
-        wrap.appendChild(head);
-      }
-      wrap.appendChild(grid);
-    });
-    container.appendChild(wrap);
-    this.popover.wire(wrap);
+    }
+    KH.widgets.journalGrid(container, spec, this.popover);
   }
 
   /* The Checklist | Journal segmented control for a journal-capable tab. */
