@@ -22,8 +22,10 @@
                                 / renderCrystals / renderSearchAbility / renderTracker
    ===================================================================== */
 
-document.addEventListener('DOMContentLoaded', async function () {
-await i18n.init();
+/* One closure holds the whole calculator; KH.Page runs it after i18n is
+   ready. Language/storage re-renders are wired internally (rerenderAll at
+   the bottom), so no onLanguageChange/onStorage hooks are passed here. */
+KH.Page.boot({ async main() {
 
 const { el, esc } = KH;
 const translate = (key) => i18n.getMessage(key);
@@ -735,4 +737,4 @@ window.addEventListener("storage", (event) => {
   if (event.key === ACH_KEY) rerenderAll();
 });
 
-});
+} });
