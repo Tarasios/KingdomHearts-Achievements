@@ -12,7 +12,7 @@
    owns in the melding calculator are shown as unlocked here.
 
    Where to look (top → bottom):
-     persistent state ......... blankStore / loadStore / saveStore
+     persistent state ......... PROGRESS / VIEW / charPref (js/kh-store.js)
      command auto-unlocks ..... commandAuto (meld / mission / treasure / …)
      other cross-off cascades . unversedAutoFn / recordsAutoFn / charactersAutoFn
                                 + recordsLinkFn (two-way linked rows)
@@ -32,57 +32,31 @@ const format = (key, ...args) => i18n.format(key, ...args);
 
 const CHARS = KH.BBS_CHARS;
 const CHAR_LABEL = KH.BBS_CHAR_LABEL;
-const PER_CHAR_SECTIONS = ["records", "characters", "unversed", "commands", "treasures"];
-const SHARED_SECTIONS = ["trophies", "ingame", "reports", "stickers", "patissier", "warrior"];
+const PER_CHAR_SECTIONS = KH.BbsStore.PER_CHAR_SECTIONS;
+const SHARED_SECTIONS = KH.BbsStore.SHARED_SECTIONS;
 // Ingredients are tracked per character (each collects them in their own
 // playthrough); the flavor data list is shared but the store is per-char.
 
-/* ---------- persistent state ---------- */
-const PROGRESS_KEY = "bbs_progress_v1";
-const MELD_KEY = "bbs_meld_tracker_v1";
-const CHAR_KEY = MELD_KEY + "_char"; // shared with the melding calculator
+/* ---------- persistent state (persistence classes: js/kh-store.js) ----------
+   PROGRESS owns the nested BBS store shape, its load-merge and the old
+   shared→per-character arena migration; STORE is a direct handle on its
+   data that the render code reads/mutates (re-pointed after reset/reload). */
+const PROGRESS_KEY = KH.KEYS.BBS_PROGRESS;
+const MELD_KEY = KH.KEYS.MELD;
+const CHAR_KEY = KH.KEYS.MELD_CHAR; // shared with the melding calculator
 
-function blankStore() {
-  const store = { shared: {}, missions: { done: {}, rank: {} } };
-  SHARED_SECTIONS.forEach(section => { store.shared[section] = {}; });
-  CHARS.forEach(char => { store[char] = {}; PER_CHAR_SECTIONS.forEach(section => { store[char][section] = {}; }); store[char].flavors = {}; store[char].arena = {}; });
-  return store;
-}
-function loadStore() {
-  const store = blankStore();
-  try {
-    const raw = localStorage.getItem(PROGRESS_KEY);
-    if (raw) {
-      const saved = JSON.parse(raw);
-      SHARED_SECTIONS.forEach(section => { if (saved.shared && saved.shared[section]) store.shared[section] = saved.shared[section]; });
-      if (saved.missions) { store.missions.done = saved.missions.done || {}; store.missions.rank = saved.missions.rank || {}; }
-      CHARS.forEach(char => {
-        PER_CHAR_SECTIONS.forEach(section => { if (saved[char] && saved[char][section]) store[char][section] = saved[char][section]; });
-        if (saved[char] && saved[char].flavors) store[char].flavors = saved[char].flavors;
-        // arena used to be a single shared section; migrate old progress to
-        // every character so it isn't lost now that it's per-character.
-        if (saved[char] && saved[char].arena) store[char].arena = saved[char].arena;
-        else if (saved.shared && saved.shared.arena) store[char].arena = Object.assign({}, saved.shared.arena);
-      });
-    }
-  } catch (e) { /* fresh store */ }
-  return store;
-}
-let STORE = loadStore();
-function saveStore() { try { localStorage.setItem(PROGRESS_KEY, JSON.stringify(STORE)); } catch (e) { /* private browsing */ } }
+const PROGRESS = new KH.BbsStore(PROGRESS_KEY);
+let STORE = PROGRESS.data;
+function saveStore() { PROGRESS.save(); }
 
-let activeChar = (function () {
-  try { const saved = localStorage.getItem(CHAR_KEY); return CHARS.includes(saved) ? saved : "terra"; }
-  catch (e) { return "terra"; }
-})();
-function setActiveChar(char) { activeChar = char; try { localStorage.setItem(CHAR_KEY, char); } catch (e) { /* ignore */ } }
+const charPref = new KH.CharPref(CHAR_KEY, CHARS, "terra");
+let activeChar = charPref.id;
+function setActiveChar(char) { activeChar = char; charPref.set(char); }
 
 /* ---------- view mode (checklist vs journal), persisted per tab ---------- */
-const VIEW_KEY = "bbs_view_v1";
-let VIEW = (function () { try { return JSON.parse(localStorage.getItem(VIEW_KEY)) || {}; } catch (e) { return {}; } })();
-function saveView() { try { localStorage.setItem(VIEW_KEY, JSON.stringify(VIEW)); } catch (e) { /* private browsing */ } }
-function tabJournalOn(tabId) { return VIEW[tabId] === "journal"; }
-function setTabJournal(tabId, on) { if (on) VIEW[tabId] = "journal"; else delete VIEW[tabId]; saveView(); }
+const VIEW = new KH.ViewStore(KH.KEYS.BBS_VIEW);
+function tabJournalOn(tabId) { return VIEW.journalOn(tabId); }
+function setTabJournal(tabId, on) { VIEW.setJournal(tabId, on); }
 
 /* ---------- shared hover popover (journal tiles) ---------- */
 let _pop = null;
@@ -671,7 +645,7 @@ function buildPanels() {
     if (id === "trophies") {
       const resetBtn = el("button", "clearbtn", translate('bt-reset'));
       resetBtn.onclick = () => {
-        if (confirm(translate('bt-reset-confirm'))) { STORE = blankStore(); saveStore(); render(); }
+        if (confirm(translate('bt-reset-confirm'))) { PROGRESS.reset(); STORE = PROGRESS.data; render(); }
       };
       toolbar.appendChild(resetBtn);
     }
@@ -1304,7 +1278,7 @@ document.addEventListener('i18n:updated', () => { buildPanels(); render(); });
 
 /* Live-sync when the melding calculator (or another tab) changes storage. */
 window.addEventListener("storage", (event) => {
-  if (event.key === PROGRESS_KEY) STORE = loadStore();
+  if (event.key === PROGRESS_KEY) { PROGRESS.reload(); STORE = PROGRESS.data; }
   if (event.key === CHAR_KEY && CHARS.includes(event.newValue)) { activeChar = event.newValue; syncCharButtons(); }
   if (event.key === PROGRESS_KEY || event.key === MELD_KEY || event.key === CHAR_KEY) render();
 });

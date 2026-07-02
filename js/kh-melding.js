@@ -107,7 +107,7 @@ function commandAllowed(cmd, char) {
    Progress is tracked separately for Terra, Ventus, Aqua in localStorage:
      abilities: { "Magic Haste": craftedCount, ... }
      owned:     [ "Fira", "Sliding Dash", ... ] */
-const STORE_KEY = "bbs_meld_tracker_v1";
+const STORE_KEY = KH.KEYS.MELD;
 const CHARS = KH.BBS_CHARS;
 function blankChar() { return { abilities: {}, owned: [] }; }
 function loadStore() {
@@ -120,12 +120,11 @@ function loadStore() {
 const STORE = loadStore();
 function saveStore() { try { localStorage.setItem(STORE_KEY, JSON.stringify(STORE)); } catch (e) { /* private browsing */ } }
 
-// active character is persistent and always set (defaults to Terra)
-let activeChar = (function () {
-  try { const saved = localStorage.getItem(STORE_KEY + "_char"); return CHARS.includes(saved) ? saved : "terra"; }
-  catch (e) { return "terra"; }
-})();
-function setActiveChar(char) { activeChar = char; try { localStorage.setItem(STORE_KEY + "_char", char); } catch (e) { /* ignore */ } }
+// active character is persistent and always set (defaults to Terra);
+// the key is shared with the BBS tracker (see KH.KEYS.MELD_CHAR)
+const charPref = new KH.CharPref(KH.KEYS.MELD_CHAR, CHARS, "terra");
+let activeChar = charPref.id;
+function setActiveChar(char) { activeChar = char; charPref.set(char); }
 
 function curAbilities() { return STORE[activeChar].abilities; }
 function curOwnedSet() { return new Set(STORE[activeChar].owned); }
@@ -149,7 +148,7 @@ function isOwned(cmd) { return STORE[activeChar].owned.includes(cmd); }
    BBS_DATA.perChar[char].commands — commands AND the "Miscellaneous -
    Abilities" entries live in that same list. We read it to show
    ownership here, and the Meld button writes back into it. */
-const ACH_KEY = "bbs_progress_v1";
+const ACH_KEY = KH.KEYS.BBS_PROGRESS;
 function loadAch() { try { return JSON.parse(localStorage.getItem(ACH_KEY)) || {}; } catch (e) { return {}; } }
 let ACH = loadAch();
 const ACH_INDEX = {};   // char -> Map(name -> index in the tracker's commands list)

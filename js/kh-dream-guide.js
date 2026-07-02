@@ -46,7 +46,7 @@ DG.boardLinks = (window.DG_BOARDS && window.DG_BOARDS.links) || DG.boardLinks ||
 const CREATE = DG.create;
 const GAME = window.TRACKER_GAME;
 const DDD_STORE_KEY = GAME.storeKey;
-const GUIDE_KEY = "khddd_guide_v1";
+const GUIDE_KEY = KH.KEYS.DDD_GUIDE;
 const CHARS = (GAME.chars || []).map(c => c.id);
 const CHAR_LABEL = {}; (GAME.chars || []).forEach(c => CHAR_LABEL[c.id] = c.label);
 const SPIRIT_IMG = "../images/dreamdrop/spirits/";

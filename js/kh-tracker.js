@@ -33,7 +33,7 @@
    Progress is keyed by item index per section, in localStorage.
 
    Where to look:
-     persistent state ....... loadStore / saveStore / sectionStore / toggleCheck
+     persistent state ....... PROGRESS / VIEW / charPref (classes in js/kh-store.js)
      counting ............... entryCount / overallCount / trophyProgress
      checklist table ........ checklist / toggleGroup
      page skeleton .......... buildPage / selectTab
@@ -54,22 +54,19 @@ const CHARS = game.chars || [];
 const CHAR_LABEL = {};
 CHARS.forEach(character => { CHAR_LABEL[character.id] = character.label; });
 
-/* ---------- persistent state ---------- */
-function loadStore() {
-  try { const raw = localStorage.getItem(game.storeKey); return raw ? JSON.parse(raw) : {}; }
-  catch (e) { return {}; }
-}
-let STORE = loadStore();
-function saveStore() { try { localStorage.setItem(game.storeKey, JSON.stringify(STORE)); } catch (e) { /* private browsing */ } }
-function sectionStore(storeId) { if (!STORE[storeId]) STORE[storeId] = {}; return STORE[storeId]; }
-function toggleCheck(store, key) { if (store[key]) delete store[key]; else store[key] = true; saveStore(); render(); }
+/* ---------- persistent state (persistence classes: js/kh-store.js) ----------
+   PROGRESS owns loading/saving/semantics; STORE is a direct handle on its
+   data that the render code reads/mutates (re-pointed after reset/reload). */
+const PROGRESS = new KH.TrackerStore(game.storeKey);
+let STORE = PROGRESS.data;
+function saveStore() { PROGRESS.save(); }
+function sectionStore(storeId) { return PROGRESS.section(storeId); }
+function toggleCheck(store, key) { PROGRESS.toggle(store, key); render(); }
 
 /* ---------- view mode (checklist vs journal), persisted per tab ---------- */
-function loadView() { try { return JSON.parse(localStorage.getItem(game.storeKey + ":view")) || {}; } catch (e) { return {}; } }
-let VIEW = loadView();
-function saveView() { try { localStorage.setItem(game.storeKey + ":view", JSON.stringify(VIEW)); } catch (e) { /* ignore */ } }
-function tabJournalOn(tabId) { return VIEW[tabId] === "journal"; }
-function setTabJournal(tabId, on) { if (on) VIEW[tabId] = "journal"; else delete VIEW[tabId]; saveView(); }
+const VIEW = new KH.ViewStore(KH.KEYS.view(game.storeKey));
+function tabJournalOn(tabId) { return VIEW.journalOn(tabId); }
+function setTabJournal(tabId, on) { VIEW.setJournal(tabId, on); }
 
 /* ---------- shared hover popover (journal tiles) ---------- */
 let _pop = null;
@@ -92,11 +89,10 @@ function wirePop(container) {
 }
 window.addEventListener("scroll", hidePop, true);
 /* Counter sections store a number per item (0..max); 0 is removed so the
-   store stays sparse. */
+   store stays sparse (see KH.TrackerStore.setCount). */
 function setItemCount(store, index, value, max) {
-  value = Math.min(Math.max(value, 0), max);
-  if (value <= 0) delete store[index]; else store[index] = value;
-  saveStore(); render();
+  PROGRESS.setCount(store, index, value, max);
+  render();
 }
 /* Cross-section cascade: a checked item may auto-grant other collectibles —
    e.g. a Link Portal grants the rare Nightmare it contains and the recipe /
@@ -126,12 +122,9 @@ function toggleWithGives(store, key, item) {
   saveStore(); render();
 }
 
-let activeChar = (function () {
-  if (!CHARS.length) return null;
-  try { const saved = localStorage.getItem(game.charKey); return CHARS.some(c => c.id === saved) ? saved : CHARS[0].id; }
-  catch (e) { return CHARS[0].id; }
-})();
-function setActiveChar(charId) { activeChar = charId; try { localStorage.setItem(game.charKey, charId); } catch (e) { /* ignore */ } }
+const charPref = CHARS.length ? new KH.CharPref(game.charKey, CHARS.map(c => c.id), CHARS[0].id) : null;
+let activeChar = charPref ? charPref.id : null;
+function setActiveChar(charId) { activeChar = charId; if (charPref) charPref.set(charId); }
 
 /* ---------- item display text from the lang file ----------
    All user-facing item text (names, "where to find it", "how to obtain
@@ -695,7 +688,7 @@ function buildPage() {
     if (hasTrophies) {
       const resetBtn = el("button", "clearbtn", translate('gt-reset'));
       resetBtn.onclick = () => {
-        if (confirm(translate('gt-reset-confirm'))) { STORE = {}; saveStore(); render(); }
+        if (confirm(translate('gt-reset-confirm'))) { PROGRESS.reset(); STORE = PROGRESS.data; render(); }
       };
       toolbar.appendChild(resetBtn);
     }
@@ -996,7 +989,7 @@ render();
 
 document.addEventListener('i18n:updated', () => { buildPage(); render(); });
 window.addEventListener("storage", (event) => {
-  if (event.key === game.storeKey) { STORE = loadStore(); render(); }
+  if (event.key === game.storeKey) { PROGRESS.reload(); STORE = PROGRESS.data; render(); }
   if (game.charKey && event.key === game.charKey && CHARS.some(c => c.id === event.newValue)) {
     activeChar = event.newValue; buildPage(); render();
   }
