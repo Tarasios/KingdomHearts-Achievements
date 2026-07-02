@@ -4,21 +4,16 @@
    module + localStorage, without rendering — so the landing page can show
    progress for every game whether or not its tracker was opened.
 
-   The counting deliberately MIRRORS the two tracker engines (kept in sync
-   by hand, since this file must run without a DOM):
-     trackerTotals(game) — generic engine, mirrors overallCount() in
-                           js/kh-tracker.js (variants, multi-checks, the
-                           cross-section autoChecks auto-completion).
-     bbsTotals()         — Birth by Sleep, mirrors the dashboard totals in
-                           js/kh-bbs-tracker.js (per-character + shared
-                           sections, command auto-unlocks from melding /
-                           missions / treasures). Prefers the exact total
-                           the BBS tracker caches under bbs_totals_v1.
-   Achievement-only progress (platform trophies, not full 100%):
-     trackerAchievements(game) / bbsAchievements().
+   This is a thin façade: the actual counting rules live in
+   js/kh-counting.js (KH.GameCounter — the SAME class the tracker engine
+   uses live), bound here to a freshly-parsed localStorage snapshot.
+     trackerTotals(game) / trackerAchievements(game) — generic games
+     bbsTotals() / bbsAchievements() — Birth by Sleep (prefers the exact
+       total the BBS tracker caches under bbs_totals_v1)
 
    Generic games register on window.KH_GAMES (see the kh-*-tracker-data.js
-   modules); BBS exposes window.KH_BBS_DATA. Needs js/kh-common.js (KH.*).
+   modules); BBS exposes window.KH_BBS_DATA. Needs js/kh-common.js (KH.*),
+   js/kh-store.js and js/kh-counting.js.
    ===================================================================== */
 var KHSummary = (function () {
   function getStore(key) {
@@ -26,74 +21,12 @@ var KHSummary = (function () {
     catch (e) { return {}; }
   }
 
-  /* ---------- generic engine (mirror of js/kh-tracker.js) ---------- */
-  function findSec(game, sectionId) {
-    for (var tabIndex = 0; tabIndex < game.tabs.length; tabIndex++) {
-      var sections = game.tabs[tabIndex].sections;
-      for (var secIndex = 0; secIndex < sections.length; secIndex++) if (sections[secIndex].id === sectionId) return sections[secIndex];
-    }
-    return null;
+  /* ---------- generic games (KH.GameCounter over a snapshot) ---------- */
+  function counterFor(game) {
+    var snapshot = getStore(game.storeKey);   // parsed once per call
+    return new KH.GameCounter(game, function () { return snapshot; });
   }
-  function checkKey(index, checkId, checkIndex) { return checkIndex === 0 ? String(index) : index + "::" + checkId; }
-  function isChecked(store, index, section, checkIndex) {
-    var checks = section && section.checks;
-    return checks ? !!store[checkKey(index, checks[checkIndex].k, checkIndex)] : !!store[index];
-  }
-  function autoDone(game, allStores, section, item) {
-    if (!game.autoChecks) return false;
-    for (var ruleIndex = 0; ruleIndex < game.autoChecks.length; ruleIndex++) {
-      var rule = game.autoChecks[ruleIndex];
-      if (rule.to !== section.id) continue;
-      var sourceSec = findSec(game, rule.from), sourceStore = allStores[rule.from] || {};
-      if (!sourceSec) continue;
-      for (var mission in rule.map) {
-        if (rule.map[mission] !== item[rule.toKey || "name"]) continue;
-        var sourceItems = sourceSec.items || [];
-        var checkIndex = 0;
-        if (rule.check) {
-          checkIndex = -1;
-          for (var ci = 0; ci < sourceSec.checks.length; ci++) if (sourceSec.checks[ci].k === rule.check) { checkIndex = ci; break; }
-        }
-        if (checkIndex < 0) continue;
-        for (var itemIndex = 0; itemIndex < sourceItems.length; itemIndex++) if (sourceItems[itemIndex].name === mission && isChecked(sourceStore, itemIndex, sourceSec, checkIndex)) return true;
-      }
-    }
-    return false;
-  }
-  // Mirrors checkApplies/itemMax/counterValue in js/kh-tracker.js.
-  function checkApplies(item, check) { return item[check.k] !== false; }
-  function itemMax(item) { var max = +item.max; return max > 0 ? max : 1; }
-  function counterValue(store, index, item) {
-    var raw = store[index];
-    if (raw === true) return itemMax(item);
-    return Math.min(Math.max(+raw || 0, 0), itemMax(item));
-  }
-  function entryCount(game, allStores, section, storeId, items) {
-    var store = allStores[storeId] || {}, checks = section && section.checks, done = 0, total = 0;
-    (items || []).forEach(function (item, index) {
-      if (section && section.counter) { total += itemMax(item); done += counterValue(store, index, item); }
-      else if (checks) checks.forEach(function (check, checkIndex) { if (!checkApplies(item, check)) return; total++; if (store[checkKey(index, check.k, checkIndex)]) done++; });
-      else { total++; if (store[index] || autoDone(game, allStores, section, item)) done++; }
-    });
-    return [done, total];
-  }
-  function trackerTotals(game) {
-    var allStores = getStore(game.storeKey), chars = game.chars || [], done = 0, total = 0;
-    game.tabs.forEach(function (tab) {
-      tab.sections.forEach(function (section) {
-        if (section.variants) {
-          chars.forEach(function (char) {
-            var count = entryCount(game, allStores, section, section.id + "-" + char.id, section.variants[char.id] || []);
-            done += count[0]; total += count[1];
-          });
-        } else {
-          var count = entryCount(game, allStores, section, section.id, section.items);
-          done += count[0]; total += count[1];
-        }
-      });
-    });
-    return [done, total];
-  }
+  function trackerTotals(game) { return counterFor(game).overallCount(); }
 
   /* ---------- Birth by Sleep (mirror of js/kh-bbs-tracker.js) ---------- */
   var BBS_CHARS = KH.BBS_CHARS;
@@ -180,17 +113,7 @@ var KHSummary = (function () {
 
   /* Achievement (platform-trophy) progress only — the trophies list — as
    opposed to full 100% completion (everything tracked). */
-  function trackerAchievements(game) {
-    var allStores = getStore(game.storeKey), done = 0, total = 0;
-    game.tabs.forEach(function (tab) {
-      tab.sections.forEach(function (section) {
-        if (!section.trophies) return;
-        var count = entryCount(game, allStores, section, section.id, section.items);
-        done += count[0]; total += count[1];
-      });
-    });
-    return [done, total];
-  }
+  function trackerAchievements(game) { return counterFor(game).achievementsCount(); }
   function bbsAchievements() {
     var data = window.KH_BBS_DATA;
     if (!data) return [0, 0];

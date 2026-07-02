@@ -34,7 +34,7 @@
 
    Where to look:
      persistent state ....... PROGRESS / VIEW / charPref (classes in js/kh-store.js)
-     counting ............... entryCount / overallCount / trophyProgress
+     counting ............... KH.GameCounter (js/kh-counting.js) + aliases
      checklist table ........ checklist / toggleGroup
      page skeleton .......... buildPage / selectTab
      Worlds summary ......... renderWorlds (opt-in via game.worldSummary)
@@ -126,6 +126,25 @@ const charPref = CHARS.length ? new KH.CharPref(game.charKey, CHARS.map(c => c.i
 let activeChar = charPref ? charPref.id : null;
 function setActiveChar(charId) { activeChar = charId; if (charPref) charPref.set(charId); }
 
+/* ---------- counting (single source: KH.GameCounter, js/kh-counting.js) ----------
+   The counter reads the live STORE through a closure (so reset/reload
+   re-point automatically) and resolves trophy `match` text through the
+   lang file. The thin aliases keep the render code below reading
+   naturally; the landing page binds the same class to a localStorage
+   snapshot instead (js/kh-summary.js). */
+const counter = new KH.GameCounter(game, () => STORE, { textOf: (storeId, index, key, item) => cellText(storeId, index, key, item) });
+const findSec = sectionId => counter.findSec(sectionId);
+const findList = storeId => counter.findList(storeId);
+const checkKey = (index, checkId, checkIndex) => counter.checkKey(index, checkId, checkIndex);
+const checkApplies = (item, check) => counter.checkApplies(item, check);
+const itemMax = item => counter.itemMax(item);
+const counterValue = (store, index, item) => counter.counterValue(store, index, item);
+const itemVisible = (item, charId) => counter.itemVisible(item, charId);
+const autoSource = (section, item) => counter.autoSource(section, item);
+const entryCount = view => counter.entryCount(view);
+const overallCount = () => counter.overallCount();
+const trophyProgress = ref => counter.trophyProgress(ref);
+
 /* ---------- item display text from the lang file ----------
    All user-facing item text (names, "where to find it", "how to obtain
    it", …) lives in the page's lang JSON under an "items" map:
@@ -155,10 +174,6 @@ function groupNote(storeId, sectionId, groupName) {
   const bySection = messages['gnote-' + sectionId];
   return (bySection && typeof bySection === "object" && bySection[groupName]) || "";
 }
-
-/* Item-level character filter: items tagged c only count/show for that
-   character. With no char filter (dashboard totals) everything counts. */
-function itemVisible(item, charId) { return !item.c || !charId || item.c === charId; }
 
 /* Game tabs, plus a synthetic "Worlds" summary tab when the game declares
    a game.worldSummary config (see renderWorlds). Inserted second so it sits
@@ -211,169 +226,9 @@ function allLists() {
   }));
   return lists;
 }
-/* Site total: every store counted once, unfiltered (c-tagged items are
-   each completable by exactly one character). */
-function overallCount() {
-  let done = 0, total = 0;
-  game.tabs.forEach(tab => tab.sections.forEach(section => {
-    if (section.variants) {
-      CHARS.forEach(character => {
-        const [secDone, secTotal] = entryCount({ section, storeId: section.id + "-" + character.id, items: section.variants[character.id] || [] });
-        done += secDone; total += secTotal;
-      });
-    } else {
-      const [secDone, secTotal] = entryCount({ section, storeId: section.id, items: section.items });
-      done += secDone; total += secTotal;
-    }
-  }));
-  return [done, total];
-}
-function findList(storeId) {
-  for (const tab of game.tabs) for (const section of tab.sections) {
-    if (section.variants) {
-      for (const character of CHARS) if (section.id + "-" + character.id === storeId) return section.variants[character.id] || [];
-    } else if (section.id === storeId) return section.items;
-  }
-  return null;
-}
-function findSec(sectionId) {
-  for (const tab of game.tabs) for (const section of tab.sections) if (section.id === sectionId) return section;
-  return null;
-}
-
-/* ---------- multi-checkbox + cross-section auto ----------
-   A section may declare `checks: [{k, th}, ...]`: each item then has one
-   checkbox per check instead of a single one. The first check keeps the
-   bare item index as its store key (backward-compatible "done"); extra
-   checks are keyed `<i>::<k>`.
-   `game.autoChecks: [{from, check, to, map, toKey?}]` auto-completes items
-   in the `to` section: when the `from` section's mission (a map key) has
-   its `check` set (primary checkbox if omitted), the mapped item (the
-   value, matched on `toKey`/name) counts as done and locks. */
-function checkKey(index, checkId, checkIndex) { return checkIndex === 0 ? String(index) : index + "::" + checkId; }
-function isChecked(store, index, section, checkIndex) {
-  const checks = section && section.checks;
-  return checks ? !!store[checkKey(index, checks[checkIndex].k, checkIndex)] : !!store[index];
-}
-/* Source mission whose S-rank (etc.) auto-completed this item, or null. */
-function autoSource(section, item) {
-  if (!game.autoChecks) return null;
-  for (const rule of game.autoChecks) {
-    if (rule.to !== section.id) continue;
-    const sourceSec = findSec(rule.from), sourceStore = STORE[rule.from] || {};
-    if (!sourceSec) continue;
-    for (const mission in rule.map) {
-      if (rule.map[mission] !== item[rule.toKey || "name"]) continue;
-      const checkIndex = rule.check ? sourceSec.checks.findIndex(c => c.k === rule.check) : 0;
-      if (checkIndex < 0) continue;
-      // Any source row with this name being checked counts (a minigame can
-      // have several challenge rows; clearing any of them completes it).
-      for (let sourceIndex = 0; sourceIndex < (sourceSec.items || []).length; sourceIndex++) {
-        if (sourceSec.items[sourceIndex].name === mission && isChecked(sourceStore, sourceIndex, sourceSec, checkIndex)) return mission;
-      }
-    }
-  }
-  return null;
-}
-function autoDone(section, item) { return !!autoSource(section, item); }
-
-/* A section's checks need not all apply to every item: an item opts a check
-   OUT by setting that check's key to false in the DATA (e.g. a Spirit-only
-   Dream Eater carries nightmare:false, rare:false). Absent or true means the
-   check applies, so check-sections whose items don't carry the flags behave
-   exactly as before. */
-function checkApplies(item, check) { return item[check.k] !== false; }
-/* Counter sections (section.counter) track 0..max copies per item instead of
-   a single checkbox; the store holds a number. A legacy `true` (an item
-   completed before the section became a counter) counts as fully maxed. */
-function itemMax(item) { const max = +item.max; return max > 0 ? max : 1; }
-function counterValue(store, index, item) {
-  const raw = store[index];
-  if (raw === true) return itemMax(item);
-  return Math.min(Math.max(+raw || 0, 0), itemMax(item));
-}
-
-/* Count one list (a resolved section view). Handles counter sections (each
-   item contributes its max), multi-check sections (every applicable check
-   counts) and cross-section auto-completion. */
-function entryCount(view) {
-  const section = view.section, store = STORE[view.storeId] || {}, checks = section && section.checks, charId = view.charId || null;
-  let done = 0, total = 0;
-  (view.items || []).forEach((item, index) => {
-    if (!itemVisible(item, charId)) return;
-    if (section && section.counter) { total += itemMax(item); done += counterValue(store, index, item); }
-    else if (checks) checks.forEach((check, checkIndex) => { if (!checkApplies(item, check)) return; total++; if (store[checkKey(index, check.k, checkIndex)]) done++; });
-    else { total++; if (store[index] || autoDone(section, item)) done++; }
-  });
-  return [done, total];
-}
-/* Progress for a trophy: a whole section (string storeId), an array of those
-   (summed — e.g. a whole multi-section tab), or a subset
-   { section, nameEndsWith?, match?:{field,value}, check?, perGroup? } — a
-   name-filtered slice, a field-matched slice (field read via the lang text),
-   a single check dimension across every item, or (perGroup) one unit per item
-   group, done when any item in the group has the check. */
-function trophyProgress(ref) {
-  if (Array.isArray(ref)) {   // sum several sections (e.g. the whole Synthesis tab)
-    let done = 0, total = 0;
-    ref.forEach(part => { const progress = trophyProgress(part); if (progress) { done += progress[0]; total += progress[1]; } });
-    return [done, total];
-  }
-  if (typeof ref === "string") {
-    const items = findList(ref);
-    return items ? entryCount({ section: findSec(ref), storeId: ref, items }) : null;
-  }
-  const section = findSec(ref.section);
-  if (!section) return null;
-  const store = STORE[ref.section] || {};
-  const checkIndex = (ref.check !== undefined && section.checks) ? section.checks.findIndex(c => c.k === ref.check) : -1;
-  const checkObj = checkIndex >= 0 ? section.checks[checkIndex] : null;
-  const nameOk = item => {
-    if (ref.nameStartsWith && !String(item.name).startsWith(ref.nameStartsWith)) return false;
-    if (ref.nameEndsWith && !String(item.name).endsWith(ref.nameEndsWith)) return false;
-    if (ref.itemHas) for (const k in ref.itemHas) if (item[k] !== ref.itemHas[k]) return false;   // include only matching items
-    if (ref.itemNot) for (const k in ref.itemNot) if (item[k] === ref.itemNot[k]) return false;   // drop matching items (e.g. Nightmares: spirit:false)
-    return true;
-  };
-  if (section.variants) {   // sum across every character variant (e.g. Secret Portals as both Sora and Riku)
-    let done = 0, total = 0;
-    for (const charId of Object.keys(section.variants)) {
-      const sid = ref.section + "-" + charId, vstore = STORE[sid] || {};
-      (section.variants[charId] || []).forEach((item, index) => {
-        if (!nameOk(item)) return;
-        if (ref.match && String(cellText(sid, index, ref.match.field, item) || "").indexOf(ref.match.value) < 0) return;
-        if (ref.check !== undefined && (checkIndex < 0 || (checkObj && !checkApplies(item, checkObj)))) return;
-        total++;
-        const isDone = ref.check !== undefined ? !!vstore[checkKey(index, ref.check, checkIndex)] : (!!vstore[index] || autoDone(section, item));
-        if (isDone) done++;
-      });
-    }
-    return [done, total];
-  }
-  const itemDone = (item, index) => {
-    if (ref.check !== undefined) return checkIndex >= 0 && checkApplies(item, checkObj) && !!store[checkKey(index, ref.check, checkIndex)];
-    return !!store[index] || autoDone(section, item);
-  };
-  if (ref.perGroup) {
-    const groupsDone = new Map();   // group -> any item done
-    section.items.forEach((item, index) => {
-      const groupName = item.g || item.name;
-      groupsDone.set(groupName, groupsDone.get(groupName) || itemDone(item, index));
-    });
-    let done = 0;
-    groupsDone.forEach(isDone => { if (isDone) done++; });
-    return [done, groupsDone.size];
-  }
-  let done = 0, total = 0;
-  section.items.forEach((item, index) => {
-    if (!nameOk(item)) return;
-    if (ref.match && String(cellText(ref.section, index, ref.match.field, item) || "").indexOf(ref.match.value) < 0) return;
-    if (ref.check !== undefined && checkIndex < 0) return;
-    if (ref.check !== undefined && checkObj && !checkApplies(item, checkObj)) return;   // skip items that lack this form
-    total++; if (itemDone(item, index)) done++;
-  });
-  return [done, total];
-}
+/* Counting rules (multi-checkbox, counters, cross-section autoChecks,
+   trophy references) live in KH.GameCounter — see js/kh-counting.js and
+   the aliases near the top of this closure. */
 
 /* ---------- checklist table ---------- */
 function toggleGroup(items, store, groupName, section) {
