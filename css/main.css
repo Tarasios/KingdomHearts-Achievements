@@ -47,6 +47,18 @@ body {
     background: radial-gradient(1200px 700px at 70% -10%, var(--glow) 0%, var(--bg) 55%);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
+    /* Sticky footer: stack children in a column so the content container can
+       grow and pin the injected footer to the bottom on short pages. */
+    display: flex;
+    flex-direction: column;
+}
+
+/* The page's main content wrapper (direct child of body) grows to fill any
+   leftover height, so on a short page the footer sits at the bottom of the
+   viewport instead of floating in the middle. Nested .container elements
+   (inside nav / the footer) are unaffected — only direct children flex. */
+body > .container {
+    flex: 1 0 auto;
 }
 
 .container {
