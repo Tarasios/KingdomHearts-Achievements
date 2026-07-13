@@ -2336,7 +2336,7 @@
       },
       {
         "name": "Sonic Blade",
-        "how": "Command Melding (ex: Air Slide + Blitz)"
+        "how": "Prize for winning Break the Urns (Olympus Coliseum), or Command Melding (ex: Air Slide + Blitz)"
       },
       {
         "name": "Chaos Blade",
@@ -4626,7 +4626,7 @@
       },
       {
         "name": "Sonic Blade",
-        "how": "Command Melding (ex: Air Slide + Blitz)"
+        "how": "Prize for winning Break the Urns (Olympus Coliseum), or Command Melding (ex: Air Slide + Blitz)"
       },
       {
         "name": "Strike Raid",
@@ -5573,9 +5573,9 @@
         "how": "On top of a table in a corner."
       },
       {
-        "name": "Bllizzard",
+        "name": "Blizzard",
         "area": "Wardrobe Room",
-        "how": "Below a table in the corner of the room across from the Ballon Letter chest."
+        "how": "Below a table in the corner of the room across from the Balloon Letter chest."
       },
       {
         "name": "Fleeting Crystal",
@@ -5600,7 +5600,7 @@
       {
         "name": "Wellspring Crystsal",
         "area": "Gates",
-        "how": "Same as Ballon Letter chest."
+        "how": "Same as Balloon Letter chest."
       },
       {
         "name": "Absolute Zero",
@@ -7058,7 +7058,7 @@
       },
       {
         "name": "Sonic Blade",
-        "how": "Command Melding (ex: Air Slide + Blitz)"
+        "how": "Prize for winning Break the Urns (Olympus Coliseum), or Command Melding (ex: Air Slide + Blitz)"
       },
       {
         "name": "Strike Raid",
@@ -8579,6 +8579,8 @@
   "bt-badge-arena-tip": "Cleared via its Mirage Arena stage (Arena tab)",
   "bt-badge-board": "BOARD",
   "bt-badge-board-tip": "Completed via the Hunny Pot Board (Records tab)",
+  "bt-badge-record": "RECORD",
+  "bt-badge-record-tip": "Earned as the prize for a mini-game record you've checked off (Records tab)",
   "bt-world-maxrank": "Max Rank",
   "bt-legend-records": "Arena Mode and Unversed-mission records are linked to the Arena and Unversed tabs — ticking one here ticks it there too, and vice-versa.",
   "bt-toast-trophy": "Trophy ready: %1",
