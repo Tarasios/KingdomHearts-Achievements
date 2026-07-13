@@ -1284,7 +1284,7 @@ var BBS_DATA = {
     {"name": "Hungry Crystal", "g": "Castle of Dreams"},
     {"name": "Zero Gravity", "g": "Castle of Dreams"},
     {"name": "Balloon Letter", "g": "Castle of Dreams"},
-    {"name": "Bllizzard", "g": "Castle of Dreams"},
+    {"name": "Blizzard", "g": "Castle of Dreams"},
     {"name": "Fleeting Crystal", "g": "Castle of Dreams"},
     {"name": "Balloon Letter", "g": "Enchanted Dominion"},
     {"name": "Soothing Crystal", "g": "Enchanted Dominion"},

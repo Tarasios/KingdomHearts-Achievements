@@ -313,6 +313,30 @@ function rankIcon(rank, cls) {
    ===================================================================== */
 function levelCorrection(level) { return level <= 50 ? 10 + level : 35 + level / 2; }
 function rankIdx(r) { return RANKS.indexOf(r); }
+/* A %-chance recipe is shared between two Spirits (each listed with the other
+   as its `rare`), and in-game the shared recipe can only rank up as many times
+   as its MOST-limited outcome allows: a Spirit can never pass rank S from its
+   listed rank, and that allowance binds both outcomes. E.g. the Me Me Bunny
+   (A) / Majik Lapin (B) recipe can only rise once (A→S), so Majik Lapin is
+   capped at rank A on it. Derive each shared row's cap (r.cap) from its
+   partner row: strict material match first, then quantities + complementary %
+   (tolerates small tier typos in the data). */
+(function deriveSharedRecipeCaps() {
+  const top = RANKS.length - 1;   // S
+  const sameSlots = (a, b) =>
+    (a.m1 === b.m1 && a.t1 === b.t1 && a.q1 === b.q1 && a.m2 === b.m2 && a.t2 === b.t2 && a.q2 === b.q2) ||
+    (a.m1 === b.m2 && a.t1 === b.t2 && a.q1 === b.q2 && a.m2 === b.m1 && a.t2 === b.t1 && a.q2 === b.q1);
+  const sameQtyPct = (a, b) => a.pct != null && b.pct != null && a.pct + b.pct === 100 &&
+    ((a.q1 === b.q1 && a.q2 === b.q2) || (a.q1 === b.q2 && a.q2 === b.q1));
+  DG.recipes.forEach(r => {
+    if (!r.rare) return;
+    const pair = p => p !== r && p.sp === r.rare && p.rare === r.sp;
+    const partner = DG.recipes.find(p => pair(p) && sameSlots(p, r)) || DG.recipes.find(p => pair(p) && sameQtyPct(p, r));
+    if (!partner) return;
+    const capIdx = rankIdx(r.rank) + (top - Math.max(rankIdx(r.rank), rankIdx(partner.rank)));
+    if (capIdx < top) r.cap = RANKS[capIdx];
+  });
+})();
 // thresholds: how many of a Dream Piece (required = recipe amount) are needed
 // for a +1/+2/+3/+4 rank boost. Reproduces the wiki's table exactly.
 function boostThresholds(req) {
@@ -653,7 +677,11 @@ function renderModal() {
   const ownBtn = document.getElementById("dg-m-own");
   if (ownBtn) ownBtn.addEventListener("click", () => toggleSpirit(spirit.name));
   const rankSel = document.getElementById("dg-m-rank");
-  rankSel.addEventListener("change", () => { modalRank = rankSel.value; if (spiritOwned(spirit.name)) setSpiritRank(spirit.name, modalRank); updateModalStats(spirit); });
+  rankSel.addEventListener("change", () => {
+    modalRank = rankSel.value;
+    if (spiritOwned(spirit.name)) { setSpiritRank(spirit.name, modalRank); renderSpirits(); }   // gallery rank icon updates live
+    updateModalStats(spirit);
+  });
   const levelIn = document.getElementById("dg-m-level");
   levelIn.addEventListener("input", () => { modalLevel = Math.min(99, Math.max(1, parseInt(levelIn.value, 10) || 1)); updateModalStats(spirit); });
   modalBody.querySelectorAll(".dg-gcell.filled").forEach(cell => {
@@ -817,8 +845,8 @@ function recipeMatchSlots(r, s1, s2) {
   return null;
 }
 // The highest rank a recipe can reach: base + up to 4 from over-stuffing
-// materials + 1 from Risky Winds. A few recipes cap lower in-game (a per-recipe
-// quirk), given by r.cap.
+// materials + 1 from Risky Winds. Shared %-chance recipes cap lower in-game,
+// given by r.cap (derived in deriveSharedRecipeCaps above).
 function recipeMaxRank(r, isRisky) {
   let idx = rankIdx(r.rank) + 4 + (isRisky ? 1 : 0);
   idx = Math.min(idx, RANKS.length - 1);

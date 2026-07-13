@@ -286,9 +286,31 @@
       data.warrior.forEach((finish, index) => {
         if (finish.g === label && store.shared.warrior[index] && cmdNames.has(finish.name) && !unlocked.has(finish.name)) unlocked.set(finish.name, "finish");
       });
+      // Sonic Blade is a field prize for winning Olympus Coliseum's Break the
+      // Urns mini-game (all three characters), tracked by its record row.
+      if (cmdNames.has("Sonic Blade") && !unlocked.has("Sonic Blade") &&
+          this.recordDoneBy(char, record => record.cat === "Break the Urns")) unlocked.set("Sonic Blade", "record");
       return unlocked;
     }
     commandAutoFn(char) { const unlocked = this.commandAuto(char); return item => unlocked.get(item.name) || null; }
+    /* Xehanort's Reports found in treasure chests cross off with that chest.
+       Chests name them "Xehanort's Report 1"; the Reports list uses Roman
+       numerals ("Xehanort's Report I"). Returns the set of report names found. */
+    reportAuto() {
+      const store = this.store();
+      const roman = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII"];
+      const names = new Set(this.data.reports.map(report => report.name));
+      const found = new Set();
+      KH.BBS_CHARS.forEach(char => {
+        this.data.perChar[char].treasures.forEach((treasure, index) => {
+          if (this.isRealmOfDarkness(treasure.g) || !store[char].treasures[index]) return;
+          const name = String(treasure.name).replace(/Report (\d+)$/, (m, n) => "Report " + (roman[+n] || n));
+          if (names.has(name)) found.add(name);
+        });
+      });
+      return found;
+    }
+    reportsAutoFn() { const found = this.reportAuto(); return item => found.has(item.name) ? "treasure" : null; }
     /* Unversed journal: filled by clearing its Unversed mission (done is
        enough — max rank isn't needed) or any of its Mirage Arena stages. */
     unversedAutoFn(char) {
@@ -373,7 +395,15 @@
 
     /* ---------- progress math ---------- */
     countMap(map, length) { let done = 0; for (let index = 0; index < length; index++) if (map[index]) done++; return done; }
-    sharedCount(section) { return [this.countMap(this.store().shared[section], this.data[section].length), this.data[section].length]; }
+    sharedCount(section) {
+      if (section === "reports") {   // reports also auto-credit from their treasure chests
+        const store = this.store().shared.reports, found = this.reportAuto();
+        let done = 0;
+        this.data.reports.forEach((report, index) => { if (store[index] || found.has(report.name)) done++; });
+        return [done, this.data.reports.length];
+      }
+      return [this.countMap(this.store().shared[section], this.data[section].length), this.data[section].length];
+    }
     charCount(char, section) {
       const store = this.store(), items = this.data.perChar[char][section];
       if (section === "treasures") {   // exclude Aqua's Realm of Darkness chests

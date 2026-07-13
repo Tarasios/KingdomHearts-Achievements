@@ -246,7 +246,8 @@ class BbsTrackerPage extends KH.Page {
       finish: { label: this.translate('bt-badge-finish'), tip: this.translate('bt-badge-finish-tip') },
       uvmission: { label: this.translate('bt-badge-uvmission'), tip: this.translate('bt-badge-uvmission-tip') },
       arena: { label: this.translate('bt-badge-arena'), tip: this.translate('bt-badge-arena-tip') },
-      board: { label: this.translate('bt-badge-board'), tip: this.translate('bt-badge-board-tip') }
+      board: { label: this.translate('bt-badge-board'), tip: this.translate('bt-badge-board-tip') },
+      record: { label: this.translate('bt-badge-record'), tip: this.translate('bt-badge-record-tip') }
     }[source];
   }
 
@@ -675,7 +676,7 @@ class BbsTrackerPage extends KH.Page {
     this.checklist(panel.results, this.viewItems("reports", BBS_DATA.reports), this.STORE.shared.reports, [
       { th: this.translate('bt-th-report'), get: item => item.name, name: true },
       { th: this.translate('bt-th-obtain'), get: item => item.how || "" }
-    ], panel.state);
+    ], panel.state, { auto: this.counter.reportsAutoFn() });
     const [done, total] = this.counter.sharedCount("reports");
     this.setCount(panel, done, total);
   }
