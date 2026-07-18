@@ -45,7 +45,7 @@ var TRACKER_GAME = {
     "Champions of the Harmonic Score": { "section": "portals", "nameStartsWith": "Special Portal", "itemHas": { "g": "Symphony of Sorcery" } },
     "Champions of the Dark City": { "section": "portals", "nameStartsWith": "Special Portal", "itemHas": { "g": "The World That Never Was" } },
     "Treasure Seeker": { "section": "treasures" },
-    "Spirit Guide": { "section": "dreameaters", "itemNot": { "spirit": false } },
+    "Spirit Guide": { "section": "dreameaters", "check": "spirit", "itemNot": { "spirit": false } },
     "Keyblade Conqueror": { "section": "keyblades" }
   },
   "tabs": [
@@ -1194,12 +1194,12 @@ var TRACKER_GAME = {
           ],
           "checks": [
             {
-              "k": "spirit",
-              "th": "th-dreameaters-spirit"
-            },
-            {
               "k": "nightmare",
               "th": "th-dreameaters-nightmare"
+            },
+            {
+              "k": "spirit",
+              "th": "th-dreameaters-spirit"
             },
             {
               "k": "rare",
@@ -5861,6 +5861,7 @@ var TRACKER_GAME = {
     }
   ],
   "worldSummary": {
+    "story": true,
     "worlds": [
       "Traverse Town",
       "La Cité des Cloches",
@@ -5937,6 +5938,53 @@ var TRACKER_GAME = {
       else if (commandNames[it.name]) it.gives = [{ sec: "commands", name: it.name }];
     });
   });
+
+  /* Dive Mode Rank A rewards: the Dive Mode rows under Records represent
+     reaching Rank A, so ticking one marks the Deck Command that dive awards
+     (the same first-time reward is shared between both characters). */
+  var DIVE_REWARDS = {
+    sora: {
+      "Traverse Town": "Spark Dive",
+      "Country of the Musketeers": "Zero Graviga",
+      "The World That Never Was": "Meteor"
+    },
+    riku: {
+      "The World That Never Was": "Meteor"
+    }
+  };
+  var records = byId(byId(tabs, "records").sections, "records");
+  (records.items || []).forEach(function (it) {
+    if (it.g !== "Dive Mode") return;
+    var reward = (DIVE_REWARDS[it.c] || {})[it.name];
+    if (reward) it.gives = [{ sec: "commands", name: reward }];
+  });
+})();
+
+/* ---------------------------------------------------------------------------
+   One-time save migration: the Dream Eaters checks were reordered
+   (Spirit/Nightmare/Rare → Nightmare/Spirit/Rare). The FIRST check is stored
+   under the bare item index (see KH.GameCounter.checkKey), so old saves keep
+   Spirit ticks there and Nightmare ticks under "<i>::nightmare"; swap them
+   once and flag the store so re-loads don't swap again.
+--------------------------------------------------------------------------- */
+(function () {
+  try {
+    var raw = localStorage.getItem(TRACKER_GAME.storeKey);
+    if (!raw) return;
+    var data = JSON.parse(raw);
+    if (!data || typeof data !== "object" || (data._meta && data._meta.deChecksV2)) return;
+    var old = data.dreameaters || {};
+    var next = {};
+    Object.keys(old).forEach(function (key) {
+      var m;
+      if (/^\d+$/.test(key)) next[key + "::spirit"] = old[key];
+      else if ((m = /^(\d+)::nightmare$/.exec(key))) next[m[1]] = old[key];
+      else next[key] = old[key];
+    });
+    if (data.dreameaters) data.dreameaters = next;
+    (data._meta = data._meta || {}).deChecksV2 = true;
+    localStorage.setItem(TRACKER_GAME.storeKey, JSON.stringify(data));
+  } catch (e) { /* private browsing / corrupt store: nothing to migrate */ }
 })();
 
 (window.KH_GAMES = window.KH_GAMES || {})[TRACKER_GAME.id] = TRACKER_GAME;

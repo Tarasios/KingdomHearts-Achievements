@@ -157,6 +157,7 @@
        clicking toggles owned. Tile order matches the data so positions
        line up with the in-game collection. spec:
          items, perRow, query, tileExtra?          — list + layout
+         hideDone?                                 — drop fully-owned groups
          skip?(item)                               — hide ineligible items
          groupOf(item)                             — group header text
          owned(item, index) / toggle(item, index)  — state + click
@@ -180,10 +181,16 @@
       wrap.style.setProperty("--jrnl-cols", perRow);
       groups.forEach(group => {
         let done = 0;
-        const grid = el("div", "jrnl-grid");
-        group.rows.forEach(({ item, index }) => {
+        const rows = group.rows.map(({ item, index }) => {
           const owned = spec.owned(item, index);
           if (owned) done++;
+          return { item, index, owned };
+        });
+        // "Hide completed" hides whole finished groups (worlds); individual
+        // owned tiles always stay, so positions match the in-game journal.
+        if (spec.hideDone && rows.length && done === rows.length) return;
+        const grid = el("div", "jrnl-grid");
+        rows.forEach(({ item, index, owned }) => {
           const tile = el("button", "jrnl-tile " + (owned ? "owned" : "unowned") + (spec.tileExtra ? " " + spec.tileExtra : ""));
           tile.type = "button";
           tile.dataset.pop = spec.tip(item, owned, index);

@@ -546,7 +546,7 @@ class BbsTrackerPage extends KH.Page {
     const store = this.STORE[this.activeChar].commands;
     if (this.tabJournalOn("commands")) {
       this.journalGrid(container, {
-        items, store, perRow: 9, query: panel.state.q, tileExtra: "cmd",
+        items, store, perRow: 9, query: panel.state.q, hideDone: !!panel.state.hide, tileExtra: "cmd",
         groupOf: item => item.g,
         owned: (item, index) => !!store[index] || !!auto.get(item.name),
         readonly: (item, index) => (!store[index] && auto.get(item.name)) ? this.autoBadge(auto.get(item.name)).tip : null,
@@ -643,7 +643,7 @@ class BbsTrackerPage extends KH.Page {
     container.appendChild(titleRow);
     if (this.tabJournalOn("treasures")) {
       this.journalGrid(container, {
-        items: treasures, store: tStore, perRow: 9, query: panel.state.q,
+        items: treasures, store: tStore, perRow: 9, query: panel.state.q, hideDone: !!panel.state.hide,
         groupOf: item => item.g,
         owned: (item, index) => !!tStore[index],
         toggle: (item, index) => this.toggleCheck(tStore, index),

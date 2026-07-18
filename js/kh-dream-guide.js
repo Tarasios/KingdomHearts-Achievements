@@ -25,7 +25,8 @@
    Spirit stats, Ability Link boards, Deck Command bonuses and the creation
    formula constants come from js/kh-dream-guide-data.js (DREAM_GUIDE).
 
-   Stores: khddd_progress_v1 (DDD tracker — treasures read; recipes r/w),
+   Stores: khddd_progress_v1 (DDD tracker — treasures read; recipes r/w;
+           abilities + Deck Commands written by board-node unlocks),
            khddd_guide_v1 (this tool's owned-Spirit set).
    Game terms stay English in every language; only UI chrome is translated.
    ===================================================================== */
@@ -83,22 +84,24 @@ function saveDDD() { try { localStorage.setItem(DDD_STORE_KEY, JSON.stringify(DD
 function dddSection(id) { if (!DDD[id]) DDD[id] = {}; return DDD[id]; }
 
 // Spirit name -> index in the tracker's Dream Eaters list (ownership store).
+// The Spirit tick is the tracker's SECOND check since the Nightmare/Spirit/
+// Rare reorder, so it lives under "<i>::spirit" (the first check keeps the
+// bare index — see KH.GameCounter.checkKey).
 const DE_INDEX = new Map();
 DREAMEATERS.forEach((it, i) => { if (!DE_INDEX.has(it.name)) DE_INDEX.set(it.name, i); });
-function spiritOwned(name) { const i = DE_INDEX.get(name); return i != null && !!dddSection("dreameaters")[i]; }
+const spiritKey = i => i + "::spirit";
+function spiritOwned(name) { const i = DE_INDEX.get(name); return i != null && !!dddSection("dreameaters")[spiritKey(i)]; }
 function toggleSpirit(name) {
   const i = DE_INDEX.get(name); if (i == null) return;
   const store = dddSection("dreameaters");
-  if (store[i]) delete store[i]; else store[i] = true;
+  if (store[spiritKey(i)]) delete store[spiritKey(i)]; else store[spiritKey(i)] = true;
   saveDDD(); renderSpirits(); renderAbilities(); if (modalSpirit === name) renderModal();
 }
 
 // Ability-checklist index in the tracker (Support / Spirit abilities only).
 // Map every ability a board can grant to its row in the tracker's ability
 // checklists (Support/Spirit counters + single Stat abilities), so unlocking
-// or locking a node mirrors onto the checklist. Commands are deliberately not
-// here: they also come from portals/melding/treasures, so a board can't be
-// their sole source of truth.
+// or locking a node mirrors onto the checklist.
 const ABIL_TRACK = new Map();
 ["abilities", "abstats"].forEach(secId => {
   const sec = findSec(secId);
@@ -106,6 +109,12 @@ const ABIL_TRACK = new Map();
     if (!ABIL_TRACK.has(it.name)) ABIL_TRACK.set(it.name, { sec: secId, index: i, counter: !!sec.counter, max: (+it.max > 0 ? +it.max : 1) });
   });
 });
+// Deck Commands granted by board nodes mirror onto the tracker's Collection
+// checklist too — but SET-only (locking a node never unticks the command),
+// since commands also come from shops, portals, treasures and drops, so a
+// board can't be their sole source of truth.
+const CMD_TRACK = new Map();
+(((findSec("commands") || {}).items) || []).forEach((it, i) => { if (!CMD_TRACK.has(it.name)) CMD_TRACK.set(it.name, i); });
 
 function loadGuide() { try { return JSON.parse(localStorage.getItem(GUIDE_KEY)) || {}; } catch (e) { return {}; } }
 let GUIDE = loadGuide();
@@ -133,11 +142,18 @@ function boardAbilityCount(name) {
 // node correctly decrements / unticks.
 function syncBoardAbility(name) {
   const t = ABIL_TRACK.get(name);
-  if (!t) return;
-  const count = boardAbilityCount(name), store = dddSection(t.sec);
-  if (t.counter) { if (count <= 0) delete store[t.index]; else store[t.index] = Math.min(count, t.max); }
-  else if (count > 0) store[t.index] = true; else delete store[t.index];
-  saveDDD();
+  if (t) {
+    const count = boardAbilityCount(name), store = dddSection(t.sec);
+    if (t.counter) { if (count <= 0) delete store[t.index]; else store[t.index] = Math.min(count, t.max); }
+    else if (count > 0) store[t.index] = true; else delete store[t.index];
+    saveDDD();
+    return;
+  }
+  // Not an ability: a Deck Command node crosses the command off (set-only).
+  const ci = CMD_TRACK.get(name);
+  if (ci == null || boardAbilityCount(name) <= 0) return;
+  const store = dddSection("commands");
+  if (!store[ci]) { store[ci] = true; saveDDD(); }
 }
 function nodeOwned(spirit, grid) { const m = GUIDE.nodes[spirit]; return !!(m && m[grid]); }
 // A Spirit's Ability Link board is "complete" once every node on it is unlocked.

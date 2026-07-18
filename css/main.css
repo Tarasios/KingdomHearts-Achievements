@@ -33,6 +33,10 @@
 
 html {
     scroll-behavior: smooth;
+    /* Keep the layout width identical whether or not the page is tall enough
+       to scroll — otherwise switching to a short tab (e.g. Flick Rush) drops
+       the scrollbar and the whole content area resizes/shifts. */
+    scrollbar-gutter: stable;
     /* Dark base so a short page / iOS rubber-band never shows white. */
     background: var(--bg);
 }
