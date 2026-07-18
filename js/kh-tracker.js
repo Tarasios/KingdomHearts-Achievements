@@ -123,6 +123,55 @@ class GenericTrackerPage extends KH.Page {
     this.render();
   }
 
+  /* "Story completed" (opt-in via worldSummary.story): each world in the
+     Worlds summary gets a per-character checkbox that, when ticked, SETS
+     every collectible whose source text carries a
+     "Story progression (<world>…)" tag for the active character — same
+     set-only semantics as `gives`, so the items stay editable afterwards.
+     The tick itself persists under the synthetic "storydone" store section
+     (key "<world>::<char>"), which no completion count reads. */
+  storyItemsFor(world) {
+    const targets = [];
+    const clean = s => String(s || "").replace(/ /g, " ").replace(/\s+/g, " ").trim().toLowerCase();
+    const worldLc = clean(world);
+    const charLabels = this.CHARS.map(c => c.label);
+    const activeLabel = this.CHAR_LABEL[this.activeChar] || null;
+    this.game.tabs.forEach(tab => tab.sections.forEach(section => {
+      // Only plain single-checkbox lists can be story-granted.
+      if (section.trophies || section.checks || section.counter) return;
+      const view = this.resolveSection(section);
+      view.items.forEach((item, index) => {
+        if (!this.itemVisible(item, this.activeChar)) return;
+        const row = this.langRow(view.storeId, index);
+        const text = Object.values(item).join(" ") + (row ? " " + Object.values(row).join(" ") : "");
+        const m = /story progress\w*\s*\(([^)]*)\)/i.exec(text);
+        if (!m) return;
+        const inside = clean(m[1]);
+        if (!inside.startsWith(worldLc)) return;
+        // "(World, Sora)"-style tags belong to that character alone.
+        const named = charLabels.filter(label => inside.includes(label.toLowerCase()));
+        if (named.length && activeLabel && !named.includes(activeLabel)) return;
+        targets.push({ storeId: view.storeId, index });
+      });
+    }));
+    return targets;
+  }
+  toggleStoryComplete(world) {
+    const store = this.sectionStore("storydone");
+    const key = world + (this.activeChar ? "::" + this.activeChar : "");
+    if (store[key]) delete store[key];
+    else {
+      store[key] = true;
+      this.storyItemsFor(world).forEach(target => { this.sectionStore(target.storeId)[target.index] = true; });
+    }
+    this.PROGRESS.save();
+    this.render();
+  }
+  storyDone(world) {
+    const key = world + (this.activeChar ? "::" + this.activeChar : "");
+    return !!this.sectionStore("storydone")[key];
+  }
+
   /* ---------- counting delegates (KH.GameCounter) ---------- */
   findSec(sectionId) { return this.counter.findSec(sectionId); }
   findList(storeId) { return this.counter.findList(storeId); }
@@ -248,6 +297,7 @@ class GenericTrackerPage extends KH.Page {
       items: view.items,
       perRow: cfg.perRow || 8,
       query: panelState.q || "",
+      hideDone: !!panelState.hide,
       skip: item => !this.itemVisible(item, this.activeChar),
       groupOf: item => item.g || "",
       owned: (item, index) => !!store[index] || !!this.autoSource(section, item),
@@ -657,6 +707,16 @@ class GenericTrackerPage extends KH.Page {
       // which lets a re-render's programmatic open clobber a just-made collapse).
       worldSummary.addEventListener("click", () => { if (!filtering) openState[worldKey] = !((worldKey in openState) ? openState[worldKey] : false); });
       worldDetails.appendChild(worldSummary);
+      if (cfg.story) {
+        const storyLabel = el("label", "wstory");
+        const storyCheck = el("input", "chk");
+        storyCheck.type = "checkbox";
+        storyCheck.checked = this.storyDone(world);
+        storyCheck.addEventListener("change", () => this.toggleStoryComplete(world));
+        storyLabel.appendChild(storyCheck);
+        storyLabel.appendChild(document.createTextNode(" " + this.translate('gt-story-complete')));
+        worldDetails.appendChild(storyLabel);
+      }
       shownGroups.forEach(group => {
         const groupDone = group.entries.filter(entry => entry.done).length, typeKey = "t:" + slug + ":" + group.title;
         const typeDetails = el("details", "tgroup");
