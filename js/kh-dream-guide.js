@@ -364,9 +364,18 @@ function boostFor(req, used) {
   if (used >= t.t4) return 4; if (used >= t.t3) return 3; if (used >= t.t2) return 2; if (used >= t.t1) return 1;
   return 0;
 }
+// Smallest quantity of a Dream Piece (required amount `req`) that reaches AT
+// LEAST a +b rank boost. A 1-per-recipe piece has no +1 tier (its t1 is
+// Infinity — two copies jump straight to +2), so a +1 request falls through
+// to that +2 amount rather than returning an impossible Infinity. Overshooting
+// one material is harmless: the recipe's overall boost is the MIN across its
+// two pieces, so the other (exactly-+b) piece still pins the result at +b.
 function qtyForBoost(req, b) {
+  if (b <= 0) return req;
   const t = boostThresholds(req);
-  return b <= 0 ? req : b === 1 ? t.t1 : b === 2 ? t.t2 : b === 3 ? t.t3 : t.t4;
+  const tiers = [t.t1, t.t2, t.t3, t.t4];   // qty for exactly +1..+4
+  for (let i = b - 1; i < tiers.length; i++) if (isFinite(tiers[i])) return tiers[i];
+  return Infinity;   // genuinely unreachable (no finite tier at or above +b)
 }
 function levelBonusForTotal(total) {
   for (const row of CREATE.levelBonusPerTotal) if (total >= row[0] && total <= row[1]) return row[2];
