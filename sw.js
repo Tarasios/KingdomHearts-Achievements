@@ -9,7 +9,7 @@
 
    Bump VERSION to discard old caches.
    ===================================================================== */
-const VERSION = "kh-cache-v2";
+const VERSION = "kh-cache-v3";
 const HEAVY = /(?:-tracker-data|kh-melding-data)\.js$|\/images\//;
 
 self.addEventListener("install", () => self.skipWaiting());
