@@ -608,6 +608,7 @@ table.dg-board { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .dg-pop .dg-pop-cond { display: block; margin-top: 2px; color: var(--dim); }
 .dg-pop .dg-pop-gate { display: block; margin-top: 3px; color: #c77fe0; font-weight: 600; }
 .dg-pop .dg-pop-perm { color: #e0c66a; font-size: 10px; text-transform: uppercase; letter-spacing: .4px; }
+.dg-pop .dg-pop-feed { display: block; margin-top: 2px; color: #e08fb4; }
 .dg-pop .dg-pop-hr { display: block; border-top: 1px solid var(--line); margin: 6px 0; }
 .dg-leg-line { display: inline-block; width: 16px; height: 4px; border-radius: 2px; background: #3f7bdd; }
 .dg-leg-line.gated { background: #c77fe0; }
@@ -620,6 +621,11 @@ table.dg-board { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .dg-m-switch-wrap summary { cursor: pointer; font-size: 11.5px; color: var(--accent); margin-top: 6px; }
 .dg-m-switch { margin-top: 6px; font-size: 11.5px; color: var(--dim); display: flex; flex-direction: column; gap: 3px; }
 .dg-sw-to { color: var(--accent2); font-weight: 600; }
+/* Treat feeding — the universal way into a disposition (one candy per slot). */
+.kh .dg-m-candy-note { margin: -2px 0 8px; }
+.dg-m-dispo-feed { margin-top: 5px; font-size: 11.5px; font-weight: 600; color: #e08fb4; }
+.dg-m-dispo-feed::before { content: "\1F36C"; margin-right: 4px; font-weight: 400; }
+.dg-sw-feed { color: #e08fb4; }
 .kh .dg-ab.have { border-color: #2c5b3c; background: rgba(111, 227, 154, .06); }
 .kh .dg-ab-head { gap: 9px; }
 

@@ -24,8 +24,11 @@
         links to (N=up, S=down, E=right, W=left). The map is undirected:
         marking a link on EITHER tile is enough, but it is stored on both
         sides for easy reading. To change how the board branches, just edit
-        these letters — the trails and unlock order are derived from them,
-        re-rooted automatically from the start. Tile contents are untouched.
+        these letters — the trails and unlock order are derived from them.
+        Tile contents are untouched.
+        Unlocking follows the lines, not the distance from the start: a tile
+        opens as soon as ANY tile it links to is unlocked, so loops can be
+        entered from either end. Adding a link therefore adds a real route.
 
    3. starts  — the single gold keyhole each board grows from. Exactly one
                 coordinate per board; trails flow outward from it.

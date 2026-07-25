@@ -185,23 +185,18 @@ function boardInfo(spirit) {
     const c = parseCoord(coord); if (!c) return;
     for (const d of (dirs || "")) { const v = LINK_VEC[d]; if (!v) continue; const nc = coordStr(c.col + v[0], c.row + v[1]); if (isReal(coord) && isReal(nc)) addAdj(coord, nc); }
   });
-  // Distance from the single start drives progression (you grow outward).
+  // Distance from the single start, used only for DRAWING (which end of a link
+  // is the "outer" tile, so a disposition-gated trail is coloured on the right
+  // side). It is deliberately NOT used to decide what you may unlock: the board
+  // is undirected, so unlock order follows the blue lines, not the distances.
   const start = [...keyholes][0];
   const distOf = {};
   if (start != null) { distOf[start] = 0; const q = [start]; while (q.length) { const u = q.shift(); for (const v of (adj[u] || [])) if (distOf[v] === undefined) { distOf[v] = distOf[u] + 1; q.push(v); } } }
-  // Each tile's primary predecessor = its adjacent neighbour nearest the start.
-  const childrenOf = {};
-  board.forEach(n => {
-    let best = null, bd = Infinity;
-    for (const m of (adj[n.g] || [])) { const dd = distOf[m]; if (dd !== undefined && dd < bd) { bd = dd; best = m; } }
-    n.frm = (distOf[n.g] > 0) ? best : null;
-    if (n.frm) (childrenOf[n.frm] = childrenOf[n.frm] || []).push(n.g);
-  });
   // Every undirected link, for drawing trails (includes board loops).
   const edges = [], seenE = new Set();
   for (const a of Object.keys(adj)) for (const b of adj[a]) { const k = a < b ? a + "|" + b : b + "|" + a; if (!seenE.has(k)) { seenE.add(k); edges.push([a, b]); } }
   const entryCoords = new Set(keyholes);
-  return (BOARD_INFO[spirit] = { board, nodeByCoord, nodesAt, childrenOf, keyholes, entryCoords, adj, distOf, edges });
+  return (BOARD_INFO[spirit] = { board, nodeByCoord, nodesAt, keyholes, entryCoords, adj, distOf, edges });
 }
 // Has the Red Secret that flips this two-stage cell been unlocked? The board's
 // "Secret: Red" node is the real trigger (some condition strings name the wrong
@@ -226,13 +221,32 @@ function coordUnlocked(spirit, coord) {
   if (info.entryCoords.has(coord) && !info.nodeByCoord[coord]) return true;
   return nodeOwned(spirit, coord);                            // an ability node must be purchased
 }
+// In-game a tile opens as soon as ANY tile it shares a blue line with is
+// unlocked — direction and distance from the keyhole are irrelevant, so a
+// branch can be reached "backwards" through a loop. (Kab Kannon: B-3 links to
+// B-2, so unlocking C-2 → B-2 opens B-3 even with A-3 still locked.)
 function nodeUnlockable(spirit, node) {
   const info = boardInfo(spirit);
-  if (info.entryCoords.has(node.g) || !node.frm) return true;  // a start node is always available
-  // Reachable once ANY neighbour nearer the start is unlocked (handles loops).
-  const myd = info.distOf[node.g];
-  for (const m of (info.adj[node.g] || [])) { if (info.distOf[m] !== undefined && info.distOf[m] < myd && coordUnlocked(spirit, m)) return true; }
+  if (info.entryCoords.has(node.g)) return true;               // the keyhole tile is free
+  if (info.distOf[node.g] === undefined) return true;          // no link data for it — don't hard-lock
+  for (const m of (info.adj[node.g] || [])) if (coordUnlocked(spirit, m)) return true;
   return false;
+}
+// Locking a tile can strand tiles that only reached the keyhole through it, so
+// re-derive reachability over the unlocked tiles and drop whatever is now cut
+// off. Records what each dropped tile granted so the tracker can be resynced.
+function pruneUnreachable(spirit, m, touched) {
+  const info = boardInfo(spirit);
+  const seen = new Set(info.entryCoords), queue = [...info.entryCoords];
+  while (queue.length) {
+    const u = queue.shift();
+    for (const v of (info.adj[u] || [])) if (!seen.has(v) && coordUnlocked(spirit, v)) { seen.add(v); queue.push(v); }
+  }
+  for (const g of Object.keys(m)) {
+    if (seen.has(g) || info.distOf[g] === undefined) continue;   // reachable, or an unlinked tile
+    const a = activeAbilityAt(spirit, g); if (a) touched.add(a);
+    delete m[g];
+  }
 }
 function abilityNameOf(node) { return (node && node.t !== "Quota" && node.t !== "Secret") ? node.n : null; }
 function toggleNode(spirit, node) {
@@ -252,15 +266,10 @@ function toggleNode(spirit, node) {
     // second click, once the Red Secret is unlocked → switch to the second ability
     m[grid] = 2; touch(variants[0]); touch(variants[1]);   // stage 1 dropped, stage 2 gained
   } else {
-    // un-mark this cell and cascade-lock everything downstream of it
-    const { childrenOf } = info;
-    const stack = [grid];
-    while (stack.length) {
-      const g = stack.pop();
-      const a = activeAbilityAt(spirit, g); if (a) touched.add(a);   // record what it granted before locking
-      delete m[g];
-      (childrenOf[g] || []).forEach(c => { if (m[c]) stack.push(c); });
-    }
+    // un-mark this cell, then lock whatever it was the only route to
+    const a = activeAbilityAt(spirit, grid); if (a) touched.add(a);   // record what it granted before locking
+    delete m[grid];
+    pruneUnreachable(spirit, m, touched);
   }
   touched.forEach(syncBoardAbility);
   saveGuide();
@@ -516,10 +525,26 @@ function parseCoord(g) {
 }
 function colLabel(n) { let s = ""; while (n > 0) { s = String.fromCharCode(65 + (n - 1) % 26) + s; n = Math.floor((n - 1) / 26); } return s; }
 function coordStr(col, row) { return colLabel(col) + "-" + row; }
+/* ---------- disposition switching ----------
+   Petting patterns are per-Spirit (spirit.disps[i].sw), but feeding a Treat is
+   universal: one candy per disposition SLOT, in the order the four are listed.
+   Feed it and the Spirit switches to that slot's disposition, whatever the
+   Spirit and whatever it is currently in. */
+const DISPO_CANDY = ["Confetti Candy", "Ice Dream Cone", "Shield Cookie", "Block-It Chocolate"];
+function dispoIndex(spirit, name) {
+  const want = (name || "").trim().toLowerCase();
+  return ((spirit && spirit.disps) || []).findIndex(d => (d.n || "").trim().toLowerCase() === want);
+}
+// The Treat that switches this Spirit into the named disposition, if we can
+// match the name against its four slots.
+function candyFor(spirit, name) { return DISPO_CANDY[dispoIndex(spirit, name)] || null; }
+
 // A node's condition may gate it behind a disposition ("…when in X disposition").
 function dispoGate(cond) { const m = /when in (?:the )?([A-Za-z' -]+?) disposition/i.exec(cond || ""); return m ? m[1].trim() : null; }
 // Hover text for one node: what it gives + cost, or a gate's requirement.
-function nodeTipOne(n) {
+// `spirit` (the data object) is optional — when present, a disposition gate
+// also names the Treat that gets you into that disposition.
+function nodeTipOne(n, spirit) {
   const gate = dispoGate(n.cond);
   if (n.t === "Quota")
     return `<b>${esc(translate("dg-tip-gate"))}</b><span class="dg-pop-src">${esc(translate("dg-tip-requires"))}: ${esc(n.c || "")}</span>` + (n.cond ? `<span class="dg-pop-cond">${esc(n.cond)}</span>` : "");
@@ -527,8 +552,11 @@ function nodeTipOne(n) {
     return `<b>${esc(n.n)}</b><span class="dg-pop-src">${esc(translate("dg-tip-secret"))}</span>` + (n.cond ? `<span class="dg-pop-cond">${esc(n.cond)}</span>` : "");
   const perm = isPermanent(n) ? ` <span class="dg-pop-perm">${esc(translate("dg-permanent"))}</span>` : "";
   let h = `<b>${esc(n.n)}</b>${perm}<span class="dg-pop-src">${esc(n.t)}${n.c ? " · " + esc(n.c) : ""}</span>`;
-  if (gate) h += `<span class="dg-pop-gate">${esc(format("dg-tip-needs-dispo", gate))}</span>`;
-  else if (n.cond) h += `<span class="dg-pop-cond">${esc(n.cond)}</span>`;
+  if (gate) {
+    const candy = candyFor(spirit, gate);
+    h += `<span class="dg-pop-gate">${esc(format("dg-tip-needs-dispo", gate))}</span>`;
+    if (candy) h += `<span class="dg-pop-feed">${esc(format("dg-tip-feed", candy))}</span>`;
+  } else if (n.cond) h += `<span class="dg-pop-cond">${esc(n.cond)}</span>`;
   return h;
 }
 function buildBoardGrid(spirit, board) {
@@ -575,7 +603,7 @@ function buildBoardGrid(spirit, board) {
       const display = twoStage && stage === 2 ? nodes[1] : primary;   // show the active variant
       const isEntry = info.entryCoords.has(primary.g);
       const state = owned ? "owned" : (nodeUnlockable(spirit, primary) ? "open" : "locked");
-      const tip = nodes.map((n, i) => (twoStage && stage && ((stage === 2) === (i === 1)) ? '<span class="dg-pop-active">●</span> ' : "") + nodeTipOne(n)).join('<span class="dg-pop-hr"></span>') +
+      const tip = nodes.map((n, i) => (twoStage && stage && ((stage === 2) === (i === 1)) ? '<span class="dg-pop-active">●</span> ' : "") + nodeTipOne(n, SPIRIT_BY_NAME[spirit])).join('<span class="dg-pop-hr"></span>') +
         (twoStage ? `<span class="dg-pop-change">${esc(translate("dg-secret-change"))}</span>` : "");
       html += `<div class="dg-gcell filled ${state}${isEntry ? " startnode" : ""}${twoStage ? " twostage" : ""}" tabindex="0" role="button" data-pop="${esc(tip)}" data-node="${esc(primary.g)}" aria-pressed="${owned}">` +
         trailsFor(key) + `<img src="${esc(BOARD_IMG + nodeIcon(display))}" alt="${esc(display.n)}">` +
@@ -604,11 +632,16 @@ document.getElementById("dg-modal-close").addEventListener("click", closeModal);
 document.getElementById("dg-modal-back").addEventListener("click", closeModal);
 document.addEventListener("keydown", e => { if (e.key === "Escape" && modal.classList.contains("open")) closeModal(); });
 
-function dispoSwitch(sw) {
+// The "how to switch" list: each target's petting pattern, plus the Treat that
+// gets you there without any petting at all.
+function dispoSwitch(sw, spirit) {
   const parts = (sw || "").split(";").map(s => s.trim()).filter(Boolean);
   return `<div class="dg-m-switch">` + parts.map(p => {
     const m = /^To\s+([^:]+):\s*(.+)$/.exec(p);
-    return m ? `<div><span class="dg-sw-to">${esc(m[1].trim())}</span> ${esc(m[2].trim())}</div>` : `<div>${esc(p)}</div>`;
+    if (!m) return `<div>${esc(p)}</div>`;
+    const to = m[1].trim(), candy = candyFor(spirit, to);
+    return `<div><span class="dg-sw-to">${esc(to)}</span> ${esc(m[2].trim())}` +
+      (candy ? ` <span class="dg-sw-feed">${esc(format("dg-dispo-or-feed", candy))}</span>` : "") + `</div>`;
   }).join("") + `</div>`;
 }
 function updateModalStats(spirit) {
@@ -654,12 +687,15 @@ function renderModal() {
 
   // --- dispositions (with how-to-switch) ---
   if (spirit.disps && spirit.disps.length) {
-    html += `<h3 class="grp-title">${esc(translate("dg-c-dispo-list"))}</h3><div class="dg-m-dispos">`;
+    html += `<h3 class="grp-title">${esc(translate("dg-c-dispo-list"))}</h3>` +
+      `<p class="hint dg-m-candy-note">${esc(translate("dg-dispo-candy-note"))}</p><div class="dg-m-dispos">`;
     spirit.disps.forEach((d, i) => {
+      const candy = DISPO_CANDY[i];
       html += `<div class="dg-m-dispo"><div class="dg-m-dispo-top"><span class="dg-c-dispo-no">${["I", "II", "III", "IV"][i]}</span>` +
         `<span class="dg-c-dispo-name">${esc(d.n)}</span></div>` +
         (d.b ? `<div class="dg-c-dispo-beh">${esc(d.b)}</div>` : "") +
-        (d.sw ? `<details class="dg-m-switch-wrap"><summary>${esc(translate("dg-dispo-switch"))}</summary>${dispoSwitch(d.sw)}</details>` : "") +
+        (candy ? `<div class="dg-m-dispo-feed">${esc(format("dg-dispo-feed", candy))}</div>` : "") +
+        (d.sw ? `<details class="dg-m-switch-wrap"><summary>${esc(translate("dg-dispo-switch"))}</summary>${dispoSwitch(d.sw, spirit)}</details>` : "") +
         `</div>`;
     });
     html += `</div>`;
@@ -843,7 +879,10 @@ function forecastExtras(spirit, forecast) {
     html += `<div class="dg-c-dispo${pct ? "" : " off"}"><div class="dg-c-dispo-head">` +
       `<span class="dg-c-dispo-no">${["I", "II", "III", "IV"][i]}</span>` +
       `<span class="dg-c-dispo-name">${esc(d.n)}</span><span class="dg-c-dispo-pct">${pct}%</span></div>` +
-      `<div class="dg-c-dispo-bar"><i style="width:${pct}%"></i></div></div>`;
+      `<div class="dg-c-dispo-bar"><i style="width:${pct}%"></i></div>` +
+      // These are only the odds you START with — any of the four can be fed for.
+      (DISPO_CANDY[i] ? `<div class="dg-m-dispo-feed">${esc(format("dg-dispo-feed", DISPO_CANDY[i]))}</div>` : "") +
+      `</div>`;
   });
   html += `</div>`;
   const fi = (CREATE.forecastInfo || {})[forecast];
