@@ -904,25 +904,25 @@ body[data-page="kh-dream-guide"]::before {
     background-size: cover;
 }
 
-[data-theme="night"] body[data-page="kh1-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH1.png"); }
-[data-theme="night"] body[data-page="kh-com-tracker"] { --bg-img: url("../images/backgrounds/Background_COM.png"); }
-[data-theme="night"] body[data-page="kh2-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH2.png"); }
-[data-theme="night"] body[data-page="kh-bbs-tracker"] { --bg-img: url("../images/backgrounds/Background_BBS.png"); }
-[data-theme="night"] body[data-page="kh-ddd-tracker"] { --bg-img: url("../images/backgrounds/Background_3DS.png"); }
-[data-theme="night"] body[data-page="kh02-tracker"]   { --bg-img: url("../images/backgrounds/Background_KH02.png"); }
-[data-theme="night"] body[data-page="kh3-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH3.png"); }
-[data-theme="night"] body[data-page="kh-melding"]     { --bg-img: url("../images/backgrounds/Background_BBS.png"); }
-[data-theme="night"] body[data-page="kh-dream-guide"] { --bg-img: url("../images/backgrounds/Background_3DS.png"); }
+[data-theme="night"] body[data-page="kh1-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH1.webp"); }
+[data-theme="night"] body[data-page="kh-com-tracker"] { --bg-img: url("../images/backgrounds/Background_COM.webp"); }
+[data-theme="night"] body[data-page="kh2-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH2.webp"); }
+[data-theme="night"] body[data-page="kh-bbs-tracker"] { --bg-img: url("../images/backgrounds/Background_BBS.webp"); }
+[data-theme="night"] body[data-page="kh-ddd-tracker"] { --bg-img: url("../images/backgrounds/Background_3DS.webp"); }
+[data-theme="night"] body[data-page="kh02-tracker"]   { --bg-img: url("../images/backgrounds/Background_KH02.webp"); }
+[data-theme="night"] body[data-page="kh3-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH3.webp"); }
+[data-theme="night"] body[data-page="kh-melding"]     { --bg-img: url("../images/backgrounds/Background_BBS.webp"); }
+[data-theme="night"] body[data-page="kh-dream-guide"] { --bg-img: url("../images/backgrounds/Background_3DS.webp"); }
 
-[data-theme="day"] body[data-page="kh1-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH1_light.png"); }
-[data-theme="day"] body[data-page="kh-com-tracker"] { --bg-img: url("../images/backgrounds/Background_COM_light.png"); }
-[data-theme="day"] body[data-page="kh2-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH2_light.png"); }
-[data-theme="day"] body[data-page="kh-bbs-tracker"] { --bg-img: url("../images/backgrounds/Background_BBS_light.png"); }
-[data-theme="day"] body[data-page="kh-ddd-tracker"] { --bg-img: url("../images/backgrounds/Background_3DS_light.png"); }
-[data-theme="day"] body[data-page="kh02-tracker"]   { --bg-img: url("../images/backgrounds/Background_KH02_light.png"); }
-[data-theme="day"] body[data-page="kh3-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH3_light.png"); }
-[data-theme="day"] body[data-page="kh-melding"]     { --bg-img: url("../images/backgrounds/Background_BBS_light.png"); }
-[data-theme="day"] body[data-page="kh-dream-guide"] { --bg-img: url("../images/backgrounds/Background_3DS_light.png"); }
+[data-theme="day"] body[data-page="kh1-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH1_light.webp"); }
+[data-theme="day"] body[data-page="kh-com-tracker"] { --bg-img: url("../images/backgrounds/Background_COM_light.webp"); }
+[data-theme="day"] body[data-page="kh2-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH2_light.webp"); }
+[data-theme="day"] body[data-page="kh-bbs-tracker"] { --bg-img: url("../images/backgrounds/Background_BBS_light.webp"); }
+[data-theme="day"] body[data-page="kh-ddd-tracker"] { --bg-img: url("../images/backgrounds/Background_3DS_light.webp"); }
+[data-theme="day"] body[data-page="kh02-tracker"]   { --bg-img: url("../images/backgrounds/Background_KH02_light.webp"); }
+[data-theme="day"] body[data-page="kh3-tracker"]    { --bg-img: url("../images/backgrounds/Background_KH3_light.webp"); }
+[data-theme="day"] body[data-page="kh-melding"]     { --bg-img: url("../images/backgrounds/Background_BBS_light.webp"); }
+[data-theme="day"] body[data-page="kh-dream-guide"] { --bg-img: url("../images/backgrounds/Background_3DS_light.webp"); }
 
 /* ============================================================
    Games dropdown (header). Opens on hover/focus (desktop + keyboard)
